@@ -85,7 +85,7 @@ const Footer = () => {
   return (
     <footer className="bg-[#fffbfa] pt-12">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex flex-wrap justify-between">
+        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-8">
           <div className=" mb-8 md:mb-0">
             <h2 className="font-bold text-2xl text-purple-700">content β</h2>
             <ul className="mt-6 space-y-3">
@@ -153,8 +153,8 @@ const Footer = () => {
       </div>
       <div className="mt-12 bg-gray-900"> 
         <div className='max-w-7xl mx-auto flex-col md:flex-row gap-3  px-4 flex min-h-[70px] py-2 justify-between items-center '>
-        <p className="text-gray-400">All rights reserved © 2025 Earendel Media LLC</p>
-        <div className=" self-center">
+        <p className="text-gray-400 text-sm">All rights reserved © 2025 Earendel Media LLC</p>
+        <div className=" self-center text-sm">
           <a href="/privacy-policy" className="text-gray-400 hover:text-purple-500">Privacy Policy</a>
           <span className="mx-2">|</span>
           <a href="/terms-of-service" className="text-gray-400 hover:text-purple-500">Terms of Service</a>

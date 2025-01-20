@@ -7,9 +7,9 @@ const Sidebar = ({ setSidebarOpen }) => {
   return (
     <motion.div
       className="fixed inset-0 bg-gray-800 bg-opacity-75 z-50"
-      initial={{ x: "100%" }}
+      initial={{ x: "-100%" }}
       animate={{ x: 0 }}
-      exit={{ x: "100%" }}
+      exit={{ x: "-100%" }}
     >
       <div className="bg-white w-64 h-full p-6 shadow-lg">
         {/* Close Icon */}

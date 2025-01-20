@@ -71,7 +71,7 @@ const OurWorkSection = () => {
         </div>
 
         {/* Cards in Columns */}
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-3 gap-6 space-y-6">
           {cards.map((card, index) => (
             <div
               key={index}

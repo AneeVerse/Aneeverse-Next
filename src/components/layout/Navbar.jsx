@@ -9,7 +9,7 @@ const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <nav className="bg-white fixed top-0 w-full h-[80px] flex items-center z-40">
+    <nav className="bg-white fixed top-0 w-full h-[80px] px-2 flex items-center z-40">
       <div className="max-w-[1120px] w-full mx-auto flex justify-between items-center">
         {/* Logo */}
         <div className="text-2xl font-bold flex items-center">

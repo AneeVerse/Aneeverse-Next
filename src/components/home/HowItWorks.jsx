@@ -31,7 +31,7 @@ const HowItWorks = () => {
   };
 
   return (
-    <div className="bg-white max-w-6xl mx-auto py-12 px-6 md:px-12">
+    <div className="bg-white max-w-6xl mx-auto py-16 px-6 md:px-12">
       <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
         How it works?
       </h2>

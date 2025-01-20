@@ -26,7 +26,7 @@ const CaseStudyCard = ({ title, stat, description, linkText, logo }) => (
 );
 
 const CaseStudies = () => (
-  <div className="max-w-5xl mx-auto px-4 py-12">
+  <div className="max-w-5xl mx-auto px-4 py-16">
     <div className="grid md:grid-cols-2 gap-6">
       <CaseStudyCard
         title="HIGHER CONVERSIONS"

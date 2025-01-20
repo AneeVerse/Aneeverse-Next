@@ -27,7 +27,7 @@ const LogoAndG2Section = () => {
         {/* G2 Badges Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Badge 1 */}
-          <div className="border flex gap-5 items-center border-gray-200 rounded-lg p-6 text-center">
+          <div className="border flex gap-5 items-center justify-center border-gray-200 rounded-lg p-6 text-center">
             <img
               src="/images/home/G2-Leader-Fall-2024.webp"
               alt="Leader Fall 2024"

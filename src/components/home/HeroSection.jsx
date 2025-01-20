@@ -5,8 +5,8 @@ import Container from "../common/Container";
 
 const HeroSection = () => {
   return (
-    <Container className="mt-[80px] py-10">
-      <div className="grid lg:grid-cols-2 gap-8 items-center">
+    <Container className="mt-[80px] py-10 max-w-7xl mx-auto">
+      <div className="grid lg:grid-cols-2 gap-8 px-3 items-center">
         {/* Left Content */}
         <div>
           <h1 className="text-4xl font-bold leading-tight mb-4">
@@ -41,7 +41,7 @@ const HeroSection = () => {
           </div>
 
           {/* Footer Note */}
-          <p className="text-sm text-gray-500 mt-6">Flat pricing. Cancel Anytime.</p>
+          <p className="text-sm text-center lg:text-left text-gray-500 mt-6">Flat pricing. Cancel Anytime.</p>
         </div>
 
         {/* Right Image */}
