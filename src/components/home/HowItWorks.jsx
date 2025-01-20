@@ -48,7 +48,7 @@ const HowItWorks = () => {
           transition={{ duration: 0.8 }}
         >
           <img
-            src="/images/home/how-it-works.webp"
+            src="/images/home/howwork.webp"
             alt="How it works illustration"
             className="w-full"
           />
