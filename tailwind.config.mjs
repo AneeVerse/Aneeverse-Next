@@ -8,8 +8,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        purple: {
+          100: "#f3e8ff",
+          500: "#9b5de5",
+          900: "#540d6e",
+        },
+        pink: {
+          100: "#ffe3ed",
+          900: "#ff0f57",
+        },
+        yellow: {
+          100: "#fff9c4",
+          900: "#ffd600",
+        },
+        orange: {
+          100: "#ffe3d3",
+          900: "#ff6f00",
+        },
       },
     },
   },
