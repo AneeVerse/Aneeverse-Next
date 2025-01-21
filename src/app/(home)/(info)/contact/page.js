@@ -40,7 +40,7 @@ const ContactUsPage = () => {
             <h2 className="text-2xl font-bold mb-4">Schedule a Meeting</h2>
             <div className="border rounded-lg overflow-hidden shadow-lg">
               <iframe
-                src="https://calendly.com/your-calendly-link"
+                src="https://calendly.com/aneeverse/discovery-call?month=2025-01"
                 width="100%"
                 height="400"
                 frameBorder="0"
