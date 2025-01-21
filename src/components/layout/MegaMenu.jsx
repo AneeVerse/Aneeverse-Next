@@ -11,8 +11,8 @@ const MegaMenu = () => {
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <a href="#services" className="text-gray-700 hover:text-purple-500">
-        Services
+      <a href="/works" className="text-gray-700 hover:text-purple-500">
+        Our Work
       </a>
       {isOpen && (
         <motion.div
