@@ -73,7 +73,7 @@ const Navbar = () => {
         </div>
 
         <div className="hidden lg:flex items-center gap-4">
-          <Link href={"/contact"} className={`text-[${scrollY > 10 ? "#EBFAFE" : "#073742"}] bg-[${color.text}] text-sm border border-[${color.bg}]  px-6 py-[10px] rounded-full`}>
+          <Link href={"/contact"} className={`text-[${pathName != "/" ? "#EBFAFE" : (color.bg !=  "#EBFAFE") ?  "#073742":  "#EBFAFE" }] bg-[${color.text}] text-sm border border-[${color.bg}]  px-6 py-[10px] rounded-full`}>
             Book a Call
           </Link>
           <Link href={"/login"} className={`text-[${color.text}] text-sm bg-[${color.bg}] border border-[${color.text}] px-6 py-[10px] rounded-full`}>
