@@ -10,7 +10,7 @@ import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa6";
 
 
-const ServicesMegaMenu = () => {
+const ServicesMegaMenu = ({color}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuCategories = [
@@ -66,10 +66,10 @@ const ServicesMegaMenu = () => {
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <button className="text-gray-700 hover:text-purple-500">Services</button>
+      <button className={`text-[${color.text}] p-2 cursor-pointer hover:text-purple-500`}>Services</button>
       {isOpen && (
         <motion.div
-          className="absolute left-0 top-10  pt-10 w-full z-40"
+          className="absolute left-0 top-[60px] pt-[20px] w-full z-40"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}

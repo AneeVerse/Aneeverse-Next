@@ -1,42 +1,90 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FiMenu } from "react-icons/fi";
 import Sidebar from "./Sidebar";
 import ServicesMegaMenu from "./megamenu/ServicesMegaMenu";
 import Button from "../common/Button";
 import Link from "next/link";
 import ResourcesMegaMenu from "./megamenu/ResourcesMegaMenu";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const pathName = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+
+  // State for colors
+  const [color, setColor] = useState({
+    text: pathName === "/" ? "#EBFAFE" : "#073742",
+    bg: "#ebfafe00",
+  });
+
+  // Update color dynamically on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setScrolled(true);
+        setColor({
+          text: "#073742",
+          bg: "#EBFAFE",
+        });
+      } else {
+        setScrolled(false);
+        setColor({
+          text: pathName === "/" ? "#EBFAFE" : "#073742",
+          bg: "#ebfafe00",
+        });
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [pathName]);
+
+  // Ensure color is updated correctly on route change
+  useEffect(() => {
+    setColor({
+      text: pathName === "/" ? "#EBFAFE" : "#073742",
+      bg: "#ebfafe00",
+    });
+  }, [pathName]);
 
   return (
-    <nav className="bg-white fixed top-0 w-full h-[80px] px-2 flex items-center z-40">
+    <nav
+      className={`fixed top-0 w-full h-[80px] px-2 flex items-center z-40 transition-all duration-300 bg-[${color.bg}]`}
+    >
       <div className="max-w-[1120px] w-full mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link href={"/"} className="text-2xl font-bold flex items-center">
-          <span className="text-black">content</span>
-          <span className="text-purple-500">β</span>
+          <span className={`text-[${color.text}]`}>aneeverse</span>
         </Link>
 
         {/* Large Screen Menu */}
-        <div className="hidden lg:flex space-x-8 items-center">
-          <ServicesMegaMenu />
-          <Link href="#pricing" className="text-gray-700 hover:text-purple-500">
+        <div className="hidden lg:flex space-x-6 items-center">
+          <ServicesMegaMenu color={color} />
+          <Link
+            href="#pricing"
+            className={`hover:text-purple-500 text-[${color.text}]`}
+          >
             Pricing
           </Link>
-         <ResourcesMegaMenu />
-          <Link href="#login" className="text-gray-700 hover:text-purple-500">
-            Login
-          </Link>
-          <Button variant="primary" size="medium">
-            Schedule a call
-          </Button>
+          <ResourcesMegaMenu color={color} />
+          
         </div>
 
+        <div className="hidden lg:flex items-center gap-4">
+          <Link href={"/contact"} className={`text-[${scrollY > 10 ? "#EBFAFE" : "#073742"}] bg-[${color.text}] text-sm border border-[${color.bg}]  px-6 py-[10px] rounded-full`}>
+            Book a Call
+          </Link>
+          <Link href={"/login"} className={`text-[${color.text}] text-sm bg-[${color.bg}] border border-[${color.text}] px-6 py-[10px] rounded-full`}>
+            Login
+          </Link>
+        </div>
         {/* Mobile Menu Icon */}
         <button
-          className="lg:hidden text-2xl text-gray-700"
+          className={`lg:hidden text-2xl ${
+            scrolled ? "text-[#073742]" : color.text
+          }`}
           onClick={() => setSidebarOpen(true)}
         >
           <FiMenu />

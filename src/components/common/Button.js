@@ -14,8 +14,8 @@ const Button = ({ children, onClick, variant = "primary", rounded = "medium", si
   };
   // Button Variants
   const variantStyles = {
-    primary: "bg-purple-500 border-[1px] border-purple-500 text-white hover:bg-white hover:text-purple-500 hover:border-purple-500",
-    outline: "border border-purple-500 text-purple-500 hover:bg-purple-100",
+    primary: "bg-[#EBFAFE] border-[1px] border-[#073742] text-[#073742] hover:bg-[#073742] hover:text-[#Ebfafe] hover:border-[#EBFAFE]",
+    outline: "border border-[#EBFAFE] text-[#EBFAFE]",
     secondary: "bg-red-500 text-white hover:bg-red-600",
   };
 

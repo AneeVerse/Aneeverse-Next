@@ -5,14 +5,15 @@ import Container from "../common/Container";
 
 const HeroSection = () => {
   return (
-    <Container className="mt-[80px] py-10 max-w-7xl mx-auto">
+    <div className="bg-[#073742] text-[#EBFAFE]">
+    <Container className="pt-[120px] pb-10 max-w-7xl mx-auto">
       <div className="grid lg:grid-cols-2 gap-8 px-3 items-center">
         {/* Left Content */}
         <div>
           <h1 className="text-4xl font-bold leading-tight mb-4">
             On-demand Video and Design for Tech
           </h1>
-          <p className="text-lg text-gray-700 mb-6">
+          <p className="text-lg mb-6">
             Get access to high-velocity creative team that works with your brand. Ship campaigns —
             faster, more reliably, and at scale.
           </p>
@@ -21,8 +22,8 @@ const HeroSection = () => {
           <ul className="flex flex-col gap-4 mb-8">
             {["24-hour turnaround", "Dedicated Creative Director", "We work in your Slack"].map(
               (feature, index) => (
-                <li key={index} className="flex items-center gap-2 text-gray-800">
-                  <FaCheckCircle className="text-purple-500" />
+                <li key={index} className="flex items-center gap-2 ">
+                  <FaCheckCircle className="text-[#EBFAFE]" />
                   {feature}
                 </li>
               )
@@ -41,7 +42,7 @@ const HeroSection = () => {
           </div>
 
           {/* Footer Note */}
-          <p className="text-sm text-center lg:text-left text-gray-500 mt-6">Flat pricing. Cancel Anytime.</p>
+          <p className="text-sm text-center lg:text-left mt-6">Flat pricing. Cancel Anytime.</p>
         </div>
 
         {/* Right Image */}
@@ -54,6 +55,7 @@ const HeroSection = () => {
         </div>
       </div>
     </Container>
+    </div>
   );
 };
 

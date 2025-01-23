@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import { HiOutlineBookOpen, HiOutlinePlay, HiOutlineClipboardList } from "react-icons/hi";
 
-const ResourcesMegaMenu = () => {
+const ResourcesMegaMenu = ({color}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const resources = [
@@ -70,10 +70,10 @@ const ResourcesMegaMenu = () => {
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <li className="text-gray-700 list-none hover:list-disc  hover:text-purple-500">Resources</li>
+     <button className={`text-[${color.text}] p-2 cursor-pointer hover:text-purple-500`}>Resources</button>
       {isOpen && (
         <motion.div
-          className="absolute left-0 w-full top-10 pt-10 z-40"
+          className="absolute left-0 w-full top-[60px] pt-5 z-40"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
