@@ -2,9 +2,10 @@
 import React, { useState } from "react";
 import { FiMenu } from "react-icons/fi";
 import Sidebar from "./Sidebar";
-import MegaMenu from "./MegaMenu";
+import ServicesMegaMenu from "./megamenu/ServicesMegaMenu";
 import Button from "../common/Button";
 import Link from "next/link";
+import ResourcesMegaMenu from "./megamenu/ResourcesMegaMenu";
 
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -19,17 +20,15 @@ const Navbar = () => {
         </Link>
 
         {/* Large Screen Menu */}
-        <div className="hidden lg:flex space-x-8 items-center relative">
-          <MegaMenu />
-          <a href="#pricing" className="text-gray-700 hover:text-purple-500">
+        <div className="hidden lg:flex space-x-8 items-center">
+          <ServicesMegaMenu />
+          <Link href="#pricing" className="text-gray-700 hover:text-purple-500">
             Pricing
-          </a>
-          <a href="#resources" className="text-gray-700 hover:text-purple-500">
-            Resources
-          </a>
-          <a href="#login" className="text-gray-700 hover:text-purple-500">
+          </Link>
+         <ResourcesMegaMenu />
+          <Link href="#login" className="text-gray-700 hover:text-purple-500">
             Login
-          </a>
+          </Link>
           <Button variant="primary" size="medium">
             Schedule a call
           </Button>

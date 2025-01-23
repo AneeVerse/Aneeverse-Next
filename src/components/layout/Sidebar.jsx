@@ -2,6 +2,7 @@
 import React from "react";
 import { FiX } from "react-icons/fi";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const Sidebar = ({ setSidebarOpen }) => {
   return (
@@ -22,12 +23,12 @@ const Sidebar = ({ setSidebarOpen }) => {
 
         {/* Sidebar Links */}
         <nav className="flex flex-col space-y-4">
-          <a href="#services" className="text-gray-700 hover:text-purple-500">
+          <Link href="#services" className="text-gray-700 hover:text-purple-500">
             Services
-          </a>
-          <a href="#our-work" className="text-gray-700 hover:text-purple-500">
+          </Link>
+          <Link href="#our-work" className="text-gray-700 hover:text-purple-500">
             Our Work
-          </a>
+          </Link>
           <a href="#case-studies" className="text-gray-700 hover:text-purple-500">
             Case Studies
           </a>
