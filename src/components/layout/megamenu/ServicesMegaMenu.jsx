@@ -74,7 +74,7 @@ const ServicesMegaMenu = ({color}) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
         >
-          <div className="bg-[#EBFAFE] shadow-lg border overflow-y-auto h-[calc(100vh-80px)] border-gray-200 rounded-lg">
+          <div className="bg-[#EBFAFE] shadow-lg border overflow-y-auto h-[calc(100vh-80px)] border-gray-200 ">
 
 <div className="max-w-6xl mx-auto py-3 px-4 grid grid-cols-3 gap-6">
           {menuCategories.map((category, index) => (

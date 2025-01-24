@@ -1,3 +1,5 @@
+import { Rock_Salt } from 'next/font/google';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -7,20 +9,22 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+       Rock_Salt: ['Rock Salt', 'cursive'],
+      },
       colors: {
-        purple: {
-          100: "#f3e8ff",
-          500: "#9b5de5",
-          900: "#540d6e",
+        primary:{
+          100: "#E0F7FA",
+          500: "#EBFAFE",
+          900: "#073742",
         },
-        pink: {
-          100: "#ffe3ed",
-          900: "#ff0f57",
+        secondary: {
+          100: "#FFEBEE",
+          500: "#073742",
+          900: "#FF6F00",
         },
-        yellow: {
-          100: "#fff9c4",
-          900: "#ffd600",
-        },
+
+      
         orange: {
           100: "#ffe3d3",
           900: "#ff6f00",

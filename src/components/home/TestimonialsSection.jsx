@@ -26,11 +26,12 @@ const TestimonialsSection = () => {
   ];
 
   return (
-    <section className="py-12 bg-white">
+    <section className="py-12 bg-primary-500">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section Heading */}
         <h2 className="text-3xl font-bold text-center mb-8">
-          Highly Recommended By Companies Like Yours
+          {"Highly Recommended By Companies ".toUpperCase()}
+          <span className="block font-Rock_Salt mt-2 text-orange-500">{"Like Yours".toUpperCase()}</span>
         </h2>
 
         {/* Testimonials Grid */}
@@ -38,7 +39,7 @@ const TestimonialsSection = () => {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="flex flex-col items-center text-center bg-gray-50 rounded-lg shadow-md p-6"
+              className="flex flex-col"
             >
               {/* Video Thumbnail */}
               <div className="relative mb-4">
@@ -53,10 +54,10 @@ const TestimonialsSection = () => {
               </div>
 
               {/* Testimonial Text */}
-              <p className="text-sm text-gray-600 italic mb-4">“{testimonial.text}”</p>
+              <p className="text-sm text-gray-600 italic mb-3">“{testimonial.text}”</p>
 
               {/* Client Info */}
-              <div className="mt-auto">
+              <div className="">
                 <h3 className="text-lg font-semibold text-gray-900">
                   {testimonial.name}
                 </h3>

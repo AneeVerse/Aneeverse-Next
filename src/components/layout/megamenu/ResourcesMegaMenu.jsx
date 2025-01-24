@@ -78,7 +78,7 @@ const ResourcesMegaMenu = ({color}) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
         >
-            <div className="bg-[#EBFAFE] shadow-lg  border border-gray-200 rounded-lg">
+            <div className="bg-[#EBFAFE] shadow-lg  border border-gray-200 ">
 
 <div className="grid grid-cols-3 gap-6 max-w-6xl mx-auto px-6 py-8">
 
