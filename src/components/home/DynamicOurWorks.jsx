@@ -1,46 +1,47 @@
 import React from "react";
 import { MdOutlineArrowOutward } from "react-icons/md";
 
-const projects = [
-  {
-    image: "/images/home/works-ban-1.avif",
-    title: "Webflow",
-    description: "Illustration Design, Ad Creative",
-    colSpan: 2, // Dynamic column span
-  },
-  {
-    image: "/images/home/works2.avif",
-    title: "Pernod Ricard",
-    description: "eBook & Digital Reports, Video Production",
-    colSpan: 1,
-  },
-  {
-    image: "/images/home/works3.avif",
-    title: "Salesforce",
-    description: "Motion Design, Ad Creative",
-    colSpan: 1,
-  },
-  {
-    image: "/images/home/works4.avif",
-    title: "Shopify",
-    description: "Ad Creative",
-    colSpan: 1, // Dynamic column span
-  },
-  {
-    image: "/images/home/works5.avif",
-    title: "Antler",
-    description: "Brand Identity, Motion Design, Social Media Creative",
-    colSpan: 2,
-  },
-  {
-    image: "/images/home/works6.avif",
-    title: "Reddit",
-    description: "Motion Design, Social Media Creative",
-    colSpan: 1,
-  },
-];
+
 
 const DynamicOurWorks = () => {
+  const projects = [
+    {
+      image: "/images/home/works-ban-1.avif",
+      title: "Webflow",
+      description: "Illustration Design, Ad Creative",
+      colSpan: 2, // Dynamic column span
+    },
+    {
+      image: "/images/home/works2.avif",
+      title: "Pernod Ricard",
+      description: "eBook & Digital Reports, Video Production",
+      colSpan: 1,
+    },
+    {
+      image: "/images/home/works3.avif",
+      title: "Salesforce",
+      description: "Motion Design, Ad Creative",
+      colSpan: 1,
+    },
+    {
+      image: "/images/home/works4.avif",
+      title: "Shopify",
+      description: "Ad Creative",
+      colSpan: 1, // Dynamic column span
+    },
+    {
+      image: "/images/home/works5.avif",
+      title: "Antler",
+      description: "Brand Identity, Motion Design, Social Media Creative",
+      colSpan: 2,
+    },
+    {
+      image: "/images/home/works6.avif",
+      title: "Reddit",
+      description: "Motion Design, Social Media Creative",
+      colSpan: 1,
+    },
+  ];
   return (
     <div className="bg-primary-500 py-16 px-6">
       {/* Section Header */}
@@ -64,8 +65,10 @@ const DynamicOurWorks = () => {
         {projects.map((project, index) => (
           <div
             key={index}
+            // col span
+            style={{ gridColumnEnd: `span ${project.colSpan || 1}` }}
             className={`group rounded-lg cursor-pointer  overflow-hidden ${
-              project.colSpan ? `col-span-${project.colSpan}` : ""
+              project.colSpan ? ` col-span-${project.colSpan}` : ""
             }`}
           >
             {/* Image */}

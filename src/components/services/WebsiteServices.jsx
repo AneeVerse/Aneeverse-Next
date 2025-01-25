@@ -1,0 +1,101 @@
+import Link from "next/link";
+
+import { MdOutlineArrowOutward } from "react-icons/md";
+
+export default function WebsiteServices() {
+  const services = [
+    {
+      title: "Website Design",
+      description:
+        "Create stunning, responsive websites with a focus on user-friendly UI/UX to represent your brand effectively.",
+      imgUrl: "/images/services/website/website-design.png",
+      pageUrl: "/services/website-design",
+    },
+    {
+      title: "Landing Page",
+      description:
+        "Design high-converting landing pages tailored to campaigns or product launches for maximum engagement.",
+      imgUrl: "/images/services/website/landing-page.png",
+      pageUrl: "/services/landing-page",
+    },
+    {
+      title: "GMB Optimization",
+      description:
+        "Enhance your Google My Business profile to attract more local customers and improve search visibility.",
+      imgUrl: "/images/services/website/gmb-optimization.png",
+      pageUrl: "/services/gmb-optimization",
+    },
+    {
+      title: "SEO Optimization",
+      description:
+        "Boost your website's visibility and rankings with expert keyword optimization and technical SEO strategies.",
+      imgUrl: "/images/services/website/seo-optimization.png",
+      pageUrl: "/services/seo-optimization",
+    },
+    {
+      title: "Email Design",
+      description:
+        "Invigorate your communications with original email designs, templates, and creative campaigns.",
+      imgUrl: "/images/services/website/email-design.png",
+      pageUrl: "/services/email-design",
+    },
+    {
+      title: "Local SEO",
+      description:
+        "Drive local traffic to your business with targeted SEO strategies tailored for your location.",
+      imgUrl: "/images/services/website/local-seo.png",
+      pageUrl: "/services/local-seo",
+    },
+  ];
+
+  return (
+    <section className="py-6 text-white">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Heading */}
+        <h2 className="text-4xl mb-12 text-center">
+          <span className="font-Rock_Salt">WEBSITE</span>{" "}
+          <span className="ml-2">services</span>
+        </h2>
+
+        {/* Grid */}
+        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
+          {services.map((service, index) => (
+            <div
+              key={index}
+              className={`group mb-8 relative rounded-2xl overflow-hidden ${
+                index === 0 || index === services.length - 1
+                  ? "lg:col-span-2"
+                  : index === 1
+                  ? "lg:row-span-2"
+                  : ""
+              }`}
+            >
+              {/* Image */}
+              <div className="overflow-hidden h-full w-full">
+                <img
+                  src={service.imgUrl}
+                  alt={service.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition duration-300"
+                />
+              </div>
+
+              {/* Content */}
+              <div className="p-6 absolute top-2 left-2">
+                <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
+                <p className="text-[#F7F9F2] text-sm mb-4">
+                  {service.description}
+                </p>
+              </div>
+              <Link
+                href={service.pageUrl}
+                className="text-[#F7F9F2] absolute bottom-3 left-6 font-medium text-sm flex items-center gap-2 hover:underline"
+              >
+               <span> Learn more </span> <MdOutlineArrowOutward  className="self-center"/>
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

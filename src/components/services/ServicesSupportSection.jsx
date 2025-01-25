@@ -1,28 +1,31 @@
-const SupportSection = () => {
+const ServicesSupportSection = () => {
     return (
       <section className="bg-primary-500 py-12">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between px-6 lg:px-16">
           {/* Left Text Section */}
           <div className="lg:w-1/2 mb-8 pr-4 lg:mb-0">
-            <p className="text-sm font-light border-b pb-2  tracking-[2px] text-secondary-500 uppercase mb-2">
-              {"A New Era of Creative Work".toUpperCase()}
+            <p className="text-sm  tracking-[2px] font-light border-b pb-2  text-secondary-500 uppercase mb-2">
+              {"A variety of design services at your fingertips".toUpperCase()}
             </p>
-            <h1 className="text-4xl lg:text-5xl font-medium leading-tight text-secondary-500 mb-4">
-              The support your team{" "}
-              <div className="text-orange-500 text-2xl mt-4 lg:text-3xl  font-Rock_Salt">
-               {" has been asking for".toUpperCase()}
-              </div>
+            <h1 className="text-4xl lg:text-5xl  leading-tight text-secondary-500 mb-4">
+            Get graphic design, print, motion, video{" "}
+              <span className="t-4  font-Rock_Salt">
+               and more
+              </span>
             </h1>
-            <p className="text-lg text-secondary-500 mb-4">
-              Aneeverse is your dedicated, on-call creative team to expand your
-              production capacity and extend your team’s creative capabilities.
+            <p className="text-lg text-secondary-500 mb-6">
+            Whether you need an out-of-this-world
+illustration, beautiful print designs, or engaging
+digital marketing assets, Superside’s world-class
+graphic designers from around the world will
+make it happen.
             </p>
-            <p className="text-gray-500 mb-6">
+            {/* <p className="text-gray-500 mb-6">
               See us as an extension of your team, freeing you to focus on your
               most impactful and creative work.
-            </p>
-            <button className="px-6 py-3 bg-orange-400 text-white font-semibold text-md rounded-full transition">
-              Get Started
+            </p> */}
+            <button className="px-6 py-3 bg-secondary-500 text-primary-500 font-semibold text-md rounded-full  transition">
+              Book a Demo
             </button>
           </div>
   
@@ -51,5 +54,5 @@ const SupportSection = () => {
     );
   };
   
-  export default SupportSection;
+  export default ServicesSupportSection;
   

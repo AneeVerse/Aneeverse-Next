@@ -27,7 +27,7 @@ const TestimonialsSection = () => {
 
   return (
     <section className="py-12 bg-primary-500">
-      <div className="container mx-auto px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Section Heading */}
         <h2 className="text-3xl font-bold text-center mb-8">
           {"Highly Recommended By Companies ".toUpperCase()}

@@ -66,7 +66,7 @@ const ServicesMegaMenu = ({color}) => {
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <button className={`text-[${color.text}] p-2 cursor-pointer hover:text-purple-500`}>Services</button>
+      <Link href={"/services"} className={`text-[${color.text}] p-2 cursor-pointer hover:text-purple-500`}>Services</Link>
       {isOpen && (
         <motion.div
           className="absolute left-0 top-[60px] pt-[20px] w-full z-40"
@@ -74,7 +74,7 @@ const ServicesMegaMenu = ({color}) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
         >
-          <div className="bg-[#EBFAFE] shadow-lg border overflow-y-auto h-[calc(100vh-80px)] border-gray-200 ">
+          <div className="bg-[#EBFAFE] shadow-lg border py-3 overflow-y-auto h-[calc(100vh-80px)] border-gray-200 ">
 
 <div className="max-w-6xl mx-auto py-3 px-4 grid grid-cols-3 gap-6">
           {menuCategories.map((category, index) => (

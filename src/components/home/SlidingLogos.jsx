@@ -49,7 +49,7 @@ const logos = [
     }),
   };
   
-  const NGOSlider = ({ direction }) => {
+  const SliderLogo = ({ direction }) => {
     return (
       <motion.div
         className={`flex gap-8 ${direction === 'left' ? 'justify-start' : 'justify-end'}`}
@@ -72,7 +72,7 @@ const logos = [
 
   
   
-  const NGOSliderSection = () => {
+  const SlidingLogos = () => {
     return (
         <div className="relative bg-primary-500 py-12 overflow-hidden">
       <h2 className="text-center text-lg font-medium text-gray-700 mb-12">
@@ -83,14 +83,14 @@ const logos = [
         <div className="absolute top-0 left-0 w-[100px] h-full z-10 bg-gradient-to-r from-primary-500 to-transparent"></div>
         <div className="absolute z-10 top-0 right-0 w-[100px] h-full bg-gradient-to-l from-primary-500 to-transparent"></div>
          <div className="overflow-hidden">
-        <NGOSlider direction="right" />
+        <SliderLogo direction="right" />
       </div>
       <div className="overflow-hidden mt-12">
-        <NGOSlider direction="left" />
+        <SliderLogo direction="left" />
       </div>
       </div>
       </div>
     )
   }
   
-  export default NGOSliderSection
+  export default SlidingLogos

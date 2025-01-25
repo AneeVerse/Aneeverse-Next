@@ -66,10 +66,15 @@ const Navbar = () => {
             href="#pricing"
             className={`hover:text-purple-500 text-[${color.text}]`}
           >
-            Pricing
+            Our Work
           </Link>
           <ResourcesMegaMenu color={color} />
-          
+          <Link
+            href="#pricing"
+            className={`hover:text-purple-500 text-[${color.text}]`}
+          >
+            Pricing 
+          </Link>
         </div>
 
         <div className="hidden lg:flex items-center gap-4">
