@@ -3,8 +3,10 @@ import FeaturesSection from '@/components/home/FeaturesSection'
 import SlidingLogos from '@/components/home/SlidingLogos'
 import NewFooter from '@/components/layout/NewFooter'
 import AboutDesignServicesSection from '@/components/services/AboutDesignServicesSection'
+import ContentWritingServices from '@/components/services/ContentWritingServices'
 import CreativeDesignServices from '@/components/services/CreativeDesignServices'
 import FAQSection from '@/components/services/FAQSection'
+import MarketingServices from '@/components/services/MarketingServices'
 import ServicesHero from '@/components/services/ServicesHero'
 import ServicesSupportSection from '@/components/services/ServicesSupportSection'
 import WebsiteServices from '@/components/services/WebsiteServices'
@@ -20,9 +22,9 @@ const page = () => {
         <WebsiteServices />
         <CreativeDesignServices />
 
-        <CreativeDesignServices />
+        <ContentWritingServices />
 
-        <WebsiteServices />
+        <MarketingServices />
         </div>
         <DynamicOurWorks />
         <FeaturesSection />
