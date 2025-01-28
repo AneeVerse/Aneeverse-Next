@@ -1,6 +1,9 @@
 import ParnterSection from '@/components/about/PartnerSection'
 import HeroSectionOurTeam from '@/components/ourTeam/HeroSectionOurTeam'
+import OneTestimonialsOurTeam from '@/components/ourTeam/OneTestimonialsOurTeam'
 import OurTeamSection from '@/components/ourTeam/OurTeamSection'
+import OurTeamStatsSection from '@/components/ourTeam/OurTeamStateSection'
+import OurWorkWithVideoOurTeam from '@/components/ourTeam/OurWorkWithVideoOurTeam'
 import React from 'react'
 
 const page = () => {
@@ -12,6 +15,10 @@ const page = () => {
         <ParnterSection />
         <OurTeamSection />
         </div>
+
+        <OneTestimonialsOurTeam />
+        <OurTeamStatsSection />
+        <OurWorkWithVideoOurTeam />
     </div>
   )
 }

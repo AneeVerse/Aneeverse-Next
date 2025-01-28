@@ -13,7 +13,7 @@ const faqs = [
   { question: "What billing options do you offer?", answer: "We offer flexible billing options, including monthly and annual subscriptions." },
 ];
 
-export default function FAQSection() {
+export default function FAQSectionPricing() {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleFAQ = (index) => {
@@ -21,7 +21,7 @@ export default function FAQSection() {
   };
 
   return (
-    <div className="bg-secondary-500 text-primary-500 py-16 px-6">
+    <div className="bg-primary-500 text-secondary-500 py-16 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-md font-light tracking-[2px] mb-3">FAQs</div>
         <h2 className="text-3xl md:text-5xl font-bold mb-16">
@@ -36,7 +36,7 @@ export default function FAQSection() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="border-b border-gray-700 pb-4"
+                className="border-b border-gray-300 pb-4"
               >
                 <button
                   onClick={() => toggleFAQ(index)}
@@ -73,7 +73,7 @@ export default function FAQSection() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="border-b border-gray-700 pb-4"
+                className="border-b border-gray-300 pb-4"
               >
                 <button
                   onClick={() => toggleFAQ(index + Math.ceil(faqs.length / 2))}
@@ -95,7 +95,7 @@ export default function FAQSection() {
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="mt-2 "
+                    className="mt-2"
                   >
                     {faq.answer}
                   </motion.div>

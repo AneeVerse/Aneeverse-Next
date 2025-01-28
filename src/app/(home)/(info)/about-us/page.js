@@ -24,7 +24,6 @@ const AboutUsPage = () => {
     <TeamSectionAbout/>
     <TestimonialSlider/>
     <ValuesComponent/>
-    <NewFooter  />
     </>
   );
 };

@@ -7,6 +7,7 @@ import Button from "../common/Button";
 import Link from "next/link";
 import ResourcesMegaMenu from "./megamenu/ResourcesMegaMenu";
 import { usePathname } from "next/navigation";
+import WhyUsMegaMenu from "./megamenu/WhyUsMegaMenu";
 
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -63,14 +64,15 @@ const Navbar = () => {
         <div className="hidden lg:flex space-x-6 items-center">
           <ServicesMegaMenu color={color} />
           <Link
-            href="#pricing"
+            href="/pricing"
             className={`hover:text-purple-500 text-[${color.text}]`}
           >
             Our Work
           </Link>
+          <WhyUsMegaMenu color={color} />
           <ResourcesMegaMenu color={color} />
           <Link
-            href="#pricing"
+            href="/pricing"
             className={`hover:text-purple-500 text-[${color.text}]`}
           >
             Pricing 

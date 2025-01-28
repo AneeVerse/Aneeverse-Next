@@ -1,5 +1,6 @@
 
-
+import Link from "next/link";
+import { FaInstagram, FaLinkedin,FaYoutube } from "react-icons/fa";
 export default function NewFooter() {
     const footerData = {
       services: {
@@ -58,13 +59,8 @@ export default function NewFooter() {
           
         },
       },
-      legal: ["Privacy Policy", "Terms of Use", "Status Page", "DMCA"],
-      socialLinks: [
-        { icon: "fab fa-linkedin", link: "#" },
-        { icon: "fab fa-tiktok", link: "#" },
-        { icon: "fab fa-instagram", link: "#" },
-        { icon: "fab fa-youtube", link: "#" },
-      ],
+      legal: ["Privacy Policy", "Terms of Use", ],
+      
     };
   
     return (
@@ -76,10 +72,10 @@ export default function NewFooter() {
      <h2 className="text-4xl font-bold text-white">
        DESIGN, OPTIMIZE, ADVERTISE
      </h2>
-     <p className="mt-2 text-3xl text-orange-400 font-Rock_Salt">
+     <p className="mt-4 text-3xl text-orange-400 font-Rock_Salt">
        WE GOT YOU COVERED
      </p>
-     <button className="mt-6 px-6 text-md py-2 bg-primary-500 text-secondary-500 text-lg font-semibold rounded-full  transition">
+     <button className="mt-8 px-6 text-md py-2 bg-primary-500 text-secondary-500 text-lg font-semibold rounded-full  transition">
        GET STARTED
      </button>
    </div>
@@ -139,16 +135,17 @@ export default function NewFooter() {
                 ))}
               </ul>
             {/* Social Links */}
-            <div className=" gap-4 hidden">
-              {footerData.socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.link}
-                  className="text-white hover:text-gray-400"
-                >
-                  <i className={`${social.icon} fa-lg`}></i>
-                </a>
-              ))}
+            <div className=" gap-4 flex justify-center mt-4 sm:mt-0">
+             <Link href="https://www.instagram.com/aneeverse/" target="_blank">
+             <FaInstagram className="text-2xl cursor-pointer hover:text-[#c9c9c9]"/>
+              </Link>
+              <Link href="https://www.linkedin.com/company/aneeverse" target="_blank">
+              <FaLinkedin className="text-2xl cursor-pointer hover:text-[#c9c9c9]"/>
+              </Link>
+              <Link href="#" target="_blank" >
+              <FaYoutube className="text-2xl cursor-pointer hover:text-[#c9c9c9]"/>
+              </Link>
+
             </div>
             </div>
   

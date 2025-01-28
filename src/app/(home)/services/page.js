@@ -30,7 +30,6 @@ const page = () => {
         <FeaturesSection />
         <AboutDesignServicesSection />
         <FAQSection />
-        <NewFooter />
    </div>
   )
 }

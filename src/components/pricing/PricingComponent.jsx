@@ -1,0 +1,82 @@
+import React from "react";
+import { FaCheck } from "react-icons/fa6";
+
+const pricingData = {
+  title: "A subscription built to",
+  subtitle: "fuel your growth",
+  leftBox: {
+    badge: "STARTING AT ₹6,000 PER MONTH",
+    heading: "Flexible plans for every business",
+    description:
+      "From basic asset production and motion graphics to video ads and brand strategy, a Superside subscription lets you choose how you want to use your budget every month based on your business needs.",
+    note: "Typical subscriptions range from ₹6,000 to ₹100,000 Rupees/month.",
+    buttonText: "Book a call",
+  },
+  rightBox: {
+    title: "Included in",
+    italicText: "all plans",
+    description: "Access to all creative services.",
+    subNote: "(based on available dollars in monthly subscription)",
+    features: [
+      "Dedicated creative project manager and customer success",
+      "Turnaround times starting at 12 hours",
+      "24/7 timezone coverage",
+      "AI-enhanced services",
+      "Unlimited API calls to integrations",
+      "Unlimited users and asset storage",
+      "Support for multiple brands",
+      "Access to Superspace platform",
+    ],
+  },
+};
+
+export default function PricingComponent() {
+  return (
+    <div className="bg-primary-500 py-12 px-6">
+      {/* Title Section */}
+      <div className="text-center mb-12">
+        <h2 className="text-md uppercase text-secondary-500 tracking-widest">
+          PRICING MODEL
+        </h2>
+        <h3 className="text-4xl md:text-5xl mt-8 font-serif text-secondary-500">
+          {pricingData.title} <span className="font-Rock_Salt block mt-3">{pricingData.subtitle}</span>
+        </h3>
+      </div>
+
+      {/* Pricing Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        {/* Left Box */}
+        <div className="bg-[#2A4E45] text-white p-8 rounded-lg flex flex-col justify-between">
+          <span className="text-sm bg-white text-[#2A4E45] px-3 py-1 rounded-full uppercase tracking-wide font-semibold w-max">
+            {pricingData.leftBox.badge}
+          </span>
+          <h4 className="text-3xl font-semibold mt-4">
+            {pricingData.leftBox.heading}
+          </h4>
+          <p className="mt-4 text-lg">{pricingData.leftBox.description}</p>
+          <p className="text-sm opacity-80 mt-4">{pricingData.leftBox.note}</p>
+          <button className="bg-[#D8FF85] text-[#0A211F] font-semibold py-3 px-6 rounded-full mt-6">
+            {pricingData.leftBox.buttonText}
+          </button>
+        </div>
+
+        {/* Right Box */}
+        <div className="bg-[#E6ECD6] p-8 rounded-lg">
+          <h4 className="text-lg font-serif">
+            {pricingData.rightBox.title} <span className="font-Rock_Salt">{pricingData.rightBox.italicText}</span>:
+          </h4>
+          <p className="mt-2 font-semibold">{pricingData.rightBox.description}</p>
+          <p className="text-sm opacity-70">{pricingData.rightBox.subNote}</p>
+
+          <ul className="mt-6 ">
+            {pricingData.rightBox.features.map((feature, index) => (
+              <li key={index} className="flex border-b py-3 border-b-[#0f213314] items-center gap-3 text-gray-700">
+                <FaCheck className="text-[#0A211F]" /> {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
