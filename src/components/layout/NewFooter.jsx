@@ -1,6 +1,6 @@
 
 import Link from "next/link";
-import { FaInstagram, FaLinkedin,FaYoutube } from "react-icons/fa";
+import { FaInstagram, FaLinkedinIn,FaYoutube } from "react-icons/fa";
 export default function NewFooter() {
     const footerData = {
       services: {
@@ -136,13 +136,16 @@ export default function NewFooter() {
               </ul>
             {/* Social Links */}
             <div className=" gap-4 flex justify-center mt-4 sm:mt-0">
-             <Link href="https://www.instagram.com/aneeverse/" target="_blank">
+             <Link href="https://www.instagram.com/aneeverse/" target="_blank"
+             className="border border-gray-200 rounded-full p-2">
              <FaInstagram className="text-2xl cursor-pointer hover:text-[#c9c9c9]"/>
               </Link>
-              <Link href="https://www.linkedin.com/company/aneeverse" target="_blank">
-              <FaLinkedin className="text-2xl cursor-pointer hover:text-[#c9c9c9]"/>
+              <Link href="https://www.linkedin.com/company/aneeverse" target="_blank"
+              className="border border-gray-200 rounded-full p-2">
+              <FaLinkedinIn className="text-2xl cursor-pointer hover:text-[#c9c9c9]"/>
               </Link>
-              <Link href="#" target="_blank" >
+              <Link href="#" target="_blank" 
+              className="border border-gray-200 rounded-full p-2">
               <FaYoutube className="text-2xl cursor-pointer hover:text-[#c9c9c9]"/>
               </Link>
 
