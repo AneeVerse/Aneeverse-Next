@@ -52,7 +52,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 w-full h-[80px] px-2 flex items-center z-40 transition-all duration-300 bg-[${color.bg}]`}
+      className={`fixed top-0 w-full h-[80px] px-6 flex items-center z-40 transition-all duration-300 bg-[${color.bg}]`}
     >
       <div className="max-w-[1120px] w-full mx-auto flex justify-between items-center">
         {/* Logo */}
@@ -65,17 +65,17 @@ const Navbar = () => {
           <ServicesMegaMenu color={color} />
           <Link
             href="/pricing"
-            className={`hover:text-purple-500 text-[${color.text}]`}
+            className={` text-[${color.text}] flex items-center group`}
           >
-            Our Work
+           <span className=" h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full bg-secondary-500"></span>  <span>Pricing</span> 
           </Link>
           <WhyUsMegaMenu color={color} />
           <ResourcesMegaMenu color={color} />
           <Link
             href="/pricing"
-            className={`hover:text-purple-500 text-[${color.text}]`}
+            className={`group flex items-center  text-[${color.text}]`}
           >
-            Pricing 
+          <span className=" h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full bg-secondary-500"></span>  <span>Pricing</span> 
           </Link>
         </div>
 
@@ -90,7 +90,7 @@ const Navbar = () => {
         {/* Mobile Menu Icon */}
         <button
           className={`lg:hidden text-2xl ${
-            scrolled ? "text-[#073742]" : color.text
+            scrolled ? "text-[#073742]" : `text-[${color.text}]`
           }`}
           onClick={() => setSidebarOpen(true)}
         >
@@ -99,7 +99,7 @@ const Navbar = () => {
       </div>
 
       {/* Sidebar for small screens */}
-      {sidebarOpen && <Sidebar setSidebarOpen={setSidebarOpen} />}
+      {sidebarOpen && <Sidebar isOpen={sidebarOpen} toggleSidebar={() => setSidebarOpen(false)}/>}
     </nav>
   );
 };

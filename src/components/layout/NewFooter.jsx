@@ -64,8 +64,8 @@ export default function NewFooter() {
     };
   
     return (
-      <footer className="bg-secondary-500 text-white py-16">
-        <div className="max-w-7xl mx-auto px-8">
+      <footer className="bg-secondary-500 text-white pt-16 pb-6">
+        <div className="max-w-7xl mx-auto px-4">
           {/* Top Sections */}
                {/* Top Section */}
      <div className=" text-center">
@@ -121,11 +121,11 @@ export default function NewFooter() {
           </div>
   
           {/* Bottom Section */}
-          <div className="mt-10 flex flex-col lg:flex-row justify-between items-center">
+          <div className="mt-6 flex flex-col lg:flex-row justify-between items-center">
             {/* Legal Links */}
-            <div className="text-center flex flex-col sm:flex-row justify-between w-full l">
+            <div className="text-center flex flex-col items-center sm:flex-row justify-between w-full l">
               <p className="text-sm">&copy; 2025 Aneeverse. All rights reserved.</p>
-              <ul className="flex flex-col sm:flex-row mt-3 sm:mt-0 gap-4 text-sm ">
+              <ul className="flex flex-row justify-center mt-3 sm:mt-0 gap-4 text-sm ">
                 {footerData.legal.map((legalItem, index) => (
                   <li key={index}>
                     <a href="#" className="hover:underline">
@@ -138,15 +138,15 @@ export default function NewFooter() {
             <div className=" gap-4 flex justify-center mt-4 sm:mt-0">
              <Link href="https://www.instagram.com/aneeverse/" target="_blank"
              className="border border-gray-200 rounded-full p-2">
-             <FaInstagram className="text-2xl cursor-pointer hover:text-[#c9c9c9]"/>
+             <FaInstagram className="text-xl cursor-pointer hover:text-[#c9c9c9]"/>
               </Link>
               <Link href="https://www.linkedin.com/company/aneeverse" target="_blank"
               className="border border-gray-200 rounded-full p-2">
-              <FaLinkedinIn className="text-2xl cursor-pointer hover:text-[#c9c9c9]"/>
+              <FaLinkedinIn className="text-xl cursor-pointer hover:text-[#c9c9c9]"/>
               </Link>
               <Link href="#" target="_blank" 
               className="border border-gray-200 rounded-full p-2">
-              <FaYoutube className="text-2xl cursor-pointer hover:text-[#c9c9c9]"/>
+              <FaYoutube className="text-xl cursor-pointer hover:text-[#c9c9c9]"/>
               </Link>
 
             </div>

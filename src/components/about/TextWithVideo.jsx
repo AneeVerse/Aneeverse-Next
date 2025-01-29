@@ -10,10 +10,10 @@ const TextWithVideo = () => {
               
             </h1>
             <p className="text-lg text-primary-500 mb-4">
-            Superside replaces creative bottlenecks with limitless creative output, empowering you to bring your bold visions to life faster.
+            aneeverse replaces creative bottlenecks with limitless creative output, empowering you to bring your bold visions to life faster.
             </p>
             <p className="text-gray-400 mb-6">
-            “Superside combines creative talent from around the world with purpose-built tech to
+            “aneeverse combines creative talent from around the world with purpose-built tech to
 deliver a significantly faster, cheaper and better customer experience than traditional
 agency networks and freelance marketplaces.”
             </p>

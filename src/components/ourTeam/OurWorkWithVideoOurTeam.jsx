@@ -12,8 +12,8 @@ const OurWorkWithVideoOurTeam = () => {
   const scale = useTransform(scrollYProgress, [0, 1], [0.7, 1]);
 
   return (
-    <section className="flex flex-col items-center justify-center min-h-screen bg-secondary-500 p-10">
-      <h2 className="text-primary-500 text-center text-4xl md:text-6xl font-semibold mb-6">See how <span className="font-Rock_Salt">top brands</span> use Superside.</h2>
+    <section className="flex flex-col items-center justify-center min-h-screen bg-secondary-500 p-3 md:p-10">
+      <h2 className="text-primary-500 text-center text-4xl md:text-6xl font-semibold mb-6">See how <span className="font-Rock_Salt">top brands</span> use aneeverse.</h2>
       <p className="text-gray-300 text-center max-w-xl mb-6">
         Take a glimpse of what’s possible—check out some of our most creative collaborations to date.
       </p>

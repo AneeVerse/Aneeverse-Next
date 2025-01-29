@@ -55,9 +55,10 @@ export default function ValuesComponent() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-7xl mx-auto">
         {valuesData.map((value, index) => (
           <div
+          style={{backgroundColor: value.bgColor}}
             key={value.id}
             className={`rounded-lg p-6 flex flex-col md:flex-row items-start gap-4 bg-[${value.bgColor}] text-[${((index === 1) || (index === 2)) ? "gray" : "white"}]`}
           >

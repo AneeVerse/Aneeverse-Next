@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, { use, useEffect, useState } from "react";
 import { MdOutlineArrowOutward } from "react-icons/md";
 
 
@@ -42,6 +43,23 @@ const DynamicOurWorks = () => {
       colSpan: 1,
     },
   ];
+
+ const [smallScreen, setSmallScreen] = useState(false);
+  // if width is less than 768px, set colSpan to 1
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setSmallScreen(true);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className="bg-primary-500 py-16 px-6">
       {/* Section Header */}
@@ -61,14 +79,14 @@ const DynamicOurWorks = () => {
       </div>
 
       {/* Project Grid */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1  md:grid-cols-4 gap-6">
         {projects.map((project, index) => (
           <div
             key={index}
             // col span
-            style={{ gridColumnEnd: `span ${project.colSpan || 1}` }}
+            style={{ gridColumn: `span ${ smallScreen ? 1 : project.colSpan || 1}` }}
             className={`group rounded-lg cursor-pointer  overflow-hidden ${
-              project.colSpan ? ` col-span-${project.colSpan}` : ""
+              project.colSpan ? ` md:col-span-${project.colSpan}` : ""
             }`}
           >
             {/* Image */}

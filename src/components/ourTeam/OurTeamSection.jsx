@@ -47,7 +47,7 @@ export default function OurTeamSection() {
   
     return (
       <section className=" py-12">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-4">
           {/* Heading */}
           <div className="text-center mb-8">
             <p className="uppercase text-sm text-primary-500 tracking-wide">

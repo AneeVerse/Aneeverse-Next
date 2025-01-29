@@ -24,7 +24,7 @@ const ResourcesMegaMenu = ({color}) => {
         },
         {
           name: "Video Library",
-          description: "Superside's latest videos",
+          description: "aneeverse's latest videos",
           icon: <HiOutlinePlay />,
         },
         {
@@ -70,7 +70,9 @@ const ResourcesMegaMenu = ({color}) => {
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-     <button className={`text-[${color.text}] p-2 cursor-pointer hover:text-purple-500`}>Resources</button>
+     <button className={`text-[${color.text}] p-2 cursor-pointer flex items-center group`}>
+     <span className={`${isOpen ? "mr-[6px] scale-100 ": " "} h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full bg-secondary-500`}></span>  <span>Resources</span> 
+     </button>
       {isOpen && (
         <motion.div
           className="absolute left-0 w-full top-[60px] pt-5 z-40"

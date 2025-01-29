@@ -11,7 +11,7 @@ const testimonials = [
     role: "Creative Operations Manager at Roland",
     company: "Roland",
     feedback:
-      "At Amazon, it's pretty common to have a big design project and not be able to get the heads in fast enough to get the work done. **Superside was the solution that got us moving faster without adding internal headcount.**",
+      "At Amazon, it's pretty common to have a big design project and not be able to get the heads in fast enough to get the work done. **aneeverse was the solution that got us moving faster without adding internal headcount.**",
     stats: {
       assetsDelivered: "1,092",
       weeklyHoursSaved: "40",

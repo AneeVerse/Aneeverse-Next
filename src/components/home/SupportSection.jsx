@@ -1,6 +1,6 @@
 const SupportSection = () => {
     return (
-      <section className="bg-primary-500 py-12">
+      <section className="bg-primary-500 py-16">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between px-6 lg:px-16">
           {/* Left Text Section */}
           <div className="lg:w-1/2 mb-8 pr-4 lg:mb-0">

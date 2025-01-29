@@ -11,7 +11,7 @@ export default function FeaturesSection() {
       </div>
 
       {/* Features */}
-      <div className="grid md:grid-cols-3 gap-8 mt-16 px-6 max-w-6xl mx-auto">
+      <div className="grid md:grid-cols-3 gap-8 mt-16 px-6 max-w-7xl mx-auto">
         {/* Feature 1 */}
         <div className=" ">
           <span className="bg-[#E6ECD6] inline-block  text-secondary-500 p-4 rounded-lg mb-2">

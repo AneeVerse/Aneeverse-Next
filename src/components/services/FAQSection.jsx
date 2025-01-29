@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 const faqs = [
-  { question: "What makes Superside's design services different?", answer: "We deliver speedy, high-quality graphic design services through a transparent subscription model." },
+  { question: "What makes aneeverse's design services different?", answer: "We deliver speedy, high-quality graphic design services through a transparent subscription model." },
   { question: "How does a design subscription work?", answer: "A subscription provides you access to dedicated design resources on a recurring basis." },
   { question: "What is graphic design?", answer: "Graphic design is the art of creating visual content to communicate messages." },
   { question: "What do graphic designers do?", answer: "Graphic designers create visuals that inspire, inform, and captivate audiences." },

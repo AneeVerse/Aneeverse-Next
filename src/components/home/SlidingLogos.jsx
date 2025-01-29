@@ -74,7 +74,7 @@ const logos = [
   
   const SlidingLogos = () => {
     return (
-        <div className="relative bg-primary-500 py-12 overflow-hidden">
+        <div className="relative bg-primary-500 py-16 overflow-hidden">
       <h2 className="text-center text-lg font-medium text-gray-700 mb-12">
         Trusted by 500+ of the world's biggest brands
       </h2>

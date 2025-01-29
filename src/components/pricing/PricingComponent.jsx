@@ -8,7 +8,7 @@ const pricingData = {
     badge: "STARTING AT ₹6,000 PER MONTH",
     heading: "Flexible plans for every business",
     description:
-      "From basic asset production and motion graphics to video ads and brand strategy, a Superside subscription lets you choose how you want to use your budget every month based on your business needs.",
+      "From basic asset production and motion graphics to video ads and brand strategy, a aneeverse subscription lets you choose how you want to use your budget every month based on your business needs.",
     note: "Typical subscriptions range from ₹6,000 to ₹100,000 Rupees/month.",
     buttonText: "Book a call",
   },

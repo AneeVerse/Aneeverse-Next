@@ -36,7 +36,7 @@ const Footer = () => {
         {
           title: 'Competitors',
           links: [
-            { name: 'Superside Alternatives', href: '/competitors/superside' },
+            { name: 'aneeverse Alternatives', href: '/competitors/aneeverse' },
             { name: 'Vidico Alternatives', href: '/competitors/vidico' },
             { name: 'Wyzowl Alternatives', href: '/competitors/wyzowl' },
             { name: 'Design Pickle Alternatives', href: '/competitors/design-pickle' },
