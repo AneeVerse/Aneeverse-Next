@@ -6,6 +6,9 @@
   --background: #ffffff;
   --foreground: #171717;
 }
+body{
+  overflow-x: hidden;
+}
 @font-face {
   font-family: "RockSalt";
   src: url("/fonts/RockSalt-Regular'.ttf") format("truetype");
