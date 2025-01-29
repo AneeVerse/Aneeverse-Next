@@ -67,7 +67,7 @@ const Navbar = () => {
             href="/pricing"
             className={` text-[${color.text}] flex items-center group`}
           >
-           <span className=" h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full bg-secondary-500"></span>  <span>Pricing</span> 
+           <span className={`h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full bg-[${color.text}]`}></span>  <span>Our Works</span> 
           </Link>
           <WhyUsMegaMenu color={color} />
           <ResourcesMegaMenu color={color} />
@@ -75,7 +75,7 @@ const Navbar = () => {
             href="/pricing"
             className={`group flex items-center  text-[${color.text}]`}
           >
-          <span className=" h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full bg-secondary-500"></span>  <span>Pricing</span> 
+           <span className={`h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full bg-[${color.text}]`}></span>   <span>Pricing</span> 
           </Link>
         </div>
 

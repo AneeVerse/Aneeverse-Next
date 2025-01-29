@@ -31,7 +31,7 @@ const WhyUsMegaMenu = ({color}) => {
       onMouseLeave={() => setIsOpen(false)}
     >
      <button className={`text-[${color.text}] p-2 cursor-pointer flex items-center group`}>
-     <span className={`${isOpen ? "mr-[6px] scale-100 ": " "} h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full bg-secondary-500`}></span>  <span>Why Us</span> 
+     <span className={`${isOpen ? "mr-[6px] scale-100 ": " "} h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full bg-[${color.text}]`}></span>  <span>Why Us</span> 
      </button>
       {isOpen && (
         <motion.div

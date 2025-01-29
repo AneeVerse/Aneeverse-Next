@@ -67,7 +67,7 @@ const ServicesMegaMenu = ({color}) => {
       onMouseLeave={() => setIsOpen(false)}
     >
       <Link href={"/services"} className={`text-[${color.text}] p-2 cursor-pointer flex items-center group`}>
-      <span className={`${isOpen ? "mr-[6px] scale-100 ": " "} h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full bg-secondary-500`}></span>  <span>Services</span> </Link>
+      <span className={`${isOpen ? "mr-[6px] scale-100 ": " "} h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full bg-[${color.text}]`}></span>  <span>Services</span> </Link>
       {isOpen && (
         <motion.div
           className="absolute left-0 top-[60px] pt-[20px] w-full z-40"
