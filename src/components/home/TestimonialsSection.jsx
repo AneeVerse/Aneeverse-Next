@@ -2,6 +2,7 @@
 
 import React from "react";
 import { FaPlay } from "react-icons/fa";
+import Layout from "../common/Layout";
 
 const TestimonialsSection = () => {
   const testimonials = [
@@ -27,11 +28,11 @@ const TestimonialsSection = () => {
 
   return (
     <section className="py-12 bg-primary-500">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <Layout>
         {/* Section Heading */}
         <h2 className="text-3xl font-bold text-center mb-8">
           {"Highly Recommended By Companies ".toUpperCase()}
-          <span className="block font-Rock_Salt mt-2 text-orange-500">{"Like Yours".toUpperCase()}</span>
+          <span className="block font-Rock_Salt mt-2 text-orange-500">{"Like Yours"}</span>
         </h2>
 
         {/* Testimonials Grid */}
@@ -66,7 +67,7 @@ const TestimonialsSection = () => {
             </div>
           ))}
         </div>
-      </div>
+      </Layout>
     </section>
   );
 };

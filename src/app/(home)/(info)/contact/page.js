@@ -1,9 +1,11 @@
+import Layout from '@/components/common/Layout';
 import React from 'react';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 
 const ContactUsPage = () => {
   return (
     <div className="bg-gray-50 text-gray-900">
+      
 
       {/* Header Section */}
       {/* <div className="py-20 px-3 text-center bg-secondary-500 text-primary-500">
@@ -13,7 +15,7 @@ const ContactUsPage = () => {
 
       {/* Calendly Embed */}
       <div className="py-20 bg-[#fbfcfd] text-secondary-500">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Layout>
           <h2 className="text-3xl font-bold text-center  mb-8">Schedule a Meeting</h2>
           <div className="rounded-lg overflow-hidden ">
             <iframe
@@ -25,12 +27,12 @@ const ContactUsPage = () => {
               title="Calendly Scheduling"
             ></iframe>
           </div>
-        </div>
+        </Layout>
       </div>
 
       {/* Contact Details Section */}
-      <div className="py-20 px-4 bg-secondary-500  text-primary-500 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
+      <div className="py-20 bg-secondary-500  text-primary-500 ">
+        <Layout className="grid md:grid-cols-2 gap-12">
 
           {/* Contact Information */}
           <div className="space-y-8">
@@ -82,7 +84,7 @@ const ContactUsPage = () => {
             </div>
           </div>
 
-        </div>
+        </Layout>
       </div>
 
     </div>

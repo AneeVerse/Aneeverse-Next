@@ -1,8 +1,10 @@
 import { FaLightbulb, FaListAlt, FaStar } from "react-icons/fa";
+import Layout from "../common/Layout";
 
 export default function FeaturesSectionAbout() {
   return (
     <section className="bg-primary-500 py-16">
+      <Layout>
       <div className="max-w-xl mx-auto text-center">
         <div  className=" font-light tracking-widest mb-3 text-sm">CREATIVE THAT WORKS</div>
         {/* Heading */}
@@ -12,7 +14,7 @@ export default function FeaturesSectionAbout() {
       </div>
 
       {/* Features */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16 px-6 max-w-7xl mx-auto">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
         {/* Feature 1 */}
         <div className=" ">
           <span className="bg-[#E6ECD6] inline-block  text-secondary-500 p-4 rounded-lg mb-2">
@@ -63,6 +65,7 @@ export default function FeaturesSectionAbout() {
         </div>
         
       </div>
+      </Layout>
     </section>
   );
 }

@@ -7,7 +7,8 @@ import { FaPenFancy, FaGhost, FaFileAlt, FaTags } from "react-icons/fa";
 import { FaChartPie, FaEnvelope, FaGoogle, FaFacebook, FaUserFriends } from "react-icons/fa";
 import { FaEnvelopeOpenText, FaSlideshare, FaPaintBrush, FaFilePdf } from "react-icons/fa";
 import Link from "next/link";
-import { FaArrowRight } from "react-icons/fa6";
+import { FaArrowRight, FaChevronDown } from "react-icons/fa6";
+import Layout from "@/components/common/Layout";
 
 
 const ServicesMegaMenu = ({color}) => {
@@ -67,7 +68,7 @@ const ServicesMegaMenu = ({color}) => {
       onMouseLeave={() => setIsOpen(false)}
     >
       <Link href={"/services"} className={`text-[${color.text}] p-2 cursor-pointer flex items-center group`}>
-      <span className={`${isOpen ? "mr-[6px] scale-100 ": " "} h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full bg-[${color.text}]`}></span>  <span>Services</span> </Link>
+      <span className={`${isOpen ? "mr-[6px] scale-100 ": " "} h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full bg-[${color.text}]`}></span>  <span className="flex items-center gap-2">Services <FaChevronDown className={`${isOpen ? " -rotate-180 ": " " } group-hover:-rotate-180 duration-300 transition-all self-center text-[10px]`} /> </span>  </Link>
       {isOpen && (
         <motion.div
           className="absolute left-0 top-[60px] pt-[20px] w-full z-40"
@@ -76,8 +77,8 @@ const ServicesMegaMenu = ({color}) => {
           exit={{ opacity: 0, y: -10 }}
         >
           <div className="bg-[#EBFAFE] shadow-lg border py-3 overflow-y-auto h-[calc(100vh-80px)] border-gray-200 ">
-
-<div className="max-w-6xl mx-auto py-3 px-4 grid grid-cols-3 gap-6">
+<Layout>
+<div className=" grid grid-cols-3 gap-6">
           {menuCategories.map((category, index) => (
             <div key={index}>
               <h3
@@ -102,6 +103,7 @@ const ServicesMegaMenu = ({color}) => {
             </div>
           ))}
 </div>
+</Layout>
 </div>
         </motion.div>
       )}

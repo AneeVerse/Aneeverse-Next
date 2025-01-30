@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { MdOutlineArrowOutward } from "react-icons/md";
+import Layout from "../common/Layout";
 
 
 const testimonials = [
@@ -27,8 +28,8 @@ export default function OneTestimonialsOurTeam() {
   const currentTestimonial = testimonials[currentIndex];
   
   return (
-    <div className=" bg-primary-500 py-10 px-6 md:px-16">
-    <div className="flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto">
+    <div className=" bg-primary-500 py-10 ">
+    <Layout className="flex flex-col md:flex-row items-center justify-between ">
       {/* Image Section */}
       <motion.div
         key={currentIndex}
@@ -90,7 +91,7 @@ export default function OneTestimonialsOurTeam() {
             </Link>
         </div>
       </motion.div>
-    </div>
+    </Layout>
     </div>
   );
 }

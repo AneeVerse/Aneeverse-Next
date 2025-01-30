@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import { HiOutlineBookOpen, HiOutlinePlay, HiOutlineClipboardList } from "react-icons/hi";
 import Link from "next/link";
+import Layout from "@/components/common/Layout";
+import { FaChevronDown } from "react-icons/fa6";
 
 const WhyUsMegaMenu = ({color}) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +33,7 @@ const WhyUsMegaMenu = ({color}) => {
       onMouseLeave={() => setIsOpen(false)}
     >
      <button className={`text-[${color.text}] p-2 cursor-pointer flex items-center group`}>
-     <span className={`${isOpen ? "mr-[6px] scale-100 ": " "} h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full bg-[${color.text}]`}></span>  <span>Why Us</span> 
+     <span className={`${isOpen ? "mr-[6px] scale-100 ": " "} h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full bg-[${color.text}]`}></span>  <span className="flex items-center gap-2">Why Us <FaChevronDown className={`${isOpen ? " -rotate-180 ": " " } group-hover:-rotate-180 duration-300 transition-all self-center text-[10px]`} /> </span> 
      </button>
       {isOpen && (
         <motion.div
@@ -42,9 +44,9 @@ const WhyUsMegaMenu = ({color}) => {
         >
             <div className="bg-[#EBFAFE] shadow-lg  border border-gray-200 ">
 
-<div className="max-w-6xl mx-auto">
+<Layout >
 
-<div className="grid grid-cols-2 max-w-3xl gap-8  px-6 py-12">
+<div className="grid grid-cols-2 max-w-3xl gap-8 py-12">
 
               {whyUs.map((card, idx) => (
                 <a href={card.link} key={idx} className="flex group cursor-pointer flex-col gap-0">
@@ -70,7 +72,7 @@ const WhyUsMegaMenu = ({color}) => {
                 </a>
               ))}
             </div>
-          </div>
+          </Layout>
 
 </div>
         </motion.div>

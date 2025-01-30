@@ -1,7 +1,9 @@
+import Layout from "../common/Layout";
+
 const ServicesSupportSection = () => {
     return (
       <section className="bg-primary-500 py-16">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between px-6 lg:px-8">
+        <Layout className=" flex flex-col lg:flex-row items-center justify-between">
           {/* Left Text Section */}
           <div className="lg:w-1/2 mb-8 pr-4 lg:mb-0">
             <p className="text-sm  tracking-[2px] font-light border-b pb-2  text-secondary-500 uppercase mb-2">
@@ -9,7 +11,7 @@ const ServicesSupportSection = () => {
             </p>
             <h1 className="text-4xl lg:text-5xl  leading-tight text-secondary-500 mb-4">
             Get graphic design, print, motion, video{" "}
-              <span className="t-4  font-Rock_Salt">
+              <span className=" font-Rock_Salt">
                and more
               </span>
             </h1>
@@ -30,7 +32,7 @@ make it happen.
           </div>
   
           {/* Right Video Section */}
-          <div className="w-full max-w-xl mx-auto lg:w-1/2">
+          <div className="w-full max-w-xl  lg:w-1/2">
             <div className="relative w-full h-64 lg:h-80 bg-black rounded-lg overflow-hidden">
               <button
                 className="absolute inset-0 flex items-center justify-center"
@@ -49,7 +51,7 @@ make it happen.
               </button>
             </div>
           </div>
-        </div>
+        </Layout>
       </section>
     );
   };

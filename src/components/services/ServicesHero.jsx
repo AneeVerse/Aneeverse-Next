@@ -1,3 +1,5 @@
+import Layout from "../common/Layout";
+
 export default function ServicesHero() {
     return (
       <section className="relative h-[400px] md:h-[500px] bg-black text-white">
@@ -11,7 +13,7 @@ export default function ServicesHero() {
         </div>
   
         {/* Content Section */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 flex flex-col items-start justify-center h-full">
+        <Layout className="relative z-10 flex flex-col items-start justify-center h-full">
           
           <div className="text-[#F7F9F2] text-sm">CREATIVE SERVICES</div>
           {/* Title */}
@@ -29,7 +31,7 @@ export default function ServicesHero() {
           <button className="mt-8 px-6 py-3 bg-[#D8FF85] text-black font-semibold rounded-full text-md hover:bg-[#b1d75f] transition">
             BOOK A CALL
           </button>
-        </div>
+        </Layout>
       </section>
     );
   }

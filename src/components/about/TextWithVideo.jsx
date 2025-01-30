@@ -1,7 +1,9 @@
+import Layout from "../common/Layout";
+
 const TextWithVideo = () => {
     return (
       <section className="pt-12">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between px-4">
+        <Layout className=" flex flex-col lg:flex-row items-center justify-between">
           {/* Left Text Section */}
           <div className="lg:w-1/2 mb-8 pr-4 lg:mb-0">
            
@@ -44,7 +46,7 @@ agency networks and freelance marketplaces.”
               </button>
             </div>
           </div>
-        </div>
+        </Layout>
       </section>
     );
   };

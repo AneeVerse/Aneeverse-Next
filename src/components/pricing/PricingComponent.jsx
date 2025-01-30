@@ -1,5 +1,6 @@
 import React from "react";
 import { FaCheck } from "react-icons/fa6";
+import Layout from "../common/Layout";
 
 const pricingData = {
   title: "A subscription built to",
@@ -32,7 +33,8 @@ const pricingData = {
 
 export default function PricingComponent() {
   return (
-    <div className="bg-primary-500 py-12 px-6">
+    <div className="bg-primary-500 py-12">
+      <Layout>
       {/* Title Section */}
       <div className="text-center mb-12">
         <h2 className="text-md uppercase text-secondary-500 tracking-widest">
@@ -44,7 +46,7 @@ export default function PricingComponent() {
       </div>
 
       {/* Pricing Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left Box */}
         <div className="bg-[#2A4E45] text-white p-8 rounded-lg flex flex-col justify-between">
           <span className="text-sm bg-white text-[#2A4E45] px-3 py-1 rounded-full uppercase tracking-wide font-semibold w-max">
@@ -77,6 +79,7 @@ export default function PricingComponent() {
           </ul>
         </div>
       </div>
+      </Layout>
     </div>
   );
 }

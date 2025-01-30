@@ -1,6 +1,7 @@
 
 import Link from "next/link";
 import { FaInstagram, FaLinkedinIn,FaYoutube } from "react-icons/fa";
+import Layout from "../common/Layout";
 export default function NewFooter() {
     const footerData = {
       services: {
@@ -65,7 +66,7 @@ export default function NewFooter() {
   
     return (
       <footer className="bg-secondary-500 text-white pt-16 pb-6">
-        <div className="max-w-7xl mx-auto px-4">
+        <Layout>
           {/* Top Sections */}
                {/* Top Section */}
      <div className=" text-center">
@@ -73,7 +74,7 @@ export default function NewFooter() {
        DESIGN, OPTIMIZE, ADVERTISE
      </h2>
      <p className="mt-4 text-3xl text-orange-400 font-Rock_Salt">
-       WE GOT YOU COVERED
+       we got you covered.
      </p>
      <button className="mt-8 px-6 text-md py-2 bg-primary-500 text-secondary-500 text-lg font-semibold rounded-full  transition">
        GET STARTED
@@ -153,7 +154,7 @@ export default function NewFooter() {
             </div>
   
           </div>
-        </div>
+        </Layout>
       </footer>
     );
   };

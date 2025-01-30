@@ -1,9 +1,10 @@
 import React from "react";
+import Layout from "../common/Layout";
 
 export default function AIDesignSection() {
   return (
-    <section className="bg-primary-500 py-12 px-6">
-      <div className="max-w-7xl relative  mx-auto flex flex-col md:flex-row items-center gap-8 rounded-lg overflow-hidden">
+    <section className="bg-primary-500 py-12">
+      <Layout className="relative  flex flex-col md:flex-row items-center gap-8 rounded-lg overflow-hidden">
          {/* Right Side (Image) */}
          <div className="absolute z-0 inset-0">
           <img
@@ -33,7 +34,7 @@ export default function AIDesignSection() {
         </div>
 
        
-      </div>
+      </Layout>
     </section>
   );
 }

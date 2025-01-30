@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import Layout from "../common/Layout";
 
 const faqs = [
   { question: "What makes aneeverse's design services different?", answer: "We deliver speedy, high-quality graphic design services through a transparent subscription model." },
@@ -21,8 +22,8 @@ export default function FAQSection() {
   };
 
   return (
-    <div className="bg-secondary-500 text-primary-500 py-16 px-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="bg-secondary-500 text-primary-500 py-16">
+      <Layout>
         <div className="text-md font-light tracking-[2px] mb-3">FAQs</div>
         <h2 className="text-3xl md:text-5xl font-bold mb-16">
           Frequently <span className="font-Rock_Salt">asked questions</span>
@@ -104,7 +105,7 @@ export default function FAQSection() {
             ))}
           </div>
         </div>
-      </div>
+      </Layout>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 "use client"
 import React, { use, useEffect, useState } from "react";
 import { MdOutlineArrowOutward } from "react-icons/md";
+import Layout from "../common/Layout";
 
 
 
@@ -61,16 +62,17 @@ const DynamicOurWorks = () => {
   }, []);
 
   return (
-    <div className="bg-primary-500 py-16 px-6">
+    <div className="bg-primary-500 py-16">
+      <Layout>
       {/* Section Header */}
-      <div className="flex justify-between max-w-7xl mx-auto items-center mb-12">
+      <div className="flex justify-between items-center mb-12">
       <div className="max-w-3xl  ">
         <p className="text-sm font-semibold text-gray-600 tracking-wide uppercase">
           Our Works
         </p>
         <h2 className="text-4xl font-bold text-gray-800 mt-2">
-          {"See Our".toUpperCase()}{" "}
-          <span className="text-orange-500 font-Rock_Salt">{"Top Works".toUpperCase()}</span>
+          {"See Our"}{" "}
+          <span className="text-orange-500 font-Rock_Salt">{"Top Works"}</span>
         </h2>
       </div>
         <button className="mt-4 px-6 py-2 border border-black rounded-full hover:bg-gray-800 hover:text-white transition">
@@ -79,7 +81,7 @@ const DynamicOurWorks = () => {
       </div>
 
       {/* Project Grid */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1  md:grid-cols-4 gap-6">
+      <div className=" grid grid-cols-1  md:grid-cols-4 gap-6">
         {projects.map((project, index) => (
           <div
             key={index}
@@ -112,6 +114,7 @@ const DynamicOurWorks = () => {
           </div>
         ))}
       </div>
+      </Layout>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 "use client"
 import React from 'react';
 import { motion } from 'framer-motion';
+import Layout from '../common/Layout';
 
 const logos = [
     "/images/logos/amazon.png",
@@ -75,10 +76,11 @@ const logos = [
   const SlidingLogos = () => {
     return (
         <div className="relative bg-primary-500 py-16 overflow-hidden">
+          <Layout >
       <h2 className="text-center text-lg font-medium text-gray-700 mb-12">
         Trusted by 500+ of the world's biggest brands
       </h2>
-      <div className='max-w-6xl mx-auto relative'>
+      <div className='relative'>
         {/* overlap fade right and left side */}
         <div className="absolute top-0 left-0 w-[60px] sm:w-[200px] h-full z-10 bg-gradient-to-r from-primary-500 to-transparent"></div>
         <div className="absolute z-10 top-0 right-0 w-[60px] sm:w-[200px] h-full bg-gradient-to-l from-primary-500 to-transparent"></div>
@@ -89,6 +91,7 @@ const logos = [
         <SliderLogo direction="left" />
       </div>
       </div>
+      </Layout>
       </div>
     )
   }

@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { FaCheck, FaTimes, FaUsers, FaPaintBrush, FaUserTie, FaToolbox } from "react-icons/fa";
+import Layout from "../common/Layout";
 
 const data = [
   {
@@ -49,17 +50,18 @@ const TableComponent = () => {
   const headers = ["Speed", "Flexibility", "Quality", "Scalability", "Cost-effectiveness"];
 
   return (
-    <div className="bg-secondary-500 text-white py-16 px-6">
+    <div className="bg-secondary-500 text-white py-16">
+      <Layout>
       {/* Title Section */}
       <div className="text-center mb-12">
         <h2 className="text-4xl max-w-lg mx-auto font-bold">
           Hiring or traditional outsourcing?{" "}
-          <span className="font-Rock_Salt text-purple-400">{"Neither".toUpperCase()}</span>
+          <span className="font-Rock_Salt text-purple-400">{"Neither"}</span>
         </h2>
       </div>
 
       {/* Table Section - Horizontal Scrollable */}
-      <div className="max-w-7xl mx-auto overflow-x-auto crollbar-hide rounded-lg">
+      <div className=" overflow-x-auto crollbar-hide rounded-lg">
         <div className="min-w-[700px]">
           {/* Headers */}
           <div className="grid grid-cols-8 items-center text-sm font-semibold">
@@ -105,6 +107,7 @@ const TableComponent = () => {
           ))}
         </div>
       </div>
+      </Layout>
     </div>
   );
 };

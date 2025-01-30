@@ -9,6 +9,17 @@ export default {
   ],
   theme: {
     extend: {
+      spacing: {
+        xs: '4px',
+        sm: '8px',
+        md: '16px',
+        lg: '24px',
+        xl: '32px'
+      },
+      maxWidth: {
+        container: '1280px',
+        card: '300px'
+      },
       fontFamily: {
        Rock_Salt: ['Rock Salt', 'cursive'],
       },

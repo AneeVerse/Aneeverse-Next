@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { FaArrowUp , FaArrowDown} from "react-icons/fa6";
 import { motion } from "framer-motion";
+import Layout from "../common/Layout";
 
 export default function TestimonialSliderPricing() {
   const testimonials = [
@@ -76,8 +77,8 @@ export default function TestimonialSliderPricing() {
 
   return (
     
-        <div className="relative py-10 bg-primary-500 px-4 text-secondary-500">
-          <div className="max-w-6xl mx-auto">
+        <div className="relative py-10 bg-primary-500 text-secondary-500">
+          <Layout>
             {/* Vertical Navigation */}
             <div className="flex flex-col md:flex-row justify-between gap-6 items-center">
               <div className="flex flex-row md:flex-col justify-center items-center gap-4">
@@ -178,7 +179,7 @@ export default function TestimonialSliderPricing() {
                 </button>
               </div>
             </div>
-          </div>
+          </Layout>
         </div>
       );
 }

@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import Layout from "../common/Layout";
 
 const data = [
   { title: "Website Design", image: "/images/home/creative/creative1.png" },
@@ -28,17 +29,17 @@ export default function CreativeSection() {
   }, [isHovered]);
 
   return (
-    <div className="bg-primary-500 py-16 px-6">
-        <div className="max-w-7xl mx-auto">
+    <div className="bg-primary-500 py-16 ">
+        <Layout>
       <div className="max-w-3xl  ">
         <p className="text-sm font-semibold text-gray-600 tracking-wide uppercase">
           Easy & Hassle-Free
         </p>
         <h2 className="text-4xl font-bold text-gray-800 mt-2">
           {"Every type of creative work you'll ever need,".toUpperCase()}{" "}
-          <span className="text-blue-600 font-Rock_Salt">{"and more".toUpperCase()}</span>
+          <span className="text-blue-600 font-Rock_Salt">{"and more"}</span>
         </h2>
-      </div></div>
+      </div></Layout>
 
       <div
         className="mt-12 flex overflow-x-auto scrollbar-hide space-x-4"

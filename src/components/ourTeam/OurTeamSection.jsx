@@ -1,3 +1,5 @@
+import Layout from "../common/Layout";
+
 export default function OurTeamSection() {
     const team = [
         {
@@ -47,7 +49,7 @@ export default function OurTeamSection() {
   
     return (
       <section className=" py-12">
-        <div className="max-w-7xl mx-auto px-4">
+        <Layout>
           {/* Heading */}
           <div className="text-center mb-8">
             <p className="uppercase text-sm text-primary-500 tracking-wide">
@@ -82,7 +84,7 @@ export default function OurTeamSection() {
               </div>
             ))}
           </div>
-        </div>
+        </Layout>
       </section>
     );
   }

@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import Layout from "../common/Layout";
 
 const data = [
   { title: "Website Design", image: "/images/home/creative/creative1.png" },
@@ -28,8 +29,8 @@ export default function CreativeSectionPricing() {
   }, [isHovered]);
 
   return (
-    <div className="bg-secondary-500 text-primary-500 py-16 px-6">
-        <div className="max-w-7xl mx-auto">
+    <div className="bg-secondary-500 text-primary-500 py-16 ">
+        <Layout>
          {/* Text Content */}
          <div className="flex pb-8 flex-col gap-4 md:flex-row  justify-between max-w-7xl mx-auto">
                     <div>
@@ -46,10 +47,10 @@ export default function CreativeSectionPricing() {
                     No matter your creative need, creating and submitting a project is
                     easy and effortless.
                     </p>
-                </div></div>
+                </div></Layout>
 
       <div
-        className="mt-12 flex overflow-x-auto scrollbar-hide space-x-4"
+        className="mt-12 px-sm md:px-md flex overflow-x-auto scrollbar-hide space-x-4"
         ref={scrollRef}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}

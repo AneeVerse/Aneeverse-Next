@@ -1,3 +1,5 @@
+import Layout from "../common/Layout";
+
 const statsData = [
     {
       value: "650+",
@@ -19,8 +21,8 @@ const statsData = [
   
   export default function OurTeamStatsSection() {
     return (
-      <div className="bg-secondary-500 text-primary-500 pb-0 pt-5 md:pt-12 md:pb-12 px-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-gray-700 pt-8">
+      <div className="bg-secondary-500 text-primary-500 pb-0 pt-5 md:pt-12 md:pb-12 ">
+        <Layout className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-gray-700 pt-8">
           {statsData.map((stat, index) => (
             <div
               key={index}
@@ -30,7 +32,7 @@ const statsData = [
               <span className="text-[110px] font-normal text-white">{stat.value}</span>
             </div>
           ))}
-        </div>
+        </Layout>
       </div>
     );
   }

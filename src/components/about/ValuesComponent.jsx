@@ -1,4 +1,5 @@
 import React from "react";
+import Layout from "../common/Layout";
 
 const valuesData = [
   {
@@ -41,7 +42,8 @@ const valuesData = [
 
 export default function ValuesComponent() {
   return (
-    <div className="bg-primary-500 py-10 px-6">
+    <div className="bg-primary-500 py-10">
+      <Layout>
       <div className="text-center mb-10">
         <div className=" font-light tracking-widest mb-3 text-sm text-gray-600">
             DRIVEN BY PRINCIPLE 
@@ -55,7 +57,7 @@ export default function ValuesComponent() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {valuesData.map((value, index) => (
           <div
           style={{backgroundColor: value.bgColor}}
@@ -75,6 +77,7 @@ export default function ValuesComponent() {
           </div>
         ))}
       </div>
+      </Layout>
     </div>
   );
 }

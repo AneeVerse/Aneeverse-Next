@@ -1,9 +1,11 @@
 import Image from "next/image";
+import Layout from "../common/Layout";
 
 export default function AboutDesignServicesSection() {
   return (
-    <div className="bg-secondary-500 text-white py-16 px-6">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+    <div className="bg-secondary-500 text-white py-16 ">
+      <Layout>
+      <div className=" grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div className="relative max-w-lg w-full h-64 md:h-80">
           <Image
             src="/images/services/about-design.png"
@@ -28,6 +30,7 @@ export default function AboutDesignServicesSection() {
           </button>
         </div>
       </div>
+      </Layout>
     </div>
   );
 }

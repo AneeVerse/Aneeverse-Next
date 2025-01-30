@@ -1,5 +1,6 @@
 import React from "react";
 import { FaPen, FaCloud, FaBox, FaStar } from "react-icons/fa";
+import Layout from "../common/Layout";
 
 const featureData = [
   {
@@ -36,9 +37,10 @@ const featureData = [
 
 export default function FeatureGridPricing() {
   return (
-    <div className="bg-primary-500 py-12 px-6">
+    <div className="bg-primary-500 py-12">
+      <Layout>
       {/* Title Section */}
-      <div className="flex pb-8 flex-col gap-4 md:flex-row  justify-between max-w-7xl mx-auto">
+      <div className="flex pb-8 flex-col gap-4 md:flex-row  justify-between">
                     <div>
                         <span className="text-secondary-500 ">{"easy & hassle-free".toUpperCase()}</span>
                         <h1 style={{lineHeight: "120%"}} className="text-4xl max-w-3xl mt-2 lg:text-5xl font-medium">
@@ -57,7 +59,7 @@ export default function FeatureGridPricing() {
                 </div>
 
       {/* Grid Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6  ">
         {featureData.map((feature, index) => (
           <div
             key={index}
@@ -82,6 +84,7 @@ export default function FeatureGridPricing() {
           </div>
         ))}
       </div>
+      </Layout>
     </div>
   );
 }

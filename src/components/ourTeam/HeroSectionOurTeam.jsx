@@ -1,10 +1,12 @@
+import Layout from "../common/Layout";
+
 export default function HeroSectionOurTeam() {
     return (
         <section className="bg-secondary-500  text-white">
             {/* Hero Section */}
             <div className=" ">
                 {/* Text Content */}
-                <div className="flex pb-8 flex-col gap-4 md:flex-row  justify-between max-w-7xl mx-auto px-6">
+                <Layout className="flex pb-8 flex-col gap-4 md:flex-row  justify-between ">
                     <div>
                         <span className="text-[#a5bcc5] ">MEET YOUR DEDICATED TEAM</span>
                         <h1 style={{lineHeight: "120%"}} className="text-4xl max-w-xl mt-2 lg:text-6xl font-semibold">
@@ -20,7 +22,7 @@ export default function HeroSectionOurTeam() {
                         The only creative service where enterprise teams get the top 1% of
                         global talent, powered by AI, plugged directly into their workflows.
                     </p>
-                </div>
+                </Layout>
 
                 {/* Image */}
                 <div className=" mt-12 ">

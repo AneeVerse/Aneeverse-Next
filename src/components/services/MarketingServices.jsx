@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { MdOutlineArrowOutward } from "react-icons/md";
+import Layout from "../common/Layout";
 
 export default function WebsiteServices() {
   const services = [
@@ -50,10 +51,10 @@ export default function WebsiteServices() {
 
   return (
     <section className="py-6 text-white">
-      <div className="max-w-7xl mx-auto px-6">
+      <Layout>
         {/* Heading */}
         <h2 className="text-4xl mb-12 text-center">
-          <span className="font-Rock_Salt">MARKETING</span>{" "}
+          <span className="font-Rock_Salt">marketing</span>{" "}
           <span className="ml-2">services</span>
         </h2>
 
@@ -95,7 +96,7 @@ export default function WebsiteServices() {
             </div>
           ))}
         </div>
-      </div>
+      </Layout>
     </section>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
+import Layout from "../common/Layout";
 
 const ParnterSection = () => {
   const logos = [
@@ -37,7 +38,8 @@ const ParnterSection = () => {
   }, []);
 
   return (
-    <div className="overflow-hidden  mx-auto max-w-7xl text-white relative">
+    <Layout>
+    <div className="overflow-hidden   mx-auto max-w-7xl text-white relative">
       <div className="text-center text-md font-light tracking-widest text-secondary mb-12">
       {"Trusted by 500+ of the world's biggest brands".toUpperCase()}
       </div>
@@ -71,6 +73,7 @@ const ParnterSection = () => {
     
       
     </div>
+    </Layout>
   );
 };
 

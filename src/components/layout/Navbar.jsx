@@ -3,11 +3,11 @@ import React, { useState, useEffect } from "react";
 import { FiMenu } from "react-icons/fi";
 import Sidebar from "./Sidebar";
 import ServicesMegaMenu from "./megamenu/ServicesMegaMenu";
-import Button from "../common/Button";
 import Link from "next/link";
 import ResourcesMegaMenu from "./megamenu/ResourcesMegaMenu";
 import { usePathname } from "next/navigation";
 import WhyUsMegaMenu from "./megamenu/WhyUsMegaMenu";
+import Layout from "../common/Layout";
 
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -52,9 +52,9 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 w-full h-[80px] px-6 flex items-center z-40 transition-all duration-300 bg-[${color.bg}]`}
+      className={`fixed top-0 w-full h-[80px] flex items-center z-40 transition-all duration-300 bg-[${color.bg}]`}
     >
-      <div className="max-w-[1120px] w-full mx-auto flex justify-between items-center">
+      <Layout className="flex w-full justify-between items-center">
         {/* Logo */}
         <Link href={"/"} className="text-2xl font-bold flex items-center">
           <span className={`text-[${color.text}]`}>aneeverse</span>
@@ -96,7 +96,7 @@ const Navbar = () => {
         >
           <FiMenu />
         </button>
-      </div>
+      </Layout>
 
       {/* Sidebar for small screens */}
       {sidebarOpen && <Sidebar isOpen={sidebarOpen} toggleSidebar={() => setSidebarOpen(false)}/>}

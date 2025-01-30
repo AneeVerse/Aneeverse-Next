@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import { HiOutlineBookOpen, HiOutlinePlay, HiOutlineClipboardList } from "react-icons/hi";
+import { FaChevronDown } from "react-icons/fa6";
+import Layout from "@/components/common/Layout";
 
 const ResourcesMegaMenu = ({color}) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,23 +68,24 @@ const ResourcesMegaMenu = ({color}) => {
 
   return (
     <div
-      className=""
+      className=" "
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
      <button className={`text-[${color.text}] p-2 cursor-pointer flex items-center group`}>
-     <span className={`${isOpen ? "mr-[6px] scale-100 ": " "} h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full bg-[${color.text}]`}></span>  <span>Resources</span> 
+
+     <span className={`${isOpen ? "mr-[6px] scale-100 ": " "} h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full bg-[${color.text}]`}></span>  <span className="flex items-center gap-2">Resources <FaChevronDown className={`${isOpen ? " -rotate-180 ": " " } group-hover:-rotate-180 duration-300 transition-all self-center text-[10px]`} /> </span> 
      </button>
       {isOpen && (
         <motion.div
-          className="absolute left-0 w-full top-[60px] pt-5 z-40"
+          className="absolute left-0 w-full top-[60px]  pt-5 z-40"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
         >
             <div className="bg-[#EBFAFE] shadow-lg  border border-gray-200 ">
-
-<div className="grid grid-cols-3 gap-6 max-w-6xl mx-auto px-6 py-8">
+<Layout >
+<div className="grid grid-cols-3 gap-6 py-8">
 
           {/* Learning Center */}
           <div>
@@ -147,6 +150,7 @@ const ResourcesMegaMenu = ({color}) => {
           </div>
 
           </div>
+          </Layout>
           </div>
         </motion.div>
       )}
