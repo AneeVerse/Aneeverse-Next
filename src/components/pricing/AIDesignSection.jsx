@@ -16,7 +16,7 @@ export default function AIDesignSection() {
         <div className="bg-gradient-to-r from-black/50 to-transparent absolute z-0 top-0 left-0 h-full w-full"></div>
 
         {/* Left Side (Text Content) */}
-        <div className=" w-[40%] relative z-20 text-white p-10 rounded-lg">
+        <div className=" w-full  md:w-[40%] relative z-20 text-white p-4 md:p-10 rounded-lg">
           <h4 className="text-xs uppercase tracking-widest text-gray-400 mb-4">
             AI DESIGN SERVICES
           </h4>

@@ -52,7 +52,7 @@ const logos = [
   const SliderLogo = ({ direction }) => {
     return (
       <motion.div
-        className={`flex gap-8 ${direction === 'left' ? 'justify-start' : 'justify-end'}`}
+        className={`flex h-[78px] gap-10 sm:gap-16 ${direction === 'left' ? 'justify-start' : 'justify-end'}`}
         variants={slideVariants}
         animate="animate"
         custom={direction}
@@ -60,9 +60,9 @@ const logos = [
         {logos.map((logo,ind) => (
           <div
             key={ind}
-            className="flex min-w-fit items-center justify-center"
+            className="flex h-full py-6 px-5 min-w-fit items-center justify-center"
           >
-            <img src={logo} alt={`${ind} logo`} className="w-auto h-5  " />
+            <img src={logo} alt={`${ind} logo`} className="w-auto h-full  " />
          
           </div>
         ))}
@@ -80,12 +80,12 @@ const logos = [
       </h2>
       <div className='max-w-6xl mx-auto relative'>
         {/* overlap fade right and left side */}
-        <div className="absolute top-0 left-0 w-[100px] h-full z-10 bg-gradient-to-r from-primary-500 to-transparent"></div>
-        <div className="absolute z-10 top-0 right-0 w-[100px] h-full bg-gradient-to-l from-primary-500 to-transparent"></div>
+        <div className="absolute top-0 left-0 w-[60px] sm:w-[200px] h-full z-10 bg-gradient-to-r from-primary-500 to-transparent"></div>
+        <div className="absolute z-10 top-0 right-0 w-[60px] sm:w-[200px] h-full bg-gradient-to-l from-primary-500 to-transparent"></div>
          <div className="overflow-hidden">
         <SliderLogo direction="right" />
       </div>
-      <div className="overflow-hidden mt-12">
+      <div className="overflow-hidden mt-6">
         <SliderLogo direction="left" />
       </div>
       </div>

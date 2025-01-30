@@ -22,7 +22,7 @@ const HeroSection = () => {
         {/* Left Content */}
         <div>
           <h1 className="text-4xl font-bold leading-tight mb-4">
-          DESIGN, OPTIMIZE, ADVERTISE <div className="font-Rock_Salt text-orange-500">{"we got you covered.".toUpperCase()}</div>
+          DESIGN, OPTIMIZE, ADVERTISE <div className=" font-Rock_Salt text-orange-500">WE GOT YOU COVERED.</div>
           </h1>
           <p className="text-lg mb-6">
             Get access to high-velocity creative team that works with your brand. Ship campaigns —

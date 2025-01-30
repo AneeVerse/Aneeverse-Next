@@ -6,10 +6,10 @@ const ContactUsPage = () => {
     <div className="bg-gray-50 text-gray-900">
 
       {/* Header Section */}
-      <div className="py-20 px-3 text-center bg-secondary-500 text-primary-500">
+      {/* <div className="py-20 px-3 text-center bg-secondary-500 text-primary-500">
         <h1 className="text-5xl font-bold mb-4">Contact Us</h1>
         <p className="text-xl font-light">We'd love to hear from you! Schedule a meeting or reach out to us.</p>
-      </div>
+      </div> */}
 
       {/* Calendly Embed */}
       <div className="py-20 bg-[#fbfcfd] text-secondary-500">
@@ -69,7 +69,7 @@ const ContactUsPage = () => {
             <h2 className="text-3xl font-bold  text-left">Our Location</h2>
             <div className="rounded-lg overflow-hidden shadow-2xl">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.828061780794!2d-122.037851184692!3d37.36882927983982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb749eb76121b%3A0xa1c1e6c9fd6885c5!2s484%20Virginia%20Pine%20Ter%2C%20Sunnyvale%2C%20CA%2094086%2C%20USA!5e0!3m2!1sen!2sin!4v1617563714741!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8045.169104825051!2d73.005389!3d19.0155818!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c103ebdfb625%3A0xee9ac3282c16c2!2sAneeverse%20Creative%20Solutions%20%7C%20Digital%20Marketing%2C%20Web%20Development%20Services%20in%20Navi%20Mumbai!5e1!3m2!1sen!2sin!4v1738217506212!5m2!1sen!2sin"
                 width="100%"
                 height="400"
                 style={{ border: 0 }}
@@ -78,6 +78,7 @@ const ContactUsPage = () => {
                 className="w-full"
                 title="Google Maps Location"
               ></iframe>
+            
             </div>
           </div>
 
