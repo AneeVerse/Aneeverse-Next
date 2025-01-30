@@ -59,11 +59,11 @@ export default function FeatureGridPricing() {
                 </div>
 
       {/* Grid Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6  ">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6  ">
         {featureData.map((feature, index) => (
           <div
             key={index}
-            className={`${feature.bgColor} ${index==2 ? ` row-span-2 `: ` ${index==3 ? " col-span-2 " : " " } `}  rounded-lg relative flex min-h-[350px] flex-col justify-between shadow-lg`}
+            className={`${feature.bgColor} ${index==2 ? ` md:row-span-2 `: ` ${index==3 ? " md:col-span-2 " : " " } `}  rounded-lg relative flex min-h-[350px] flex-col justify-between shadow-lg`}
           >
             <div className="absolute top-0 left-0 w-full h-full">
             {feature.image && (
