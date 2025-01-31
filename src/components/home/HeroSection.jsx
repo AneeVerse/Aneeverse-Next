@@ -114,7 +114,7 @@ const HeroSection = () => {
                         />
                         <div className="absolute  inset-0 bg-black/0 px-3 py-2 rounded-xl ">
                         </div>
-                          <span className="text-white top-3 left-0 absolute tracking-wide w-full text-center font-normal text-sm ">
+                          <span className="text-white top-3 left-0 absolute tracking-wide w-full text-center font-normal text-sm  lg:text-lg">
                             {img.name}
                           </span>
                       </div>
@@ -136,7 +136,7 @@ const HeroSection = () => {
                         />
                         <div className="absolute  inset-0 bg-black/0 px-3 py-2 rounded-xl ">
                         </div>
-                          <span className="text-white top-3 left-0 absolute tracking-wide w-full text-center font-normal text-sm">
+                          <span className="text-white top-3 left-0 absolute tracking-wide w-full text-center font-normal text-sm  lg:text-lg">
                             {img.name}
                           </span>
                       </div>
@@ -157,7 +157,7 @@ const HeroSection = () => {
                         />
                         <div className="absolute  inset-0 bg-black/0 px-3 py-2 rounded-xl ">
                         </div>
-                          <span className="text-white top-3 left-0 absolute tracking-wide w-full text-center font-normal text-sm ">
+                          <span className="text-white top-3 left-0 absolute tracking-wide w-full text-center font-normal text-sm lg:text-lg">
                             {img.name}
                           </span>
                       </div>
