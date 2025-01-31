@@ -24,19 +24,9 @@ import { FaArrowRight } from "react-icons/fa6";
         { name: "SEO Optimization", description: "Boost your search rankings with expert SEO.", icon: <FaSearch /> },
         { name: "GMB Optimization", description: "Dominate local searches with GMB excellence.", icon: <FaMapMarkerAlt /> },
         { name: "Local SEO", description: "Reach your audience with targeted local SEO strategies.", icon: <FaLocationArrow /> },
+        { name: "Email Design", description: "Engaging email templates that convert.", icon: <FaEnvelopeOpenText /> },
       ],
     },
-    {
-      title: "Content Writing",
-      color: "bg-green-200 text-green-900",
-      items: [
-        { name: "Blog Writing", description: "SEO-friendly blogs tailored to your niche.", icon: <FaPenFancy /> },
-        { name: "Ghost Writing", description: "Captivating content under your brand's name.", icon: <FaGhost /> },
-        { name: "Website Copywriting", description: "Persuasive copy that drives engagement.", icon: <FaFileAlt /> },
-        { name: "Product Descriptions", description: "Sell more with attention-grabbing descriptions.", icon: <FaTags /> },
-      ],
-    },
- 
     {
       title: "Marketing Services",
       color: "bg-yellow-200 text-blue-900",
@@ -49,17 +39,29 @@ import { FaArrowRight } from "react-icons/fa6";
       ],
     },
     {
+      title: "Content Writing",
+      color: "bg-green-200 text-green-900",
+      items: [
+        { name: "Blog Writing", description: "SEO-friendly blogs tailored to your niche.", icon: <FaPenFancy /> },
+        { name: "Ghost Writing", description: "Captivating content under your brand's name.", icon: <FaGhost /> },
+        // { name: "Website Copywriting", description: "Persuasive copy that drives engagement.", icon: <FaFileAlt /> },
+        // { name: "Product Descriptions", description: "Sell more with attention-grabbing descriptions.", icon: <FaTags /> },
+      ],
+    },
+ 
+    {
       title: "Creative Design Services",
       color: "bg-lime-200 text-lime-900",
       items: [
         { name: "Social Media Creatives", description: "Engaging assets for all platforms.", icon: <FaFacebook /> },
-        { name: "Email Creation", description: "Compelling email designs that drive action.", icon: <FaEnvelopeOpenText /> },
+        // { name: "Email Creation", description: "Compelling email designs that drive action.", icon: <FaEnvelopeOpenText /> },
         { name: "Presentation Design", description: "Pitch-perfect presentations for your business needs.", icon: <FaSlideshare /> },
-        { name: "Logo Design", description: "Memorable logos that define your brand.", icon: <FaPaintBrush /> },
+        // { name: "Logo Design", description: "Memorable logos that define your brand.", icon: <FaPaintBrush /> },
         { name: "Brochure Design", description: "Informative and visually stunning brochures.", icon: <FaFilePdf /> },
       ],
     },
   ];
+  
   
   const resources = [
     {
@@ -135,15 +137,20 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       className={`fixed h-[100vh] overflow-y-auto inset-0 pb-24 bg-primary-500 w-full  z-50 shadow-lg`}
     >
       {/* Close Button */}
-      <div className="flex justify-between items-center p-6">
-        <h1 className="text-2xl text-secondary-500 font-bold">aneeverse</h1>
+      <motion.div
+      initial={{padding: "0px 0px"}}
+      animate={{padding: "0px 20px"}}
+      transition={{ duration: 0.3 }}
+      exit={{padding: "0px 0px"}}
+      className="flex justify-between items-center h-[70px] sm:h-[80px] px-sm md:px-md">
+        <Link href={"/"} onClick={toggleSidebar} className=" text-secondary-500 text-3xl tracking-wide font-bold"> <span className="font-Rock_Salt">a</span>neeverse</Link>
         <button onClick={toggleSidebar} className="text-xl text-secondary-500">
           <FaTimes />
         </button>
-      </div>
+      </motion.div>
 
       {/* Menu Items */}
-      <div className="px-6">
+      <div className="px-5">
         <div
           className="py-3 flex justify-between items-center cursor-pointer"
           onClick={() => toggleSection("services")}
@@ -154,7 +161,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         <AnimatePresence>
           {openSection === "services" && (
             <motion.div
-              className="pl-3 space-y-3"
+              className=" space-y-3"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
@@ -170,16 +177,16 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                             </h3>
                             <ul className="mt-4 space-y-2">
                               {category.items.map((item, idx) => (
-                                <a href={"/contact"} key={idx} className="flex group px-3 py-2 border-b items-center justify-between gap-3">
+                                <a href={"/contact"} key={idx} className="flex group px-2 py-2 border-b items-center justify-between gap-3">
                                   <div className="flex items-center gap-3">
-                                  <div className="text-gray-700 text-lg self-center">{item.icon}</div>
                                   <div>
                                     <h4 className="text-md font-medium text-gray-700">{item.name}</h4>
                                     <p className="text-sm text-gray-500">{item.description}</p>
                                   </div>
                                   </div>
-                                  <FaArrowRight  className=" opacity-0 translate-x-[50%] group-hover:opacity-100 group-hover:translate-x-0 duration-300 "/>
-                                </a>
+                                  
+                                  <div className="text-gray-700 text-lg self-center">{item.icon}</div>
+                                    </a>
                               ))}
                             </ul>
                           </div>
@@ -189,13 +196,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           )}
         </AnimatePresence>
 
-        <div
-          className="py-3 flex justify-between items-center cursor-pointer"
-          onClick={() => toggleSection("work")}
-        >
-          <span>Our work</span>
-          {openSection === "work" ? <FaChevronUp /> : <FaChevronDown />}
-        </div>
+    
+        <Link href={"/works"}  onClick={toggleSidebar} className="py-3 block cursor-pointer">Our Work</Link>
 
         <div
           className="py-3 flex justify-between items-center cursor-pointer"
@@ -209,7 +211,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         <AnimatePresence>
           {openSection === "whyUs" && (
             <motion.div
-              className="pl-3 space-y-3"
+              className="space-y-3 px-2"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
@@ -253,29 +255,27 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         <AnimatePresence>
           {openSection === "resources" && (
             <motion.div
-              className="pl-3 space-y-3"
+              className=" space-y-3"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="grid grid-cols-1 gap-6 max-w-6xl mx-auto py-2">
+              <div className="grid grid-cols-1 gap-6 px-2 max-w-6xl mx-auto py-2">
               
                         {/* Learning Center */}
                         <div>
-                          <h3 className="text-lg font-bold flex items-center justify-between">
-                            Learning Center <FiArrowUpRight />
-                          </h3>
+                          
                           <ul className="mt-4 space-y-4">
                             {resources[0].items.map((item, idx) => (
-                              <li key={idx} className="flex items-start gap-3">
-                                <div className="text-gray-700 text-xl">{item.icon}</div>
+                              <li key={idx} className="flex items-start justify-between gap-3">
                                 <div>
                                   <h4 className="text-md font-medium text-gray-700">
                                     {item.name}
                                   </h4>
                                   <p className="text-sm text-gray-500">{item.description}</p>
                                 </div>
+                                <div className="text-gray-700 text-xl">{item.icon}</div>
                               </li>
                             ))}
                           </ul>
@@ -283,9 +283,9 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               
                         {/* Blog */}
                         <div>
-                          <h3 className="text-lg font-bold flex items-center justify-between">
+                          <Link href={"/blog"} className="text-lg hover:underline font-bold flex items-center gap-2">
                             Blog <FiArrowUpRight />
-                          </h3>
+                          </Link>
                           <div className="grid grid-cols-1 gap-4 mt-4">
                             {resources[1].cards.map((card, idx) => (
                               <div key={idx} className="flex flex-row gap-3">
@@ -304,9 +304,9 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               
                         {/* Customer Stories */}
                         <div>
-                          <h3 className="text-lg font-bold flex items-center justify-between">
+                        <Link href={"/customer"} className="text-lg hover:underline font-bold flex items-center gap-2">
                             Customer Stories <FiArrowUpRight />
-                          </h3>
+                          </Link>
                           <div className="grid grid-cols-1 gap-4 mt-4">
                             {resources[2].cards.map((card, idx) => (
                               <div key={idx} className="flex flex-row gap-3">

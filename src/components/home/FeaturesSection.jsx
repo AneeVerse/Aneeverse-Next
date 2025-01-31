@@ -8,7 +8,7 @@ export default function FeaturesSection() {
       <div className="max-w-xl mx-auto text-center">
         {/* Heading */}
         <h2 className="text-4xl font-medium text-gray-800">
-          Aneeverse is the <span className="text-blue-500 font-Rock_Salt">perfect fit</span> for fast moving brands
+          Aneeverse is the <span className="text-blue-500 text-3xl font-Rock_Salt">perfect fit</span> for fast moving brands
         </h2>
       </div>
 

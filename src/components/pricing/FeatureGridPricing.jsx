@@ -70,7 +70,7 @@ export default function FeatureGridPricing() {
               <img
                 src={feature.image}
                 alt={feature.title}
-                className=" w-full h-full rounded-lg shadow"
+                className=" w-full h-full object-cover rounded-lg shadow"
               />
             )}
             </div>

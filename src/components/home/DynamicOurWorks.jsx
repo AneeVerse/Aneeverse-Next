@@ -72,11 +72,11 @@ const DynamicOurWorks = () => {
         </p>
         <h2 className="text-4xl font-bold text-gray-800 mt-2">
           {"See Our"}{" "}
-          <span className="text-orange-500 font-Rock_Salt">{"Top Works"}</span>
+          <span className="text-orange-500 text-2xl font-Rock_Salt">{"Top Works"}</span>
         </h2>
       </div>
-        <button className="mt-4 px-6 py-2 border border-black rounded-full hover:bg-gray-800 hover:text-white transition">
-          Explore all our work
+        <button className="mt-4 min-w-fit px-6 py-2 border border-black rounded-full hover:bg-gray-800 hover:text-white transition">
+          Explore all <span className="hidden sm:inline-block"> our works</span>
         </button>
       </div>
 
@@ -92,7 +92,7 @@ const DynamicOurWorks = () => {
             }`}
           >
             {/* Image */}
-            <div className="h-[280px] rounded-lg overflow-hidden">
+            <div className="h-[200px] sm:h-[280px] rounded-lg overflow-hidden">
 
             <img
               src={project.image}

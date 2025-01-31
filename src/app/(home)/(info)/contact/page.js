@@ -1,4 +1,5 @@
 import Layout from '@/components/common/Layout';
+import Link from 'next/link';
 import React from 'react';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 
@@ -14,9 +15,16 @@ const ContactUsPage = () => {
       </div> */}
 
       {/* Calendly Embed */}
-      <div className="py-20 bg-[#fbfcfd] text-secondary-500">
+      <div className="pt-6 sm:pt-16 sm:pb-16 bg-[#fbfcfd] text-secondary-500">
         <Layout>
-          <h2 className="text-3xl font-bold text-center  mb-8">Schedule a Meeting</h2>
+          <h2 className="text-3xl font-bold text-center mb-4  sm:mb-8">Schedule a Discovery Call
+          </h2><p className="text-xl mb-4 text-center font-normal">
+  Schedule a call below or email{" "}
+  <Link href="mailto:aneeverse@gmail.com" className='inline-block'>
+    <span className="text-blue-600">aneeverse@gmail.com</span>
+  </Link>{" "}
+  or send us a text to learn more about our plans, process, and results.
+</p>
           <div className="rounded-lg overflow-hidden ">
             <iframe
               src="https://calendly.com/aneeverse/discovery-call"

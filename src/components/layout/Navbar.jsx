@@ -52,19 +52,19 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 w-full h-[80px] flex items-center z-40 transition-all duration-300 bg-[${color.bg}]`}
+      className={`fixed top-0 w-full h-[70px] sm:h-[80px] flex items-center z-40 transition-all duration-300 bg-[${color.bg}]`}
     >
       <Layout className="flex w-full justify-between items-center">
         {/* Logo */}
-        <Link href={"/"} className="text-2xl font-bold flex items-center">
-          <span className={`text-[${color.text}]`}>aneeverse</span>
+        <Link href={"/"} className="text-3xl ml-2 sm:ml-0 tracking-wide font-bold flex items-center">
+          <span className={`text-[${color.text}]`}><span className="font-Rock_Salt">a</span>neeverse</span>
         </Link>
 
         {/* Large Screen Menu */}
         <div className="hidden lg:flex space-x-6 items-center">
           <ServicesMegaMenu color={color} />
           <Link
-            href="/pricing"
+            href="/works"
             className={` text-[${color.text}] flex items-center group`}
           >
            <span className={`h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full bg-[${color.text}]`}></span>  <span>Our Works</span> 
@@ -89,7 +89,7 @@ const Navbar = () => {
         </div>
         {/* Mobile Menu Icon */}
         <button
-          className={`lg:hidden text-2xl ${
+          className={`lg:hidden mr-2 sm:mr-0 text-2xl ${
             scrolled ? "text-[#073742]" : `text-[${color.text}]`
           }`}
           onClick={() => setSidebarOpen(true)}

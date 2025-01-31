@@ -29,7 +29,7 @@ const statsData = [
               className="flex justify-between gap-5 items-center border-b border-gray-700 pb-4"
             >
               <p className="text-lg text-gray-400 max-w-sm">{stat.description}</p>
-              <span className="text-[110px] font-normal text-white">{stat.value}</span>
+              <span className="text-[50px] sm:text-[110px] font-normal text-white">{stat.value}</span>
             </div>
           ))}
         </Layout>

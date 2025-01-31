@@ -63,7 +63,7 @@ const logos = [
             key={ind}
             className="flex h-full py-6 px-5 min-w-fit items-center justify-center"
           >
-            <img src={logo} alt={`${ind} logo`} className="w-auto h-full  " />
+            <img src={logo} alt={`${ind} logo`} className="w-auto h-auto  " />
          
           </div>
         ))}
@@ -75,7 +75,7 @@ const logos = [
   
   const SlidingLogos = () => {
     return (
-        <div className="relative bg-primary-500 py-16 overflow-hidden">
+        <div className="relative bg-primary-500 pt-8 sm:py-16 overflow-hidden">
           <Layout >
       <h2 className="text-center text-lg font-medium text-gray-700 mb-12">
         Trusted by 500+ of the world's biggest brands

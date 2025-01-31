@@ -54,9 +54,9 @@ const TableComponent = () => {
       <Layout>
       {/* Title Section */}
       <div className="text-center mb-12">
-        <h2 className="text-4xl max-w-lg mx-auto font-bold">
+        <h2 className="text-4xl max-w-lg mx-auto font-semibold">
           Hiring or traditional outsourcing?{" "}
-          <span className="font-Rock_Salt text-purple-400">{"Neither"}</span>
+          <span className="font-Rock_Salt text-[#FC83E1] text-3xl">{"Neither"}</span>
         </h2>
       </div>
 

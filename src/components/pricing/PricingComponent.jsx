@@ -41,7 +41,7 @@ export default function PricingComponent() {
           PRICING MODEL
         </h2>
         <h3 className="text-4xl md:text-5xl mt-8 font-serif text-secondary-500">
-          {pricingData.title} <span className="font-Rock_Salt block mt-3">{pricingData.subtitle}</span>
+          {pricingData.title} <span className="font-Rock_Salt sm:block inline mt-3">{pricingData.subtitle}</span>
         </h3>
       </div>
 

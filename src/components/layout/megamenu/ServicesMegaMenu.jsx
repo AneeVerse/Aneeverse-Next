@@ -24,19 +24,9 @@ const ServicesMegaMenu = ({color}) => {
         { name: "SEO Optimization", description: "Boost your search rankings with expert SEO.", icon: <FaSearch /> },
         { name: "GMB Optimization", description: "Dominate local searches with GMB excellence.", icon: <FaMapMarkerAlt /> },
         { name: "Local SEO", description: "Reach your audience with targeted local SEO strategies.", icon: <FaLocationArrow /> },
+        { name: "Email Design", description: "Engaging email templates that convert.", icon: <FaEnvelopeOpenText /> },
       ],
     },
-    {
-      title: "Content Writing",
-      color: "bg-green-200 text-green-900",
-      items: [
-        { name: "Blog Writing", description: "SEO-friendly blogs tailored to your niche.", icon: <FaPenFancy /> },
-        { name: "Ghost Writing", description: "Captivating content under your brand's name.", icon: <FaGhost /> },
-        { name: "Website Copywriting", description: "Persuasive copy that drives engagement.", icon: <FaFileAlt /> },
-        { name: "Product Descriptions", description: "Sell more with attention-grabbing descriptions.", icon: <FaTags /> },
-      ],
-    },
- 
     {
       title: "Marketing Services",
       color: "bg-yellow-200 text-blue-900",
@@ -49,13 +39,24 @@ const ServicesMegaMenu = ({color}) => {
       ],
     },
     {
+      title: "Content Writing",
+      color: "bg-green-200 text-green-900",
+      items: [
+        { name: "Blog Writing", description: "SEO-friendly blogs tailored to your niche.", icon: <FaPenFancy /> },
+        { name: "Ghost Writing", description: "Captivating content under your brand's name.", icon: <FaGhost /> },
+        // { name: "Website Copywriting", description: "Persuasive copy that drives engagement.", icon: <FaFileAlt /> },
+        // { name: "Product Descriptions", description: "Sell more with attention-grabbing descriptions.", icon: <FaTags /> },
+      ],
+    },
+ 
+    {
       title: "Creative Design Services",
       color: "bg-lime-200 text-lime-900",
       items: [
         { name: "Social Media Creatives", description: "Engaging assets for all platforms.", icon: <FaFacebook /> },
-        { name: "Email Creation", description: "Compelling email designs that drive action.", icon: <FaEnvelopeOpenText /> },
+        // { name: "Email Creation", description: "Compelling email designs that drive action.", icon: <FaEnvelopeOpenText /> },
         { name: "Presentation Design", description: "Pitch-perfect presentations for your business needs.", icon: <FaSlideshare /> },
-        { name: "Logo Design", description: "Memorable logos that define your brand.", icon: <FaPaintBrush /> },
+        // { name: "Logo Design", description: "Memorable logos that define your brand.", icon: <FaPaintBrush /> },
         { name: "Brochure Design", description: "Informative and visually stunning brochures.", icon: <FaFilePdf /> },
       ],
     },
@@ -78,30 +79,57 @@ const ServicesMegaMenu = ({color}) => {
         >
           <div className="bg-[#EBFAFE] shadow-lg border py-3 overflow-y-auto h-[calc(100vh-80px)] border-gray-200 ">
 <Layout>
-<div className=" grid grid-cols-3 gap-6">
-          {menuCategories.map((category, index) => (
-            <div key={index}>
-              <h3
-                className={`text-lg font-bold py-2 px-4 rounded-md inline-flex items-center gap-2 ${category.color}`}
-              >
-                {category.title} <FiArrowUpRight />
-              </h3>
-              <ul className="mt-4 space-y-2">
-                {category.items.map((item, idx) => (
-                  <a href={"/contact"} key={idx} className="flex group px-3 py-2 border-b items-center justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                    <div className="text-gray-700 text-lg self-center">{item.icon}</div>
-                    <div>
-                      <h4 className="text-md font-medium text-gray-700">{item.name}</h4>
-                      <p className="text-sm text-gray-500">{item.description}</p>
-                    </div>
-                    </div>
-                    <FaArrowRight  className=" opacity-0 translate-x-[50%] group-hover:opacity-100 group-hover:translate-x-0 duration-300 "/>
-                  </a>
-                ))}
-              </ul>
+<div className="grid grid-cols-3 gap-6">
+  {menuCategories.slice(0, 2).map((category, index) => (
+    <div key={index}>
+      <h3 className={`text-lg font-bold py-2 px-4 rounded-md inline-flex items-center gap-2 ${category.color}`}>
+        {category.title} <FiArrowUpRight />
+      </h3>
+      <ul className="mt-4 space-y-2">
+        {category.items.map((item, idx) => (
+          <a href={"/contact"} key={idx} className="flex group px-3 py-2 border-b items-center justify-between gap-3">
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <h4 className="text-md font-medium text-gray-700 flex items-center">
+                  <span className="h-[5px] w-[5px] bg-secondary-500 inline-block transition-all duration-300 scale-0 group-hover:scale-100 rounded-full"></span>  
+                  <span className="ml-[-5px] group-hover:ml-[6px] transition-all duration-300">{item.name}</span>
+                </h4>
+                <p className="text-sm text-gray-500">{item.description}</p>
+              </div>
             </div>
+            <div className="text-gray-700 text-lg self-center">{item.icon}</div>
+          </a>
+        ))}
+      </ul>
+    </div>
+  ))}
+
+  {/* Content Writing & Creative Design ek hi column me */}
+  <div className="flex gap-6 flex-col">
+    {menuCategories.slice(2, 4).map((category, index) => (
+      <div key={index}>
+        <h3 className={`text-lg font-bold py-2 px-4 rounded-md inline-flex items-center gap-2 ${category.color}`}>
+          {category.title} <FiArrowUpRight />
+        </h3>
+        <ul className="mt-4 space-y-2">
+          {category.items.map((item, idx) => (
+            <a href={"/contact"} key={idx} className="flex group px-3 py-2 border-b items-center justify-between gap-3">
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <h4 className="text-md font-medium text-gray-700 flex items-center">
+                    <span className="h-[5px] w-[5px] bg-secondary-500 inline-block transition-all duration-300 scale-0 group-hover:scale-100 rounded-full"></span>  
+                    <span className="ml-[-5px] group-hover:ml-[6px] transition-all duration-300">{item.name}</span>
+                  </h4>
+                  <p className="text-sm text-gray-500">{item.description}</p>
+                </div>
+              </div>
+              <div className="text-gray-700 text-lg self-center">{item.icon}</div>
+            </a>
           ))}
+        </ul>
+      </div>
+    ))}
+  </div>
 </div>
 </Layout>
 </div>
