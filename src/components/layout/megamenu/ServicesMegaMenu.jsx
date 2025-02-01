@@ -105,7 +105,7 @@ const ServicesMegaMenu = ({color}) => {
   ))}
 
   {/* Content Writing & Creative Design ek hi column me */}
-  <div className="flex gap-6 flex-col">
+  <div className="flex gap-12 flex-col">
     {menuCategories.slice(2, 4).map((category, index) => (
       <div key={index}>
         <h3 className={`text-lg font-bold py-2 px-4 rounded-md inline-flex items-center gap-2 ${category.color}`}>

@@ -57,7 +57,7 @@ const Navbar = () => {
       <Layout className="flex w-full justify-between items-center">
         {/* Logo */}
         <Link href={"/"} className="text-3xl ml-2 sm:ml-0 tracking-wide font-bold flex items-center">
-          <span className={`text-[${color.text}]`}><span className="font-Rock_Salt">a</span>neeverse</span>
+          <span className={`text-[${color.text}]`}>aneeverse</span>
         </Link>
 
         {/* Large Screen Menu */}

@@ -97,7 +97,7 @@ export default function CreativeSectionPricing() {
   return (
     <div className="text-primary-500 bg-secondary-500 py-16">
       <Layout>
-      <div className="flex pb-8 flex-col gap-4 md:flex-row  justify-between max-w-7xl mx-auto">
+      <div className="flex pb-8 flex-col gap-4 md:flex-row  justify-between">
                     <div>
                         <span className="text-primary-500 ">{"easy & hassle-free".toUpperCase()}</span>
                         <h1 style={{lineHeight: "120%"}} className="text-4xl max-w-3xl mt-2 lg:text-5xl font-medium">

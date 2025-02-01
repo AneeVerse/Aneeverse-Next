@@ -4,168 +4,135 @@ import { FaCheckCircle } from "react-icons/fa";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Layout from "../common/Layout";
 
-
 const images1 = [
-  { src: "/images/home/creative/creative1.png", name: "Creative Design" },
-  { src: "/images/home/creative/creative2.png", name: "Social Media" },
-  { src: "/images/home/creative/creative3.png", name: "Advertising" },
-  { src: "/images/home/creative/creative4.png", name: "Optimization" },
-  { src: "/images/home/creative/creative1.png", name: "Branding" },
-  { src: "/images/home/creative/creative2.png", name: "Campaigns" },
-  { src: "/images/home/creative/creative1.png", name: "Creative Design" },
-  { src: "/images/home/creative/creative2.png", name: "Social Media" },
-  { src: "/images/home/creative/creative3.png", name: "Advertising" },
-  { src: "/images/home/creative/creative4.png", name: "Optimization" },
-  { src: "/images/home/creative/creative1.png", name: "Branding" },
-  { src: "/images/home/creative/creative2.png", name: "Campaigns" },
+  { src: "/images/home/webflow.avif", logo: "images/home/logo/webflow-logo.png" },
+  { src: "/images/home/shopify.avif", logo: "images/home/logo/shopify-logo.png" },
+  { src: "/images/home/opa.avif", logo: "images/home/logo/opa-logo.png" },
+  { src: "/images/home/kins.avif", logo: "images/home/logo/webflow-logo.png" },
+  { src: "/images/home/oyster.avif", logo: "images/home/logo/shopify-logo.png" },
+  { src: "/images/home/reddit.avif", logo: "images/home/logo/opa-logo.png" },
+  { src: "/images/home/salesforce.avif", logo: "images/home/logo/webflow-logo.png" },
+  { src: "/images/home/roland.avif", logo: "images/home/logo/shopify-logo.png" },
 ];
 
 const images2 = [
-  { src: "/images/home/creative/creative1.png", name: "Creative Design" },
-  { src: "/images/home/creative/creative2.png", name: "Social Media" },
-  { src: "/images/home/creative/creative1.png", name: "Branding" },
-  { src: "/images/home/creative/creative2.png", name: "Campaigns" },
-  { src: "/images/home/creative/creative3.png", name: "Advertising" },
-  { src: "/images/home/creative/creative4.png", name: "Optimization" },
-  { src: "/images/home/creative/creative1.png", name: "Creative Design" },
-  { src: "/images/home/creative/creative2.png", name: "Social Media" },
-  { src: "/images/home/creative/creative1.png", name: "Branding" },
-  { src: "/images/home/creative/creative2.png", name: "Campaigns" },
-  { src: "/images/home/creative/creative3.png", name: "Advertising" },
-  { src: "/images/home/creative/creative4.png", name: "Optimization" },
+  { src: "/images/home/antler.avif", logo: "images/home/logo/webflow-logo.png" },
+  { src: "/images/home/gohenry.avif", logo: "images/home/logo/shopify-logo.png" },
+  { src: "/images/home/opa.avif", logo: "images/home/logo/opa-logo.png" },
+  { src: "/images/home/roland.avif", logo: "images/home/logo/webflow-logo.png" },
+  { src: "/images/home/shopify.avif", logo: "images/home/logo/shopify-logo.png" },
+  { src: "/images/home/opa.avif", logo: "images/home/logo/opa-logo.png" },
+  { src: "/images/home/reddit.avif", logo: "images/home/logo/opa-logo.png" },
+  { src: "/images/home/salesforce.avif", logo: "images/home/logo/webflow-logo.png" },
+  { src: "/images/home/roland.avif", logo: "images/home/logo/shopify-logo.png" },
 ];
 
 const images3 = [
-  { src: "/images/home/creative/creative4.png", name: "Optimization" },
-  { src: "/images/home/creative/creative1.png", name: "Branding" },
-  { src: "/images/home/creative/creative5.png", name: "Creative Design" },
-  { src: "/images/home/creative/creative2.png", name: "Social Media" },
-  { src: "/images/home/creative/creative3.png", name: "Advertising" },
-  { src: "/images/home/creative/creative2.png", name: "Campaigns" },
-  { src: "/images/home/creative/creative4.png", name: "Optimization" },
-  { src: "/images/home/creative/creative1.png", name: "Branding" },
-  { src: "/images/home/creative/creative5.png", name: "Creative Design" },
-  { src: "/images/home/creative/creative2.png", name: "Social Media" },
-  { src: "/images/home/creative/creative3.png", name: "Advertising" },
-  { src: "/images/home/creative/creative2.png", name: "Campaigns" },
+  { src: "/images/home/webflow.avif", logo: "images/home/logo/webflow-logo.png" },
+  { src: "/images/home/strava.avif", logo: "images/home/logo/shopify-logo.png" },
+  { src: "/images/home/vimeo.avif", logo: "images/home/logo/opa-logo.png" },
+  { src: "/images/home/reddit.avif", logo: "images/home/logo/opa-logo.png" },
+  { src: "/images/home/salesforce.avif", logo: "images/home/logo/webflow-logo.png" },
+  { src: "/images/home/roland.avif", logo: "images/home/logo/shopify-logo.png" },
+  { src: "/images/home/zapier.avif", logo: "images/home/logo/webflow-logo.png" },
+  { src: "/images/home/shopify.avif", logo: "images/home/logo/shopify-logo.png" },
+  { src: "/images/home/opa.avif", logo: "images/home/logo/opa-logo.png" },
 ];
+
 const HeroSection = () => {
   return (
-    <div className="bg-[#073742] relative text-[#EBFAFE]">
-            {/* overlap */}
-          <div className="absolute top-[-40px] left-0 w-full h-[110px] bg-gradient-to-b z-20 blur-md from-secondary-500 via-secondary-500 to-secondary-500"></div>
-          
-          <div className="absolute hidden lg:block bottom-[0px] left-0 w-full h-[110px] bg-gradient-to-t z-20 from-secondary-500  to-transparent"></div>
+    <div className="bg-[#073742] relative text-[#EBFAFE] overflow-x-hidden">
+      {/* Overlap */}
+      <div className="absolute top-[-40px] left-0 w-full h-[110px] bg-gradient-to-b z-20 blur-md from-secondary-500 via-secondary-500 to-secondary-500"></div>
+      <div className="absolute hidden lg:block bottom-[0px] left-0 w-full h-[110px] bg-gradient-to-t z-20 from-secondary-500 to-transparent"></div>
+
       <Layout>
-        <div className="grid lg:grid-cols-2 gap-4 sm:gap-8  items-center">
-          {/* Left Content - Same as before */}
-              {/* Left Content */}
-              <div className=" pt-[80px] lg:pt-[120px] lg:pb-12">
-          <h1 className=" text-2xl sm:text-4xl font-bold leading-tight mb-4">
-          DESIGN, OPTIMIZE, ADVERTISE <div className=" font-medium font-Rock_Salt  text-orange-500">we got you covered.</div>
-          </h1>
-          <p className="text-sm text-justify sm:text-left sm:text-lg mb-4 sm:mb-6">
-            Get access to high-velocity creative team that works with your brand. Ship campaigns —
-            faster, more reliably, and at scale.
-          </p>
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 items-center">
+          {/* Left Content */}
+          <div className="pt-[90px] lg:pt-[120px] lg:pb-12">
+            <h1 className="text-2xl sm:text-4xl font-bold text-center sm:text-left leading-tight mb-6">
+              DESIGN, OPTIMIZE, ADVERTISE{" "}
+              <div className="font-medium font-Rock_Salt text-orange-500">we got you covered.</div>
+            </h1>
+            <p className="text-sm text-center sm:text-left sm:text-lg mb-6 sm:mb-6">
+              Get access to high-velocity creative team that works with your brand. Ship campaigns —
+              faster, more reliably, and at scale.
+            </p>
 
-          {/* Features */}
-          <ul className="flex flex-col gap-2 text-sm sm:text-lg sm:gap-4 mb-5 sm:mb-8">
-            {["Dependable Services", "Proven Results", "100% Better results"].map(
-              (feature, index) => (
-                <li key={index} className="flex items-center gap-2 ">
-                  <FaCheckCircle className="text-[#EBFAFE]" />
-                  {feature}
-                </li>
-              )
-            )}
-          </ul>
+            {/* Features */}
+            <ul className="hidden sm:flex flex-col gap-2 text-sm sm:text-lg sm:gap-4 mb-5 sm:mb-8">
+              {["Dependable Services", "Proven Results", "100% Better results"].map(
+                (feature, index) => (
+                  <li key={index} className="flex items-center gap-2">
+                    <FaCheckCircle className="text-[#EBFAFE]" />
+                    {feature}
+                  </li>
+                )
+              )}
+            </ul>
 
-          {/* Call to Action */}
-          <div className="flex w-full flex-col lg:flex-row items-center gap-4">
-            {/* Updated Button */}
-            <button className="px-6 py-3 w-full  md:w-auto max-w-[400px] mx-auto md:mx-0 bg-[#88D7F0]  text-secondary-500 font-semibold text-md rounded-full">
-              GET STARTED
-            </button>
-           
+            {/* Call to Action */}
+            <div className="flex w-full flex-col lg:flex-row items-center gap-4">
+              <button className="px-6 py-3 w-full md:w-auto max-w-[400px] mx-auto md:mx-0 bg-[#88D7F0] text-secondary-500 font-semibold text-md rounded-full">
+                GET STARTED
+              </button>
+            </div>
           </div>
-        </div>
 
-          {/* Right Image Section with New Animation */}
-          <div className="flex-1 pb-8 lg:pb-0  w-full  relative overflow-hidden">
-            
-          {/* <div className="absolute block lg:hidden top-0 left-0 w-[20px] h-full bg-gradient-to-r z-20  from-secondary-500  to-transparent"></div>
-          
-          <div className="absolute block lg:hidden top-0 right-0 w-[20px] h-full bg-gradient-to-l z-20  from-secondary-500  to-transparent"></div> */}
-          
+          {/* Right Image Section */}
+          <div className="flex-1 pb-8 lg:pb-0 w-full relative overflow-hidden">
             {/* Desktop View - Vertical Scroll */}
             <div className="hidden lg:flex gap-4 h-screen overflow-hidden">
-           
-                <div 
-                  className={`w-1/3 marquee-vertical `}
-                >
-                  <div className="marquee-vertical-content space-y-5">
-                    {[...images1, ...images1].map((img, index) => (
-                      <div key={index} className="relative overflow-hidden  cursor-pointer rounded-xl group">
-                        <img
-                          src={img.src}
-                          alt=""
-                          className="w-full h-auto object-cover rounded-xl group-hover:scale-105 transition-all duration-300 shadow-2xl "
-                        />
-                        <div className="absolute  inset-0 bg-black/0 px-3 py-2 rounded-xl ">
-                        </div>
-                          <span className="text-white top-3 left-0 absolute tracking-wide w-full text-center font-normal text-sm  lg:text-lg">
-                            {img.name}
-                          </span>
+              <div className="w-1/3 marquee-vertical">
+                <div className="marquee-vertical-content space-y-5">
+                  {[...images1, ...images1].map((img, index) => (
+                    <div key={index} className="relative overflow-hidden cursor-pointer rounded-xl group">
+                      <img
+                        src={img.src}
+                        alt=""
+                        className="w-auto h-auto object-cover rounded-xl group-hover:scale-105 transition-all duration-300 shadow-xl"
+                      />
+                      <div className="absolute inset-0 bg-black/0 px-3 py-4 rounded-xl">
+                        <img src={img.logo} alt="" className="w-auto h-auto mx-auto" />
                       </div>
-                    ))}
-                    
-                  </div>
+                    </div>
+                  ))}
                 </div>
-             
-                <div 
-                  className={`w-1/3 marquee-vertical-reverse `}
-                >
-                  <div className="marquee-vertical-content space-y-5">
-                    {[...images2, ...images2].map((img, index) => (
-                      <div key={index} className="relative overflow-hidden cursor-pointer rounded-xl group">
-                        <img
-                          src={img.src}
-                          alt=""
-                          className="w-full h-auto object-cover rounded-xl group-hover:scale-105 transition-all duration-300 shadow-2xl "
-                        />
-                        <div className="absolute  inset-0 bg-black/0 px-3 py-2 rounded-xl ">
-                        </div>
-                          <span className="text-white top-3 left-0 absolute tracking-wide w-full text-center font-normal text-sm  lg:text-lg">
-                            {img.name}
-                          </span>
+              </div>
+
+              <div className="w-1/3 marquee-vertical-reverse">
+                <div className="marquee-vertical-content space-y-5">
+                  {[...images2, ...images2].map((img, index) => (
+                    <div key={index} className="relative overflow-hidden cursor-pointer rounded-xl group">
+                      <img
+                        src={img.src}
+                        alt=""
+                        className="w-auto h-auto object-cover rounded-xl group-hover:scale-105 transition-all duration-300 shadow-2xl"
+                      />
+                      <div className="absolute inset-0 bg-black/0 px-3 py-4 rounded-xl">
+                        <img src={img.logo} alt="" className="w-auto h-auto mx-auto" />
                       </div>
-                    ))}
-                    
-                  </div>
+                    </div>
+                  ))}
                 </div>
-                <div 
-                  className={`w-1/3 marquee-vertical `}
-                >
-                  <div className="marquee-vertical-content space-y-5">
-                    {[...images1, ...images1].map((img, index) => (
-                      <div key={index} className="relative overflow-hidden  cursor-pointer rounded-xl group">
-                        <img
-                          src={img.src}
-                          alt=""
-                          className="w-full h-auto object-cover rounded-xl group-hover:scale-105 transition-all duration-300 shadow-2xl "
-                        />
-                        <div className="absolute  inset-0 bg-black/0 px-3 py-2 rounded-xl ">
-                        </div>
-                          <span className="text-white top-3 left-0 absolute tracking-wide w-full text-center font-normal text-sm lg:text-lg">
-                            {img.name}
-                          </span>
+              </div>
+
+              <div className="w-1/3 marquee-vertical">
+                <div className="marquee-vertical-content space-y-5">
+                  {[...images1, ...images1].map((img, index) => (
+                    <div key={index} className="relative overflow-hidden cursor-pointer rounded-xl group">
+                      <img
+                        src={img.src}
+                        alt=""
+                        className="w-auto h-auto object-cover rounded-xl group-hover:scale-105 transition-all duration-300 shadow-2xl"
+                      />
+                      <div className="absolute inset-0 bg-black/0 px-3 py-4 rounded-xl">
+                        <img src={img.logo} alt="" className="w-auto h-auto mx-auto" />
                       </div>
-                    ))}
-                    
-                  </div>
+                    </div>
+                  ))}
                 </div>
-             
+              </div>
             </div>
 
             {/* Mobile View - Dual Line Scroll */}
@@ -173,37 +140,40 @@ const HeroSection = () => {
               {/* First Row - Left Scroll */}
               <div className="flex marquee-horizontal">
                 {[...images1, ...images1].map((img, index) => (
-                  <div className="relative flex-shrink-0  overflow-hidden  cursor-pointer rounded-xl  group" key={index}>
-                  <img
-                    
-                    src={img.src}
-                    alt=""
-                    className="w-[150px] h-48 object-cover  group-hover:scale-105 transition-all duration-300 rounded-lg shadow-lg mx-2"
-                  />
-                  <div className="absolute flex justify-center inset-0 bg-black/10 px-3 py-2 rounded-md ">
-                  <span className="text-white w-full text-center font-medium text-sm">
-                    {img.name}
-                  </span>
-                </div>
-                </div>
+                  <div className="relative flex-shrink-0 overflow-hidden cursor-pointer rounded-xl group" key={index}>
+                    <div className="overflow-hidden relative rounded-xl mx-2">
+                      <img
+                        src={img.src}
+                        alt=""
+                        className="w-[150px] h-48 object-cover group-hover:scale-105 transition-all duration-300 rounded-xl shadow-lg"
+                      />
+                    </div>
+                    <div className="absolute inset-0 bg-black/10 rounded-xl">
+                      <div className="flex justify-center h-[50px] items-center">
+                        <img src={img.logo} alt="" className="w-auto self-center px-9 h-auto object-contain mx-auto" />
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
 
               {/* Second Row - Right Scroll */}
               <div className="flex marquee-horizontal-reverse">
                 {[...images2, ...images2].reverse().map((img, index) => (
-                  <div className="relative flex-shrink-0 overflow-hidden  cursor-pointer rounded-xl group" key={index}>
-                  <img
-                    src={img.src}
-                    alt=""
-                    className="w-[150px] h-48 object-cover  group-hover:scale-105 transition-all duration-300 rounded-lg shadow-lg mx-2"
-                  />
-                  <div className="absolute flex justify-center inset-0 bg-black/10 px-3 py-2 rounded-md ">
-                  <span className="text-white w-full text-center font-medium text-sm">
-                    {img.name}
-                  </span>
-                </div>
-                </div>
+                  <div className="relative flex-shrink-0 overflow-hidden cursor-pointer rounded-xl group" key={index}>
+                    <div className="overflow-hidden relative rounded-xl mx-2">
+                      <img
+                        src={img.src}
+                        alt=""
+                        className="w-[150px] h-48 object-cover group-hover:scale-105 transition-all duration-300 rounded-xl shadow-lg"
+                      />
+                    </div>
+                    <div className="absolute inset-0 bg-black/10 rounded-xl">
+                      <div className="flex justify-center h-[50px] items-center">
+                        <img src={img.logo} alt="" className="w-auto self-center px-9 h-auto object-contain mx-auto" />
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
@@ -223,7 +193,6 @@ const HeroSection = () => {
           100% { transform: translateY(0); }
         }
 
-
         .marquee-vertical {
           animation: marqueeVertical 50s linear infinite;
         }
@@ -232,25 +201,7 @@ const HeroSection = () => {
           animation: marqueeVerticalReverse 50s linear infinite;
         }
 
-
         /* Horizontal Marquee Animation */
-        @keyframes marqueeHorizontal {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-
-        .marquee-vertical-content {
-          display: flex;
-          flex-direction: column;
-        }
-
-        /* Pause animation on hover */
-        .marquee-vertical:hover, 
-        .marquee-horizontal:hover {
-          animation-play-state: paused;
-        }
-
-       /* Horizontal Animations */
         @keyframes marqueeHorizontal {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
@@ -269,19 +220,20 @@ const HeroSection = () => {
           animation: marqueeHorizontalReverse 30s linear infinite;
         }
 
+        /* Pause animation on hover */
+        .marquee-vertical:hover,
+        .marquee-vertical-reverse:hover,
+        .marquee-horizontal:hover {
+          animation-play-state: paused;
+        }
+
         /* Hide Scrollbar */
         .md\:hidden {
-          -ms-overflow-style: none;  /* IE and Edge */
-          scrollbar-width: none;  /* Firefox */
+          -ms-overflow-style: none; /* IE and Edge */
+          scrollbar-width: none; /* Firefox */
         }
         .md\:hidden::-webkit-scrollbar {
           display: none;
-        }
-
-        /* Spacing Adjustments */
-        .mx-2 {
-          margin-left: 0.5rem;
-          margin-right: 0.5rem;
         }
 
         /* Custom Scrollbar for Mobile */

@@ -143,7 +143,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       transition={{ duration: 0.3 }}
       exit={{padding: "0px 0px"}}
       className="flex justify-between items-center h-[70px] sm:h-[80px] px-sm md:px-md">
-        <Link href={"/"} onClick={toggleSidebar} className=" text-secondary-500 text-3xl tracking-wide font-bold"> <span className="font-Rock_Salt">a</span>neeverse</Link>
+        <Link href={"/"} onClick={toggleSidebar} className=" text-secondary-500 text-3xl tracking-wide font-bold"> aneeverse</Link>
         <button onClick={toggleSidebar} className="text-xl text-secondary-500">
           <FaTimes />
         </button>

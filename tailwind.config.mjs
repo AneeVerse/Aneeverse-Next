@@ -17,7 +17,7 @@ export default {
         xl: '32px'
       },
       maxWidth: {
-        container: '1280px',
+        container: '1536px',
         card: '300px'
       },
       fontFamily: {
