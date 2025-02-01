@@ -131,7 +131,7 @@ const ResourcesMegaMenu = ({ color }) => {
 
                 {/* Blog */}
                 <div className="border-r border-gray-200 pr-6">
-                  <Link href={resources[1].link} className="text-lg font-semibold cursor-pointer hover:underline flex items-center text-secondary-500 gap-2">
+                  <Link onClick={()=>{setIsOpen(false)}} href={resources[1].link} className="text-lg font-semibold cursor-pointer hover:underline flex items-center text-secondary-500 gap-2">
                     Blog <FiArrowUpRight />
                   </Link>
                   <div className="grid grid-cols-1 gap-4 mt-4">
@@ -153,7 +153,7 @@ const ResourcesMegaMenu = ({ color }) => {
 
                 {/* Customer Stories */}
                 <div>
-                  <Link href={resources[2].link} className="text-lg font-semibold flex items-center hover:underline cursor-pointer text-secondary-500 gap-2">
+                  <Link  onClick={()=>{setIsOpen(false)}} href={resources[2].link} className="text-lg font-semibold flex items-center hover:underline cursor-pointer text-secondary-500 gap-2">
                     Customer Stories <FiArrowUpRight />
                   </Link>
                   <div className="grid grid-cols-1 gap-4 mt-4">
