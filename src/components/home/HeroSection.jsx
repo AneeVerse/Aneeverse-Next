@@ -223,6 +223,7 @@ const HeroSection = () => {
         /* Pause animation on hover */
         .marquee-vertical:hover,
         .marquee-vertical-reverse:hover,
+        .marquee-horizontal-reverse:hover,
         .marquee-horizontal:hover {
           animation-play-state: paused;
         }
