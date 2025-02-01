@@ -28,7 +28,7 @@ export default function ContentWritingServices() {
   ];
 
   return (
-    <section className="py-6 text-white">
+    <section id="content-writing" className="py-6 text-white">
       <Layout>
         {/* Heading */}
         <h2 className="text-4xl mb-12 text-center">
@@ -37,11 +37,11 @@ export default function ContentWritingServices() {
         </h2>
 
         {/* Grid */}
-        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 auto-rows-fr">
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 auto-rows-fr">
           {creativeServices.map((service, index) => (
             <div
               key={index}
-              className={`group mb-8 relative h-[350px] rounded-2xl overflow-hidden `}
+              className={`group relative h-[350px] rounded-2xl overflow-hidden `}
             >
               {/* Image */}
               <div className="overflow-hidden h-full w-full">

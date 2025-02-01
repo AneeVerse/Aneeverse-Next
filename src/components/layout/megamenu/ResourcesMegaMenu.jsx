@@ -9,6 +9,7 @@ import {
 } from "react-icons/hi";
 import { FaChevronDown } from "react-icons/fa6";
 import Layout from "@/components/common/Layout";
+import Link from "next/link";
 
 const ResourcesMegaMenu = ({ color }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,7 +43,7 @@ const ResourcesMegaMenu = ({ color }) => {
     },
     {
       title: "Blog",
-      link: "#",
+      link: "/blog",
       cards: [
         {
           title: "Beyond the Brief: All the Buzz About AI-Powered Ads",
@@ -130,9 +131,9 @@ const ResourcesMegaMenu = ({ color }) => {
 
                 {/* Blog */}
                 <div className="border-r border-gray-200 pr-6">
-                  <h3 className="text-lg font-semibold cursor-pointer hover:underline flex items-center text-secondary-500 gap-2">
+                  <Link href={resources[1].link} className="text-lg font-semibold cursor-pointer hover:underline flex items-center text-secondary-500 gap-2">
                     Blog <FiArrowUpRight />
-                  </h3>
+                  </Link>
                   <div className="grid grid-cols-1 gap-4 mt-4">
                     {resources[1].cards.map((card, idx) => (
                       <div key={idx} className="flex flex-col cursor-pointer gap-3">
@@ -152,9 +153,9 @@ const ResourcesMegaMenu = ({ color }) => {
 
                 {/* Customer Stories */}
                 <div>
-                  <h3 className="text-lg font-semibold flex items-center hover:underline cursor-pointer text-secondary-500 gap-2">
+                  <Link href={resources[2].link} className="text-lg font-semibold flex items-center hover:underline cursor-pointer text-secondary-500 gap-2">
                     Customer Stories <FiArrowUpRight />
-                  </h3>
+                  </Link>
                   <div className="grid grid-cols-1 gap-4 mt-4">
                     {resources[2].cards.map((card, idx) => (
                       <div key={idx} className="flex flex-col cursor-pointer gap-3">

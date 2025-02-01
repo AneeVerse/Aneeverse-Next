@@ -5,7 +5,7 @@ import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebookF, FaTwitter, FaInstagra
 
 const ContactUsPage = () => {
   return (
-    <div className="bg-gray-50 text-gray-900">
+    <div className="bg-gray-50 mt-[-80px] pt-[80px] text-gray-900">
       
 
       {/* Header Section */}

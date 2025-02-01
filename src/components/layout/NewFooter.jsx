@@ -10,66 +10,83 @@ export default function NewFooter() {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [navigationOpen, setNavigationOpen] = useState(false);
   
-    const footerData = {
-      services: {
-        heading: "Services",
+  const footerData = {
+    services: {
+      heading: "Services",
+      items: [
+        {
+          title: "Creative design services",
+          links: [
+            { title: "Ad creative", link: "/ad-creative" },
+            { title: "Social media creative", link: "/social-media-creative" },
+            { title: "Presentation design", link: "/presentation-design" },
+            { title: "Illustration design", link: "/illustration-design" },
+            { title: "Branding services", link: "/branding-services" },
+            { title: "Email creation", link: "/email-creation" },
+            { title: "Web design", link: "/web-design" },
+            { title: "eBooks & report design", link: "/ebooks-report-design" },
+            { title: "Concept creation", link: "/concept-creation" },
+            { title: "Print design", link: "/print-design" },
+            { title: "Packaging & merchandise design", link: "/packaging-merchandise-design" },
+          ],
+        },
+        {
+          title: "Specialized production services",
+          links: [
+            { title: "Video production", link: "/video-production" },
+            { title: "Motion design", link: "/motion-design" },
+            { title: "3D & AR design", link: "/3d-ar-design" },
+          ],
+        },
+        {
+          title: "AI Services",
+          links: [
+            { title: "AI enhanced creative", link: "/ai-enhanced-creative" },
+            { title: "AI consulting", link: "/ai-consulting" },
+          ],
+        },
+        {
+          title: "Marketing services",
+          links: [
+            { title: "Marketing strategy", link: "/marketing-strategy" },
+          ],
+        },
+      ],
+    },
+    navigation: {
+      heading: "Navigation",
+      sections: {
         items: [
           {
-            title: "Creative design services",
+            title: "main",
             links: [
-              "Ad creative",
-              "Social media creative",
-              "Presentation design",
-              "Illustration design",
-              "Branding services",
-              "Email creation",
-              "Web design",
-              "eBooks & report design",
-              "Concept creation",
-              "Print design",
-              "Packaging & merchandise design",
+              { title: "Our Work", link: "/our-work" },
+              { title: "Our people", link: "/our-people" },
+              { title: "About Us", link: "/about-us" },
+              { title: "Pricing", link: "/pricing" },
+              { title: "Careers", link: "/careers" },
             ],
           },
           {
-            title: "Specialized production services ",
-            links: ["Video production", "Motion design", "3D & AR design"],
-          },
-          {
-            title: "AI Services",
-            links: ["AI enhanced creative", "AI consulting"],
-          },
-          {
-            title: "Marketing services",
-            links: ["Marketing strategy"],
+            title: "learn",
+            links: [
+              { title: "Blog", link: "/blog" },
+              { title: "Events & Summits", link: "/events-summits" },
+              { title: "Guides & Reports", link: "/guides-reports" },
+              { title: "Customer Stories", link: "/customer-stories" },
+              { title: "Video Library", link: "/video-library" },
+              { title: "Playbooks", link: "/playbooks" },
+            ],
           },
         ],
       },
-      navigation: {
-        heading: "Navigation",
-        sections: {
-          items: [
-            {
-              title: "main",
-              links: ["Our Work", "Our people", "About Us", "Pricing", "Careers"],
-            },
-            {
-              title: "learn",
-              links: [
-                "Blog",
-                "Events & Summits",
-                "Guides & Reports",
-                "Customer Stories",
-                "Video Library",
-                "Playbooks",
-              ],
-            }
-          ],
-          
-        },
-      },
-      legal: ["Privacy Policy", "Terms of Use", ],
-      
-    };
+    },
+    legal: [
+      { title: "Privacy Policy", link: "/privacy-policy" },
+      { title: "Terms of Use", link: "/terms-of-use" },
+    ],
+  };
+
   
     return (
       <footer className="bg-secondary-500 text-white pt-16 pb-6">
@@ -108,15 +125,15 @@ export default function NewFooter() {
                 className="mt-4 space-y-6 overflow-y-hidden">
                   {footerData.services.items.map((item, index) => (
                     <div key={index} className="pl-2">
-                      <h4 className="font-medium mb-2 flex items-center">
+                      <Link href={item.links} className="font-medium mb-2 flex items-center">
                         {item.title} <FiArrowUpRight className="ml-1" />
-                      </h4>
+                      </Link>
                       <ul className="space-y-2">
-                        {item.links.map((link, i) => (
+                        {item.links.map((val, i) => (
                           <li key={i} className="text-sm text-[#c9c9c9]">
-                            <button className="hover:underline w-full text-left">
-                              {link}
-                            </button>
+                            <Link href={val.link} className="hover:underline w-full block text-left">
+                              {val.title}
+                            </Link>
                           </li>
                         ))}
                       </ul>
@@ -144,13 +161,13 @@ export default function NewFooter() {
                 className="mt-4 overflow-y-hidden grid grid-cols-1 gap-6 pl-2">
                   {footerData.navigation.sections.items.map((item, index) => (
                     <div key={index}>
-                      <h4 className="font-medium mb-2">{item.title}</h4>
+                      <Link href={item.links} className="font-medium block mb-2">{item.title}</Link>
                       <ul className="space-y-2">
-                        {item.links.map((link, i) => (
+                        {item.links.map((val, i) => (
                           <li key={i} className="text-sm text-[#c9c9c9]">
-                            <button className="hover:underline w-full text-left">
-                              {link}
-                            </button>
+                            <Link href={val.link} className="hover:underline w-full block text-left">
+                              {val.title}
+                            </Link>
                           </li>
                         ))}
                       </ul>
@@ -168,12 +185,12 @@ export default function NewFooter() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {footerData.services.items.map((item, index) => (
                   <div key={index}>
-                    <h4 className="font-medium mb-2">{item.title} <FiArrowUpRight className="text-md inline-block" /></h4>
+                    <Link href={item.links} className="font-medium mb-2 block">{item.title} <FiArrowUpRight className="text-md inline-block" /></Link>
                     <ul>
-                      {item.links.map((link, i) => (
-                        <li key={i} className="text-sm text-[#c9c9c9] mb-2 cursor-pointer hover:underline">
-                          {link}
-                        </li>
+                      {item.links.map((val, i) => (
+                        <Link href={val.link} key={i} className="text-sm text-[#c9c9c9] mb-2 block cursor-pointer hover:underline">
+                          {val.title}
+                        </Link>
                       ))}
                     </ul>
                   </div>
@@ -187,12 +204,12 @@ export default function NewFooter() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {footerData.navigation.sections.items.map((item, index) => (
                   <div key={index}>
-                    <h4 className="font-medium mb-2">{item.title}</h4>
+                    <Link href={item.links} className="font-medium mb-2 block">{item.title}</Link>
                     <ul>
-                      {item.links.map((link, i) => (
-                        <li key={i} className="text-sm text-[#c9c9c9] mb-2 cursor-pointer hover:underline">
-                          {link}
-                        </li>
+                      {item.links.map((val, i) => (
+                        <Link href={val.link} key={i} className="text-sm text-[#c9c9c9] block mb-2 cursor-pointer hover:underline">
+                          {val.title}
+                        </Link>
                       ))}
                     </ul>
                   </div>
@@ -211,9 +228,9 @@ export default function NewFooter() {
               <ul className="flex flex-row justify-center mt-3 sm:mt-0 gap-4 text-sm ">
                 {footerData.legal.map((legalItem, index) => (
                   <li key={index}>
-                    <a href="#" className="hover:underline">
-                      {legalItem}
-                    </a>
+                    <Link href={legalItem.link} className="hover:underline block">
+                      {legalItem.title}
+                    </Link>
                   </li>
                 ))}
               </ul>

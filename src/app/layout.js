@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
      <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-primary-500`}
       >
           <NextTopLoader
          color="#0e2f50"

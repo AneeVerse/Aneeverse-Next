@@ -17,6 +17,7 @@ const ServicesMegaMenu = ({color}) => {
   const menuCategories = [
     {
       title: "Website Services",
+      url: "/services#website-services",
       color: "bg-blue-200 text-blue-900",
       items: [
         { name: "Website Design", description: "Stunning websites built to engage.", icon: <FaDesktop /> },
@@ -29,6 +30,7 @@ const ServicesMegaMenu = ({color}) => {
     },
     {
       title: "Marketing Services",
+      url: "/services#marketing-services",
       color: "bg-yellow-200 text-blue-900",
       items: [
         { name: "Marketing Strategy", description: "Grow your brand with expert consultants.", icon: <FaChartPie /> },
@@ -40,6 +42,7 @@ const ServicesMegaMenu = ({color}) => {
     },
     {
       title: "Content Writing",
+      url: "/services#content-writing",
       color: "bg-green-200 text-green-900",
       items: [
         { name: "Blog Writing", description: "SEO-friendly blogs tailored to your niche.", icon: <FaPenFancy /> },
@@ -51,6 +54,7 @@ const ServicesMegaMenu = ({color}) => {
  
     {
       title: "Creative Design Services",
+      url: "/services#creative-design-services",
       color: "bg-lime-200 text-lime-900",
       items: [
         { name: "Social Media Creatives", description: "Engaging assets for all platforms.", icon: <FaFacebook /> },
@@ -82,9 +86,9 @@ const ServicesMegaMenu = ({color}) => {
 <div className="grid grid-cols-3 gap-6">
   {menuCategories.slice(0, 2).map((category, index) => (
     <div key={index}>
-      <h3 className={`text-lg font-bold py-2 px-4 rounded-md inline-flex items-center gap-2 ${category.color}`}>
+      <Link onClick={()=>{setIsOpen(false)}} href={category.url} className={`text-lg font-bold py-2 px-4 rounded-md inline-flex items-center gap-2 ${category.color}`}>
         {category.title} <FiArrowUpRight />
-      </h3>
+      </Link>
       <ul className="mt-4 space-y-2">
         {category.items.map((item, idx) => (
           <a href={"/contact"} key={idx} className="flex group px-3 py-2 border-b items-center justify-between gap-3">
@@ -108,9 +112,9 @@ const ServicesMegaMenu = ({color}) => {
   <div className="flex gap-12 flex-col">
     {menuCategories.slice(2, 4).map((category, index) => (
       <div key={index}>
-        <h3 className={`text-lg font-bold py-2 px-4 rounded-md inline-flex items-center gap-2 ${category.color}`}>
+        <Link href={category.url} onClick={()=>{setIsOpen(false)}} className={`text-lg font-bold py-2 px-4 rounded-md inline-flex items-center gap-2 ${category.color}`}>
           {category.title} <FiArrowUpRight />
-        </h3>
+        </Link>
         <ul className="mt-4 space-y-2">
           {category.items.map((item, idx) => (
             <a href={"/contact"} key={idx} className="flex group px-3 py-2 border-b items-center justify-between gap-3">

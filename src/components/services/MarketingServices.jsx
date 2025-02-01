@@ -50,7 +50,7 @@ export default function WebsiteServices() {
   ];
 
   return (
-    <section className="py-6 text-white">
+    <section id="marketing-services" className="py-6 text-white">
       <Layout>
         {/* Heading */}
         <h2 className="text-4xl mb-12 text-center">
@@ -59,11 +59,11 @@ export default function WebsiteServices() {
         </h2>
 
         {/* Grid */}
-        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
           {services.map((service, index) => (
             <div
               key={index}
-              className={`group mb-8 relative rounded-2xl overflow-hidden ${
+              className={`group relative rounded-2xl overflow-hidden ${
                 index === 0 || index === services.length - 1
                   ? "lg:col-span-2"
                   : index === 1

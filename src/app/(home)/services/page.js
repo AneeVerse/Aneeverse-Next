@@ -18,7 +18,7 @@ const page = () => {
     <ServicesHero />
      <SlidingLogos />
      <ServicesSupportSection />
-     <div className='bg-secondary-500 space-y-[100px] py-16 px-6'>
+     <div className='bg-secondary-500 space-y-8 py-16 px-6'>
         <WebsiteServices />
         <CreativeDesignServices />
 
