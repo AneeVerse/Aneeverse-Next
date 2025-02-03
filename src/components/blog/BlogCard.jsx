@@ -9,7 +9,7 @@ export default function BlogCard({ blog }) {
       {/* Image Section */}
       <div className="relative w-full h-48 rounded-xl overflow-hidden">
         <Image
-          src={blog.image} // Use the blog's image
+          src={blog.thumbnail} // Use the blog's image
           alt={blog.title}
           layout="fill"
           objectFit="cover"
@@ -18,28 +18,28 @@ export default function BlogCard({ blog }) {
 
       {/* Content Section */}
       <div className="mt-4">
-        <p className="text-sm text-gray-500 font-medium">{blog.title} • {blog.time}</p>
-        <h2 className="text-lg font-semibold mt-1 text-black group-hover:underline transition-all duration-300">
+        <p className="text-sm text-gray-500 font-medium">{blog.title} • {blog.timeToRead}</p>
+        <h2 className="text-lg line-clamp-1 font-semibold mt-1 text-black group-hover:underline transition-all duration-300">
           {blog.title}
         </h2>
-        <p className="text-sm text-gray-600 mt-2 line-clamp-2">
-          {blog.description}
-        </p>
+        <div className="text-sm text-gray-600 mt-2 line-clamp-2">
+          {blog.shortDescription}
+        </div>
       </div>
 
       {/* Author Section */}
       <div className="flex items-center mt-4">
         <div className="w-10 h-10 rounded-full overflow-hidden">
           <Image
-            src={blog.authorImage} // Use the blog's author image
-            alt={blog.author}
+            src={blog.author.image} // Use the blog's author image
+            alt={blog.author.name}
             width={40}
             height={40}
           />
         </div>
         <div className="ml-3">
-          <p className="text-sm font-semibold">{blog.author}</p>
-          <p className="text-xs text-gray-500">{blog.authorRole}</p>
+          <p className="text-sm font-semibold">{blog.author.name}</p>
+          <p className="text-xs text-gray-500">{blog.author.role}</p>
         </div>
       </div>
     </Link>

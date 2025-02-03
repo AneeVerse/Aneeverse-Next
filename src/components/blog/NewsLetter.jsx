@@ -3,7 +3,6 @@ import Layout from "../common/Layout";
 
 const Newsletter = () => {
     return (
-        <Layout>
       <div className="bg-secondary-500 mt-4  text-primary-500 p-10 sm:p-12 rounded-2xl flex flex-col gap-5 ">
         <div className="mb-5 sm:mb-0 max-w-full sm:max-w-md">
           <h3 className="text-sm font-semibold uppercase text-gray-400">Subscribe to our Newsletter</h3>
@@ -21,7 +20,7 @@ const Newsletter = () => {
           </div>
           <button className="bg-lime-300 text-black font-semibold px-5 py-2 ml-3 rounded-full hover:bg-lime-400 transition">Subscribe</button>
         </div>
-      </div></Layout>
+      </div>
     );
   };
   

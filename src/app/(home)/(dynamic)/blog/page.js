@@ -1,6 +1,7 @@
 import BlogHeroSection from '@/components/blog/BlogHeroSection'
 import DigitalAdvertising from '@/components/blog/DigitalAdvertising'
 import Newsletter from '@/components/blog/NewsLetter'
+import Layout from '@/components/common/Layout'
 import React from 'react'
 
 const page = () => {
@@ -8,7 +9,9 @@ const page = () => {
     <div className='bg-white pb-16'>
         <BlogHeroSection    />
         <DigitalAdvertising />
+        <Layout>
         <Newsletter />
+        </Layout>
       
     </div>
   )
