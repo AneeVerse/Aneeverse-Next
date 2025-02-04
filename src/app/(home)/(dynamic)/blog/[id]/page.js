@@ -7,6 +7,7 @@ import { FaRegClock } from "react-icons/fa6";
 import Link from 'next/link';
 import { IoIosArrowForward } from "react-icons/io";
 import Newsletter from '@/components/blog/NewsLetter';
+import BlogCard from '@/components/blog/BlogCard';
 
 const getBlogPost = (id) => {
   return blogs.find((blog) => blog.id === id);
@@ -59,7 +60,7 @@ export default function BlogDetail({ params }) {
               Blog
             </Link>
             <IoIosArrowForward className="" />
-            <Link href={post.categoryLink} className="uppercase hover:underline">
+            <Link href={`/blog/category/${post.category.toLowerCase().replace(" ","-")}`} className="uppercase hover:underline">
               {post.category}
             </Link>
           </div>
@@ -176,16 +177,16 @@ export default function BlogDetail({ params }) {
                 >
                   <div className="mb-8">
                     <h2 className="text-3xl font-semibold mb-4">{section.title}</h2>
-                    <div className="relative h-96 xl:h-[480px] rounded-xl overflow-hidden">
+                { section.type != "text" &&    <div className="relative h-96 xl:h-[480px] rounded-xl overflow-hidden">
                     { section.type == "image" ?  <Image
-                        src={section.image}
+                        src={section.srcUrl}
                         alt={section.title}
                         fill
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                         placeholder="blur"
                         blurDataURL="/images/placeholder.jpg"
-                      /> : <video src={section.image} controls className="w-full h-full object-cover" />}
-                    </div>
+                      /> : <iframe  src={section.srcUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" controls className="w-full h-full object-cover" />}
+                    </div> } 
                   </div>
                   <div className="text-lg text-gray-600 leading-relaxed">
                     {section.description}
@@ -199,39 +200,13 @@ export default function BlogDetail({ params }) {
             {/* Related Blogs */}
             <section className="mt-20">
               <h2 className="text-2xl font-semibold mb-8">More Articles</h2>
-              <div className="grid md:grid-cols-2 gap-8">
+              <div className="grid md:grid-cols-3 gap-6">
                 {blogs
                   .filter(b => b.id !== post.id)
                   .slice(0, 2)
                   .map(blog => (
-                    <Link
-                      key={blog.id}
-                      href={blog.id}
-                      className="border rounded-xl overflow-hidden hover:shadow-lg transition-all"
-                    >
-                      <div className="relative h-64">
-                        <Image
-                          src={blog.content[0].image}
-                          alt={blog.title}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <div className="p-6">
-                        <h3 className="text-xl font-semibold mb-2">{blog.title}</h3>
-                        <div className="text-gray-500 line-clamp-2">{blog.shortDescription}</div>
-                        <div className="mt-4 flex items-center gap-3">
-                          <Image
-                            src={blog.author.image}
-                            alt={blog.author.name}
-                            width={32}
-                            height={32}
-                            className="rounded-full"
-                          />
-                          <span className="text-sm">{blog.author.name}</span>
-                        </div>
-                      </div>
-                    </Link>
+                    <BlogCard key={blog.id} blog={blog} />
+                 
                   ))}
               </div>
             </section>

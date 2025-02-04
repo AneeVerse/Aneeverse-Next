@@ -18,7 +18,7 @@ export default function BlogCard({ blog }) {
 
       {/* Content Section */}
       <div className="mt-4">
-        <p className="text-sm text-gray-500 font-medium">{blog.title} • {blog.timeToRead}</p>
+        <p className="text-sm text-gray-500  uppercase tracking-widest font-medium">{blog.category} • {blog.timeToRead}</p>
         <h2 className="text-lg line-clamp-1 font-semibold mt-1 text-black group-hover:underline transition-all duration-300">
           {blog.title}
         </h2>

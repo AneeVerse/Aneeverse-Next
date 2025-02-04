@@ -125,12 +125,12 @@ const OurWorkSection = () => {
             }`}
           >
             {/* Image */}
-            <div className="h-[200px] sm:h-[280px] rounded-lg overflow-hidden">
+            <div className=" rounded-lg overflow-hidden">
 
             <img
               src={project.image}
               alt={project.title}
-              className="h-[280px] w-full group-hover:scale-105 transition-transform duration-300 rounded-lg object-cover"
+              className="h-[200px] sm:h-[280px] xl:h-[340px] w-full group-hover:scale-105 transition-transform duration-300 rounded-lg object-cover"
             />
             </div>
             {/* Text Content */}

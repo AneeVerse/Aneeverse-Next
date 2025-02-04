@@ -1,6 +1,7 @@
 import React from "react";
 import { FaCheck } from "react-icons/fa6";
 import Layout from "../common/Layout";
+import Link from "next/link";
 
 const pricingData = {
   title: "A subscription built to",
@@ -57,9 +58,9 @@ export default function PricingComponent() {
           </h4>
           <p className="mt-4 text-lg">{pricingData.leftBox.description}</p>
           <p className="text-sm opacity-80 mt-4">{pricingData.leftBox.note}</p>
-          <button className="bg-[#D8FF85] text-[#0A211F] font-semibold py-3 px-6 rounded-full mt-6">
+          <Link href={"/contact"} className="bg-[#D8FF85] text-[#0A211F] font-semibold py-3 px-6 rounded-full inline-block text-center mt-6">
             {pricingData.leftBox.buttonText}
-          </button>
+          </Link>
         </div>
 
         {/* Right Box */}

@@ -1,5 +1,6 @@
 import React from "react";
 import Layout from "../common/Layout";
+import Link from "next/link";
 
 export default function AIDesignSection() {
   return (
@@ -28,9 +29,9 @@ export default function AIDesignSection() {
             Through AI, customers like Amazon, Reddit, and Salesforce managed to spend less
             than half of what they normally would on similar projects.
           </p>
-          <button className="mt-6 border border-white text-white py-2 px-5 rounded-full hover:bg-white hover:text-black transition">
+          <Link href={"/contact"} className="mt-6 border border-white text-center inline-block text-white py-2 px-5 rounded-full hover:bg-white hover:text-black transition">
             Book a demo
-          </button>
+          </Link>
         </div>
 
        

@@ -3,6 +3,7 @@ import React, { useRef, useEffect } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Layout from "../common/Layout";
+import Link from "next/link";
 
 const images1 = [
   { src: "/images/home/webflow.avif", logo: "images/home/logo/webflow-logo.png" },
@@ -49,7 +50,8 @@ const HeroSection = () => {
       <Layout>
         <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 items-center">
           {/* Left Content */}
-          <div className="pt-[90px] lg:pt-[120px] lg:pb-12">
+          <div className="pt-[90px]  lg:pt-[120px] lg:pb-12">
+            <div className="flex flex-col-reverse sm:flex-col">
             <h1 className="text-2xl sm:text-4xl font-bold text-center sm:text-left leading-tight mb-6">
               DESIGN, OPTIMIZE, ADVERTISE{" "}
               <div className="font-medium font-Rock_Salt text-orange-500">we got you covered.</div>
@@ -58,7 +60,7 @@ const HeroSection = () => {
               Get access to high-velocity creative team that works with your brand. Ship campaigns —
               faster, more reliably, and at scale.
             </p>
-
+</div>
             {/* Features */}
             <ul className="hidden sm:flex flex-col gap-2 text-sm sm:text-lg sm:gap-4 mb-5 sm:mb-8">
               {["Dependable Services", "Proven Results", "100% Better results"].map(
@@ -73,9 +75,9 @@ const HeroSection = () => {
 
             {/* Call to Action */}
             <div className="flex w-full flex-col lg:flex-row items-center gap-4">
-              <button className="px-6 py-3 w-full md:w-auto max-w-[400px] mx-auto md:mx-0 bg-[#88D7F0] text-secondary-500 font-semibold text-md rounded-full">
+              <Link href={"/contact"} className="px-6 inline-block text-center py-3 w-full md:w-auto max-w-[400px] mx-auto md:mx-0 bg-[#88D7F0] text-secondary-500 font-semibold text-md rounded-full">
                 GET STARTED
-              </button>
+              </Link>
             </div>
           </div>
 

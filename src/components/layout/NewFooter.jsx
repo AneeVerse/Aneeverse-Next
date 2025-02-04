@@ -100,9 +100,9 @@ export default function NewFooter() {
      <p className="mt-4 text-3xl text-orange-400 font-Rock_Salt">
        we got you covered.
      </p>
-     <button className="mt-8 px-6 text-md py-2 bg-primary-500 text-secondary-500 text-lg font-semibold rounded-full  transition">
+     <Link href={"/contact"} className="mt-8 text-center inline-block px-6 text-md py-2 bg-primary-500 text-secondary-500 text-lg font-semibold rounded-full  transition">
        GET STARTED
-     </button>
+     </Link>
    </div>
    <div className="mt-16 border-b border-gray-600 pb-1">
           {/* Mobile Accordions */}

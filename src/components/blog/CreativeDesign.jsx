@@ -5,15 +5,15 @@ import { FaChevronRight } from "react-icons/fa6";
 import Link from 'next/link';
 import {blogs} from '@/data/blogData';
 
-const DigitalAdvertising = () => {
-  const DigitalAdvertisingBlogData = blogs.filter(blog => blog.category === 'Digital Advertising');
+const CreativeDesign = () => {
+  const DigitalAdvertisingBlogData = blogs.filter(blog => blog.category === 'Creative Design');
   
   return (
     <div className='bg-white py-10'>
       <Layout>
         <div className='flex group mb-6 justify-between items-center'>
-          <h1 className='text-3xl sm:text-4xl text-secondary-500 font-semibold'>Digital Advertising</h1>
-          <Link href={`/blog/category/${DigitalAdvertisingBlogData[0].category.toLowerCase().replace(" ", "-")}`}  className='text-secondary-500 hover:underline flex items-center gap-1 font-semibold text-lg'>
+          <h1 className='text-3xl sm:text-4xl text-secondary-500 font-semibold'>Creative Design</h1>
+          <Link href={`/blog/category/${DigitalAdvertisingBlogData[0].category.toLowerCase().replace(" ", "-")}`} className='text-secondary-500 hover:underline flex items-center gap-1 font-semibold text-lg'>
             <span>See all</span>
             <FaChevronRight className='text-lg group-hover:translate-x-1 duration-300 transition-all' />
           </Link>
@@ -28,4 +28,4 @@ const DigitalAdvertising = () => {
   );
 };
 
-export default DigitalAdvertising;
+export default CreativeDesign;
