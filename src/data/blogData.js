@@ -1,40 +1,39 @@
 // data/blogs.js
 export const blogs = [
-    {
-      id: "giant-leap-superside",
-      title: "A Giant Leap Forward: Superside’s New Brand Has Landed",
-     
-      thumbnail: "/images/blog/creative-design/blog1/thumbnail.avif",
-      category: "Digital Advertising",
-      date: "2025-02-01",
-      timeToRead: "5 min read",
-      author: {
-        name: "Jennifer Rapp",
-        role: "Chief Marketing Officer",
-        image: "/images/blog/author/author.avif",
-      }, 
-      shortDescription: "A new Superside has arrived—and it's spectacular. We've completely redefined our entire look and feel to capture exactly how we bring the world's leading enterprise brands a whole new universe of creative freedom.",
-      description:
+  {
+    id: "giant-leap-superside",
+    title: "A Giant Leap Forward: Superside’s New Brand Has Landed",
+    thumbnail: "/images/blog/creative-design/blog1/thumbnail.avif",
+    category: "Digital Advertising",
+    date: "01 Jan, 2025",
+    timeToRead: "5 min read",
+    author: {
+      name: "Pushkar Dake",
+      role: "Chief Marketing Officer",
+      image: "/images/blog/author/pushkar.png",
+    },
+    shortDescription: "A new Superside has arrived—and it's spectacular. We've completely redefined our entire look and feel to capture exactly how we bring the world's leading enterprise brands a whole new universe of creative freedom.",
+    description:
       <div>
         <div >
-       <div className=" highlight">
-        <h5>Houston, We Have a New Brand!</h5>
+          <div className="highlight">
+            <h5>Houston, We Have a New Brand!</h5>
 
-        <p>A new Superside has arrived—and it's spectacular. We've completely redefined our entire look and feel to capture exactly how we bring the world's leading enterprise brands a whole new universe of creative freedom. Curious? The suspense is over and all the details are below. (You didn't think we'd spill everything in the TL;DR, did you?).</p>
-        </div>
-        
-        <p>The eagle has landed! Our brand now reflects who we are: The world’s leading AI-powered creative services company, transforming how enterprise teams approach design.</p>
-        <p>Over the past decade, Superside has grown from a scale-up to a global creative powerhouse, working with tech giants like Amazon, Vimeo, Meta, Salesforce and Reddit.</p>
-        <p>We’re proud to work with the best brands on the planet. The one thing they all have in common? Incredible in-house creative teams brimming with world-class talent—and all strapped for time and resources.</p>
-        <p>Our mission: To help enterprise creative teams dream bigger, move faster, scale smarter and build iconic brands</p>
+            <p>A new Superside has arrived—and it's spectacular. We've completely redefined our entire look and feel to capture exactly how we bring the world's leading enterprise brands a whole new universe of creative freedom. Curious? The suspense is over and all the details are below. (You didn't think we'd spill everything in the TL;DR, did you?).</p>
+          </div>
+
+          <p>The eagle has landed! Our brand now reflects who we are: The world’s leading AI-powered creative services company, transforming how enterprise teams approach design.</p>
+          <p>Over the past decade, Superside has grown from a scale-up to a global creative powerhouse, working with tech giants like Amazon, Vimeo, Meta, Salesforce and Reddit.</p>
+          <p>We’re proud to work with the best brands on the planet. The one thing they all have in common? Incredible in-house creative teams brimming with world-class talent—and all strapped for time and resources.</p>
+          <p>Our mission: To help enterprise creative teams dream bigger, move faster, scale smarter and build iconic brands</p>
         </div>
       </div>,
-      content: [
-        {
-          title: "A Fresh New Look",
-          type: "image",
-          srcUrl:  "/images/blog/creative-design/blog1/thumbnail.avif",
-          description:<div > <p>AI is making hyper-personalized marketing campaigns more effective than ever. </p>
+    content: [
+      {
+        title: "A Fresh New Look",
+        type: "image", // "image" | "video" | "text"
+        srcUrl: "/images/blog/creative-design/blog1/thumbnail.avif",
+        description: <div > <p>AI is making hyper-personalized marketing campaigns more effective than ever. </p>
           <p>Today, we're unveiling a completely reimagined look and feel. Don’t worry—we’re still Superside, with the same fun-loving, kind and clever spirit.</p>
           <li>
             <strong>Key Takeaway:</strong> Brands that leverage AI for personalization will see higher engagement rates.
@@ -42,24 +41,24 @@ export const blogs = [
           <li>
             <strong>What to Expect:</strong> AI-powered tools will help marketers create more targeted campaigns.
           </li>
-          </div>,
-        },
-        {
-          title: "What’s Changing?",
-          type: "image", // video
-          srcUrl:  "/images/blog/creative-design/blog1/thumbnail.avif",
-          description:<div> <p>AI is making hyper-personalized marketing campaigns more effective than ever. </p>
-            <p>Our new brand identity aligns with our mission to empower marketers with better, faster creative.</p>
-            <p>Our new brand identity aligns with our mission to empower marketers with better, faster creative.</p>
-            <p>I’m Jen Rapp, Superside CMO. Fun fact: I was a Superside customer before joining the team. Previously, I led brand marketing at Klaviyo and, in 2021, our creative team was, to put it lightly, underwater. We hired Superside to help bridge a growing bandwidth gap.</p>
-            <p>Our new brand identity aligns with our mission to empower marketers with better, faster creative.</p>
-          </div>,
-        },
-        {
-          title: "What’s Next?",
-          type: "text",
-          srcUrl:  "",
-          description:
+        </div>,
+      },
+      {
+        title: "What’s Changing?",
+        type: "video", // "image" | "video" | "text"
+        srcUrl: "https://www.youtube.com/embed/YLo6g58vUm0?si=GgNcq3D71jEVRyGe",
+        description: <div> <p>AI is making hyper-personalized marketing campaigns more effective than ever. </p>
+          <p>Our new brand identity aligns with our mission to empower marketers with better, faster creative.</p>
+          <p>Our new brand identity aligns with our mission to empower marketers with better, faster creative.</p>
+          <p>I’m Jen Rapp, Superside CMO. Fun fact: I was a Superside customer before joining the team. Previously, I led brand marketing at Klaviyo and, in 2021, our creative team was, to put it lightly, underwater. We hired Superside to help bridge a growing bandwidth gap.</p>
+          <p>Our new brand identity aligns with our mission to empower marketers with better, faster creative.</p>
+        </div>,
+      },
+      {
+        title: "What’s Next?",
+        type: "text", // "image" | "video" | "text"
+        srcUrl: "",
+        description:
           <div>
             <p>Superside is evolving, and this is just the beginning. Learn about our roadmap for 2025.</p>
             <ul>
@@ -68,9 +67,9 @@ export const blogs = [
               <li>**Product Innovation:** Stay tuned for new features and tools to streamline your creative workflow.</li>
             </ul>
           </div>,
-        },
-      ],
-    },
+      },
+    ],
+  },
 
 
   {
@@ -78,12 +77,12 @@ export const blogs = [
     title: "Building Scalable Design Systems for Enterprises",
     thumbnail: "/images/blog/creative-design/blog1/thumbnail.avif",
     category: "Creative Design",
-    date: "2025-04-02",
+    date: "01 Jan, 2025",
     timeToRead: "12 min read",
     author: {
-      name: "Sarah Chen",
+      name: "Pushkar Dake",
       role: "Lead Product Designer",
-      image: "/images/blog/author/author.avif",
+      image: "/images/blog/author/pushkar.png",
     },
     shortDescription: "Discover how to create and implement scalable design systems for enterprise-level organizations.",
     description: (
@@ -92,9 +91,9 @@ export const blogs = [
           <h5>Why Design Systems Matter in 2025</h5>
           <p>Design systems streamline the workflow, ensuring consistency, efficiency, and scalability. They empower teams to build cohesive products faster, reducing design debt and improving collaboration between developers and designers.</p>
         </div>
-  
+
         <p>From tech startups to enterprise giants, **design systems** have revolutionized product development. They eliminate inconsistencies, improve accessibility, and enhance user experience across all touchpoints.</p>
-  
+
         <p>In this article, we will explore the **best practices** for building an enterprise-level design system, including:</p>
         <ul>
           <li>Atomic Design Principles</li>
@@ -103,7 +102,7 @@ export const blogs = [
           <li>Design Tokenization</li>
           <li>Scalability & Performance Optimization</li>
         </ul>
-  
+
         <p>Let's dive deep into each section.</p>
       </div>
     ),
@@ -233,18 +232,18 @@ export const blogs = [
         ),
       },
     ],
-  },  
+  },
   {
     id: "ui-trends-2025",
     title: "Top UI Design Trends to Watch in 2025",
     thumbnail: "/images/blog/creative-design/blog2/post1.avif",
     category: "Creative Design",
-    date: "2025-05-01",
+    date: "01 Jan, 2025",
     timeToRead: "10 min read",
     author: {
-      name: "Michael Lee",
+      name: "Abhijit",
       role: "UI/UX Designer",
-      image: "/images/blog/author/author.avif",
+      image: "/images/blog/author/abhi.png",
     },
     shortDescription: "Explore the cutting-edge UI design trends that will dominate in 2025 and redefine digital experiences.",
     description: (
@@ -253,9 +252,9 @@ export const blogs = [
           <h5>The Future of UI Design is Here</h5>
           <p>2025 is set to redefine UI design with bold, immersive, and highly interactive user interfaces. From AI-driven designs to 3D elements, the digital landscape is evolving faster than ever.</p>
         </div>
-  
+
         <p>With rapid advancements in **technology, user behavior, and accessibility**, UI design is no longer just about aesthetics—it’s about functionality, storytelling, and inclusivity.</p>
-  
+
         <p>So, what’s shaping UI design in 2025? Here are the top trends:</p>
         <ul>
           <li>Neomorphism & Glassmorphism</li>
@@ -266,7 +265,7 @@ export const blogs = [
           <li>Voice & Gesture-Based Navigation</li>
           <li>Sustainable & Eco-Friendly UI</li>
         </ul>
-  
+
         <p>Let’s explore these trends in depth.</p>
       </div>
     ),
@@ -308,7 +307,7 @@ export const blogs = [
       {
         title: "3. AI-Powered Personalized UI",
         type: "image",
-        srcUrl:  "/images/blog/creative-design/blog1/thumbnail.avif",
+        srcUrl: "/images/blog/creative-design/blog1/thumbnail.avif",
         description: (
           <div>
             <p>Artificial Intelligence is transforming UI with **hyper-personalized user experiences**.</p>
@@ -325,7 +324,7 @@ export const blogs = [
       {
         title: "4. Microinteractions & Motion UI",
         type: "image",
-        srcUrl:  "/images/blog/creative-design/blog1/thumbnail.avif",
+        srcUrl: "/images/blog/creative-design/blog1/thumbnail.avif",
         description: (
           <div>
             <p>Microinteractions add **delightful animations** and **smooth transitions**, improving **usability and user satisfaction**.</p>
@@ -342,7 +341,7 @@ export const blogs = [
       {
         title: "5. Dark Mode & High-Contrast UI",
         type: "image",
-        srcUrl:  "/images/blog/creative-design/blog1/thumbnail.avif",
+        srcUrl: "/images/blog/creative-design/blog1/thumbnail.avif",
         description: (
           <div>
             <p>Dark mode is no longer an option—it’s a necessity. High-contrast UI improves **readability, accessibility, and battery efficiency**.</p>
@@ -359,7 +358,7 @@ export const blogs = [
       {
         title: "6. Voice & Gesture-Based UI Navigation",
         type: "image",
-        srcUrl:  "/images/blog/creative-design/blog1/thumbnail.avif",
+        srcUrl: "/images/blog/creative-design/blog1/thumbnail.avif",
         description: (
           <div>
             <p>Voice and **gesture-controlled interfaces** are changing how users interact with devices.</p>
@@ -376,7 +375,7 @@ export const blogs = [
       {
         title: "7. Sustainable & Eco-Friendly UI Design",
         type: "image",
-        srcUrl:  "/images/blog/creative-design/blog1/thumbnail.avif",
+        srcUrl: "/images/blog/creative-design/blog1/thumbnail.avif",
         description: (
           <div>
             <p>UI design is becoming more **environmentally conscious** with energy-efficient color schemes and **low-bandwidth UI elements**.</p>
@@ -408,6 +407,6 @@ export const blogs = [
         ),
       },
     ],
-  }, 
+  },
 
 ];

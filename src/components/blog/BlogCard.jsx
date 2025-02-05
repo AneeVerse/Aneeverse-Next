@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function BlogCard({ blog }) {
   return (
-    <Link href={`/blog/${blog.id}`} className=" block group rounded-2xl p-4 ">
+    <Link href={`/blog/${blog.id}`} className=" block group rounded-2xl ">
       {/* Image Section */}
       <div className="relative w-full h-48 rounded-xl overflow-hidden">
         <Image
@@ -19,7 +19,7 @@ export default function BlogCard({ blog }) {
       {/* Content Section */}
       <div className="mt-4">
         <p className="text-sm text-gray-500  uppercase tracking-widest font-medium">{blog.category} • {blog.timeToRead}</p>
-        <h2 className="text-lg line-clamp-1 font-semibold mt-1 text-black group-hover:underline transition-all duration-300">
+        <h2 className="text-lg line-clamp-1 font-semibold mt-1 text-black group-hover:underline underline-offset-2 transition-all duration-300">
           {blog.title}
         </h2>
         <div className="text-sm text-gray-600 mt-2 line-clamp-2">

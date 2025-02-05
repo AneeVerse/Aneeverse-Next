@@ -2,6 +2,9 @@
 import React from "react";
 import { FaEnvelope } from "react-icons/fa";
 import Layout from "../common/Layout";
+import Link from "next/link";
+import { blogs } from "@/data/blogData";
+
 
 const BlogHeroSection = () => {
   return (
@@ -22,10 +25,10 @@ const BlogHeroSection = () => {
         {/* Main Content */}
         <div className="grid md:grid-cols-3 gap-8">
           {/* Featured Blog */}
-          <div className="md:col-span-2 bg-[#031B34] text-white rounded-xl overflow-hidden">
+          <Link href={`blog/${blogs[0].id}`} className="md:col-span-2 bg-[#031B34] text-white rounded-xl overflow-hidden">
             <div className="relative z-10 h-full w-full p-6">
             <img
-              src="/images/about/about-hero-banner.avif"
+              src={blogs[0].thumbnail}
               alt="Featured Blog"
               className="w-full h-full absolute top-0 left-0 object-cover"
             />
@@ -35,29 +38,29 @@ const BlogHeroSection = () => {
                 ANEEVERSE NEWS • 5 min read
               </p>
               <h3 className="text-3xl sm:text-4xl max-w-full sm:max-w-sm font-semibold mt-3">
-                A Giant Leap Forward: Superside’s New Brand Has Landed
+               {blogs[0].title}
               </h3>
               <div className="flex items-center gap-3 mt-5">
                 <img
-                  src="/images/blog/author/author.avif"
-                  alt="Jennifer Rapp"
+                  src={blogs[0].author.image}
+                  alt={blogs[0].author.name}
                   className="w-10 h-10 object-cover rounded-full"
                 />
                 <div className="flex items-center text-sm gap-2">
                     <div className="pr-4 border-r border-gray-400">
-                  <p className=" font-medium">Jennifer Rapp</p>
+                  <p className=" font-medium">{blogs[0].author.name}</p>
                   <p className=" text-gray-400">
-                    Chief Marketing Officer  
+                    {blogs[0].author.role}
                   </p>
                   </div>
                   <div className="pl-4">
-                  Published <br /> Jan 22
+                  Published <br /> {blogs[0].date}
                   </div>
                 </div>
               </div>
             </div>
             </div>
-          </div>
+          </Link>
 
           {/* Subscription Box */}
           <div className="bg-[#EAF2E3] rounded-xl p-6 flex flex-col justify-between">

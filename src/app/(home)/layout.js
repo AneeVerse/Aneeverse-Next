@@ -1,4 +1,4 @@
-import Footer from '@/components/layout/Footer'
+
 import NewFooter from '@/components/layout/NewFooter'
 import React from 'react'
 

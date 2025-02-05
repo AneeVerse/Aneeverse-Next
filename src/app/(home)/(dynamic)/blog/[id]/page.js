@@ -13,6 +13,8 @@ const getBlogPost = (id) => {
   return blogs.find((blog) => blog.id === id);
 };
 
+
+
 export default function BlogDetail({ params }) {
   
   const resolvedParams = use(params); // ✅ Unwrapping params
@@ -96,7 +98,7 @@ export default function BlogDetail({ params }) {
                 <h1 className="text-2xl sm:text-3xl md:text-5xl text-left font-semibold mb-3 md:mb-6">
                   {post.title}
                 </h1>
-                <div className="text-left">Published: {post.date}</div>
+                <div className="text-left">Published {post.date}</div>
               </div>
               <div>
                 <div className='text-md mb-2 tracking-wider'>AUTHOR</div>
@@ -134,20 +136,20 @@ export default function BlogDetail({ params }) {
               {/* Table of Contents */}
               <div className="py-3">
           <h4 className="font-semibold mb-4">In this article</h4>
-          <ul className="space-y-2">
+          <ul className="space-y-3">
             {post.content.map((section, index) => (
               <li key={index}>
                 <a
                         href={`#section-${index}`}
-                        className={`text-secondary-500 flex items-center group text-sm ${
+                        className={` flex items-center group text-sm ${
                           activeSection === index ? ' font-semibold' : ''
                         }`}
                       >
                         <span className={`w-[5px] h-[5px] rounded-full ${
                           activeSection === index ? 'bg-secondary-500 scale-100 opacity-100' : 'bg-secondary-500 group-hover:scale-100 group-hover:opacity-100 scale-0 opacity-0'
                         } inline-block transition-all duration-300`}></span>
-                        <span className={`ml-[-5px] inline-block transition-all duration-300 ${
-                          activeSection === index ? 'ml-[5px]' : 'group-hover:ml-[5px]'
+                        <span className={`ml-[-5px] text-gray-600 inline-block transition-all duration-300 ${
+                          activeSection === index ? 'ml-[5px] text-secondary-500' : 'group-hover:ml-[5px] group-hover:text-secondary-500'
                         }`}>{section.title}</span>
                       </a>
               </li>
@@ -220,10 +222,10 @@ export default function BlogDetail({ params }) {
             {/* Related Blogs */}
             <section className="mt-20">
               <h2 className="text-2xl font-semibold mb-8">More Articles</h2>
-              <div className="grid md:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-3 gap-12">
                 {blogs
                   .filter(b => b.id !== post.id)
-                  .slice(0, 2)
+                  .slice(0, 3)
                   .map(blog => (
                     <BlogCard key={blog.id} blog={blog} />
                  

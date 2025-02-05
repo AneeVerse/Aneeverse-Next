@@ -3,6 +3,34 @@ import Link from 'next/link';
 import React from 'react';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 
+
+export const metadata = {
+  title: "Contact Us | Aneeverse",
+  description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+  openGraph: {
+    title:  "Contact Us | Aneeverse",
+    description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+    url: `https://aneeverse.com/contact`,
+    images: [
+      {
+        url: "/images/meta/phone.avif", // ✅ Dynamic Image
+        width: 1200,
+        height: 630,
+        alt:  "Contact Us | Aneeverse",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:  "Contact Us | Aneeverse",
+    description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+    image: "/images/meta/phone.avif",
+  },
+}
+
+
+
 const ContactUsPage = () => {
   return (
     <div className="bg-gray-50 mt-[-80px] pt-[80px] text-gray-900">

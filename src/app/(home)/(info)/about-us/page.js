@@ -10,6 +10,35 @@ import Link from 'next/link';
 import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 
+
+
+
+export const metadata = {
+  title: "About Us | Aneeverse",
+  description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+  openGraph: {
+    title:  "About Us | Aneeverse",
+    description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+    url: `https://aneeverse.com/about-us`,
+    images: [
+      {
+        url: "/images/meta/phone.avif", // ✅ Dynamic Image
+        width: 1200,
+        height: 630,
+        alt:  "About Us | Aneeverse",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:  "About Us | Aneeverse",
+    description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+    image: "/images/meta/phone.avif",
+  },
+}
+
+
 const AboutUsPage = () => {
   return (
    

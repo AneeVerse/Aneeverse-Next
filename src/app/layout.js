@@ -16,6 +16,26 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Aneeverse",
   description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+  openGraph: {
+    title:  "Aneeverse",
+    description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+    url: `https://aneeverse.com`,
+    images: [
+      {
+        url: "/images/meta/phone.avif", // ✅ Dynamic Image
+        width: 1200,
+        height: 630,
+        alt:  "Aneeverse",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:  "Aneeverse",
+    description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+    image: "/images/meta/phone.avif",
+  },
   // Add favicon icon and device-specific icons
   icons: {
     icon: "/favicon.ico", // Default favicon
