@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState , use} from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 import Layout from '@/components/common/Layout';
 import { blogs } from '@/data/blogData';
 import Image from 'next/image';
@@ -13,39 +13,56 @@ const getBlogPost = (id) => {
   return blogs.find((blog) => blog.id === id);
 };
 
-
 export default function BlogDetail({ params }) {
+  
   const resolvedParams = use(params); // ✅ Unwrapping params
-  const post = getBlogPost(resolvedParams.id); // ✅ Access id after unwrapping
-
+  const post = getBlogPost(resolvedParams.id); 
   const [activeSection, setActiveSection] = useState(null);
   const sectionRefs = useRef([]);
+  const observer = useRef(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    // Cleanup previous observer
+    if (observer.current) {
+      sectionRefs.current.forEach(section => {
+        if (section) observer.current.unobserve(section);
+      });
+    }
+
+    // Initialize new observer
+    observer.current = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            const index = sectionRefs.current.indexOf(entry.target);
-            setActiveSection(index);
+            const index = sectionRefs.current.findIndex(
+              ref => ref && ref.id === entry.target.id
+            );
+            if (index !== -1) setActiveSection(index);
           }
         });
       },
       {
-        rootMargin: '-50px 0px -50% 0px',
-        threshold: 0.5
+        rootMargin: '-20% 0px -50% 0px', // Adjusted for better detection
+        threshold: 0.2
       }
     );
 
-    sectionRefs.current.forEach(section => {
-      if (section) observer.observe(section);
+    // Observe new sections
+    const currentSections = sectionRefs.current.filter(Boolean);
+    currentSections.forEach(section => {
+      observer.current.observe(section);
     });
 
     return () => {
-      sectionRefs.current.forEach(section => {
-        if (section) observer.unobserve(section);
+      currentSections.forEach(section => {
+        observer.current.unobserve(section);
       });
     };
+  }, [post]);
+
+  // Reset sections when post changes
+  useEffect(() => {
+    sectionRefs.current = sectionRefs.current.slice(0, post?.content.length);
   }, [post]);
 
   if (!post) return <div className="text-center py-20">Blog not found</div>;
@@ -116,11 +133,11 @@ export default function BlogDetail({ params }) {
 
               {/* Table of Contents */}
               <div className="py-3">
-                <h4 className="font-semibold mb-4">In this article</h4>
-                <ul className="space-y-2">
-                  {post.content.map((section, index) => (
-                    <li key={index}>
-                      <a
+          <h4 className="font-semibold mb-4">In this article</h4>
+          <ul className="space-y-2">
+            {post.content.map((section, index) => (
+              <li key={index}>
+                <a
                         href={`#section-${index}`}
                         className={`text-secondary-500 flex items-center group text-sm ${
                           activeSection === index ? ' font-semibold' : ''
@@ -133,10 +150,11 @@ export default function BlogDetail({ params }) {
                           activeSection === index ? 'ml-[5px]' : 'group-hover:ml-[5px]'
                         }`}>{section.title}</span>
                       </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
 
               {/* Author Info */}
               <div className="bg-secondary-500 p-5 text-primary-500 flex-col flex rounded-lg shadow-md">
@@ -168,13 +186,15 @@ export default function BlogDetail({ params }) {
               {post.description}
             </div>
             <article className="space-y-20">
-              {post.content.map((section, index) => (
-                <section
-                  key={index}
-                  id={`section-${index}`}
-                  className="group scroll-mt-20"
-                  ref={(el) => (sectionRefs.current[index] = el)}
-                >
+            
+        {/* Main Content */}
+        {post.content.map((section, index) => (
+          <section
+            key={index}
+            id={`section-${index}`}
+            ref={(el) => (sectionRefs.current[index] = el)}
+            className="scroll-mt-24 mb-16" // Increased scroll margin
+          >
                   <div className="mb-8">
                     <h2 className="text-3xl font-semibold mb-4">{section.title}</h2>
                 { section.type != "text" &&    <div className="relative  aspect-video rounded-xl overflow-hidden">

@@ -57,11 +57,16 @@ export const blogs = [
         },
         {
           title: "What’s Next?",
-          type: "image",
-          srcUrl:  "/images/blog/creative-design/blog1/thumbnail.avif",
+          type: "text",
+          srcUrl:  "",
           description:
           <div>
             <p>Superside is evolving, and this is just the beginning. Learn about our roadmap for 2025.</p>
+            <ul>
+              <li>**AI-Powered Creativity:** We’re investing in AI to help marketers create more personalized campaigns.</li>
+              <li>**Global Expansion:** Our team is growing to support more brands worldwide.</li>
+              <li>**Product Innovation:** Stay tuned for new features and tools to streamline your creative workflow.</li>
+            </ul>
           </div>,
         },
       ],
