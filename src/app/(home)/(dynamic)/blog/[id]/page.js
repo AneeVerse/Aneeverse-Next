@@ -102,7 +102,7 @@ export default function BlogDetail({ params }) {
         </header>
 
         {/* Main Grid Container */}
-        <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-16">
           {/* Sticky Sidebar */}
           <aside className="sticky top-24 self-start hidden lg:block">
             <div className="space-y-8 bg-white">
@@ -164,7 +164,7 @@ export default function BlogDetail({ params }) {
           {/* Main Content Sections */}
           <div>
             {/* description */}
-            <div className="text-lg text-gray-600 leading-relaxed mb-12">
+            <div className="text-lg text-gray-600 leading-relaxed description mb-12">
               {post.description}
             </div>
             <article className="space-y-20">
@@ -177,7 +177,7 @@ export default function BlogDetail({ params }) {
                 >
                   <div className="mb-8">
                     <h2 className="text-3xl font-semibold mb-4">{section.title}</h2>
-                { section.type != "text" &&    <div className="relative h-96 xl:h-[480px] rounded-xl overflow-hidden">
+                { section.type != "text" &&    <div className="relative  aspect-video rounded-xl overflow-hidden">
                     { section.type == "image" ?  <Image
                         src={section.srcUrl}
                         alt={section.title}
@@ -188,7 +188,7 @@ export default function BlogDetail({ params }) {
                       /> : <iframe  src={section.srcUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" controls className="w-full h-full object-cover" />}
                     </div> } 
                   </div>
-                  <div className="text-lg text-gray-600 leading-relaxed">
+                  <div className="text-lg description text-gray-600 leading-relaxed">
                     {section.description}
                   </div>
                 </section>
@@ -213,6 +213,7 @@ export default function BlogDetail({ params }) {
           </div>
         </div>
       </Layout>
+      
     </div>
   );
 }

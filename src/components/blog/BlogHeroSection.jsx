@@ -39,7 +39,7 @@ const BlogHeroSection = () => {
               </h3>
               <div className="flex items-center gap-3 mt-5">
                 <img
-                  src="/images/blog/author.avif"
+                  src="/images/blog/author/author.avif"
                   alt="Jennifer Rapp"
                   className="w-10 h-10 object-cover rounded-full"
                 />
