@@ -14,8 +14,8 @@ export default function Home() {
     <div>
       <HeroSection />
       <SlidingLogos />
-      <SupportSection />
-      {/* <TestimonialsSection /> */}
+     {/* <SupportSection />
+       <TestimonialsSection /> */}
       <CreativeSection />
       <TableComponent />
       <DynamicOurWorks />

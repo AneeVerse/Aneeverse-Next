@@ -16,7 +16,7 @@ const Navbar = () => {
 
   // State for colors
   const [color, setColor] = useState({
-    text: pathName === "/" ? "#EBFAFE" : "#073742",
+    text: ((pathName === "/") || (pathName.includes("/services/"))) ? "#EBFAFE" : "#073742",
     bg: "#ebfafe00",
   });
 
@@ -32,7 +32,7 @@ const Navbar = () => {
       } else {
         setScrolled(false);
         setColor({
-          text: pathName === "/" ? "#EBFAFE" : "#073742",
+          text: ((pathName === "/") || (pathName.includes("/services/")))  ? "#EBFAFE" : "#073742",
           bg: "#ebfafe00",
         });
       }
@@ -45,8 +45,8 @@ const Navbar = () => {
   // Ensure color is updated correctly on route change
   useEffect(() => {
     setColor({
-      text: pathName === "/" ? "#EBFAFE" : "#073742",
-      bg: "#ebfafe00",
+      text: ((pathName === "/") || (pathName.includes("/services/"))) ? "#EBFAFE" : "#073742",
+    bg: "#ebfafe00",
     });
   }, [pathName]);
 
@@ -80,7 +80,7 @@ const Navbar = () => {
         </div>
 
         <div className="hidden lg:flex items-center gap-4">
-          <Link href={"/contact"} className={`text-[${pathName != "/" ? "#EBFAFE" : (color.bg !=  "#EBFAFE") ?  "#073742":  "#EBFAFE" }] bg-[${color.text}] text-sm border border-[${color.bg}]  px-6 py-[10px] rounded-full`}>
+          <Link href={"/contact"} className={`text-[${pathName != "/" ?  pathName.includes("/services/") ?(color.bg !=  "#EBFAFE") ?  "#073742":  "#EBFAFE" : "#EBFAFE" : (color.bg !=  "#EBFAFE") ?  "#073742":  "#EBFAFE" }] bg-[${color.text}] text-sm border border-[${color.bg}]  px-6 py-[10px] rounded-full`}>
             Book a Call
           </Link>
           <Link href={"/login"} className={`text-[${color.text}] text-sm bg-[${color.bg}] border border-[${color.text}] px-6 py-[10px] rounded-full`}>

@@ -4,51 +4,25 @@ import Layout from "../common/Layout";
 import Link from "next/link";
 
 const data = [
-  {
-    firstTitle: "Website",
-    secondTitle: "design",
-    url: "#",
-    image: "/images/home/creative/creative1.png",
-  },
-  {
-    firstTitle: "Social Media",
-    secondTitle: "creative",
-    url: "#",
-    image: "/images/home/creative/creative4.png",
-  },
-  {
-    firstTitle: "Email",
-    secondTitle: "design",
-    url: "#",
-    image: "/images/home/creative/creative2.png",
-  },
-  {
-    firstTitle: "Graphic",
-    secondTitle: "design",
-    url: "#",
-    image: "/images/home/creative/creative3.png",
-  },
-  {
-    firstTitle: "Video",
-    secondTitle: "editing",
-    url: "#",
-    image: "/images/home/creative/creative4.png",
-  },
+  { firstTitle: "Website", secondTitle: "design", url: "#", image: "/images/home/creative/creative1.png" },
+  { firstTitle: "Social Media", secondTitle: "creative", url: "#", image: "/images/home/creative/creative4.png" },
+  { firstTitle: "Email", secondTitle: "design", url: "#", image: "/images/home/creative/creative2.png" },
+  { firstTitle: "Graphic", secondTitle: "design", url: "#", image: "/images/home/creative/creative3.png" },
+  { firstTitle: "Video", secondTitle: "editing", url: "#", image: "/images/home/creative/creative4.png" },
 ];
 
 const duplicatedData = [...data, ...data];
 
 export default function CreativeSection() {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const containerRef = useRef(null);
   const animationRef = useRef(null);
   const translateX = useRef(0);
-  const totalWidth = useRef(0);
   const isTouching = useRef(false);
+  const totalWidth = useRef(0);
+  const scrollSpeed = 0.5; // Adjust speed as needed
 
-  // Scroll speed (adjust this value to control speed)
-  const scrollSpeed = useRef(0.5); // Reduced speed for smoother scroll
-
+  // ✅ Calculate Total Width of Scrollable Content
   const calculateWidth = useCallback(() => {
     if (containerRef.current) {
       const firstChild = containerRef.current.children[0];
@@ -58,39 +32,38 @@ export default function CreativeSection() {
     }
   }, []);
 
+  // ✅ Animation Loop
   const animate = useCallback(() => {
-    if (!isHovered && !isTouching.current && containerRef.current) {
-      translateX.current -= scrollSpeed.current;
-
-      // Reset position when reaching halfway
+    if (!isPaused && !isTouching.current && containerRef.current) {
+      translateX.current -= scrollSpeed;
+      
       if (Math.abs(translateX.current) >= totalWidth.current) {
-        translateX.current = 0;
+        translateX.current = 0; // Reset position to ensure smooth loop
       }
 
       containerRef.current.style.transform = `translateX(${translateX.current}px)`;
     }
+    
     animationRef.current = requestAnimationFrame(animate);
-  }, [isHovered]);
+  }, [isPaused]);
 
+  // ✅ Handle Touch & Hover Events
+  const handlePause = () => setIsPaused(true);
+  const handleResume = () => setIsPaused(false);
+  const handleTouchStart = () => { isTouching.current = true; handlePause(); };
+  const handleTouchEnd = () => { isTouching.current = false; handleResume(); };
+
+  // ✅ Start Animation & Recalculate on Resize
   useEffect(() => {
     calculateWidth();
     window.addEventListener("resize", calculateWidth);
     animationRef.current = requestAnimationFrame(animate);
+
     return () => {
       window.removeEventListener("resize", calculateWidth);
       cancelAnimationFrame(animationRef.current);
     };
   }, [animate, calculateWidth]);
-
-  const handleTouchStart = () => {
-    isTouching.current = true;
-    setIsHovered(true);
-  };
-
-  const handleTouchEnd = () => {
-    isTouching.current = false;
-    setIsHovered(false);
-  };
 
   return (
     <div className="bg-primary-500 py-16">
@@ -106,18 +79,15 @@ export default function CreativeSection() {
         </div>
       </Layout>
 
+      {/* ✅ Scrolling Content */}
       <div 
         className="mt-12 overflow-hidden relative"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={handlePause}
+        onMouseLeave={handleResume}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        <div
-          ref={containerRef}
-          className="flex w-max will-change-transform"
-          style={{ transition: "transform 0.5s linear" }} // Increased transition duration
-        >
+        <div ref={containerRef} className="flex w-max will-change-transform">
           {duplicatedData.map((item, index) => (
             <Link
               key={index}
