@@ -24,7 +24,7 @@ const scrollVariants = {
     transition: {
       repeat: Infinity,
       repeatType: "loop",
-      duration: 125,
+      duration: 225,
       ease: "linear",
     },
   },
@@ -78,7 +78,7 @@ export default function WebDesignHero() {
           variants={scrollVariants}
           animate="animate"
         >
-          {[...services, ...services].map((service, index) => (
+          {[...services, ...services,...services, ...services].map((service, index) => (
             <div
               key={index}
               className="flex items-center w-fit px-3 py-2 bg-primary-500  rounded-lg shadow-lg overflow-hidden"
