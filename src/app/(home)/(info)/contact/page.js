@@ -74,14 +74,14 @@ const ContactUsPage = () => {
           <div className="space-y-8">
             <h2 className="text-3xl font-bold ">Get in Touch</h2>
             <div className="space-y-6">
+              <Link href={"tel:+91 91527 55529"} className="flex items-center text-lg ">
+                <FaPhone className="  mr-4" /> +91 91527 55529
+              </Link>
+              <Link href="mailto:aneeverse@gmail.com"  className="flex items-center text-lg  ">
+                <FaEnvelope className=" mr-4" /> aneeverse@gmail.com
+  </Link>
               <p className="flex items-center text-lg ">
-                <FaPhone className="  mr-4" /> +1-(707)-240-8320
-              </p>
-              <p className="flex items-center text-lg  ">
-                <FaEnvelope className=" mr-4" /> info@contentbeta.com
-              </p>
-              <p className="flex items-center text-lg ">
-                <FaMapMarkerAlt className=" mr-4" /> 484 Virginia Pine TER, Sunnyvale, CA, US
+                <FaMapMarkerAlt className=" mr-4" /> Office No. 03, Plot No. 45, near HP Petrol Pump, Seawoods West, Sector 44, Seawoods, Navi Mumbai, Maharashtra 400706
               </p>
             </div>
 
