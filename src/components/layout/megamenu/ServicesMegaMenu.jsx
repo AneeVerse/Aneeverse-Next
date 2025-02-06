@@ -20,7 +20,8 @@ const ServicesMegaMenu = ({color}) => {
       url: "/services#website-services",
       color: "bg-blue-200 text-blue-900",
       items: [
-        { name: "Website Design", description: "Stunning websites built to engage.", icon: <FaDesktop /> },
+        { name: "Website Design", description: "Stunning websites built to engage.", icon: <FaDesktop />
+         },
         { name: "Landing Pages", description: "High-converting pages for your campaigns.", icon: <FaPager /> },
         { name: "SEO Optimization", description: "Boost your search rankings with expert SEO.", icon: <FaSearch /> },
         { name: "GMB Optimization", description: "Dominate local searches with GMB excellence.", icon: <FaMapMarkerAlt /> },
@@ -91,7 +92,7 @@ const ServicesMegaMenu = ({color}) => {
       </Link>
       <ul className="mt-4 space-y-2">
         {category.items.map((item, idx) => (
-          <a href={"/contact"} key={idx} className="flex group px-3 py-2 border-b items-center justify-between gap-3">
+          <a onClick={()=>{setIsOpen(false)}} href={`/services/${item.name.toLowerCase().replace(" ", "-")}`} key={idx} className="flex group px-3 py-2 border-b items-center justify-between gap-3">
             <div className="flex items-center justify-between gap-3">
               <div>
                 <h4 className="text-md font-medium text-gray-700 flex items-center">
