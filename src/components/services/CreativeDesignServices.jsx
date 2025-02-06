@@ -43,17 +43,19 @@ export default function CreativeDesignServices() {
               key={index}
               className={`group relative rounded-2xl overflow-hidden `}
             >
-              {/* Image */}
-              <div className="overflow-hidden h-full w-full">
+            {/* Image */}
+            <div className="overflow-hidden relative h-[250px] sm:h-full w-full">
                 <img
                   src={service.imgUrl}
                   alt={service.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition duration-300"
+                  className="w-full h-[250px] sm:h-full object-cover group-hover:scale-110 transition duration-300"
                 />
+                {/* overlap */}
+                <div className="absolute inset-0 bg-black bg-opacity-50 transition-all duration-300 opacity-30 "></div>
               </div>
 
               {/* Content */}
-              <div className="p-6 absolute top-2 left-2">
+              <div className="p-3 sm:p-6 absolute top-2 left-2">
                 <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
                 <p className="text-[#F7F9F2] text-sm mb-4">
                   {service.description}
