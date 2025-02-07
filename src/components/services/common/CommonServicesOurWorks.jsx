@@ -6,7 +6,7 @@ import Link from "next/link";
 
 
 
-const WebsiteDesignOurWorks = () => {
+const CommonServicesOurWorks = () => {
   const projects = [
     {
       image: "/images/home/works-ban-1.avif",
@@ -121,4 +121,4 @@ const WebsiteDesignOurWorks = () => {
   );
 };
 
-export default WebsiteDesignOurWorks;
+export default CommonServicesOurWorks;

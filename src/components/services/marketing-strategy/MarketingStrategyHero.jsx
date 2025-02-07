@@ -30,14 +30,14 @@ const scrollVariants = {
   },
 };
 
-export default function WebDesignHero() {
+export default function MarketingStrategyHero() {
   return (
     <div className="relative -mt-[80px] text-white overflow-hidden">
       {/* ✅ Hero Section */}
       <div className="relative w-full h-[90vh] sm:h-[70vh] flex items-center">
         {/* Background Image */}
         <Image
-          src="/images/services/website/hero-banner.avif"
+          src="/images/services/marketing-strategy/hero-banner.avif"
           alt="Web Design Hero"
           fill
           layout="fill"
@@ -55,9 +55,9 @@ export default function WebDesignHero() {
           <p className="uppercase tracking-widest text-lg font-medium">
             Creative Services
           </p>
-          <h1 className="text-5xl md:text-6xl w-full block font-bold mt-2">Web Design</h1>
+          <h1 className="text-5xl md:text-6xl w-full block font-bold mt-2">Marketing Strategy Services</h1>
           <p className="mt-4 text-lg text-gray-200">
-          Get email designs, templates, and creative to capture your audience’s attention. Invigorate your communications and get access to a fully-stacked team of designers to start bringing your email campaigns to life.
+          Empower your business with data-driven marketing initiatives, plans, and exceptional insights from our team of expert consultants. Leverage Superside's marketing strategy services for an on-demand marketing team extension.
           </p>
           <Link href="/contact">
             <button className="mt-6 px-6 py-3 bg-lime-400 text-black text-lg font-semibold rounded-full hover:bg-lime-500 transition">

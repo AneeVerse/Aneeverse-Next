@@ -2,62 +2,62 @@
 import { useRef, useState } from "react";
 import Layout from "../../common/Layout";
 
-export default function WebDesignCreativeServices() {
+export default function EmailDesignCreativeServices() {
     const team = [
         {
-            name: "Website Strategy",
-            about: "Our marketing consulting team can help you craft channel and campaign plans that drive traffic to your website.",
-            image: "/images/services/website/website-strategy.avif",
+            name: "Email Design",
+            about: "Creating visually appealing email templates that reflect your brand and engage your audience.",
+            image: "/images/services/email-design/email-design.avif",
             bgColor: "bg-secondary-500",
             textColor: "text-primary-500",
         },
         {
-            name: "Website Design",
-            about: "Superside creates conversion-focused websites and landing pages that are tailored to your campaign goals",
-            image: "/images/services/website/website-design.avif",
+            name: "Email Strategy",
+            about: "Our consulting team can craft an effective email strategy to help structure and optimize your efforts.",
+            image: "/images/services/email-design/email-strategy.avif",
             bgColor: "bg-[#c0e2ff]",
             textColor: "text-[#0a211f]",
         },
         {
-            name: "Landing Page Design",
-            about: "Our team of designers can create high-converting landing pages that are optimized for your campaign goals.",
-            image: "/images/services/website/landing-page-design.avif",
+            name: "Email HTML5",
+            about: "Coding responsive and interactive email designs that look great on any device.",
+            image: "/images/services/email-design/email-html5.avif",
             bgColor: "bg-[#f9f9f9]",
             textColor: "text-[#3d3d3d]",
         },
         {
-            name: "Illustration Design",
-            about: "Our team of illustrators can create custom illustrations that bring your brand to life.",
-            image: "/images/services/website/website-illustrations.avif",
+            name: "Email Design Templates",
+            about: "Get customized email design templates that reflect your brand's identity and can be easily adapted for various campaigns.",
+            image: "/images/services/email-design/email-design-templates.avif",
             bgColor: "bg-[#292423]",
             textColor: "text-[#ffafed]",
         },
         // add webflow development, ux ui audit, design system, content development
         {
-            name: "Webflow Development",
-            about: "Our team of developers can build custom websites using Webflow that are tailored to your campaign goals.",
-            image: "/images/services/website/webflow-development.avif",
+            name: "Email Newsletter Design",
+            about: "Engage your subscribers with beautifully designed newsletters that inform, entertain, and drive engagement.",
+            image: "/images/services/email-design/email-newsletter-design.avif",
             bgColor: "bg-[#d8ff85]",
             textColor: "text-[#1c4437]",
         },
         {
-            name: "UX UI Audit",
-            about: "Our team of designers can audit your website and provide recommendations to improve user experience and user interface.",
-            image: "/images/services/website/ux-ui-audit.avif",
+            name: "Email UI UX Audits",
+            about: "Email audit to identify design improvements, increasing user satisfaction, and boosting click through rates for overall business success.",
+            image: "/images/services/email-design/email-ui-ux-audits.avif",
             bgColor: "bg-[#edf4ea]",
             textColor: "text-[#1c4437]",
         },
         {
-            name: "Design Systems",
-            about: "Our team of designers can create design systems that help maintain brand consistency across all marketing materials.",
-            image: "/images/services/website/design-systems.avif",
+            name: "Graphics & Illustrations",
+            about: "Enhance your emails with custom graphics that grab attention and convey your message visually.",
+            image: "/images/services/email-design/graphics-and-illustrations.avif",
             bgColor: "bg-[#e7f9d1]",
             textColor: "text-[#365314]",
         },
         {
-            name: "Content Development",
-            about: "Our team of copywriters can create compelling content that resonates with your target audience.",
-            image: "/images/services/website/content-development.avif",
+            name: "Email Design Systems",
+            about: "Compilation and development of a design system taking into account your brand’s requirements and objectives for your emails.",
+            image: "/images/services/email-design/email-design-systems.avif",
             bgColor: "bg-[#f6edf9]",
             textColor: "text-[#4a124f]",
         }
@@ -96,9 +96,9 @@ export default function WebDesignCreativeServices() {
         <Layout>
           {/* Heading */}
           <div className="text-center mb-8">
-            <p className="uppercase text-sm tracking-widest">TAILORED CREATIVE SOLUTIONS</p>
+            <p className="uppercase text-sm tracking-widest">Design Expertise</p>
             <h2 className="text-4xl mt-3 md:text-6xl max-w-4xl mx-auto font-bold">
-              <span className="italic">Full-stack</span> web design services
+              <span className="italic">Comprehensive</span> Email Design Services
             </h2>
           </div>
   

@@ -1,9 +1,9 @@
 import TestimonialSlider from '@/components/about/TestimonialSlider'
 import SlidingLogos from '@/components/home/SlidingLogos'
+import CommonServicesOurWorks from '@/components/services/common/CommonServicesOurWorks'
 import WebDesignCreativeServices from '@/components/services/website-design/WebDesignCreativeServices'
 import WebDesignHero from '@/components/services/website-design/WebDesignHero'
 import WebsiteDesignFAQSection from '@/components/services/website-design/WebsiteDesignFAQSection'
-import WebsiteDesignOurWorks from '@/components/services/website-design/WebsiteDesignOurWorks'
 import WebsiteDesignStateSections from '@/components/services/website-design/WebsiteDesignStateSections'
 import WebsiteDesignSupportSection from '@/components/services/website-design/WebsiteDesignSupportSection'
 import React from 'react'
@@ -42,7 +42,7 @@ const page = () => {
       <SlidingLogos />
       <WebsiteDesignSupportSection />
       <WebDesignCreativeServices />
-      <WebsiteDesignOurWorks />
+      <CommonServicesOurWorks />
       <WebsiteDesignStateSections />
       <TestimonialSlider />
       <WebsiteDesignFAQSection />

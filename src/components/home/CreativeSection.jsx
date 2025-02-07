@@ -4,9 +4,9 @@ import Layout from "../common/Layout";
 import Link from "next/link";
 
 const data = [
-  { firstTitle: "Website", secondTitle: "design", url: "#", image: "/images/home/creative/creative1.png" },
+  { firstTitle: "Website", secondTitle: "design", url: "/services/website-design", image: "/images/home/creative/creative1.png" },
   { firstTitle: "Social Media", secondTitle: "creative", url: "#", image: "/images/home/creative/creative4.png" },
-  { firstTitle: "Email", secondTitle: "design", url: "#", image: "/images/home/creative/creative2.png" },
+  { firstTitle: "Email", secondTitle: "design", url: "/services/email-design", image: "/images/home/creative/creative2.png" },
   { firstTitle: "Graphic", secondTitle: "design", url: "#", image: "/images/home/creative/creative3.png" },
   { firstTitle: "Video", secondTitle: "editing", url: "#", image: "/images/home/creative/creative4.png" },
 ];
@@ -18,7 +18,9 @@ export default function CreativeSection() {
   const containerRef = useRef(null);
   const animationRef = useRef(null);
   const translateX = useRef(0);
-  const isTouching = useRef(false);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
   const totalWidth = useRef(0);
   const scrollSpeed = 0.5; // Adjust speed as needed
 
@@ -34,24 +36,39 @@ export default function CreativeSection() {
 
   // ✅ Animation Loop
   const animate = useCallback(() => {
-    if (!isPaused && !isTouching.current && containerRef.current) {
+    if (!isPaused && !isDragging.current && containerRef.current) {
       translateX.current -= scrollSpeed;
-      
+
       if (Math.abs(translateX.current) >= totalWidth.current) {
         translateX.current = 0; // Reset position to ensure smooth loop
       }
 
       containerRef.current.style.transform = `translateX(${translateX.current}px)`;
     }
-    
+
     animationRef.current = requestAnimationFrame(animate);
   }, [isPaused]);
 
-  // ✅ Handle Touch & Hover Events
-  const handlePause = () => setIsPaused(true);
-  const handleResume = () => setIsPaused(false);
-  const handleTouchStart = () => { isTouching.current = true; handlePause(); };
-  const handleTouchEnd = () => { isTouching.current = false; handleResume(); };
+  // ✅ Handle Pointer Events (Mouse & Touch)
+  const handlePointerDown = (e) => {
+    isDragging.current = true;
+    setIsPaused(true);
+    startX.current = e.clientX || e.touches[0].clientX;
+    scrollLeft.current = translateX.current;
+  };
+
+  const handlePointerMove = (e) => {
+    if (!isDragging.current) return;
+    const x = e.clientX || e.touches[0].clientX;
+    const walk = (x - startX.current) * 2; // Adjust sensitivity
+    translateX.current = scrollLeft.current + walk;
+    containerRef.current.style.transform = `translateX(${translateX.current}px)`;
+  };
+
+  const handlePointerUp = () => {
+    isDragging.current = false;
+    setIsPaused(false);
+  };
 
   // ✅ Start Animation & Recalculate on Resize
   useEffect(() => {
@@ -80,18 +97,26 @@ export default function CreativeSection() {
       </Layout>
 
       {/* ✅ Scrolling Content */}
-      <div 
+      <div
         className="mt-12 overflow-hidden relative"
-        onMouseEnter={handlePause}
-        onMouseLeave={handleResume}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
+        onMouseEnter={() => setIsPaused(true)}
+        onTouchStart={handlePointerDown}
+        onTouchMove={handlePointerMove}
+        onTouchEnd={handlePointerUp}
+        onMouseDown={handlePointerDown}
+        onMouseMove={handlePointerMove}
+        onMouseUp={handlePointerUp}
+        onMouseLeave={handlePointerUp}
       >
-        <div ref={containerRef} className="flex w-max will-change-transform">
+        <div
+          ref={containerRef}
+          className="flex w-max will-change-transform cursor-grab active:cursor-grabbing"
+        >
           {duplicatedData.map((item, index) => (
             <Link
               key={index}
               href={item.url}
+              draggable={false}
               className="relative min-w-[250px] h-[400px] sm:min-w-[300px] sm:h-[500px] lg:h-[600px] lg:min-w-[330px] flex-shrink-0 mx-2 overflow-hidden rounded-xl shadow-lg"
             >
               <img

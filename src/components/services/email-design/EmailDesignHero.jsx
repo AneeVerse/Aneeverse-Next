@@ -30,14 +30,14 @@ const scrollVariants = {
   },
 };
 
-export default function WebDesignHero() {
+export default function EmailDesignHero() {
   return (
     <div className="relative -mt-[80px] text-white overflow-hidden">
       {/* ✅ Hero Section */}
       <div className="relative w-full h-[90vh] sm:h-[70vh] flex items-center">
         {/* Background Image */}
         <Image
-          src="/images/services/website/hero-banner.avif"
+          src="/images/services/email-design/hero-banner.avif"
           alt="Web Design Hero"
           fill
           layout="fill"
@@ -55,9 +55,12 @@ export default function WebDesignHero() {
           <p className="uppercase tracking-widest text-lg font-medium">
             Creative Services
           </p>
-          <h1 className="text-5xl md:text-6xl w-full block font-bold mt-2">Web Design</h1>
+          <h1 className="text-5xl md:text-6xl w-full block font-bold mt-2">Email Design Services</h1>
           <p className="mt-4 text-lg text-gray-200">
-          Get email designs, templates, and creative to capture your audience’s attention. Invigorate your communications and get access to a fully-stacked team of designers to start bringing your email campaigns to life.
+            Our web design services combine creativity and strategy to deliver
+            stunning websites that meet your objectives. From concept to launch,
+            our experts craft tailored solutions to help your brand stand out
+            and drive results.
           </p>
           <Link href="/contact">
             <button className="mt-6 px-6 py-3 bg-lime-400 text-black text-lg font-semibold rounded-full hover:bg-lime-500 transition">
