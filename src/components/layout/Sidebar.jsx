@@ -319,7 +319,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             onClick={toggleSidebar}
             className="w-full block text-center py-3 rounded-full bg-secondary-500 text-primary-500 font-semibold"
           >
-            Book a Demo
+            Book a Call
           </Link>
           <Link
             href="/sign-in"
