@@ -48,8 +48,6 @@ const ServicesMegaMenu = ({color}) => {
       items: [
         { name: "Blog Writing", description: "SEO-friendly blogs tailored to your niche.", icon: <FaPenFancy /> },
         { name: "Ghost Writing", description: "Captivating content under your brand's name.", icon: <FaGhost /> },
-        // { name: "Website Copywriting", description: "Persuasive copy that drives engagement.", icon: <FaFileAlt /> },
-        // { name: "Product Descriptions", description: "Sell more with attention-grabbing descriptions.", icon: <FaTags /> },
       ],
     },
  
@@ -59,9 +57,7 @@ const ServicesMegaMenu = ({color}) => {
       color: "bg-lime-200 text-lime-900",
       items: [
         { name: "Social Media Creatives", description: "Engaging assets for all platforms.", icon: <FaFacebook /> },
-        // { name: "Email Creation", description: "Compelling email designs that drive action.", icon: <FaEnvelopeOpenText /> },
         { name: "Presentation Design", description: "Pitch-perfect presentations for your business needs.", icon: <FaSlideshare /> },
-        // { name: "Logo Design", description: "Memorable logos that define your brand.", icon: <FaPaintBrush /> },
         { name: "Brochure Design", description: "Informative and visually stunning brochures.", icon: <FaFilePdf /> },
       ],
     },
@@ -92,7 +88,7 @@ const ServicesMegaMenu = ({color}) => {
       </Link>
       <ul className="mt-4 space-y-2">
         {category.items.map((item, idx) => (
-          <a onClick={()=>{setIsOpen(false)}} href={`/services/${item.name.toLowerCase().replace(" ", "-")}`} key={idx} className="flex group px-3 py-2 border-b items-center justify-between gap-3">
+          <Link onClick={()=>{setIsOpen(false)}} href={`/services/${item.name.toLowerCase().replace(" ", "-")}`} key={idx} className="flex group px-3 py-2 border-b items-center justify-between gap-3">
             <div className="flex items-center justify-between gap-3">
               <div>
                 <h4 className="text-md font-medium text-gray-700 flex items-center">
@@ -103,7 +99,7 @@ const ServicesMegaMenu = ({color}) => {
               </div>
             </div>
             <div className="text-gray-700 text-lg self-center">{item.icon}</div>
-          </a>
+          </Link>
         ))}
       </ul>
     </div>

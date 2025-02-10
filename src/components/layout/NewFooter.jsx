@@ -11,44 +11,43 @@ export default function NewFooter() {
   const [navigationOpen, setNavigationOpen] = useState(false);
   
   const footerData = {
-    services: {
+  services:  { 
       heading: "Services",
       items: [
         {
-          title: "Creative design services",
+          title: "Website Services",
           links: [
-            { title: "Ad creative", link: "/ad-creative" },
-            { title: "Social media creative", link: "/social-media-creative" },
-            { title: "Presentation design", link: "/presentation-design" },
-            { title: "Illustration design", link: "/illustration-design" },
-            { title: "Branding services", link: "/branding-services" },
-            { title: "Email creation", link: "/email-creation" },
-            { title: "Web design", link: "/web-design" },
-            { title: "eBooks & report design", link: "/ebooks-report-design" },
-            { title: "Concept creation", link: "/concept-creation" },
-            { title: "Print design", link: "/print-design" },
-            { title: "Packaging & merchandise design", link: "/packaging-merchandise-design" },
+            { title: "Website Design", link: "/services/website-design" },
+            { title: "Landing Pages", link: "/services/landing-pages" },
+            { title: "SEO Optimization", link: "/services/seo-optimization" },
+            { title: "GMB Optimization", link: "/services/gmb-optimization" },
+            { title: "Local SEO", link: "/services/local-seo" },
+            { title: "Email Design", link: "/services/email-design" },
           ],
         },
         {
-          title: "Specialized production services",
+          title: "Marketing Services",
           links: [
-            { title: "Video production", link: "/video-production" },
-            { title: "Motion design", link: "/motion-design" },
-            { title: "3D & AR design", link: "/3d-ar-design" },
+            { title: "Marketing Strategy", link: "/services/marketing-strategy" },
+            { title: "Email Campaigns", link: "/services/email-campaigns" },
+            { title: "Google Ads", link: "/services/google-ads" },
+            { title: "Meta Ads", link: "/services/meta-ads" },
+            { title: "Influencer Marketing", link: "/services/influencer-marketing" },
           ],
         },
         {
-          title: "AI Services",
+          title: "Content Writing",
           links: [
-            { title: "AI enhanced creative", link: "/ai-enhanced-creative" },
-            { title: "AI consulting", link: "/ai-consulting" },
+            { title: "Blog Writing", link: "/services/blog-writing" },
+            { title: "Ghost Writing", link: "/services/ghost-writing" },
           ],
         },
         {
-          title: "Marketing services",
+          title: "Creative Design Services",
           links: [
-            { title: "Marketing strategy", link: "/marketing-strategy" },
+            { title: "Social Media Creatives", link: "/services/social-media-creatives" },
+            { title: "Presentation Design", link: "/services/presentation-design" },
+            { title: "Brochure Design", link: "/services/brochure-design" },
           ],
         },
       ],
@@ -64,7 +63,6 @@ export default function NewFooter() {
               { title: "Our people", link: "/our-people" },
               { title: "About Us", link: "/about-us" },
               { title: "Pricing", link: "/pricing" },
-              { title: "Careers", link: "/careers" },
             ],
           },
           {
