@@ -29,7 +29,7 @@ export default function NewFooter() {
           title: "Marketing Services",
           links: [
             { title: "Marketing Strategy", link: "/services/marketing-strategy" },
-            { title: "Email Campaigns", link: "/services/email-campaigns" },
+            { title: "Email Campaigns", link: "/services/email-campaign" },
             { title: "Google Ads", link: "/services/google-ads" },
             { title: "Meta Ads", link: "/services/meta-ads" },
             { title: "Influencer Marketing", link: "/services/influencer-marketing" },

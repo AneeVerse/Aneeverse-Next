@@ -1,54 +1,51 @@
 import TestimonialSlider from '@/components/about/TestimonialSlider'
 import SlidingLogos from '@/components/home/SlidingLogos'
 import CommonServicesOurWorks from '@/components/services/common/CommonServicesOurWorks'
-import MetaAdsCreativeServices from '@/components/services/meta-ads/MetaAdsCreativeServices'
-import MetaAdsFAQSection from '@/components/services/meta-ads/MetaAdsFAQSection'
-import MetaAdsHero from '@/components/services/meta-ads/MetaAdsHero'
-import MetaAdsStateSection from '@/components/services/meta-ads/MetaAdsStateSection'
-import MetaAdsSupportSection from '@/components/services/meta-ads/MetaAdsSupportSection'
+import SocialMediaCreativeServices from '@/components/services/social-media-creatives/SocialMediaCreativeServices'
+import SocialMediaFAQSection from '@/components/services/social-media-creatives/SocialMediaFAQSection'
+import SocialMediaHero from '@/components/services/social-media-creatives/SocialMediaHero'
+import SocialMediaStateSection from '@/components/services/social-media-creatives/SocialMediaStateSection'
+import SocialMediaSupportSection from '@/components/services/social-media-creatives/SocialMediaSupportSection'
 import React from 'react'
-
 
 
 
 // metadata
 export const metadata = {
-    title: "Meta Ads | Aneeverse",
+    title: "Social Media Creatives | Aneeverse",
     description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
     openGraph: {
-      title:  "Meta Ads | Aneeverse",
+      title:  "Social Media Creatives | Aneeverse",
       description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
-      url: `https://aneeverse.com/services/meta-ads`,
+      url: `https://aneeverse.com/services/social-media-creatives`,
       images: [
         {
           url: "/images/meta/phone.avif", // ✅ Dynamic Image
           width: 1200,
           height: 630,
-          alt:  "Meta Ads | Aneeverse",
+          alt:  "Social Media Creatives | Aneeverse",
         },
       ],
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
-      title:  "Meta Ads | Aneeverse",
+      title:  "Social Media Creatives | Aneeverse",
       description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
       image: "/images/meta/phone.avif",
     },
-}
-
-
+  }
 const page = () => {
   return (
     <div>
-        <MetaAdsHero    />
+        <SocialMediaHero />
         <SlidingLogos />
-        <MetaAdsSupportSection />
-        <MetaAdsCreativeServices    />
+        <SocialMediaSupportSection />
+        <SocialMediaCreativeServices />
         <CommonServicesOurWorks />
-        <MetaAdsStateSection />
-        <TestimonialSlider />
-        <MetaAdsFAQSection />
+        <SocialMediaStateSection />
+        <TestimonialSlider  />
+        <SocialMediaFAQSection />
       
     </div>
   )

@@ -114,7 +114,7 @@ const ServicesMegaMenu = ({color}) => {
         </Link>
         <ul className="mt-4 space-y-2">
           {category.items.map((item, idx) => (
-            <a href={"/contact"} key={idx} className="flex group px-3 py-2 border-b items-center justify-between gap-3">
+            <Link onClick={()=>{setIsOpen(false)}} href={`/services/${item.name.toLowerCase().replaceAll(" ", "-")}`} key={idx} className="flex group px-3 py-2 border-b items-center justify-between gap-3">
               <div className="flex items-center justify-between gap-3">
                 <div>
                   <h4 className="text-md font-medium text-gray-700 flex items-center">
@@ -125,7 +125,7 @@ const ServicesMegaMenu = ({color}) => {
                 </div>
               </div>
               <div className="text-gray-700 text-lg self-center">{item.icon}</div>
-            </a>
+            </Link>
           ))}
         </ul>
       </div>
