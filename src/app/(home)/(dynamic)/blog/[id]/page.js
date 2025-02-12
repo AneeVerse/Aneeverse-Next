@@ -135,7 +135,7 @@ export default function BlogDetail({ params }) {
 
               {/* Table of Contents */}
               <div className="py-3">
-          <h4 className="font-semibold mb-4">In this article</h4>
+          <h4 className=" text-sm font-semibold mb-4 uppercase">In this article</h4>
           <ul className="space-y-3">
             {post.content.map((section, index) => (
               <li key={index}>

@@ -58,7 +58,7 @@ const ResourcesMegaMenu = ({ color }) => {
     },
     {
       title: "Customer Stories",
-      link: "#",
+      link: "/customer-stories",
       cards: [
         {
           title:
