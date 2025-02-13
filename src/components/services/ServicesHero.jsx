@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Layout from "../common/Layout";
 
 export default function ServicesHero() {
@@ -28,9 +29,9 @@ export default function ServicesHero() {
           </p>
   
           {/* Call to Action Button */}
-          <button className="mt-8 px-6 py-3 bg-[#D8FF85] text-black font-semibold rounded-full text-md hover:bg-[#b1d75f] transition">
+          <Link href={"/contact"} className="mt-8 inline-block px-6 py-3 bg-[#D8FF85] text-black font-semibold rounded-full text-md hover:bg-[#b1d75f] transition">
             BOOK A CALL
-          </button>
+          </Link>
         </Layout>
       </section>
     );

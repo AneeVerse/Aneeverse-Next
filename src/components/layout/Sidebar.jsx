@@ -62,8 +62,8 @@ const menuCategories = [
 // Resources Data
 const resources = [
   {
-    title: "Learning Center",
-    link: "/learning-center",
+    title: "",
+    link: "#",
     items: [
       {
         name: "Events & Summits",
@@ -271,13 +271,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               <div className="grid grid-cols-1 gap-6 px-2 max-w-6xl mx-auto py-2">
                 {resources.map((resource, index) => (
                   <div key={index}>
-                    <Link href={resource.link} className="text-lg hover:underline font-bold inline-flex flex-row min-w-fit items-center gap-2">
+                    <Link href={resource.link}  onClick={toggleSidebar}  className={`${index == 0 ? "hidden " : "inline-flex "} text-lg hover:underline font-bold flex-row min-w-fit items-center gap-2`}>
                       <span>{resource.title}</span> <FiArrowUpRight />
                     </Link>
-                    <div className="mt-4 space-y-4">
+                    <div className={`${index == 0 ? " mt-0 " : " mt-4 "} space-y-4`}>
                       {resource.items &&
                         resource.items.map((item, idx) => (
-                          <Link href={item.link} key={idx} className="flex items-start justify-between gap-3">
+                          <Link href={item.link} key={idx}  onClick={toggleSidebar}  className="flex items-start justify-between gap-3">
                             <div>
                               <h4 className="text-md font-medium text-gray-700">{item.name}</h4>
                               <p className="text-sm text-gray-500">{item.description}</p>
@@ -287,7 +287,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                         ))}
                       {resource.cards &&
                         resource.cards.map((card, idx) => (
-                          <Link href={card.link} key={idx} className="flex flex-row gap-3">
+                          <Link href={card.link}  onClick={toggleSidebar}  key={idx} className="flex flex-row gap-3">
                             <img
                               src={card.image}
                               alt={card.title}
@@ -307,9 +307,6 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         {/* Additional Links */}
         <Link href="/pricing" onClick={toggleSidebar} className="py-3 block cursor-pointer">
           Pricing
-        </Link>
-        <Link href="/about" onClick={toggleSidebar} className="py-3 block cursor-pointer">
-          About Us
         </Link>
 
         {/* Action Buttons */}

@@ -1,5 +1,6 @@
 
   "use client";
+import Link from "next/link";
 import Layout from "../common/Layout";
 import { useEffect, useState, useRef } from "react";
 
@@ -80,9 +81,9 @@ make it happen.
             See us as an extension of your team, freeing you to focus on your
             most impactful and creative work.
           </p> */}
-            <button className="px-6 py-3 bg-secondary-500 text-primary-500 font-semibold text-md rounded-full  transition">
-              Book a Demo
-            </button>
+            <Link href={"/contact"} className="px-6 py-3 bg-secondary-500 inline-block text-primary-500 font-semibold text-md rounded-full  transition">
+              Book a Call
+            </Link>
         </div>
 
         {/* Right Video Section */}

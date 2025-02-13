@@ -5,7 +5,8 @@ const getStoryPost = (id) => customerStories.find((story) => story.id === id);
 
 // ✅ Generate Dynamic Metadata
 export async function generateMetadata({ params }) {
-  const post = getStoryPost(params.id);
+  const {id} = await params;
+  const post = getStoryPost(id);
   if (!post) return { title: "Customer Stories Not Found - Aneeverse", description: "This Customer Stories post does not exist." };
 
   return {

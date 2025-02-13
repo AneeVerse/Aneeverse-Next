@@ -81,7 +81,7 @@ const ContactUsPage = () => {
                 <FaEnvelope className=" mr-4" /> aneeverse@gmail.com
   </Link>
               <p className="flex items-center text-lg ">
-                <FaMapMarkerAlt className=" mr-4" /> Office No. 03, Plot No. 45, near HP Petrol Pump, Seawoods West, Sector 44, Seawoods, Navi Mumbai, Maharashtra 400706
+                <FaMapMarkerAlt className=" min-w-fit mr-4" /> Office No. 03, Plot No. 45, near HP Petrol Pump, Seawoods West, Sector 44, Seawoods, Navi Mumbai, Maharashtra 400706
               </p>
             </div>
 

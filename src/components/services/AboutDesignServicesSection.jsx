@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Layout from "../common/Layout";
+import Link from "next/link";
 
 export default function AboutDesignServicesSection() {
   return (
@@ -25,9 +26,9 @@ export default function AboutDesignServicesSection() {
           <p className="text-gray-400 mb-6">
             We are a tech-enabled company, developing its own proprietary software to brief, manage, and coordinate a high-volume of design projects, making it possible to keep pace with teams at Amazon, Puma, Facebook, and more. Learn how we can revolutionize the way your organization gets design work done. Book a call today.
           </p>
-          <button className="bg-lime-400 text-black px-6 py-2 rounded-full font-medium hover:bg-lime-500 transition">
+          <Link href={"/contact"} className="bg-lime-400 text-black px-6 py-2 rounded-full inline-block font-medium hover:bg-lime-500 transition">
             Book a call
-          </button>
+          </Link>
         </div>
       </div>
       </Layout>

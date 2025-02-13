@@ -59,8 +59,8 @@ export default function NewFooter() {
           {
             title: "main",
             links: [
-              { title: "Our Work", link: "/our-work" },
-              { title: "Our people", link: "/our-people" },
+              { title: "Our Work", link: "/works" },
+              { title: "Our people", link: "/our-team" },
               { title: "About Us", link: "/about-us" },
               { title: "Pricing", link: "/pricing" },
             ],

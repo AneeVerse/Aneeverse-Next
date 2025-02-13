@@ -7,18 +7,18 @@ const pricingData = {
   title: "A subscription built to",
   subtitle: "fuel your growth",
   leftBox: {
-    badge: "STARTING AT ₹6,000 PER MONTH",
+    badge: "FLEXIBLE MONTHLY PLANS AVAILABLE.",
     heading: "Flexible plans for every business",
     description:
       "From basic asset production and motion graphics to video ads and brand strategy, a aneeverse subscription lets you choose how you want to use your budget every month based on your business needs.",
-    note: "Typical subscriptions range from ₹6,000 to ₹100,000 Rupees/month.",
+    note: "Subscriptions are offered in a variety of plans to suit your needs.",
     buttonText: "Book a call",
   },
   rightBox: {
     title: "Included in",
     italicText: "all plans",
     description: "Access to all creative services.",
-    subNote: "(based on available dollars in monthly subscription)",
+    subNote: "(Subscription options are available in various tiers, based on your needs.)",
     features: [
       "Dedicated creative project manager and customer success",
       "Turnaround times starting at 12 hours",
@@ -50,7 +50,7 @@ export default function PricingComponent() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left Box */}
         <div className="bg-[#2A4E45] text-white p-8 rounded-lg flex flex-col justify-between">
-          <span className="text-sm bg-white text-[#2A4E45] px-3 py-1 rounded-full uppercase tracking-wide font-semibold w-max">
+          <span className=" text-[11px] sm:text-sm bg-white text-[#2A4E45] px-3 py-1 rounded-full uppercase tracking-wide font-semibold max-w-fit ">
             {pricingData.leftBox.badge}
           </span>
           <h4 className="text-3xl font-semibold mt-4">

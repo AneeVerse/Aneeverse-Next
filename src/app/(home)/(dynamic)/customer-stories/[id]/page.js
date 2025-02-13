@@ -19,6 +19,13 @@ export default function CustomerStoryDetail({ params }) {
   const sectionRefs = useRef([]);
   const observer = useRef(null);
 
+  const [isBrowser, setIsBrowser] = useState(false);
+
+  useEffect(() => {
+    // Check if window is defined
+    setIsBrowser(typeof window !== "undefined");
+  }, []);
+
   useEffect(() => {
     if (observer.current) {
       sectionRefs.current.forEach((section) => section && observer.current.unobserve(section));
@@ -146,7 +153,7 @@ export default function CustomerStoryDetail({ params }) {
               </div>
 
                {/* ✅ Social Media Share */}
-        <div className="flex flex-col pb-3  gap-4">
+               {isBrowser && (    <div className="flex flex-col pb-3  gap-4">
           <p className="text-sm font-semibold uppercase">Share this Article:</p>
           <div className="flex items-center gap-4">
           <Link href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`} target="_blank" className="text-secondary-500 hover:text-blue-800">
@@ -163,6 +170,7 @@ export default function CustomerStoryDetail({ params }) {
           </Link>
         </div>
         </div>
+               )}
         <SidebarCallToAction />
             </div>
           </aside>
