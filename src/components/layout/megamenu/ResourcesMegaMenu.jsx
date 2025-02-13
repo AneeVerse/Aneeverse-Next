@@ -6,6 +6,8 @@ import {
   HiOutlineBookOpen,
   HiOutlinePlay,
   HiOutlineClipboardList,
+  HiOutlinePencilAlt,
+  HiOutlineUserGroup,
 } from "react-icons/hi";
 import { FaChevronDown } from "react-icons/fa6";
 import Layout from "@/components/common/Layout";
@@ -20,25 +22,29 @@ const ResourcesMegaMenu = ({ color }) => {
       link: "#",
       items: [
         {
-          name: "Events & Summits",
-          description: "Our upcoming events and recordings",
-          icon: <HiOutlineClipboardList />,
+          name: "Blog",
+          link: "/blog",
+          description: "Latest articles and insights",
+          icon: <HiOutlinePencilAlt />,
+        },
+        {
+          name: "Customer Stories",
+          link: "/customer-stories",
+          description: "Success stories from our clients",
+          icon: <HiOutlineUserGroup />,
         },
         {
           name: "Guides & Quizzes",
+          link: "/guides-quizzes",
           description: "Insights from marketing leaders",
           icon: <HiOutlineBookOpen />,
         },
         {
           name: "Video Library",
-          description: "aneeverse's latest videos",
+          link: "/video-library",
+          description: "Aneeverse's latest videos",
           icon: <HiOutlinePlay />,
-        },
-        {
-          name: "Playbooks",
-          description: "Quick ways to step up your game",
-          icon: <HiOutlineBookOpen />,
-        },
+        }
       ],
     },
     {
@@ -101,12 +107,19 @@ const ResourcesMegaMenu = ({ color }) => {
       </button>
       {isOpen && (
         <motion.div
-          className="absolute left-0 w-full top-[60px]  pt-5 z-40"
+          className="fixed h-screen inset-0 w-full top-[60px]  pt-5 z-40"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
           exit={{ opacity: 0, y: -10 }}
         >
-          <div className="bg-[#EBFAFE] shadow-lg  border border-gray-200 ">
+          <div className="backdrop-blur-[2px] h-full w-full">
+          <motion.div
+              onMouseLeave={() => {
+                setIsOpen(false);
+              }}
+          
+          className="bg-[#EBFAFE] shadow-lg  border border-gray-200 ">
             <Layout>
               <div className="grid grid-cols-3 gap-6 py-8">
                 {/* Learning Center */}
@@ -114,7 +127,9 @@ const ResourcesMegaMenu = ({ color }) => {
                  
                   <ul className="mt-12  space-y-4">
                     {resources[0].items.map((item, idx) => (
-                      <li key={idx} className="flex cursor-pointer border-b pb-3 items-start group justify-between gap-3">
+                      <li key={idx}>
+                        <Link href={item.link} onClick={()=>{setIsOpen(false)}} 
+                       className="flex cursor-pointer border-b pb-3 items-start group justify-between gap-3">
                         <div>
                           <h4 className="text-md flex items-center font-medium text-gray-700">
                            <span className="h-[5px] bg-secondary-500 w-[5px] inline-block transition-all  duration-300 scale-0 group-hover:scale-100 rounded-full"></span> <span className=" ml-[-5px] group-hover:ml-[6px]  transition-all duration-300">{item.name}</span>
@@ -124,6 +139,7 @@ const ResourcesMegaMenu = ({ color }) => {
                           </p>
                         </div>
                         <div className="text-gray-700 text-xl">{item.icon}</div>
+                      </Link>
                       </li>
                     ))}
                   </ul>
@@ -174,6 +190,7 @@ const ResourcesMegaMenu = ({ color }) => {
                 </div>
               </div>
             </Layout>
+          </motion.div>
           </div>
         </motion.div>
       )}

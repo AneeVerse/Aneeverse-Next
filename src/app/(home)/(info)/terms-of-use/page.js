@@ -76,7 +76,7 @@ const TermsOfUse = () => {
             If you have any questions or concerns about these Terms, please contact us at:
           </p>
           <p className="text-lg text-gray-700 mb-4">
-            <strong>Email:</strong> aneeverse@gmail.com
+            <strong>Email:</strong> support@aneeverse.com
           </p>
           <p className="text-lg text-gray-700 mb-4">
             <strong>Phone:</strong> +91 91527 55529

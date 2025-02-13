@@ -97,7 +97,7 @@ const PrivacyPolicy = () => {
             your personal information, please contact us:
           </p>
           <p className="text-lg text-gray-700 mb-4">
-            <strong>Email:</strong> aneeverse@gmail.com
+            <strong>Email:</strong> support@aneeverse.com
           </p>
           <p className="text-lg text-gray-700 mb-4">
             <strong>Phone:</strong> +91 91527 55529

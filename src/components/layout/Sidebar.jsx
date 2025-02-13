@@ -3,7 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaTimes, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { FiArrowUpRight } from "react-icons/fi";
-import { HiOutlineBookOpen, HiOutlinePlay, HiOutlineClipboardList } from "react-icons/hi";
+import { HiOutlineBookOpen, HiOutlinePlay, HiOutlineClipboardList, HiOutlinePencilAlt, HiOutlineUserGroup } from "react-icons/hi";
 import { FaDesktop, FaPager, FaSearch, FaMapMarkerAlt, FaLocationArrow } from "react-icons/fa";
 import { FaPenFancy, FaGhost, FaFileAlt, FaTags } from "react-icons/fa";
 import { FaChartPie, FaEnvelope, FaGoogle, FaFacebook, FaUserFriends } from "react-icons/fa";
@@ -66,29 +66,29 @@ const resources = [
     link: "#",
     items: [
       {
-        name: "Events & Summits",
-        description: "Our upcoming events and recordings",
-        icon: <HiOutlineClipboardList />,
-        link: "/learning-center/events",
-      },
-      {
-        name: "Guides & Quizzes",
-        description: "Insights from marketing leaders",
-        icon: <HiOutlineBookOpen />,
-        link: "/learning-center/guides",
-      },
-      {
-        name: "Video Library",
-        description: "aneeverse's latest videos",
-        icon: <HiOutlinePlay />,
-        link: "/learning-center/videos",
-      },
-      {
-        name: "Playbooks",
-        description: "Quick ways to step up your game",
-        icon: <HiOutlineBookOpen />,
-        link: "/learning-center/playbooks",
-      },
+               name: "Blog",
+               link: "/blog",
+               description: "Latest articles and insights",
+               icon: <HiOutlinePencilAlt />,
+             },
+             {
+               name: "Customer Stories",
+               link: "/customer-stories",
+               description: "Success stories from our clients",
+               icon: <HiOutlineUserGroup />,
+             },
+             {
+               name: "Guides & Quizzes",
+               link: "/guides-quizzes",
+               description: "Insights from marketing leaders",
+               icon: <HiOutlineBookOpen />,
+             },
+             {
+               name: "Video Library",
+               link: "/video-library",
+               description: "Aneeverse's latest videos",
+               icon: <HiOutlinePlay />,
+             }
     ],
   },
   {
