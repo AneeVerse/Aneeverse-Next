@@ -34,7 +34,7 @@ export default function SeoHero() {
   return (
     <div className="relative -mt-[80px] text-white overflow-hidden">
       {/* ✅ Hero Section */}
-      <div className="relative w-full h-[90vh] sm:h-[70vh] flex items-center">
+      <div className="relative w-full h-[90vh]  sm:min-h-[500px] sm:h-[75vh] flex items-center">
         {/* Background Image */}
         <Image
           src="/images/services/google-ads/hero-banner.avif"

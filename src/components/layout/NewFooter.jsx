@@ -69,8 +69,7 @@ export default function NewFooter() {
             title: "learn",
             links: [
               { title: "Blog", link: "/blog" },
-              { title: "Events & Summits", link: "/events-summits" },
-              { title: "Guides & Reports", link: "/guides-reports" },
+              { title: "Guides & Reports", link: "/guides-quizzes" },
               { title: "Customer Stories", link: "/customer-stories" },
               { title: "Video Library", link: "/video-library" },
               { title: "Playbooks", link: "/playbooks" },
@@ -242,7 +241,7 @@ export default function NewFooter() {
               className="border border-gray-200 rounded-full p-2">
               <FaLinkedinIn className="text-xl cursor-pointer hover:text-[#c9c9c9]"/>
               </Link>
-              <Link href="#" target="_blank" 
+              <Link href="https://www.youtube.com/@AneeVerse" target="_blank" 
               className="border border-gray-200 rounded-full p-2">
               <FaYoutube className="text-xl cursor-pointer hover:text-[#c9c9c9]"/>
               </Link>

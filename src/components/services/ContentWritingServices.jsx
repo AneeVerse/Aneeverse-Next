@@ -5,25 +5,18 @@ import Layout from "../common/Layout";
 export default function ContentWritingServices() {
   const creativeServices = [
     {
-      title: "Brochure Design",
+      title: "Blog Writing",
       description:
-        "Create compelling brochures that showcase your offerings in a polished and eye-catching format.",
+        "SEO-friendly blogs tailored to your niche. Engage your audience with informative and engaging content.",
       imgUrl: "/images/services/creative/borchore.png",
-      pageUrl: "/services/brochure-design",
+      pageUrl: "/services/blog-writing",
     },
-    // {
-    //   title: "Social Media Creatives",
-    //   description:
-    //     "Engage your audience with visually striking social media posts and short videos tailored to your brand.",
-    //     imgUrl: "/images/services/creative/social-media-creative.png",
-    //   pageUrl: "/services/social-media-creatives",
-    // },
     {
-      title: "Presentation Design",
+      title: "Ghost Writing",
       description:
-        "Elevate your business pitches with professional, visually appealing presentation designs.",
+        "Captivating content under your brand's name. Let our expert writers craft compelling content for your brand.",
         imgUrl: "/images/services/creative/presentation-design.png",
-      pageUrl: "/services/presentation-design",
+      pageUrl: "/services/ghost-writing",
     },
   ];
 
@@ -39,7 +32,8 @@ export default function ContentWritingServices() {
         {/* Grid */}
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 auto-rows-fr">
           {creativeServices.map((service, index) => (
-            <div
+            <Link
+            href={service.pageUrl}
               key={index}
               className={`group relative h-[250px] sm:h-[370px] lg:h-[420px] rounded-2xl overflow-hidden `}
             >
@@ -61,13 +55,12 @@ export default function ContentWritingServices() {
                   {service.description}
                 </p>
               </div>
-              <Link
-                href={service.pageUrl}
-                className="text-[#F7F9F2] absolute bottom-3 left-6 font-medium text-sm flex items-center gap-2 hover:underline"
+              <div
+                className="text-[#F7F9F2] absolute bottom-3 left-6 font-medium text-sm flex items-center gap-2 group-hover:underline"
               >
                <span> Learn more </span> <MdOutlineArrowOutward  className="self-center"/>
-              </Link>
-            </div>
+              </div>
+            </Link>
           ))}
         </div>
       </Layout>

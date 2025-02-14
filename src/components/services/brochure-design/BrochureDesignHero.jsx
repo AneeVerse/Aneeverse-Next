@@ -34,7 +34,7 @@ export default function BrochureDesignHero() {
   return (
     <div className="relative -mt-[80px] text-white overflow-hidden">
       {/* ✅ Hero Section */}
-      <div className="relative w-full h-[90vh] sm:h-[70vh] flex items-center">
+      <div className="relative w-full h-[90vh]  sm:min-h-[500px] sm:h-[75vh] flex items-center">
         {/* Background Image */}
         <Image
           src="/images/services/brochure-design/hero-banner.avif"
@@ -55,7 +55,7 @@ export default function BrochureDesignHero() {
           <p className="uppercase tracking-widest text-lg font-medium">
           {"Creative Brochure Designs".toUpperCase()}
           </p>
-          <h1 className="text-5xl md:text-6xl w-full block font-bold mt-2">Borchure Design Services
+          <h1 className="text-5xl md:text-6xl w-full block font-bold mt-2">Brochure Design Services
           </h1>
           <p className="mt-4 text-lg text-gray-200">
           From concept to completion, we create brochures that effectively communicate your brand story.

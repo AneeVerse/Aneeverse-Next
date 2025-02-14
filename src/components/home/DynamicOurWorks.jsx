@@ -73,7 +73,7 @@ const DynamicOurWorks = () => {
         </p>
         <h2 className="text-4xl font-bold text-gray-800 mt-2">
           {"See Our"}{" "}
-          <span className="text-orange-500 text-2xl font-Rock_Salt">{"Top Works"}</span>
+          <span className="text-orange-500 text-2xl whitespace-nowrap font-Rock_Salt">{"Top Works"}</span>
         </h2>
       </div>
         <Link href={"/works"} className="mt-4 min-w-fit px-6 py-2 border border-black rounded-full hover:bg-gray-800 hover:text-white transition">

@@ -48,8 +48,8 @@ const ContactUsPage = () => {
           <h2 className="text-3xl font-bold text-center mb-4  sm:mb-8">Schedule a Discovery Call
           </h2><p className="text-xl mb-4 text-center font-normal">
   Schedule a call below or email{" "}
-  <Link href="mailto:support@aneeverse.com" className='inline-block'>
-    <span className="text-blue-600">support@aneeverse.com</span>
+  <Link href="mailto:team@aneeverse.com" className='inline-block'>
+    <span className="text-blue-600">team@aneeverse.com</span>
   </Link>{" "}
   or  {" "}
   {/* send message to whatsapp */}
@@ -82,8 +82,8 @@ const ContactUsPage = () => {
               <Link href={"tel:+91 91527 55529"} className="flex items-center text-lg ">
                 <FaPhone className="  mr-4" /> +91 91527 55529
               </Link>
-              <Link href="mailto:support@aneeverse.com"  className="flex items-center text-lg  ">
-                <FaEnvelope className=" mr-4" /> support@aneeverse.com
+              <Link href="mailto:team@aneeverse.com"  className="flex items-center text-lg  ">
+                <FaEnvelope className=" mr-4" /> team@aneeverse.com
   </Link>
               <p className="flex items-center text-lg ">
                 <FaMapMarkerAlt className=" min-w-fit mr-4" /> Office No. 03, Plot No. 45, near HP Petrol Pump, Seawoods West, Sector 44, Seawoods, Navi Mumbai, Maharashtra 400706
@@ -92,18 +92,18 @@ const ContactUsPage = () => {
 
             {/* Social Media Links */}
             <div className="flex space-x-6">
-              <a href="#" className="  ">
+              <a href="#" target='_blank' className="  ">
                 <FaFacebookF size={24} />
               </a>
-              <a href="#" className="">
+              <a href="#" target='_blank' className="">
                 <FaTwitter size={24} />
               </a>
-              <a href="#" className="  ">
+              <a href="https://www.instagram.com/aneeverse/" target='_blank' className="  ">
                 <FaInstagram size={24} />
               </a>
-              <a href="#" className=" ">
+              <Link  href="https://www.linkedin.com/company/aneeverse" target='_blank' className=" ">
                 <FaLinkedinIn size={24} />
-              </a>
+              </Link>
             </div>
           </div>
 

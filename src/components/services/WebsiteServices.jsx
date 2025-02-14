@@ -17,7 +17,7 @@ export default function WebsiteServices() {
       description:
         "Design high-converting landing pages tailored to campaigns or product launches for maximum engagement.",
       imgUrl: "/images/services/website/landing-page.png",
-      pageUrl: "/services/landing-page",
+      pageUrl: "/services/landing-pages",
     },
     {
       title: "GMB Optimization",
@@ -61,9 +61,10 @@ export default function WebsiteServices() {
         {/* Grid */}
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
           {services.map((service, index) => (
-            <div
-              key={index}
-              className={`group  relative rounded-2xl overflow-hidden ${
+            <Link
+              key={index}              
+              href={service.pageUrl}
+              className={`group block h-[250px] sm:h-[370px] lg:h-auto  relative rounded-2xl overflow-hidden ${
                 index === 0 || index === services.length - 1
                   ? "lg:col-span-2"
                   : index === 1
@@ -89,13 +90,12 @@ export default function WebsiteServices() {
                   {service.description}
                 </p>
               </div>
-              <Link
-                href={service.pageUrl}
-                className="text-[#F7F9F2] absolute bottom-3 left-6 font-medium text-sm flex items-center gap-2 hover:underline"
+              <div
+                className="text-[#F7F9F2] absolute bottom-3 left-6 font-medium text-sm flex items-center gap-2 group-hover:underline"
               >
                <span> Learn more </span> <MdOutlineArrowOutward  className="self-center"/>
-              </Link>
-            </div>
+              </div>
+            </Link>
           ))}
         </div>
       </Layout>

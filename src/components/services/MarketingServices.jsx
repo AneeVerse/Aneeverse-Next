@@ -6,47 +6,41 @@ import Layout from "../common/Layout";
 export default function WebsiteServices() {
   const services = [
     {
-      title: "Website Design",
+      title: "Marketing Strategy",
       description:
-        "Create stunning, responsive websites with a focus on user-friendly UI/UX to represent your brand effectively.",
-      imgUrl: "/images/services/website/website-design.png",
-      pageUrl: "/services/website-design",
+        "Grow your brand with expert consultants. Develop a comprehensive marketing strategy to reach your goals.",
+      imgUrl: "/images/services/marketing-strategy/hero-banner.avif",
+      pageUrl: "/services/marketing-strategy",
     },
     {
-      title: "Landing Page",
+      title: "Email Campaign",
       description:
-        "Design high-converting landing pages tailored to campaigns or product launches for maximum engagement.",
+        "Personalized email campaigns that convert. Engage your audience with targeted email campaigns.",
       imgUrl: "/images/services/website/landing-page.png",
-      pageUrl: "/services/landing-page",
+      pageUrl: "/services/email-campaign",
     },
     {
-      title: "GMB Optimization",
+      title: "Google Ads",
       description:
-        "Enhance your Google My Business profile to attract more local customers and improve search visibility.",
+        "Targeted ads to maximize ROI. Reach your audience with Google Ads campaigns that drive results.",
       imgUrl: "/images/services/website/gmb-optimization.png",
-      pageUrl: "/services/gmb-optimization",
+      pageUrl: "/services/google-ads",
     },
     {
-      title: "SEO Optimization",
+      title: "Meta Ads",
       description:
-        "Boost your website's visibility and rankings with expert keyword optimization and technical SEO strategies.",
+        "Creative campaigns that get noticed. Stand out with creative Meta Ads campaigns that drive engagement.",
       imgUrl: "/images/services/website/seo-optimization.png",
-      pageUrl: "/services/seo-optimization",
+      pageUrl: "/services/meta-ads",
     },
     {
-      title: "Email Design",
+      title: "Influencer Marketing",
       description:
-        "Invigorate your communications with original email designs, templates, and creative campaigns.",
+        "Boost brand visibility with trusted influencers. Leverage influencer partnerships to grow your brand.",
       imgUrl: "/images/services/website/email-design.png",
-      pageUrl: "/services/email-design",
+      pageUrl: "/services/influencer-marketing",
     },
-    {
-      title: "Local SEO",
-      description:
-        "Drive local traffic to your business with targeted SEO strategies tailored for your location.",
-      imgUrl: "/images/services/website/local-seo.png",
-      pageUrl: "/services/local-seo",
-    },
+   
   ];
 
   return (
@@ -61,10 +55,11 @@ export default function WebsiteServices() {
         {/* Grid */}
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
           {services.map((service, index) => (
-            <div
-              key={index}
-              className={`group relative rounded-2xl overflow-hidden ${
-                index === 0 || index === services.length - 1
+            <Link
+              key={index}              
+              href={service.pageUrl}
+              className={`group relative  h-[250px] sm:h-[370px] lg:h-auto rounded-2xl overflow-hidden ${
+                index === 0 
                   ? "lg:col-span-2"
                   : index === 1
                   ? "lg:row-span-2"
@@ -89,13 +84,12 @@ export default function WebsiteServices() {
                   {service.description}
                 </p>
               </div>
-              <Link
-                href={service.pageUrl}
-                className="text-[#F7F9F2] absolute bottom-3 left-6 font-medium text-sm flex items-center gap-2 hover:underline"
+              <div
+                className="text-[#F7F9F2] absolute bottom-3 left-6 font-medium text-sm flex items-center gap-2 group-hover:underline"
               >
                <span> Learn more </span> <MdOutlineArrowOutward  className="self-center"/>
-              </Link>
-            </div>
+              </div>
+            </Link>
           ))}
         </div>
       </Layout>

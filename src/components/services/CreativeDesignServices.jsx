@@ -39,7 +39,8 @@ export default function CreativeDesignServices() {
         {/* Grid */}
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
           {creativeServices.map((service, index) => (
-            <div
+            <Link
+            href={service.pageUrl}
               key={index}
               className={`group relative rounded-2xl overflow-hidden `}
             >
@@ -61,13 +62,12 @@ export default function CreativeDesignServices() {
                   {service.description}
                 </p>
               </div>
-              <Link
-                href={service.pageUrl}
-                className="text-[#F7F9F2] absolute bottom-3 left-6 font-medium text-sm flex items-center gap-2 hover:underline"
+              <div
+                className="text-[#F7F9F2] absolute bottom-3 left-6 font-medium text-sm flex items-center gap-2 group-hover:underline"
               >
                <span> Learn more </span> <MdOutlineArrowOutward  className="self-center"/>
-              </Link>
-            </div>
+              </div>
+            </Link>
           ))}
         </div>
       </Layout>

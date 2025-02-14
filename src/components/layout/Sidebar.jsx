@@ -18,9 +18,9 @@ const menuCategories = [
     link: "/services#website-services",
     color: "bg-blue-200 text-blue-900",
     items: [
-      { name: "Website Design", description: "Stunning websites built to engage.", icon: <FaDesktop />, link: "/services/web-design" },
+      { name: "Website Design", description: "Stunning websites built to engage.", icon: <FaDesktop />, link: "/services/website-design" },
       { name: "Landing Pages", description: "High-converting pages for your campaigns.", icon: <FaPager />, link: "/services/landing-pages" },
-      { name: "SEO Optimization", description: "Boost your search rankings with expert SEO.", icon: <FaSearch />, link: "/services/seo" },
+      { name: "SEO Optimization", description: "Boost your search rankings with expert SEO.", icon: <FaSearch />, link: "/services/seo-optimization" },
       { name: "GMB Optimization", description: "Dominate local searches with GMB excellence.", icon: <FaMapMarkerAlt />, link: "/services/gmb-optimization" },
       { name: "Local SEO", description: "Reach your audience with targeted local SEO strategies.", icon: <FaLocationArrow />, link: "/services/local-seo" },
       { name: "Email Design", description: "Engaging email templates that convert.", icon: <FaEnvelopeOpenText />, link: "/services/email-design" },
@@ -227,7 +227,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <Link href="/about" onClick={toggleSidebar} className="flex items-center gap-3">
+              <Link href="/about-us" onClick={toggleSidebar} className="flex items-center gap-3">
                 <img
                   src="/images/blog1.avif"
                   alt="About"
@@ -238,7 +238,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                   <p className="text-sm">Our mission, goals & values</p>
                 </div>
               </Link>
-              <Link href="/team" onClick={toggleSidebar} className="flex items-center gap-3">
+              <Link href="/our-team" onClick={toggleSidebar} className="flex items-center gap-3">
                 <img
                   src="/images/blog2.avif"
                   alt="Our People"
@@ -319,7 +319,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             Book a Call
           </Link>
           <Link
-            href="/sign-in"
+            href="/login"
             onClick={toggleSidebar}
             className="w-full block text-center mt-3 py-3 rounded-full border border-secondary-500 text-secondary-500 font-semibold"
           >
