@@ -20,13 +20,6 @@ export default function WebsiteServices() {
       pageUrl: "/services/landing-pages",
     },
     {
-      title: "GMB Optimization",
-      description:
-        "Enhance your Google My Business profile to attract more local customers and improve search visibility.",
-      imgUrl: "/images/services/website/gmb-optimization.png",
-      pageUrl: "/services/gmb-optimization",
-    },
-    {
       title: "SEO Optimization",
       description:
         "Boost your website's visibility and rankings with expert keyword optimization and technical SEO strategies.",
@@ -34,18 +27,25 @@ export default function WebsiteServices() {
       pageUrl: "/services/seo-optimization",
     },
     {
-      title: "Email Design",
+      title: "GMB Optimization",
       description:
-        "Invigorate your communications with original email designs, templates, and creative campaigns.",
-      imgUrl: "/images/services/website/email-design.png",
-      pageUrl: "/services/email-design",
+        "Enhance your Google My Business profile to attract more local customers and improve search visibility.",
+      imgUrl: "/images/services/website/gmb-optimization.png",
+      pageUrl: "/services/gmb-optimization",
     },
     {
       title: "Local SEO",
       description:
         "Drive local traffic to your business with targeted SEO strategies tailored for your location.",
-      imgUrl: "/images/services/website/local-seo.png",
+      imgUrl: "/images/services/website/email-design.png",
       pageUrl: "/services/local-seo",
+    },
+    {
+      title: "Email Design",
+      description:
+        "Invigorate your communications with original email designs, templates, and creative campaigns.",
+      imgUrl: "/images/services/website/local-seo.png",
+      pageUrl: "/services/email-design",
     },
   ];
 

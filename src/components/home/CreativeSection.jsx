@@ -91,7 +91,7 @@ export default function CreativeSection() {
           </p>
           <h2 className="text-4xl font-bold text-gray-800 mt-2">
             {"EVERY TYPE OF CREATIVE WORK YOU'LL EVER NEED, "}
-            <span className="text-blue-600 whitespace-nowrap font-Rock_Salt">and more</span>
+            <span className="text-blue-600 text-3xl whitespace-nowrap font-Rock_Salt">and more</span>
           </h2>
         </div>
       </Layout>

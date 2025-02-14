@@ -58,11 +58,9 @@ export default function WebsiteServices() {
             <Link
               key={index}              
               href={service.pageUrl}
-              className={`group relative  h-[250px] sm:h-[370px] lg:h-auto rounded-2xl overflow-hidden ${
+              className={`group relative  h-[250px] sm:h-[370px] lg:h-auto lg:max-h-[420px] rounded-2xl overflow-hidden ${
                 index === 0 
                   ? "lg:col-span-2"
-                  : index === 1
-                  ? "lg:row-span-2"
                   : ""
               }`}
             >

@@ -35,7 +35,7 @@ const ResourcesMegaMenu = ({ color }) => {
         },
         {
           name: "Guides & Quizzes",
-          link: "/guides-quizzes",
+          link: "/blog",
           description: "Insights from marketing leaders",
           icon: <HiOutlineBookOpen />,
         },

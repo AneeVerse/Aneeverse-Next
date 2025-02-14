@@ -69,10 +69,9 @@ export default function NewFooter() {
             title: "learn",
             links: [
               { title: "Blog", link: "/blog" },
-              { title: "Guides & Reports", link: "/guides-quizzes" },
+              { title: "Guides & Reports", link: "/blog" },
               { title: "Customer Stories", link: "/customer-stories" },
               { title: "Video Library", link: "/video-library" },
-              { title: "Playbooks", link: "/playbooks" },
             ],
           },
         ],

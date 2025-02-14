@@ -5,13 +5,6 @@ import Layout from "../common/Layout";
 export default function CreativeDesignServices() {
   const creativeServices = [
     {
-      title: "Brochure Design",
-      description:
-        "Create compelling brochures that showcase your offerings in a polished and eye-catching format.",
-      imgUrl: "/images/services/creative/borchore.png",
-      pageUrl: "/services/brochure-design",
-    },
-    {
       title: "Social Media Creatives",
       description:
         "Engage your audience with visually striking social media posts and short videos tailored to your brand.",
@@ -24,6 +17,13 @@ export default function CreativeDesignServices() {
         "Elevate your business pitches with professional, visually appealing presentation designs.",
         imgUrl: "/images/services/creative/presentation-design.png",
       pageUrl: "/services/presentation-design",
+    },
+    {
+      title: "Brochure Design",
+      description:
+        "Create compelling brochures that showcase your offerings in a polished and eye-catching format.",
+      imgUrl: "/images/services/creative/borchore.png",
+      pageUrl: "/services/brochure-design",
     },
   ];
 
