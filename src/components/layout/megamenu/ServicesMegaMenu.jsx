@@ -18,7 +18,7 @@ const ServicesMegaMenu = ({color}) => {
     {
       title: "Website Services",
       url: "/services#website-services",
-      color: "bg-blue-200 text-blue-900",
+      color: "bg-indigo-100 hover:bg-indigo-200 text-indigo-900", 
       items: [
         { name: "Website Design", description: "Stunning websites built to engage.", icon: <FaDesktop />
          },
@@ -32,7 +32,7 @@ const ServicesMegaMenu = ({color}) => {
     {
       title: "Marketing Services",
       url: "/services#marketing-services",
-      color: "bg-yellow-200 text-blue-900",
+      color: "bg-amber-100 hover:bg-amber-200 text-amber-900", // Updated to warm amber
       items: [
         { name: "Marketing Strategy", description: "Grow your brand with expert consultants.", icon: <FaChartPie /> },
         { name: "Email Campaign", description: "Personalized email campaigns that convert.", icon: <FaEnvelope /> },
@@ -44,7 +44,7 @@ const ServicesMegaMenu = ({color}) => {
     {
       title: "Content Writing",
       url: "/services#content-writing",
-      color: "bg-green-200 text-green-900",
+      color: "bg-emerald-100 hover:bg-emerald-200 text-emerald-900", // Updated to deep emerald
       items: [
         { name: "Blog Writing", description: "SEO-friendly blogs tailored to your niche.", icon: <FaPenFancy /> },
         { name: "Ghost Writing", description: "Captivating content under your brand's name.", icon: <FaGhost /> },
@@ -54,7 +54,7 @@ const ServicesMegaMenu = ({color}) => {
     {
       title: "Creative Design Services",
       url: "/services#creative-design-services",
-      color: "bg-lime-200 text-lime-900",
+      color: "bg-violet-100 hover:bg-violet-200 text-violet-900", // Updated to sophisticated violet
       items: [
         { name: "Social Media Creatives", description: "Engaging assets for all platforms.", icon: <FaFacebook /> },
         { name: "Presentation Design", description: "Pitch-perfect presentations for your business needs.", icon: <FaSlideshare /> },

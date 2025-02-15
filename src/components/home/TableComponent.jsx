@@ -9,7 +9,7 @@ const data = [
     description:
       "Work with the top 1% of global creative talent, recruited from the best brands and agencies.",
     features: [true, true, true, true, true],
-    icon: <FaUsers className="text-3xl min-w-fit text-secondary-500" />,
+    icon: <FaUsers className="text-xl sm:text-3xl min-w-fit text-secondary-500" />,
     highlight: true,
   },
   {
@@ -17,7 +17,7 @@ const data = [
     description:
       "In-house teams don’t always have the skill mix or bandwidth to handle every request that the business needs.",
     features: [false, false, true, true, false],
-    icon: <FaUserTie className="text-3xl min-w-fit text-primary-500" />,
+    icon: <FaUserTie className="text-xl sm:text-3xl min-w-fit text-primary-500" />,
     highlight: false,
   },
   {
@@ -25,7 +25,7 @@ const data = [
     description:
       "Working with full-scale creative agencies can be slow, costly, and inflexible.",
     features: [false, false, true, true, false],
-    icon: <FaPaintBrush className="text-3xl min-w-fit text-primary-500" />,
+    icon: <FaPaintBrush className="text-xl sm:text-3xl min-w-fit text-primary-500" />,
     highlight: false,
   },
   {
@@ -33,7 +33,7 @@ const data = [
     description:
       "Freelancers can be unreliable and hard to scale, leading to inconsistent work and questionable quality.",
     features: [false, false, true, true, true],
-    icon: <FaUsers className="text-3xl min-w-fit text-primary-500" />,
+    icon: <FaUsers className="text-xl sm:text-3xl min-w-fit text-primary-500" />,
     highlight: false,
   },
   {
@@ -41,72 +41,70 @@ const data = [
     description:
       "These solutions make incremental improvements to capacity, and work mostly for simpler, repetitive tasks.",
     features: [false, false, true, true, false],
-    icon: <FaToolbox className="text-3xl min-w-fit text-primary-500" />,
+    icon: <FaToolbox className="text-xl sm:text-3xl min-w-fit text-primary-500" />,
     highlight: false,
   },
 ];
 
-const TableComponent = () => {
-  const headers = ["Speed", "Flexibility", "Quality", "Scalability", "Cost-effectiveness"];
+const headers = ["Speed", "Flexibility", "Quality", "Scalability", "Cost-effectiveness"];
 
+const TableComponent = () => {
   return (
     <div className="bg-secondary-500 text-white py-16">
       <Layout>
-      {/* Title Section */}
-      <div className="text-center mb-12">
-        <h2 className="text-4xl max-w-lg mx-auto font-semibold">
-          Hiring or traditional outsourcing?{" "}
-          <span className="font-Rock_Salt text-[#FC83E1] text-3xl">{"Neither"}</span>
-        </h2>
-      </div>
+        {/* ✅ Title Section */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl max-w-lg mx-auto font-semibold">
+            Hiring or traditional outsourcing?{" "}
+            <span className="font-Rock_Salt text-[#FC83E1] text-3xl">{"Neither"}</span>
+          </h2>
+        </div>
 
-      {/* Table Section - Horizontal Scrollable */}
-      <div className=" overflow-x-auto crollbar-hide rounded-lg">
-        <div className="min-w-[700px]">
-          {/* Headers */}
-          <div className="grid grid-cols-8 items-center text-sm font-semibold">
-            <div className="p-4 col-span-3 text-center"></div>
-            {headers.map((header, index) => (
-              <div key={index} className="p-4 text-center">
-                {header}
-              </div>
-            ))}
-          </div>
-
-          {/* Data Rows */}
-          {data.map((item, index) => (
-            <div
-              key={index}
-              className={`grid grid-cols-8 my-2 items-center ${
-                item.highlight ? "bg-[#88D7F0] rounded-full text-secondary-500" : " "
-              } ${index !== data.length - 1 ? "border-b border-gray-700" : ""}`}
-            >
-              {/* Icon + Title + Description */}
-              <div className="p-4 col-span-3 flex gap-4 items-center">
-                {item.icon}
-                <div>
-                  <h3 className="font-bold text-lg">{item.title}</h3>
-                  <p className="text-sm hidden md:block mt-1">{item.description}</p>
-                </div>
-              </div>
-
-              {/* Features */}
-              {item.features.map((feature, idx) => (
-                <div
-                  key={idx}
-                  className={`p-4 ${index === 0 ? "text-secondary-500" : "text-primary-500"} text-center flex justify-center items-center`}
-                >
-                  {feature ? (
-                    <FaCheck className="text-2xl" />
-                  ) : (
-                    <FaTimes className="text-2xl" />
-                  )}
+        {/* ✅ Table Section - First Column Fixed */}
+        <div className="overflow-x-auto scrollbar-hide rounded-lg">
+          <div className="min-w-[650px]">
+            {/* ✅ Headers */}
+            <div className="grid grid-cols-7 sm:grid-cols-8 items-center text-sm font-semibold">
+              <div className="p-3 sm:p-4 col-span-2 sm:col-span-3 sticky left-0 z-30 bg-secondary-500"></div>
+              {headers.map((header, index) => (
+                <div key={index} className="p-3 sm:p-4 text-center">
+                  {header}
                 </div>
               ))}
             </div>
-          ))}
+
+            {/* ✅ Data Rows */}
+            {data.map((item, index) => (
+              <div
+                key={index}
+                className={`grid grid-cols-7 sm:grid-cols-8 my-2 items-center ${
+                  item.highlight ? "bg-[#88D7F0]  rounded-full text-secondary-500" : ""
+                } ${index !== data.length - 1 ? "border-b border-gray-700" : ""}`}
+              >
+                {/* ✅ Fixed First Column */}
+                <div className={`${index === 0 ? " bg-[#88D7F0] rounded-l-full " : " bg-secondary-500 " } p-3 sm:p-4 col-span-2 sm:col-span-3 flex gap-4 items-center sticky left-0 z-10 `}>
+                  {item.icon}
+                  <div>
+                    <h3 className="font-semibold sm:font-bold text-md sm:text-lg">{item.title}</h3>
+                    <p className="text-sm hidden md:block mt-1">{item.description}</p>
+                  </div>
+                </div>
+
+                {/* ✅ Features - Scrollable */}
+                {item.features.map((feature, idx) => (
+                  <div
+                    key={idx}
+                    className={`p-3 sm:p-4 text-center flex justify-center items-center ${
+                      index === 0 ? "text-secondary-500" : "text-primary-500"
+                    }`}
+                  >
+                    {feature ? <FaCheck className="text-lg sm:text-2xl" /> : <FaTimes className="text-lg sm:text-2xl" />}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
       </Layout>
     </div>
   );

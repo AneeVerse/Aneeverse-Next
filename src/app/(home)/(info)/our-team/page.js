@@ -1,4 +1,5 @@
 import ParnterSection from '@/components/about/PartnerSection'
+import UnderConstructionPage from '@/components/layout/UnderConstructionPage'
 import HeroSectionOurTeam from '@/components/ourTeam/HeroSectionOurTeam'
 import OneTestimonialsOurTeam from '@/components/ourTeam/OneTestimonialsOurTeam'
 import OurTeamSection from '@/components/ourTeam/OurTeamSection'
@@ -34,6 +35,7 @@ export const metadata = {
 }
 
 const page = () => {
+  return <UnderConstructionPage />;
 
   return (
     <div>

@@ -1,8 +1,8 @@
-
-  "use client";
+"use client";
 import Link from "next/link";
 import Layout from "../common/Layout";
 import { useEffect, useState, useRef } from "react";
+import Button from "../common/Button";
 
 const ServicesSupportSection = () => {
   const vimeoVideoId = "347119375"; // Replace with your Vimeo video ID
@@ -65,25 +65,25 @@ const ServicesSupportSection = () => {
             {"A variety of design services at your fingertips".toUpperCase()}
           </p>
           <h1 className="text-4xl lg:text-5xl font-medium leading-tight text-secondary-500 mb-4">
-          Get graphic design, print, motion, video{" "}
+            Get graphic design, print, motion, video{" "}
             <span className=" text-secondary-500 text-2xl mt-4 lg:text-3xl font-Rock_Salt">
-             and more
+              and more
             </span>
           </h1>
           <p className="text-lg text-secondary-500 mb-4">
-          Whether you need an out-of-this-world
-illustration, beautiful print designs, or engaging
-digital marketing assets, aneeverse’s world-class
-graphic designers from around the world will
-make it happen.
+            Whether you need an out-of-this-world illustration, beautiful print
+            designs, or engaging digital marketing assets, aneeverse’s
+            world-class graphic designers from around the world will make it
+            happen.
           </p>
           {/* <p className="text-gray-500 mb-6">
             See us as an extension of your team, freeing you to focus on your
             most impactful and creative work.
           </p> */}
-            <Link href={"/contact"} className="px-6 py-3 bg-secondary-500 inline-block text-primary-500 font-semibold text-md rounded-full  transition">
-              Book a Call
-            </Link>
+
+          <Button href="/contact" className="mt-6" variant="secondary">
+            Book a Call
+          </Button>
         </div>
 
         {/* Right Video Section */}

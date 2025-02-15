@@ -5,6 +5,7 @@ import { FiArrowUpRight, FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Layout from "../common/Layout";
+import Button from "../common/Button";
 
 export default function NewFooter() {
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -96,9 +97,9 @@ export default function NewFooter() {
      <p className="mt-4 text-3xl text-orange-400 font-Rock_Salt">
        we got you covered.
      </p>
-     <Link href={"/contact"} className="mt-8 text-center inline-block px-6 text-md py-2 bg-primary-500 text-secondary-500 text-lg font-semibold rounded-full  transition">
-       GET STARTED
-     </Link>
+     <Button variant="primary" href={"/contact"} className="mt-8 " border="border-primary-500">
+     GET STARTED
+      </Button>
    </div>
    <div className="mt-16 border-b border-gray-600 pb-1">
           {/* Mobile Accordions */}

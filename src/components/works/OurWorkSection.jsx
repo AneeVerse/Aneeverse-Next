@@ -130,7 +130,7 @@ const OurWorkSection = () => {
             <img
               src={project.image}
               alt={project.title}
-              className="h-[200px] sm:h-[280px] xl:h-[340px] w-full group-hover:scale-105 transition-transform duration-300 rounded-lg object-cover"
+              className="h-[200px] sm:h-[280px] xl:h-[340px]  2xl:h-[380px] w-full group-hover:scale-105 transition-transform duration-300 rounded-lg object-cover"
             />
             </div>
             {/* Text Content */}

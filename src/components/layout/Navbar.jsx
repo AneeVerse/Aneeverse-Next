@@ -8,6 +8,7 @@ import ResourcesMegaMenu from "./megamenu/ResourcesMegaMenu";
 import { usePathname } from "next/navigation";
 import WhyUsMegaMenu from "./megamenu/WhyUsMegaMenu";
 import Layout from "../common/Layout";
+import Button from "../common/Button";
 
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);

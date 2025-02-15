@@ -1,8 +1,8 @@
 import TestimonialSlider from '@/components/about/TestimonialSlider'
 import SlidingLogos from '@/components/home/SlidingLogos'
+import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
 import CommonServicesOurWorks from '@/components/services/common/CommonServicesOurWorks'
 import WebDesignCreativeServices from '@/components/services/website-design/WebDesignCreativeServices'
-import WebDesignHero from '@/components/services/website-design/WebDesignHero'
 import WebsiteDesignFAQSection from '@/components/services/website-design/WebsiteDesignFAQSection'
 import WebsiteDesignStateSections from '@/components/services/website-design/WebsiteDesignStateSections'
 import WebsiteDesignSupportSection from '@/components/services/website-design/WebsiteDesignSupportSection'
@@ -36,9 +36,30 @@ export const metadata = {
 
 
 const page = () => {
+// ✅ Services Data (for scrolling cards)
+const services = [
+  { title: "Webflow Development", image: "/images/services/website/card/webflow-development.avif" },
+  { title: "Website Illustrations", image: "/images/services/website/card/website-illustration.avif" },
+  { title: "UX UI Audit", image: "/images/services/website/card/ui-ux-audit.avif" },
+  { title: "Design Systems", image: "/images/services/website/card/design-system.avif" },
+  { title: "Content Development", image: "/images/services/website/card/content-development.avif" },
+  { title: "Website Strategy", image: "/images/services/website/card/website-strategy.avif" },
+  { title: "Website Design", image: "/images/services/website/card/website-design.avif" },
+  { title: "Landing Page Design", image: "/images/services/website/card/landing-page-design.avif" },
+];
+
+
   return (
     <div>
-      <WebDesignHero />
+        <CommonServicesHeroSection
+      title="Web Design"
+      subtitle="Creative Services"
+      description=" Get email designs, templates, and creative to capture your audience’s attention. Invigorate your communications and get access to a fully-stacked team of designers to start bringing your email campaigns to life."
+      ctaText="Book a demo"
+      ctaLink="/contact"
+      backgroundImage="/images/services/website/hero-banner.avif"
+      services={services}
+    />
       <SlidingLogos />
       <WebsiteDesignSupportSection />
       <WebDesignCreativeServices />

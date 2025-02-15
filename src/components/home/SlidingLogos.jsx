@@ -82,8 +82,8 @@ const logos = [
       </h2>
       <div className='relative'>
         {/* overlap fade right and left side */}
-        <div className="absolute top-0 left-0 w-[60px] sm:w-[400px] h-full z-10 bg-gradient-to-r via-primary-500/80 from-primary-500 to-transparent"></div>
-        <div className="absolute z-10 top-0 right-0 w-[60px] sm:w-[400px] h-full bg-gradient-to-l from-primary-500 via-primary-500/80 to-transparent"></div>
+        <div className="absolute top-0 left-0 w-[60px] sm:w-[200px] lg:w-[400px] h-full z-10 bg-gradient-to-r via-primary-500/80 from-primary-500 to-transparent"></div>
+        <div className="absolute z-10 top-0 right-0 w-[60px] sm:w-[200px] lg:w-[400px] h-full bg-gradient-to-l from-primary-500 via-primary-500/80 to-transparent"></div>
          <div className="overflow-hidden">
         <SliderLogo direction="right" />
       </div>

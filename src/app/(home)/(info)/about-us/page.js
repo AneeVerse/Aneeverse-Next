@@ -5,6 +5,7 @@ import TeamSectionAbout from '@/components/about/TeamSectionAbout';
 import TestimonialSlider from '@/components/about/TestimonialSlider';
 import TextWithVideo from '@/components/about/TextWithVideo';
 import ValuesComponent from '@/components/about/ValuesComponent';
+import UnderConstructionPage from '@/components/layout/UnderConstructionPage';
 import Link from 'next/link';
 import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
@@ -39,6 +40,7 @@ export const metadata = {
 
 
 const AboutUsPage = () => {
+  return <UnderConstructionPage />;
 
   return (
    

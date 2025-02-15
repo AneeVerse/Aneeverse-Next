@@ -3,6 +3,7 @@ import React, { use, useEffect, useState } from "react";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import Layout from "../common/Layout";
 import Link from "next/link";
+import Button from "../common/Button";
 
 
 
@@ -76,9 +77,9 @@ const DynamicOurWorks = () => {
           <span className="text-orange-500 text-2xl whitespace-nowrap font-Rock_Salt">{"Top Works"}</span>
         </h2>
       </div>
-        <Link href={"/works"} className="mt-4 min-w-fit px-6 py-2 border border-black rounded-full hover:bg-gray-800 hover:text-white transition">
-          Explore all <span className="hidden sm:inline-block"> our works</span>
-        </Link>
+        <Button variant="primary" href={"/works"} className="mt-4 min-w-fit whitespace-nowrap">
+        Explore all <span className="hidden sm:inline-block"> our works</span>
+        </Button>
       </div>
 
       {/* Project Grid */}
@@ -98,7 +99,7 @@ const DynamicOurWorks = () => {
             <img
               src={project.image}
               alt={project.title}
-              className="h-[200px] sm:h-[280px] xl:h-[340px] w-full group-hover:scale-105 transition-transform duration-300 rounded-lg object-cover"
+              className="h-[200px] sm:h-[280px] xl:h-[340px] 2xl:h-[380px] w-full group-hover:scale-105 transition-transform duration-300 rounded-lg object-cover"
             />
             </div>
             {/* Text Content */}

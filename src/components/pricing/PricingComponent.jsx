@@ -1,7 +1,9 @@
+"use client"
 import React from "react";
 import { FaCheck } from "react-icons/fa6";
 import Layout from "../common/Layout";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const pricingData = {
   title: "A subscription built to",
@@ -58,9 +60,28 @@ export default function PricingComponent() {
           </h4>
           <p className="mt-4 text-lg">{pricingData.leftBox.description}</p>
           <p className="text-sm opacity-80 mt-4">{pricingData.leftBox.note}</p>
-          <Link href={"/contact"} className="bg-[#D8FF85] text-[#0A211F] font-semibold py-3 px-6 rounded-full inline-block text-center mt-6">
-            {pricingData.leftBox.buttonText}
-          </Link>
+      
+
+          <Link href="/contact" className="flex justify-center sm:justify-start w-full mt-6" passHref>
+      <motion.div
+        className={`relative px-6 inline-block text-center py-3 w-full  bg-[#D8FF85] text-[#0A211F] hover:text-[#D8FF85] font-semibold text-md rounded-full border border-[#D8FF85] active:text-[#0A211F] overflow-hidden`}
+        whileHover="hover"
+        initial="initial"
+      >
+        {/* Background Animation */}
+        <motion.div
+          className="absolute inset-0 text-[#D8FF85] bg-[#2A4E45] z-0"
+          variants={{
+            initial: { x: "-100%" },
+            hover: { x: 0 },
+          }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+        />
+        
+        {/* Button Text */}
+        <span className="relative z-10"> {pricingData.leftBox.buttonText}</span>
+      </motion.div>
+    </Link>
         </div>
 
         {/* Right Box */}

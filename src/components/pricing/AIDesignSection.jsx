@@ -1,6 +1,8 @@
+"use client"
 import React from "react";
 import Layout from "../common/Layout";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function AIDesignSection() {
   return (
@@ -29,9 +31,27 @@ export default function AIDesignSection() {
             Through AI, customers like Amazon, Reddit, and Salesforce managed to spend less
             than half of what they normally would on similar projects.
           </p>
-          <Link href={"/contact"} className="mt-6 border border-white text-center inline-block text-white py-2 px-5 rounded-full hover:bg-white hover:text-black transition">
-            Book a demo
-          </Link>
+
+          <Link href="/contact" className="block w-full mt-8" passHref>
+      <motion.div
+        className={`relative px-6 inline-block text-center py-[10px] w-full md:w-auto max-w-[400px] mx-auto md:mx-0 bg-transparent text-white hover:text-black font-semibold text-md rounded-full border border-white active:text-black overflow-hidden`}
+        whileHover="hover"
+        initial="initial"
+      >
+        {/* Background Animation */}
+        <motion.div
+          className="absolute inset-0 text-black bg-white z-0"
+          variants={{
+            initial: { x: "-100%" },
+            hover: { x: 0 },
+          }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+        />
+        
+        {/* Button Text */}
+        <span className="relative z-10">BOOK A CALL</span>
+      </motion.div>
+    </Link>
         </div>
 
        
