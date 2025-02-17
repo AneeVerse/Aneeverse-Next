@@ -1,9 +1,10 @@
 import TestimonialSlider from '@/components/about/TestimonialSlider'
 import SlidingLogos from '@/components/home/SlidingLogos'
+import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
 import CommonServicesOurWorks from '@/components/services/common/CommonServicesOurWorks'
 import GoogleAdsCreativeServices from '@/components/services/google-ads/GoogleAdsCreativeServices'
 import GoogleAdsFAQSection from '@/components/services/google-ads/GoogleAdsFAQSection'
-import GoogleAdsHero from '@/components/services/google-ads/GoogleAdsHero'
+
 import GoogleAdsStateSection from '@/components/services/google-ads/GoogleAdsStateSection'
 import GoogleAdsSupportSection from '@/components/services/google-ads/GoogleAdsSupportSection'
 import React from 'react'
@@ -39,7 +40,15 @@ export const metadata = {
 const page = () => {
   return (
     <div>
-        <GoogleAdsHero />
+           <CommonServicesHeroSection
+            title="Google Ads Services"
+            subtitle="Maximize Your ROI with Google Ads"
+            description=" Unlock the power of paid search with our expertly managed Google Ads campaigns. We focus on driving high-quality traffic and maximizing your ROI."
+            ctaText="Book a Call"
+            ctaLink="/contact"
+            backgroundImage="/images/services/google-ads/hero-banner.avif"
+           
+          />
         <SlidingLogos />
         <GoogleAdsSupportSection />
         <GoogleAdsCreativeServices />

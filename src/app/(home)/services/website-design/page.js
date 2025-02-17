@@ -36,17 +36,6 @@ export const metadata = {
 
 
 const page = () => {
-// ✅ Services Data (for scrolling cards)
-const services = [
-  { title: "Webflow Development", image: "/images/services/website/card/webflow-development.avif" },
-  { title: "Website Illustrations", image: "/images/services/website/card/website-illustration.avif" },
-  { title: "UX UI Audit", image: "/images/services/website/card/ui-ux-audit.avif" },
-  { title: "Design Systems", image: "/images/services/website/card/design-system.avif" },
-  { title: "Content Development", image: "/images/services/website/card/content-development.avif" },
-  { title: "Website Strategy", image: "/images/services/website/card/website-strategy.avif" },
-  { title: "Website Design", image: "/images/services/website/card/website-design.avif" },
-  { title: "Landing Page Design", image: "/images/services/website/card/landing-page-design.avif" },
-];
 
 
   return (
@@ -58,7 +47,7 @@ const services = [
       ctaText="Book a demo"
       ctaLink="/contact"
       backgroundImage="/images/services/website/hero-banner.avif"
-      services={services}
+     
     />
       <SlidingLogos />
       <WebsiteDesignSupportSection />

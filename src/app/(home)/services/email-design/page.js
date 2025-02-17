@@ -1,10 +1,10 @@
 import TestimonialSlider from '@/components/about/TestimonialSlider'
 import SlidingLogos from '@/components/home/SlidingLogos'
+import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
 import CommonServicesOurWorks from '@/components/services/common/CommonServicesOurWorks'
 import EmailDesignAiDesignSection from '@/components/services/email-design/EmailDesignAiDesignSection'
 import EmailDesignCreativeServices from '@/components/services/email-design/EmailDesignCreativeServices'
 import EmailDesignFAQSection from '@/components/services/email-design/EmailDesignFAQSection'
-import EmailDesignHero from '@/components/services/email-design/EmailDesignHero'
 import EmailDesignStateSection from '@/components/services/email-design/EmailDesignStateSection'
 import EmailDesignSupportSection from '@/components/services/email-design/EmailDesignSupportSection'
 import React from 'react'
@@ -40,7 +40,18 @@ export const metadata = {
 const page = () => {
   return (
     <div>
-        <EmailDesignHero />
+           <CommonServicesHeroSection
+            title="Email Design Services"
+            subtitle="Creative Services"
+            description="  Our web design services combine creativity and strategy to deliver
+            stunning websites that meet your objectives. From concept to launch,
+            our experts craft tailored solutions to help your brand stand out
+            and drive results."
+            ctaText="Book a Call"
+            ctaLink="/contact"
+            backgroundImage="/images/services/email-design/hero-banner.avif"
+           
+          />
         <SlidingLogos />
         <EmailDesignSupportSection />
         <EmailDesignCreativeServices />

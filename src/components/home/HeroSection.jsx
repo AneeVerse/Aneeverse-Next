@@ -177,26 +177,19 @@ const HeroSection = () => {
 
             {/* Call to Action */}
             <div className="flex w-full flex-col lg:flex-row items-center gap-4">
-            <Link href="/contact" className="block w-full md:w-auto max-w-[400px] mx-auto md:mx-0" passHref>
-      <motion.div
-        className={`relative px-6 inline-block text-center py-3 w-full md:w-auto max-w-[400px] mx-auto md:mx-0 bg-[#88D7F0] text-secondary-500 hover:text-[#88D7F0] font-semibold text-md rounded-full border border-[#88D7F0] active:text-secondary-500 overflow-hidden`}
-        whileHover="hover"
-        initial="initial"
-      >
-        {/* Background Animation */}
-        <motion.div
-          className="absolute inset-0 text-[#88D7F0] bg-secondary-500 z-0"
-          variants={{
-            initial: { x: "-100%" },
-            hover: { x: 0 },
-          }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-        />
         
-        {/* Button Text */}
-        <span className="relative z-10">GET STARTED</span>
-      </motion.div>
-    </Link>
+      <Button
+            href="/contact"
+            textColor="text-secondary-500"
+            bgColor="bg-[#88D7F0]"
+            borderColor="border-[#88D7F0]"
+            hoverBgColor="bg-secondary-500"
+            hoverTextColor="text-[#88D7F0]"
+            className="block w-[250px] text-center md:w-auto sm:w-[400px] mx-auto md:mx-0"
+
+          >
+            GET STARTED
+          </Button>
             </div>
           </div>
 

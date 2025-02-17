@@ -1,9 +1,9 @@
 import TestimonialSlider from '@/components/about/TestimonialSlider'
 import SlidingLogos from '@/components/home/SlidingLogos'
+import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
 import CommonServicesOurWorks from '@/components/services/common/CommonServicesOurWorks'
 import SocialMediaCreativeServices from '@/components/services/social-media-creatives/SocialMediaCreativeServices'
 import SocialMediaFAQSection from '@/components/services/social-media-creatives/SocialMediaFAQSection'
-import SocialMediaHero from '@/components/services/social-media-creatives/SocialMediaHero'
 import SocialMediaStateSection from '@/components/services/social-media-creatives/SocialMediaStateSection'
 import SocialMediaSupportSection from '@/components/services/social-media-creatives/SocialMediaSupportSection'
 import React from 'react'
@@ -38,7 +38,16 @@ export const metadata = {
 const page = () => {
   return (
     <div>
-        <SocialMediaHero />
+           <CommonServicesHeroSection
+            title="Social Media Creatives"
+            subtitle="Engaging Visuals, Maximum Reach"
+            description=" Grab attention with high-impact social media visuals. Our creatives are designed to
+                increase engagement, brand recall, and audience interaction across platforms."
+            ctaText="Book a Call"
+            ctaLink="/contact"
+            backgroundImage="/images/services/google-ads/hero-banner.avif"
+           
+          />
         <SlidingLogos />
         <SocialMediaSupportSection />
         <SocialMediaCreativeServices />

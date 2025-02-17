@@ -4,6 +4,7 @@ import { FaCheck } from "react-icons/fa6";
 import Layout from "../common/Layout";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Button from "../common/Button";
 
 const pricingData = {
   title: "A subscription built to",
@@ -62,26 +63,17 @@ export default function PricingComponent() {
           <p className="text-sm opacity-80 mt-4">{pricingData.leftBox.note}</p>
       
 
-          <Link href="/contact" className="flex justify-center sm:justify-start w-full mt-6" passHref>
-      <motion.div
-        className={`relative px-6 inline-block text-center py-3 w-full  bg-[#D8FF85] text-[#0A211F] hover:text-[#D8FF85] font-semibold text-md rounded-full border border-[#D8FF85] active:text-[#0A211F] overflow-hidden`}
-        whileHover="hover"
-        initial="initial"
-      >
-        {/* Background Animation */}
-        <motion.div
-          className="absolute inset-0 text-[#D8FF85] bg-[#2A4E45] z-0"
-          variants={{
-            initial: { x: "-100%" },
-            hover: { x: 0 },
-          }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-        />
-        
-        {/* Button Text */}
-        <span className="relative z-10"> {pricingData.leftBox.buttonText}</span>
-      </motion.div>
-    </Link>
+    <Button
+          href="/contact"
+          textColor="text-[#0A211F]"
+          bgColor="bg-[#D8FF85]"
+          borderColor="border-[#D8FF85]"
+          hoverBgColor="bg-[#2A4E45]"
+          hoverTextColor="text-[#D8FF85]"
+          className="mt-6 w-full  flex justify-center  mx-auto sm:mx-0 text-center"
+        >
+          {pricingData.leftBox.buttonText}
+        </Button>
         </div>
 
         {/* Right Box */}

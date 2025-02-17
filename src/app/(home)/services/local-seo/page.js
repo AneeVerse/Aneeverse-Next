@@ -1,9 +1,9 @@
 import TestimonialSlider from '@/components/about/TestimonialSlider'
 import SlidingLogos from '@/components/home/SlidingLogos'
+import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
 import CommonServicesOurWorks from '@/components/services/common/CommonServicesOurWorks'
 import LocalSeoCreativeServices from '@/components/services/local-seo/LocalSeoCreativeServices'
 import LocalSeoFAQSection from '@/components/services/local-seo/LocalSeoFAQSection'
-import LocalSeoHero from '@/components/services/local-seo/LocalSeoHero'
 import LocalSeoStateSection from '@/components/services/local-seo/LocalSeoStateSection'
 import LocalSeoSupportSection from '@/components/services/local-seo/LocalSeoSupportSection'
 import React from 'react'
@@ -39,7 +39,15 @@ export const metadata = {
 const page = () => {
   return (
     <div>
-        <LocalSeoHero />
+           <CommonServicesHeroSection
+            title="Local SEO Optimization Services"
+            subtitle="Data-Driven Local SEO Strategies"
+            description="Enhance your local search presence with our expert local SEO services. We optimize your business for local visibility and drive targeted traffic from your area."
+            ctaText="Book a Call"
+            ctaLink="/contact"
+            backgroundImage="/images/services/google-ads/hero-banner.avif"
+           
+          />
         <SlidingLogos   />
         <LocalSeoSupportSection />
         <LocalSeoCreativeServices />

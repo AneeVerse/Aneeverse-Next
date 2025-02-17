@@ -1,9 +1,9 @@
 import SlidingLogos from '@/components/home/SlidingLogos'
+import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
 import CommonServicesOurWorks from '@/components/services/common/CommonServicesOurWorks'
 import MarketingStrategyCreativeServices from '@/components/services/marketing-strategy/MarketingStrategyCreativeServices'
 import MarketingStrategyFAQSection from '@/components/services/marketing-strategy/MarketingStrategyFAQSection'
 import MarketingStrategyFeatureSection from '@/components/services/marketing-strategy/MarketingStrategyFeatureSection'
-import MarketingStrategyHero from '@/components/services/marketing-strategy/MarketingStrategyHero'
 import MarketingStrategyStateSection from '@/components/services/marketing-strategy/MarketingStrategyStateSection'
 import MarketingStrategySupportSection from '@/components/services/marketing-strategy/MarketingStrategySupportSection'
 import React from 'react'
@@ -37,8 +37,16 @@ export const metadata = {
 
 const page = () => {
   return (
-    <div>
-        <MarketingStrategyHero />
+    <div>    
+       <CommonServicesHeroSection
+          title="Marketing Strategy Services"
+          subtitle="Creative Services"
+          description=" Empower your business with data-driven marketing initiatives, plans, and exceptional insights from our team of expert consultants. Leverage Superside's marketing strategy services for an on-demand marketing team extension."
+          ctaText="Book a Call"
+          ctaLink="/contact"
+          backgroundImage="/images/services/marketing-strategy/hero-banner.avif"
+         
+        />
         <SlidingLogos />
         <MarketingStrategySupportSection />
         <MarketingStrategyCreativeServices/>

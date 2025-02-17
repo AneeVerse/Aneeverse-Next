@@ -1,9 +1,9 @@
 import TestimonialSlider from '@/components/about/TestimonialSlider'
 import SlidingLogos from '@/components/home/SlidingLogos'
+import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
 import CommonServicesOurWorks from '@/components/services/common/CommonServicesOurWorks'
 import PresentationiDesignCreativeServices from '@/components/services/presentation-design/PresentationiDesignCreativeServices'
 import PresentationiDesignFAQSection from '@/components/services/presentation-design/PresentationiDesignFAQSection'
-import PresentationiDesignHero from '@/components/services/presentation-design/PresentationiDesignHero'
 import PresentationiDesignStateSection from '@/components/services/presentation-design/PresentationiDesignStateSection'
 import PresentationiDesignSupportSection from '@/components/services/presentation-design/PresentationiDesignSupportSection'
 import React from 'react'
@@ -39,7 +39,17 @@ export const metadata = {
 const page = () => {
   return (
     <div>
-        <PresentationiDesignHero />
+           <CommonServicesHeroSection
+            title="Presentation Designs"
+            subtitle="Impactful Presentation Design"
+            description=" Create visually compelling and engaging presentations that resonate with your audience.
+                From pitch decks to corporate presentations, we bring your ideas to life.
+             "
+            ctaText="Book a Call"
+            ctaLink="/contact"
+            backgroundImage="/images/services/presentation-design/hero-banner.avif"
+           
+          />
         <SlidingLogos />
         <PresentationiDesignSupportSection />
         <PresentationiDesignCreativeServices />

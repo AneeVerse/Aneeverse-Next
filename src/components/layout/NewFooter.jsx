@@ -97,9 +97,20 @@ export default function NewFooter() {
      <p className="mt-4 text-3xl text-orange-400 font-Rock_Salt">
        we got you covered.
      </p>
-     <Button variant="primary" href={"/contact"} className="mt-8 " border="border-primary-500">
-     GET STARTED
-      </Button>
+    
+      
+      <Button
+            href="/contact"
+            textColor="text-secondary-500"
+            bgColor="bg-primary-500"
+            borderColor="border-primary-500"
+            hoverBgColor="bg-secondary-500"
+            hoverTextColor="text-primary-500"
+            className="mt-8"
+
+          >
+            GET STARTED
+          </Button>
    </div>
    <div className="mt-16 border-b border-gray-600 pb-1">
           {/* Mobile Accordions */}

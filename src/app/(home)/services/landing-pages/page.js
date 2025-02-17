@@ -1,9 +1,9 @@
 import TestimonialSlider from '@/components/about/TestimonialSlider'
 import SlidingLogos from '@/components/home/SlidingLogos'
+import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
 import CommonServicesOurWorks from '@/components/services/common/CommonServicesOurWorks'
 import LandingPagesCreativeServices from '@/components/services/landign-pages/LandingPagesCreativeServices'
 import LandingPagesFAQSection from '@/components/services/landign-pages/LandingPagesFAQSection'
-import LandingPagesHero from '@/components/services/landign-pages/LandingPagesHero'
 import LandingPagesStateSection from '@/components/services/landign-pages/LandingPagesStateSection'
 import LandingPagesSupportSection from '@/components/services/landign-pages/LandingPagesSupportSection'
 import React from 'react'
@@ -43,7 +43,16 @@ export const metadata = {
 const page = () => {
   return (
     <div>
-        <LandingPagesHero />
+           <CommonServicesHeroSection
+            title="Landing Page Design Services"
+            subtitle="Performance-Driven Design"
+            description=" High-converting landing pages crafted to maximize engagement, lead generation, and sales.
+                Our expert team designs pages tailored to your goals, ensuring a seamless user experience."
+            ctaText="Book a Call"
+            ctaLink="/contact"
+            backgroundImage="/images/services/email-design/hero-banner.avif"
+           
+          />
         <SlidingLogos />
         <LandingPagesSupportSection />
         <LandingPagesCreativeServices />

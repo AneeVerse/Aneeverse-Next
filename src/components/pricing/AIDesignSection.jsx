@@ -3,6 +3,7 @@ import React from "react";
 import Layout from "../common/Layout";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Button from "../common/Button";
 
 export default function AIDesignSection() {
   return (
@@ -32,26 +33,18 @@ export default function AIDesignSection() {
             than half of what they normally would on similar projects.
           </p>
 
-          <Link href="/contact" className="block w-full mt-8" passHref>
-      <motion.div
-        className={`relative px-6 inline-block text-center py-[10px] w-full md:w-auto max-w-[400px] mx-auto md:mx-0 bg-transparent text-white hover:text-black font-semibold text-md rounded-full border border-white active:text-black overflow-hidden`}
-        whileHover="hover"
-        initial="initial"
-      >
-        {/* Background Animation */}
-        <motion.div
-          className="absolute inset-0 text-black bg-white z-0"
-          variants={{
-            initial: { x: "-100%" },
-            hover: { x: 0 },
-          }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-        />
-        
-        {/* Button Text */}
-        <span className="relative z-10">BOOK A CALL</span>
-      </motion.div>
-    </Link>
+          
+    <Button
+          href="/contact"
+          textColor="text-white"
+          bgColor="bg-transparent"
+          borderColor="border-white"
+          hoverBgColor="bg-white"
+          hoverTextColor="text-black"
+          className="mt-8 w-full md:w-fit max-w-[400px] flex justify-center  mx-auto sm:mx-0 text-center"
+        >
+          BOOK A CALL
+        </Button>
         </div>
 
        

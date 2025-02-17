@@ -2,9 +2,9 @@ import TestimonialSlider from '@/components/about/TestimonialSlider'
 import SlidingLogos from '@/components/home/SlidingLogos'
 import BrochureDesignCreativeServices from '@/components/services/brochure-design/BrochureDesignCreativeServices'
 import BrochureDesignFAQSection from '@/components/services/brochure-design/BrochureDesignFAQSection'
-import BrochureDesignHero from '@/components/services/brochure-design/BrochureDesignHero'
 import BrochureDesignStateSection from '@/components/services/brochure-design/BrochureDesignStateSection'
 import BrochureDesignSupportSection from '@/components/services/brochure-design/BrochureDesignSupportSection'
+import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
 import CommonServicesOurWorks from '@/components/services/common/CommonServicesOurWorks'
 import React from 'react'
 
@@ -39,7 +39,15 @@ export const metadata = {
 const page = () => {
   return (
     <div>
-        <BrochureDesignHero />
+           <CommonServicesHeroSection
+            title="Brochure Design Services"
+            subtitle="Creative Brochure Designs"
+            description="   From concept to completion, we create brochures that effectively communicate your brand story."
+            ctaText="Book a Call"
+            ctaLink="/contact"
+            backgroundImage="/images/services/brochure-design/hero-banner.avif"
+           
+          />
         <SlidingLogos />
         <BrochureDesignSupportSection />
         <BrochureDesignCreativeServices />

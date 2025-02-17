@@ -1,9 +1,9 @@
 import TestimonialSlider from '@/components/about/TestimonialSlider'
 import SlidingLogos from '@/components/home/SlidingLogos'
+import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
 import CommonServicesOurWorks from '@/components/services/common/CommonServicesOurWorks'
 import GhostWritingCreativeServices from '@/components/services/ghost-writing/GhostWritingCreativeServices'
 import GhostWritingFAQSection from '@/components/services/ghost-writing/GhostWritingFAQSection'
-import GhostWritingHero from '@/components/services/ghost-writing/GhostWritingHero'
 import GhostWritingStateSection from '@/components/services/ghost-writing/GhostWritingStateSection'
 import GhostWritingSupportSection from '@/components/services/ghost-writing/GhostWritingSupportSection'
 import React from 'react'
@@ -40,7 +40,15 @@ export const metadata = {
 const page = () => {
   return (
     <div>
-        <GhostWritingHero />
+           <CommonServicesHeroSection
+            title="Ghost writing Services"
+            subtitle="Your Words, Our Expertise"
+            description="  Transform your ideas into compelling narratives. Our ghostwriters craft books, articles, speeches, and more—seamlessly adapting to your unique voice and style."
+            ctaText="Book a demo"
+            ctaLink="/contact"
+            backgroundImage="/images/services/ghost-writing/hero-banner.avif"
+           
+          />
         <SlidingLogos />
         <GhostWritingSupportSection />
         <GhostWritingCreativeServices />

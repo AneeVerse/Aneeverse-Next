@@ -1,9 +1,9 @@
 import TestimonialSlider from '@/components/about/TestimonialSlider'
 import SlidingLogos from '@/components/home/SlidingLogos'
+import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
 import CommonServicesOurWorks from '@/components/services/common/CommonServicesOurWorks'
 import SeoCreativeServices from '@/components/services/seo-optimization/SeoCreativeServices'
 import SeoFAQSection from '@/components/services/seo-optimization/SeoFAQSection'
-import SeoHero from '@/components/services/seo-optimization/SeoHero'
 import SeoStateSection from '@/components/services/seo-optimization/SeoStateSection'
 import SeoSupportSection from '@/components/services/seo-optimization/SeoSupportSection'
 import React from 'react'
@@ -39,7 +39,17 @@ export const metadata = {
 const page = () => {
   return (
     <div>
-        <SeoHero />
+           <CommonServicesHeroSection
+            title="SEO Optimization Services"
+            subtitle="Data-Driven SEO Strategies"
+            description=" Maximize your search engine visibility with our cutting-edge SEO techniques.
+                From keyword research to technical audits, we ensure your website ranks higher
+                and attracts quality traffic."
+            ctaText="Book a Call"
+            ctaLink="/contact"
+            backgroundImage="/images/services/google-ads/hero-banner.avif"
+           
+          />
         <SlidingLogos />
         <SeoSupportSection />
         <SeoCreativeServices />

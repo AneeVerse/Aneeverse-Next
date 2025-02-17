@@ -1,9 +1,9 @@
 import TestimonialSlider from '@/components/about/TestimonialSlider'
 import SlidingLogos from '@/components/home/SlidingLogos'
+import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
 import CommonServicesOurWorks from '@/components/services/common/CommonServicesOurWorks'
 import GmbOptimizationCreativeServices from '@/components/services/gmb-optimization/GmbOptimizationCreativeServices'
 import GmbOptimizationFAQSection from '@/components/services/gmb-optimization/GmbOptimizationFAQSection'
-import GmbOptimizationHero from '@/components/services/gmb-optimization/GmbOptimizationHero'
 import GmbOptimizationStateSection from '@/components/services/gmb-optimization/GmbOptimizationStateSection'
 import GmbOptimizationSupportSection from '@/components/services/gmb-optimization/GmbOptimizationSupportSection'
 import React from 'react'
@@ -42,7 +42,15 @@ export const metadata = {
 const page = () => {
   return (
     <div>
-        <GmbOptimizationHero />
+           <CommonServicesHeroSection
+            title="GMB Optimization Services"
+            subtitle="Google My Business Optimization"
+            description="Boost your local visibility with expert GMB optimization services. From profile setup to review management, we help you attract more customers."
+            ctaText="Book a Call"
+            ctaLink="/contact"
+            backgroundImage="/images/services/email-design/hero-banner.avif"
+           
+          />
         <SlidingLogos />
         <GmbOptimizationSupportSection />
         <GmbOptimizationCreativeServices />

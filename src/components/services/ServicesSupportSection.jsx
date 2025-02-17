@@ -80,10 +80,18 @@ const ServicesSupportSection = () => {
             See us as an extension of your team, freeing you to focus on your
             most impactful and creative work.
           </p> */}
-
-          <Button href="/contact" className="mt-6" variant="secondary">
-            Book a Call
-          </Button>
+          
+        <Button
+          href="/contact"
+          textColor="text-primary-500"
+          bgColor="bg-secondary-500"
+          borderColor="border-secondary-500"
+          hoverBgColor="bg-primary-500"
+          hoverTextColor="text-secondary-500"
+          className="mt-6"
+        >
+          Book a Call
+        </Button>
         </div>
 
         {/* Right Video Section */}
