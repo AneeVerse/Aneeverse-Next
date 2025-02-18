@@ -38,7 +38,7 @@ export default function AboutDesignServicesSection() {
           bgColor="bg-[#D8FF85]"
           borderColor="border-[#D8FF85]"
           hoverBgColor="bg-secondary-500"
-          hoverTextColor="text-[#D8FF85]"
+          hoverTextColor="#D8FF85"
           className="mt-8 w-full md:w-fit max-w-[400px] flex justify-center mx-auto md:mx-0 text-center"
         >
           BOOK A CALL

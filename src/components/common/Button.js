@@ -9,23 +9,19 @@ const Button = ({
   bgColor = "bg-secondary-500",
   borderColor = "border-secondary-500",
   hoverBgColor = "bg-primary-500",
-  hoverTextColor = "text-white",
-  
+  hoverTextColor = "#073742", 
   className = "",
   ...props
 }) => {
   return (
-    <Link href={href} passHref className="block ">
+    <Link href={href} passHref className="block">
       <motion.div
-        className={`relative px-6 py-[10px] font-semibold rounded-full inline-block tracking-wide cursor-pointer overflow-hidden border ${textColor} ${bgColor} ${borderColor} hover:${hoverTextColor}  group ${className}`}
+        className={`relative px-6 py-[10px] font-semibold rounded-full inline-block tracking-wide cursor-pointer overflow-hidden border ${textColor} ${bgColor} ${borderColor} group ${className}`}
         whileHover="hover"
         whileTap="active"
         initial="initial"
-        // if hold device, click event will not fire and remove focus
         onTouchEnd={(e) => e.target.blur()}
-        // fix ios safari focus issue
         onMouseDown={(e) => e.target.blur()}
-
         {...props}
       >
         {/* Background Animation */}
@@ -38,11 +34,12 @@ const Button = ({
           }}
           transition={{ duration: 0.4, ease: "easeInOut" }}
         />
+        
         {/* Button Text */}
         <motion.span
           className="relative z-10"
           variants={{
-            initial: { color: textColor },
+            initial: { color: "inherit" },
             hover: { color: hoverTextColor },
             active: { color: hoverTextColor },
           }}

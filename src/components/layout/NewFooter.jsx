@@ -105,7 +105,7 @@ export default function NewFooter() {
             bgColor="bg-primary-500"
             borderColor="border-primary-500"
             hoverBgColor="bg-secondary-500"
-            hoverTextColor="text-primary-500"
+            hoverTextColor="#EBFAFE"
             className="mt-8"
 
           >

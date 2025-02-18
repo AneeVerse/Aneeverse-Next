@@ -69,7 +69,7 @@ export default function PricingComponent() {
           bgColor="bg-[#D8FF85]"
           borderColor="border-[#D8FF85]"
           hoverBgColor="bg-[#2A4E45]"
-          hoverTextColor="text-[#D8FF85]"
+          hoverTextColor="#D8FF85"
           className="mt-6 w-full  flex justify-center  mx-auto sm:mx-0 text-center"
         >
           {pricingData.leftBox.buttonText}

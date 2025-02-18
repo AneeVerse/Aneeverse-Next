@@ -40,7 +40,7 @@ export default function AIDesignSection() {
           bgColor="bg-transparent"
           borderColor="border-white"
           hoverBgColor="bg-white"
-          hoverTextColor="text-black"
+          hoverTextColor="#000000"
           className="mt-8 w-full md:w-fit max-w-[400px] flex justify-center  mx-auto sm:mx-0 text-center"
         >
           BOOK A CALL

@@ -40,7 +40,7 @@ export default function ServicesHero() {
           bgColor="bg-[#D8FF85]"
           borderColor="border-[#D8FF85]"
           hoverBgColor="bg-black/90"
-          hoverTextColor="text-[#D8FF85]"
+          hoverTextColor="#D8FF85"
           className="mt-4 min-w-fit whitespace-nowrap"
         >
           BOOK A CALL

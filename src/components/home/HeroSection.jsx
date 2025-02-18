@@ -184,7 +184,7 @@ const HeroSection = () => {
             bgColor="bg-[#88D7F0]"
             borderColor="border-[#88D7F0]"
             hoverBgColor="bg-secondary-500"
-            hoverTextColor="text-[#88D7F0]"
+            hoverTextColor="#88D7F0"
             className="block w-[250px] text-center md:w-auto sm:w-[400px] mx-auto md:mx-0"
 
           >

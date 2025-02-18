@@ -87,7 +87,7 @@ const ServicesSupportSection = () => {
           bgColor="bg-secondary-500"
           borderColor="border-secondary-500"
           hoverBgColor="bg-primary-500"
-          hoverTextColor="text-secondary-500"
+          hoverTextColor="#073742"
           className="mt-6"
         >
           Book a Call

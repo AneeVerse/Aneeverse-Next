@@ -74,7 +74,7 @@ export default function CommonServicesHeroSection({
                 bgColor="bg-transparent"
                 borderColor="border-primary-500"
                 hoverBgColor="bg-primary-500"
-                hoverTextColor="text-secondary-500"
+                hoverTextColor="#073742"
                 className="mt-6 min-w-fit whitespace-nowrap"
               >
                 {ctaText}

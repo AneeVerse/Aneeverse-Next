@@ -83,7 +83,7 @@ const DynamicOurWorks = () => {
             bgColor="bg-primary-500"
             borderColor="border-secondary-500"
             hoverBgColor="bg-secondary-500"
-            hoverTextColor="text-primary-500"
+            hoverTextColor="#EBFAFE"
             className="mt-4 min-w-fit whitespace-nowrap"
           >
             Explore all{" "}
