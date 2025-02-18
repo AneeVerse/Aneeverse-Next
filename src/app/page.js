@@ -14,7 +14,7 @@ export default function Home() {
     <div>
       <HeroSection />
       <SlidingLogos />
-     {/* <SupportSection />
+    {/*  <SupportSection />
        <TestimonialsSection /> */}
       <CreativeSection />
       <TableComponent />

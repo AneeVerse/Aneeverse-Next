@@ -4,6 +4,9 @@ import { MdOutlineArrowOutward } from "react-icons/md";
 import Layout from "../common/Layout";
 import Link from "next/link";
 import Button from "../common/Button";
+import { AccentText } from "../common/typography/AccentText";
+import { Heading } from "../common/typography/Heading";
+import { UiSubheading } from "../common/typography/UiSubheading";
 
 const DynamicOurWorks = () => {
   const projects = [
@@ -65,17 +68,26 @@ const DynamicOurWorks = () => {
     <div className="bg-primary-500 py-16">
       <Layout>
         {/* Section Header */}
-        <div className="flex justify-between items-center mb-12">
+        <div className="flex justify-between items-center mb-2">
           <div className="max-w-3xl  ">
-            <p className="text-sm font-semibold text-gray-600 tracking-wide uppercase">
+              <UiSubheading className="text-secondary-500 mb-2">
               Our Works
-            </p>
-            <h2 className="text-4xl font-bold text-gray-800 mt-2">
-              {"See Our"}{" "}
-              <span className="text-orange-500 text-2xl whitespace-nowrap font-Rock_Salt">
-                {"Top Works"}
-              </span>
-            </h2>
+            </UiSubheading>
+                      <Heading
+                      level="h2"
+                      color="dark"
+                      spacing="lg"
+                      className="text-left font-semibold"
+                    >
+                      See Our{' '}
+                      <AccentText 
+                        size="lg" 
+                        className={"text-orange-500 whitespace-nowrap "}
+                      >
+                        Top Works
+                      </AccentText>
+                    </Heading>
+          
           </div>
           <Button
             href="/works"

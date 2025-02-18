@@ -1,4 +1,6 @@
 import Layout from '@/components/common/Layout';
+import { AccentText } from '@/components/common/typography/AccentText';
+import { Heading } from '@/components/common/typography/Heading';
 import Link from 'next/link';
 import React from 'react';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
@@ -8,7 +10,7 @@ export const metadata = {
   title: "Contact Us | Aneeverse",
   description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
   openGraph: {
-    title:  "Contact Us | Aneeverse",
+    title: "Contact Us | Aneeverse",
     description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
     url: `https://aneeverse.com/contact`,
     images: [
@@ -16,14 +18,14 @@ export const metadata = {
         url: "/images/meta/phone.avif", // ✅ Dynamic Image
         width: 1200,
         height: 630,
-        alt:  "Contact Us | Aneeverse",
+        alt: "Contact Us | Aneeverse",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title:  "Contact Us | Aneeverse",
+    title: "Contact Us | Aneeverse",
     description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
     image: "/images/meta/phone.avif",
   },
@@ -33,10 +35,10 @@ export const metadata = {
 
 const ContactUsPage = () => {
 
-  
+
   return (
     <div className="bg-gray-50 mt-[-80px] pt-[80px] text-gray-900">
-      
+
 
       {/* Header Section */}
       {/* <div className="py-20 px-3 text-center bg-secondary-500 text-primary-500">
@@ -47,26 +49,34 @@ const ContactUsPage = () => {
       {/* Calendly Embed */}
       <div className="pt-6 sm:pt-16 sm:pb-16 bg-[#fbfcfd] text-secondary-500">
         <Layout>
-          <h2 className="text-3xl font-bold text-center mb-4  sm:mb-8">Schedule a Discovery Call
-          </h2><p className="text-xl mb-4 text-center font-normal">
-  Schedule a call below or email{" "}
-  <Link href="mailto:team@aneeverse.com" className='inline-block'>
-    <span className="text-blue-600">team@aneeverse.com</span>
-  </Link>{" "}
-  or  {" "}
-  {/* send message to whatsapp */}
-  <Link href="https://wa.me/+919152755529" className='inline-block'>
-    <span className="text-blue-600">send us a text </span>
-    </Link>{" "}
-     to learn more about our plans, process, and results.
-</p>
+          <Heading
+            level="h2"
+            color="dark"
+            spacing="lg"
+            className="text-center font-semibold mb-2"
+          >
+            Schedule a Discovery Call
+
+          </Heading>
+          <p className="text-md sm:text-lg md:text-xl mb-4 text-center font-normal">
+            Schedule a call below or email{" "}
+            <Link href="mailto:team@aneeverse.com" className='inline-block'>
+              <span className="text-blue-600">team@aneeverse.com</span>
+            </Link>{" "}
+            or  {" "}
+            {/* send message to whatsapp */}
+            <Link href="https://wa.me/+919152755529" className='inline-block'>
+              <span className="text-blue-600">send us a text </span>
+            </Link>{" "}
+            to learn more about our plans, process, and results.
+          </p>
           <div className="rounded-lg overflow-hidden ">
             <iframe
               src="https://calendly.com/aneeverse/discovery-call"
               className="w-full min-h-[1090px] lg:min-h-[760px] border-none"
               frameBorder="0"
               scrolling="no"
-              
+
               title="Calendly Scheduling"
             ></iframe>
           </div>
@@ -79,15 +89,23 @@ const ContactUsPage = () => {
 
           {/* Contact Information */}
           <div className="space-y-8">
-            <h2 className="text-3xl font-bold ">Get in Touch</h2>
-            <div className="space-y-6">
-              <Link href={"tel:+91 91527 55529"} className="flex items-center text-lg ">
+          <Heading
+            level="h4"
+            color="light"
+            spacing="lg"
+            className="text-left font-semibold"
+          >
+            Get in Touch
+
+          </Heading>
+            <div className="space-y-6 text-md sm:text-lg">
+              <Link href={"tel:+91 91527 55529"} className="flex items-center  ">
                 <FaPhone className="  mr-4" /> +91 91527 55529
               </Link>
-              <Link href="mailto:team@aneeverse.com"  className="flex items-center text-lg  ">
+              <Link href="mailto:team@aneeverse.com" className="flex items-center   ">
                 <FaEnvelope className=" mr-4" /> team@aneeverse.com
-  </Link>
-              <p className="flex items-center text-lg ">
+              </Link>
+              <p className="flex items-center  ">
                 <FaMapMarkerAlt className=" min-w-fit mr-4" /> Office No. 03, Plot No. 45, near HP Petrol Pump, Seawoods West, Sector 44, Seawoods, Navi Mumbai, Maharashtra 400706
               </p>
             </div>
@@ -103,7 +121,7 @@ const ContactUsPage = () => {
               <a href="https://www.instagram.com/aneeverse/" target='_blank' className="  ">
                 <FaInstagram size={24} />
               </a>
-              <Link  href="https://www.linkedin.com/company/aneeverse" target='_blank' className=" ">
+              <Link href="https://www.linkedin.com/company/aneeverse" target='_blank' className=" ">
                 <FaLinkedinIn size={24} />
               </Link>
             </div>
@@ -111,7 +129,15 @@ const ContactUsPage = () => {
 
           {/* Map Section */}
           <div className="space-y-8">
-            <h2 className="text-3xl font-bold  text-left">Our Location</h2>
+          <Heading
+            level="h4"
+            color="light"
+            spacing="lg"
+            className="text-left font-semibold "
+          >
+           Our Location
+
+          </Heading>
             <div className="rounded-lg overflow-hidden shadow-2xl">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8045.169104825051!2d73.005389!3d19.0155818!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c103ebdfb625%3A0xee9ac3282c16c2!2sAneeverse%20Creative%20Solutions%20%7C%20Digital%20Marketing%2C%20Web%20Development%20Services%20in%20Navi%20Mumbai!5e1!3m2!1sen!2sin!4v1738217506212!5m2!1sen!2sin"
@@ -123,7 +149,7 @@ const ContactUsPage = () => {
                 className="w-full"
                 title="Google Maps Location"
               ></iframe>
-            
+
             </div>
           </div>
 

@@ -2,6 +2,8 @@
 import React from "react";
 import { FaCheck, FaTimes, FaUsers, FaPaintBrush, FaUserTie, FaToolbox } from "react-icons/fa";
 import Layout from "../common/Layout";
+import { AccentText } from "../common/typography/AccentText";
+import { Heading } from "../common/typography/Heading";
 
 const data = [
   {
@@ -53,11 +55,22 @@ const TableComponent = () => {
     <div className="bg-secondary-500 text-white py-16">
       <Layout>
         {/* ✅ Title Section */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl max-w-lg mx-auto font-semibold">
-            Hiring or traditional outsourcing?{" "}
-            <span className="font-Rock_Salt text-[#FC83E1] text-3xl">{"Neither"}</span>
-          </h2>
+        <div className="text-center mb-6 sm:mb-8 md:mb-12 max-w-md  md:max-w-lg mx-auto">
+            <Heading
+                    level="h2"
+                    color="light"
+                    spacing="lg"
+                    className="text-center font-semibold"
+                  >
+                     Hiring or traditional outsourcing?{' '}
+                    <AccentText 
+                      size="lg" 
+                      className={"text-[#FC83E1] "}
+                    >
+                      neither
+                    </AccentText>
+                  </Heading>
+         
         </div>
 
         {/* ✅ Table Section - First Column Fixed */}

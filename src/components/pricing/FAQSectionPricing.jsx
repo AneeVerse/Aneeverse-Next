@@ -3,15 +3,45 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import Layout from "../common/Layout";
+import { UiSubheading } from "../common/typography/UiSubheading";
+import { AccentText } from "../common/typography/AccentText";
+import { Heading } from "../common/typography/Heading";
 
 const faqs = [
-  { question: "What makes aneeverse's design services different?", answer: "We deliver speedy, high-quality graphic design services through a transparent subscription model." },
-  { question: "How does a design subscription work?", answer: "A subscription provides you access to dedicated design resources on a recurring basis." },
-  { question: "What is graphic design?", answer: "Graphic design is the art of creating visual content to communicate messages." },
-  { question: "What do graphic designers do?", answer: "Graphic designers create visuals that inspire, inform, and captivate audiences." },
-  { question: "Who needs graphic design services?", answer: "Anyone looking to enhance their brand's visual identity needs graphic design services." },
-  { question: "Do you do custom plans?", answer: "Yes, we offer tailored solutions to meet unique design needs." },
-  { question: "What billing options do you offer?", answer: "We offer flexible billing options, including monthly and annual subscriptions." },
+  {
+    question: "What makes aneeverse's design services different?",
+    answer:
+      "We deliver speedy, high-quality graphic design services through a transparent subscription model.",
+  },
+  {
+    question: "How does a design subscription work?",
+    answer:
+      "A subscription provides you access to dedicated design resources on a recurring basis.",
+  },
+  {
+    question: "What is graphic design?",
+    answer:
+      "Graphic design is the art of creating visual content to communicate messages.",
+  },
+  {
+    question: "What do graphic designers do?",
+    answer:
+      "Graphic designers create visuals that inspire, inform, and captivate audiences.",
+  },
+  {
+    question: "Who needs graphic design services?",
+    answer:
+      "Anyone looking to enhance their brand's visual identity needs graphic design services.",
+  },
+  {
+    question: "Do you do custom plans?",
+    answer: "Yes, we offer tailored solutions to meet unique design needs.",
+  },
+  {
+    question: "What billing options do you offer?",
+    answer:
+      "We offer flexible billing options, including monthly and annual subscriptions.",
+  },
 ];
 
 export default function FAQSectionPricing() {
@@ -23,11 +53,22 @@ export default function FAQSectionPricing() {
 
   return (
     <div className="bg-primary-500 text-secondary-500 py-16">
-      <Layout >
-        <div className="text-md font-light tracking-[2px] mb-3">FAQs</div>
-        <h2 className="text-3xl md:text-5xl font-bold mb-16">
-          Frequently <span className="font-Rock_Salt">asked questions</span>
-        </h2>
+      <Layout>
+        <UiSubheading className="text-secondary-500 mb-2">
+        FAQs
+        </UiSubheading>
+        <Heading
+          level="h2"
+          color="dark"
+          spacing="lg"
+          className="text-left font-semibold mb-2"
+        >
+          Frequently{" "}
+          <AccentText size="lg" className={" text-secondary-500  "}>
+          asked questions
+          </AccentText>
+        </Heading>
+       
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
           {/* Left Column */}
           <div className="flex flex-col gap-8">
@@ -83,7 +124,10 @@ export default function FAQSectionPricing() {
                   {faq.question}
                   <motion.div
                     animate={{
-                      rotate: activeIndex === index + Math.ceil(faqs.length / 2) ? 180 : 0,
+                      rotate:
+                        activeIndex === index + Math.ceil(faqs.length / 2)
+                          ? 180
+                          : 0,
                     }}
                     transition={{ duration: 0.2 }}
                   >

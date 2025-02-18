@@ -2,6 +2,9 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import Layout from "../common/Layout";
 import Link from "next/link";
+import { Heading } from "../common/typography/Heading";
+import { AccentText } from "../common/typography/AccentText";
+import { UiSubheading } from "../common/typography/UiSubheading";
 
 const data = [
   { firstTitle: "Website", secondTitle: "design", url: "/services/website-design", image: "/images/home/creative/creative1.png" },
@@ -85,14 +88,25 @@ export default function CreativeSection() {
   return (
     <div className="bg-primary-500 py-16">
       <Layout>
-        <div className="max-w-3xl">
-          <p className="text-sm font-semibold text-gray-600 tracking-wide uppercase">
-            Easy & Hassle-Free
-          </p>
-          <h2 className="text-4xl font-bold text-gray-800 mt-2">
-            {"EVERY TYPE OF CREATIVE WORK YOU'LL EVER NEED, "}
-            <span className="text-blue-600 text-3xl whitespace-nowrap font-Rock_Salt">and more</span>
-          </h2>
+        <div className="max-w-4xl">
+           <UiSubheading className="text-secondary-500 mb-2">
+           Easy & Hassle-Free
+          </UiSubheading>
+            <Heading
+                    level="h2"
+                    color="dark"
+                    spacing="lg"
+                    className="text-left font-semibold"
+                  >
+                    Every Type of Creative Work You'll Ever Need,{' '}
+                    <AccentText 
+                      size="lg" 
+                      className={" text-blue-600 whitespace-nowrap"}
+                    >
+                      and more
+                    </AccentText>
+                  </Heading>
+         
         </div>
       </Layout>
 

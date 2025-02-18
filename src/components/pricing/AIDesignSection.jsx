@@ -4,6 +4,9 @@ import Layout from "../common/Layout";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Button from "../common/Button";
+import { UiSubheading } from "../common/typography/UiSubheading";
+import { Heading } from "../common/typography/Heading";
+import { AccentText } from "../common/typography/AccentText";
 
 export default function AIDesignSection() {
   return (
@@ -22,12 +25,25 @@ export default function AIDesignSection() {
 
         {/* Left Side (Text Content) */}
         <div className=" w-full  md:w-[40%] relative z-20 text-white px-2 py-4 md:p-10 rounded-lg">
-          <h4 className="text-xs uppercase tracking-widest text-gray-400 mb-2 md:mb-4">
-            AI DESIGN SERVICES
-          </h4>
-          <h2 className="text-3xl md:text-4xl font-serif leading-tight">
-            Save <span className=" font-Rock_Salt">up to 70%</span> on production costs
-          </h2>
+             <UiSubheading className="text-primary-500 mb-2">
+             AI DESIGN SERVICES
+                      </UiSubheading>
+                                <Heading
+                                level="h2"
+                                color="light"
+                                spacing="lg"
+                                className="text-left font-semibold"
+                              >
+                               Save{' '}
+                                <AccentText 
+                                  size="lg" 
+                                  
+                                >
+                                  up to 70% {' '}
+                                </AccentText>
+                                on production costs
+                              </Heading>
+          
           <p className="mt-4 text-sm md:text-md text-gray-300">
             Through AI, customers like Amazon, Reddit, and Salesforce managed to spend less
             than half of what they normally would on similar projects.

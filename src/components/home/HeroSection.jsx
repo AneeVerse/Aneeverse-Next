@@ -5,6 +5,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Layout from "../common/Layout";
 import Link from "next/link";
 import Button from "../common/Button";
+import { Heading } from "../common/typography/Heading";
+import { AccentText } from "../common/typography/AccentText";
 
 const images1 = [
   {
@@ -111,8 +113,7 @@ const HeroSection = () => {
     const walk = (x - startX.current) * 1.5; // Adjust speed
     scrollRef.current.scrollLeft = scrollLeft.current - walk;
   };
-  
-  
+
   const startXRight = useRef(0);
   const scrollLeftRight = useRef(0);
 
@@ -123,8 +124,6 @@ const HeroSection = () => {
     scrollLeftRight.current = scrollRefRight.current.scrollLeftRight;
   };
 
-
-
   // ✅ Scroll Right with Drag
   const handleMouseMoveRight = (e) => {
     if (!isDragging) return;
@@ -132,7 +131,6 @@ const HeroSection = () => {
     const walk = (x - startX.current) * 1.5; // Adjust speed
     scrollRefRight.current.scrollLeftRight = scrollLeftRight.current - walk;
   };
-
 
   // ✅ Stop Dragging
   const handleMouseUp = () => {
@@ -150,12 +148,17 @@ const HeroSection = () => {
           {/* Left Content */}
           <div className="pt-[90px]  lg:pt-[120px] lg:pb-12">
             <div className="flex flex-col-reverse sm:flex-col">
-              <h1 className="text-2xl sm:text-4xl font-bold text-center sm:text-left leading-tight mb-6">
+              <Heading
+                level="h1"
+                color="gredient"
+                spacing="lg"
+                className="text-center sm:text-left font-semibold"
+              >
                 DESIGN, OPTIMIZE, ADVERTISE{" "}
-                <div className="font-medium font-Rock_Salt text-orange-500">
-                  we got you covered.
-                </div>
-              </h1>
+                <AccentText size="xl" className={" block text-orange-500  "}>
+                we got you covered.
+                </AccentText>
+              </Heading>
               <p className="text-sm text-center sm:text-left sm:text-lg mb-6 sm:mb-6">
                 Get access to high-velocity creative team that works with your
                 brand. Ship campaigns — faster, more reliably, and at scale.
@@ -177,19 +180,17 @@ const HeroSection = () => {
 
             {/* Call to Action */}
             <div className="flex w-full flex-col lg:flex-row items-center gap-4">
-        
-      <Button
-            href="/contact"
-            textColor="text-secondary-500"
-            bgColor="bg-[#88D7F0]"
-            borderColor="border-[#88D7F0]"
-            hoverBgColor="bg-secondary-500"
-            hoverTextColor="#88D7F0"
-            className="block w-[250px] text-center md:w-auto sm:w-[400px] mx-auto md:mx-0"
-
-          >
-            GET STARTED
-          </Button>
+              <Button
+                href="/contact"
+                textColor="text-secondary-500"
+                bgColor="bg-[#88D7F0]"
+                borderColor="border-[#88D7F0]"
+                hoverBgColor="bg-secondary-500"
+                hoverTextColor="#88D7F0"
+                className="block w-[250px] text-center md:w-auto sm:w-[400px] mx-auto md:mx-0"
+              >
+                GET STARTED
+              </Button>
             </div>
           </div>
 
@@ -325,34 +326,35 @@ const HeroSection = () => {
                 onTouchEnd={handleMouseUp}
                 className="overflow-x-auto scrollbar-hide"
               >
-
-              <div className="flex marquee-horizontal-reverse">
-                {[...images2, ...images2, ...images2].reverse().map((img, index) => (
-                  <div
-                    className="relative select-none flex-shrink-0 overflow-hidden cursor-pointer rounded-xl group"
-                    key={index}
-                  >
-                    <div className="overflow-hidden relative rounded-xl mx-2">
-                      <img
-                        src={img.src}
-                        alt=""
-                        draggable={false}
-                        className="w-[150px]  h-48 object-cover group-hover:scale-105 transition-all duration-300 rounded-xl shadow-lg"
-                      />
-                    </div>
-                    <div className="absolute inset-0 mx-2 bg-black/10 rounded-xl">
-                      <div className="flex justify-center h-[50px] items-center">
-                        <img
-                          src={img.logo}
-                          draggable={false}
-                          alt=""
-                          className="w-auto self-center px-9 h-auto object-contain mx-auto"
-                        />
+                <div className="flex marquee-horizontal-reverse">
+                  {[...images2, ...images2, ...images2]
+                    .reverse()
+                    .map((img, index) => (
+                      <div
+                        className="relative select-none flex-shrink-0 overflow-hidden cursor-pointer rounded-xl group"
+                        key={index}
+                      >
+                        <div className="overflow-hidden relative rounded-xl mx-2">
+                          <img
+                            src={img.src}
+                            alt=""
+                            draggable={false}
+                            className="w-[150px]  h-48 object-cover group-hover:scale-105 transition-all duration-300 rounded-xl shadow-lg"
+                          />
+                        </div>
+                        <div className="absolute inset-0 mx-2 bg-black/10 rounded-xl">
+                          <div className="flex justify-center h-[50px] items-center">
+                            <img
+                              src={img.logo}
+                              draggable={false}
+                              alt=""
+                              className="w-auto self-center px-9 h-auto object-contain mx-auto"
+                            />
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+                    ))}
+                </div>
               </div>
             </div>
           </div>

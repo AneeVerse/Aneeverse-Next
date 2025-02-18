@@ -1,6 +1,9 @@
 "use client";
 import Layout from "../common/Layout";
 import { useEffect, useState, useRef } from "react";
+import { Heading } from "../common/typography/Heading";
+import { AccentText } from "../common/typography/AccentText";
+import { UiSubheading } from "../common/typography/UiSubheading";
 
 const SupportSection = () => {
   const vimeoVideoId = "347119375"; // Replace with your Vimeo video ID
@@ -59,15 +62,23 @@ const SupportSection = () => {
       <Layout className="flex flex-col lg:flex-row items-center justify-between gap-8">
         {/* Left Text Section */}
         <div className="lg:w-1/2 mb-8 lg:mb-0">
-          <p className="text-sm font-light border-b pb-2 tracking-[2px] text-secondary-500 uppercase mb-2">
-            {"A New Era of Creative Work".toUpperCase()}
-          </p>
-          <h1 className="text-4xl lg:text-5xl font-medium leading-tight text-secondary-500 mb-4">
-            The support your team{" "}
-            <span className="block text-orange-500 text-2xl mt-4 lg:text-3xl font-Rock_Salt">
-              {"has been asking for"}
-            </span>
-          </h1>
+        <UiSubheading border={true}className="text-secondary-500 mb-2">
+  A New Era of Creative Work
+</UiSubheading>
+          <Heading
+          level="h2"
+          color="dark"
+          spacing="lg"
+          className="text-left font-semibold"
+        >
+          The support your team{' '}
+          <AccentText 
+            size="lg" 
+            className={"block text-orange-500 mt-1 "}
+          >
+            has been asking for
+          </AccentText>
+        </Heading>
           <p className="text-lg text-secondary-500 mb-4">
             Aneeverse is your dedicated, on-call creative team to expand your
             production capacity and extend your team’s creative capabilities.

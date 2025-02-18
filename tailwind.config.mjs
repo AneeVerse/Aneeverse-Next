@@ -9,7 +9,27 @@ export default {
   ],
   theme: {
     extend: {
+      fontSize: {
+        'display-2xl': ['3.75rem', { lineHeight: '1.1' }], // Desktop size
+        'display-xl': ['3rem', { lineHeight: '1.15' }],
+        'display-lg': ['2.25rem', { lineHeight: '1.25' }],
+        // Mobile-first sizes
+        '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
+        '2xl': ['1.5rem', { lineHeight: '2rem' }],
+        'xl': ['1.25rem', { lineHeight: '1.75rem' }],
+        'lg': ['1.125rem', { lineHeight: '1.5rem' }],
+        'base': ['1rem', { lineHeight: '1.5rem' }],
+        'sm': ['0.875rem', { lineHeight: '1.25rem' }],
+        'xs': ['0.75rem', { lineHeight: '1rem' }]
+      },
+      fontFamily: {
+       Rock_Salt: ['Rock Salt', 'cursive'],
+        'sans': ['Inter', 'sans-serif'], // Primary font
+        'accent': ['Rock Salt', 'cursive'] // Accent font
+      },
       spacing: {
+        'type-lg': '1rem md:2rem', // Responsive spacing
+        'type-md': '0.75rem md:1.5rem',
         xs: '4px',
         sm: '8px',
         md: '16px',
@@ -19,9 +39,6 @@ export default {
       maxWidth: {
         container: '1536px',
         card: '300px'
-      },
-      fontFamily: {
-       Rock_Salt: ['Rock Salt', 'cursive'],
       },
       colors: {
         primary:{

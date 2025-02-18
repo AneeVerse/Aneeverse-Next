@@ -5,6 +5,9 @@ import Layout from "../common/Layout";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Button from "../common/Button";
+import { UiSubheading } from "../common/typography/UiSubheading";
+import { Heading } from "../common/typography/Heading";
+import { AccentText } from "../common/typography/AccentText";
 
 const pricingData = {
   title: "A subscription built to",
@@ -41,12 +44,25 @@ export default function PricingComponent() {
       <Layout>
       {/* Title Section */}
       <div className="text-center mb-12">
-        <h2 className="text-md uppercase text-secondary-500 tracking-widest">
-          PRICING MODEL
-        </h2>
-        <h3 className="text-4xl md:text-5xl mt-8 font-serif text-secondary-500">
-          {pricingData.title} <span className="font-Rock_Salt sm:block inline mt-3">{pricingData.subtitle}</span>
-        </h3>
+         <UiSubheading className="text-secondary-500 text-center mb-6">
+         PRICING MODEL
+                    </UiSubheading>
+                    <Heading
+                      level="h1"
+                      color="dark"
+                      spacing="lg"
+                      className="text-center max-w-2xl mx-auto font-medium"
+                    >
+                      {pricingData.title}{" "}
+                      <AccentText
+                        size="xl"
+                        className={" sm:whitespace-nowrap  "}
+                      >
+                        {pricingData.subtitle}
+                      </AccentText>
+                    </Heading>
+                 
+        
       </div>
 
       {/* Pricing Cards */}

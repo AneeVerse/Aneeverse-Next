@@ -4,6 +4,9 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import Layout from "../common/Layout";
 import Link from "next/link";
+import { UiSubheading } from "../common/typography/UiSubheading";
+import { Heading } from "../common/typography/Heading";
+import { AccentText } from "../common/typography/AccentText";
 
 const data = [
   { firstTitle: "Website", secondTitle: "design", url: "/services/website-design", image: "/images/home/creative/creative1.png" },
@@ -89,13 +92,24 @@ export default function CreativeSectionPricing() {
       <Layout>
       <div className="flex pb-8 flex-col gap-4 md:flex-row  justify-between">
                     <div>
-                        <span className="text-primary-500 ">{"easy & hassle-free".toUpperCase()}</span>
-                        <h1 style={{lineHeight: "120%"}} className="text-4xl max-w-3xl mt-2 lg:text-5xl font-medium">
-                        One subscription for access to{" "}
-                            <span className=" font-Rock_Salt ">all our creative services
+                       <UiSubheading className="text-primary-500 mb-2">
+                                 Easy & Hassle-Free
+                                </UiSubheading>
+                                  <Heading
+                                          level="h2"
+                                          color="light"
+                                          spacing="lg"
+                                          className="text-left font-semibold"
+                                        >
+                                         One subscription for access to{' '}
+                                          <AccentText 
+                                            size="lg" 
+                                            className={" text-primary-500  "}
+                                          >
+                                            all our creative services
+                                          </AccentText>
+                                        </Heading>
                        
-                            </span>
-                        </h1>
                     </div>
 
                     <p className="text-md self-end max-w-md mt-6">
