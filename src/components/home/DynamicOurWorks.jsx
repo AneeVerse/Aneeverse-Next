@@ -70,24 +70,23 @@ const DynamicOurWorks = () => {
         {/* Section Header */}
         <div className="flex justify-between items-center mb-2">
           <div className="max-w-3xl  ">
-              <UiSubheading className="text-secondary-500 mb-2">
+            <UiSubheading className="text-secondary-500 mb-2">
               Our Works
             </UiSubheading>
-                      <Heading
-                      level="h2"
-                      color="dark"
-                      spacing="lg"
-                      className="text-left font-semibold"
-                    >
-                      See Our{' '}
-                      <AccentText 
-                        size="lg" 
-                        className={"text-orange-500 whitespace-nowrap "}
-                      >
-                        Top Works
-                      </AccentText>
-                    </Heading>
-          
+            <Heading
+              level="h2"
+              color="dark"
+              spacing="lg"
+              className="text-left font-semibold"
+            >
+              See Our{" "}
+              <AccentText
+                size="lg"
+                className={"text-orange-500 whitespace-nowrap "}
+              >
+                Top Works
+              </AccentText>
+            </Heading>
           </div>
           <Button
             href="/works"

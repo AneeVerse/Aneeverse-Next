@@ -3,6 +3,9 @@ import Link from "next/link";
 import Layout from "../common/Layout";
 import { useEffect, useState, useRef } from "react";
 import Button from "../common/Button";
+import { UiSubheading } from "../common/typography/UiSubheading";
+import { Heading } from "../common/typography/Heading";
+import { AccentText } from "../common/typography/AccentText";
 
 const ServicesSupportSection = () => {
   const vimeoVideoId = "347119375"; // Replace with your Vimeo video ID
@@ -61,15 +64,21 @@ const ServicesSupportSection = () => {
       <Layout className="flex flex-col lg:flex-row items-center justify-between gap-8">
         {/* Left Text Section */}
         <div className="lg:w-1/2 mb-8 lg:mb-0">
-          <p className="text-sm font-light border-b pb-2 tracking-[2px] text-secondary-500 uppercase mb-2">
-            {"A variety of design services at your fingertips".toUpperCase()}
-          </p>
-          <h1 className="text-4xl lg:text-5xl font-medium leading-tight text-secondary-500 mb-4">
+          <UiSubheading border={true} className="text-secondary-500 mb-2">
+            A variety of design services at your fingertips
+          </UiSubheading>
+          <Heading
+            level="h2"
+            color="dark"
+            spacing="lg"
+            className="text-left font-semibold"
+          >
             Get graphic design, print, motion, video{" "}
-            <span className=" text-secondary-500 text-2xl mt-4 lg:text-3xl font-Rock_Salt">
+            <AccentText size="lg" className={" "}>
               and more
-            </span>
-          </h1>
+            </AccentText>
+          </Heading>
+
           <p className="text-lg text-secondary-500 mb-4">
             Whether you need an out-of-this-world illustration, beautiful print
             designs, or engaging digital marketing assets, aneeverse’s
@@ -80,18 +89,18 @@ const ServicesSupportSection = () => {
             See us as an extension of your team, freeing you to focus on your
             most impactful and creative work.
           </p> */}
-          
-        <Button
-          href="/contact"
-          textColor="text-primary-500"
-          bgColor="bg-secondary-500"
-          borderColor="border-secondary-500"
-          hoverBgColor="bg-primary-500"
-          hoverTextColor="#073742"
-          className="mt-6"
-        >
-          Book a Call
-        </Button>
+
+          <Button
+            href="/contact"
+            textColor="text-primary-500"
+            bgColor="bg-secondary-500"
+            borderColor="border-secondary-500"
+            hoverBgColor="bg-primary-500"
+            hoverTextColor="#073742"
+            className="mt-6"
+          >
+            Book a Call
+          </Button>
         </div>
 
         {/* Right Video Section */}

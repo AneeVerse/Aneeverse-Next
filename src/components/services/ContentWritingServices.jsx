@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import Layout from "../common/Layout";
+import { Heading } from "../common/typography/Heading";
+import { AccentText } from "../common/typography/AccentText";
 
 export default function ContentWritingServices() {
   const creativeServices = [
@@ -15,7 +17,7 @@ export default function ContentWritingServices() {
       title: "Ghost Writing",
       description:
         "Captivating content under your brand's name. Let our expert writers craft compelling content for your brand.",
-        imgUrl: "/images/services/creative/presentation-design.png",
+      imgUrl: "/images/services/creative/presentation-design.png",
       pageUrl: "/services/ghost-writing",
     },
   ];
@@ -24,16 +26,21 @@ export default function ContentWritingServices() {
     <section id="content-writing" className="py-6 text-white">
       <Layout>
         {/* Heading */}
-        <h2 className="text-4xl mb-12 text-center">
-          <span className="font-Rock_Salt">content</span>{" "}
-          <span className="ml-2">WRITING</span>
-        </h2>
+        <Heading
+          level="h2"
+          color="light"
+          spacing="lg"
+          className="text-center  font-medium"
+        >
+          <AccentText size="lg">content </AccentText>
+          Writing
+        </Heading>
 
         {/* Grid */}
-        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 auto-rows-fr">
+        <div className="grid gap-4 mt-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 auto-rows-fr">
           {creativeServices.map((service, index) => (
             <Link
-            href={service.pageUrl}
+              href={service.pageUrl}
               key={index}
               className={`group relative h-[250px] sm:h-[370px] lg:h-[420px] rounded-2xl overflow-hidden `}
             >
@@ -55,10 +62,9 @@ export default function ContentWritingServices() {
                   {service.description}
                 </p>
               </div>
-              <div
-                className="text-[#F7F9F2] absolute bottom-3 left-6 font-medium text-sm flex items-center gap-2 group-hover:underline"
-              >
-               <span> Learn more </span> <MdOutlineArrowOutward  className="self-center"/>
+              <div className="text-[#F7F9F2] absolute bottom-3 left-6 font-medium text-sm flex items-center gap-2 group-hover:underline">
+                <span> Learn more </span>{" "}
+                <MdOutlineArrowOutward className="self-center" />
               </div>
             </Link>
           ))}

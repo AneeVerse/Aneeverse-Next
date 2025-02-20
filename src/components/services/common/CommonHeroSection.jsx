@@ -2,6 +2,8 @@
 
 import Button from "@/components/common/Button";
 import Layout from "@/components/common/Layout";
+import { Heading } from "@/components/common/typography/Heading";
+import { UiSubheading } from "@/components/common/typography/UiSubheading";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -60,13 +62,19 @@ export default function CommonServicesHeroSection({
           {/* Content */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="relative  z-10">
-              <p className="uppercase tracking-widest text-lg font-medium">
-                {subtitle}
-              </p>
-              <h1 className="text-5xl md:text-6xl w-full block font-bold mt-2">
-                {title}
-              </h1>
-              <p className="mt-4 text-lg text-gray-200">{description}</p>
+                 <UiSubheading className="text-primary-500 mb-2">
+                 {subtitle}
+                        </UiSubheading>
+                        <Heading
+                          level="h1"
+                          color="light"
+                          spacing="lg"
+                          className="text-left font-semibold"
+                        >
+                         {title}
+                        </Heading>
+            
+              <p className="  sm:-mt-2 text-lg text-gray-200">{description}</p>
          
               <Button
                 href={ctaLink}

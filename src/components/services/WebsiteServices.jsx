@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import { MdOutlineArrowOutward } from "react-icons/md";
 import Layout from "../common/Layout";
+import { Heading } from "../common/typography/Heading";
+import { AccentText } from "../common/typography/AccentText";
 
 export default function WebsiteServices() {
   const services = [
@@ -53,16 +55,21 @@ export default function WebsiteServices() {
     <section id="website-services" className="py-6 text-white">
       <Layout>
         {/* Heading */}
-        <h2 className="text-4xl mb-12 text-center">
-          <span className="font-Rock_Salt">website</span>{" "}
-          <span className="ml-2">services</span>
-        </h2>
+        <Heading
+          level="h2"
+          color="light"
+          spacing="lg"
+          className="text-center  font-medium"
+        >
+          <AccentText size="lg">website </AccentText>
+          Services
+        </Heading>
 
         {/* Grid */}
-        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
+        <div className="grid gap-4 grid-cols-1 mt-8 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
           {services.map((service, index) => (
             <Link
-              key={index}              
+              key={index}
               href={service.pageUrl}
               className={`group block h-[250px] sm:h-[370px] lg:h-auto  relative rounded-2xl overflow-hidden ${
                 index === 0 || index === services.length - 1
@@ -90,10 +97,9 @@ export default function WebsiteServices() {
                   {service.description}
                 </p>
               </div>
-              <div
-                className="text-[#F7F9F2] absolute bottom-3 left-6 font-medium text-sm flex items-center gap-2 group-hover:underline"
-              >
-               <span> Learn more </span> <MdOutlineArrowOutward  className="self-center"/>
+              <div className="text-[#F7F9F2] absolute bottom-3 left-6 font-medium text-sm flex items-center gap-2 group-hover:underline">
+                <span> Learn more </span>{" "}
+                <MdOutlineArrowOutward className="self-center" />
               </div>
             </Link>
           ))}

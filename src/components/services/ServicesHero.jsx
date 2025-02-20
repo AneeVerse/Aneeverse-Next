@@ -3,6 +3,9 @@ import Link from "next/link";
 import Layout from "../common/Layout";
 import { motion } from "framer-motion";
 import Button from "../common/Button";
+import { UiSubheading } from "../common/typography/UiSubheading";
+import { Heading } from "../common/typography/Heading";
+import { AccentText } from "../common/typography/AccentText";
 
 export default function ServicesHero() {
   return (
@@ -18,15 +21,22 @@ export default function ServicesHero() {
 
       {/* Content Section */}
       <Layout className="relative z-10 flex flex-col pt-[20px] items-start justify-center h-full">
-        <div className="text-[#F7F9F2] text-sm">CREATIVE SERVICES</div>
-        {/* Title */}
-
-        <h1 className="text-3xl md:text-5xl font-bold mt-3 leading-tight">
-          Design services for <br /> ambitious brands
-        </h1>
+        <UiSubheading className="text-primary-500 mb-2">
+          CREATIVE SERVICES
+        </UiSubheading>
+        <Heading
+          level="h1"
+          color="light"
+          spacing="lg"
+          className="text-left font-semibold"
+        >
+           Design services for{" "}
+           <br /> ambitious brands
+        </Heading>
+        
 
         {/* Subtitle */}
-        <p className="text-md md:text-lg mt-6 text-[#F7F9F2] max-w-2xl">
+        <p className="text-md md:text-lg  text-primary-500 -mt-2 max-w-2xl">
           Teams at fast-growing companies use our services to get quality
           graphic design done at scale. Book a call today and get access to your
           dedicated design team.

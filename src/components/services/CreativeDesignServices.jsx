@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import Layout from "../common/Layout";
+import { Heading } from "../common/typography/Heading";
+import { AccentText } from "../common/typography/AccentText";
 
 export default function CreativeDesignServices() {
   const creativeServices = [
@@ -8,14 +10,14 @@ export default function CreativeDesignServices() {
       title: "Social Media Creatives",
       description:
         "Engage your audience with visually striking social media posts and short videos tailored to your brand.",
-        imgUrl: "/images/services/creative/social-media-creative.png",
+      imgUrl: "/images/services/creative/social-media-creative.png",
       pageUrl: "/services/social-media-creatives",
     },
     {
       title: "Presentation Design",
       description:
         "Elevate your business pitches with professional, visually appealing presentation designs.",
-        imgUrl: "/images/services/creative/presentation-design.png",
+      imgUrl: "/images/services/creative/presentation-design.png",
       pageUrl: "/services/presentation-design",
     },
     {
@@ -31,21 +33,26 @@ export default function CreativeDesignServices() {
     <section id="creative-design-services" className="py-6 text-white">
       <Layout>
         {/* Heading */}
-        <h2 className="text-4xl mb-12 text-center">
-          <span className="font-Rock_Salt">creative</span>{" "}
-          <span className="ml-2">Design Services</span>
-        </h2>
+        <Heading
+          level="h2"
+          color="light"
+          spacing="lg"
+          className="text-center  font-medium"
+        >
+          <AccentText size="lg">creative </AccentText>
+          Design Services
+        </Heading>
 
         {/* Grid */}
-        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
+        <div className="grid mt-8 gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
           {creativeServices.map((service, index) => (
             <Link
-            href={service.pageUrl}
+              href={service.pageUrl}
               key={index}
               className={`group relative rounded-2xl overflow-hidden `}
             >
-            {/* Image */}
-            <div className="overflow-hidden relative h-[250px] sm:h-full w-full">
+              {/* Image */}
+              <div className="overflow-hidden relative h-[250px] sm:h-full w-full">
                 <img
                   src={service.imgUrl}
                   alt={service.title}
@@ -62,10 +69,9 @@ export default function CreativeDesignServices() {
                   {service.description}
                 </p>
               </div>
-              <div
-                className="text-[#F7F9F2] absolute bottom-3 left-6 font-medium text-sm flex items-center gap-2 group-hover:underline"
-              >
-               <span> Learn more </span> <MdOutlineArrowOutward  className="self-center"/>
+              <div className="text-[#F7F9F2] absolute bottom-3 left-6 font-medium text-sm flex items-center gap-2 group-hover:underline">
+                <span> Learn more </span>{" "}
+                <MdOutlineArrowOutward className="self-center" />
               </div>
             </Link>
           ))}
