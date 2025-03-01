@@ -644,7 +644,7 @@ content: [
   },
 
   {
-    id: "local-seo-business-growth",
+    id: "local-seo",
     title: "How Local SEO Can Help Your Business Stand Out",
     thumbnail: "/images/blog/local-seo/thumbnail.avif",
     category: "Creative Design",
