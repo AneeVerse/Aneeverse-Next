@@ -5,10 +5,10 @@ import { cva } from "class-variance-authority";
 export const headingStyles = cva("font-sans", {
   variants: {
     level: {
-      h1: "text-3xl md:text-4xl lg:text-5xl xl:text-display-2xl", // Responsive sizes
-      h2: "text-2xl md:text-3xl lg:text-4xl xl:text-display-xl",
-      h3: "text-xl md:text-2xl lg:text-3xl xl:text-display-lg",
-      h4: "text-xl md:text-2xl lg:text-2xl xl:text-3xl",
+      h1: "text-3xl md:text-4xl lg:text-5xl 2xl:text-display-2xl", // Responsive sizes
+      h2: "text-2xl md:text-3xl lg:text-4xl 2xl:text-display-xl",
+      h3: "text-xl md:text-2xl lg:text-3xl 2xl:text-display-lg",
+      h4: "text-xl md:text-2xl lg:text-2xl 2xl:text-3xl",
     },
     color: {
       dark: "text-secondary-500",

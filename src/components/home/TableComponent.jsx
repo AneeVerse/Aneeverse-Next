@@ -95,10 +95,10 @@ const TableComponent = () => {
                 } ${index !== data.length - 1 ? "border-b border-gray-700" : ""}`}
               >
                 {/* ✅ Fixed First Column */}
-                <div className={`${index === 0 ? " bg-[#88D7F0] rounded-l-full " : " bg-secondary-500 " } p-3 sm:p-4 col-span-2 sm:col-span-3 flex gap-4 items-center sticky left-0 z-10 `}>
+                <div className={`${index === 0 ? " bg-[#88D7F0] rounded-l-full " : " bg-secondary-500 " } p-3 sm:p-10 col-span-2 sm:col-span-3 flex gap-4 items-center sticky left-0 z-10 `}>
                   {item.icon}
                   <div>
-                    <h3 className="font-semibold sm:font-bold text-md sm:text-lg">{item.title}</h3>
+                    <h3 className="font-semibold sm:font-bold text-md sm:text-lg md:text-xl lg:text-2xl ">{item.title}</h3>
                     <p className="text-sm hidden md:block mt-1">{item.description}</p>
                   </div>
                 </div>
