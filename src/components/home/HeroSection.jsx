@@ -138,18 +138,18 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="bg-[#073742] relative text-[#EBFAFE] overflow-x-hidden">
+    <div className="bg-[#073742]  relative text-[#EBFAFE] lg:pl-[50px] overflow-x-hidden">
       {/* Overlap */}
       <div className="absolute top-[-40px] left-0 w-full h-[110px] bg-gradient-to-b z-20 blur-md from-secondary-500 via-secondary-500 to-secondary-500"></div>
       <div className="absolute hidden lg:block bottom-[0px] left-0 w-full h-[110px] bg-gradient-to-t z-20 from-secondary-500 to-transparent"></div>
 
       <Layout>
-        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 items-center">
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
           {/* Left Content */}
-          <div className="pt-[90px]  lg:pt-[120px] lg:pb-12">
+          <div className="pt-[90px]  lg:pt-[100px] lg:pb-12">
             <div className="flex flex-col-reverse sm:flex-col">
               <Heading
-                level="h1"
+                level="h2"
                 color="gredient"
                 spacing="lg"
                 className="text-center sm:text-left font-semibold"
@@ -159,13 +159,13 @@ const HeroSection = () => {
                 we got you covered.
                 </AccentText>
               </Heading>
-              <p className="text-sm text-center sm:text-left sm:text-lg mb-6 sm:mb-6">
+              <p className="text-sm text-center sm:text-left sm:text-[16px] mb-6 sm:mb-6">
                 Get access to high-velocity creative team that works with your
                 brand. Ship campaigns — faster, more reliably, and at scale.
               </p>
             </div>
             {/* Features */}
-            <ul className="hidden sm:flex flex-col gap-2 text-sm sm:text-lg sm:gap-4 mb-5 sm:mb-8">
+            <ul className="hidden sm:flex flex-col gap-2 text-sm sm:text-[16px] sm:gap-2 mb-5 sm:mb-8">
               {[
                 "Dependable Services",
                 "Proven Results",
@@ -197,7 +197,7 @@ const HeroSection = () => {
           {/* Right Image Section */}
           <div className="flex-1 pb-8 lg:pb-0 w-full relative overflow-hidden">
             {/* Desktop View - Vertical Scroll */}
-            <div className="hidden lg:flex gap-4 h-screen overflow-hidden">
+            <div className="hidden lg:flex gap-4  h-screen md:max-h-[800px] xl:max-h-[850px] 2xl:max-h-screen overflow-hidden">
               <div className="w-1/3 marquee-vertical">
                 <div className="marquee-vertical-content space-y-5">
                   {[...images1, ...images1].map((img, index) => (
