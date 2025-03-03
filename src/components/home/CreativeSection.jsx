@@ -7,11 +7,21 @@ import { AccentText } from "../common/typography/AccentText";
 import { UiSubheading } from "../common/typography/UiSubheading";
 
 const data = [
-  { firstTitle: "Website", secondTitle: "design", url: "/services/website-design", image: "/images/home/creative/creative1.png" },
-  { firstTitle: "Social Media", secondTitle: "creative", url: "#", image: "/images/home/creative/creative4.png" },
-  { firstTitle: "Email", secondTitle: "design", url: "/services/email-design", image: "/images/home/creative/creative2.png" },
-  { firstTitle: "Graphic", secondTitle: "design", url: "#", image: "/images/home/creative/creative3.png" },
-  { firstTitle: "Video", secondTitle: "editing", url: "#", image: "/images/home/creative/creative4.png" },
+  { firstTitle: "Website", secondTitle: "design",
+    tags: ["Web Design", "UI/UX", "Landing Pages", "E-commerce"],
+    url: "/services/website-design", image: "/images/home/creative/creative1.png" },
+  { firstTitle: "Social Media", secondTitle: "creative",
+    tags: ["Social Media", "Content Creation", "Ads", "Marketing"],
+    url: "#", image: "/images/home/creative/creative4.png" },
+  { firstTitle: "Email", secondTitle: "design", 
+    tags: ["Email Design", "Newsletters", "Templates", "Campaigns"],
+    url: "/services/email-design", image: "/images/home/creative/creative2.png" },
+  { firstTitle: "Graphic", secondTitle: "design",
+    tags: ["Graphic Design", "Illustrations", "Logos", "Branding"],
+    url: "#", image: "/images/home/creative/creative3.png" },
+  { firstTitle: "Video", secondTitle: "editing",
+    tags: ["Video Editing", "Motion Graphics", "Animations", "VFX"],
+    url: "#", image: "/images/home/creative/creative4.png" },
 ];
 
 const duplicatedData = [...data, ...data];
@@ -131,7 +141,7 @@ export default function CreativeSection() {
               key={index}
               href={item.url}
               draggable={false}
-              className="relative min-w-[250px] h-[400px] sm:min-w-[300px] sm:h-[500px] lg:h-[600px] lg:min-w-[330px] flex-shrink-0 mx-2 overflow-hidden rounded-xl shadow-lg"
+              className="relative min-w-[250px] h-[400px] sm:min-w-[300px] sm:h-[500px] group lg:h-[600px] lg:min-w-[330px] flex-shrink-0 mx-2 overflow-hidden rounded-xl shadow-lg"
             >
               <img
                 src={item.image}
@@ -144,6 +154,16 @@ export default function CreativeSection() {
                   <span className="font-Rock_Salt block">{item.secondTitle}</span>
                 </h3>
               </div>
+
+                <div className="absolute bottom-5 left-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                  <ul className="flex gap-2  flex-wrap">
+                    {item.tags.map((tag, index) => (
+                      <li key={index} className="text-white min-w-fit px-[10px] rounded-full py-[3px] border text-xs font-medium">
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
             </Link>
           ))}
         </div>

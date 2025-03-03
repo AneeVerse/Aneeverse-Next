@@ -99,8 +99,11 @@ export default function NewFooter() {
   };
 
   return (
-    <footer className="bg-secondary-500 text-white pt-16 pb-6">
-      <Layout>
+    <footer className="bg-secondary-500 relative text-white pt-16 pb-6">
+      {/* overlap image bg */}
+      <img src="/images/fbg.jpg" className="absolute inset-0 -z-0 w-full h-full object-cover" />
+      <div className="absolute inset-0 bg-secondary-500 opacity-50 z-0"></div>
+      <Layout className="relative z-10">
         {/* Top Sections */}
         <div className=" text-center">
         <Heading
