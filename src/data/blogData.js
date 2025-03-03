@@ -71,7 +71,6 @@ export const blogs = [
     ],
   },
 
-
   {
     id: "design-system-guide",
     title: "Building Scalable Design Systems for Enterprises",
