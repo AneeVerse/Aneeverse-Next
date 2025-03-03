@@ -73,6 +73,26 @@ body{
     line-height: 1.6;
     /* margin-bottom: 40px; */
   }
+.description  table {
+    width: 80%;
+    border-collapse: collapse;
+    background: white;
+    margin: 40px 0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.description th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.description th {
+    background: #EBFAFE;
+    color: #073742;
+    text-transform: uppercase;
+}
 
   .description ul {
     list-style-type: disc;
