@@ -75,111 +75,123 @@ export default function TestimonialSlider() {
     return () => clearInterval(interval);
   }, [currentIndex]);
 
+
   return (
-    
-        <div className="relative py-10 bg-primary-500  text-secondary-500">
-          <Layout>
-            {/* Vertical Navigation */}
-            <div className="flex flex-col md:flex-row justify-between gap-6 items-center">
-              <div className="flex flex-row md:flex-col justify-center items-center gap-4">
-                {/* Previous Testimonial */}
-                <motion.img
-                  src={testimonials[(currentIndex - 1 + testimonials.length) % testimonials.length].imageUrl}
-                  alt="Previous Testimonial"
-                  className="w-20 h-20 rounded-full object-cover opacity-50"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 0.5, scale: 1 }}
-                  transition={{ duration: 0.3 }}
-                />
-                {/* Current Testimonial */}
-                <motion.img
-                  key={currentIndex}
-                  src={testimonials[currentIndex].imageUrl}
-                  alt="Current Testimonial"
-                  className="w-40 h-40 rounded-full object-cover border-4 border-gray-300 shadow-lg"
-                  initial={{ x: 50, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  exit={{ x: -50, opacity: 0 }}
-                  transition={{ duration: 0.5 }}
-                />
-                {/* Next Testimonial */}
-                <motion.img
-                  src={testimonials[(currentIndex + 1) % testimonials.length].imageUrl}
-                  alt="Next Testimonial"
-                  className="w-20 h-20 rounded-full object-cover opacity-50"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 0.5, scale: 1 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </div>
-    
-              {/* Current Testimonial Content */}
-              <motion.div
-                key={currentIndex}
-                className="relative flex flex-col"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
-              >
-                <h2 className="text-3xl font-semibold mt-4">
-                  {testimonials[currentIndex].company}
-                </h2>
-                <p className="text-lg italic text-left my-4">
-                  "{testimonials[currentIndex].feedback}"
-                </p>
-                <p className="font-medium text-gray-600">
-                  {testimonials[currentIndex].name}, {testimonials[currentIndex].role}
-                </p>
-                {/* Stats */}
-                <div className="grid grid-cols-3 gap-4 mt-6">
-                  <div>
-                    <p className="text-lg font-bold">
-                      {testimonials[currentIndex].stats.productionTimeSaved}
-                    </p>
-                    <p className="text-sm text-gray-500">Time Saved</p>
-                  </div>
-                  <div>
-                    <p className="text-lg font-bold">
-                      {testimonials[currentIndex].stats.costSavings}
-                    </p>
-                    <p className="text-sm text-gray-500">Cost Savings</p>
-                  </div>
-                  <div>
-                    <p className="text-lg font-bold">
-                      {testimonials[currentIndex].stats.videosDelivered}
-                    </p>
-                    <p className="text-sm text-gray-500">Videos Delivered</p>
-                  </div>
+    <div className="relative py-10 bg-secondary-500 text-primary-500">
+      <Layout>
+        {/* Main Container */}
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
+          {/* Image Section */}
+          <div className="flex min-w-fit flex-row lg:flex-col justify-center items-center gap-4">
+            {/* Previous Testimonial Image */}
+            <motion.img
+              src={testimonials[(currentIndex - 1 + testimonials.length) % testimonials.length].imageUrl}
+              alt="Previous Testimonial"
+              className="w-[80px] h-[80px] sm:w-[150px] sm:h-[150px] rounded-full object-cover opacity-50"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 0.5, scale: 1 }}
+              transition={{ duration: 0.3 }}
+            />
+
+            {/* Current Testimonial Image */}
+            <motion.img
+              key={currentIndex}
+              src={testimonials[currentIndex].imageUrl}
+              alt="Current Testimonial"
+              className="w-[160px] h-[160px] sm:w-[200px] sm:h-[200px] rounded-full object-cover border-4 border-gray-300 shadow-md"
+              initial={{ x: 50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: -50, opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            />
+
+            {/* Next Testimonial Image */}
+            <motion.img
+              src={testimonials[(currentIndex + 1) % testimonials.length].imageUrl}
+              alt="Next Testimonial"
+              className="w-[80px] h-[80px] sm:w-[150px] sm:h-[150px] rounded-full object-cover opacity-50"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 0.5, scale: 1 }}
+              transition={{ duration: 0.3 }}
+            />
+          </div>
+
+          {/* Content Section */}
+          <motion.div
+            key={currentIndex}
+            className="flex flex-col"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-3xl font-semibold">
+              {testimonials[currentIndex].company}
+            </h2>
+            <p className="text-xl sm:text-3xl md:text-4xl text-left my-8">
+              "{testimonials[currentIndex].feedback}"
+            </p>
+            <p className="font-medium text-gray-300">
+              {testimonials[currentIndex].name}, {testimonials[currentIndex].role}
+            </p>
+
+            {/* Stats Grid */}
+            <div className="flex flex-wrap justify-between gap-4 mb-8 mt-10">
+              {Object.entries(testimonials[currentIndex].stats).map(([key, value]) => (
+                <div
+                  key={key}
+                  className="bg-white/10 flex-1 p-4 rounded-lg backdrop-blur-sm border border-white/10"
+                >
+                  <p className="text-2xl font-bold mb-1">{value}</p>
+                  <p className="text-xs uppercase tracking-wider text-white/80">
+                    {key.replace(/([A-Z])/g, " $1")}
+                  </p>
                 </div>
-                {/* Case Study */}
-                <a
-                  href={testimonials[currentIndex].caseStudyUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 underline mt-4"
-                >
-                  {testimonials[currentIndex].caseStudy}
-                </a>
-              </motion.div>
-    
-              {/* Buttons */}
-              <div className="flex flex-row md:flex-col items-center gap-6">
-                <button
-                  onClick={handlePrev}
-                  className="p-2 border -rotate-90 md:rotate-0 rounded-full shadow hover:bg-gray-300"
-                >
-                  <FaArrowUp />
-                </button>
-                <button
-                  onClick={handleNext}
-                  className="p-2 border -rotate-90 md:rotate-0 rounded-full shadow hover:bg-gray-300"
-                >
-                  <FaArrowDown />
-                </button>
-              </div>
+              ))}
             </div>
-          </Layout>
+
+            {/* Case Study Link */}
+            <a
+              href={testimonials[currentIndex].caseStudyUrl}
+              className="inline-flex items-center gap-2 group font-medium text-white/90 transition-colors"
+            >
+              {testimonials[currentIndex].caseStudy}
+              <span className="group-hover:translate-x-2 transition-transform">
+                →
+              </span>
+            </a>
+          </motion.div>
+
+          {/* Navigation Buttons */}
+          <div className="flex flex-row lg:flex-col items-center gap-6">
+            <button
+              onClick={handlePrev}
+              className="p-2 border -rotate-90 lg:rotate-0 rounded-full shadow hover:bg-gray-300"
+            >
+              <FaArrowUp />
+            </button>
+            <button
+              onClick={handleNext}
+              className="p-2 border -rotate-90 lg:rotate-0 rounded-full shadow hover:bg-gray-300"
+            >
+              <FaArrowDown />
+            </button>
+          </div>
         </div>
-      );
+
+        {/* Progress Dots */}
+        <div className="flex justify-center gap-2 mt-8">
+          {testimonials.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`w-3 h-3 rounded-full transition-all ${
+                index === currentIndex ? "bg-white scale-125" : "bg-white/30"
+              }`}
+            />
+          ))}
+        </div>
+      </Layout>
+    </div>
+  );
 }

@@ -83,8 +83,8 @@ const ServicesMegaMenu = ({color}) => {
 <div className="grid grid-cols-3 gap-6">
   {menuCategories.slice(0, 2).map((category, index) => (
     <div key={index}>
-      <Link onClick={()=>{setIsOpen(false)}} href={category.url} className={`text-lg font-bold py-2 px-4 rounded-md inline-flex items-center gap-2 ${category.color}`}>
-        {category.title} <FiArrowUpRight />
+      <Link onClick={()=>{setIsOpen(false)}} href={category.url} className={`text-lg font-bold group py-2 px-4 rounded-md inline-flex items-center gap-2 ${category.color}`}>
+        {category.title} <div className="relative"> <FiArrowUpRight className="  z-10 group-hover:translate-x-[80%] group-hover:translate-y-[-80%] group-hover:opacity-0 transition-all duration-300" /> <FiArrowUpRight className=" absolute inset-0 z-10 opacity-0 translate-x-[-80%] translate-y-[80%] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" /></div>
       </Link>
       <ul className="mt-4 space-y-2">
         {category.items.map((item, idx) => (
@@ -109,9 +109,9 @@ const ServicesMegaMenu = ({color}) => {
   <div className="flex gap-12 flex-col">
     {menuCategories.slice(2, 4).map((category, index) => (
       <div key={index}>
-        <Link href={category.url} onClick={()=>{setIsOpen(false)}} className={`text-lg font-bold py-2 px-4 rounded-md inline-flex items-center gap-2 ${category.color}`}>
-          {category.title} <FiArrowUpRight />
-        </Link>
+       <Link onClick={()=>{setIsOpen(false)}} href={category.url} className={`text-lg font-bold group py-2 px-4 rounded-md inline-flex items-center gap-2 ${category.color}`}>
+        {category.title} <div className="relative"> <FiArrowUpRight className="  z-10 group-hover:translate-x-[80%] group-hover:translate-y-[-80%] group-hover:opacity-0 transition-all duration-300" /> <FiArrowUpRight className=" absolute inset-0 z-10 opacity-0 translate-x-[-80%] translate-y-[80%] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" /></div>
+      </Link>
         <ul className="mt-4 space-y-2">
           {category.items.map((item, idx) => (
             <Link onClick={()=>{setIsOpen(false)}} href={`/services/${item.name.toLowerCase().replaceAll(" ", "-")}`} key={idx} className="flex group px-3 py-2 border-b items-center justify-between gap-3">
