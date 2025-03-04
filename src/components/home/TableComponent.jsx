@@ -4,14 +4,16 @@ import { FaCheck, FaTimes, FaUsers, FaPaintBrush, FaUserTie, FaToolbox } from "r
 import Layout from "../common/Layout";
 import { AccentText } from "../common/typography/AccentText";
 import { Heading } from "../common/typography/Heading";
-
+import { GoPersonAdd } from "react-icons/go";
+import { AiOutlineTeam } from "react-icons/ai";
+import { PiPaintBrushDuotone,PiToolbox } from "react-icons/pi";
 const data = [
   {
     title: "Aneeverse",
     description:
       "Work with the top 1% of global creative talent, recruited from the best brands and agencies.",
     features: [true, true, true, true, true],
-    icon: <FaUsers className="text-xl sm:text-3xl min-w-fit text-secondary-500" />,
+    icon: <div className="p-2 sm:p-3 md:p-4 "><FaUsers className="text-xl sm:text-3xl min-w-fit text-secondary-500" /></div>,
     highlight: true,
   },
   {
@@ -19,7 +21,7 @@ const data = [
     description:
       "In-house teams don’t always have the skill mix or bandwidth to handle every request that the business needs.",
     features: [false, false, true, true, false],
-    icon: <FaUserTie className="text-xl sm:text-3xl min-w-fit text-primary-500" />,
+    icon: <div className="bg-primary-500/20 backdrop-blur-sm p-2 sm:p-3 md:p-4 rounded-lg"> <AiOutlineTeam className="text-xl  sm:text-3xl min-w-fit text-primary-500" /></div>,
     highlight: false,
   },
   {
@@ -27,7 +29,7 @@ const data = [
     description:
       "Working with full-scale creative agencies can be slow, costly, and inflexible.",
     features: [false, false, true, true, false],
-    icon: <FaPaintBrush className="text-xl sm:text-3xl min-w-fit text-primary-500" />,
+    icon: <div className="bg-primary-500/20 backdrop-blur-sm p-2 sm:p-3 md:p-4 rounded-lg"><PiPaintBrushDuotone className="text-xl sm:text-3xl min-w-fit text-primary-500" /></div>,
     highlight: false,
   },
   {
@@ -35,7 +37,7 @@ const data = [
     description:
       "Freelancers can be unreliable and hard to scale, leading to inconsistent work and questionable quality.",
     features: [false, false, true, true, true],
-    icon: <FaUsers className="text-xl sm:text-3xl min-w-fit text-primary-500" />,
+    icon: <div className="bg-primary-500/20 backdrop-blur-sm p-2 sm:p-3 md:p-4 rounded-lg"> <GoPersonAdd className="text-xl sm:text-3xl min-w-fit text-primary-500" /></div>,
     highlight: false,
   },
   {
@@ -43,7 +45,7 @@ const data = [
     description:
       "These solutions make incremental improvements to capacity, and work mostly for simpler, repetitive tasks.",
     features: [false, false, true, true, false],
-    icon: <FaToolbox className="text-xl sm:text-3xl min-w-fit text-primary-500" />,
+    icon: <div className="bg-primary-500/20 backdrop-blur-sm p-2 sm:p-3 md:p-4 rounded-lg"> <PiToolbox className="text-xl sm:text-3xl min-w-fit text-primary-500" /></div>,
     highlight: false,
   },
 ];

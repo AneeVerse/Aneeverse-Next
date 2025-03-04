@@ -147,8 +147,8 @@ const ResourcesMegaMenu = ({ color }) => {
 
                 {/* Blog */}
                 <div className="border-r border-gray-200 pr-6">
-                  <Link onClick={()=>{setIsOpen(false)}} href={resources[1].link} className="text-lg font-semibold cursor-pointer hover:underline flex items-center text-secondary-500 gap-2">
-                    Blog <FiArrowUpRight />
+                  <Link onClick={()=>{setIsOpen(false)}} href={resources[1].link} className="text-lg group font-semibold cursor-pointer hover:underline flex items-center text-secondary-500 gap-2">
+                    Blog <div className="relative"> <FiArrowUpRight className="  z-10 group-hover:translate-x-[80%] group-hover:translate-y-[-80%] group-hover:opacity-0 transition-all duration-300" /> <FiArrowUpRight className=" absolute inset-0 z-10 opacity-0 translate-x-[-80%] translate-y-[80%] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" /></div>
                   </Link>
                   <div className="grid grid-cols-1 gap-4 mt-4">
                     {resources[1].cards.map((card, idx) => (
@@ -169,8 +169,8 @@ const ResourcesMegaMenu = ({ color }) => {
 
                 {/* Customer Stories */}
                 <div>
-                  <Link  onClick={()=>{setIsOpen(false)}} href={resources[2].link} className="text-lg font-semibold flex items-center hover:underline cursor-pointer text-secondary-500 gap-2">
-                    Customer Stories <FiArrowUpRight />
+                  <Link  onClick={()=>{setIsOpen(false)}} href={resources[2].link} className="text-lg group font-semibold flex items-center hover:underline cursor-pointer text-secondary-500 gap-2">
+                    Customer Stories <div className="relative"> <FiArrowUpRight className="  z-10 group-hover:translate-x-[80%] group-hover:translate-y-[-80%] group-hover:opacity-0 transition-all duration-300" /> <FiArrowUpRight className=" absolute inset-0 z-10 opacity-0 translate-x-[-80%] translate-y-[80%] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" /></div>
                   </Link>
                   <div className="grid grid-cols-1 gap-4 mt-4">
                     {resources[2].cards.map((card, idx) => (
