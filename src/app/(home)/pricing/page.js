@@ -1,3 +1,4 @@
+import TestimonialSlider from '@/components/about/TestimonialSlider'
 import SlidingLogos from '@/components/home/SlidingLogos'
 import AIDesignSection from '@/components/pricing/AIDesignSection'
 import CreativeSectionPricing from '@/components/pricing/CreativeSectionPricing'
@@ -43,7 +44,8 @@ const page = () => {
         </div>
         <CreativeSectionPricing />
         <FeatureGridPricing />
-        <TestimonialSliderPricing />
+        {/* <TestimonialSliderPricing /> */}
+        <TestimonialSlider  />
         <AIDesignSection />
         <FAQSectionPricing />
     </div>

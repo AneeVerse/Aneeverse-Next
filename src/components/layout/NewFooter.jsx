@@ -95,6 +95,8 @@ export default function NewFooter() {
     legal: [
       { title: "Privacy Policy", link: "/privacy-policy" },
       { title: "Terms of Use", link: "/terms-of-use" },
+      { title: "Status page", link: "/status" },
+      { title: "DMCA", link: "/dmca" },
     ],
   };
 
@@ -278,14 +280,22 @@ export default function NewFooter() {
           </div>
         </div>
 
+          <div className="text-center md:text-left  tracking-wide text-4xl mt-6 mb-2 font-bold block">
+              aneeverse
+           </div>
+
         {/* Bottom Section */}
-        <div className="mt-6 flex flex-col lg:flex-row justify-between items-center">
+        <div className=" flex flex-col lg:flex-row justify-between items-center">
           {/* Legal Links */}
-          <div className="text-center flex flex-col items-center sm:flex-row justify-between w-full l">
+          <div className="text-center flex flex-col items-center md:flex-row justify-between w-full ">
+            <div>
+             
+
             <p className="text-sm">
               &copy; 2025 Aneeverse. All rights reserved.
             </p>
-            <ul className="flex flex-row justify-center mt-3 sm:mt-0 gap-4 text-sm ">
+            </div>
+            <ul className="flex flex-row justify-center mt-3 md:mt-0 gap-4 text-sm ">
               {footerData.legal.map((legalItem, index) => (
                 <li key={index}>
                   <Link href={legalItem.link} className="hover:underline block">
@@ -295,7 +305,7 @@ export default function NewFooter() {
               ))}
             </ul>
             {/* Social Links */}
-            <div className=" gap-4 flex justify-center mt-4 sm:mt-0">
+            <div className=" gap-4 flex justify-center mt-4 md:mt-0">
               <Link
                 href="https://www.instagram.com/aneeverse/"
                 target="_blank"
