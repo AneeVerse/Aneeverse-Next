@@ -5,12 +5,14 @@ import Layout from "../common/Layout";
 import { UiSubheading } from "../common/typography/UiSubheading";
 import { Heading } from "../common/typography/Heading";
 import { AccentText } from "../common/typography/AccentText";
+import Link from "next/link";
 
 const OurWorkSection = () => {
   const projects = [
     {
       image: "/images/home/works-ban-1.avif",
       title: "Social Media Marketing",
+      url: "/works/social-media-marketing",
       description:
         "Social Media Management, Content Creation, Campaign Strategy",
       colSpan: 2,
@@ -18,18 +20,21 @@ const OurWorkSection = () => {
     {
       image: "/images/home/works2.avif",
       title: "SEO Optimization",
+      url: "/works/seo-optimization",
       description: "Keyword Research, On-Page SEO, Technical SEO Audits",
       colSpan: 1,
     },
     {
       image: "/images/home/works3.avif",
       title: "PPC Advertising",
+      url: "/works/ppc-advertising",
       description: "Google Ads Management, Facebook Ads, Remarketing Campaigns",
       colSpan: 1,
     },
     {
       image: "/images/home/works4.avif",
       title: "Email Marketing",
+      url: "/works/email-marketing",
       description:
         "Newsletter Design, Automation Workflows, Analytics Tracking",
       colSpan: 1,
@@ -37,12 +42,14 @@ const OurWorkSection = () => {
     {
       image: "/images/home/works5.avif",
       title: "Content Marketing",
+      url: "/works/content-marketing",
       description: "Blog Writing, Video Production, Infographic Design",
       colSpan: 2,
     },
     {
       image: "/images/home/works6.avif",
       title: "Influencer Marketing",
+      url: "/works/influencer-marketing",
       description:
         "Creator Partnerships, Campaign Management, Performance Analysis",
       colSpan: 1,
@@ -51,6 +58,7 @@ const OurWorkSection = () => {
     {
       image: "/images/home/works-ban-1.avif",
       title: "Brand Strategy",
+      url: "/works/brand-strategy",
       description:
         "Market Research, Competitor Analysis, Positioning Development",
       colSpan: 2,
@@ -58,30 +66,35 @@ const OurWorkSection = () => {
     {
       image: "/images/home/works2.avif",
       title: "E-commerce SEO",
+      url: "/works/ecommerce-seo",
       description: "Product Page Optimization, Schema Markup, Local SEO",
       colSpan: 1,
     },
     {
       image: "/images/home/works3.avif",
       title: "Conversion Rate Optimization",
+      url: "/works/conversion-rate-optimization",
       description: "A/B Testing, Landing Page Design, User Experience Analysis",
       colSpan: 1,
     },
     {
       image: "/images/home/works4.avif",
       title: "Marketing Automation",
+      url: "/works/marketing-automation",
       description: "CRM Integration, Lead Nurturing, Behavioral Targeting",
       colSpan: 1,
     },
     {
       image: "/images/home/works5.avif",
       title: "Video Marketing",
+      url: "/works/video-marketing",
       description: "YouTube Strategy, Short-form Video Production, Video SEO",
       colSpan: 2,
     },
     {
       image: "/images/home/works6.avif",
       title: "Analytics & Reporting",
+      url: "/works/analytics-reporting",
       description: "ROI Tracking, Custom Dashboards, KPI Monitoring",
       colSpan: 1,
     },
@@ -133,7 +146,8 @@ const OurWorkSection = () => {
         {/* Project Grid */}
         <div className=" grid grid-cols-1  md:grid-cols-4 gap-6">
           {projects.map((project, index) => (
-            <div
+            <Link
+              href={project.url}
               key={index}
               // col span
               style={{
@@ -161,7 +175,7 @@ const OurWorkSection = () => {
                 </div>
                 <p className="text-sm text-gray-600">{project.description}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </Layout>
