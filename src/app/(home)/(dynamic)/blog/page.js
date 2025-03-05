@@ -1,7 +1,9 @@
 import BlogHeroSection from '@/components/blog/BlogHeroSection'
-import CreativeDesign from '@/components/blog/CreativeDesign'
-import DigitalAdvertising from '@/components/blog/DigitalAdvertising'
+import DesignBlogSection from '@/components/blog/DesignBlogSection'
+import EbayBlogSection from '@/components/blog/EbayBlogSection'
+import EcommerceBlogSection from '@/components/blog/EcommerceBlogSection'
 import Newsletter from '@/components/blog/NewsLetter'
+import SeoBlogSection from '@/components/blog/SeoBlogSection'
 import Layout from '@/components/common/Layout'
 import React from 'react'
 
@@ -34,8 +36,11 @@ const page = () => {
   return (
     <div className='bg-white pb-16'>
         <BlogHeroSection    />
-        <DigitalAdvertising />
-        <CreativeDesign   />
+        <EbayBlogSection  />
+        <SeoBlogSection   />
+        <DesignBlogSection />
+        <EcommerceBlogSection />
+
         <Layout>
         <Newsletter />
         </Layout>
