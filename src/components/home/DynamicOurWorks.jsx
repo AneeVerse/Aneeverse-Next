@@ -13,36 +13,42 @@ const DynamicOurWorks = () => {
     {
       image: "/images/home/works-ban-1.avif",
       title: "Webflow",
+      url: "/works/webflow",
       description: "Illustration Design, Ad Creative",
       colSpan: 2, // Dynamic column span
     },
     {
       image: "/images/home/works2.avif",
       title: "Pernod Ricard",
+      url: "/works/pernod-ricard",
       description: "eBook & Digital Reports, Video Production",
       colSpan: 1,
     },
     {
       image: "/images/home/works3.avif",
       title: "Salesforce",
+      url: "/works/salesforce",
       description: "Motion Design, Ad Creative",
       colSpan: 1,
     },
     {
       image: "/images/home/works4.avif",
       title: "Shopify",
+      url: "/works/shopify",
       description: "Ad Creative",
       colSpan: 1, // Dynamic column span
     },
     {
       image: "/images/home/works5.avif",
       title: "Antler",
+      url: "/works/antler",
       description: "Brand Identity, Motion Design, Social Media Creative",
       colSpan: 2,
     },
     {
       image: "/images/home/works6.avif",
       title: "Reddit",
+      url: "/works/reddit",
       description: "Motion Design, Social Media Creative",
       colSpan: 1,
     },
@@ -105,7 +111,9 @@ const DynamicOurWorks = () => {
         {/* Project Grid */}
         <div className=" grid grid-cols-1  md:grid-cols-4 gap-6">
           {projects.map((project, index) => (
-            <div
+            <Link
+
+              href={project.url}
               key={index}
               // col span
               style={{
@@ -133,7 +141,7 @@ const DynamicOurWorks = () => {
                 </div>
                 <p className="text-sm text-gray-600">{project.description}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </Layout>
