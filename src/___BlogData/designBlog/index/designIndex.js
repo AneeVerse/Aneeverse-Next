@@ -1,4 +1,4 @@
-import { blog1 } from "./blog/blog1";
+import { blog1 } from "../blog1";
 
 
 
