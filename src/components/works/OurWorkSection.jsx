@@ -10,18 +10,18 @@ import Link from "next/link";
 const OurWorkSection = () => {
   const projects = [
     {
+ 
       image: "/images/home/works-ban-1.avif",
-      title: "Social Media Marketing",
-      url: "/works/social-media-marketing",
-      description:
-        "Social Media Management, Content Creation, Campaign Strategy",
+      title: "Webflow",
+      url: "/works/webflow",
+      description: "Illustration Design, Ad Creative",
       colSpan: 2,
     },
     {
       image: "/images/home/works2.avif",
-      title: "SEO Optimization",
-      url: "/works/seo-optimization",
-      description: "Keyword Research, On-Page SEO, Technical SEO Audits",
+      title: "Pernod Ricard",
+      url: "/works/pernod-ricard",
+      description: "eBook & Digital Reports, Video Production",
       colSpan: 1,
     },
     {
@@ -32,11 +32,54 @@ const OurWorkSection = () => {
       colSpan: 1,
     },
     {
+      image: "/images/home/works3.avif",
+      title: "Salesforce",
+      url: "/works/salesforce",
+      description: "Motion Design, Ad Creative",
+      colSpan: 1,
+    },
+    {
+      image: "/images/home/works5.avif",
+      title: "Content Marketing",
+      url: "/works/content-marketing",
+      description: "Blog Writing, Video Production, Infographic Design",
+      colSpan: 2,
+    },
+    {
       image: "/images/home/works4.avif",
-      title: "Email Marketing",
-      url: "/works/email-marketing",
-      description:
-        "Newsletter Design, Automation Workflows, Analytics Tracking",
+      title: "Shopify",
+      url: "/works/shopify",
+      description: "Ad Creative",
+      colSpan: 1,
+    },
+    // Duplicated entries for infinite scroll effect
+    {
+      image: "/images/home/works-ban-1.avif",
+      title: "Webflow",
+      url: "/works/webflow",
+      description: "Illustration Design, Ad Creative",
+      colSpan: 2,
+    },
+    {
+      image: "/images/home/works6.avif",
+      title: "Reddit",
+      url: "/works/reddit",
+      description: "Motion Design, Social Media Creative",
+      colSpan: 1,
+    },
+    {
+   
+      image: "/images/home/works2.avif",
+      title: "Pernod Ricard",
+      url: "/works/pernod-ricard",
+      description: "eBook & Digital Reports, Video Production",
+        colSpan: 1,
+    },
+    {
+      image: "/images/home/works3.avif",
+      title: "Salesforce",
+      url: "/works/salesforce",
+      description: "Motion Design, Ad Creative",
       colSpan: 1,
     },
     {
@@ -48,54 +91,9 @@ const OurWorkSection = () => {
     },
     {
       image: "/images/home/works6.avif",
-      title: "Influencer Marketing",
-      url: "/works/influencer-marketing",
-      description:
-        "Creator Partnerships, Campaign Management, Performance Analysis",
-      colSpan: 1,
-    },
-    // Duplicated entries for infinite scroll effect
-    {
-      image: "/images/home/works-ban-1.avif",
-      title: "Brand Strategy",
-      url: "/works/brand-strategy",
-      description:
-        "Market Research, Competitor Analysis, Positioning Development",
-      colSpan: 2,
-    },
-    {
-      image: "/images/home/works2.avif",
-      title: "E-commerce SEO",
-      url: "/works/ecommerce-seo",
-      description: "Product Page Optimization, Schema Markup, Local SEO",
-      colSpan: 1,
-    },
-    {
-      image: "/images/home/works3.avif",
-      title: "Conversion Rate Optimization",
-      url: "/works/conversion-rate-optimization",
-      description: "A/B Testing, Landing Page Design, User Experience Analysis",
-      colSpan: 1,
-    },
-    {
-      image: "/images/home/works4.avif",
-      title: "Marketing Automation",
-      url: "/works/marketing-automation",
-      description: "CRM Integration, Lead Nurturing, Behavioral Targeting",
-      colSpan: 1,
-    },
-    {
-      image: "/images/home/works5.avif",
-      title: "Video Marketing",
-      url: "/works/video-marketing",
-      description: "YouTube Strategy, Short-form Video Production, Video SEO",
-      colSpan: 2,
-    },
-    {
-      image: "/images/home/works6.avif",
-      title: "Analytics & Reporting",
-      url: "/works/analytics-reporting",
-      description: "ROI Tracking, Custom Dashboards, KPI Monitoring",
+      title: "Reddit",
+      url: "/works/reddit",
+      description: "Motion Design, Social Media Creative",
       colSpan: 1,
     },
   ];
