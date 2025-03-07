@@ -10,6 +10,8 @@ import { FaChartPie, FaEnvelope, FaGoogle, FaFacebook, FaUserFriends } from "rea
 import { FaEnvelopeOpenText, FaSlideshare, FaPaintBrush, FaFilePdf } from "react-icons/fa";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa6";
+import { blogs } from "@/data/blogData";
+import { customerStories } from "@/data/customerStoriesData";
 
 // Menu Categories Data
 const menuCategories = [
@@ -95,32 +97,15 @@ const resources = [
     title: "Blog",
     link: "/blog",
     cards: [
-      {
-        title: "Beyond the Brief: All the Buzz About AI-Powered Ads",
-        image: "/images/blog1.avif",
-        link: "/blog/ai-powered-ads",
-      },
-      {
-        title: "Creative Leadership Decoded: Lessons from Two Industry Experts",
-        image: "/images/blog2.avif",
-        link: "/blog/creative-leadership",
-      },
+      ...blogs.slice(0, 2)
     ],
   },
   {
     title: "Customer Stories",
     link: "/customer-stories",
     cards: [
-      {
-        title: "How Shopify Built a Growth Workshop to Unlock Rapid Experimentation",
-        image: "/images/customer1.avif",
-        link: "/customer-stories/shopify",
-      },
-      {
-        title: "How Amazon Delivers Creative Assets Faster Without Increasing Headcount",
-        image: "/images/customer2.avif",
-        link: "/customer-stories/amazon",
-      },
+   
+      ...customerStories.slice(0, 2)
     ],
   },
 ];
@@ -287,9 +272,9 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                         ))}
                       {resource.cards &&
                         resource.cards.map((card, idx) => (
-                          <Link href={card.link}  onClick={toggleSidebar}  key={idx} className="flex flex-row gap-3">
+                          <Link href={`/${resource.title == "Blog" ? "blog":"customer-stories"}/${card.id}`}  onClick={toggleSidebar}  key={idx} className="flex flex-row gap-3">
                             <img
-                              src={card.image}
+                              src={card.thumbnail}
                               alt={card.title}
                               className="w-[60px] h-[60px] object-cover rounded-md"
                             />

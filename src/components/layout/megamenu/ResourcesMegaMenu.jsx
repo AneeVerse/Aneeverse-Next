@@ -12,6 +12,8 @@ import {
 import { FaChevronDown } from "react-icons/fa6";
 import Layout from "@/components/common/Layout";
 import Link from "next/link";
+import { blogs } from "@/data/blogData";
+import { customerStories } from "@/data/customerStoriesData";
 
 const ResourcesMegaMenu = ({ color }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,31 +53,14 @@ const ResourcesMegaMenu = ({ color }) => {
       title: "Blog",
       link: "/blog",
       cards: [
-        {
-          title: "Beyond the Brief: All the Buzz About AI-Powered Ads",
-          image: "/images/blog1.avif",
-        },
-        {
-          title:
-            "Creative Leadership Decoded: Lessons from Two Industry Experts",
-          image: "/images/blog2.avif",
-        },
+       ...blogs.slice(0, 2)
       ],
     },
     {
       title: "Customer Stories",
       link: "/customer-stories",
       cards: [
-        {
-          title:
-            "How Shopify Built a Growth Workshop to Unlock Rapid Experimentation",
-          image: "/images/customer1.avif",
-        },
-        {
-          title:
-            "How Amazon Delivers Creative Assets Faster Without Increasing Headcount",
-          image: "/images/customer2.avif",
-        },
+       ...customerStories.slice(0, 2)
       ],
     },
   ];
@@ -152,17 +137,17 @@ const ResourcesMegaMenu = ({ color }) => {
                   </Link>
                   <div className="grid grid-cols-1 gap-4 mt-4">
                     {resources[1].cards.map((card, idx) => (
-                      <div key={idx} className="flex flex-col cursor-pointer gap-3">
+                      <Link onClick={()=>{setIsOpen(false)}} href={`/blog/${card.id}`} key={idx} className="flex flex-col cursor-pointer gap-3">
                       <div className="overflow-hidden rounded-md">
                       <img
-                        src={card.image}
+                        src={card.thumbnail}
                         alt={card.title}
                         className="w-full h-[160px] hover:scale-110 transition-all duration-300 object-cover rounded-md"
                       /></div>
                       <p className="text-sm line-clamp-1 font-medium text-gray-700">
                         {card.title}
                       </p>
-                    </div>
+                    </Link>
                     ))}
                   </div>
                 </div>
@@ -174,17 +159,17 @@ const ResourcesMegaMenu = ({ color }) => {
                   </Link>
                   <div className="grid grid-cols-1 gap-4 mt-4">
                     {resources[2].cards.map((card, idx) => (
-                      <div key={idx} className="flex flex-col cursor-pointer gap-3">
+                      <Link onClick={()=>{setIsOpen(false)}} href={`/customer-stories/${card.id}`} key={idx} className="flex flex-col cursor-pointer gap-3">
                         <div className="overflow-hidden rounded-md">
                         <img
-                          src={card.image}
+                          src={card.thumbnail}
                           alt={card.title}
                           className="w-full h-[160px] hover:scale-110 transition-all duration-300 object-cover rounded-md"
                         /></div>
                         <p className="text-sm line-clamp-1 font-medium text-gray-700">
                           {card.title}
                         </p>
-                      </div>
+                      </Link>
                     ))}
                   </div>
                 </div>

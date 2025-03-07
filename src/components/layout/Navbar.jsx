@@ -62,7 +62,7 @@ const Navbar = () => {
         </Link>
 
         {/* Large Screen Menu */}
-        <div className="hidden lg:flex gap-6 items-center">
+        <div className="hidden lg:flex lg:gap-3 xl:gap-6 gap-6 items-center">
           <ServicesMegaMenu color={color} />
           <Link
             href="/works"
