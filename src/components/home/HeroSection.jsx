@@ -138,7 +138,7 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="bg-[#073742]  relative text-[#EBFAFE] lg:pl-[50px] overflow-x-hidden">
+    <div className="bg-[#073742]  relative text-[#EBFAFE] overflow-x-hidden">
       {/* Overlap */}
       <div className="absolute top-[-40px] left-0 w-full h-[110px] bg-gradient-to-b z-20 blur-md from-secondary-500 via-secondary-500 to-secondary-500"></div>
       <div className="absolute hidden lg:block bottom-[0px] left-0 w-full h-[110px] bg-gradient-to-t z-20 from-secondary-500 to-transparent"></div>
