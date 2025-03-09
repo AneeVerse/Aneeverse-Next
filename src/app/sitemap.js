@@ -1,5 +1,7 @@
 // app/sitemap.js
 import { blogs } from "@/data/blogData";
+import { customerStories } from "@/data/customerStoriesData";
+import { projects } from "@/data/projects";
 
 const BASE_URL = 'https://www.aneeverse.com';
 
@@ -104,21 +106,61 @@ export default function sitemap() {
             priority: 0.8,
         },
         {
-            url: `${BASE_URL}/blog`,
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 0.8,
-        },
-        {
             url: `${BASE_URL}/services`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 0.8,
         },
+        {
+            url: `${BASE_URL}/customer-stories`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
 
-        // Dynamic routes (e.g., blogs)
+        {
+            url: `${BASE_URL}/blog`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+
+        {
+            url: `${BASE_URL}/blog/category/ebay`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+        {
+            url: `${BASE_URL}/blog/category/seo`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+        {
+            url: `${BASE_URL}/blog/category/design`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+        {
+            url: `${BASE_URL}/blog/category/e-commerce`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+
+        // Dynamic routes (e.g., services)
         ...servicesUrl.map((post) => ({
             url: `${BASE_URL}/services${post.url}`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.8,
+        })),
+
+        // Dynamic routes (e.g., our works)
+        ...projects.map((post) => ({
+            url: `${BASE_URL}/works/${post.slug}`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 0.8,
@@ -128,7 +170,14 @@ export default function sitemap() {
         ...blogs.map((post) => ({
             url: `${BASE_URL}/blog/${post.id}`,
             lastModified: new Date(),
-            priority: 0.5,
+            priority: 0.8,
+        })),
+
+        // Dynamic routes (e.g., customer-stories)
+        ...customerStories.map((post) => ({
+            url: `${BASE_URL}/customer-stories/${post.id}`,
+            lastModified: new Date(),
+            priority: 0.8,
         })),
     ];
 }
