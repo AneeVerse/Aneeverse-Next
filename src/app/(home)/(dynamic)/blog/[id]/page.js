@@ -28,41 +28,52 @@ export default function BlogDetail({ params }) {
       title: h2.props.children
     })) || [];
 
-  useEffect(() => {
-    if (observer.current) {
-      sectionRefs.current.forEach(section => {
-        if (section) observer.current.unobserve(section);
-      });
-    }
-
-    observer.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const index = sectionRefs.current.findIndex(
-              ref => ref && ref.id === entry.target.id
-            );
-            if (index !== -1) setActiveSection(index);
-          }
+    useEffect(() => {
+      if (!post) return;
+    
+      // Initialize section refs
+      const elements = post.content.props.children
+        .filter(child => child.type === 'h2')
+        .map((_, index) => document.getElementById(`section-${index}`));
+    
+      sectionRefs.current = elements.filter(Boolean);
+    
+      // Cleanup previous observer
+      if (observer.current) {
+        sectionRefs.current.forEach(section => {
+          if (section) observer.current.unobserve(section);
         });
-      },
-      {
-        rootMargin: '-20% 0px -50% 0px',
-        threshold: 0.2
       }
-    );
-
-    const currentSections = sectionRefs.current.filter(Boolean);
-    currentSections.forEach(section => {
-      observer.current.observe(section);
-    });
-
-    return () => {
-      currentSections.forEach(section => {
-        observer.current.unobserve(section);
+    
+      // Initialize new observer
+      observer.current = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const index = sectionRefs.current.findIndex(
+                ref => ref === entry.target
+              );
+              if (index !== -1) setActiveSection(index);
+            }
+          });
+        },
+        {
+          rootMargin: '-20% 0px -50% 0px',
+          threshold: 0.2
+        }
+      );
+    
+      // Observe all sections
+      sectionRefs.current.forEach(section => {
+        if (section) observer.current.observe(section);
       });
-    };
-  }, [post]);
+    
+      return () => {
+        sectionRefs.current.forEach(section => {
+          if (section) observer.current.unobserve(section);
+        });
+      };
+    }, [post]);
 
   if (!post) return <div className="text-center py-20">Blog not found</div>;
 
@@ -133,30 +144,35 @@ export default function BlogDetail({ params }) {
                 </div>
               </div>
 
-           {/* Table of Contents */}
-           <div className="py-3">
-          <h4 className=" text-sm font-semibold mb-4 uppercase">In this article</h4>
-          <ul className="space-y-3">
-            {h2Headings.map((section, index) => (
-              <li key={index}>
-                <a
+              {/* Table of Contents */}
+              <div className="py-3">
+                <h4 className="text-sm font-semibold mb-4 uppercase">In this article</h4>
+                <ul className="space-y-3">
+                  {h2Headings.map((section, index) => (
+                    <li key={index}>
+                      <a
                         href={`#section-${index}`}
-                        className={` flex items-center group text-sm ${
-                          activeSection === index ? ' font-semibold' : ''
+                        className={`flex items-center group text-sm ${
+                          activeSection === index ? 'font-semibold' : ''
                         }`}
                       >
                         <span className={`w-[5px] h-[5px] rounded-full ${
-                          activeSection === index ? 'bg-secondary-500 scale-100 opacity-100' : 'bg-secondary-500 group-hover:scale-100 group-hover:opacity-100 scale-0 opacity-0'
+                          activeSection === index 
+                            ? 'bg-secondary-500 scale-100 opacity-100' 
+                            : 'bg-secondary-500 group-hover:scale-100 group-hover:opacity-100 scale-0 opacity-0'
                         } inline-block transition-all duration-300`}></span>
                         <span className={`ml-[-5px] text-gray-600 inline-block transition-all duration-300 ${
-                          activeSection === index ? 'ml-[5px] text-secondary-500' : 'group-hover:ml-[5px] group-hover:text-secondary-500'
-                        }`}>{section.title}</span>
+                          activeSection === index 
+                            ? 'ml-[5px] text-secondary-500' 
+                            : 'group-hover:ml-[5px] group-hover:text-secondary-500'
+                        }`}>
+                          {section.title}
+                        </span>
                       </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
               {/* Author Info */}
               <div className="bg-gray-50 p-5 rounded-lg shadow-sm border border-gray-200">
@@ -183,19 +199,21 @@ export default function BlogDetail({ params }) {
 
           {/* Main Content Sections */}
           <div>
-            <div className="text-lg text-gray-600 leading-relaxed mb-12 ">
+            <div className="text-lg text-gray-600 leading-relaxed mb-12">
               {post.description}
             </div>
             
-            <article className="prose lg:prose-xl ">
+            <article className="prose lg:prose-xl">
               {post.content.props.children.map((element, index) => {
                 if (element.type === 'h2') {
-                  const sectionId = `section-${h2Headings.findIndex(h => h.title === element.props.children)}`;
+                  const sectionIndex = h2Headings.findIndex(
+                    h => h.title === element.props.children
+                  );
                   return (
                     <h2
                       key={index}
-                      id={sectionId}
-                      ref={(el) => (sectionRefs.current[index] = el)}
+                      id={`section-${sectionIndex}`}
+                      ref={(el) => (sectionRefs.current[sectionIndex] = el)}
                       className="scroll-mt-24 text-3xl font-semibold text-gray-900 mb-6 pt-8 border-t border-gray-200"
                     >
                       {element.props.children}
