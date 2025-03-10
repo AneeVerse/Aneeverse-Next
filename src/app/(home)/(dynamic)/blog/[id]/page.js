@@ -13,25 +13,28 @@ const getBlogPost = (id) => {
   return blogs.find((blog) => blog.id === id);
 };
 
-
-
 export default function BlogDetail({ params }) {
-  
-  const resolvedParams = use(params); // ✅ Unwrapping params
-  const post = getBlogPost(resolvedParams.id); 
+  const resolvedParams = use(params);
+  const post = getBlogPost(resolvedParams.id);
   const [activeSection, setActiveSection] = useState(null);
   const sectionRefs = useRef([]);
   const observer = useRef(null);
 
+  // Extract h2 headings from content
+  const h2Headings = post?.content.props.children
+    .filter(child => child.type === 'h2')
+    .map((h2, index) => ({
+      id: `section-${index}`,
+      title: h2.props.children
+    })) || [];
+
   useEffect(() => {
-    // Cleanup previous observer
     if (observer.current) {
       sectionRefs.current.forEach(section => {
         if (section) observer.current.unobserve(section);
       });
     }
 
-    // Initialize new observer
     observer.current = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
@@ -44,12 +47,11 @@ export default function BlogDetail({ params }) {
         });
       },
       {
-        rootMargin: '-20% 0px -50% 0px', // Adjusted for better detection
+        rootMargin: '-20% 0px -50% 0px',
         threshold: 0.2
       }
     );
 
-    // Observe new sections
     const currentSections = sectionRefs.current.filter(Boolean);
     currentSections.forEach(section => {
       observer.current.observe(section);
@@ -60,11 +62,6 @@ export default function BlogDetail({ params }) {
         observer.current.unobserve(section);
       });
     };
-  }, [post]);
-
-  // Reset sections when post changes
-  useEffect(() => {
-    sectionRefs.current = sectionRefs.current.slice(0, post?.content.length);
   }, [post]);
 
   if (!post) return <div className="text-center py-20">Blog not found</div>;
@@ -79,11 +76,14 @@ export default function BlogDetail({ params }) {
               Blog
             </Link>
             <IoIosArrowForward className="" />
-            <Link href={`/blog/category/${post.category.toLowerCase().replace(" ","-")}`} className="uppercase hover:underline">
+            <Link 
+              href={`/blog/category/${post.category.toLowerCase().replace(" ","-")}`} 
+              className="uppercase hover:underline"
+            >
               {post.category}
             </Link>
           </div>
-          <div className="relative h-96 md:h-[483px] rounded-xl overflow-hidden">
+          <div className="relative h-96 md:h-[483px] rounded-xl overflow-hidden shadow-lg">
             <Image
               src={post.thumbnail}
               alt={post.title}
@@ -92,27 +92,27 @@ export default function BlogDetail({ params }) {
               placeholder="blur"
               blurDataURL="/images/placeholder.jpg"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-50" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60" />
             <div className="absolute w-full md:w-[80%] lg:w-[60%] inset-0 px-6 md:px-12 flex flex-col text-white py-6 md:py-12 justify-between">
               <div>
-                <h1 className="text-2xl sm:text-3xl md:text-5xl text-left font-semibold mb-3 md:mb-6">
+                <h1 className="text-2xl sm:text-3xl md:text-5xl font-semibold mb-3 md:mb-6 drop-shadow-lg">
                   {post.title}
                 </h1>
-                <div className="text-left">Published {post.date}</div>
+                <div className="text-gray-200">Published {post.date}</div>
               </div>
-              <div>
-                <div className='text-md mb-2 tracking-wider'>AUTHOR</div>
-                <div className="flex items-center gap-2 sm:gap-4">
+              <div className=" p-4 rounded-lg">
+                <div className='text-sm mb-2 tracking-wider text-gray-200'>AUTHOR</div>
+                <div className="flex items-center gap-4">
                   <Image
                     src={post.author.image}
                     alt={post.author.name}
-                    width={48}
-                    height={48}
-                    className="rounded-lg"
+                    width={56}
+                    height={56}
+                    className="rounded-lg border-2 border-white"
                   />
-                  <div className="text-left">
-                    <p className="font-semibold">{post.author.name}</p>
-                    <p className="text-sm">{post.author.role}</p>
+                  <div>
+                    <p className="font-semibold text-lg">{post.author.name}</p>
+                    <p className="text-sm text-gray-200">{post.author.role}</p>
                   </div>
                 </div>
               </div>
@@ -128,16 +128,16 @@ export default function BlogDetail({ params }) {
               {/* Time to Read */}
               <div className="bg-white font-medium border-b py-3 text-lg">
                 <div className="text-gray-900 flex items-center gap-3">
-                  <FaRegClock className='self-center' />
+                  <FaRegClock className='text-secondary-500' />
                   <div>{post.timeToRead}</div>
                 </div>
               </div>
 
-              {/* Table of Contents */}
-              <div className="py-3">
+           {/* Table of Contents */}
+           <div className="py-3">
           <h4 className=" text-sm font-semibold mb-4 uppercase">In this article</h4>
           <ul className="space-y-3">
-            {post.content.map((section, index) => (
+            {h2Headings.map((section, index) => (
               <li key={index}>
                 <a
                         href={`#section-${index}`}
@@ -159,21 +159,21 @@ export default function BlogDetail({ params }) {
 
 
               {/* Author Info */}
-              <div className="bg-secondary-500 p-5 text-primary-500 flex-col flex rounded-lg shadow-md">
-                <div className='flex gap-3 items-center'>
-                <Image
-                  src={post.author.image}
-                  alt={post.author.name}
-                  width={70}
-                  height={70}
-                  className="rounded-full mb-4"
-                />
-                <div>
-                <h3 className="text-lg font-bold mb-2">{post.author.name}</h3>
-                <p className=" text-sm mb-4">{post.author.role}</p>
+              <div className="bg-gray-50 p-5 rounded-lg shadow-sm border border-gray-200">
+                <div className='flex gap-4 items-center'>
+                  <Image
+                    src={post.author.image}
+                    alt={post.author.name}
+                    width={64}
+                    height={64}
+                    className="rounded-full border-2 border-white shadow-sm"
+                  />
+                  <div>
+                    <h3 className="text-lg font-semibold mb-1">{post.author.name}</h3>
+                    <p className="text-sm text-gray-600">{post.author.role}</p>
+                  </div>
                 </div>
-                </div>
-                <p className=" text-left text-sm">
+                <p className="mt-4 text-sm text-gray-600 leading-relaxed">
                   {post.author.name} has over a decade of experience in digital marketing
                   and creative leadership.
                 </p>
@@ -183,59 +183,52 @@ export default function BlogDetail({ params }) {
 
           {/* Main Content Sections */}
           <div>
-            {/* description */}
-            <div className="text-lg text-gray-600 leading-relaxed description mb-12">
+            <div className="text-lg text-gray-600 leading-relaxed mb-12 ">
               {post.description}
             </div>
-            <article className="space-y-20">
             
-        {/* Main Content */}
-        {post.content.map((section, index) => (
-          <section
-            key={index}
-            id={`section-${index}`}
-            ref={(el) => (sectionRefs.current[index] = el)}
-            className="scroll-mt-24 mb-16" // Increased scroll margin
-          >
-                  <div className="mb-8">
-                    <h2 className="text-3xl font-semibold mb-4">{section.title}</h2>
-                { section.type != "text" &&    <div className="relative  aspect-video rounded-xl overflow-hidden">
-                    { section.type == "image" ?  <Image
-                        src={section.srcUrl}
-                        alt={section.title}
-                        fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
-                        placeholder="blur"
-                        blurDataURL="/images/placeholder.jpg"
-                      /> : <iframe  src={section.srcUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" controls className="w-full h-full object-cover" />}
-                    </div> } 
+            <article className="prose lg:prose-xl ">
+              {post.content.props.children.map((element, index) => {
+                if (element.type === 'h2') {
+                  const sectionId = `section-${h2Headings.findIndex(h => h.title === element.props.children)}`;
+                  return (
+                    <h2
+                      key={index}
+                      id={sectionId}
+                      ref={(el) => (sectionRefs.current[index] = el)}
+                      className="scroll-mt-24 text-3xl font-semibold text-gray-900 mb-6 pt-8 border-t border-gray-200"
+                    >
+                      {element.props.children}
+                    </h2>
+                  );
+                }
+                return (
+                  <div key={index} className="mb-6 text-gray-600 leading-relaxed">
+                    {element}
                   </div>
-                  <div className="text-lg description text-gray-600 leading-relaxed">
-                    {section.description}
-                  </div>
-                </section>
-              ))}
+                );
+              })}
             </article>
-            <div className='mt-12'>
-            <Newsletter />
-</div>
+
+            <div className='mt-16'>
+              <Newsletter />
+            </div>
+
             {/* Related Blogs */}
             <section className="mt-20">
-              <h2 className="text-2xl font-semibold mb-8">More Articles</h2>
-              <div className="grid md:grid-cols-3 gap-12">
+              <h2 className="text-2xl font-semibold mb-8 text-gray-900">More Articles</h2>
+              <div className="grid md:grid-cols-3 gap-8">
                 {blogs
                   .filter(b => b.id !== post.id)
                   .slice(0, 3)
                   .map(blog => (
                     <BlogCard key={blog.id} blog={blog} />
-                 
                   ))}
               </div>
             </section>
           </div>
         </div>
       </Layout>
-      
     </div>
   );
 }
