@@ -223,7 +223,7 @@ export default function CreativeSection() {
               key={index}
               href={item.url}
               draggable={false}
-              className="relative min-w-[250px] h-[400px] sm:min-w-[300px] sm:h-[500px] group xl:h-[600px] lg:min-w-[330px] flex-shrink-0 mx-2 overflow-hidden rounded-xl shadow-lg"
+              className="relative min-w-[250px] h-[400px] sm:min-w-[300px] sm:h-[500px] group xl:h-[600px] lg:min-w-[330px] flex-shrink-0 mx-2 overflow-hidden hover:translate-y-[-10px] mt-[10px] duration-300 transition-all rounded-xl shadow-lg"
             >
               <img
                 src={item.image}
