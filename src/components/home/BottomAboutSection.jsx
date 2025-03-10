@@ -9,11 +9,11 @@ import Button from "@/components/common/Button";
 
 const BottomAboutSection = () => {
   return (
-    <section className={`bg-[#e6ecd6] text-secondary-500`}>
-      <Layout>
+    <section className={`bg-[#e6ecd6] overflow-x-hidden text-secondary-500`}>
+      <div className="max-w-container mx-auto  lg:px-[50px] lg:mx-[20px] xl:mx-[50px]  2xl:mx-auto">
         <div className="flex flex-col lg:flex-row items-stretch  lg:gap-16 xl:gap-24">
           {/* Left Content Section */}
-          <div className="lg:w-1/2 flex flex-col justify-between items-stretch ">
+          <div className="lg:w-1/2 px-sm md:px-md lg:px-0 flex flex-col justify-between items-stretch ">
             <div className="max-w-2xl flex flex-col justify-between h-full py-16 ">
              <div>
                 <div className="border-b border-secondary-500 pb-1 mb-4">
@@ -71,7 +71,7 @@ const BottomAboutSection = () => {
             />
           </div>
         </div>
-      </Layout>
+      </div>
     </section>
   );
 };
