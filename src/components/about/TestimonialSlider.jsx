@@ -7,10 +7,10 @@ import Layout from "../common/Layout";
 export default function TestimonialSlider() {
   const testimonials = [
     {
-      name: "Justin Rands",
-      role: "Director of Brand at Oyster",
-      company: "Oyster",
-      feedback: "I am beyond happy with the work. Your designers routinely save the day!",
+      name: "Amrita Thakar",
+      role: "Founder",
+      company: "JM Visa Services",
+      feedback: "Working with AneeVerse got us to the #1 spot in Mumbai through smart blog strategies and GMB optimization. Our leads have grown, and we've even saved on marketing costs. Really glad we made this move!",
       stats: {
         productionTimeSaved: "57%",
         costSavings: "$10,775",
@@ -22,10 +22,10 @@ export default function TestimonialSlider() {
       caseStudyUrl: "/case-studies/oyster",
     },
     {
-      name: "John Doe",
-      role: "CEO at Example Corp",
-      company: "Example Corp",
-      feedback: "The team is fantastic! They helped us scale our content creation effortlessly.",
+      name: "Navin Agarwal",
+      role: "Founder",
+      company: "Novino Inks Pvt Ltd",
+      feedback: "The biggest benefit has been the time saved. AneeVerse built a high-converting eCommerce website that truly reflects our brand. The level of customization and efficiency they brought in is unmatched.",
       stats: {
         productionTimeSaved: "40%",
         costSavings: "$8,000",
@@ -37,10 +37,10 @@ export default function TestimonialSlider() {
       caseStudyUrl: "/case-studies/example-corp",
     },
     {
-      name: "Jane Smith",
-      role: "Marketing Manager at Acme Inc.",
-      company: "Acme Inc.",
-      feedback: "Their expertise is unmatched. We've seen incredible ROI since partnering with them.",
+      name: "Vikram Manghnani",
+      role: "VMC",
+      company: "VMC",
+      feedback: "AneeVerse helped us with our creative work. They brought lots of fun ideas that made everything simple and bright. It felt like having a whole team of friends.",
       stats: {
         productionTimeSaved: "65%",
         costSavings: "$15,000",
@@ -128,10 +128,10 @@ export default function TestimonialSlider() {
             <h2 className="text-3xl font-semibold">
               {testimonials[currentIndex].company}
             </h2>
-            <p className="text-xl sm:text-3xl md:text-4xl text-left my-8">
+            <p className="text-xl sm:text-2xl md:text-3xl 2xl:text-4xl text-left my-8">
               "{testimonials[currentIndex].feedback}"
             </p>
-            <p className="font-medium text-gray-300">
+            <p className="font-medium italic text-gray-300">
               {testimonials[currentIndex].name}, {testimonials[currentIndex].role}
             </p>
 
@@ -151,7 +151,7 @@ export default function TestimonialSlider() {
             </div>
 
             {/* Case Study Link */}
-            <a
+            {/* <a
               href={testimonials[currentIndex].caseStudyUrl}
               className="inline-flex items-center gap-2 group font-medium text-white/90 transition-colors"
             >
@@ -159,7 +159,7 @@ export default function TestimonialSlider() {
               <span className="group-hover:translate-x-2 transition-transform">
                 →
               </span>
-            </a>
+            </a> */}
           </motion.div>
 
           {/* Navigation Buttons */}
