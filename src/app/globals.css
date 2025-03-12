@@ -73,6 +73,18 @@ body{
     line-height: 1.6;
     /* margin-bottom: 40px; */
   }
+  .description img {
+    max-width: 100%;
+    height: auto;
+    margin: 1.5rem 0;
+    border-radius: 0.5rem;
+  }
+  .description iframe {
+    width: 100%;
+    height: 500px;
+    margin: 1.5rem 0;
+    border-radius: 0.5rem;
+  }
 .description  table {
     width: 80%;
     border-collapse: collapse;
@@ -137,4 +149,7 @@ body{
     .description h3 { font-size: 1.25rem; } /* 20px */
     .description h4 { font-size: 1.125rem; } /* 18px */
     .description p, .description li { font-size: 0.95rem; } /* 15px */
+    .description iframe {
+      height: 400px;
+    }
   }

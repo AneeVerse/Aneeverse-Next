@@ -1,6 +1,6 @@
 // data/blogs.js
 export const temp_ui_trends_2025 = {
-  id: "boosting-conversions-with-ai",
+  id: "boosting-conversions-with",
   title: "How AI-Powered Tools Can Boost Your Conversion Rates",
   thumbnail: "https://www.aneeverse.com/images/blog/creative-design/blog1/thumbnail.avif",
   category: "E-Commerce",
