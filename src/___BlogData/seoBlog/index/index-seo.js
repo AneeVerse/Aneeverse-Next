@@ -1,11 +1,11 @@
-import { how_content_marketing_helps_yo } from "../how_content_marketing_helps";
+import { how_content_marketing_helps_your_business_grow } from "../how_content_marketing_helps_your_business_grow";
 import { temp_content_marketing_growth } from "../temp_content_marketing_growth";
 
 
 
 export const SeoBlog = [
     temp_content_marketing_growth,
-    how_content_marketing_helps_yo,
+    how_content_marketing_helps_your_business_grow,
     //blog3,
     //blog4,
     //blog5,
