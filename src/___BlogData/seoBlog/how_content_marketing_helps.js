@@ -1,5 +1,6 @@
 // data/blogs.js
-export const how_content_marketing_helps_yo = {
+export const how_content_marketing_helps_your_business_grow = 
+{
   id: "how-content-marketing-helps-your-business-grow",
   title: "How Content Marketing Helps Your Business Grow",
   thumbnail:
