@@ -1,6 +1,6 @@
 // data/blogs.js
 export const temp_design_system_guide = {
-  id: "boosting-conversions-with-ai",
+  id: "boosting-conversions",
   title: "How AI-Powered Tools Can Boost Your Conversion Rates",
   thumbnail: "https://www.aneeverse.com/images/blog/creative-design/blog1/thumbnail.avif",
   category: "eBay",
