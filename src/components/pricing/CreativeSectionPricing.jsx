@@ -8,12 +8,104 @@ import { UiSubheading } from "../common/typography/UiSubheading";
 import { Heading } from "../common/typography/Heading";
 import { AccentText } from "../common/typography/AccentText";
 
+
 const data = [
-  { firstTitle: "Website", secondTitle: "design", url: "/services/website-design", image: "/images/home/creative/creative1.png" },
-  { firstTitle: "Social Media", secondTitle: "creative", url: "#", image: "/images/home/creative/creative4.png" },
-  { firstTitle: "Email", secondTitle: "design", url: "/services/email-design", image: "/images/home/creative/creative2.png" },
-  { firstTitle: "Graphic", secondTitle: "design", url: "#", image: "/images/home/creative/creative3.png" },
-  { firstTitle: "Video", secondTitle: "editing", url: "#", image: "/images/home/creative/creative4.png" },
+  {
+    firstTitle: "Website", secondTitle: "Design",
+    tags: ["E-commerce", "UI/UX", "Custom Design", "Responsive Design", "CMS Integration"],
+    url: "/services/website-design",
+    image: "/images/home/creative/creative1.png"
+  },
+  {
+    firstTitle: "Landing", secondTitle: "Pages",
+    tags: ["High Conversion", "Lead Generation", "A/B Testing", "Minimal UI", "Fast Loading"],
+    url: "/services/landing-pages",
+    image: "/images/home/creative/creative3.png"
+  },
+  {
+    firstTitle: "SEO", secondTitle: "Optimization",
+    tags: ["Keyword Research", "On-Page SEO", "Technical SEO", "Backlink Building", "Content Optimization"],
+    url: "/services/seo-optimization",
+    image: "/images/home/creative/creative2.png"
+  },
+  {
+    firstTitle: "GMB", secondTitle: "Optimization",
+    tags: ["Google My Business", "Local Ranking", "Map SEO", "Business Profile", "Review Management"],
+    url: "/services/gmb-optimization",
+    image: "/images/home/creative/creative4.png"
+  },
+  {
+    firstTitle: "Local", secondTitle: "SEO",
+    tags: ["Geo-Targeting", "NAP Consistency", "Local Listings", "Customer Reviews", "Local Backlinks"],
+    url: "/services/local-seo",
+    image: "/images/home/creative/creative1.png"
+  },
+  {
+    firstTitle: "Email", secondTitle: "Design",
+    tags: ["Responsive Emails", "Newsletter Templates", "HTML Emails", "Transactional Emails", "Marketing Campaigns"],
+    url: "/services/email-design",
+    image: "/images/home/creative/creative2.png"
+  },
+  {
+    firstTitle: "Marketing", secondTitle: "Strategy",
+    tags: ["Brand Awareness", "Customer Retention", "Market Research", "Competitor Analysis", "Growth Hacking"],
+    url: "/services/marketing-strategy",
+    image: "/images/home/creative/creative4.png"
+  },
+  {
+    firstTitle: "Email", secondTitle: "Campaign",
+    tags: ["Personalized Emails", "Automated Sequences", "Lead Nurturing", "Email Analytics", "A/B Testing"],
+    url: "/services/email-campaign",
+    image: "/images/home/creative/creative3.png"
+  },
+  {
+    firstTitle: "Google", secondTitle: "Ads",
+    tags: ["PPC", "Keyword Targeting", "Ad Copywriting", "Performance Tracking", "Conversion Optimization"],
+    url: "/services/google-ads",
+    image: "/images/home/creative/creative1.png"
+  },
+  {
+    firstTitle: "Meta", secondTitle: "Ads",
+    tags: ["Facebook Ads", "Instagram Ads", "Audience Targeting", "Video Ads", "Retargeting Campaigns"],
+    url: "/services/meta-ads",
+    image: "/images/home/creative/creative2.png"
+  },
+  {
+    firstTitle: "Influencer", secondTitle: "Marketing",
+    tags: ["Brand Collaborations", "Social Proof", "Sponsored Posts", "Influencer Outreach", "Engagement Growth"],
+    url: "/services/influencer-marketing",
+    image: "/images/home/creative/creative3.png"
+  },
+  {
+    firstTitle: "Blog", secondTitle: "Writing",
+    tags: ["SEO Blogs", "Long-Form Content", "Industry Research", "Engaging Storytelling", "Content Strategy"],
+    url: "/services/blog-writing",
+    image: "/images/home/creative/creative4.png"
+  },
+  {
+    firstTitle: "Ghost", secondTitle: "Writing",
+    tags: ["Personal Branding", "Book Writing", "Thought Leadership", "SEO Optimization", "Confidential Content"],
+    url: "/services/ghost-writing",
+    image: "/images/home/creative/creative2.png"
+  },
+  {
+    firstTitle: "Social Media", secondTitle: "Creatives",
+    tags: ["Social Posts", "Ad Creatives", "Engaging Graphics", "Brand Consistency", "Platform-Specific Design"],
+    url: "/services/social-media-creatives",
+    image: "/images/home/creative/creative3.png"
+  },
+  {
+    firstTitle: "Presentation", secondTitle: "Design",
+    tags: ["Business Pitches", "Infographics", "Slide Decks", "Storytelling", "Professional Templates"],
+    url: "/services/presentation-design",
+    image: "/images/home/creative/creative3.png"
+  },
+  {
+    firstTitle: "Brochure", secondTitle: "Design",
+    tags: ["Company Profiles", "Marketing Brochures", "Product Catalogs", "Print & Digital", "Attractive Layouts"],
+    url: "/services/brochure-design",
+    image: "/images/home/creative/creative3.png"
+  }
 ];
 
 const duplicatedData = [...data, ...data];
@@ -140,7 +232,7 @@ export default function CreativeSectionPricing() {
               key={index}
               href={item.url}
               draggable={false}
-              className="relative min-w-[250px] h-[400px] sm:min-w-[300px] sm:h-[500px] lg:h-[600px] lg:min-w-[330px] flex-shrink-0 mx-2 overflow-hidden rounded-xl shadow-lg"
+              className="relative min-w-[250px] h-[400px] sm:min-w-[300px] sm:h-[500px] group xl:h-[600px] lg:min-w-[330px] flex-shrink-0 mx-2 overflow-hidden hover:translate-y-[-10px] mt-[10px] duration-300 transition-all rounded-xl shadow-lg"
             >
               <img
                 src={item.image}
@@ -153,6 +245,16 @@ export default function CreativeSectionPricing() {
                   <span className="font-Rock_Salt block">{item.secondTitle}</span>
                 </h3>
               </div>
+
+                <div className="absolute bottom-5 left-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                  <ul className="flex gap-2  flex-wrap">
+                    {item.tags.map((tag, index) => (
+                      <li key={index} className="text-white min-w-fit px-[10px] rounded-full py-[3px] border text-xs font-medium">
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
             </Link>
           ))}
         </div>
