@@ -28,54 +28,99 @@ export default function BlogDetail({ params }) {
       title: h2.props.children
     })) || [];
 
-    useEffect(() => {
-      if (!post) return;
-    
-      // Initialize section refs
-      const elements = post.content.props.children
-        .filter(child => child.type === 'h2')
-        .map((_, index) => document.getElementById(`section-${index}`));
-    
-      sectionRefs.current = elements.filter(Boolean);
-    
-      // Cleanup previous observer
-      if (observer.current) {
-        sectionRefs.current.forEach(section => {
-          if (section) observer.current.unobserve(section);
-        });
-      }
-    
-      // Initialize new observer
-      observer.current = new IntersectionObserver(
-        (entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const index = sectionRefs.current.findIndex(
-                ref => ref === entry.target
-              );
-              if (index !== -1) setActiveSection(index);
-            }
-          });
-        },
-        {
-          rootMargin: '-20% 0px -50% 0px',
-          threshold: 0.2
-        }
-      );
-    
-      // Observe all sections
+  useEffect(() => {
+    if (!post) return;
+
+    // Initialize section refs
+    const elements = post.content.props.children
+      .filter(child => child.type === 'h2')
+      .map((_, index) => document.getElementById(`section-${index}`));
+
+    sectionRefs.current = elements.filter(Boolean);
+
+    // Cleanup previous observer
+    if (observer.current) {
       sectionRefs.current.forEach(section => {
-        if (section) observer.current.observe(section);
+        if (section) observer.current.unobserve(section);
       });
-    
-      return () => {
-        sectionRefs.current.forEach(section => {
-          if (section) observer.current.unobserve(section);
+    }
+
+    // Initialize new observer
+    observer.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const index = sectionRefs.current.findIndex(
+              ref => ref === entry.target
+            );
+            if (index !== -1) setActiveSection(index);
+          }
         });
-      };
-    }, [post]);
+      },
+      {
+        rootMargin: '-20% 0px -50% 0px',
+        threshold: 0.2
+      }
+    );
+
+    // Observe all sections
+    sectionRefs.current.forEach(section => {
+      if (section) observer.current.observe(section);
+    });
+
+    return () => {
+      sectionRefs.current.forEach(section => {
+        if (section) observer.current.unobserve(section);
+      });
+    };
+  }, [post]);
 
   if (!post) return <div className="text-center py-20">Blog not found</div>;
+
+  // Function to render content with proper image handling
+  const renderContent = (content) => {
+    return content.props.children.map((element, index) => {
+      if (element.type === 'h2') {
+        const sectionIndex = h2Headings.findIndex(
+          h => h.title === element.props.children
+        );
+        return (
+          <h2
+            key={index}
+            id={`section-${sectionIndex}`}
+            ref={(el) => (sectionRefs.current[sectionIndex] = el)}
+            className="scroll-mt-24 text-3xl font-semibold text-gray-900 mb-6 pt-8 border-t border-gray-200"
+          >
+            {element.props.children}
+          </h2>
+        );
+      } else if (element.type === 'img') {
+        return (
+          <div key={index} className="my-6">
+            <Image
+              src={element.props.src}
+              alt={element.props.alt || "Blog Image"}
+              width={800}
+              height={450}
+              className="rounded-lg shadow-lg"
+            />
+          </div>
+        );
+      } else if (element.type === 'iframe') {
+        return (
+          <div key={index} className="my-6 aspect-video w-full">
+            {element}
+          </div>
+        );
+      } else {
+        return (
+          <div key={index} className="mb-6 text-gray-600 leading-relaxed">
+            {element}
+          </div>
+        );
+      }
+    });
+  };
 
   return (
     <div className='bg-white py-16'>
@@ -175,7 +220,7 @@ export default function BlogDetail({ params }) {
               </div>
 
               {/* Author Info */}
-              <div className="bg-gray-50 p-5 rounded-lg shadow-sm border border-gray-200">
+              <div className="bg-secondary-500 p-5 rounded-lg shadow-sm border text-primary-500">
                 <div className='flex gap-4 items-center'>
                   <Image
                     src={post.author.image}
@@ -186,10 +231,10 @@ export default function BlogDetail({ params }) {
                   />
                   <div>
                     <h3 className="text-lg font-semibold mb-1">{post.author.name}</h3>
-                    <p className="text-sm text-gray-600">{post.author.role}</p>
+                    <p className="text-sm  *:">{post.author.role}</p>
                   </div>
                 </div>
-                <p className="mt-4 text-sm text-gray-600 leading-relaxed">
+                <p className="mt-4 text-sm  leading-relaxed">
                   {post.author.name} has over a decade of experience in digital marketing
                   and creative leadership.
                 </p>
@@ -198,34 +243,13 @@ export default function BlogDetail({ params }) {
           </aside>
 
           {/* Main Content Sections */}
-          <div>
-            <div className="text-lg text-gray-600 leading-relaxed mb-12">
-              {post.description}
+          <div >
+            <div className=" description text-gray-600 leading-relaxed mb-12">
+              <p className='highlight'>{post.description}</p> 
             </div>
             
-            <article className="prose lg:prose-xl">
-              {post.content.props.children.map((element, index) => {
-                if (element.type === 'h2') {
-                  const sectionIndex = h2Headings.findIndex(
-                    h => h.title === element.props.children
-                  );
-                  return (
-                    <h2
-                      key={index}
-                      id={`section-${sectionIndex}`}
-                      ref={(el) => (sectionRefs.current[sectionIndex] = el)}
-                      className="scroll-mt-24 text-3xl font-semibold text-gray-900 mb-6 pt-8 border-t border-gray-200"
-                    >
-                      {element.props.children}
-                    </h2>
-                  );
-                }
-                return (
-                  <div key={index} className="mb-6 text-gray-600 leading-relaxed">
-                    {element}
-                  </div>
-                );
-              })}
+            <article className="prose description lg:prose-xl">
+              {renderContent(post.content)}
             </article>
 
             <div className='mt-16'>
