@@ -147,7 +147,7 @@ const HeroSection = () => {
         <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
           {/* Left Content */}
           <div className="pt-[90px]  lg:pt-[100px] lg:pb-12">
-            <div className="flex flex-col-reverse sm:flex-col">
+            <div className="flex flex-col sm:flex-col">
               <Heading
                 level="h2"
                 color="gredient"

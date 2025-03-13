@@ -101,7 +101,7 @@ const CommonServicesOurWorks = () => {
         </div>
 
         {/* Project Grid */}
-        <div className=" grid grid-cols-1  md:grid-cols-4 gap-6">
+        <div className=" grid grid-cols-1  md:grid-cols-4 gap-4">
           {projects.map((project, index) => (
             <div
               key={index}
