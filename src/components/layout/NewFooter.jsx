@@ -295,7 +295,7 @@ export default function NewFooter() {
               &copy; 2025 Aneeverse. All rights reserved.
             </p>
             </div>
-            <ul className="flex flex-row justify-center mt-3 md:mt-0 gap-4 text-sm ">
+            <ul className="flex flex-col sm:flex-row justify-center mt-3 md:mt-0 gap-4 text-sm ">
               {footerData.legal.map((legalItem, index) => (
                 <li key={index}>
                   <Link href={legalItem.link} className="hover:underline block">
