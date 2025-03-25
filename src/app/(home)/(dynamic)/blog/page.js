@@ -4,6 +4,7 @@ import EbayBlogSection from '@/components/blog/EbayBlogSection'
 import EcommerceBlogSection from '@/components/blog/EcommerceBlogSection'
 import Newsletter from '@/components/blog/NewsLetter'
 import SeoBlogSection from '@/components/blog/SeoBlogSection'
+import UiuxBlogSection from '@/components/blog/UiuxBlogSection'
 import Layout from '@/components/common/Layout'
 import React from 'react'
 
@@ -39,6 +40,7 @@ const page = () => {
         <EbayBlogSection  />
         <SeoBlogSection   />
         <DesignBlogSection />
+        <UiuxBlogSection />
         <EcommerceBlogSection />
 
         <Layout>
