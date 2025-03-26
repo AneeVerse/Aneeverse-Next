@@ -5,6 +5,7 @@ import EcommerceBlogSection from '@/components/blog/EcommerceBlogSection'
 import Newsletter from '@/components/blog/NewsLetter'
 import SeoBlogSection from '@/components/blog/SeoBlogSection'
 import UiuxBlogSection from '@/components/blog/UiuxBlogSection'
+import LocalSeoBlogSection from '@/components/blog/LocalSeoBlogSection'
 import Layout from '@/components/common/Layout'
 import React from 'react'
 
@@ -42,6 +43,7 @@ const page = () => {
         <DesignBlogSection />
         <UiuxBlogSection />
         <EcommerceBlogSection />
+        <LocalSeoBlogSection />
 
         <Layout>
         <Newsletter />

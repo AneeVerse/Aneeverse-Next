@@ -3,6 +3,7 @@ import { ebayBlog } from "@/___BlogData/ebayBlog/index/index-ebay";
 import { ecommerceBlog } from "@/___BlogData/ecommerceBlog/index/index-ecommerce";
 import { SeoBlog } from "@/___BlogData/seoBlog/index/index-seo";
 import { UiuxBlog } from "@/___BlogData/uiuxBlog/index-uiux";
+import { LocalseoBlog } from "@/___BlogData/localseoBlog/index-localseo";
 
 // data/blogs.js
 export const blogs = [
@@ -10,5 +11,6 @@ export const blogs = [
 ...SeoBlog,
 ...ecommerceBlog,
 ...ebayBlog,
-...UiuxBlog
+...UiuxBlog,
+...LocalseoBlog
 ];
