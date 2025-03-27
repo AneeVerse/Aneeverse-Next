@@ -6,6 +6,7 @@ import Newsletter from '@/components/blog/NewsLetter'
 import SeoBlogSection from '@/components/blog/SeoBlogSection'
 import UiuxBlogSection from '@/components/blog/UiuxBlogSection'
 import LocalSeoBlogSection from '@/components/blog/LocalSeoBlogSection'
+import ContentMarketingBlogSection from '@/components/blog/ContentMarketingBlogSection'
 import Layout from '@/components/common/Layout'
 import React from 'react'
 
@@ -37,18 +38,18 @@ export const metadata = {
 const page = () => {
   return (
     <div className='bg-white pb-16'>
-        <BlogHeroSection    />
-        <EbayBlogSection  />
-        <SeoBlogSection   />
+        <BlogHeroSection />
         <DesignBlogSection />
-        <UiuxBlogSection />
+        <SeoBlogSection />
         <EcommerceBlogSection />
+        <EbayBlogSection />
+        <UiuxBlogSection />
         <LocalSeoBlogSection />
+        <ContentMarketingBlogSection />
 
         <Layout>
-        <Newsletter />
+          <Newsletter />
         </Layout>
-      
     </div>
   )
 }
