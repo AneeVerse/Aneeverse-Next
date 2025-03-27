@@ -8,6 +8,7 @@ import UiuxBlogSection from '@/components/blog/UiuxBlogSection'
 import LocalSeoBlogSection from '@/components/blog/LocalSeoBlogSection'
 import ContentMarketingBlogSection from '@/components/blog/ContentMarketingBlogSection'
 import WebDevelopmentBlogSection from '@/components/blog/WebDevelopmentBlogSection'
+import WebDesignBlogSection from '@/components/blog/WebDesignBlogSection'
 import Layout from '@/components/common/Layout'
 import React from 'react'
 
@@ -48,6 +49,7 @@ const page = () => {
         <LocalSeoBlogSection />
         <ContentMarketingBlogSection />
         <WebDevelopmentBlogSection />
+        <WebDesignBlogSection />
 
         <Layout>
           <Newsletter />

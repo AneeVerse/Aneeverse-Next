@@ -6,6 +6,7 @@ import { UiuxBlog } from "@/___BlogData/uiuxBlog/index-uiux";
 import { LocalseoBlog } from "@/___BlogData/localseoBlog/index-localseo";
 import { contentMarketingBlogPosts } from "@/___BlogData/contentMarketingBlog";
 import { WebDevelopmentBlog } from '@/___BlogData/webDevelopmentBlog/index-webdev';
+import { WebDesignBlog } from '@/___BlogData/webDesignBlog/index-webdesign';
 
 // data/blogs.js
 export const blogs = [
@@ -16,5 +17,6 @@ export const blogs = [
 ...UiuxBlog,
 ...LocalseoBlog,
 ...contentMarketingBlogPosts,
-...WebDevelopmentBlog
+...WebDevelopmentBlog,
+...WebDesignBlog
 ];
