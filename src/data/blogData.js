@@ -1,3 +1,4 @@
+// Last updated: 2025-03-27T14:59:51.551Z
 import { designBlog } from "@/___BlogData/designBlog/index/index-design";
 import { ebayBlog } from "@/___BlogData/ebayBlog/index/index-ebay";
 import { ecommerceBlog } from "@/___BlogData/ecommerceBlog/index/index-ecommerce";
