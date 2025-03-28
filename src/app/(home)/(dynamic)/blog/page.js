@@ -1,16 +1,4 @@
-import BlogHeroSection from '@/components/blog/BlogHeroSection'
-import DesignBlogSection from '@/components/blog/DesignBlogSection'
-import EbayBlogSection from '@/components/blog/EbayBlogSection'
-import EcommerceBlogSection from '@/components/blog/EcommerceBlogSection'
-import Newsletter from '@/components/blog/NewsLetter'
-import SeoBlogSection from '@/components/blog/SeoBlogSection'
-import UiuxBlogSection from '@/components/blog/UiuxBlogSection'
-import LocalSeoBlogSection from '@/components/blog/LocalSeoBlogSection'
-import ContentMarketingBlogSection from '@/components/blog/ContentMarketingBlogSection'
-import WebDevelopmentBlogSection from '@/components/blog/WebDevelopmentBlogSection'
-import WebDesignBlogSection from '@/components/blog/WebDesignBlogSection'
-import Layout from '@/components/common/Layout'
-import React from 'react'
+import BlogPage from './ClientBlogPage';
 
 export const metadata = {
   title: "Blog | Aneeverse",
@@ -37,25 +25,7 @@ export const metadata = {
   },
 }
 
-const page = () => {
-  return (
-    <div className='bg-white pb-16'>
-        <BlogHeroSection />
-        <DesignBlogSection />
-        <SeoBlogSection />
-        <EcommerceBlogSection />
-        <EbayBlogSection />
-        <UiuxBlogSection />
-        <LocalSeoBlogSection />
-        <ContentMarketingBlogSection />
-        <WebDevelopmentBlogSection />
-        <WebDesignBlogSection />
-
-        <Layout>
-          <Newsletter />
-        </Layout>
-    </div>
-  )
+export default function Page() {
+  // This is a server component that only handles the metadata export
+  return <BlogPage />;
 }
-
-export default page
