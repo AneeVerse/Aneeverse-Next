@@ -16,7 +16,7 @@ export default function AdminLayout({ children }) {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Admin Navigation */}
-      <nav className="bg-secondary-500 text-white">
+      <nav className="bg-secondary-500 text-white fixed top-0 left-0 right-0 z-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
@@ -46,7 +46,7 @@ export default function AdminLayout({ children }) {
       </nav>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8 mt-16">
         {children}
       </main>
     </div>
