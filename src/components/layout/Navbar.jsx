@@ -53,7 +53,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 w-full h-[70px] sm:h-[80px] flex items-center z-40 transition-all duration-300 bg-[${color.bg}]`}
+      className={`fixed top-0 w-full h-[70px] sm:h-[80px] flex items-center z-30 transition-all duration-300 bg-[${color.bg}]`}
     >
       <Layout className="flex w-full justify-between items-center">
         {/* Logo */}
