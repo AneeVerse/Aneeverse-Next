@@ -77,25 +77,81 @@ export default function BlogDetail({ params }) {
     loadBlog();
   }, [resolvedParams.id]);
 
+  // Function to add IDs to HTML headings for linking
+  const processHtmlContent = (htmlContent) => {
+    if (!htmlContent || typeof htmlContent !== 'string') return htmlContent;
+    if (typeof window === 'undefined') return htmlContent; // Skip on server
+    
+    try {
+      // Create a temporary div to parse and modify HTML content
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = htmlContent;
+      
+      // Add IDs to h2 elements
+      const headings = tempDiv.querySelectorAll('h2');
+      headings.forEach((heading, index) => {
+        heading.id = `section-${index}`;
+      });
+      
+      return tempDiv.innerHTML;
+    } catch (err) {
+      console.error('Error processing HTML content:', err);
+      return htmlContent;
+    }
+  };
+
+  // Extract h2 headings from content
+  const h2Headings = React.useMemo(() => {
+    if (!post) return [];
+    
+    try {
+      // For HTML string content
+      if (typeof post.content === 'string') {
+        if (typeof window === 'undefined') return []; // Skip on server
+        
+        // Create a temporary div to parse HTML content
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = post.content;
+        const headings = tempDiv.querySelectorAll('h2');
+        
+        // Convert to array and extract info
+        return Array.from(headings).map((h2, index) => ({
+          id: `section-${index}`,
+          title: h2.textContent
+        }));
+      }
+      
+      // For React element content
+      if (post.content.props?.children) {
+        return post.content.props.children
+          .filter(child => child && child.type === 'h2')
+          .map((h2, index) => ({
+            id: `section-${index}`,
+            title: h2.props.children
+          }));
+      }
+      
+      return [];
+    } catch (err) {
+      console.error('Error extracting h2 headings:', err);
+      return [];
+    }
+  }, [post]);
+
   useEffect(() => {
-    if (!post) return;
+    if (!post || typeof window === 'undefined') return;
 
     // Initialize section refs
     try {
-      let h2Elements = [];
+      let sectionElements = [];
       
-      if (typeof post.content === 'string') {
-        // For string content, we'll need to parse the HTML
-        console.log('Parsing HTML content');
-        // We're not actually parsing it here, just logging
-      } else if (post.content.props?.children) {
-        // For React element content
-        h2Elements = post.content.props.children
-          .filter(child => child && child.type === 'h2')
-          .map((_, index) => document.getElementById(`section-${index}`));
-      }
-
-      sectionRefs.current = h2Elements.filter(Boolean);
+      // Get h2 elements based on their IDs
+      h2Headings.forEach(({ id }) => {
+        const el = document.getElementById(id);
+        if (el) sectionElements.push(el);
+      });
+      
+      sectionRefs.current = sectionElements;
 
       // Cleanup previous observer
       if (observer.current) {
@@ -140,33 +196,7 @@ export default function BlogDetail({ params }) {
       console.error('Error setting up section observers:', err);
       // Continue without scroll tracking
     }
-  }, [post]);
-
-  // Extract h2 headings from content
-  const h2Headings = React.useMemo(() => {
-    if (!post) return [];
-    
-    try {
-      if (typeof post.content === 'string') {
-        // For string content, we can't easily extract headings
-        return [];
-      }
-      
-      if (post.content.props?.children) {
-        return post.content.props.children
-          .filter(child => child && child.type === 'h2')
-          .map((h2, index) => ({
-            id: `section-${index}`,
-            title: h2.props.children
-          }));
-      }
-      
-      return [];
-    } catch (err) {
-      console.error('Error extracting h2 headings:', err);
-      return [];
-    }
-  }, [post]);
+  }, [post, h2Headings]);
 
   if (isLoading) {
     return (
@@ -204,7 +234,15 @@ export default function BlogDetail({ params }) {
     try {
       // Handle string content (HTML)
       if (typeof content === 'string') {
-        return <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: content }} />;
+        // Process HTML to add IDs to headings
+        const processedContent = processHtmlContent(content);
+        
+        return (
+          <div 
+            className="prose max-w-none prose-img:rounded-lg prose-img:shadow-lg prose-headings:scroll-mt-24 prose-headings:pt-6 prose-headings:mt-6 prose-headings:border-t prose-headings:border-gray-100" 
+            dangerouslySetInnerHTML={{ __html: processedContent }} 
+          />
+        );
       }
 
       // Handle null or undefined content
@@ -352,29 +390,26 @@ export default function BlogDetail({ params }) {
 
               {/* Table of Contents - only show if we have headings */}
               {h2Headings.length > 0 && (
-                <div className="py-3">
+                <div className="py-3 border-b mb-4">
                   <h4 className="text-sm font-semibold mb-4 uppercase">In this article</h4>
                   <ul className="space-y-3">
                     {h2Headings.map((section, index) => (
-                      <li key={index}>
+                      <li key={index} className="pl-3 border-l-2 border-transparent hover:border-secondary-500">
                         <a
-                          href={`#section-${index}`}
-                          className={`flex items-center group text-sm ${
-                            activeSection === index ? 'font-semibold' : ''
+                          href={`#${section.id}`}
+                          className={`block group text-sm py-1 ${
+                            activeSection === index ? 'font-semibold text-secondary-500 border-secondary-500' : 'text-gray-700 hover:text-secondary-500'
                           }`}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            const element = document.getElementById(section.id);
+                            if (element) {
+                              element.scrollIntoView({ behavior: 'smooth' });
+                              window.history.pushState(null, '', `#${section.id}`);
+                            }
+                          }}
                         >
-                          <span className={`w-[5px] h-[5px] rounded-full ${
-                            activeSection === index 
-                              ? 'bg-secondary-500 scale-100 opacity-100' 
-                              : 'bg-secondary-500 group-hover:scale-100 group-hover:opacity-100 scale-0 opacity-0'
-                          } inline-block transition-all duration-300`}></span>
-                          <span className={`ml-[-5px] text-gray-600 inline-block transition-all duration-300 ${
-                            activeSection === index 
-                              ? 'ml-[5px] text-secondary-500' 
-                              : 'group-hover:ml-[5px] group-hover:text-secondary-500'
-                          }`}>
-                            {section.title}
-                          </span>
+                          {section.title}
                         </a>
                       </li>
                     ))}
@@ -404,6 +439,42 @@ export default function BlogDetail({ params }) {
                   and creative leadership.
                 </p>
               </div>
+
+              {/* Related Articles */}
+              <div className="mt-8">
+                <h4 className="text-sm font-semibold mb-4 uppercase">Related Articles</h4>
+                <div className="space-y-4">
+                  {blogs
+                    .filter(b => b.id !== post.id && b.category === post.category)
+                    .slice(0, 3)
+                    .map(blog => (
+                      <div key={blog.id} className="border-b pb-4">
+                        <Link href={`/blog/${blog.id}`} className="block group">
+                          <div className="relative h-36 mb-2 overflow-hidden rounded-md">
+                            <Image
+                              src={blog.thumbnail}
+                              alt={blog.title}
+                              fill
+                              className="object-cover transition-transform duration-300 group-hover:scale-105"
+                              onError={(e) => {
+                                e.currentTarget.src = defaultThumbnail;
+                              }}
+                            />
+                          </div>
+                          <h5 className="font-medium text-gray-900 group-hover:text-secondary-500 transition-colors line-clamp-2">
+                            {blog.title}
+                          </h5>
+                        </Link>
+                      </div>
+                    ))}
+                </div>
+                <Link 
+                  href="/blog" 
+                  className="inline-block mt-4 text-sm font-medium text-secondary-500 hover:underline"
+                >
+                  View all articles
+                </Link>
+              </div>
             </div>
           </aside>
 
@@ -413,9 +484,32 @@ export default function BlogDetail({ params }) {
               <p className='highlight'>{post.shortDescription}</p> 
             </div>
             
-            <article className="prose description lg:prose-xl">
+            <article className="prose prose-lg max-w-none description prose-img:rounded-lg prose-img:mx-auto prose-img:my-8 prose-headings:text-gray-900 prose-a:text-secondary-500 prose-a:no-underline hover:prose-a:underline">
               {renderContent(post.content)}
             </article>
+
+            <style jsx global>{`
+              /* Custom styles for blog content */
+              .prose iframe {
+                border-radius: 0.5rem;
+                width: 100%;
+                aspect-ratio: 16/9;
+                margin: 2rem auto;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+              }
+              
+              .prose div.my-8.flex.justify-center {
+                margin: 2rem auto;
+              }
+              
+              .prose div.my-8.flex.justify-center img {
+                border-radius: 0.5rem;
+                max-height: 500px;
+                object-fit: contain;
+                margin: 0 auto;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+              }
+            `}</style>
 
             <div className='mt-16'>
               <Newsletter />
