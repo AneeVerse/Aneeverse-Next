@@ -2,18 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import BlogHeroSection from '@/components/blog/BlogHeroSection';
-import DesignBlogSection from '@/components/blog/DesignBlogSection';
-import EbayBlogSection from '@/components/blog/EbayBlogSection';
-import EcommerceBlogSection from '@/components/blog/EcommerceBlogSection';
 import Newsletter from '@/components/blog/NewsLetter';
-import SeoBlogSection from '@/components/blog/SeoBlogSection';
-import UiuxBlogSection from '@/components/blog/UiuxBlogSection';
-import LocalSeoBlogSection from '@/components/blog/LocalSeoBlogSection';
-import ContentMarketingBlogSection from '@/components/blog/ContentMarketingBlogSection';
-import WebDevelopmentBlogSection from '@/components/blog/WebDevelopmentBlogSection';
-import WebDesignBlogSection from '@/components/blog/WebDesignBlogSection';
 import Layout from '@/components/common/Layout';
 import { blogs as staticBlogs } from '@/data/blogData';
+import BlogCard from '@/components/blog/BlogCard';
+import { FaChevronRight } from "react-icons/fa6";
+import Link from 'next/link';
 
 export default function ClientBlogPage() {
   const [blogs, setBlogs] = useState([]);
@@ -168,6 +162,9 @@ export default function ClientBlogPage() {
     );
   }
 
+  // Get unique categories from blogs
+  const categories = [...new Set(blogs.map(blog => blog.category))].filter(Boolean);
+
   return (
     <div className='bg-white pb-16'>
       {apiWarning && (
@@ -188,15 +185,37 @@ export default function ClientBlogPage() {
       )}
       
       <BlogHeroSection blogData={blogData} />
-      <DesignBlogSection blogData={blogData} />
-      <SeoBlogSection blogData={blogData} />
-      <EcommerceBlogSection blogData={blogData} />
-      <EbayBlogSection blogData={blogData} />
-      <UiuxBlogSection blogData={blogData} />
-      <LocalSeoBlogSection blogData={blogData} />
-      <ContentMarketingBlogSection blogData={blogData} />
-      <WebDevelopmentBlogSection blogData={blogData} />
-      <WebDesignBlogSection blogData={blogData} />
+
+      {/* Dynamically render sections for each category */}
+      {categories.map(category => {
+        const categoryBlogs = blogs.filter(blog => blog.category === category);
+        if (categoryBlogs.length === 0) return null;
+
+        // Convert category to URL-friendly format
+        const categorySlug = category.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '-');
+
+        return (
+          <div key={category} className='bg-white py-10'>
+            <Layout>
+              <div className='flex group mb-6 justify-between items-center'>
+                <h1 className='text-3xl sm:text-4xl text-secondary-500 font-semibold'>{category}</h1>
+                <Link 
+                  href={`/blog/category/${categorySlug}`} 
+                  className='text-secondary-500 hover:underline flex items-center gap-1 font-semibold text-lg'
+                >
+                  <span>See all</span>
+                  <FaChevronRight className='text-lg group-hover:translate-x-1 duration-300 transition-all' />
+                </Link>
+              </div>
+              <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
+                {categoryBlogs.slice(0, 4).map((blog) => (
+                  <BlogCard key={blog.id} blog={blog} />
+                ))}
+              </div>
+            </Layout>
+          </div>
+        );
+      })}
 
       <Layout>
         <Newsletter />
