@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { FaArrowLeft, FaImage, FaYoutube, FaPaste } from 'react-icons/fa';
+import { FaArrowLeft, FaImage, FaYoutube, FaPaste, FaPlus } from 'react-icons/fa';
 import { useParams, useRouter } from 'next/navigation';
 
 export default function EditBlog() {
@@ -11,6 +11,9 @@ export default function EditBlog() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [categories, setCategories] = useState([]);
+  const [isAddingCategory, setIsAddingCategory] = useState(false);
+  const [newCategory, setNewCategory] = useState({ name: '', description: '' });
   const [formData, setFormData] = useState({
     title: '',
     category: '',
@@ -44,8 +47,8 @@ export default function EditBlog() {
         if (response.ok && data.success) {
           // Use the API data if available
           const blog = data.blog;
-          setFormData({
-            ...blog,
+      setFormData({
+        ...blog,
             date: blog.date ? new Date(blog.date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
             content: blog.content || ''
           });
@@ -77,6 +80,48 @@ export default function EditBlog() {
 
     fetchBlog();
   }, [params.id]);
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch('/api/categories');
+      const data = await response.json();
+      if (data.success) {
+        setCategories(data.categories);
+      }
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+    }
+  };
+
+  const handleAddCategory = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/categories', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newCategory)
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setCategories([...categories, data.category]);
+        setFormData({ ...formData, category: data.category.name });
+        setNewCategory({ name: '', description: '' });
+        setIsAddingCategory(false);
+      } else {
+        setError(data.error);
+      }
+    } catch (error) {
+      console.error('Error adding category:', error);
+      setError('Failed to add category');
+    }
+  };
 
   // Setup the paste event handler
   useEffect(() => {
@@ -336,162 +381,204 @@ export default function EditBlog() {
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-secondary-500"></div>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="max-w-4xl space-y-6">
+      <form onSubmit={handleSubmit} className="max-w-4xl space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Title
-                </label>
-                <input
-                  type="text"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
-                  required
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Title
+              </label>
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
+                required
                   disabled={isSubmitting}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Category
-                </label>
-                <select
-                  name="category"
-                  value={formData.category}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
-                  required
-                  disabled={isSubmitting}
-                >
-                  <option value="">Select a category</option>
-                  <option value="Local SEO">Local SEO</option>
-                  <option value="Web Development">Web Development</option>
-                  <option value="Web Design">Web Design</option>
-                  <option value="SEO">SEO</option>
-                  <option value="eBay">eBay</option>
-                  <option value="E-commerce">E-commerce</option>
-                  <option value="UI/UX">UI/UX</option>
-                  <option value="Content Marketing">Content Marketing</option>
-                  <option value="Design">Design</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Short Description
-                </label>
-                <textarea
-                  name="shortDescription"
-                  value={formData.shortDescription}
-                  onChange={handleChange}
-                  rows="3"
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Thumbnail URL
-                </label>
-                <input
-                  type="text"
-                  name="thumbnail"
-                  value={formData.thumbnail}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Time to Read (in minutes)
-                </label>
-                <input
-                  type="text"
-                  name="timeToRead"
-                  value={formData.timeToRead}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
+              />
             </div>
 
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Author Name
-                </label>
-                <input
-                  type="text"
-                  name="author.name"
-                  value={formData.author?.name || ''}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Category
+              </label>
+                <div className="flex gap-2">
+                  {!isAddingCategory ? (
+                    <>
+              <select
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
+                required
+                        disabled={isSubmitting}
+              >
+                <option value="">Select a category</option>
+                        {categories.map((cat) => (
+                          <option key={cat.name} value={cat.name}>
+                            {cat.name}
+                          </option>
+                        ))}
+              </select>
+                      <button
+                        type="button"
+                        onClick={() => setIsAddingCategory(true)}
+                        className="px-3 py-2 bg-secondary-500 text-white rounded-md hover:bg-secondary-600"
+                      >
+                        <FaPlus />
+                      </button>
+                    </>
+                  ) : (
+                    <div className="w-full">
+                      <div className="flex gap-2 mb-2">
+                        <input
+                          type="text"
+                          placeholder="Category name"
+                          value={newCategory.name}
+                          onChange={(e) => setNewCategory({ ...newCategory, name: e.target.value })}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                        />
+                        <button
+                          type="button"
+                          onClick={handleAddCategory}
+                          className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+                        >
+                          Add
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setIsAddingCategory(false)}
+                          className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="Category description (optional)"
+                        value={newCategory.description}
+                        onChange={(e) => setNewCategory({ ...newCategory, description: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      />
+                    </div>
+                  )}
+                </div>
+            </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Author Role
-                </label>
-                <input
-                  type="text"
-                  name="author.role"
-                  value={formData.author?.role || ''}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
-                  required
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Short Description
+              </label>
+              <textarea
+                name="shortDescription"
+                value={formData.shortDescription}
+                onChange={handleChange}
+                rows="3"
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
+                required
                   disabled={isSubmitting}
-                />
-              </div>
+              />
+            </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Author Image URL
-                </label>
-                <input
-                  type="text"
-                  name="author.image"
-                  value={formData.author?.image || ''}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
-                  required
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Thumbnail URL
+              </label>
+              <input
+                type="text"
+                name="thumbnail"
+                value={formData.thumbnail}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
+                required
                   disabled={isSubmitting}
-                />
-              </div>
+              />
+            </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Publication Date
-                </label>
-                <input
-                  type="date"
-                  name="date"
-                  value={formData.date}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
-                  required
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Time to Read (in minutes)
+              </label>
+              <input
+                  type="text"
+                name="timeToRead"
+                value={formData.timeToRead}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
+                required
                   disabled={isSubmitting}
-                />
-              </div>
+              />
             </div>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Content (HTML)
-            </label>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Author Name
+              </label>
+              <input
+                type="text"
+                name="author.name"
+                  value={formData.author?.name || ''}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
+                required
+                  disabled={isSubmitting}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Author Role
+              </label>
+              <input
+                type="text"
+                name="author.role"
+                  value={formData.author?.role || ''}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
+                required
+                  disabled={isSubmitting}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Author Image URL
+              </label>
+              <input
+                type="text"
+                name="author.image"
+                  value={formData.author?.image || ''}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
+                required
+                  disabled={isSubmitting}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Publication Date
+              </label>
+              <input
+                type="date"
+                name="date"
+                value={formData.date}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
+                required
+                  disabled={isSubmitting}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Content (HTML)
+          </label>
             <div className="mb-2 flex gap-2">
               <button
                 type="button"
@@ -513,37 +600,37 @@ export default function EditBlog() {
                 <FaPaste /> Rich Paste Enabled
               </div>
             </div>
-            <textarea
+          <textarea
               ref={contentTextareaRef}
-              name="content"
+            name="content"
               value={typeof formData.content === 'string' ? formData.content : ''}
-              onChange={handleChange}
-              rows="15"
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500 font-mono"
-              required
+            onChange={handleChange}
+            rows="15"
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500 font-mono"
+            required
               disabled={isSubmitting}
-            />
+          />
             <p className="text-xs text-gray-500 mt-1">
               Paste formatted text from Word/Google Docs to preserve formatting. Use the buttons above to insert media.
             </p>
-          </div>
+        </div>
 
-          <div className="flex justify-end gap-4">
-            <Link
-              href="/admin/blogs"
-              className="px-6 py-2 border rounded-lg hover:bg-gray-50"
-            >
-              Cancel
-            </Link>
-            <button
-              type="submit"
+        <div className="flex justify-end gap-4">
+          <Link
+            href="/admin/blogs"
+            className="px-6 py-2 border rounded-lg hover:bg-gray-50"
+          >
+            Cancel
+          </Link>
+          <button
+            type="submit"
               className="px-6 py-2 bg-secondary-500 text-white rounded-lg hover:bg-secondary-600 disabled:opacity-50"
               disabled={isSubmitting}
-            >
+          >
               {isSubmitting ? 'Saving...' : 'Save Changes'}
-            </button>
-          </div>
-        </form>
+          </button>
+        </div>
+      </form>
       )}
     </div>
   );
