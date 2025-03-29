@@ -9,27 +9,37 @@ export default function AdminLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     // Check if already logged in
     const session = document.cookie.includes('admin_session=true');
     if (session) {
-      router.push('/admin');
+      window.location.href = '/admin';
     }
-  }, [router]);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setIsLoading(true);
 
-    // For demo purposes, hardcoded credentials
-    // In a real app, this would be an API call
-    if (email === 'admin@aneeverse.com' && password === 'admin123') {
-      // Set a cookie to maintain the session
-      document.cookie = 'admin_session=true; path=/';
-      router.push('/admin');
-    } else {
-      setError('Invalid credentials');
+    try {
+      // For demo purposes, hardcoded credentials
+      // In a real app, this would be an API call
+      if (email === 'admin@aneeverse.com' && password === 'admin123') {
+        // Set a cookie to maintain the session
+        document.cookie = 'admin_session=true; path=/; max-age=86400'; // 24 hours
+        
+        // Use window.location for full page navigation after login
+        window.location.href = '/admin';
+      } else {
+        setError('Invalid credentials');
+      }
+    } catch (err) {
+      setError('An error occurred during login. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -67,6 +77,7 @@ export default function AdminLogin() {
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
               required
+              disabled={isLoading}
             />
           </div>
 
@@ -80,14 +91,25 @@ export default function AdminLogin() {
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
               required
+              disabled={isLoading}
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-secondary-500 text-white py-2 px-4 rounded-lg hover:bg-secondary-600 transition-colors"
+            className="w-full bg-secondary-500 text-white py-2 px-4 rounded-lg hover:bg-secondary-600 transition-colors relative"
+            disabled={isLoading}
           >
-            Sign In
+            {isLoading ? (
+              <>
+                <span className="opacity-0">Sign In</span>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-5 h-5 border-t-2 border-b-2 border-white rounded-full animate-spin"></div>
+                </div>
+              </>
+            ) : (
+              'Sign In'
+            )}
           </button>
         </form>
 
