@@ -6,6 +6,7 @@ import { validateBlog, sanitizeBlog } from '@/models/Blog';
 // GET all blogs with optional filtering
 export async function GET(request) {
   try {
+    console.log('Starting GET /api/blogs request');
     const url = new URL(request.url);
     const searchParams = url.searchParams;
     
@@ -19,23 +20,24 @@ export async function GET(request) {
     // Build query object
     const query = {};
     if (category) {
-      query.category = { $regex: new RegExp(`^${category}$`, 'i') }; // Case-insensitive exact match
+      query.category = { $regex: new RegExp(`^${category}$`, 'i') };
     }
     if (featured === 'true') query.isFeatured = true;
     
-    console.log('MongoDB Query:', query); // Debug log
+    console.log('MongoDB Query:', { query, limit, page, skip });
     
-    // Connect to database with a timeout
+    // Connect to database
     let client;
     try {
-      client = await Promise.race([
-        clientPromise,
-        new Promise((_, reject) => 
-          setTimeout(() => reject(new Error('MongoDB connection timeout - took too long to connect')), 20000)
-        )
-      ]);
+      console.log('Attempting to connect to MongoDB...');
+      client = await clientPromise;
+      console.log('Successfully connected to MongoDB');
     } catch (connError) {
-      console.error('MongoDB connection error:', connError);
+      console.error('MongoDB connection error:', {
+        error: connError.message,
+        stack: connError.stack,
+        code: connError.code
+      });
       return NextResponse.json({ 
         success: false, 
         error: `Database connection error: ${connError.message}`,
@@ -44,35 +46,58 @@ export async function GET(request) {
     }
     
     const db = client.db(process.env.MONGODB_DB);
+    console.log('Using database:', process.env.MONGODB_DB);
     
-    // Get blogs with pagination
-    const blogs = await db
-      .collection('blogs')
-      .find(query)
-      .sort({ date: -1 }) // Most recent first
-      .skip(skip)
-      .limit(limit)
-      .toArray();
-    
-    // Get total count for pagination
-    const totalCount = await db.collection('blogs').countDocuments(query);
-    
-    return NextResponse.json({ 
-      success: true, 
-      blogs,
-      pagination: {
-        total: totalCount,
-        page,
-        limit,
+    try {
+      // Get blogs with pagination
+      const blogs = await db
+        .collection('blogs')
+        .find(query)
+        .sort({ date: -1 })
+        .skip(skip)
+        .limit(limit)
+        .toArray();
+      
+      // Get total count for pagination
+      const totalCount = await db.collection('blogs').countDocuments(query);
+      
+      console.log('Successfully fetched blogs:', {
+        count: blogs.length,
+        totalCount,
         pages: Math.ceil(totalCount / limit)
-      }
-    });
+      });
+      
+      return NextResponse.json({ 
+        success: true, 
+        blogs,
+        pagination: {
+          total: totalCount,
+          page,
+          limit,
+          pages: Math.ceil(totalCount / limit)
+        }
+      });
+    } catch (dbError) {
+      console.error('Database operation error:', {
+        error: dbError.message,
+        stack: dbError.stack,
+        code: dbError.code
+      });
+      return NextResponse.json({ 
+        success: false, 
+        error: `Database operation failed: ${dbError.message}`,
+        details: process.env.NODE_ENV === 'development' ? dbError.stack : undefined
+      }, { status: 500 });
+    }
   } catch (error) {
-    console.error('Error fetching blogs:', error);
+    console.error('Unexpected error in GET /api/blogs:', {
+      error: error.message,
+      stack: error.stack,
+      code: error.code
+    });
     return NextResponse.json({ 
       success: false, 
-      error: `Error fetching blogs: ${error.message}`,
-      code: error.code || 'UNKNOWN_ERROR',
+      error: `Unexpected error: ${error.message}`,
       details: process.env.NODE_ENV === 'development' ? error.stack : undefined
     }, { status: 500 });
   }

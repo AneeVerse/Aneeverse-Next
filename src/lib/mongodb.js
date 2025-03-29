@@ -1,50 +1,59 @@
 import { MongoClient } from 'mongodb';
 
-const uri = process.env.MONGODB_URI;
-
-// Updated options with better timeout settings
-const options = {
-  connectTimeoutMS: 30000,  // 30 seconds connection timeout
-  socketTimeoutMS: 45000,   // 45 seconds socket timeout
-  serverSelectionTimeoutMS: 60000, // 60 seconds to select a server
-  maxPoolSize: 10,          // Maximum number of connections in the connection pool
-  retryWrites: true,        // Retry write operations if they fail
-  // These options are deprecated but we'll keep them for backwards compatibility
-  // with older MongoDB drivers
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-};
-
-// Global promise reference
-let clientPromise;
-
-// Handle non-existent URI
-if (!uri) {
-  throw new Error(
-    'Please define the MONGODB_URI environment variable inside .env.local'
-  );
+if (!process.env.MONGODB_URI) {
+  throw new Error('Please define the MONGODB_URI environment variable');
 }
 
-// In development, use a global variable so connections survive hot reloading
+if (!process.env.MONGODB_DB) {
+  throw new Error('Please define the MONGODB_DB environment variable');
+}
+
+const uri = process.env.MONGODB_URI;
+const options = {
+  connectTimeoutMS: 60000,  // 60 seconds connection timeout
+  socketTimeoutMS: 60000,   // 60 seconds socket timeout
+  serverSelectionTimeoutMS: 60000, // 60 seconds to select a server
+  maxPoolSize: 50,          // Increased pool size for production
+  retryWrites: true,
+  w: 'majority',
+  wtimeoutMS: 30000,       // 30 seconds write timeout
+};
+
+let client;
+let clientPromise;
+
 if (process.env.NODE_ENV === 'development') {
+  // In development mode, use a global variable so that the value
+  // is preserved across module reloads caused by HMR (Hot Module Replacement).
   if (!global._mongoClientPromise) {
-    const client = new MongoClient(uri, options);
+    client = new MongoClient(uri, options);
     global._mongoClientPromise = client.connect()
       .catch(err => {
-        console.error('Failed to connect to MongoDB:', err);
+        console.error('Failed to connect to MongoDB:', {
+          error: err.message,
+          stack: err.stack,
+          code: err.code,
+          uri: uri.replace(/:[^:/@]+@/, ':****@') // Hide password in logs
+        });
         throw err;
       });
   }
   clientPromise = global._mongoClientPromise;
 } else {
-  // In production, create a new client for each request
-  const client = new MongoClient(uri, options);
+  // In production mode, it's best to not use a global variable.
+  client = new MongoClient(uri, options);
   clientPromise = client.connect()
     .catch(err => {
-      console.error('Failed to connect to MongoDB:', err);
+      console.error('Failed to connect to MongoDB:', {
+        error: err.message,
+        stack: err.stack,
+        code: err.code,
+        uri: uri.replace(/:[^:/@]+@/, ':****@') // Hide password in logs
+      });
       throw err;
     });
 }
 
-// Export the client promise
+// Export a module-scoped MongoClient promise. By doing this in a
+// separate module, the client can be shared across functions.
 export default clientPromise; 
