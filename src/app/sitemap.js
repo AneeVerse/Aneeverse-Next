@@ -168,7 +168,7 @@ export default function sitemap() {
 
         // Dynamic routes (e.g., blogs)
         ...blogs.map((post) => ({
-            url: `${BASE_URL}/blog/${post.id}`,
+            url: `${BASE_URL}/blog/${post.slug}`,
             lastModified: new Date(),
             priority: 0.8,
         })),

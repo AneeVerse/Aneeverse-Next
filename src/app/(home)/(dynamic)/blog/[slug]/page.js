@@ -11,10 +11,10 @@ import BlogCard from '@/components/blog/BlogCard';
 import React from 'react';
 
 // More efficient approach to fetch blog post
-const getBlogPost = async (id) => {
+const getBlogPost = async (slug) => {
   try {
     // First try to fetch from API
-    const response = await fetch(`/api/blogs/${id}`, {
+    const response = await fetch(`/api/blogs/${slug}`, {
       cache: 'no-store', // Don't cache the request
       next: { revalidate: 60 } // Revalidate every 60 seconds
     });
@@ -27,13 +27,13 @@ const getBlogPost = async (id) => {
     }
     
     // Fall back to static data if API fails
-    const staticBlog = blogs.find((blog) => blog.id === id);
+    const staticBlog = blogs.find((blog) => blog.slug === slug);
     console.log('Static Blog:', staticBlog);
     return staticBlog;
   } catch (err) {
     console.error("Error fetching blog:", err);
     // Fall back to static data
-    return blogs.find((blog) => blog.id === id);
+    return blogs.find((blog) => blog.slug === slug);
   }
 };
 
@@ -56,12 +56,12 @@ export default function BlogDetail({ params }) {
     const loadBlog = async () => {
       try {
         setIsLoading(true);
-        console.log('Loading blog with ID:', resolvedParams.id);
-        const blogPost = await getBlogPost(resolvedParams.id);
+        console.log('Loading blog with slug:', resolvedParams.slug);
+        const blogPost = await getBlogPost(resolvedParams.slug);
         
         if (!blogPost) {
           setError('Blog not found');
-          console.error('Blog not found with ID:', resolvedParams.id);
+          console.error('Blog not found with slug:', resolvedParams.slug);
         } else {
           setPost(blogPost);
           console.log('Blog loaded successfully:', blogPost.title);
@@ -75,7 +75,7 @@ export default function BlogDetail({ params }) {
     };
     
     loadBlog();
-  }, [resolvedParams.id]);
+  }, [resolvedParams.slug]);
 
   // Function to add IDs to HTML headings for linking
   const processHtmlContent = (htmlContent) => {
@@ -449,7 +449,7 @@ export default function BlogDetail({ params }) {
                     .slice(0, 3)
                     .map(blog => (
                       <div key={blog.id} className="border-b pb-4">
-                        <Link href={`/blog/${blog.id}`} className="block group">
+                        <Link href={`/blog/${blog.slug}`} className="block group">
                           <div className="relative h-36 mb-2 overflow-hidden rounded-md">
                             <Image
                               src={blog.thumbnail}

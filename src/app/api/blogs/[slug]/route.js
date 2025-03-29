@@ -2,17 +2,22 @@ import { NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 import { validateBlog, sanitizeBlog } from '@/models/Blog';
 
-// GET a single blog by ID
+// GET a single blog by slug
 export async function GET(request, { params }) {
   try {
-    const { id } = params;
+    const { slug } = params;
     
     // Connect to database
     const client = await clientPromise;
     const db = client.db(process.env.MONGODB_DB);
     
-    // Find blog by ID
-    const blog = await db.collection('blogs').findOne({ id });
+    // Try to find blog by slug first
+    let blog = await db.collection('blogs').findOne({ slug });
+    
+    // If not found by slug, try to find by ID (for backward compatibility)
+    if (!blog) {
+      blog = await db.collection('blogs').findOne({ id: slug });
+    }
     
     if (!blog) {
       return NextResponse.json({ 
@@ -23,7 +28,7 @@ export async function GET(request, { params }) {
     
     // Increment view count
     await db.collection('blogs').updateOne(
-      { id },
+      { _id: blog._id },
       { $inc: { views: 1 } }
     );
     
@@ -43,7 +48,7 @@ export async function GET(request, { params }) {
 // PUT/PATCH - Update a blog
 export async function PUT(request, { params }) {
   try {
-    const { id } = params;
+    const { slug } = params;
     const updateData = await request.json();
     
     // Remove _id field if it exists to prevent immutable field modification error
@@ -55,8 +60,13 @@ export async function PUT(request, { params }) {
     const client = await clientPromise;
     const db = client.db(process.env.MONGODB_DB);
     
-    // Find existing blog
-    const existingBlog = await db.collection('blogs').findOne({ id });
+    // Try to find blog by slug first
+    let existingBlog = await db.collection('blogs').findOne({ slug });
+    
+    // If not found by slug, try to find by ID (for backward compatibility)
+    if (!existingBlog) {
+      existingBlog = await db.collection('blogs').findOne({ id: slug });
+    }
     
     if (!existingBlog) {
       return NextResponse.json({ 
@@ -84,7 +94,7 @@ export async function PUT(request, { params }) {
     const sanitizedBlog = sanitizeBlog(updatedBlog);
     
     await db.collection('blogs').updateOne(
-      { id },
+      { _id: existingBlog._id },
       { $set: sanitizedBlog }
     );
     
@@ -105,14 +115,19 @@ export async function PUT(request, { params }) {
 // DELETE a blog
 export async function DELETE(request, { params }) {
   try {
-    const { id } = params;
+    const { slug } = params;
     
     // Connect to database
     const client = await clientPromise;
     const db = client.db(process.env.MONGODB_DB);
     
-    // Find blog to get its category for response
-    const blogToDelete = await db.collection('blogs').findOne({ id });
+    // Try to find blog by slug first
+    let blogToDelete = await db.collection('blogs').findOne({ slug });
+    
+    // If not found by slug, try to find by ID (for backward compatibility)
+    if (!blogToDelete) {
+      blogToDelete = await db.collection('blogs').findOne({ id: slug });
+    }
     
     if (!blogToDelete) {
       return NextResponse.json({ 
@@ -122,7 +137,7 @@ export async function DELETE(request, { params }) {
     }
     
     // Delete the blog
-    await db.collection('blogs').deleteOne({ id });
+    await db.collection('blogs').deleteOne({ _id: blogToDelete._id });
     
     return NextResponse.json({ 
       success: true,
