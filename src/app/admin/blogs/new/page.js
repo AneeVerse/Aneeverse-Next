@@ -4,6 +4,14 @@ import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import { FaImage, FaYoutube, FaPaste, FaPlus } from 'react-icons/fa';
+import dynamic from 'next/dynamic';
+import { Toaster, toast } from 'react-hot-toast';
+
+// Dynamically import the RichTextEditor component
+const RichTextEditor = dynamic(() => import('@/components/editor/RichTextEditor'), {
+  ssr: false,
+  loading: () => <div className="h-[400px] w-full bg-gray-100 animate-pulse rounded-lg" />
+});
 
 export default function NewBlog() {
   const router = useRouter();
@@ -292,266 +300,245 @@ export default function NewBlog() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto py-10">
-      <h1 className="text-3xl font-bold mb-6">Create New Blog</h1>
-      
-      {errorMessage && (
-        <div className="bg-red-50 text-red-700 p-4 rounded-md mb-6">
-          {errorMessage}
-        </div>
-      )}
-      
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Blog Title*
-            </label>
-            <input
-              type="text"
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md"
-              disabled={isSubmitting}
-            />
+    <>
+      <Toaster />
+      <div className="max-w-5xl mx-auto py-10">
+        <h1 className="text-3xl font-bold mb-6">Create New Blog</h1>
+        
+        {errorMessage && (
+          <div className="bg-red-50 text-red-700 p-4 rounded-md mb-6">
+            {errorMessage}
           </div>
-          
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Category*
-            </label>
-            <div className="flex gap-2">
-              {!isAddingCategory ? (
-                <>
-                  <select
-                    name="category"
-                    value={formData.category}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    disabled={isSubmitting}
-                  >
-                    <option value="">Select a category</option>
-                    {categories.map((cat) => (
-                      <option key={cat.name} value={cat.name}>
-                        {cat.name}
-                      </option>
-                    ))}
-                  </select>
-                  <button
-                    type="button"
-                    onClick={() => setIsAddingCategory(true)}
-                    className="px-3 py-2 bg-secondary-500 text-white rounded-md hover:bg-secondary-600"
-                  >
-                    <FaPlus />
-                  </button>
-                </>
-              ) : (
-                <div className="w-full">
-                  <div className="flex gap-2 mb-2">
+        )}
+        
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Blog Title*
+              </label>
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                required
+                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                disabled={isSubmitting}
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Category*
+              </label>
+              <div className="flex gap-2">
+                {!isAddingCategory ? (
+                  <>
+                    <select
+                      name="category"
+                      value={formData.category}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      disabled={isSubmitting}
+                    >
+                      <option value="">Select a category</option>
+                      {categories.map((cat) => (
+                        <option key={cat.name} value={cat.name}>
+                          {cat.name}
+                        </option>
+                      ))}
+                    </select>
+                    <button
+                      type="button"
+                      onClick={() => setIsAddingCategory(true)}
+                      className="px-3 py-2 bg-secondary-500 text-white rounded-md hover:bg-secondary-600"
+                    >
+                      <FaPlus />
+                    </button>
+                  </>
+                ) : (
+                  <div className="w-full">
+                    <div className="flex gap-2 mb-2">
+                      <input
+                        type="text"
+                        placeholder="Category name"
+                        value={newCategory.name}
+                        onChange={(e) => setNewCategory({ ...newCategory, name: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      />
+                      <button
+                        type="button"
+                        onClick={handleAddCategory}
+                        className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+                      >
+                        Add
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setIsAddingCategory(false)}
+                        className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
+                      >
+                        Cancel
+                      </button>
+                    </div>
                     <input
                       type="text"
-                      placeholder="Category name"
-                      value={newCategory.name}
-                      onChange={(e) => setNewCategory({ ...newCategory, name: e.target.value })}
+                      placeholder="Category description (optional)"
+                      value={newCategory.description}
+                      onChange={(e) => setNewCategory({ ...newCategory, description: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md"
                     />
-                    <button
-                      type="button"
-                      onClick={handleAddCategory}
-                      className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
-                    >
-                      Add
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setIsAddingCategory(false)}
-                      className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
-                    >
-                      Cancel
-                    </button>
                   </div>
-                  <input
-                    type="text"
-                    placeholder="Category description (optional)"
-                    value={newCategory.description}
-                    onChange={(e) => setNewCategory({ ...newCategory, description: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                  />
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
-        </div>
-        
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Short Description*
-          </label>
-          <textarea
-            name="shortDescription"
-            value={formData.shortDescription}
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
-            rows="2"
-            disabled={isSubmitting}
-          ></textarea>
-        </div>
-        
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Content* (HTML supported)
-          </label>
-          <div className="mb-2 flex gap-2">
-            <button
-              type="button"
-              onClick={insertImage}
-              className="px-3 py-1 bg-blue-50 text-blue-600 rounded flex items-center gap-1 hover:bg-blue-100"
-              disabled={isSubmitting}
-            >
-              <FaImage /> Insert Image
-            </button>
-            <button
-              type="button"
-              onClick={insertYouTube}
-              className="px-3 py-1 bg-red-50 text-red-600 rounded flex items-center gap-1 hover:bg-red-100"
-              disabled={isSubmitting}
-            >
-              <FaYoutube /> Insert YouTube Video
-            </button>
-            <div className="ml-auto px-3 py-1 bg-green-50 text-green-600 rounded flex items-center gap-1">
-              <FaPaste /> Rich Paste Enabled
-            </div>
-          </div>
-          <textarea
-            ref={contentTextareaRef}
-            name="content"
-            value={formData.content}
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md font-mono"
-            rows="12"
-            disabled={isSubmitting}
-          ></textarea>
-          <p className="text-xs text-gray-500 mt-1">
-            Paste formatted text from Word/Google Docs to preserve formatting. Use the buttons above to insert media.
-          </p>
-        </div>
-        
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Thumbnail URL*
-          </label>
-          <input
-            type="url"
-            name="thumbnail"
-            value={formData.thumbnail}
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
-            disabled={isSubmitting}
-          />
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Author Name*
+              Short Description*
             </label>
-            <input
-              type="text"
-              name="author.name"
-              value={formData.author.name}
+            <textarea
+              name="shortDescription"
+              value={formData.shortDescription}
               onChange={handleChange}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
+              rows="2"
+              disabled={isSubmitting}
+            ></textarea>
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Content*
+            </label>
+            <RichTextEditor
+              value={formData.content}
+              onChange={(data) => {
+                setFormData(prev => ({
+                  ...prev,
+                  content: data
+                }));
+              }}
               disabled={isSubmitting}
             />
           </div>
           
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Author Role*
-            </label>
-            <input
-              type="text"
-              name="author.role"
-              value={formData.author.role}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md"
-              disabled={isSubmitting}
-            />
-          </div>
-          
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Author Image URL*
+              Thumbnail URL*
             </label>
             <input
               type="url"
-              name="author.image"
-              value={formData.author.image}
+              name="thumbnail"
+              value={formData.thumbnail}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md"
-              disabled={isSubmitting}
-            />
-          </div>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Time to Read (e.g., "5 min")
-            </label>
-            <input
-              type="text"
-              name="timeToRead"
-              value={formData.timeToRead}
-              onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
               disabled={isSubmitting}
             />
           </div>
           
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Publication Date*
-            </label>
-            <input
-              type="date"
-              name="date"
-              value={formData.date}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md"
-              disabled={isSubmitting}
-            />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Author Name*
+              </label>
+              <input
+                type="text"
+                name="author.name"
+                value={formData.author.name}
+                onChange={handleChange}
+                required
+                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                disabled={isSubmitting}
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Author Role*
+              </label>
+              <input
+                type="text"
+                name="author.role"
+                value={formData.author.role}
+                onChange={handleChange}
+                required
+                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                disabled={isSubmitting}
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Author Image URL*
+              </label>
+              <input
+                type="url"
+                name="author.image"
+                value={formData.author.image}
+                onChange={handleChange}
+                required
+                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                disabled={isSubmitting}
+              />
+            </div>
           </div>
-        </div>
-        
-        <div className="flex justify-end gap-3">
-          <button
-            type="button"
-            onClick={() => router.push('/admin/blogs')}
-            className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
-            disabled={isSubmitting}
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            className="px-4 py-2 bg-secondary-500 text-white rounded-md hover:bg-secondary-600"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? 'Creating...' : 'Create Blog'}
-          </button>
-        </div>
-      </form>
-    </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Time to Read (e.g., "5 min")
+              </label>
+              <input
+                type="text"
+                name="timeToRead"
+                value={formData.timeToRead}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                disabled={isSubmitting}
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Publication Date*
+              </label>
+              <input
+                type="date"
+                name="date"
+                value={formData.date}
+                onChange={handleChange}
+                required
+                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                disabled={isSubmitting}
+              />
+            </div>
+          </div>
+          
+          <div className="flex justify-end gap-3">
+            <button
+              type="button"
+              onClick={() => router.push('/admin/blogs')}
+              className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
+              disabled={isSubmitting}
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="px-4 py-2 bg-secondary-500 text-white rounded-md hover:bg-secondary-600"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Creating...' : 'Create Blog'}
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 } 
