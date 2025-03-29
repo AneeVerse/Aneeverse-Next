@@ -3,15 +3,18 @@
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
-import { FaImage, FaYoutube, FaPaste } from 'react-icons/fa';
+import { FaImage, FaYoutube, FaPaste, FaPlus } from 'react-icons/fa';
 
 export default function NewBlog() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [categories, setCategories] = useState([]);
+  const [isAddingCategory, setIsAddingCategory] = useState(false);
+  const [newCategory, setNewCategory] = useState({ name: '', description: '' });
   const [formData, setFormData] = useState({
     title: '',
-    category: 'eBay',
+    category: '',
     shortDescription: '',
     content: '',
     thumbnail: '',
@@ -26,6 +29,49 @@ export default function NewBlog() {
 
   // Create ref for the content textarea
   const contentTextareaRef = useRef(null);
+
+  // Fetch categories on component mount
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch('/api/categories');
+      const data = await response.json();
+      if (data.success) {
+        setCategories(data.categories);
+      }
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+    }
+  };
+
+  const handleAddCategory = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/categories', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newCategory)
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setCategories([...categories, data.category]);
+        setFormData({ ...formData, category: data.category.name });
+        setNewCategory({ name: '', description: '' });
+        setIsAddingCategory(false);
+      } else {
+        setErrorMessage(data.error);
+      }
+    } catch (error) {
+      console.error('Error adding category:', error);
+      setErrorMessage('Failed to add category');
+    }
+  };
 
   // Setup the paste event handler
   useEffect(() => {
@@ -150,30 +196,21 @@ export default function NewBlog() {
   };
 
   const insertContentTemplate = (template) => {
-    // Get cursor position
     const contentTextarea = contentTextareaRef.current;
     if (!contentTextarea) return;
-    
+
     const start = contentTextarea.selectionStart;
     const end = contentTextarea.selectionEnd;
-    
-    // Insert template at cursor position
+
     const newContent = 
       formData.content.substring(0, start) + 
-      template + 
+      template +
       formData.content.substring(end);
-    
-    setFormData({
-      ...formData,
+
+    setFormData(prev => ({
+      ...prev,
       content: newContent
-    });
-    
-    // Focus back on textarea and place cursor after inserted content
-    setTimeout(() => {
-      contentTextarea.focus();
-      const newCursorPos = start + template.length;
-      contentTextarea.setSelectionRange(newCursorPos, newCursorPos);
-    }, 0);
+    }));
   };
 
   const insertImage = () => {
@@ -231,32 +268,24 @@ export default function NewBlog() {
     setErrorMessage('');
 
     try {
-      // Generate unique ID
-      const blogData = {
-        ...formData,
-        id: uuidv4()
-      };
-
-      // Send to API
       const response = await fetch('/api/blogs', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(blogData)
+        body: JSON.stringify(formData)
       });
 
       const data = await response.json();
 
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to create blog');
+      if (response.ok) {
+        router.push('/admin/blogs');
+      } else {
+        setErrorMessage(data.error || 'Failed to create blog');
       }
-
-      // Navigate to blogs list on success
-      router.push('/admin/blogs?created=true');
     } catch (error) {
       console.error('Error creating blog:', error);
-      setErrorMessage(error.message);
+      setErrorMessage('Failed to create blog');
     } finally {
       setIsSubmitting(false);
     }
@@ -293,22 +322,67 @@ export default function NewBlog() {
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Category*
             </label>
-            <select
-              name="category"
-              value={formData.category}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md"
-              disabled={isSubmitting}
-            >
-              <option value="eBay">eBay</option>
-              <option value="Design">Design</option>
-              <option value="SEO">SEO</option>
-              <option value="Marketing">Marketing</option>
-              <option value="Business">Business</option>
-              <option value="E-commerce">E-commerce</option>
-              <option value="UI/UX">UI/UX</option>
-            </select>
+            <div className="flex gap-2">
+              {!isAddingCategory ? (
+                <>
+                  <select
+                    name="category"
+                    value={formData.category}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    disabled={isSubmitting}
+                  >
+                    <option value="">Select a category</option>
+                    {categories.map((cat) => (
+                      <option key={cat.name} value={cat.name}>
+                        {cat.name}
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    type="button"
+                    onClick={() => setIsAddingCategory(true)}
+                    className="px-3 py-2 bg-secondary-500 text-white rounded-md hover:bg-secondary-600"
+                  >
+                    <FaPlus />
+                  </button>
+                </>
+              ) : (
+                <div className="w-full">
+                  <div className="flex gap-2 mb-2">
+                    <input
+                      type="text"
+                      placeholder="Category name"
+                      value={newCategory.name}
+                      onChange={(e) => setNewCategory({ ...newCategory, name: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleAddCategory}
+                      className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+                    >
+                      Add
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setIsAddingCategory(false)}
+                      className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Category description (optional)"
+                    value={newCategory.description}
+                    onChange={(e) => setNewCategory({ ...newCategory, description: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </div>
         
