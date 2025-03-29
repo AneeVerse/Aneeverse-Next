@@ -42,14 +42,14 @@ export default function EditBlog() {
 
   useEffect(() => {
     const fetchBlog = async () => {
-      if (!params.id) return;
+      if (!params.slug) return;
       
       try {
         setIsLoading(true);
         setError('');
         
         // First try the API
-        const response = await fetch(`/api/blogs/${params.id}`);
+        const response = await fetch(`/api/blogs/${params.slug}`);
         const data = await response.json();
         
         if (response.ok && data.success) {
@@ -63,7 +63,7 @@ export default function EditBlog() {
         } else {
           // If API failed, try static data as fallback
           import('@/data/blogData').then(({ blogs }) => {
-            const staticBlog = blogs.find(b => b.id === params.id);
+            const staticBlog = blogs.find(b => b.slug === params.slug);
             if (staticBlog) {
               setFormData({
                 ...staticBlog,
@@ -87,7 +87,7 @@ export default function EditBlog() {
     };
 
     fetchBlog();
-  }, [params.id]);
+  }, [params.slug]);
 
   useEffect(() => {
     fetchCategories();
@@ -144,7 +144,13 @@ export default function EditBlog() {
         delete submitData._id;
       }
       
-      const response = await fetch(`/api/blogs/${params.id}`, {
+      // Generate or update slug from title
+      submitData.slug = submitData.title
+        .toLowerCase()
+        .replace(/[^\w\s]/gi, '')
+        .replace(/\s+/g, '-');
+      
+      const response = await fetch(`/api/blogs/${params.slug}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -316,16 +322,20 @@ export default function EditBlog() {
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Content*
               </label>
-              <RichTextEditor
-                value={formData.content}
-                onChange={(data) => {
-                  setFormData(prev => ({
-                    ...prev,
-                    content: data
-                  }));
-                }}
-                disabled={isSubmitting}
-              />
+              <div className="sticky top-4 z-10 bg-white rounded-lg shadow-lg h-[600px]">
+                <div className="h-full">
+                  <RichTextEditor
+                    value={formData.content}
+                    onChange={(data) => {
+                      setFormData(prev => ({
+                        ...prev,
+                        content: data
+                      }));
+                    }}
+                    disabled={isSubmitting}
+                  />
+                </div>
+              </div>
             </div>
 
             <div>

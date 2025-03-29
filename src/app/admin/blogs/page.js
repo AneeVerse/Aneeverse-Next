@@ -76,7 +76,7 @@ export default function BlogList() {
       setIsDeleting(true);
       setErrorMessage('');
       try {
-        const response = await fetch(`/api/blogs/${blog.id}`, {
+        const response = await fetch(`/api/blogs/${blog.slug}`, {
           method: 'DELETE',
         });
         
@@ -208,14 +208,16 @@ export default function BlogList() {
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-2">
                         <Link
-                          href={`/admin/blogs/${blog.id}/edit`}
-                          className="p-2 text-blue-600 hover:bg-blue-50 rounded"
+                          href={`/admin/blogs/${blog.slug}/edit`}
+                          className="p-2 text-blue-600 hover:bg-blue-50 rounded-full"
+                          title="Edit blog"
                         >
                           <FaEdit />
                         </Link>
                         <button
                           onClick={() => handleDelete(blog)}
-                          className="p-2 text-red-600 hover:bg-red-50 rounded"
+                          className="p-2 text-red-600 hover:bg-red-50 rounded-full"
+                          title="Delete blog"
                           disabled={isDeleting}
                         >
                           <FaTrash />

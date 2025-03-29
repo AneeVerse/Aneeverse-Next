@@ -34,7 +34,9 @@ const RichTextEditor = ({ value, onChange, disabled = false }) => {
 
   // SunEditor Options
   const options = {
-    height: '500px',
+    height: 'auto',
+    minHeight: '500px',
+    maxHeight: '500px',
     buttonList: [
       ['undo', 'redo'],
       ['font', 'fontSize', 'formatBlock'],
@@ -118,10 +120,14 @@ const RichTextEditor = ({ value, onChange, disabled = false }) => {
           border-color: #e2e8f0;
         }
         .sun-editor .se-wrapper {
-          min-height: 400px;
+          height: 500px !important;
+          min-height: 500px !important;
+          max-height: 500px !important;
         }
         .sun-editor .se-wrapper .se-wrapper-inner {
-          min-height: 400px;
+          height: 500px !important;
+          min-height: 500px !important;
+          max-height: 500px !important;
         }
         .sun-editor .se-wrapper .se-wrapper-inner .se-placeholder {
           color: #94a3b8;

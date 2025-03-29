@@ -20,7 +20,7 @@ export default function BlogCard({ blog }) {
   const author = blog?.author || { name: 'Anonymous', role: 'Author', image: defaultAuthorImage };
   
   return (
-    <Link href={`/blog/${blog.id}`} className="block group rounded-2xl h-full flex flex-col">
+    <Link href={`/blog/${blog.slug}`} className="block group rounded-2xl h-full flex flex-col">
       {/* Image Section - Fixed height */}
       <div className="relative w-full h-48 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
         <Image
