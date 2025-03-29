@@ -1,11 +1,11 @@
 import { blogs } from "@/data/blogData";
 
-// ✅ Fetch blog post by ID
-const getBlogPost = (id) => blogs.find((blog) => blog.id === id);
+// ✅ Fetch blog post by slug
+const getBlogPost = (slug) => blogs.find((blog) => blog.slug === slug);
 
 // ✅ Generate Dynamic Metadata
 export async function generateMetadata({ params }) {
-  const post = getBlogPost(params.id);
+  const post = getBlogPost(params.slug);
   if (!post) return { title: "Blog Not Found - Aneeverse", description: "This blog post does not exist." };
 
   return {
@@ -14,10 +14,10 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: post.title,
       description: post.shortDescription,
-      url: `https://aneeverse.com/blog/${post.id}`,
+      url: `https://aneeverse.com/blog/${post.slug}`,
       images: [
         {
-          url: post.thumbnail, // ✅ Dynamic Image
+          url: post.thumbnail,
           width: 1200,
           height: 630,
           alt: post.title,

@@ -137,7 +137,7 @@ const ResourcesMegaMenu = ({ color }) => {
                   </Link>
                   <div className="grid grid-cols-1 gap-4 mt-4">
                     {resources[1].cards.map((card, idx) => (
-                      <Link onClick={()=>{setIsOpen(false)}} href={`/blog/${card.id}`} key={idx} className="flex flex-col cursor-pointer gap-3">
+                      <Link onClick={()=>{setIsOpen(false)}} href={`/blog/${card.slug}`} key={idx} className="flex flex-col cursor-pointer gap-3">
                       <div className="overflow-hidden rounded-md">
                       <img
                         src={card.thumbnail}
