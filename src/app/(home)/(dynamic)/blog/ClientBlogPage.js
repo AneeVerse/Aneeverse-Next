@@ -150,11 +150,8 @@ export default function ClientBlogPage() {
       <div className='bg-white min-h-screen py-16'>
         <Layout>
           <div className="text-center p-10 bg-blue-50 rounded-lg max-w-xl mx-auto">
-            <h2 className="text-2xl font-bold text-blue-700 mb-4">No Blogs Found</h2>
-            <p className="text-blue-600 mb-6">There are no blog posts available at the moment.</p>
-            <p className="text-gray-600">
-              Visit the <a href="/admin/blogs/new" className="text-blue-600 underline">admin section</a> to create your first blog post.
-            </p>
+            <h2 className="text-2xl font-bold text-blue-700 mb-4">Blogs Temporarily Unavailable</h2>
+            <p className="text-blue-600 mb-6">Our blog section is currently undergoing maintenance. Please check back later.</p>
           </div>
           <Newsletter />
         </Layout>
