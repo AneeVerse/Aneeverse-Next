@@ -133,42 +133,53 @@ export default function EditBlog() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+    setIsSubmitting(true);
+    setError('');
+
     try {
-      setIsSubmitting(true);
-      setError('');
-      
-      // Create a copy of the form data and remove the _id field
-      const submitData = {...formData};
-      if (submitData._id) {
-        delete submitData._id;
-      }
-      
-      // Generate or update slug from title
-      submitData.slug = submitData.title
-        .toLowerCase()
-        .replace(/[^\w\s]/gi, '')
-        .replace(/\s+/g, '-');
-      
+      // Ensure thumbnail URL starts with /images if it's a relative path
+      const thumbnailUrl = formData.thumbnail.startsWith('http') 
+        ? formData.thumbnail 
+        : formData.thumbnail.startsWith('/') 
+          ? formData.thumbnail 
+          : `/images/${formData.thumbnail}`;
+
+      // Ensure author image URL starts with /images if it's a relative path
+      const authorImageUrl = formData.author.image.startsWith('http')
+        ? formData.author.image
+        : formData.author.image.startsWith('/')
+          ? formData.author.image
+          : `/images/${formData.author.image}`;
+
+      const blogData = {
+        ...formData,
+        thumbnail: thumbnailUrl,
+        author: {
+          ...formData.author,
+          image: authorImageUrl
+        }
+      };
+
       const response = await fetch(`/api/blogs/${params.slug}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(submitData),
+        body: JSON.stringify(blogData),
       });
-      
+
       const data = await response.json();
-      
+
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to update blog');
+        throw new Error(data.message || 'Failed to update blog');
       }
-      
-      // Navigate back to the blogs list
-      router.push('/admin/blogs?updated=true');
-    } catch (err) {
-      console.error('Error updating blog:', err);
-      setError(err.message || 'An unexpected error occurred');
+
+      toast.success('Blog updated successfully!');
+      router.push('/admin/blogs');
+    } catch (error) {
+      console.error('Error updating blog:', error);
+      setError(error.message || 'Failed to update blog');
+      toast.error(error.message || 'Failed to update blog');
     } finally {
       setIsSubmitting(false);
     }
