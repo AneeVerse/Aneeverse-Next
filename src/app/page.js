@@ -1,4 +1,3 @@
-
 import HeroSection from "../components/home/HeroSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import SlidingLogos from "@/components/home/SlidingLogos";
@@ -16,8 +15,6 @@ export default function Home() {
     <div>
       <HeroSection />
       <SlidingLogos />
-    {/*  <SupportSection />
-       <TestimonialsSection /> */}
       <CreativeSection />
       <TableComponent />
       <DynamicOurWorks />
@@ -25,7 +22,6 @@ export default function Home() {
       <FeaturesSection />
       <BottomAboutSection />
       <NewFooter />
-
     </div>
   );
 }

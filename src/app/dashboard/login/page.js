@@ -13,9 +13,10 @@ export default function AdminLogin() {
 
   useEffect(() => {
     // Check if already logged in
-    const session = document.cookie.includes('admin_session=true');
-    if (session) {
-      window.location.href = '/admin';
+    const cookies = document.cookie.split(';');
+    const sessionCookie = cookies.find(cookie => cookie.trim().startsWith('session='));
+    if (sessionCookie && sessionCookie.trim().split('=')[1] === 'true') {
+      window.location.href = '/dashboard';
     }
   }, []);
 
@@ -25,16 +26,20 @@ export default function AdminLogin() {
     setIsLoading(true);
 
     try {
-      // For demo purposes, hardcoded credentials
-      // In a real app, this would be an API call
-      if (email === 'admin@aneeverse.com' && password === 'admin123') {
-        // Set a cookie to maintain the session
-        document.cookie = 'admin_session=true; path=/; max-age=86400'; // 24 hours
-        
-        // Use window.location for full page navigation after login
-        window.location.href = '/admin';
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        window.location.href = '/dashboard';
       } else {
-        setError('Invalid credentials');
+        setError(data.error || 'Invalid credentials');
       }
     } catch (err) {
       setError('An error occurred during login. Please try again.');

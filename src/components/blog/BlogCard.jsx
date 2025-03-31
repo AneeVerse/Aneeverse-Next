@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function BlogCard({ blog }) {
   const [thumbnailError, setThumbnailError] = useState(false);
@@ -19,6 +19,26 @@ export default function BlogCard({ blog }) {
   const shortDescription = blog?.shortDescription || '';
   const author = blog?.author || { name: 'Anonymous', role: 'Author', image: defaultAuthorImage };
   
+  // Debug logging for image URLs
+  useEffect(() => {
+    if (blog?.thumbnail) {
+      console.log('Blog thumbnail URL:', blog.thumbnail);
+    }
+    if (blog?.author?.image) {
+      console.log('Author image URL:', blog.author.image);
+    }
+  }, [blog]);
+
+  const handleThumbnailError = () => {
+    console.error('Failed to load thumbnail:', blog?.thumbnail);
+    setThumbnailError(true);
+  };
+
+  const handleAuthorImageError = () => {
+    console.error('Failed to load author image:', blog?.author?.image);
+    setAuthorImageError(true);
+  };
+  
   return (
     <Link href={`/blog/${blog.slug}`} className="block group rounded-2xl h-full flex flex-col">
       {/* Image Section - Fixed height */}
@@ -32,7 +52,7 @@ export default function BlogCard({ blog }) {
           className="object-cover"
           placeholder="blur"
           blurDataURL="/images/placeholder.jpg"
-          onError={() => setThumbnailError(true)}
+          onError={handleThumbnailError}
         />
       </div>
 
@@ -58,7 +78,7 @@ export default function BlogCard({ blog }) {
             width={40}
             height={40}
             className="object-cover"
-            onError={() => setAuthorImageError(true)}
+            onError={handleAuthorImageError}
           />
         </div>
         <div className="ml-3">
