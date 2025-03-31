@@ -3,44 +3,55 @@ import { NextResponse } from 'next/server';
 // List of allowed admin emails
 const ALLOWED_EMAILS = ['admin@aneeverse.com'];
 
-export async function middleware(request) {
-  // Check if the request is for the admin route but not the login page
-  if (request.nextUrl.pathname.startsWith('/admin') && 
-      !request.nextUrl.pathname.startsWith('/admin/login')) {
-    
-    // Get the user's session from cookies
-    const session = request.cookies.get('admin_session');
-    const loginUrl = new URL('/admin/login', request.url);
+export function middleware(request) {
+  const url = request.nextUrl;
+  const hostname = request.headers.get('host');
 
-    // If no session exists, redirect to login
-    if (!session || session.value !== 'true') {
-      // Clear any invalid session cookies
-      const response = NextResponse.redirect(loginUrl);
-      response.cookies.delete('admin_session');
-      return response;
+  // Handle blog subdomain
+  if (hostname === 'blog.aneeverse.com') {
+    // List of paths that don't require authentication
+    const publicPaths = ['/login', '/api/auth/login'];
+    
+    // Allow public paths without authentication
+    if (publicPaths.some(path => url.pathname.startsWith(path))) {
+      return NextResponse.next();
     }
 
+    // Handle session checks for protected paths
     try {
-      // Session exists and is valid
+      // Get session from cookies
+      const session = request.cookies.get('session')?.value;
+
+      if (!session) {
+        // Redirect to login if no session
+        return NextResponse.redirect(new URL('/login', request.url));
+      }
+
+      // Create response to extend session
       const response = NextResponse.next();
       
-      // Extend session duration with each request
-      response.cookies.set('admin_session', 'true', {
-        path: '/',
-        maxAge: 86400, // 24 hours
+      // Extend session cookie
+      response.cookies.set('session', session, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax'
+        sameSite: 'lax',
+        maxAge: 60 * 60 * 24 // 24 hours
       });
-      
+
       return response;
     } catch (error) {
       console.error('Session verification error:', error);
-      // If session verification fails, redirect to login
-      const response = NextResponse.redirect(loginUrl);
-      response.cookies.delete('admin_session');
+      // Clear invalid session and redirect to login
+      const response = NextResponse.redirect(new URL('/login', request.url));
+      response.cookies.delete('session');
       return response;
     }
+  }
+
+  // If accessing /admin from main domain, redirect to blog subdomain root
+  if (hostname === 'www.aneeverse.com' && url.pathname.startsWith('/admin')) {
+    const newPath = url.pathname.replace('/admin', '');
+    return NextResponse.redirect(`https://blog.aneeverse.com${newPath}`);
   }
 
   return NextResponse.next();
@@ -49,7 +60,6 @@ export async function middleware(request) {
 // Configure which routes to run middleware on
 export const config = {
   matcher: [
-    // Match all admin routes except login
-    '/((?!admin/login)admin.*)'
-  ]
+    '/((?!_next/static|_next/image|favicon.ico|logo.png).*)',
+  ],
 }; 
