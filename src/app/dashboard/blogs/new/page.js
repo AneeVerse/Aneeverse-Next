@@ -276,24 +276,49 @@ export default function NewBlog() {
     setErrorMessage('');
 
     try {
+      // Ensure thumbnail URL starts with /images if it's a relative path
+      const thumbnailUrl = formData.thumbnail.startsWith('http') 
+        ? formData.thumbnail 
+        : formData.thumbnail.startsWith('/') 
+          ? formData.thumbnail 
+          : `/images/${formData.thumbnail}`;
+
+      // Ensure author image URL starts with /images if it's a relative path
+      const authorImageUrl = formData.author.image.startsWith('http')
+        ? formData.author.image
+        : formData.author.image.startsWith('/')
+          ? formData.author.image
+          : `/images/${formData.author.image}`;
+
+      const blogData = {
+        ...formData,
+        thumbnail: thumbnailUrl,
+        author: {
+          ...formData.author,
+          image: authorImageUrl
+        }
+      };
+
       const response = await fetch('/api/blogs', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(blogData),
       });
 
       const data = await response.json();
 
-      if (response.ok) {
-        router.push('/admin/blogs');
-      } else {
-        setErrorMessage(data.error || 'Failed to create blog');
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to create blog');
       }
+
+      toast.success('Blog created successfully!');
+      router.push('/admin/blogs');
     } catch (error) {
       console.error('Error creating blog:', error);
-      setErrorMessage('Failed to create blog');
+      setErrorMessage(error.message || 'Failed to create blog');
+      toast.error(error.message || 'Failed to create blog');
     } finally {
       setIsSubmitting(false);
     }

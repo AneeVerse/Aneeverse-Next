@@ -9,22 +9,28 @@ export function middleware(request) {
 
   // Handle blog subdomain
   if (hostname === 'blog.aneeverse.com') {
-    // List of paths that don't require authentication
-    const publicPaths = ['/login', '/api/auth/login'];
-    
-    // Allow public paths without authentication
-    if (publicPaths.some(path => url.pathname.startsWith(path))) {
+    // If accessing root path on blog subdomain, redirect to /dashboard
+    if (url.pathname === '/') {
+      return NextResponse.redirect(new URL('/dashboard', request.url));
+    }
+
+    // Skip auth check for login page and API routes
+    if (url.pathname === '/dashboard/login' || url.pathname.startsWith('/api/')) {
       return NextResponse.next();
     }
 
-    // Handle session checks for protected paths
+    // Redirect old admin routes to new dashboard route
+    if (url.pathname.startsWith('/admin')) {
+      const newPath = url.pathname.replace('/admin', '/dashboard');
+      return NextResponse.redirect(new URL(newPath, request.url));
+    }
+
+    // Check session for all other routes
     try {
-      // Get session from cookies
       const session = request.cookies.get('session')?.value;
 
       if (!session) {
-        // Redirect to login if no session
-        return NextResponse.redirect(new URL('/login', request.url));
+        return NextResponse.redirect(new URL('/dashboard/login', request.url));
       }
 
       // Create response to extend session
@@ -41,17 +47,26 @@ export function middleware(request) {
       return response;
     } catch (error) {
       console.error('Session verification error:', error);
-      // Clear invalid session and redirect to login
-      const response = NextResponse.redirect(new URL('/login', request.url));
+      const response = NextResponse.redirect(new URL('/dashboard/login', request.url));
       response.cookies.delete('session');
       return response;
     }
   }
 
-  // If accessing /admin from main domain, redirect to blog subdomain root
-  if (hostname === 'www.aneeverse.com' && url.pathname.startsWith('/admin')) {
-    const newPath = url.pathname.replace('/admin', '');
-    return NextResponse.redirect(`https://blog.aneeverse.com${newPath}`);
+  // If accessing /admin or /dashboard from main domain, redirect to blog subdomain
+  if ((hostname === 'www.aneeverse.com' || hostname === 'aneeverse.com') && 
+      (url.pathname.startsWith('/admin') || url.pathname.startsWith('/dashboard'))) {
+    return NextResponse.redirect(`https://blog.aneeverse.com${url.pathname}`);
+  }
+
+  // For main domain, allow normal access to all non-admin routes
+  if (hostname === 'www.aneeverse.com' || hostname === 'aneeverse.com') {
+    // Block access to admin routes on main domain
+    if (url.pathname.startsWith('/admin')) {
+      return NextResponse.redirect(`https://blog.aneeverse.com${url.pathname}`);
+    }
+    // Allow all other routes
+    return NextResponse.next();
   }
 
   return NextResponse.next();
