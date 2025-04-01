@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 
 export default function AdminLogin() {
   const router = useRouter();
@@ -52,15 +51,6 @@ export default function AdminLogin() {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
         <div className="text-center mb-8">
-          <div className="flex justify-center mb-4">
-            <Image
-              src="/images/logo.png"
-              alt="Aneeverse Logo"
-              width={150}
-              height={40}
-              className="h-10 w-auto"
-            />
-          </div>
           <h1 className="text-2xl font-bold text-gray-800">Admin Login</h1>
           <p className="text-gray-600 mt-2">Sign in to access the admin dashboard</p>
         </div>
@@ -117,12 +107,6 @@ export default function AdminLogin() {
             )}
           </button>
         </form>
-
-        <div className="mt-6 text-center text-sm text-gray-600">
-          <p>Demo Credentials:</p>
-          <p>Email: admin@aneeverse.com</p>
-          <p>Password: admin123</p>
-        </div>
       </div>
     </div>
   );
