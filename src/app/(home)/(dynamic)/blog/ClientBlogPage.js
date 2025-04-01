@@ -183,8 +183,36 @@ export default function ClientBlogPage() {
       
       <BlogHeroSection blogData={blogData} />
 
+      {/* Add SEO section directly with custom styling */}
+      <section className="bg-white pb-16">
+        <Layout>
+          <div className='flex justify-between items-center mb-8'>
+            <h2 className='text-[40px] text-[#0A2E3D] font-normal'>SEO</h2>
+            <Link 
+              href={`/blog/category/seo`} 
+              className='text-[#0A2E3D] hover:text-blue-600 flex items-center gap-2 font-medium text-lg'
+            >
+              <span>See All</span>
+              <FaChevronRight className='text-lg transition-transform duration-300 group-hover:translate-x-1' />
+            </Link>
+          </div>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+            {blogs.filter(blog => 
+              blog?.category?.toLowerCase() === 'seo' || 
+              blog?.category?.toLowerCase() === 'search engine optimization'
+            ).slice(0, 3).map((blog) => (
+              <div key={blog.id}>
+                <BlogCard blog={blog} />
+              </div>
+            ))}
+          </div>
+        </Layout>
+      </section>
+
       {/* Dynamically render sections for each category */}
-      {categories.map(category => {
+      {categories.filter(category => 
+        !['seo', 'search engine optimization'].includes(category.toLowerCase())
+      ).map(category => {
         const categoryBlogs = blogs.filter(blog => blog.category === category);
         if (categoryBlogs.length === 0) return null;
 
