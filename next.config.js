@@ -1,10 +1,37 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['images.unsplash.com', 'res.cloudinary.com'],
+    domains: [
+      'images.unsplash.com', 
+      'res.cloudinary.com',
+      'www.aneeverse.com',
+      'blog.aneeverse.com',
+      'localhost',
+      'localhost:3000',
+      'localhost:3001',
+      'images.pexels.com',
+      'images.unsplash.com',
+      'i.imgur.com'
+    ],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+      {
+        protocol: 'http',
+        hostname: '**',
+      }
+    ],
+    unoptimized: true,
+    minimumCacheTTL: 60,
   },
   async rewrites() {
     return [
+      {
+        source: '/dashboard/:path*',
+        destination: '/dashboard/:path*',
+      },
       {
         source: '/admin/:path*',
         has: [
