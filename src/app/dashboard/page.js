@@ -1,77 +1,230 @@
 'use client';
 
-import Link from 'next/link';
-import { FaBlog, FaPlus } from 'react-icons/fa';
-import { blogs } from '@/data/blogData';
+import { useState, useEffect } from 'react';
+import { FaDatabase, FaChartBar, FaClock } from 'react-icons/fa';
+import { formatDistanceToNow } from 'date-fns';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
 
-export default function AdminDashboard() {
-  // Get counts by category
-  const categoryCounts = blogs.reduce((acc, blog) => {
-    acc[blog.category] = (acc[blog.category] || 0) + 1;
-    return acc;
-  }, {});
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+export default function Dashboard() {
+  const [stats, setStats] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    fetchDashboardStats();
+  }, []);
+
+  const fetchDashboardStats = async () => {
+    try {
+      const response = await fetch('/api/dashboard/stats');
+      const data = await response.json();
+      
+      if (data.success) {
+        setStats(data.stats);
+      } else {
+        setError(data.error || 'Failed to fetch dashboard statistics');
+      }
+    } catch (error) {
+      console.error('Error fetching dashboard stats:', error);
+      setError('Failed to fetch dashboard statistics');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const formatBytes = (bytes) => {
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    if (bytes === 0) return '0 Bytes';
+    const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    return Math.round((bytes / Math.pow(1024, i)) * 100) / 100 + ' ' + sizes[i];
+  };
+
+  const chartData = {
+    labels: stats?.last5DaysStats.map(stat => stat._id) || [],
+    datasets: [
+      {
+        label: 'Blogs Published',
+        data: stats?.last5DaysStats.map(stat => stat.count) || [],
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        borderColor: 'rgb(53, 162, 235)',
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Blog Posts - Last 5 Days',
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          stepSize: 1
+        }
+      }
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-secondary-500"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="p-4">
+        <div className="bg-red-50 text-red-700 p-4 rounded-md">
+          {error}
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-800">Dashboard</h1>
-        <Link 
-          href="/admin/blogs/new" 
-          className="bg-secondary-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-secondary-600"
-        >
-          <FaPlus /> New Blog
-        </Link>
-      </div>
+    <div className="p-6 max-w-7xl mx-auto">
+      <h1 className="text-3xl font-bold mb-8">Dashboard</h1>
 
-      {/* Quick Stats */}
+      {/* Stats Overview */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h3 className="text-lg font-semibold mb-2">Total Blogs</h3>
-          <p className="text-3xl font-bold text-secondary-500">{blogs.length}</p>
-        </div>
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h3 className="text-lg font-semibold mb-2">Categories</h3>
-          <p className="text-3xl font-bold text-secondary-500">{Object.keys(categoryCounts).length}</p>
-        </div>
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h3 className="text-lg font-semibold mb-2">Latest Blog</h3>
-          <p className="text-lg font-medium text-secondary-500 truncate">{blogs[0]?.title}</p>
-        </div>
-      </div>
-
-      {/* Category Breakdown */}
-      <div className="bg-white p-6 rounded-lg shadow">
-        <h2 className="text-xl font-bold mb-4">Blogs by Category</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {Object.entries(categoryCounts).map(([category, count]) => (
-            <div key={category} className="border p-4 rounded-lg">
-              <h3 className="font-semibold text-gray-800">{category}</h3>
-              <p className="text-2xl font-bold text-secondary-500">{count}</p>
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-xl font-semibold mb-2">Total Blogs</h2>
+              <p className="text-4xl font-bold text-secondary-600">{stats.totalBlogs}</p>
             </div>
-          ))}
+            <FaChartBar className="text-4xl text-secondary-400" />
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-xl font-semibold mb-2">Categories</h2>
+              <p className="text-4xl font-bold text-secondary-600">{stats.totalCategories}</p>
+            </div>
+            <FaDatabase className="text-4xl text-secondary-400" />
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-xl font-semibold mb-2">Storage Used</h2>
+              <p className="text-4xl font-bold text-secondary-600">
+                {formatBytes(stats.storageStats.dataSize)}
+              </p>
+              <p className="text-sm text-gray-500">
+                of {formatBytes(stats.storageStats.maxSize)} ({stats.storageStats.usagePercentage}%)
+              </p>
+            </div>
+            <div className="w-16 h-16 relative">
+              <svg className="w-full h-full" viewBox="0 0 36 36">
+                <path
+                  d="M18 2.0845
+                    a 15.9155 15.9155 0 0 1 0 31.831
+                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                  fill="none"
+                  stroke="#eee"
+                  strokeWidth="3"
+                />
+                <path
+                  d="M18 2.0845
+                    a 15.9155 15.9155 0 0 1 0 31.831
+                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                  fill="none"
+                  stroke="#60a5fa"
+                  strokeWidth="3"
+                  strokeDasharray={`${stats.storageStats.usagePercentage}, 100`}
+                />
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Recent Blogs */}
-      <div className="bg-white p-6 rounded-lg shadow mt-8">
-        <h2 className="text-xl font-bold mb-4">Recent Blogs</h2>
+      {/* Latest Blog Activity */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-xl font-semibold mb-4">Latest Blog Activity</h2>
+          <div className="h-[300px]">
+            <Bar data={chartData} options={chartOptions} />
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-xl font-semibold mb-4">Blogs by Category</h2>
+          <div className="space-y-4">
+            {stats.blogsByCategory.map((category) => (
+              <div key={category._id} className="flex items-center justify-between">
+                <span className="font-medium">{category._id || 'Uncategorized'}</span>
+                <span className="px-3 py-1 bg-secondary-100 text-secondary-700 rounded-full">
+                  {category.count} posts
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Recent Blogs Table */}
+      <div className="bg-white rounded-lg shadow">
+        <div className="p-6">
+          <h2 className="text-xl font-semibold mb-4">Recent Blogs</h2>
+        </div>
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead>
-              <tr className="border-b">
-                <th className="text-left py-3">Title</th>
-                <th className="text-left py-3">Category</th>
-                <th className="text-left py-3">Author</th>
-                <th className="text-left py-3">Date</th>
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Author</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Published</th>
               </tr>
             </thead>
-            <tbody>
-              {blogs.slice(0, 5).map((blog) => (
-                <tr key={blog.id} className="border-b hover:bg-gray-50">
-                  <td className="py-3">{blog.title}</td>
-                  <td className="py-3">{blog.category}</td>
-                  <td className="py-3">{blog.author.name}</td>
-                  <td className="py-3">{blog.date}</td>
+            <tbody className="divide-y divide-gray-200">
+              {stats.recentBlogs.map((blog) => (
+                <tr key={blog._id} className="hover:bg-gray-50">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    {blog.title}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {blog.category || 'Uncategorized'}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {blog.author?.name || 'Unknown'}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {blog.createdAt ? formatDistanceToNow(new Date(blog.createdAt), { addSuffix: true }) : 'N/A'}
+                  </td>
                 </tr>
               ))}
             </tbody>
