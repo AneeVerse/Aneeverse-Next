@@ -59,21 +59,34 @@ export default function EditBlog() {
         if (response.ok && data.success) {
           // Use the API data if available
           const blog = data.blog;
+          
+          // Store the current category for later consistency check
+          const currentCategory = blog.category;
+          
           setFormData({
             ...blog,
             date: blog.date ? new Date(blog.date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
-            content: blog.content || ''
+            content: blog.content || '',
+            category: currentCategory // Ensure category is set
           });
+          
+          console.log('Blog data loaded with category:', currentCategory);
         } else {
           // If API failed, try static data as fallback
           import('@/data/blogData').then(({ blogs }) => {
             const staticBlog = blogs.find(b => b.slug === params.slug);
             if (staticBlog) {
+              // Store the current category
+              const currentCategory = staticBlog.category;
+              
               setFormData({
                 ...staticBlog,
                 date: staticBlog.date ? new Date(staticBlog.date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
-                content: staticBlog.content || ''
+                content: staticBlog.content || '',
+                category: currentCategory // Ensure category is set
               });
+              
+              console.log('Static blog data loaded with category:', currentCategory);
             } else {
               setError('Blog not found');
             }
@@ -339,7 +352,7 @@ export default function EditBlog() {
   return (
     <>
       <Toaster />
-      <div className="max-w-5xl mx-auto py-10">
+      <div className="max-w-5xl mx-auto py-10 pb-24">
         <div className="flex items-center gap-4 mb-8">
           <Link 
             href="/admin/blogs"
@@ -674,20 +687,22 @@ export default function EditBlog() {
               </div>
             </div>
 
-            <div className="flex justify-end gap-4">
-              <Link
-                href="/admin/blogs"
-                className="px-6 py-2 border rounded-lg hover:bg-gray-50"
-              >
-                Cancel
-              </Link>
-              <button
-                type="submit"
-                className="px-6 py-2 bg-secondary-500 text-white rounded-lg hover:bg-secondary-600 disabled:opacity-50"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'Saving...' : 'Save Changes'}
-              </button>
+            <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-4 px-4 shadow-lg z-20">
+              <div className="max-w-4xl mx-auto flex justify-end gap-4">
+                <Link
+                  href="/admin/blogs"
+                  className="px-6 py-2 border rounded-lg hover:bg-gray-50"
+                >
+                  Cancel
+                </Link>
+                <button
+                  type="submit"
+                  className="px-6 py-2 bg-secondary-500 text-white rounded-lg hover:bg-secondary-600 disabled:opacity-50"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Saving...' : 'Save Changes'}
+                </button>
+              </div>
             </div>
           </form>
         )}
