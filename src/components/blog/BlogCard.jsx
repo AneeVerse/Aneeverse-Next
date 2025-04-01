@@ -65,8 +65,11 @@ export default function BlogCard({ blog }) {
         </div>
 
         {/* Title */}
-        <h3 className="mt-3 text-[26px] leading-[1.2] text-[#0A2E3D] font-normal group-hover:text-blue-600 transition-colors duration-200">
-          {title}
+        <h3 className="mt-3 text-[26px] leading-[1.2] text-[#0A2E3D] font-normal transition-colors duration-200 relative">
+          <span className="inline-block relative">
+            {title}
+            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#0A2E3D] transition-all duration-300 group-hover:w-full"></span>
+          </span>
         </h3>
 
         {/* Description */}

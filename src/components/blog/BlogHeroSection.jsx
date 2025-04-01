@@ -17,8 +17,11 @@ const BlogHeroSection = ({ blogData }) => {
           {/* Heading */}
           <div className="text-center mb-12">
             <h4 className="text-sm uppercase tracking-wide text-secondary-500">BLOG</h4>
-            <h2 className="text-4xl md:text-[80px] mt-3 font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1]">
-              Creative Performance
+            <h2 className="text-4xl md:text-[80px] mt-3 font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] relative inline-block group">
+              <span className="relative inline-block">
+                Creative Performance
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#0A2E3D] transition-all duration-300 group-hover:w-full"></span>
+              </span>
             </h2>
             <p className="text-lg text-secondary-500 mt-8 max-w-3xl mx-auto">
               Creative ideas, practical tips and insider info—the Aneeverse blog
@@ -78,8 +81,11 @@ const BlogHeroSection = ({ blogData }) => {
         {/* Heading */}
         <div className="text-center mb-12">
           <h4 className="text-sm uppercase tracking-wide text-secondary-500">BLOG</h4>
-          <h2 className="text-4xl md:text-[80px] mt-3 font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1]">
-            Creative Performance
+          <h2 className="text-4xl md:text-[80px] mt-3 font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] relative inline-block group">
+            <span className="relative inline-block">
+              Creative Performance
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#0A2E3D] transition-all duration-300 group-hover:w-full"></span>
+            </span>
           </h2>
           <p className="text-lg text-secondary-500 mt-8 max-w-3xl mx-auto">
             Creative ideas, practical tips and insider info—the Aneeverse blog
@@ -107,8 +113,11 @@ const BlogHeroSection = ({ blogData }) => {
                   {featuredBlog.category?.toUpperCase()} • {featuredBlog.timeToRead || '5 min read'}
                 </p>
                 <div>
-                  <h3 className="text-3xl sm:text-4xl max-w-full sm:max-w-2xl font-semibold mt-3 leading-tight">
-                    {featuredBlog.title}
+                  <h3 className="text-3xl sm:text-4xl max-w-full sm:max-w-2xl font-semibold mt-3 leading-tight relative">
+                    <span className="inline-block relative">
+                      {featuredBlog.title}
+                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                    </span>
                   </h3>
                   <div className="flex items-center gap-3 mt-6">
                     <div className="relative w-10 h-10 rounded-full overflow-hidden">
