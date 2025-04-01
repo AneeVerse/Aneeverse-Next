@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import {
@@ -12,11 +12,32 @@ import {
 import { FaChevronDown } from "react-icons/fa6";
 import Layout from "@/components/common/Layout";
 import Link from "next/link";
-import { blogs } from "@/data/blogData";
 import { customerStories } from "@/data/customerStoriesData";
 
 const ResourcesMegaMenu = ({ color }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [blogs, setBlogs] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await fetch('/api/blogs?limit=2');
+        const data = await response.json();
+        if (data.success) {
+          setBlogs(data.blogs);
+        }
+      } catch (error) {
+        console.error('Error fetching blogs:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (isOpen) {
+      fetchBlogs();
+    }
+  }, [isOpen]);
 
   const resources = [
     {
@@ -52,15 +73,13 @@ const ResourcesMegaMenu = ({ color }) => {
     {
       title: "Blog",
       link: "/blog",
-      cards: [
-       ...blogs.slice(0, 2)
-      ],
+      cards: blogs,
     },
     {
       title: "Customer Stories",
       link: "/customer-stories",
       cards: [
-       ...customerStories.slice(0, 2)
+        ...customerStories.slice(0, 2)
       ],
     },
   ];
@@ -136,19 +155,36 @@ const ResourcesMegaMenu = ({ color }) => {
                     Blog <div className="relative"> <FiArrowUpRight className="  z-10 group-hover:translate-x-[80%] group-hover:translate-y-[-80%] group-hover:opacity-0 transition-all duration-300" /> <FiArrowUpRight className=" absolute inset-0 z-10 opacity-0 translate-x-[-80%] translate-y-[80%] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" /></div>
                   </Link>
                   <div className="grid grid-cols-1 gap-4 mt-4">
-                    {resources[1].cards.map((card, idx) => (
-                      <Link onClick={()=>{setIsOpen(false)}} href={`/blog/${card.slug}`} key={idx} className="flex flex-col cursor-pointer gap-3">
-                      <div className="overflow-hidden rounded-md">
-                      <img
-                        src={card.thumbnail}
-                        alt={card.title}
-                        className="w-full h-[160px] hover:scale-110 transition-all duration-300 object-cover rounded-md"
-                      /></div>
-                      <p className="text-sm line-clamp-1 font-medium text-gray-700">
-                        {card.title}
-                      </p>
-                    </Link>
-                    ))}
+                    {isLoading ? (
+                      // Loading placeholders
+                      Array(2).fill(0).map((_, idx) => (
+                        <div key={idx} className="animate-pulse">
+                          <div className="bg-gray-200 h-[160px] rounded-md"></div>
+                          <div className="h-4 bg-gray-200 rounded mt-3 w-3/4"></div>
+                        </div>
+                      ))
+                    ) : blogs.length > 0 ? (
+                      // Render actual blogs
+                      blogs.map((blog, idx) => (
+                        <Link onClick={()=>{setIsOpen(false)}} href={`/blog/${blog.slug}`} key={idx} className="flex flex-col cursor-pointer gap-3">
+                          <div className="overflow-hidden rounded-md">
+                            <img
+                              src={blog.thumbnail}
+                              alt={blog.title}
+                              className="w-full h-[160px] hover:scale-110 transition-all duration-300 object-cover rounded-md"
+                            />
+                          </div>
+                          <p className="text-sm line-clamp-1 font-medium text-gray-700">
+                            {blog.title}
+                          </p>
+                        </Link>
+                      ))
+                    ) : (
+                      // No blogs found
+                      <div className="text-center py-4 text-gray-500">
+                        No blog posts available
+                      </div>
+                    )}
                   </div>
                 </div>
 
