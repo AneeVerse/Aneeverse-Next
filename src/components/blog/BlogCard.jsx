@@ -76,8 +76,8 @@ export default function BlogCard({ blog }) {
       </div>
 
       {/* Author Section */}
-      <div className="flex items-center mt-6 pt-6 border-t border-gray-200">
-        <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-100">
+      <div className="flex items-center mt-6">
+        <div className="w-10 h-10 rounded-md overflow-hidden bg-gray-100">
           <Image
             src={authorImageError ? defaultAuthorImage : author.image}
             alt={author.name}
