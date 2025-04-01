@@ -15,7 +15,9 @@ export default function BlogCard({ blog }) {
   // Safe access to blog data with fallbacks
   const title = blog?.title || 'Untitled Blog Post';
   const category = blog?.category || 'Uncategorized';
-  const timeToRead = blog?.timeToRead || '5 min read';
+  const timeToRead = typeof blog?.timeToRead === 'number' || !isNaN(parseInt(blog?.timeToRead))
+    ? `${blog?.timeToRead} min Read`
+    : (blog?.timeToRead || '5 min Read');
   const shortDescription = blog?.shortDescription || '';
   const author = blog?.author || { name: 'Anonymous', role: 'Author', image: defaultAuthorImage };
   
