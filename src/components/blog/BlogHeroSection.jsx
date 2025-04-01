@@ -13,22 +13,22 @@ const BlogHeroSection = ({ blogData }) => {
   if (isLoading || blogs.length === 0) {
     return (
       <section className="pb-16 pt-[120px] mt-[-80px]">
-        <Layout>
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Heading */}
           <div className="text-center mb-12">
             <h4 className="text-sm uppercase tracking-wide text-secondary-500">BLOG</h4>
-            <h2 className="text-4xl md:text-6xl mt-3 font-semibold text-secondary-500">
+            <h2 className="text-4xl md:text-[80px] mt-3 font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1]">
               Creative Performance
             </h2>
-            <p className="text-lg text-secondary-500 mt-8">
+            <p className="text-lg text-secondary-500 mt-8 max-w-3xl mx-auto">
               Creative ideas, practical tips and insider info—the Aneeverse blog
               helps your team get great design done at scale.
             </p>
           </div>
           
           {/* Loading state or empty blogs */}
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="md:col-span-2 bg-gray-100 rounded-xl p-12 flex items-center justify-center">
+          <div className="grid md:grid-cols-3 gap-8 w-full">
+            <div className="md:col-span-2 bg-gray-100 rounded-xl p-12 flex items-center justify-center min-h-[400px]">
               {isLoading ? (
                 <div className="animate-pulse text-secondary-500">Loading featured content...</div>
               ) : (
@@ -37,7 +37,7 @@ const BlogHeroSection = ({ blogData }) => {
             </div>
             
             {/* Subscription Box */}
-            <div className="bg-[#EAF2E3] rounded-xl p-6 flex flex-col justify-between">
+            <div className="bg-[#EAF2E3] rounded-xl p-8 flex flex-col justify-between">
               <div>
                 <p className="text-sm uppercase tracking-wide text-gray-500">
                   CREATIVE GOLD
@@ -58,13 +58,13 @@ const BlogHeroSection = ({ blogData }) => {
                     className="flex-1 bg-transparent outline-none pl-3 text-gray-900"
                   />
                 </div>
-                <button className="mt-4 w-full bg-gray-900 text-white py-3 rounded-full font-semibold">
+                <button className="mt-4 w-full bg-gray-900 text-white py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors">
                   Subscribe now
                 </button>
               </div>
             </div>
           </div>
-        </Layout>
+        </div>
       </section>
     );
   }
@@ -74,59 +74,61 @@ const BlogHeroSection = ({ blogData }) => {
   
   return (
     <section className="pb-16 pt-[120px] mt-[-80px]">
-      <Layout>
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="text-center mb-12">
           <h4 className="text-sm uppercase tracking-wide text-secondary-500">BLOG</h4>
-          <h2 className="text-4xl md:text-6xl mt-3 font-semibold text-secondary-500">
+          <h2 className="text-4xl md:text-[80px] mt-3 font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1]">
             Creative Performance
           </h2>
-          <p className="text-lg text-secondary-500 mt-8">
+          <p className="text-lg text-secondary-500 mt-8 max-w-3xl mx-auto">
             Creative ideas, practical tips and insider info—the Aneeverse blog
             helps your team get great design done at scale.
           </p>
         </div>
 
         {/* Main Content */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 w-full">
           {/* Featured Blog */}
-          <Link href={`blog/${featuredBlog.id}`} className="md:col-span-2 bg-[#031B34] text-white rounded-xl overflow-hidden">
-            <div className="relative z-10 h-full w-full p-6">
+          <Link href={`blog/${featuredBlog.id}`} className="md:col-span-2 bg-[#031B34] text-white rounded-xl overflow-hidden group">
+            <div className="relative z-10 h-[400px] w-full p-8">
               <div className="absolute inset-0">
                 <Image
                   src={featuredBlog.thumbnail}
                   alt="Featured Blog"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 66vw"
                 />
               </div>
-              <div className="absolute top-0 left-0 w-full h-full bg-secondary-500 opacity-50"></div>
-              <div className="relative flex flex-col justify-around z-10 w-full h-full">
-                <p className="text-sm sm:text-md font-semibold uppercase tracking-wide text-gray-400">
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/80 via-black/50 to-transparent"></div>
+              <div className="relative flex flex-col justify-between z-10 w-full h-full">
+                <p className="text-sm sm:text-md font-semibold uppercase tracking-wide text-gray-300">
                   {featuredBlog.category?.toUpperCase()} • {featuredBlog.timeToRead || '5 min read'}
                 </p>
-                <h3 className="text-3xl sm:text-4xl max-w-full sm:max-w-sm font-semibold mt-3">
-                  {featuredBlog.title}
-                </h3>
-                <div className="flex items-center gap-3 mt-5">
-                  <div className="relative w-10 h-10 rounded-full overflow-hidden">
-                    <Image
-                      src={featuredBlog.author.image}
-                      alt={featuredBlog.author.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="flex items-center text-sm gap-2">
-                    <div className="pr-4 border-r border-gray-400">
-                      <p className="font-medium">{featuredBlog.author.name}</p>
-                      <p className="text-gray-400">
-                        {featuredBlog.author.role}
-                      </p>
+                <div>
+                  <h3 className="text-3xl sm:text-4xl max-w-full sm:max-w-2xl font-semibold mt-3 leading-tight">
+                    {featuredBlog.title}
+                  </h3>
+                  <div className="flex items-center gap-3 mt-6">
+                    <div className="relative w-10 h-10 rounded-full overflow-hidden">
+                      <Image
+                        src={featuredBlog.author.image}
+                        alt={featuredBlog.author.name}
+                        fill
+                        className="object-cover"
+                      />
                     </div>
-                    <div className="pl-4">
-                      Published <br /> {featuredBlog.date}
+                    <div className="flex items-center text-sm gap-2">
+                      <div className="pr-4 border-r border-gray-400">
+                        <p className="font-medium">{featuredBlog.author.name}</p>
+                        <p className="text-gray-400">
+                          {featuredBlog.author.role}
+                        </p>
+                      </div>
+                      <div className="pl-4">
+                        Published <br /> {featuredBlog.date}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -135,7 +137,7 @@ const BlogHeroSection = ({ blogData }) => {
           </Link>
 
           {/* Subscription Box */}
-          <div className="bg-[#EAF2E3] rounded-xl p-6 flex flex-col justify-between">
+          <div className="bg-[#EAF2E3] rounded-xl p-8 flex flex-col justify-between">
             <div>
               <p className="text-sm uppercase tracking-wide text-gray-500">
                 CREATIVE GOLD
@@ -156,13 +158,13 @@ const BlogHeroSection = ({ blogData }) => {
                   className="flex-1 bg-transparent outline-none pl-3 text-gray-900"
                 />
               </div>
-              <button className="mt-4 w-full bg-gray-900 text-white py-3 rounded-full font-semibold">
+              <button className="mt-4 w-full bg-gray-900 text-white py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors">
                 Subscribe now
               </button>
             </div>
           </div>
         </div>
-      </Layout>
+      </div>
     </section>
   );
 };
