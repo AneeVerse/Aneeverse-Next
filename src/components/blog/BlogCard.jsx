@@ -40,38 +40,44 @@ export default function BlogCard({ blog }) {
   };
   
   return (
-    <Link href={`/blog/${blog.slug}`} className="block group rounded-2xl h-full flex flex-col">
-      {/* Image Section - Fixed height */}
-      <div className="relative w-full h-48 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
+    <Link href={`/blog/${blog.slug}`} className="block group">
+      {/* Image Section */}
+      <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden">
         <Image
           src={thumbnailError ? defaultThumbnail : blog.thumbnail}
           alt={title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority={false}
-          className="object-cover"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
           placeholder="blur"
           blurDataURL="/images/placeholder.jpg"
           onError={handleThumbnailError}
         />
       </div>
 
-      {/* Content Section - Flex-grow to fill available space */}
-      <div className="mt-4 flex-grow flex flex-col">
-        <p className="text-sm text-gray-500 uppercase tracking-widest font-medium">
-          {category} • {timeToRead}
-        </p>
-        <h2 className="text-lg line-clamp-1 font-semibold mt-1 text-black group-hover:underline underline-offset-2 transition-all duration-300 min-h-[28px]">
-          {title}
-        </h2>
-        <div className="text-sm text-gray-600 mt-2 line-clamp-2 min-h-[40px]">
-          {shortDescription}
+      {/* Category and Read Time */}
+      <div className="mt-6">
+        <div className="flex items-center gap-2 text-sm text-[#475467] uppercase tracking-wide">
+          <span className="font-medium">{category}</span>
+          <span>•</span>
+          <span>{timeToRead}</span>
         </div>
+
+        {/* Title */}
+        <h3 className="mt-3 text-[26px] leading-[1.2] text-[#0A2E3D] font-normal group-hover:text-blue-600 transition-colors duration-200">
+          {title}
+        </h3>
+
+        {/* Description */}
+        <p className="mt-3 text-[17px] leading-[1.5] text-[#475467] line-clamp-2">
+          {shortDescription}
+        </p>
       </div>
 
-      {/* Author Section - Fixed position at bottom */}
-      <div className="flex items-center mt-4 pt-2 border-t border-gray-100">
-        <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-100 flex-shrink-0">
+      {/* Author Section */}
+      <div className="flex items-center mt-6 pt-6 border-t border-gray-200">
+        <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-100">
           <Image
             src={authorImageError ? defaultAuthorImage : author.image}
             alt={author.name}
@@ -82,8 +88,8 @@ export default function BlogCard({ blog }) {
           />
         </div>
         <div className="ml-3">
-          <p className="text-sm font-semibold line-clamp-1">{author.name}</p>
-          <p className="text-xs text-gray-500 line-clamp-1">{author.role}</p>
+          <p className="text-[15px] font-medium text-[#0A2E3D]">{author.name}</p>
+          <p className="text-[15px] text-[#475467]">{author.role}</p>
         </div>
       </div>
     </Link>

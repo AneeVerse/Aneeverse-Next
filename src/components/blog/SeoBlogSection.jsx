@@ -1,6 +1,5 @@
 import React from 'react';
 import BlogCard from './BlogCard';
-import Layout from '../common/Layout';
 import { FaChevronRight } from "react-icons/fa6";
 import Link from 'next/link';
 
@@ -13,29 +12,30 @@ const SeoBlogSection = ({ blogData }) => {
     blog?.category?.toLowerCase() === 'seo' || 
     blog?.category?.toLowerCase() === 'search engine optimization'
   );
-  const hasBlogs = seoBlogs?.length > 0;
   
-  // If no blogs exist in this category, don't render the section
-  if (!hasBlogs) {
-    return null;
-  }
+  if (!seoBlogs?.length) return null;
   
   return (
-    <div className='bg-white py-10'>
-      <Layout>
-        <div className='flex group mb-6 justify-between items-center'>
-          <h1 className='text-3xl sm:text-4xl text-secondary-500 font-semibold'>SEO</h1>
-          <Link href={`/blog/category/seo`} className='text-secondary-500 hover:underline flex items-center gap-1 font-semibold text-lg'>
-            <span>See all</span>
-            <FaChevronRight className='text-lg group-hover:translate-x-1 duration-300 transition-all' />
+    <div className='w-full bg-white py-20'>
+      <div className='w-[94%] max-w-[1440px] mx-auto'>
+        <div className='flex justify-between items-center mb-14'>
+          <h2 className='text-[40px] text-[#0A2E3D] font-normal'>SEO</h2>
+          <Link 
+            href={`/blog/category/seo`} 
+            className='text-[#0A2E3D] hover:text-blue-600 flex items-center gap-2 font-medium text-lg'
+          >
+            <span>See All</span>
+            <FaChevronRight className='text-lg transition-transform duration-300 group-hover:translate-x-1' />
           </Link>
         </div>
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
-          {seoBlogs.slice(0, 4).map((blog) => (
-            <BlogCard key={blog.id} blog={blog} />
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7'>
+          {seoBlogs.slice(0, 3).map((blog) => (
+            <div key={blog.id} className="min-w-0">
+              <BlogCard blog={blog} />
+            </div>
           ))}
         </div>
-      </Layout>
+      </div>
     </div>
   );
 };

@@ -23,9 +23,10 @@ export default {
         'xs': ['0.75rem', { lineHeight: '1rem' }]
       },
       fontFamily: {
-       Rock_Salt: ['Rock Salt', 'cursive'],
+        Rock_Salt: ['Rock Salt', 'cursive'],
         'sans': ['Inter', 'sans-serif'], // Primary font
-        'accent': ['Rock Salt', 'cursive'] // Accent font
+        'accent': ['Rock Salt', 'cursive'], // Accent font
+        'helonik': ['Helonik Regular', 'sans-serif'] // Adding Helonik font
       },
       spacing: {
         'type-lg': '1rem md:2rem', // Responsive spacing
