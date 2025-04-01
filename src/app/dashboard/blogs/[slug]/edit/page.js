@@ -24,6 +24,7 @@ export default function EditBlog() {
   const [newCategory, setNewCategory] = useState({ name: '', description: '' });
   const [formData, setFormData] = useState({
     title: '',
+    slug: '',
     category: '',
     shortDescription: '',
     content: '',
@@ -185,6 +186,16 @@ export default function EditBlog() {
     }
   };
 
+  // Add function to generate slug from title
+  const generateSlug = (title) => {
+    return title
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '') // Remove special characters except hyphens
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+      .trim(); // Trim hyphens from start and end
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name.startsWith('author.')) {
@@ -199,7 +210,9 @@ export default function EditBlog() {
     } else {
       setFormData(prev => ({
         ...prev,
-        [name]: value
+        [name]: value,
+        // Auto-generate slug when title changes
+        ...(name === 'title' ? { slug: generateSlug(value) } : {})
       }));
     }
   };
@@ -244,6 +257,25 @@ export default function EditBlog() {
                   required
                   disabled={isSubmitting}
                 />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  URL Slug
+                </label>
+                <input
+                  type="text"
+                  name="slug"
+                  value={formData.slug}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
+                  required
+                  placeholder="url-friendly-title"
+                  disabled={isSubmitting}
+                />
+                <p className="mt-1 text-sm text-gray-500">
+                  This will be used in the blog URL. Auto-generated from title but can be edited.
+                </p>
               </div>
 
               <div>
