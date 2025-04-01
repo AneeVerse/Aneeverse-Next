@@ -20,8 +20,11 @@ export default function EditBlog() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [categories, setCategories] = useState([]);
+  const [authors, setAuthors] = useState([]);
   const [isAddingCategory, setIsAddingCategory] = useState(false);
+  const [isAddingAuthor, setIsAddingAuthor] = useState(false);
   const [newCategory, setNewCategory] = useState({ name: '', description: '' });
+  const [newAuthor, setNewAuthor] = useState({ name: '', role: '', image: '', bio: '' });
   const [formData, setFormData] = useState({
     title: '',
     slug: '',
@@ -92,6 +95,7 @@ export default function EditBlog() {
 
   useEffect(() => {
     fetchCategories();
+    fetchAuthors();
   }, []);
 
   const fetchCategories = async () => {
@@ -103,6 +107,18 @@ export default function EditBlog() {
       }
     } catch (error) {
       console.error('Error fetching categories:', error);
+    }
+  };
+
+  const fetchAuthors = async () => {
+    try {
+      const response = await fetch('/api/authors');
+      const data = await response.json();
+      if (data.success) {
+        setAuthors(data.authors);
+      }
+    } catch (error) {
+      console.error('Error fetching authors:', error);
     }
   };
 
@@ -129,6 +145,109 @@ export default function EditBlog() {
     } catch (error) {
       console.error('Error adding category:', error);
       setError('Failed to add category');
+    }
+  };
+
+  const handleDeleteCategory = async (categoryName) => {
+    try {
+      // Encode the category name for the URL
+      const encodedName = encodeURIComponent(categoryName);
+      console.log('Deleting category:', categoryName);
+      
+      const response = await fetch(`/api/categories/${encodedName}`, {
+        method: 'DELETE',
+      });
+
+      const data = await response.json();
+      console.log('Delete response:', data);
+
+      if (data.success) {
+        setCategories(categories.filter(cat => cat.name !== categoryName));
+        if (formData.category === categoryName) {
+          setFormData(prev => ({ ...prev, category: '' }));
+        }
+        toast.success('Category deleted successfully!');
+      } else {
+        console.error('Failed to delete category:', data.error);
+        toast.error(data.error || 'Failed to delete category');
+      }
+    } catch (error) {
+      console.error('Error deleting category:', error);
+      toast.error('Failed to delete category: ' + (error.message || 'Unknown error'));
+    }
+  };
+
+  const handleAddAuthor = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/authors', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newAuthor)
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setAuthors([...authors, data.author]);
+        setFormData(prev => ({
+          ...prev,
+          author: {
+            name: data.author.name,
+            role: data.author.role,
+            image: data.author.image || ''
+          }
+        }));
+        setNewAuthor({ name: '', role: '', image: '', bio: '' });
+        setIsAddingAuthor(false);
+        toast.success('Author added successfully!');
+      } else {
+        toast.error(data.error || 'Failed to add author');
+      }
+    } catch (error) {
+      console.error('Error adding author:', error);
+      toast.error('Failed to add author');
+    }
+  };
+
+  const handleDeleteAuthor = async (authorName) => {
+    try {
+      const encodedName = encodeURIComponent(authorName);
+      const response = await fetch(`/api/authors/${encodedName}`, {
+        method: 'DELETE',
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setAuthors(authors.filter(a => a.name !== authorName));
+        if (formData.author.name === authorName) {
+          setFormData(prev => ({
+            ...prev,
+            author: { name: '', role: '', image: '' }
+          }));
+        }
+        toast.success('Author deleted successfully!');
+      } else {
+        toast.error(data.error || 'Failed to delete author');
+      }
+    } catch (error) {
+      console.error('Error deleting author:', error);
+      toast.error('Failed to delete author');
+    }
+  };
+
+  const handleAuthorSelect = (authorName) => {
+    const selectedAuthor = authors.find(a => a.name === authorName);
+    if (selectedAuthor) {
+      setFormData(prev => ({
+        ...prev,
+        author: {
+          name: selectedAuthor.name,
+          role: selectedAuthor.role,
+          image: selectedAuthor.image || ''
+        }
+      }));
     }
   };
 
@@ -277,72 +396,246 @@ export default function EditBlog() {
                   This will be used in the blog URL. Auto-generated from title but can be edited.
                 </p>
               </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Thumbnail URL
+              </label>
+              <input
+                type="text"
+                name="thumbnail"
+                value={formData.thumbnail}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
+                required
+                disabled={isSubmitting}
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Author*
+                </label>
+                <div className="flex gap-2">
+                  <select
+                    value={formData.author.name}
+                    onChange={(e) => handleAuthorSelect(e.target.value)}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    disabled={isSubmitting}
+                  >
+                    <option value="">Select an author</option>
+                    {authors.map((author) => (
+                      <option key={author.name} value={author.name}>
+                        {author.name}
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    type="button"
+                    onClick={() => setIsAddingAuthor(true)}
+                    className="px-3 py-2 bg-secondary-500 text-white rounded-md hover:bg-secondary-600"
+                    title="Add new author"
+                  >
+                    <FaPlus />
+                  </button>
+                  {formData.author.name && (
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteAuthor(formData.author.name)}
+                      className="px-3 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                      title="Delete selected author"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m4-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                      </svg>
+                    </button>
+                  )}
+                </div>
+                {isAddingAuthor && (
+                  <div className="mt-2 space-y-2">
+                    <input
+                      type="text"
+                      placeholder="Author name"
+                      value={newAuthor.name}
+                      onChange={(e) => setNewAuthor({ ...newAuthor, name: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Author role"
+                      value={newAuthor.role}
+                      onChange={(e) => setNewAuthor({ ...newAuthor, role: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    />
+                    <input
+                      type="url"
+                      placeholder="Author image URL"
+                      value={newAuthor.image}
+                      onChange={(e) => setNewAuthor({ ...newAuthor, image: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    />
+                    <div className="flex gap-2">
+                      <button
+                        type="button"
+                        onClick={handleAddAuthor}
+                        className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+                      >
+                        Add
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setIsAddingAuthor(false)}
+                        className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Category
+                  Author Role
                 </label>
-                <div className="flex gap-2">
-                  {!isAddingCategory ? (
-                    <>
-                      <select
-                        name="category"
-                        value={formData.category}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
-                        required
-                        disabled={isSubmitting}
-                      >
-                        <option value="">Select a category</option>
-                        {categories.map((cat) => (
-                          <option key={cat.name} value={cat.name}>
-                            {cat.name}
-                          </option>
-                        ))}
-                      </select>
+                <input
+                  type="text"
+                  value={formData.author.role}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100"
+                  disabled
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Author Image URL
+                </label>
+                <input
+                  type="url"
+                  value={formData.author.image}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100"
+                  disabled
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Time to Read (minutes)*
+                </label>
+                <input
+                  type="number"
+                  name="timeToRead"
+                  value={formData.timeToRead}
+                  onChange={handleChange}
+                  min="1"
+                  max="60"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                  disabled={isSubmitting}
+                  required
+                />
+                <p className="mt-1 text-sm text-gray-500">
+                  Will be displayed as "{formData.timeToRead || '0'} min read"
+                </p>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Publication Date
+                </label>
+                <input
+                  type="date"
+                  name="date"
+                  value={formData.date}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
+                  required
+                  disabled={isSubmitting}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Category
+              </label>
+              <div className="flex gap-2">
+                {!isAddingCategory ? (
+                  <>
+                    <select
+                      name="category"
+                      value={formData.category}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
+                      required
+                      disabled={isSubmitting}
+                    >
+                      <option value="">Select a category</option>
+                      {categories.map((cat) => (
+                        <option key={cat.name} value={cat.name}>
+                          {cat.name}
+                        </option>
+                      ))}
+                    </select>
+                    <button
+                      type="button"
+                      onClick={() => setIsAddingCategory(true)}
+                      className="px-3 py-2 bg-secondary-500 text-white rounded-md hover:bg-secondary-600"
+                      title="Add new category"
+                    >
+                      <FaPlus />
+                    </button>
+                    {formData.category && (
                       <button
                         type="button"
-                        onClick={() => setIsAddingCategory(true)}
-                        className="px-3 py-2 bg-secondary-500 text-white rounded-md hover:bg-secondary-600"
+                        onClick={() => handleDeleteCategory(formData.category)}
+                        className="px-3 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                        title="Delete selected category"
                       >
-                        <FaPlus />
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m4-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
                       </button>
-                    </>
-                  ) : (
-                    <div className="w-full">
-                      <div className="flex gap-2 mb-2">
-                        <input
-                          type="text"
-                          placeholder="Category name"
-                          value={newCategory.name}
-                          onChange={(e) => setNewCategory({ ...newCategory, name: e.target.value })}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                        />
-                        <button
-                          type="button"
-                          onClick={handleAddCategory}
-                          className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
-                        >
-                          Add
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setIsAddingCategory(false)}
-                          className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
-                        >
-                          Cancel
-                        </button>
-                      </div>
+                    )}
+                  </>
+                ) : (
+                  <div className="w-full">
+                    <div className="flex gap-2 mb-2">
                       <input
                         type="text"
-                        placeholder="Category description (optional)"
-                        value={newCategory.description}
-                        onChange={(e) => setNewCategory({ ...newCategory, description: e.target.value })}
+                        placeholder="Category name"
+                        value={newCategory.name}
+                        onChange={(e) => setNewCategory({ ...newCategory, name: e.target.value })}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md"
                       />
+                      <button
+                        type="button"
+                        onClick={handleAddCategory}
+                        className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+                      >
+                        Add
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setIsAddingCategory(false)}
+                        className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
+                      >
+                        Cancel
+                      </button>
                     </div>
-                  )}
-                </div>
+                    <input
+                      type="text"
+                      placeholder="Category description (optional)"
+                      value={newCategory.description}
+                      onChange={(e) => setNewCategory({ ...newCategory, description: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    />
+                  </div>
+                )}
               </div>
             </div>
 
@@ -378,100 +671,6 @@ export default function EditBlog() {
                     disabled={isSubmitting}
                   />
                 </div>
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Thumbnail URL
-              </label>
-              <input
-                type="text"
-                name="thumbnail"
-                value={formData.thumbnail}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
-                required
-                disabled={isSubmitting}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Author Name
-                </label>
-                <input
-                  type="text"
-                  name="author.name"
-                  value={formData.author?.name || ''}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Author Role
-                </label>
-                <input
-                  type="text"
-                  name="author.role"
-                  value={formData.author?.role || ''}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Author Image URL
-                </label>
-                <input
-                  type="text"
-                  name="author.image"
-                  value={formData.author?.image || ''}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Time to Read (in minutes)
-                </label>
-                <input
-                  type="text"
-                  name="timeToRead"
-                  value={formData.timeToRead}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Publication Date
-                </label>
-                <input
-                  type="date"
-                  name="date"
-                  value={formData.date}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500"
-                  required
-                  disabled={isSubmitting}
-                />
               </div>
             </div>
 
