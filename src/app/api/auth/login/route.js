@@ -5,10 +5,10 @@ export async function POST(request) {
     const body = await request.json();
     const { email, password } = body;
 
-    console.log('Login attempt:', { email, password }); // Debug log
+    console.log('Login attempt:', { email }); // Debug log, don't log password for security
 
-    // Simple check for testing
-    if (email === 'admin@aneeverse.com' && password === 'admin123') {
+    // Check credentials
+    if (email === 'team@aneeverse.com' && password === 'Anee@Anee') {
       console.log('Login successful'); // Debug log
       
       const response = NextResponse.json({ 
