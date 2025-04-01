@@ -342,17 +342,17 @@ export default function BlogDetail({ params }) {
                   {post.coAuthors.map((author, index) => (
                     <div key={index} className="flex items-center gap-2">
                       <div className="relative w-8 h-8 rounded-full overflow-hidden bg-gray-100">
-                        <Image
+            <Image
                           src={author.image || defaultAuthorImage}
                           alt={author.name}
-                          fill
-                          className="object-cover"
+              fill
+              className="object-cover"
                           onError={() => setAuthorImageError(true)}
                         />
                       </div>
                       <Link href="#" className="font-medium text-sm hover:underline">{author.name}</Link>
                       {index < post.coAuthors.length - 1 && <span className="ml-3">&</span>}
-                    </div>
+              </div>
                   ))}
                 </>
               ) : (
@@ -401,8 +401,8 @@ export default function BlogDetail({ params }) {
                 <polyline points="22,6 12,13 2,6"></polyline>
               </svg>
             </a>
-          </div>
-        </div>
+                </div>
+              </div>
 
         {/* Main Grid Container - layout matched to Superside */}
         <div className="grid grid-cols-1 lg:grid-cols-[270px_minmax(0,750px)_1fr] gap-8 px-4">
@@ -410,37 +410,37 @@ export default function BlogDetail({ params }) {
           <aside className="sticky top-24 self-start hidden lg:block h-fit lg:col-start-1 mt-0">
             <div className="bg-[#EAF2E3] p-6 rounded-lg">
               <h4 className="uppercase text-[#333] text-sm font-bold mb-4">Table of Contents</h4>
-              
+
               {/* Table of Contents - only show if we have headings */}
               {h2Headings.length > 0 && (
-                <ul className="space-y-3">
-                  {h2Headings.map((section, index) => (
+                  <ul className="space-y-3">
+                    {h2Headings.map((section, index) => (
                     <li key={index}>
-                      <a
-                        href={`#${section.id}`}
+                        <a
+                          href={`#${section.id}`}
                         className={`block group text-sm py-1 transition-colors ${
                           activeSection === index ? 'text-primary-600 font-medium' : 'text-gray-700 hover:text-primary-600'
-                        }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          const element = document.getElementById(section.id);
-                          if (element) {
-                            element.scrollIntoView({ behavior: 'smooth' });
-                            window.history.pushState(null, '', `#${section.id}`);
-                          }
-                        }}
-                      >
-                        {section.title}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+                          }`}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            const element = document.getElementById(section.id);
+                            if (element) {
+                              element.scrollIntoView({ behavior: 'smooth' });
+                              window.history.pushState(null, '', `#${section.id}`);
+                            }
+                          }}
+                        >
+                          {section.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
               )}
               
               {/* Time to Read */}
               <div className="text-gray-600 flex items-center gap-2 text-sm mt-4">
                 <FaRegClock />
-                <div>
+                  <div>
                   {typeof post.timeToRead === 'number' || !isNaN(parseInt(post.timeToRead)) 
                     ? `${post.timeToRead} min Read` 
                     : (post.timeToRead || '5 min Read')}
@@ -484,7 +484,7 @@ export default function BlogDetail({ params }) {
           {/* Main Content Section - centered column */}
           <div className="lg:col-start-2">
             {/* Remove breadcrumb from top of content, will add to bottom */}
-            
+
             <style jsx global>{`
               /* Custom styles for blog content */
               .prose {
