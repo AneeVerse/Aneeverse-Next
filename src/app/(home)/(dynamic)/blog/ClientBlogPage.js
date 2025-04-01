@@ -220,25 +220,27 @@ export default function ClientBlogPage() {
         const categorySlug = category.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '-');
 
         return (
-          <div key={category} className='bg-white py-10'>
+          <section key={category} className='bg-white pb-16'>
             <Layout>
-              <div className='flex group mb-6 justify-between items-center'>
-                <h1 className='text-3xl sm:text-4xl text-secondary-500 font-semibold'>{category}</h1>
+              <div className='flex justify-between items-center mb-8'>
+                <h2 className='text-[40px] text-[#0A2E3D] font-normal'>{category}</h2>
                 <Link 
                   href={`/blog/category/${categorySlug}`} 
-                  className='text-secondary-500 hover:underline flex items-center gap-1 font-semibold text-lg'
+                  className='text-[#0A2E3D] hover:text-blue-600 flex items-center gap-2 font-medium text-lg'
                 >
-                  <span>See all</span>
-                  <FaChevronRight className='text-lg group-hover:translate-x-1 duration-300 transition-all' />
+                  <span>See All</span>
+                  <FaChevronRight className='text-lg transition-transform duration-300 group-hover:translate-x-1' />
                 </Link>
               </div>
-              <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
-                {categoryBlogs.slice(0, 4).map((blog) => (
-                  <BlogCard key={blog.id} blog={blog} />
+              <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+                {categoryBlogs.slice(0, 3).map((blog) => (
+                  <div key={blog.id}>
+                    <BlogCard key={blog.id} blog={blog} />
+                  </div>
                 ))}
               </div>
             </Layout>
-          </div>
+          </section>
         );
       })}
 
