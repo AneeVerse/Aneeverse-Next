@@ -1,7 +1,7 @@
 "use client"
-import React, { useEffect, useState } from "react";
-import { FaArrowUp , FaArrowDown} from "react-icons/fa6";
-import { motion } from "framer-motion";
+import React, { useEffect, useState, useRef } from "react";
+import { FaArrowUp, FaArrowDown } from "react-icons/fa6";
+import { motion, AnimatePresence } from "framer-motion";
 import Layout from "../common/Layout";
 
 export default function TestimonialSlider() {
@@ -54,6 +54,62 @@ export default function TestimonialSlider() {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const containerRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const handleDragStart = (e) => {
+    setIsDragging(true);
+    const clientX = e.clientX || e.touches?.[0]?.clientX || 0;
+    const clientY = e.clientY || e.touches?.[0]?.clientY || 0;
+    setDragStart({ x: clientX, y: clientY });
+    setDragOffset({ x: 0, y: 0 });
+  };
+
+  const handleDrag = (e) => {
+    if (!isDragging) return;
+    
+    const clientX = e.clientX || e.touches?.[0]?.clientX || 0;
+    const clientY = e.clientY || e.touches?.[0]?.clientY || 0;
+    
+    if (isMobile) {
+      const offsetX = (clientX - dragStart.x) * 1.5;
+      setDragOffset({ x: offsetX, y: 0 });
+    } else {
+      const offsetY = (clientY - dragStart.y) * 1.5;
+      setDragOffset({ x: 0, y: offsetY });
+    }
+  };
+
+  const handleDragEnd = () => {
+    if (!isDragging) return;
+    setIsDragging(false);
+    
+    const offset = isMobile ? dragOffset.x : dragOffset.y;
+    
+    // Change slide based on drag distance with reduced threshold
+    if (Math.abs(offset) > 30) {
+      if (offset > 0) {
+        handlePrev();
+      } else {
+        handleNext();
+      }
+    }
+    
+    setDragOffset({ x: 0, y: 0 });
+  };
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
@@ -67,14 +123,14 @@ export default function TestimonialSlider() {
     );
   };
   
-//   automatically change the testimonial every 10 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      handleNext();
+      if (!isDragging) {
+        handleNext();
+      }
     }, 5000);
     return () => clearInterval(interval);
-  }, [currentIndex]);
-
+  }, [currentIndex, isDragging]);
 
   return (
     <div className="relative py-10 bg-secondary-500 text-primary-500">
@@ -82,38 +138,86 @@ export default function TestimonialSlider() {
         {/* Main Container */}
         <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
           {/* Image Section */}
-          <div className="flex min-w-fit flex-row lg:flex-col justify-center items-center gap-4">
-            {/* Previous Testimonial Image */}
-            <motion.img
-              src={testimonials[(currentIndex - 1 + testimonials.length) % testimonials.length].imageUrl}
-              alt="Previous Testimonial"
-              className="w-[80px] h-[80px] sm:w-[150px] sm:h-[150px] rounded-full object-cover opacity-50"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 0.5, scale: 1 }}
-              transition={{ duration: 0.3 }}
-            />
+          <div 
+            ref={containerRef}
+            className="flex min-w-fit flex-row lg:flex-col justify-center items-center gap-4 select-none cursor-grab active:cursor-grabbing"
+            onMouseDown={handleDragStart}
+            onMouseMove={handleDrag}
+            onMouseUp={handleDragEnd}
+            onMouseLeave={handleDragEnd}
+            onTouchStart={handleDragStart}
+            onTouchMove={handleDrag}
+            onTouchEnd={handleDragEnd}
+            style={{
+              transition: isDragging ? 'none' : 'transform 0.3s ease-out'
+            }}
+          >
+            <AnimatePresence mode="wait">
+              {/* Previous Testimonial Image */}
+              <motion.div
+                key={`prev-${currentIndex}`}
+                className="w-[80px] h-[80px] sm:w-[150px] sm:h-[150px] relative"
+                initial={isMobile ? { x: -50, opacity: 0 } : { y: -50, opacity: 0 }}
+                animate={{ 
+                  x: isMobile ? (isDragging ? dragOffset.x * 0.5 : 0) : 0,
+                  y: !isMobile ? (isDragging ? dragOffset.y * 0.5 : 0) : 0,
+                  opacity: 0.5,
+                  scale: 0.8
+                }}
+                exit={isMobile ? { x: 50, opacity: 0 } : { y: 50, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <img
+                  src={testimonials[(currentIndex - 1 + testimonials.length) % testimonials.length].imageUrl}
+                  alt="Previous Testimonial"
+                  className="w-full h-full rounded-full object-cover opacity-50"
+                  draggable={false}
+                />
+              </motion.div>
 
-            {/* Current Testimonial Image */}
-            <motion.img
-              key={currentIndex}
-              src={testimonials[currentIndex].imageUrl}
-              alt="Current Testimonial"
-              className="w-[160px] h-[160px] sm:w-[200px] sm:h-[200px] rounded-full object-cover border-4 border-gray-300 shadow-md"
-              initial={{ x: 50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -50, opacity: 0 }}
-              transition={{ duration: 0.5 }}
-            />
+              {/* Current Testimonial Image */}
+              <motion.div
+                key={`current-${currentIndex}`}
+                className="w-[160px] h-[160px] sm:w-[200px] sm:h-[200px] relative z-10"
+                initial={{ scale: 0.8 }}
+                animate={{ 
+                  x: isMobile ? (isDragging ? dragOffset.x * 0.8 : 0) : 0,
+                  y: !isMobile ? (isDragging ? dragOffset.y * 0.8 : 0) : 0,
+                  scale: 1
+                }}
+                exit={{ scale: 0.8 }}
+                transition={{ duration: 0.3 }}
+              >
+                <img
+                  src={testimonials[currentIndex].imageUrl}
+                  alt="Current Testimonial"
+                  className="w-full h-full rounded-full object-cover border-4 border-gray-300 shadow-md"
+                  draggable={false}
+                />
+              </motion.div>
 
-            {/* Next Testimonial Image */}
-            <motion.img
-              src={testimonials[(currentIndex + 1) % testimonials.length].imageUrl}
-              alt="Next Testimonial"
-              className="w-[80px] h-[80px] sm:w-[150px] sm:h-[150px] rounded-full object-cover opacity-50"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 0.5, scale: 1 }}
-              transition={{ duration: 0.3 }}
-            />
+              {/* Next Testimonial Image */}
+              <motion.div
+                key={`next-${currentIndex}`}
+                className="w-[80px] h-[80px] sm:w-[150px] sm:h-[150px] relative"
+                initial={isMobile ? { x: 50, opacity: 0 } : { y: 50, opacity: 0 }}
+                animate={{ 
+                  x: isMobile ? (isDragging ? dragOffset.x * 0.5 : 0) : 0,
+                  y: !isMobile ? (isDragging ? dragOffset.y * 0.5 : 0) : 0,
+                  opacity: 0.5,
+                  scale: 0.8
+                }}
+                exit={isMobile ? { x: -50, opacity: 0 } : { y: -50, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <img
+                  src={testimonials[(currentIndex + 1) % testimonials.length].imageUrl}
+                  alt="Next Testimonial"
+                  className="w-full h-full rounded-full object-cover opacity-50"
+                  draggable={false}
+                />
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           {/* Content Section */}
@@ -123,7 +227,7 @@ export default function TestimonialSlider() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }}
           >
             <h2 className="text-3xl font-semibold">
               {testimonials[currentIndex].company}
@@ -149,17 +253,6 @@ export default function TestimonialSlider() {
                 </div>
               ))}
             </div>
-
-            {/* Case Study Link */}
-            {/* <a
-              href={testimonials[currentIndex].caseStudyUrl}
-              className="inline-flex items-center gap-2 group font-medium text-white/90 transition-colors"
-            >
-              {testimonials[currentIndex].caseStudy}
-              <span className="group-hover:translate-x-2 transition-transform">
-                →
-              </span>
-            </a> */}
           </motion.div>
 
           {/* Navigation Buttons */}
