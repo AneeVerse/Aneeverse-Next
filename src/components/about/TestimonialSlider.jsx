@@ -12,16 +12,16 @@ const VMCLogo = ({ isMobile }) => {
     maxWidth: isMobile ? '100px' : '120px',
     maxHeight: isMobile ? '35px' : '60px',
     objectFit: 'contain',
-    objectPosition: 'center',
+    objectPosition: isMobile ? 'center' : 'left',
     display: 'block',
-    margin: '0 auto'
+    margin: isMobile ? '0 auto' : '0'
   };
 
   // Container style for positioning
   const containerStyle = {
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: isMobile ? 'center' : 'flex-start',
+    justifyContent: isMobile ? 'center' : 'flex-start',
     width: '100%',
     marginTop: isMobile ? '20px' : '40px',
     marginBottom: isMobile ? '16px' : '4px'
@@ -44,17 +44,17 @@ const JMVisaLogo = ({ isMobile }) => {
     width: 'auto',
     height: 'auto',
     filter: 'brightness(0) invert(1)',
-    objectPosition: 'center',
+    objectPosition: isMobile ? 'center' : 'left',
     maxHeight: isMobile ? '120px' : '260px', 
     display: 'block',
-    margin: '0 auto'
+    margin: isMobile ? '0 auto' : '0'
   };
 
   // Container style for positioning
   const containerStyle = {
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: isMobile ? 'center' : 'flex-start',
+    justifyContent: isMobile ? 'center' : 'flex-start',
     width: '100%',
     marginLeft: isMobile ? '0' : '-80px',
     marginTop: isMobile ? '20px' : '0',
@@ -285,7 +285,7 @@ export default function TestimonialSlider() {
           >
             <div className="flex flex-col items-start lg:items-start gap-2 w-full">
               {testimonials[currentIndex].companyLogo ? (
-                <div className={`flex flex-col items-center lg:items-start w-full max-w-[600px]`}>
+                <div className={`flex flex-col ${isMobile ? 'items-center' : 'items-start'} w-full max-w-[600px]`}>
                   {testimonials[currentIndex].company === "VMC" ? (
                     <VMCLogo isMobile={isMobile} />
                   ) : testimonials[currentIndex].company === "JM Visa Services" ? (
