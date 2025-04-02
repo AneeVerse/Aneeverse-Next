@@ -184,9 +184,9 @@ export default function Dashboard() {
           <h2 className="text-xl font-semibold mb-4">Blogs by Category</h2>
           <div className="space-y-4">
             {stats.blogsByCategory.map((category) => (
-              <div key={category._id} className="flex items-center justify-between">
-                <span className="font-medium">{category._id || 'Uncategorized'}</span>
-                <span className="px-3 py-1 bg-secondary-100 text-secondary-700 rounded-full">
+              <div key={category._id} className="flex items-center justify-between bg-white">
+                <span className="font-medium text-gray-800">{category._id || 'Uncategorized'}</span>
+                <span className="px-3 py-1 bg-[#0A2E3D] text-white rounded-full min-w-[80px] text-center">
                   {category.count} posts
                 </span>
               </div>
