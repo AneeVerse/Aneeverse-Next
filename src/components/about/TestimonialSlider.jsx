@@ -4,28 +4,98 @@ import { FaArrowUp, FaArrowDown } from "react-icons/fa6";
 import { motion, AnimatePresence } from "framer-motion";
 import Layout from "../common/Layout";
 
+// Custom VMC Logo component with mobile-specific sizing
+const VMCLogo = ({ isMobile }) => {
+  const style = {
+    width: 'auto',
+    height: 'auto',
+    maxWidth: isMobile ? '100px' : '120px',
+    maxHeight: isMobile ? '35px' : '60px',
+    objectFit: 'contain',
+    objectPosition: 'center',
+    display: 'block',
+    margin: '0 auto'
+  };
+
+  // Container style for positioning
+  const containerStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    marginTop: isMobile ? '20px' : '40px',
+    marginBottom: isMobile ? '16px' : '4px'
+  };
+
+  return (
+    <div style={containerStyle}>
+      <img 
+        src={`/images/testimonals/vmc-logo.webp?v=${Date.now()}`}
+        alt="VMC Logo"
+        style={style}
+      />
+    </div>
+  );
+};
+
+// Custom JM Visa Logo component with mobile-specific sizing
+const JMVisaLogo = ({ isMobile }) => {
+  const style = {
+    width: 'auto',
+    height: 'auto',
+    filter: 'brightness(0) invert(1)',
+    objectPosition: 'center',
+    maxHeight: isMobile ? '120px' : '260px', 
+    display: 'block',
+    margin: '0 auto'
+  };
+
+  // Container style for positioning
+  const containerStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    marginLeft: isMobile ? '0' : '-80px',
+    marginTop: isMobile ? '20px' : '0',
+    marginBottom: isMobile ? '-10px' : '0'
+  };
+
+  return (
+    <div style={containerStyle}>
+      <img 
+        src={`/images/testimonals/jm-visa-logo.png?v=${Date.now()}`}
+        alt="JM Visa Services Logo"
+        style={style}
+      />
+    </div>
+  );
+};
+
 export default function TestimonialSlider() {
   const testimonials = [
     {
       name: "Vikram Manghnani",
-      role: "Founder",
+      role: "Founder, VMC",
       company: "VMC",
-      feedback: "AneeVerse brought fresh, fun ideas that made our creative work simple and engaging. They felt like a team of friends who truly cared about our vision, making them key to our expansion.",
+      feedback: <><span className="font-bold">AneeVerse brought fresh, fun ideas that made our creative work simple and engaging</span>. They felt like a team of friends who truly cared about our vision, making them key to our expansion.</>,
       imageUrl: "/images/testimonals/Vmc.png",
+      companyLogo: "/images/testimonals/vmc-logo.webp"
     },
     {
       name: "Navin Agarwal",
       role: "Founder",
       company: "Novino Inks Pvt Ltd",
-      feedback: "The biggest win? The time we saved. AneeVerse built a stunning eCommerce site that truly reflects our brand. Abhijeet understood my paintings on a personal level—he knew exactly what I wanted to express and brought it to life with unmatched customization and efficiency.",
-      imageUrl: "/images/testimonals/navino.png",
+      feedback: <>The biggest win? The time we saved. AneeVerse built a stunning eCommerce site that truly reflects our brand. <span className="font-bold">Abhijeet understood my paintings on a personal level</span>—he knew exactly what I wanted to express and brought it to life with unmatched customization and efficiency.</>,
+      imageUrl: "/images/testimonals/navino.png"
     },
     {
       name: "Amrita Thakar",
-      role: "Founder",
+      role: "Founder, JM Visa Services",
       company: "JM Visa Services",
-      feedback: "AneeVerse redesigned our website, and the leads started flowing. Their smart blog and GMB strategies got us to #1 in Mumbai while cutting marketing costs. Best move we made.",
+      feedback: <>AneeVerse redesigned our website, and the leads started flowing. Their smart <span className="font-bold">blog and GMB strategies got us to #1 in Mumbai while cutting marketing costs</span>. Best move we made.</>,
       imageUrl: "/images/testimonals/jm-visa.png",
+      companyLogo: "/images/testimonals/jm-visa-logo.png"
     },
   ];
 
@@ -205,28 +275,49 @@ export default function TestimonialSlider() {
           {/* Content Section */}
           <motion.div
             key={currentIndex}
-            className="flex flex-col w-full lg:w-auto px-2 sm:px-0"
+            className={`flex flex-col w-full lg:w-auto px-2 sm:px-0 ${
+              testimonials[currentIndex].company === "JM Visa Services" && !isMobile ? "-mt-20" : ""
+            }`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="flex items-center gap-2 sm:gap-4">
-              <h2 className="text-2xl sm:text-3xl font-semibold">
-                {testimonials[currentIndex].company}
-              </h2>
-              {testimonials[currentIndex].company === "JM Visa Services" && (
-                <img
-                  src="/images/testimonals/jm visa logo.png"
-                  alt="JM Visa Services Logo"
-                  className="h-6 sm:h-8 object-contain"
-                />
+            <div className="flex flex-col items-start lg:items-start gap-2 w-full">
+              {testimonials[currentIndex].companyLogo ? (
+                <div className={`flex flex-col items-center lg:items-start w-full max-w-[600px]`}>
+                  {testimonials[currentIndex].company === "VMC" ? (
+                    <VMCLogo isMobile={isMobile} />
+                  ) : testimonials[currentIndex].company === "JM Visa Services" ? (
+                    <JMVisaLogo isMobile={isMobile} />
+                  ) : (
+                    <img
+                      src={testimonials[currentIndex].companyLogo}
+                      alt={`${testimonials[currentIndex].company} Logo`}
+                      className="w-full h-auto object-contain"
+                      style={{
+                        objectPosition: "center",
+                        maxHeight: "60px"
+                      }}
+                    />
+                  )}
+                </div>
+              ) : (
+                <h2 className="text-3xl sm:text-4xl font-semibold mb-2 text-center lg:text-left w-full">
+                  {testimonials[currentIndex].company}
+                </h2>
               )}
             </div>
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl 2xl:text-4xl text-left my-4 sm:my-8">
+            <p className={`text-lg sm:text-xl md:text-2xl lg:text-3xl 2xl:text-4xl text-center lg:text-left ${
+              testimonials[currentIndex].company === "JM Visa Services" 
+                ? isMobile ? "mt-0" : "-mt-4" 
+                : isMobile ? "mt-0" : "my-4 sm:my-6"
+            }`}>
               "{testimonials[currentIndex].feedback}"
             </p>
-            <p className="font-medium italic text-gray-300">
+            <p className={`font-medium italic text-gray-300 text-center lg:text-left ${
+              testimonials[currentIndex].company === "JM Visa Services" ? "mt-4" : "mt-4"
+            }`}>
               {testimonials[currentIndex].name}, {testimonials[currentIndex].role}
             </p>
           </motion.div>
