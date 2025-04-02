@@ -1,8 +1,12 @@
+'use client';
+
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "@/styles/fonts.css"; // Import fonts CSS
 import Navbar from "@/components/layout/Navbar";
+import NewFooter from "@/components/layout/NewFooter";
 import NextTopLoader from "nextjs-toploader";
+import { usePathname } from 'next/navigation';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,48 +18,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
-  title: "Aneeverse",
-  description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
-  openGraph: {
-    title:  "Aneeverse",
-    description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
-    url: `https://aneeverse.com`,
-    images: [
-      {
-        url: "/images/meta/phone.avif", // ✅ Dynamic Image
-        width: 1200,
-        height: 630,
-        alt:  "Aneeverse",
-      },
-    ],
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title:  "Aneeverse",
-    description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
-    image: "/images/meta/phone.avif",
-  },
-  // Add favicon icon and device-specific icons
-  icons: {
-    icon: "/favicon.ico", // Default favicon
-    apple: "/apple-touch-icon.png", // Apple touch icon
-    other: [
-      { rel: "icon", type: "image/png", sizes: "192x192", url: "/android-chrome-192x192.png" },
-      { rel: "icon", type: "image/png", sizes: "512x512", url: "/android-chrome-512x512.png" },
-    ],
-  },
-  manifest: "/site.webmanifest", // Optional: Link to your manifest.json file
-};
-
 export default function RootLayout({ children }) {
+  const pathname = usePathname();
+  const isAuthPage = pathname === '/register' || pathname === '/login';
+
   return (
     <html lang="en">
       <head>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-primary-500`}
@@ -69,8 +41,9 @@ export default function RootLayout({ children }) {
          speed={500}
          shadow="0 0 10px #2299DD,0 0 5px #2299DD"
          />
-        <Navbar />
+        {!isAuthPage && <Navbar />}
         {children}
+        {!isAuthPage && <NewFooter />}
       </body>
     </html>
   );

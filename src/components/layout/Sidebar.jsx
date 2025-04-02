@@ -304,7 +304,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             Book a Call
           </Link>
           <Link
-            href="/login"
+            href="/register"
             onClick={toggleSidebar}
             className="w-full block text-center mt-3 py-3 rounded-full border border-secondary-500 text-secondary-500 font-semibold"
           >
