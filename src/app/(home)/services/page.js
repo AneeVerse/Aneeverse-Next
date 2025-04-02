@@ -1,7 +1,6 @@
 import DynamicOurWorks from '@/components/home/DynamicOurWorks'
 import FeaturesSection from '@/components/home/FeaturesSection'
 import SlidingLogos from '@/components/home/SlidingLogos'
-import NewFooter from '@/components/layout/NewFooter'
 import AboutDesignServicesSection from '@/components/services/AboutDesignServicesSection'
 import ContentWritingServices from '@/components/services/ContentWritingServices'
 import CreativeDesignServices from '@/components/services/CreativeDesignServices'
