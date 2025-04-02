@@ -7,49 +7,25 @@ import Layout from "../common/Layout";
 export default function TestimonialSlider() {
   const testimonials = [
     {
-      name: "Amrita Thakar",
+      name: "Vikram Manghnani",
       role: "Founder",
-      company: "JM Visa Services",
-      feedback: "Working with AneeVerse got us to the #1 spot in Mumbai through smart blog strategies and GMB optimization. Our leads have grown, and we've even saved on marketing costs. Really glad we made this move!",
-      stats: {
-        productionTimeSaved: "57%",
-        costSavings: "$10,775",
-        videosDelivered: "20",
-      },
-      imageUrl: "/images/about/team1.avif",
-      cardImage: "/images/about/team1.avif",
-      caseStudy: "How Oyster Automates Global Social Media Campaigns",
-      caseStudyUrl: "/case-studies/oyster",
+      company: "VMC",
+      feedback: "AneeVerse brought fresh, fun ideas that made our creative work simple and engaging. They felt like a team of friends who truly cared about our vision, making them key to our expansion.",
+      imageUrl: "/images/testimonals/Vmc.png",
     },
     {
       name: "Navin Agarwal",
       role: "Founder",
       company: "Novino Inks Pvt Ltd",
-      feedback: "The biggest benefit has been the time saved. AneeVerse built a high-converting eCommerce website that truly reflects our brand. The level of customization and efficiency they brought in is unmatched.",
-      stats: {
-        productionTimeSaved: "40%",
-        costSavings: "$8,000",
-        videosDelivered: "15",
-      },
-      imageUrl: "/images/about/team2.avif",
-      cardImage: "/images/about/team2.avif",
-      caseStudy: "Scaling Content Creation with Example Corp",
-      caseStudyUrl: "/case-studies/example-corp",
+      feedback: "The biggest win? The time we saved. AneeVerse built a stunning eCommerce site that truly reflects our brand. Abhijeet understood my paintings on a personal level—he knew exactly what I wanted to express and brought it to life with unmatched customization and efficiency.",
+      imageUrl: "/images/testimonals/navino.png",
     },
     {
-      name: "Vikram Manghnani",
-      role: "VMC",
-      company: "VMC",
-      feedback: "AneeVerse helped us with our creative work. They brought lots of fun ideas that made everything simple and bright. It felt like having a whole team of friends.",
-      stats: {
-        productionTimeSaved: "65%",
-        costSavings: "$15,000",
-        videosDelivered: "25",
-      },
-      imageUrl: "/images/about/team3.avif",
-      cardImage: "/images/about/team3.avif",
-      caseStudy: "Driving ROI with Acme Inc.",
-      caseStudyUrl: "/case-studies/acme-inc",
+      name: "Amrita Thakar",
+      role: "Founder",
+      company: "JM Visa Services",
+      feedback: "AneeVerse redesigned our website, and the leads started flowing. Their smart blog and GMB strategies got us to #1 in Mumbai while cutting marketing costs. Best move we made.",
+      imageUrl: "/images/testimonals/jm-visa.png",
     },
   ];
 
@@ -85,11 +61,15 @@ export default function TestimonialSlider() {
     const clientY = e.clientY || e.touches?.[0]?.clientY || 0;
     
     if (isMobile) {
-      const offsetX = (clientX - dragStart.x) * 1.5;
-      setDragOffset({ x: offsetX, y: 0 });
+      const offsetX = (clientX - dragStart.x);
+      // Constrain the drag offset to a maximum value
+      const constrainedOffsetX = Math.max(Math.min(offsetX, 100), -100);
+      setDragOffset({ x: constrainedOffsetX, y: 0 });
     } else {
-      const offsetY = (clientY - dragStart.y) * 1.5;
-      setDragOffset({ x: 0, y: offsetY });
+      const offsetY = (clientY - dragStart.y);
+      // Constrain the drag offset to a maximum value
+      const constrainedOffsetY = Math.max(Math.min(offsetY, 100), -100);
+      setDragOffset({ x: 0, y: constrainedOffsetY });
     }
   };
 
@@ -100,7 +80,7 @@ export default function TestimonialSlider() {
     const offset = isMobile ? dragOffset.x : dragOffset.y;
     
     // Change slide based on drag distance with reduced threshold
-    if (Math.abs(offset) > 30) {
+    if (Math.abs(offset) > 20) {
       if (offset > 0) {
         handlePrev();
       } else {
@@ -108,6 +88,7 @@ export default function TestimonialSlider() {
       }
     }
     
+    // Reset the offset immediately
     setDragOffset({ x: 0, y: 0 });
   };
 
@@ -133,14 +114,14 @@ export default function TestimonialSlider() {
   }, [currentIndex, isDragging]);
 
   return (
-    <div className="relative py-10 bg-secondary-500 text-primary-500">
+    <div className="relative py-6 sm:py-10 bg-secondary-500 text-primary-500">
       <Layout>
         {/* Main Container */}
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-4 lg:gap-8 px-4 sm:px-0">
           {/* Image Section */}
           <div 
             ref={containerRef}
-            className="flex min-w-fit flex-row lg:flex-col justify-center items-center gap-4 select-none cursor-grab active:cursor-grabbing"
+            className="flex min-w-fit flex-row lg:flex-col justify-center items-center gap-2 sm:gap-4 select-none cursor-grab active:cursor-grabbing overflow-hidden"
             onMouseDown={handleDragStart}
             onMouseMove={handleDrag}
             onMouseUp={handleDragEnd}
@@ -149,7 +130,8 @@ export default function TestimonialSlider() {
             onTouchMove={handleDrag}
             onTouchEnd={handleDragEnd}
             style={{
-              transition: isDragging ? 'none' : 'transform 0.3s ease-out'
+              transition: isDragging ? 'none' : 'transform 0.3s ease-out',
+              transform: isMobile ? `translateX(${dragOffset.x}px)` : `translateY(${dragOffset.y}px)`
             }}
           >
             <AnimatePresence mode="wait">
@@ -223,36 +205,30 @@ export default function TestimonialSlider() {
           {/* Content Section */}
           <motion.div
             key={currentIndex}
-            className="flex flex-col"
+            className="flex flex-col w-full lg:w-auto px-2 sm:px-0"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <h2 className="text-3xl font-semibold">
-              {testimonials[currentIndex].company}
-            </h2>
-            <p className="text-xl sm:text-2xl md:text-3xl 2xl:text-4xl text-left my-8">
+            <div className="flex items-center gap-2 sm:gap-4">
+              <h2 className="text-2xl sm:text-3xl font-semibold">
+                {testimonials[currentIndex].company}
+              </h2>
+              {testimonials[currentIndex].company === "JM Visa Services" && (
+                <img
+                  src="/images/testimonals/jm visa logo.png"
+                  alt="JM Visa Services Logo"
+                  className="h-6 sm:h-8 object-contain"
+                />
+              )}
+            </div>
+            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl 2xl:text-4xl text-left my-4 sm:my-8">
               "{testimonials[currentIndex].feedback}"
             </p>
             <p className="font-medium italic text-gray-300">
               {testimonials[currentIndex].name}, {testimonials[currentIndex].role}
             </p>
-
-            {/* Stats Grid */}
-            <div className="flex flex-wrap justify-between gap-4 mb-8 mt-10">
-              {Object.entries(testimonials[currentIndex].stats).map(([key, value]) => (
-                <div
-                  key={key}
-                  className="bg-white/10 flex-1 p-4 rounded-lg backdrop-blur-sm border border-white/10"
-                >
-                  <p className="text-2xl font-bold mb-1">{value}</p>
-                  <p className="text-xs uppercase tracking-wider text-white/80">
-                    {key.replace(/([A-Z])/g, " $1")}
-                  </p>
-                </div>
-              ))}
-            </div>
           </motion.div>
 
           {/* Navigation Buttons */}
