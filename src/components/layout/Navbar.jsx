@@ -84,7 +84,7 @@ const Navbar = () => {
           <Link href={"/contact"} className={`text-[${pathName != "/" ?  pathName.includes("/services/") ?(color.bg !=  "#EBFAFE") ?  "#073742":  "#EBFAFE" : "#EBFAFE" : (color.bg !=  "#EBFAFE") ?  "#073742":  "#EBFAFE" }] bg-[${color.text}] text-sm border border-[${color.bg}]  px-6 py-[10px] rounded-full`}>
             Book a Call
           </Link>
-          <Link href={"/login"} className={`text-[${color.text}] text-sm bg-[${color.bg}] border border-[${color.text}] px-6 py-[10px] rounded-full`}>
+          <Link href={"/register"} className={`text-[${color.text}] text-sm bg-[${color.bg}] border border-[${color.text}] px-6 py-[10px] rounded-full`}>
             Login
           </Link>
         </div>

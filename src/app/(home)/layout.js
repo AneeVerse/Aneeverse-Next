@@ -1,12 +1,9 @@
-
-import NewFooter from '@/components/layout/NewFooter'
 import React from 'react'
 
 const layout = ({children}) => {
   return (
-    <div className='mt-[80px]'>
+    <div>
         {children}
-        <NewFooter/>
     </div>
   )
 }
