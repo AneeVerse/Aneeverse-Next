@@ -11,7 +11,10 @@ const nextConfig = {
       'localhost:3001',
       'images.pexels.com',
       'images.unsplash.com',
-      'i.imgur.com'
+      'i.imgur.com',
+      'drive.google.com',
+      'lh3.googleusercontent.com',
+      'docs.google.com'
     ],
     remotePatterns: [
       {
