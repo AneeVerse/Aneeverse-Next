@@ -23,7 +23,7 @@ const VMCLogo = ({ isMobile }) => {
     alignItems: isMobile ? 'center' : 'flex-start',
     justifyContent: isMobile ? 'center' : 'flex-start',
     width: '100%',
-    marginTop: isMobile ? '20px' : '40px',
+    marginTop: isMobile ? '40px' : '40px',
     marginBottom: isMobile ? '16px' : '4px'
   };
 
