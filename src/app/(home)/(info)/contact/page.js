@@ -47,7 +47,7 @@ const ContactUsPage = () => {
       </div> */}
 
       {/* Calendly Embed */}
-      <div className="pt-6 sm:pt-16 sm:pb-16 bg-[#fbfcfd] text-secondary-500">
+      <div className="pt-24 sm:pt-28 sm:pb-16 bg-[#fbfcfd] text-secondary-500">
         <Layout>
           <Heading
             level="h2"
