@@ -16,7 +16,6 @@ const BlogHeroSection = ({ blogData }) => {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Heading */}
           <div className="text-center mb-12">
-            <h4 className="text-sm uppercase tracking-wide text-secondary-500">BLOG</h4>
             <h2 className="text-4xl md:text-[80px] mt-3 font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] relative inline-block group">
               <span className="relative inline-block">
                 Creative Performance
@@ -80,7 +79,6 @@ const BlogHeroSection = ({ blogData }) => {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="text-center mb-12">
-          <h4 className="text-sm uppercase tracking-wide text-secondary-500">BLOG</h4>
           <h2 className="text-4xl md:text-[80px] mt-3 font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] relative inline-block group">
             <span className="relative inline-block">
               Creative Performance
