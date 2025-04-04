@@ -321,21 +321,20 @@ export default function BlogDetail({ params }) {
   return (
     <div className='bg-white py-16'>
       <Layout>
-        {/* Blog Header - centered like Superside with content in the middle */}
-        <div className="max-w-4xl mx-auto px-4 mb-12">
-          {/* Superside-style date display */}
-          <div className="uppercase text-gray-600 tracking-wider text-sm font-medium mb-8 text-center">
+        {/* Blog Header */}
+        <div className="max-w-[780px] mx-auto px-4 sm:px-6 lg:px-0 mb-12">
+          {/* Date display with increased top margin */}
+          <div className="uppercase text-gray-600 tracking-wider text-sm font-medium mb-8 text-center mt-8">
             {post.date}
           </div>
           
-          {/* Title styled like Superside - with main title and possible subtitle - centered */}
           <h1 className="text-4xl md:text-5xl lg:text-[65px] font-bold text-[#0A2E3D] leading-[1.2] md:leading-[1.1] tracking-tight mb-10 text-center">
             {post.title}
           </h1>
           
-          {/* Author section like Superside - centered */}
+          {/* Author section */}
           <div className="mb-10 text-center">
-            <div className="text-gray-700 text-sm mb-2">As told by</div>
+            <div className="text-gray-700 text-sm mb-2">  Author</div>
             <div className="flex items-center gap-5 justify-center">
               {post.coAuthors ? (
                 <>
