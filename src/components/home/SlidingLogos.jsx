@@ -72,7 +72,7 @@ const logos = [
               <img 
                 src={logo} 
                 alt={`Logo ${ind}: ${logo}`} 
-                className={`w-auto ${isIshanya || isBharathaksha ? 'h-[120px]' : isDeepak ? 'h-[80px]' : 'h-[40px]'} object-contain`} 
+                className={`w-auto ${isIshanya || isBharathaksha ? 'h-[200px]' : isDeepak ? 'h-[160px]' : 'h-[40px]'} object-contain`} 
                 onError={(e) => {
                   console.error(`Failed to load logo: ${logo}`);
                   e.target.onerror = null; // Prevent infinite loop
