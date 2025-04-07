@@ -31,7 +31,7 @@ export default function AdminLayout({ children }) {
               <Link href="/admin/blogs" className="hover:text-gray-200 flex items-center gap-2">
                 <FaBlog /> Blogs
               </Link>
-              <Link href="/" className="hover:text-gray-200">
+              <Link href="/" className="hover:text-gray-200" target="_blank" rel="noopener noreferrer">
                 View Site
               </Link>
               <button
