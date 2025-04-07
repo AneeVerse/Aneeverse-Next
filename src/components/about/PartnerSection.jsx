@@ -8,7 +8,7 @@ const ParnterSection = () => {
     "/images/about/figma.png",
     "/images/about/google.png",
     "/images/about/figma.png",
-    "/images/about/epic.png",
+    "/images/logos/ishanyafoundation.png",
     "/images/about/webflow.png",
     "/images/logos/ishanyafoundation.png",
     "/images/logos/bharathaksha2.png",
@@ -67,15 +67,17 @@ const ParnterSection = () => {
         >
           {/* Original Logos */}
           {[...logos, ...logos, ...logos, ...logos].map((logo, index) => {
-            // Check if it's one of the new logos
-            const isNewLogo = logo.includes('bharathaksha') || logo.includes('deepakfertilizer') || logo.includes('ishanyafoundation');
+            // Check specific logos to resize
+            const isIshanya = logo.includes('ishanyafoundation');
+            const isBharathaksha = logo.includes('bharathaksha');
+            const isDeepak = logo.includes('deepakfertilizer');
             
             return (
               <img
                 key={index}
                 src={logo}
                 alt={`Partner ${index + 1}: ${logo}`}
-                className={`${isNewLogo ? 'h-12' : 'h-6'} object-contain px-6 w-auto transition-all`}
+                className={`${isIshanya || isBharathaksha ? 'h-20' : isDeepak ? 'h-12' : 'h-6'} object-contain px-6 w-auto transition-all`}
                 onError={(e) => {
                   console.error(`Failed to load logo: ${logo}`);
                   e.target.onerror = null; // Prevent infinite loop

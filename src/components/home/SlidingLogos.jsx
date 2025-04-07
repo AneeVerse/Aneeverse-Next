@@ -7,7 +7,7 @@ const logos = [
     "/images/logos/amazon.png",
     "/images/logos/bookings.png",
     "/images/logos/coinbase.png",
-    "/images/logos/epic.png",
+    "/images/logos/ishanyafoundation.png",
     "/images/logos/figma.png",
     "/images/logos/google.png",
     "/images/logos/bharathaksha2.png",
@@ -22,7 +22,7 @@ const logos = [
     "/images/logos/amazon.png",
     "/images/logos/bookings.png",
     "/images/logos/coinbase.png",
-    "/images/logos/epic.png",
+    "/images/logos/ishanyafoundation.png",
     "/images/logos/figma.png",
     "/images/logos/google.png",
     "/images/logos/bharathaksha2.png",
@@ -53,14 +53,16 @@ const logos = [
   const SliderLogo = ({ direction }) => {
     return (
       <motion.div
-        className={`flex h-[78px] gap-10 sm:gap-16 ${direction === 'left' ? 'justify-start' : 'justify-end'}`}
+        className={`flex h-[120px] gap-10 sm:gap-16 ${direction === 'left' ? 'justify-start' : 'justify-end'}`}
         variants={slideVariants}
         animate="animate"
         custom={direction}
       >
         {logos.map((logo,ind) => {
-          // Check if it's one of the new logos
-          const isNewLogo = logo.includes('bharathaksha') || logo.includes('deepakfertilizer') || logo.includes('ishanyafoundation');
+          // Check specific logos to resize
+          const isIshanya = logo.includes('ishanyafoundation');
+          const isBharathaksha = logo.includes('bharathaksha');
+          const isDeepak = logo.includes('deepakfertilizer');
           
           return (
             <div
@@ -70,7 +72,7 @@ const logos = [
               <img 
                 src={logo} 
                 alt={`Logo ${ind}: ${logo}`} 
-                className={`w-auto ${isNewLogo ? 'h-[80px]' : 'h-[40px]'} object-contain`} 
+                className={`w-auto ${isIshanya || isBharathaksha ? 'h-[120px]' : isDeepak ? 'h-[80px]' : 'h-[40px]'} object-contain`} 
                 onError={(e) => {
                   console.error(`Failed to load logo: ${logo}`);
                   e.target.onerror = null; // Prevent infinite loop
