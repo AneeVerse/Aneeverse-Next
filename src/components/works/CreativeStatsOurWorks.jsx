@@ -25,13 +25,13 @@ const stats = [
 
 const CreativeStatsOurWorks = () => {
   return (
-    <div className="bg-primary-500 text-secondary-500 py-16 text-center">
+    <div className="bg-primary-500 text-secondary-500 py-16 pt-24 text-center">
       <Layout>
         <Heading
           level="h1"
           color="dark"
           spacing="lg"
-          className="text-center font-medium"
+          className="text-center font-medium mt-8"
         >
           Creative that{" "}
           <AccentText size="xl" className={""}>
