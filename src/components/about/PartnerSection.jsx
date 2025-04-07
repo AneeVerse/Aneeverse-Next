@@ -10,9 +10,9 @@ const ParnterSection = () => {
     "/images/about/figma.png",
     "/images/about/epic.png",
     "/images/about/webflow.png",
-    "/images/about/zapier.png",
-    "/images/about/kellogs.png",
-    "/images/about/novarits.png",
+    "/images/logos/ishanyafoundation.png",
+    "/images/logos/bharathaksha2.png",
+    "/images/logos/deepakfertilizer.png",
   ];
 
   const controls = useAnimation();
@@ -37,6 +37,16 @@ const ParnterSection = () => {
     startAnimation();
   }, []);
 
+  // Debug which logos are actually loading
+  useEffect(() => {
+    logos.forEach((logo, index) => {
+      const img = new Image();
+      img.onload = () => console.log(`Partner Logo ${index} loaded successfully: ${logo}`);
+      img.onerror = () => console.error(`Partner Logo ${index} failed to load: ${logo}`);
+      img.src = logo;
+    });
+  }, []);
+
   return (
     <Layout>
     <div className="overflow-hidden   mx-auto max-w-7xl text-white relative">
@@ -56,14 +66,25 @@ const ParnterSection = () => {
           // onHoverEnd={() => startAnimation(currentX)} // Resume from the same point
         >
           {/* Original Logos */}
-          {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
-            <img
-              key={index}
-              src={logo}
-              alt={`Partner ${index + 1}`}
-              className="h-6 object-contain   px-6 w-auto  transition-all"
-            />
-          ))}
+          {[...logos, ...logos, ...logos, ...logos].map((logo, index) => {
+            // Check if it's one of the new logos
+            const isNewLogo = logo.includes('bharathaksha') || logo.includes('deepakfertilizer') || logo.includes('ishanyafoundation');
+            
+            return (
+              <img
+                key={index}
+                src={logo}
+                alt={`Partner ${index + 1}: ${logo}`}
+                className={`${isNewLogo ? 'h-12' : 'h-6'} object-contain px-6 w-auto transition-all`}
+                onError={(e) => {
+                  console.error(`Failed to load logo: ${logo}`);
+                  e.target.onerror = null; // Prevent infinite loop
+                  e.target.alt = `Error loading: ${logo}`;
+                  e.target.src = "/images/logos/placeholder-logo.png"; // Try to show a placeholder
+                }}
+              />
+            );
+          })}
         </motion.div>
 
         {/* Optional gradient fade on edges */}
