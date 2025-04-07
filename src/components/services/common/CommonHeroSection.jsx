@@ -43,7 +43,7 @@ export default function CommonServicesHeroSection({
   backgroundImage,
 }) {
   return (
-    <div className="relative -mt-[80px] text-white overflow-hidden">
+    <div className="relative mt-0 text-white overflow-hidden">
       {/* ✅ Hero Section */}
       <div className="relative w-full h-[90vh] min-h-[600px] sm:min-h-[600px] sm:h-[75vh] flex items-center">
         {/* Background Image */}
