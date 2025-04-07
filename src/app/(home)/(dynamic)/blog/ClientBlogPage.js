@@ -194,7 +194,7 @@ export default function ClientBlogPage() {
             <section key={`category-${category}`} className='bg-white pb-16'>
               <Layout>
                 <div className='flex justify-between items-center mb-8'>
-                  <h2 className='text-[40px] text-[#0A2E3D] font-normal'>{category}</h2>
+                  <h2 className='text-[40px] text-[#0A2E3D] font-normal uppercase'>{category}</h2>
                   <Link 
                     href={`/blog/category/${categorySlug}`} 
                     className='text-[#0A2E3D] hover:text-blue-600 flex items-center gap-2 font-medium text-lg'

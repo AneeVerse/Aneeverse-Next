@@ -12,11 +12,11 @@ const BlogHeroSection = ({ blogData }) => {
   // If no blogs exist or still loading, render a simplified version
   if (isLoading || blogs.length === 0) {
     return (
-      <section className="pb-16 pt-[120px] mt-[-80px]">
+      <section className="pb-16 pt-[160px] mt-[-80px]">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Heading */}
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-[80px] mt-3 font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] relative inline-block group">
+            <h2 className="text-4xl md:text-[80px] mt-16 font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] relative inline-block group">
               <span className="relative inline-block">
                 Creative Performance
                 <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#0A2E3D] transition-all duration-300 group-hover:w-full"></span>
@@ -75,11 +75,11 @@ const BlogHeroSection = ({ blogData }) => {
   const featuredBlog = blogs[0];
   
   return (
-    <section className="pb-16 pt-[120px] mt-[-80px]">
+    <section className="pb-16 pt-[160px] mt-[-80px]">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-[80px] mt-3 font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] relative inline-block group">
+          <h2 className="text-4xl md:text-[80px] mt-16 font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] relative inline-block group">
             <span className="relative inline-block">
               Creative Performance
               <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#0A2E3D] transition-all duration-300 group-hover:w-full"></span>
