@@ -9,8 +9,9 @@ const logos = [
     "/images/logos/coinbase.png",
     "/images/logos/ishanyafoundation.png",
     "/images/logos/figma.png",
-    "/images/logos/google.png",
     "/images/logos/bharathaksha2.png",
+    "/images/logos/google.png",
+   
     "/images/logos/meta.png",
     "/images/logos/deepakfertilizer.png",
     "/images/logos/reddit.png",
@@ -24,8 +25,9 @@ const logos = [
     "/images/logos/coinbase.png",
     "/images/logos/ishanyafoundation.png",
     "/images/logos/figma.png",
-    "/images/logos/google.png",
     "/images/logos/bharathaksha2.png",
+    "/images/logos/google.png",
+    
     "/images/logos/meta.png",
     "/images/logos/deepakfertilizer.png",
     "/images/logos/reddit.png",
