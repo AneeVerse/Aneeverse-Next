@@ -77,7 +77,7 @@ const ParnterSection = () => {
                 key={index}
                 src={logo}
                 alt={`Partner ${index + 1}: ${logo}`}
-                className={`${isIshanya || isBharathaksha ? 'h-20' : isDeepak ? 'h-12' : 'h-6'} object-contain px-6 w-auto transition-all`}
+                className={`${isIshanya || isBharathaksha ? 'h-32' : isDeepak ? 'h-24' : 'h-6'} object-contain px-6 w-auto transition-all`}
                 onError={(e) => {
                   console.error(`Failed to load logo: ${logo}`);
                   e.target.onerror = null; // Prevent infinite loop
