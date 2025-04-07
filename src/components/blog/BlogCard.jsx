@@ -61,7 +61,7 @@ export default function BlogCard({ blog }) {
       {/* Category and Read Time */}
       <div className="mt-6">
         <div className="flex items-center gap-2 text-sm text-[#475467] uppercase tracking-wide">
-          <span className="font-medium">{category}</span>
+          <span className="font-medium">{category.toUpperCase()}</span>
           <span>•</span>
           <span>{timeToRead}</span>
         </div>

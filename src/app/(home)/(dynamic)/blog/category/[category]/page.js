@@ -194,7 +194,7 @@ export default function BlogCategoryPage() {
         <header className="mb-12 flex flex-col md:flex-row items-center gap-6">
           {/* Left - Category Info */}
           <div className="flex-1 text-center md:text-left">
-            <h1 className="text-4xl font-bold capitalize">
+            <h1 className="text-4xl font-bold uppercase">
               {categoryInfo?.title || category.replace(/-/g, " ")}
             </h1>
             <p className="text-gray-500 max-w-full md:max-w-[40%] mt-2 text-lg">

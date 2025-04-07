@@ -122,8 +122,8 @@ export default function BlogDetail({ params }) {
                 </Link>
                 <IoIosArrowForward className="" />
                 <Link 
-                  href={`/blog/${resolvedParams.slug?.[0]}`} 
-                  className="uppercase hover:underline"
+                  href={`/blog/category/${post.category.toLowerCase().replace(/\s+/g, "-")}`} 
+                  className="text-gray-900 text-sm uppercase"
                 >
                   {post.category}
                 </Link>
