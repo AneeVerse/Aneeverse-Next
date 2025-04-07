@@ -10,14 +10,14 @@ const logos = [
     "/images/logos/epic.png",
     "/images/logos/figma.png",
     "/images/logos/google.png",
-    "/images/logos/kelloggs.png",
+    "/images/logos/bharathaksha2.png",
     "/images/logos/meta.png",
-    "/images/logos/novartis.png",
+    "/images/logos/deepakfertilizer.png",
     "/images/logos/reddit.png",
     "/images/logos/salesforce.png",
     "/images/logos/shopify.png",
     "/images/logos/webflow.png",
-    "/images/logos/zapier.png",
+    "/images/logos/ishanyafoundation.png",
 
     "/images/logos/amazon.png",
     "/images/logos/bookings.png",
@@ -25,14 +25,14 @@ const logos = [
     "/images/logos/epic.png",
     "/images/logos/figma.png",
     "/images/logos/google.png",
-    "/images/logos/kelloggs.png",
+    "/images/logos/bharathaksha2.png",
     "/images/logos/meta.png",
-    "/images/logos/novartis.png",
+    "/images/logos/deepakfertilizer.png",
     "/images/logos/reddit.png",
     "/images/logos/salesforce.png",
     "/images/logos/shopify.png",
     "/images/logos/webflow.png",
-    "/images/logos/zapier.png",
+    "/images/logos/ishanyafoundation.png",
     
   ];
   
@@ -58,15 +58,29 @@ const logos = [
         animate="animate"
         custom={direction}
       >
-        {logos.map((logo,ind) => (
-          <div
-            key={ind}
-            className="flex h-full py-6 px-5 min-w-fit items-center justify-center"
-          >
-            <img src={logo} alt={`${ind} logo`} className="w-auto h-auto  " />
-         
-          </div>
-        ))}
+        {logos.map((logo,ind) => {
+          // Check if it's one of the new logos
+          const isNewLogo = logo.includes('bharathaksha') || logo.includes('deepakfertilizer') || logo.includes('ishanyafoundation');
+          
+          return (
+            <div
+              key={ind}
+              className="flex h-full py-6 px-5 min-w-fit items-center justify-center"
+            >
+              <img 
+                src={logo} 
+                alt={`Logo ${ind}: ${logo}`} 
+                className={`w-auto ${isNewLogo ? 'h-[80px]' : 'h-[40px]'} object-contain`} 
+                onError={(e) => {
+                  console.error(`Failed to load logo: ${logo}`);
+                  e.target.onerror = null; // Prevent infinite loop
+                  e.target.alt = `Error loading: ${logo}`;
+                  e.target.src = "/images/logos/placeholder-logo.png"; // Try to show a placeholder
+                }}
+              />
+            </div>
+          );
+        })}
       </motion.div>
     );
   };
@@ -74,8 +88,18 @@ const logos = [
   
   
   const SlidingLogos = () => {
+    // Debug which logos are actually loading
+    React.useEffect(() => {
+      logos.forEach((logo, index) => {
+        const img = new Image();
+        img.onload = () => console.log(`Logo ${index} loaded successfully: ${logo}`);
+        img.onerror = () => console.error(`Logo ${index} failed to load: ${logo}`);
+        img.src = logo;
+      });
+    }, []);
+
     return (
-        <div className="relative bg-primary-500 pt-8 sm:py-16 overflow-hidden">
+        <div className="relative bg-primary-500 pt-12 pb-16 sm:py-20 overflow-hidden">
           <Layout >
       <h2 className="text-center text-lg font-medium text-gray-700 mb-12">
         Trusted by 500+ of the world's biggest brands
@@ -87,7 +111,7 @@ const logos = [
          <div className="overflow-hidden">
         <SliderLogo direction="right" />
       </div>
-      <div className="overflow-hidden mt-6">
+      <div className="overflow-hidden mt-8">
         <SliderLogo direction="left" />
       </div>
       </div>
