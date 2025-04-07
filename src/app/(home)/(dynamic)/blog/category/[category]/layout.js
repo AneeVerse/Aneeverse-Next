@@ -7,7 +7,7 @@ export async function generateMetadata({ params }) {
 
   if (categoryBlogs.length === 0) {
     return {
-      title: "Blog Category Not Found - Aneeverse",
+      title: "Blog | Aneeverse",
       description: "This Blog Category does not exist.",
     };
   }

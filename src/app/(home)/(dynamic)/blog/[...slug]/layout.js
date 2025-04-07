@@ -1,8 +1,3 @@
-import { blogs } from "@/data/blogData";
-
-// ✅ Fetch blog post by slug
-const getBlogPost = (slug) => blogs.find((blog) => blog.slug === slug);
-
 // ✅ Generate Dynamic Metadata
 export async function generateMetadata({ params }) {
   const post = getBlogPost(params.slug);
@@ -36,9 +31,4 @@ export async function generateMetadata({ params }) {
       image: post.thumbnail,
     },
   };
-}
-
-// ✅ Layout Wrapper for Blog Post
-export default function BlogLayout({ children }) {
-  return <>{children}</>;
-}
+} 
