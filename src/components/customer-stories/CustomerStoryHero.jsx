@@ -58,7 +58,7 @@ const CustomerStoryHero = () => {
   };
 
   return (
-    <section className="pb-16 pt-[120px] mt-[-80px]">
+    <section className="pb-16 pt-[160px] mt-[-80px]">
       <Layout>
         {/* Heading */}
         <div className="text-center mb-12">
@@ -67,7 +67,7 @@ const CustomerStoryHero = () => {
             Customer Stories
           </h2>
           <p className="text-lg max-w-2xl mx-auto text-secondary-500 mt-8">
-            Hear from Superside customers about the design challenges they’ve faced. From better branding to battling burnout, find out how we helped them implement solutions, fast.
+            Hear from Superside customers about the design challenges they've faced. From better branding to battling burnout, find out how we helped them implement solutions, fast.
           </p>
         </div>
 
