@@ -33,9 +33,11 @@ export const metadata = {
 const page = () => {
   return (
     <div>
+      <div className='mt-[40px]'>
         <CustomerStoryHero    />
         <SlidingLogos />
         <CustomerStoriesButtonWithCategoryCard />
+      </div>
       
     </div>
   )
