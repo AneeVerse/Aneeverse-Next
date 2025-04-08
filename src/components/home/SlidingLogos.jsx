@@ -38,7 +38,7 @@ const SliderLogo = ({ direction }) => {
   return (
     <div className="relative overflow-hidden w-full">
       <motion.div
-        className="flex h-[120px] gap-10 sm:gap-16 min-w-max"
+        className="flex h-[80px] sm:h-[120px] gap-4 sm:gap-10 min-w-max"
         variants={slideVariants}
         animate="animate"
         custom={direction}
@@ -53,12 +53,12 @@ const SliderLogo = ({ direction }) => {
           return (
             <div
               key={ind}
-              className="flex h-full py-6 px-5 min-w-fit items-center justify-center"
+              className="flex h-full py-3 px-2 sm:py-6 sm:px-5 min-w-fit items-center justify-center"
             >
               <img 
                 src={logo} 
                 alt={`Logo ${ind}: ${logo}`} 
-                className={`w-auto ${isIshanya || isBharathaksha ? 'h-[200px]' : isDeepak ? 'h-[160px]' : 'h-[40px]'} object-contain`} 
+                className={`w-auto ${isIshanya || isBharathaksha ? 'h-[120px] sm:h-[200px]' : isDeepak ? 'h-[100px] sm:h-[160px]' : 'h-[30px] sm:h-[40px]'} object-contain`} 
                 onError={(e) => {
                   console.error(`Failed to load logo: ${logo}`);
                   e.target.onerror = null; // Prevent infinite loop
@@ -80,12 +80,12 @@ const SliderLogo = ({ direction }) => {
           return (
             <div
               key={`dup-${ind}`}
-              className="flex h-full py-6 px-5 min-w-fit items-center justify-center"
+              className="flex h-full py-3 px-2 sm:py-6 sm:px-5 min-w-fit items-center justify-center"
             >
               <img 
                 src={logo} 
                 alt={`Logo ${ind}: ${logo}`} 
-                className={`w-auto ${isIshanya || isBharathaksha ? 'h-[200px]' : isDeepak ? 'h-[160px]' : 'h-[40px]'} object-contain`} 
+                className={`w-auto ${isIshanya || isBharathaksha ? 'h-[120px] sm:h-[200px]' : isDeepak ? 'h-[100px] sm:h-[160px]' : 'h-[30px] sm:h-[40px]'} object-contain`} 
                 onError={(e) => {
                   console.error(`Failed to load logo: ${logo}`);
                   e.target.onerror = null; // Prevent infinite loop
@@ -107,12 +107,12 @@ const SliderLogo = ({ direction }) => {
           return (
             <div
               key={`tri-${ind}`}
-              className="flex h-full py-6 px-5 min-w-fit items-center justify-center"
+              className="flex h-full py-3 px-2 sm:py-6 sm:px-5 min-w-fit items-center justify-center"
             >
               <img 
                 src={logo} 
                 alt={`Logo ${ind}: ${logo}`} 
-                className={`w-auto ${isIshanya || isBharathaksha ? 'h-[200px]' : isDeepak ? 'h-[160px]' : 'h-[40px]'} object-contain`} 
+                className={`w-auto ${isIshanya || isBharathaksha ? 'h-[120px] sm:h-[200px]' : isDeepak ? 'h-[100px] sm:h-[160px]' : 'h-[30px] sm:h-[40px]'} object-contain`} 
                 onError={(e) => {
                   console.error(`Failed to load logo: ${logo}`);
                   e.target.onerror = null; // Prevent infinite loop
@@ -134,12 +134,12 @@ const SliderLogo = ({ direction }) => {
           return (
             <div
               key={`quad-${ind}`}
-              className="flex h-full py-6 px-5 min-w-fit items-center justify-center"
+              className="flex h-full py-3 px-2 sm:py-6 sm:px-5 min-w-fit items-center justify-center"
             >
               <img 
                 src={logo} 
                 alt={`Logo ${ind}: ${logo}`} 
-                className={`w-auto ${isIshanya || isBharathaksha ? 'h-[200px]' : isDeepak ? 'h-[160px]' : 'h-[40px]'} object-contain`} 
+                className={`w-auto ${isIshanya || isBharathaksha ? 'h-[120px] sm:h-[200px]' : isDeepak ? 'h-[100px] sm:h-[160px]' : 'h-[30px] sm:h-[40px]'} object-contain`} 
                 onError={(e) => {
                   console.error(`Failed to load logo: ${logo}`);
                   e.target.onerror = null; // Prevent infinite loop
