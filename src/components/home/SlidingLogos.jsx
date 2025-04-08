@@ -22,12 +22,12 @@ const logos = [
 
 const slideVariants = {
   animate: (direction) => ({
-    x: direction === 'left' ? [0, '-100%'] : ['-100%', 0],
+    x: direction === 'left' ? [0, '-50%'] : ['-50%', 0],
     transition: {
       x: {
         repeat: Infinity,
         repeatType: 'loop',
-        duration: 120,
+        duration: 100,
         ease: 'linear',
       },
     },
@@ -38,7 +38,7 @@ const SliderLogo = ({ direction }) => {
   return (
     <div className="relative overflow-hidden w-full">
       <motion.div
-        className="flex h-[80px] sm:h-[120px] gap-4 sm:gap-10 min-w-max"
+        className="flex h-[80px] sm:h-[120px] gap-2 sm:gap-6 min-w-max"
         variants={slideVariants}
         animate="animate"
         custom={direction}
@@ -53,7 +53,7 @@ const SliderLogo = ({ direction }) => {
           return (
             <div
               key={ind}
-              className="flex h-full py-3 px-2 sm:py-6 sm:px-5 min-w-fit items-center justify-center"
+              className="flex h-full py-2 px-1 sm:py-6 sm:px-5 min-w-fit items-center justify-center"
             >
               <img 
                 src={logo} 
@@ -70,7 +70,7 @@ const SliderLogo = ({ direction }) => {
           );
         })}
         
-        {/* Second set of logos */}
+        {/* Duplicate the entire logo set for seamless looping */}
         {logos.map((logo, ind) => {
           // Check specific logos to resize
           const isIshanya = logo.includes('ishanyafoundation');
@@ -80,61 +80,7 @@ const SliderLogo = ({ direction }) => {
           return (
             <div
               key={`dup-${ind}`}
-              className="flex h-full py-3 px-2 sm:py-6 sm:px-5 min-w-fit items-center justify-center"
-            >
-              <img 
-                src={logo} 
-                alt={`Logo ${ind}: ${logo}`} 
-                className={`w-auto ${isIshanya || isBharathaksha ? 'h-[120px] sm:h-[200px]' : isDeepak ? 'h-[100px] sm:h-[160px]' : 'h-[30px] sm:h-[40px]'} object-contain`} 
-                onError={(e) => {
-                  console.error(`Failed to load logo: ${logo}`);
-                  e.target.onerror = null; // Prevent infinite loop
-                  e.target.alt = `Error loading: ${logo}`;
-                  e.target.src = "/images/logos/placeholder-logo.png"; // Try to show a placeholder
-                }}
-              />
-            </div>
-          );
-        })}
-
-        {/* Third set of logos */}
-        {logos.map((logo, ind) => {
-          // Check specific logos to resize
-          const isIshanya = logo.includes('ishanyafoundation');
-          const isBharathaksha = logo.includes('bharathaksha');
-          const isDeepak = logo.includes('deepakfertilizer');
-          
-          return (
-            <div
-              key={`tri-${ind}`}
-              className="flex h-full py-3 px-2 sm:py-6 sm:px-5 min-w-fit items-center justify-center"
-            >
-              <img 
-                src={logo} 
-                alt={`Logo ${ind}: ${logo}`} 
-                className={`w-auto ${isIshanya || isBharathaksha ? 'h-[120px] sm:h-[200px]' : isDeepak ? 'h-[100px] sm:h-[160px]' : 'h-[30px] sm:h-[40px]'} object-contain`} 
-                onError={(e) => {
-                  console.error(`Failed to load logo: ${logo}`);
-                  e.target.onerror = null; // Prevent infinite loop
-                  e.target.alt = `Error loading: ${logo}`;
-                  e.target.src = "/images/logos/placeholder-logo.png"; // Try to show a placeholder
-                }}
-              />
-            </div>
-          );
-        })}
-
-        {/* Fourth set of logos */}
-        {logos.map((logo, ind) => {
-          // Check specific logos to resize
-          const isIshanya = logo.includes('ishanyafoundation');
-          const isBharathaksha = logo.includes('bharathaksha');
-          const isDeepak = logo.includes('deepakfertilizer');
-          
-          return (
-            <div
-              key={`quad-${ind}`}
-              className="flex h-full py-3 px-2 sm:py-6 sm:px-5 min-w-fit items-center justify-center"
+              className="flex h-full py-2 px-1 sm:py-6 sm:px-5 min-w-fit items-center justify-center"
             >
               <img 
                 src={logo} 
