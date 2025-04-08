@@ -40,7 +40,7 @@ const pricingData = {
 
 export default function PricingComponent() {
   return (
-    <div className="bg-primary-500 py-12">
+    <div className="bg-primary-500 pt-24 pb-12">
       <Layout>
       {/* Title Section */}
       <div className="text-center mb-12">
