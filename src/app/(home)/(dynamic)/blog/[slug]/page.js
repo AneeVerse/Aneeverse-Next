@@ -322,13 +322,13 @@ export default function BlogDetail({ params }) {
     <div className='bg-white py-16'>
       <Layout>
         {/* Blog Header */}
-        <div className="max-w-[780px] mx-auto px-4 sm:px-6 lg:px-0 mb-12">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-0 mb-12">
           {/* Date display with increased top margin */}
-          <div className="uppercase text-gray-600 tracking-wider text-sm font-medium mb-8 text-center mt-8">
+          <div className="uppercase text-gray-600 tracking-wider text-sm font-medium mb-8 text-center mt-16">
             {post.date}
           </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-[65px] font-bold text-[#0A2E3D] leading-[1.2] md:leading-[1.1] tracking-tight mb-10 text-center">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0A2E3D] leading-[1.2] px-4 mb-10 text-center max-w-[1200px] mx-auto">
             {post.title}
           </h1>
           
@@ -485,11 +485,23 @@ export default function BlogDetail({ params }) {
             {/* Remove breadcrumb from top of content, will add to bottom */}
 
             <style jsx global>{`
+              /* Import fonts */
+              @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap');
+
               /* Custom styles for blog content */
               .prose {
                 font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
                 color: #333;
                 line-height: 1.6;
+              }
+
+              /* Title styles */
+              h1 {
+                font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+              }
+
+              h1 span.font-serif {
+                font-family: 'Playfair Display', serif;
               }
               
               .prose h2 {
