@@ -408,6 +408,19 @@ export default function BlogDetail({ params }) {
           </div>
         </div>
       </Layout>
+
+      {/* Related Blogs - "You may also like these" section */}
+      <section className="mt-20 pb-12 w-full">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl font-semibold mb-12 text-center text-gray-900">
+            <div className="text-sm text-gray-500 mb-2 uppercase tracking-wider">RELATED ARTICLES</div>
+            You may also like these
+          </h2>
+          
+          <RelatedBlogs currentPost={post} defaultThumbnail={defaultThumbnail} defaultAuthorImage={defaultAuthorImage} />
+        </div>
+      </section>
+      
       <style jsx global>{`
         .blog-content {
           font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
