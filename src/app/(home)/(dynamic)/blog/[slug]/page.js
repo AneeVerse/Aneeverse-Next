@@ -10,6 +10,7 @@ import Newsletter from '@/components/blog/NewsLetter';
 import BlogCard from '@/components/blog/BlogCard';
 import React from 'react';
 import RelatedBlogs from '@/components/blog/RelatedBlogs';
+import { useScrollSpy } from '@/hooks/useScrollSpy';
 
 // More efficient approach to fetch blog post
 const getBlogPost = async (slug) => {
@@ -43,16 +44,27 @@ export default function BlogDetail({ params }) {
   const [post, setPost] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [activeSection, setActiveSection] = useState(null);
   const [thumbnailError, setThumbnailError] = useState(false);
   const [authorImageError, setAuthorImageError] = useState(false);
-  const sectionRefs = useRef([]);
-  const observer = useRef(null);
+  
+  // Use only one mechanism for scroll spy
+  const activeId = useScrollSpy('h2'); 
 
   // Default images
   const defaultThumbnail = "/images/blog1.avif";
   const defaultAuthorImage = "/images/blog/author/abhi.png";
   
+  // Update URL when active section changes
+  useEffect(() => {
+    if (activeId && typeof window !== 'undefined') {
+      // Update URL hash without scrolling
+      const newHash = `#${activeId}`;
+      if (window.location.hash !== newHash) {
+        window.history.replaceState(null, '', newHash);
+      }
+    }
+  }, [activeId]);
+
   useEffect(() => {
     const loadBlog = async () => {
       try {
@@ -90,8 +102,13 @@ export default function BlogDetail({ params }) {
       
       // Add IDs to h2 elements
       const headings = tempDiv.querySelectorAll('h2');
-      headings.forEach((heading, index) => {
-        heading.id = `section-${index}`;
+      headings.forEach((heading) => {
+        // Create URL-friendly ID from heading text
+        const id = heading.textContent
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/(^-|-$)/g, '');
+        heading.id = id;
       });
       
       return tempDiv.innerHTML;
@@ -116,20 +133,28 @@ export default function BlogDetail({ params }) {
         const headings = tempDiv.querySelectorAll('h2');
         
         // Convert to array and extract info
-        return Array.from(headings).map((h2, index) => ({
-          id: `section-${index}`,
-          title: h2.textContent
-        }));
+        return Array.from(headings).map((h2) => {
+          const title = h2.textContent;
+          const id = title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/(^-|-$)/g, '');
+          return { id, title };
+        });
       }
       
       // For React element content
       if (post.content.props?.children) {
         return post.content.props.children
           .filter(child => child && child.type === 'h2')
-          .map((h2, index) => ({
-            id: `section-${index}`,
-            title: h2.props.children
-          }));
+          .map((h2) => {
+            const title = h2.props.children;
+            const id = title
+              .toLowerCase()
+              .replace(/[^a-z0-9]+/g, '-')
+              .replace(/(^-|-$)/g, '');
+            return { id, title };
+          });
       }
       
       return [];
@@ -138,72 +163,6 @@ export default function BlogDetail({ params }) {
       return [];
     }
   }, [post]);
-
-  useEffect(() => {
-    if (!post || typeof window === 'undefined') return;
-
-    // Initialize section refs
-    try {
-      let sectionElements = [];
-      
-      // Get h2 elements based on their IDs
-      h2Headings.forEach(({ id }) => {
-        const el = document.getElementById(id);
-        if (el) sectionElements.push(el);
-      });
-      
-      sectionRefs.current = sectionElements;
-
-      // Cleanup previous observer
-      if (observer.current) {
-        sectionRefs.current.forEach(section => {
-          if (section) observer.current.unobserve(section);
-        });
-      }
-
-      // Initialize new observer only if we have sections
-      if (sectionRefs.current.length > 0) {
-        observer.current = new IntersectionObserver(
-          (entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                const index = sectionRefs.current.findIndex(
-                  ref => ref === entry.target
-                );
-                if (index !== -1) {
-                  setActiveSection(index);
-                  // Update URL hash without scrolling
-                  const newHash = `#${h2Headings[index].id}`;
-                  if (window.location.hash !== newHash) {
-                    window.history.replaceState(null, '', newHash);
-                  }
-                }
-              }
-            });
-          },
-          {
-            rootMargin: '-10% 0px -80% 0px',  // Adjusted margins for better tracking
-            threshold: [0, 0.2, 0.5, 1]  // Multiple thresholds for smoother transitions
-          }
-        );
-
-        // Observe all sections
-        sectionRefs.current.forEach(section => {
-          if (section) observer.current.observe(section);
-        });
-      }
-
-      return () => {
-        if (observer.current) {
-          sectionRefs.current.forEach(section => {
-            if (section) observer.current.unobserve(section);
-          });
-        }
-      };
-    } catch (err) {
-      console.error('Error setting up section observers:', err);
-    }
-  }, [post, h2Headings]);
 
   if (isLoading) {
     return (
@@ -273,14 +232,15 @@ export default function BlogDetail({ params }) {
           }
 
           if (element.type === 'h2') {
-            const sectionIndex = h2Headings.findIndex(
-              h => h.title === element.props.children
-            );
+            const title = element.props.children;
+            const id = title
+              .toLowerCase()
+              .replace(/[^a-z0-9]+/g, '-')
+              .replace(/(^-|-$)/g, '');
             return (
               <h2
                 key={index}
-                id={`section-${sectionIndex}`}
-                ref={(el) => (sectionRefs.current[sectionIndex] = el)}
+                id={id}
                 className="scroll-mt-24 text-3xl font-semibold text-gray-900 mb-6 pt-8 border-t border-gray-200"
               >
                 {element.props.children}
@@ -340,24 +300,24 @@ export default function BlogDetail({ params }) {
           
           {/* Author section */}
           <div className="mb-10 text-center">
-            <div className="text-gray-700 text-sm mb-2">  Author</div>
+            <div className="text-gray-700 text-sm mb-2">Author</div>
             <div className="flex items-center gap-5 justify-center">
               {post.coAuthors ? (
                 <>
                   {post.coAuthors.map((author, index) => (
                     <div key={index} className="flex items-center gap-2">
                       <div className="relative w-8 h-8 rounded-full overflow-hidden bg-gray-100">
-            <Image
+                        <Image
                           src={author.image || defaultAuthorImage}
                           alt={author.name}
-              fill
-              className="object-cover"
+                          fill
+                          className="object-cover"
                           onError={() => setAuthorImageError(true)}
                         />
                       </div>
                       <Link href="#" className="font-medium text-sm hover:underline">{author.name}</Link>
                       {index < post.coAuthors.length - 1 && <span className="ml-3">&</span>}
-              </div>
+                    </div>
                   ))}
                 </>
               ) : (
@@ -376,38 +336,7 @@ export default function BlogDetail({ params }) {
               )}
             </div>
           </div>
-          
-          {/* Social media sharing icons - centered */}
-          <div className="flex gap-3 mb-8 justify-center">
-            <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-gray-700">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-              </svg>
-            </a>
-            <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-gray-700">
-                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
-              </svg>
-            </a>
-            <button onClick={() => {
-              if (navigator.clipboard) {
-                navigator.clipboard.writeText(typeof window !== 'undefined' ? window.location.href : '');
-                alert('Link copied to clipboard!');
-              }
-            }} className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-700">
-                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-              </svg>
-            </button>
-            <a href={`mailto:?subject=${encodeURIComponent(post.title)}&body=${encodeURIComponent(`Check out this article: ${typeof window !== 'undefined' ? window.location.href : ''}`)}`} className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-700">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-              </svg>
-            </a>
-                </div>
-              </div>
+        </div>
 
         {/* Main Grid Container */}
         <div className="grid grid-cols-1 lg:grid-cols-[270px_1fr] gap-16 px-4 max-w-[2000px] mx-auto">
@@ -420,21 +349,19 @@ export default function BlogDetail({ params }) {
                 <div className="max-h-[300px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
                   <ul className="space-y-1">
                     {h2Headings.map((section, index) => (
-                    <li key={index}>
+                      <li key={index}>
                         <a
                           href={`#${section.id}`}
                           className={`block group text-xs py-1.5 pl-2 transition-all duration-200 rounded-sm ${
-                            activeSection === index 
-                            ? 'text-primary-600 font-medium bg-white/80 border-l-2 border-primary-600 pl-3' 
+                            activeId === section.id
+                            ? 'text-black font-bold border-l-2 border-primary-600 pl-3' 
                             : 'text-gray-600 hover:text-primary-600 hover:bg-white/30 hover:pl-3'
                           }`}
                           onClick={(e) => {
                             e.preventDefault();
                             const element = document.getElementById(section.id);
                             if (element) {
-                              setActiveSection(index);
                               element.scrollIntoView({ behavior: 'smooth' });
-                              window.history.pushState(null, '', `#${section.id}`);
                             }
                           }}
                         >
@@ -445,119 +372,97 @@ export default function BlogDetail({ params }) {
                   </ul>
                 </div>
               )}
-              
-              {/* Time to Read */}
-              <div className="text-gray-600 flex items-center gap-2 text-xs mt-3 pt-3 border-t border-gray-200">
-                <FaRegClock className="text-[10px]" />
-                <div>{post.timeToRead || '5 min Read'}</div>
-              </div>
-            </div>
-            
-            {/* Promotional Box - Moved from right side */}
-            <div className="bg-[#EAF2E3] p-6 rounded-lg">
-              <h4 className="text-lg font-semibold mb-3">More asks, more stress, less creativity</h4>
-              <p className="text-sm text-gray-600 mb-3">
-                200+ leaders told us about it
-              </p>
-              <a 
-                href="/blog" 
-                className="inline-block text-sm font-medium px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 transition-colors"
-              >
-                Read the report
-              </a>
-            </div>
-
-            {/* Social Share Icons */}
-            <div className="flex gap-3">
-              {/* Keep existing social share icons */}
             </div>
           </aside>
 
           {/* Main Content Section */}
           <div className="lg:pl-8 w-full min-w-0">
             <article className="w-full">
-              <style jsx global>{`
-                .blog-content {
-                  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-                  color: #333;
-                  line-height: 1.6;
-                  width: 100%;
-                }
-
-                .blog-content h2 {
-                  font-size: 1.875rem;
-                  margin-top: 2.5rem;
-                  margin-bottom: 1.25rem;
-                  font-weight: 600;
-                  color: #0A2E3D;
-                  scroll-margin-top: 100px;
-                }
-
-                .blog-content h3 {
-                  font-size: 1.5rem;
-                  margin-top: 2rem;
-                  margin-bottom: 1rem;
-                  font-weight: 600;
-                  color: #0A2E3D;
-                }
-
-                .blog-content p {
-                  margin-bottom: 1.5rem;
-                  font-size: 1.125rem;
-                  color: #4B5563;
-                  line-height: 1.75;
-                }
-
-                .blog-content ul {
-                  margin-top: 1.25rem;
-                  margin-bottom: 1.25rem;
-                  list-style-type: disc;
-                  padding-left: 1.25rem;
-                }
-
-                .blog-content ul li {
-                  margin-top: 0.5rem;
-                  margin-bottom: 0.5rem;
-                  font-size: 1.125rem;
-                  color: #4B5563;
-                }
-
-                .blog-content img {
-                  border-radius: 0.5rem;
-                  margin: 2rem auto;
-                  width: 100%;
-                  height: auto;
-                  max-width: 100%;
-                }
-
-                .blog-content blockquote {
-                  border-left: 4px solid #88D7F0; 
-                  padding: 0.75rem 1.25rem;
-                  margin: 1.5rem 0;
-                  font-style: italic;
-                  color: #333;
-                  background: #f8f8f8;
-                }
-              `}</style>
               <div className="blog-content">
                 {renderContent(post.content)}
               </div>
             </article>
           </div>
         </div>
-        
-        {/* Related Blogs - "You may also like these" - Moved outside of the grid to take full width */}
-        <section className="mt-20 pb-12 w-full">
-          <h2 className="text-2xl md:text-3xl font-semibold mb-12 text-center text-gray-900">
-            <div className="text-sm text-gray-500 mb-2 uppercase tracking-wider">RELATED ARTICLES</div>
-            You may also like these
-          </h2>
-          
-          <div className="max-w-7xl mx-auto px-4">
-            <RelatedBlogs currentPost={post} defaultThumbnail={defaultThumbnail} defaultAuthorImage={defaultAuthorImage} />
-          </div>
-        </section>
       </Layout>
+      <style jsx global>{`
+        .blog-content {
+          font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+          color: #4B5563;
+          line-height: 1.8;
+          width: 100%;
+        }
+
+        .blog-content h2 {
+          font-size: 1.875rem;
+          margin-top: 2.5rem;
+          margin-bottom: 1.25rem;
+          font-weight: 600;
+          color: #0A2E3D;
+          scroll-margin-top: 100px;
+          padding-top: 1.5rem;
+          border-top: 1px solid #F3F4F6;
+        }
+
+        .blog-content h3 {
+          font-size: 1.5rem;
+          margin-top: 2rem;
+          margin-bottom: 1rem;
+          font-weight: 600;
+          color: #0A2E3D;
+          scroll-margin-top: 100px;
+        }
+
+        .blog-content p {
+          margin-bottom: 1.5rem;
+          font-size: 1.125rem;
+          color: #4B5563;
+          line-height: 1.75;
+        }
+
+        .blog-content ul {
+          margin-top: 1.25rem;
+          margin-bottom: 1.25rem;
+          list-style-type: disc;
+          padding-left: 1.25rem;
+        }
+
+        .blog-content ul li {
+          margin-top: 0.5rem;
+          margin-bottom: 0.5rem;
+          font-size: 1.125rem;
+          color: #4B5563;
+        }
+
+        .blog-content img {
+          border-radius: 0.5rem;
+          margin: 2rem auto;
+          width: 100%;
+          height: auto;
+          max-width: 100%;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .blog-content blockquote {
+          border-left: 4px solid #88D7F0; 
+          padding: 0.75rem 1.25rem;
+          margin: 1.5rem 0;
+          font-style: italic;
+          color: #4B5563;
+          background: #f9fafb;
+        }
+        
+        .blog-content a {
+          color: #088AB2;
+          text-decoration: underline;
+          text-underline-offset: 2px;
+        }
+        
+        .blog-content a:hover {
+          color: #0A2E3D;
+        }
+      `}</style>
     </div>
   );
 }
+  
