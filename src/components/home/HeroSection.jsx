@@ -227,8 +227,21 @@ const HeroSection = () => {
                       <img
                         src={img.src}
                         alt=""
-                        className="w-full h-auto object-cover rounded-xl group-hover:scale-105 transition-all duration-300 shadow-xl"
+                        className="w-full h-[250px] object-cover rounded-xl group-hover:scale-105 transition-all duration-300 shadow-xl"
                       />
+                      <div className="absolute inset-0 flex items-start justify-center bg-black/10">
+                        <img
+                          src={img.src.replace('.png', '.svg')}
+                          alt=""
+                          className={`${
+                            img.src.includes('salesforce') 
+                              ? 'w-[25%] h-[25%] mt-1'
+                              : img.src.includes('kins')
+                              ? 'w-[30%] h-[30%] -mt-3'
+                              : 'w-[40%] h-[40%] -mt-3'
+                          } object-contain`}
+                        />
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -244,8 +257,21 @@ const HeroSection = () => {
                       <img
                         src={img.src}
                         alt=""
-                        className="w-full h-auto object-cover rounded-xl group-hover:scale-105 transition-all duration-300 shadow-2xl"
+                        className={`w-full ${index % 2 === 0 ? 'h-[280px]' : 'h-[200px]'} object-cover rounded-xl group-hover:scale-105 transition-all duration-300 shadow-2xl`}
                       />
+                      <div className="absolute inset-0 flex items-start justify-center bg-black/10">
+                        <img
+                          src={img.src.replace('.png', '.svg')}
+                          alt=""
+                          className={`${
+                            img.src.includes('salesforce') 
+                              ? 'w-[25%] h-[25%] mt-1'
+                              : img.src.includes('kins')
+                              ? 'w-[30%] h-[30%] -mt-3'
+                              : 'w-[40%] h-[40%] -mt-3'
+                          } object-contain`}
+                        />
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -261,8 +287,21 @@ const HeroSection = () => {
                       <img
                         src={img.src}
                         alt=""
-                        className="w-full h-auto object-cover rounded-xl group-hover:scale-105 transition-all duration-300 shadow-2xl"
+                        className="w-full h-[220px] object-cover rounded-xl group-hover:scale-105 transition-all duration-300 shadow-2xl"
                       />
+                      <div className="absolute inset-0 flex items-start justify-center bg-black/10">
+                        <img
+                          src={img.src.replace('.png', '.svg')}
+                          alt=""
+                          className={`${
+                            img.src.includes('salesforce') 
+                              ? 'w-[25%] h-[25%] mt-1'
+                              : img.src.includes('kins')
+                              ? 'w-[30%] h-[30%] -mt-3'
+                              : 'w-[40%] h-[40%] -mt-3'
+                          } object-contain`}
+                        />
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -296,6 +335,19 @@ const HeroSection = () => {
                           alt=""
                           className="w-[150px] h-48 object-cover group-hover:scale-105 transition-all duration-300 rounded-xl shadow-lg"
                         />
+                        <div className="absolute inset-0 flex items-start justify-center bg-black/10">
+                          <img
+                            src={img.src.replace('.png', '.svg')}
+                            alt=""
+                            className={`${
+                              img.src.includes('salesforce') 
+                                ? 'w-[25%] h-[25%] mt-1'
+                                : img.src.includes('kins')
+                                ? 'w-[30%] h-[30%] -mt-3'
+                                : 'w-[40%] h-[40%] -mt-3'
+                            } object-contain`}
+                          />
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -319,7 +371,7 @@ const HeroSection = () => {
                     .reverse()
                     .map((img, index) => (
                       <div
-                        className="relative select-none flex-shrink-0 overflow-hidden cursor-pointer rounded-xl group"
+                        className="relative flex-shrink-0 select-none overflow-hidden cursor-pointer rounded-xl group"
                         key={index}
                       >
                         <div className="overflow-hidden relative rounded-xl mx-2">
@@ -329,6 +381,19 @@ const HeroSection = () => {
                             draggable={false}
                             className="w-[150px] h-48 object-cover group-hover:scale-105 transition-all duration-300 rounded-xl shadow-lg"
                           />
+                          <div className="absolute inset-0 flex items-start justify-center bg-black/10">
+                            <img
+                              src={img.src.replace('.png', '.svg')}
+                              alt=""
+                              className={`${
+                                img.src.includes('salesforce') 
+                                  ? 'w-[25%] h-[25%] mt-1'
+                                  : img.src.includes('kins')
+                                  ? 'w-[30%] h-[30%] -mt-3'
+                                  : 'w-[40%] h-[40%] -mt-3'
+                              } object-contain`}
+                            />
+                          </div>
                         </div>
                       </div>
                     ))}
