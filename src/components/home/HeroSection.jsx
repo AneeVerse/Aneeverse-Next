@@ -10,88 +10,107 @@ import { AccentText } from "../common/typography/AccentText";
 
 const images1 = [
   {
-    src: "/images/home/webflow.avif",
-    logo: "images/home/logo/webflow-logo.png",
+    src: "/hero-logos/shopify.png",
+    logo: "/hero-logos/shopify.png",
   },
   {
-    src: "/images/home/shopify.avif",
-    logo: "images/home/logo/shopify-logo.png",
-  },
-  { src: "/images/home/opa.avif", logo: "images/home/logo/opa-logo.png" },
-  { src: "/images/home/kins.avif", logo: "images/home/logo/webflow-logo.png" },
-  {
-    src: "/images/home/oyster.avif",
-    logo: "images/home/logo/shopify-logo.png",
-  },
-  { src: "/images/home/reddit.avif", logo: "images/home/logo/opa-logo.png" },
-  {
-    src: "/images/home/salesforce.avif",
-    logo: "images/home/logo/webflow-logo.png",
+    src: "/hero-logos/reddit.png",
+    logo: "/hero-logos/reddit.png",
   },
   {
-    src: "/images/home/roland.avif",
-    logo: "images/home/logo/shopify-logo.png",
+    src: "/hero-logos/salesforce.png",
+    logo: "/hero-logos/salesforce.png",
+  },
+  {
+    src: "/hero-logos/pharmacy.png",
+    logo: "/hero-logos/pharmacy.png",
+  },
+  {
+    src: "/hero-logos/shopify.png",
+    logo: "/hero-logos/shopify.png",
+  },
+  {
+    src: "/hero-logos/reddit.png",
+    logo: "/hero-logos/reddit.png",
+  },
+  {
+    src: "/hero-logos/salesforce.png",
+    logo: "/hero-logos/salesforce.png",
+  },
+  {
+    src: "/hero-logos/pharmacy.png",
+    logo: "/hero-logos/pharmacy.png",
   },
 ];
 
 const images2 = [
   {
-    src: "/images/home/antler.avif",
-    logo: "images/home/logo/webflow-logo.png",
+    src: "/hero-logos/opa.png",
+    logo: "/hero-logos/opa.png",
   },
   {
-    src: "/images/home/gohenry.avif",
-    logo: "images/home/logo/shopify-logo.png",
-  },
-  { src: "/images/home/opa.avif", logo: "images/home/logo/opa-logo.png" },
-  {
-    src: "/images/home/roland.avif",
-    logo: "images/home/logo/webflow-logo.png",
+    src: "/hero-logos/oyster.png",
+    logo: "/hero-logos/oyster.png",
   },
   {
-    src: "/images/home/shopify.avif",
-    logo: "images/home/logo/shopify-logo.png",
-  },
-  { src: "/images/home/opa.avif", logo: "images/home/logo/opa-logo.png" },
-  { src: "/images/home/reddit.avif", logo: "images/home/logo/opa-logo.png" },
-  {
-    src: "/images/home/salesforce.avif",
-    logo: "images/home/logo/webflow-logo.png",
+    src: "/hero-logos/pernod ricard.png",
+    logo: "/hero-logos/pernod ricard.png",
   },
   {
-    src: "/images/home/roland.avif",
-    logo: "images/home/logo/shopify-logo.png",
+    src: "/hero-logos/_zaphier.png",
+    logo: "/hero-logos/_zaphier.png",
+  },
+  {
+    src: "/hero-logos/opa.png",
+    logo: "/hero-logos/opa.png",
+  },
+  {
+    src: "/hero-logos/oyster.png",
+    logo: "/hero-logos/oyster.png",
+  },
+  {
+    src: "/hero-logos/pernod ricard.png",
+    logo: "/hero-logos/pernod ricard.png",
+  },
+  {
+    src: "/hero-logos/_zaphier.png",
+    logo: "/hero-logos/_zaphier.png",
   },
 ];
 
 const images3 = [
   {
-    src: "/images/home/webflow.avif",
-    logo: "images/home/logo/webflow-logo.png",
+    src: "/hero-logos/vimeo.png",
+    logo: "/hero-logos/vimeo.png",
   },
   {
-    src: "/images/home/strava.avif",
-    logo: "images/home/logo/shopify-logo.png",
-  },
-  { src: "/images/home/vimeo.avif", logo: "images/home/logo/opa-logo.png" },
-  { src: "/images/home/reddit.avif", logo: "images/home/logo/opa-logo.png" },
-  {
-    src: "/images/home/salesforce.avif",
-    logo: "images/home/logo/webflow-logo.png",
+    src: "/hero-logos/gohenry.png",
+    logo: "/hero-logos/gohenry.png",
   },
   {
-    src: "/images/home/roland.avif",
-    logo: "images/home/logo/shopify-logo.png",
+    src: "/hero-logos/roland.png",
+    logo: "/hero-logos/roland.png",
   },
   {
-    src: "/images/home/zapier.avif",
-    logo: "images/home/logo/webflow-logo.png",
+    src: "/hero-logos/kins.png",
+    logo: "/hero-logos/kins.png",
   },
   {
-    src: "/images/home/shopify.avif",
-    logo: "images/home/logo/shopify-logo.png",
+    src: "/hero-logos/vimeo.png",
+    logo: "/hero-logos/vimeo.png",
   },
-  { src: "/images/home/opa.avif", logo: "images/home/logo/opa-logo.png" },
+  {
+    src: "/hero-logos/gohenry.png",
+    logo: "/hero-logos/gohenry.png",
+  },
+  {
+    src: "/hero-logos/roland.png",
+    logo: "/hero-logos/roland.png",
+  },
+  {
+    src: "/hero-logos/kins.png",
+    logo: "/hero-logos/kins.png",
+  },
 ];
 
 const HeroSection = () => {
@@ -208,15 +227,8 @@ const HeroSection = () => {
                       <img
                         src={img.src}
                         alt=""
-                        className="w-auto h-auto object-cover rounded-xl group-hover:scale-105 transition-all duration-300 shadow-xl"
+                        className="w-full h-auto object-cover rounded-xl group-hover:scale-105 transition-all duration-300 shadow-xl"
                       />
-                      <div className="absolute inset-0 bg-black/0 px-3 py-4 rounded-xl">
-                        <img
-                          src={img.logo}
-                          alt=""
-                          className="w-auto h-auto mx-auto"
-                        />
-                      </div>
                     </div>
                   ))}
                 </div>
@@ -232,15 +244,8 @@ const HeroSection = () => {
                       <img
                         src={img.src}
                         alt=""
-                        className="w-auto h-auto object-cover rounded-xl group-hover:scale-105 transition-all duration-300 shadow-2xl"
+                        className="w-full h-auto object-cover rounded-xl group-hover:scale-105 transition-all duration-300 shadow-2xl"
                       />
-                      <div className="absolute inset-0 bg-black/0 px-3 py-4 rounded-xl">
-                        <img
-                          src={img.logo}
-                          alt=""
-                          className="w-auto h-auto mx-auto"
-                        />
-                      </div>
                     </div>
                   ))}
                 </div>
@@ -248,7 +253,7 @@ const HeroSection = () => {
 
               <div className="w-1/3 marquee-vertical">
                 <div className="marquee-vertical-content space-y-5">
-                  {[...images1, ...images1].map((img, index) => (
+                  {[...images3, ...images3].map((img, index) => (
                     <div
                       key={index}
                       className="relative overflow-hidden cursor-pointer rounded-xl group"
@@ -256,15 +261,8 @@ const HeroSection = () => {
                       <img
                         src={img.src}
                         alt=""
-                        className="w-auto h-auto object-cover rounded-xl group-hover:scale-105 transition-all duration-300 shadow-2xl"
+                        className="w-full h-auto object-cover rounded-xl group-hover:scale-105 transition-all duration-300 shadow-2xl"
                       />
-                      <div className="absolute inset-0 bg-black/0 px-3 py-4 rounded-xl">
-                        <img
-                          src={img.logo}
-                          alt=""
-                          className="w-auto h-auto mx-auto"
-                        />
-                      </div>
                     </div>
                   ))}
                 </div>
@@ -299,16 +297,6 @@ const HeroSection = () => {
                           className="w-[150px] h-48 object-cover group-hover:scale-105 transition-all duration-300 rounded-xl shadow-lg"
                         />
                       </div>
-                      <div className="absolute inset-0 mx-2 bg-black/10 rounded-xl">
-                        <div className="flex justify-center h-[50px] items-center">
-                          <img
-                            src={img.logo}
-                            draggable={false}
-                            alt=""
-                            className="w-auto self-center px-9 h-auto object-contain mx-auto"
-                          />
-                        </div>
-                      </div>
                     </div>
                   ))}
                 </div>
@@ -339,18 +327,8 @@ const HeroSection = () => {
                             src={img.src}
                             alt=""
                             draggable={false}
-                            className="w-[150px]  h-48 object-cover group-hover:scale-105 transition-all duration-300 rounded-xl shadow-lg"
+                            className="w-[150px] h-48 object-cover group-hover:scale-105 transition-all duration-300 rounded-xl shadow-lg"
                           />
-                        </div>
-                        <div className="absolute inset-0 mx-2 bg-black/10 rounded-xl">
-                          <div className="flex justify-center h-[50px] items-center">
-                            <img
-                              src={img.logo}
-                              draggable={false}
-                              alt=""
-                              className="w-auto self-center px-9 h-auto object-contain mx-auto"
-                            />
-                          </div>
                         </div>
                       </div>
                     ))}
