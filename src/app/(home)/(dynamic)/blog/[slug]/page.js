@@ -343,16 +343,16 @@ export default function BlogDetail({ params }) {
           {/* Left Sidebar */}
           <aside className="lg:sticky top-24 self-start hidden lg:block space-y-8 shrink-0">
             {/* Table of Contents */}
-            <div className="bg-[#EAF2E3] p-4 rounded-lg">
-              <h4 className="uppercase text-[#333] text-xs font-bold mb-3">Table of Contents</h4>
+            <div className="bg-[#EAF2E3] p-3 rounded-lg">
+              <h4 className="uppercase text-[#333] text-xs font-bold mb-2">Table of Contents</h4>
               {h2Headings.length > 0 && (
-                <div className="max-h-[300px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
-                  <ul className="space-y-1">
+                <div className="max-h-[220px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+                  <ul className="space-y-0.5">
                     {h2Headings.map((section, index) => (
                       <li key={index}>
                         <a
                           href={`#${section.id}`}
-                          className={`block group text-xs py-1.5 pl-2 transition-all duration-200 rounded-sm ${
+                          className={`block group text-xs py-1 pl-2 transition-all duration-200 rounded-sm ${
                             activeId === section.id
                             ? 'text-black font-bold border-l-2 border-primary-600 pl-3' 
                             : 'text-gray-600 hover:text-primary-600 hover:bg-white/30 hover:pl-3'
@@ -372,6 +372,29 @@ export default function BlogDetail({ params }) {
                   </ul>
                 </div>
               )}
+            </div>
+            
+            {/* Promotional Poster */}
+            <div className="relative overflow-hidden rounded-lg shadow-lg mt-8">
+              <div className="h-[170px] overflow-hidden bg-[#034352]">
+                <Image 
+                  src="/blog-poster.avif" 
+                  alt="Get hassle-free service" 
+                  width={500} 
+                  height={300} 
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
+              <div className="bg-[#073742] p-4" style={{marginTop: "-1px"}}>
+                <h3 className="text-white text-lg font-bold leading-tight">Get hassle-free video at scale</h3>
+                <p className="text-white/90 text-xs my-1.5">See how we can help.</p>
+                <Link 
+                  href="/contact" 
+                  className="block bg-[#C0FF7C] hover:bg-[#9DF550] text-[#073742] text-center py-2.5 w-full rounded-md font-medium transition-colors mt-2.5"
+                >
+                  Book a call
+                </Link>
+              </div>
             </div>
           </aside>
 
