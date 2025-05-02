@@ -11,6 +11,8 @@ import BlogCard from '@/components/blog/BlogCard';
 import React from 'react';
 import RelatedBlogs from '@/components/blog/RelatedBlogs';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
+import { motion } from 'framer-motion';
+import '../blogStyles.css';
 
 // More efficient approach to fetch blog post
 const getBlogPost = async (slug) => {
@@ -288,7 +290,7 @@ export default function BlogDetail({ params }) {
     <div className='bg-white py-16'>
       <Layout>
         {/* Blog Header - Superside Style */}
-        <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 3rem)' }}>
           {/* Date display - exact Superside format */}
           <div className="text-center mt-16 mb-10">
             <div className="uppercase text-[#475467] tracking-wide text-base font-medium">
@@ -381,23 +383,23 @@ export default function BlogDetail({ params }) {
         </div>
 
         {/* Main Grid Container */}
-        <div className="grid grid-cols-1 lg:grid-cols-[270px_1fr] gap-16 px-4 max-w-[2000px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-[270px_1fr] gap-16 px-5 sm:px-6 lg:px-8 max-w-7xl mx-auto" style={{ width: 'calc(100% - 3rem)' }}>
           {/* Left Sidebar */}
           <aside className="lg:sticky top-24 self-start hidden lg:block space-y-8 shrink-0">
-            {/* Table of Contents */}
-            <div className="bg-[#EAF2E3] p-3 rounded-lg">
-              <h4 className="uppercase text-[#333] text-xs font-bold mb-2">Table of Contents</h4>
+            {/* Table of Contents - Updated with black dot and exact beige color */}
+            <div className="bg-[#E6ECD6] p-6 rounded-lg">
+              <h4 className="uppercase text-[#101828] text-sm font-semibold tracking-wide mb-4">TABLE OF CONTENTS</h4>
               {h2Headings.length > 0 && (
-                <div className="max-h-[220px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
-                  <ul className="space-y-0.5">
+                <div className="max-h-[200px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                  <ul className="space-y-2">
                     {h2Headings.map((section, index) => (
-                      <li key={index}>
+                      <li key={index} className="relative">
                         <a
                           href={`#${section.id}`}
-                          className={`block group text-xs py-1 pl-2 transition-all duration-200 rounded-sm ${
+                          className={`block text-base leading-tight pl-4 ${
                             activeId === section.id
-                            ? 'text-black font-bold border-l-2 border-primary-600 pl-3' 
-                            : 'text-gray-600 hover:text-primary-600 hover:bg-white/30 hover:pl-3'
+                            ? 'text-[#101828] font-medium' 
+                            : 'text-[#667085] hover:text-[#101828]'
                           }`}
                           onClick={(e) => {
                             e.preventDefault();
@@ -407,6 +409,9 @@ export default function BlogDetail({ params }) {
                             }
                           }}
                         >
+                          {activeId === section.id && (
+                            <div className="absolute left-0 top-[8px] w-2 h-2 rounded-full bg-[#101828] animate-pulse"></div>
+                          )}
                           {section.title}
                         </a>
                       </li>
@@ -453,7 +458,7 @@ export default function BlogDetail({ params }) {
 
       {/* Related Blogs - "You may also like these" section */}
       <section className="mt-20 pb-12 w-full">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 3rem)' }}>
           <h2 className="text-2xl md:text-3xl font-semibold mb-12 text-center text-gray-900">
             <div className="text-sm text-gray-500 mb-2 uppercase tracking-wider">RELATED ARTICLES</div>
             You may also like these
@@ -462,84 +467,6 @@ export default function BlogDetail({ params }) {
           <RelatedBlogs currentPost={post} defaultThumbnail={defaultThumbnail} defaultAuthorImage={defaultAuthorImage} />
         </div>
       </section>
-      
-      <style jsx global>{`
-        .blog-content {
-          font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-          color: #4B5563;
-          line-height: 1.8;
-          width: 100%;
-        }
-
-        .blog-content h2 {
-          font-size: 1.875rem;
-          margin-top: 2.5rem;
-          margin-bottom: 1.25rem;
-          font-weight: 600;
-          color: #0A2E3D;
-          scroll-margin-top: 100px;
-          padding-top: 1.5rem;
-          border-top: 1px solid #F3F4F6;
-        }
-
-        .blog-content h3 {
-          font-size: 1.5rem;
-          margin-top: 2rem;
-          margin-bottom: 1rem;
-          font-weight: 600;
-          color: #0A2E3D;
-          scroll-margin-top: 100px;
-        }
-
-        .blog-content p {
-          margin-bottom: 1.5rem;
-          font-size: 1.125rem;
-          color: #4B5563;
-          line-height: 1.75;
-        }
-
-        .blog-content ul {
-          margin-top: 1.25rem;
-          margin-bottom: 1.25rem;
-          list-style-type: disc;
-          padding-left: 1.25rem;
-        }
-
-        .blog-content ul li {
-          margin-top: 0.5rem;
-          margin-bottom: 0.5rem;
-          font-size: 1.125rem;
-          color: #4B5563;
-        }
-
-        .blog-content img {
-          border-radius: 0.5rem;
-          margin: 2rem auto;
-          width: 100%;
-          height: auto;
-          max-width: 100%;
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-
-        .blog-content blockquote {
-          border-left: 4px solid #88D7F0; 
-          padding: 0.75rem 1.25rem;
-          margin: 1.5rem 0;
-          font-style: italic;
-          color: #4B5563;
-          background: #f9fafb;
-        }
-        
-        .blog-content a {
-          color: #088AB2;
-          text-decoration: underline;
-          text-underline-offset: 2px;
-        }
-        
-        .blog-content a:hover {
-          color: #0A2E3D;
-        }
-      `}</style>
     </div>
   );
 }
