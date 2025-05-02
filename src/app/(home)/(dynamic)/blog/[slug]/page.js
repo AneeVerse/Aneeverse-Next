@@ -340,7 +340,6 @@ export default function BlogDetail({ params }) {
           
           {/* Author section */}
           <div className="mb-10 text-center">
-            <div className="text-gray-700 text-sm mb-2">  Author</div>
             <div className="flex items-center gap-5 justify-center">
               {post.coAuthors ? (
                 <>
@@ -371,7 +370,9 @@ export default function BlogDetail({ params }) {
                       onError={() => setAuthorImageError(true)}
                     />
                   </div>
-                  <Link href="#" className="font-medium text-sm hover:underline">{post.author.name}</Link>
+                  <span className="text-gray-600 text-sm mr-1">By</span>
+                  <Link href="#" className="font-medium text-sm hover:underline mr-2">{post.author.name}</Link>
+                  <span className="text-sm text-gray-500">{post.author.role}</span>
                 </div>
               )}
             </div>

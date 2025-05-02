@@ -145,8 +145,9 @@ export default function BlogDetail({ params }) {
                       onError={() => setAuthorImageError(true)}
                     />
                   </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">{post.author.name}</p>
+                  <div className="flex items-center">
+                    <span className="text-gray-600 mr-2">By</span>
+                    <p className="font-semibold text-gray-900 mr-2">{post.author.name}</p>
                     <p className="text-sm text-gray-500">{post.author.role}</p>
                   </div>
                 </div>
