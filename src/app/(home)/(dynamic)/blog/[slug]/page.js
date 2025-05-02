@@ -334,7 +334,7 @@ export default function BlogDetail({ params }) {
             {post.date}
           </div>
           
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0A2E3D] leading-[1.2] px-4 mb-10 text-center max-w-[1200px] mx-auto">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-[#0A2E3D] leading-[1.2] px-4 mb-10 text-center max-w-[1200px] mx-auto">
             {post.title}
           </h1>
           
