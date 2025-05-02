@@ -114,50 +114,112 @@ export default function BlogDetail({ params }) {
           </div>
         ) : post ? (
           <>
-            {/* Blog Header */}
-            <header className="mb-16">
-              <div className="flex items-center text-md text-secondary-500/80 font-semibold gap-2 mb-3">
-                <Link href="/blog" className="uppercase hover:underline">
+            {/* Blog Header - Superside Style */}
+            <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8">
+              {/* Breadcrumb navigation */}
+              <div className="flex items-center text-sm gap-2 mb-8 justify-center">
+                <Link href="/blog" className="uppercase hover:underline text-gray-500">
                   Blog
                 </Link>
-                <IoIosArrowForward className="" />
+                <IoIosArrowForward className="text-gray-400" />
                 <Link 
                   href={`/blog/category/${post.category.toLowerCase().replace(/\s+/g, "-")}`} 
-                  className="text-gray-900 text-sm uppercase"
+                  className="text-gray-500 uppercase hover:underline"
                 >
                   {post.category}
                 </Link>
-                <IoIosArrowForward className="" />
-                <span className="uppercase text-gray-500">{post.title}</span>
               </div>
-
-              <h1 className="text-4xl font-normal text-gray-900 mb-6">{post.title}</h1>
+            
+              {/* Date display - exact Superside format */}
+              <div className="text-center mt-16 mb-10">
+                <div className="uppercase text-[#475467] tracking-wide text-base font-medium">
+                  {/* Format date to match Superside (MONTH DD, YYYY) */}
+                  {new Date(post.date).toLocaleDateString('en-US', {
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                  }).toUpperCase()}
+                </div>
+              </div>
               
-              <div className="flex items-center gap-6">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full overflow-hidden">
+              {/* Title - exact Superside specs */}
+              <h1 className="text-4xl md:text-5xl lg:text-[3.75rem] font-normal text-[#101828] leading-[1.1] mb-16 text-center mx-auto max-w-[900px] tracking-tight">
+                {post.title}
+              </h1>
+              
+              {/* Author section - exactly like Superside */}
+              <div className="flex items-center justify-center mb-8">
+                <div className="flex items-center">
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gray-100 mr-3">
                     <Image
                       src={authorImageError ? defaultAuthorImage : post.author.image}
                       alt={post.author.name}
-                      width={48}
-                      height={48}
+                      width={40}
+                      height={40}
                       className="object-cover"
                       onError={() => setAuthorImageError(true)}
                     />
                   </div>
                   <div className="flex items-center">
-                    <span className="text-gray-600 mr-2">By</span>
-                    <p className="font-semibold text-gray-900 mr-2">{post.author.name}</p>
-                    <p className="text-sm text-gray-500">{post.author.role}</p>
+                    <div className="text-[#475467] mr-2">By</div>
+                    <Link 
+                      href="#" 
+                      className="font-semibold text-[#101828] hover:underline mr-2"
+                    >
+                      {post.author.name}
+                    </Link>
+                    <div className="text-[#475467]">{post.author.role}</div>
                   </div>
                 </div>
-                
-                <div className="flex items-center gap-2 text-gray-500">
-                  <FaRegClock />
-                  <span>{post.timeToRead}</span>
-                </div>
               </div>
-            </header>
+              
+              {/* Social sharing icons - Superside style */}
+              <div className="flex items-center justify-center gap-3 mb-20">
+                <Link href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`} 
+                  className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
+                  target="_blank" rel="noopener noreferrer"
+                  aria-label="Share on LinkedIn"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-gray-700">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                </Link>
+                <Link href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`} 
+                  className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
+                  target="_blank" rel="noopener noreferrer"
+                  aria-label="Share on Facebook"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-gray-700">
+                    <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                  </svg>
+                </Link>
+                <button 
+                  onClick={() => {
+                    if (navigator.clipboard) {
+                      navigator.clipboard.writeText(typeof window !== 'undefined' ? window.location.href : '');
+                      alert('Link copied to clipboard!');
+                    }
+                  }} 
+                  className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
+                  aria-label="Copy link to clipboard"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-700">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                  </svg>
+                </button>
+                <Link 
+                  href={`mailto:?subject=${encodeURIComponent(post.title)}&body=${encodeURIComponent(`Check out this article: ${typeof window !== 'undefined' ? window.location.href : ''}`)}`} 
+                  className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
+                  aria-label="Share via email"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-700">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                </Link>
+              </div>
+            </div>
 
             {/* Blog Content */}
             <div className="prose prose-lg max-w-none">
