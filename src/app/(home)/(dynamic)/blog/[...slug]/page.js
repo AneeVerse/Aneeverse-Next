@@ -11,6 +11,9 @@ import Newsletter from '@/components/blog/NewsLetter';
 import BlogCard from '@/components/blog/BlogCard';
 import React from 'react';
 
+// Add the import for our CSS file:
+import '../blogStyles.css';
+
 // More efficient approach to fetch blog post
 const getBlogPost = async (category, slug) => {
   try {
@@ -115,7 +118,7 @@ export default function BlogDetail({ params }) {
         ) : post ? (
           <>
             {/* Blog Header - Superside Style */}
-            <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 3rem)' }}>
               {/* Breadcrumb navigation */}
               <div className="flex items-center text-sm gap-2 mb-8 justify-center">
                 <Link href="/blog" className="uppercase hover:underline text-gray-500">
@@ -221,25 +224,73 @@ export default function BlogDetail({ params }) {
               </div>
             </div>
 
-            {/* Blog Content */}
-            <div className="prose prose-lg max-w-none">
-              <div className="relative w-full h-[400px] mb-8 rounded-xl overflow-hidden">
-                <Image
-                  src={thumbnailError ? defaultThumbnail : post.thumbnail}
-                  alt={post.title}
-                  fill
-                  className="object-cover"
-                  onError={() => setThumbnailError(true)}
-                />
-              </div>
+            {/* Main Grid Container with TOC Sidebar */}
+            <div className="grid grid-cols-1 md:grid-cols-[270px_1fr] gap-8 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 3rem)' }}>
+              {/* Left Sidebar with TOC */}
+              <aside className="hidden md:block">
+                {/* Table of Contents */}
+                <div className="bg-[#E6ECD6] p-6 rounded-lg sticky top-24">
+                  <h4 className="uppercase text-[#101828] text-sm font-semibold tracking-wide mb-4">TABLE OF CONTENTS</h4>
+                  <div className="max-h-[200px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                    <ul className="space-y-2">
+                      {post.title && (
+                        <li className="relative">
+                          <a
+                            href="#introduction"
+                            className="block text-base leading-tight pl-4 text-[#101828] font-medium"
+                          >
+                            <div className="absolute left-0 top-[8px] w-2 h-2 rounded-full bg-[#101828] animate-pulse"></div>
+                            Understanding {post.title.split(' ').slice(0, 3).join(' ')}...
+                          </a>
+                        </li>
+                      )}
+                      <li className="relative">
+                        <a href="#" className="block text-base leading-tight pl-4 text-[#667085] hover:text-[#101828]">
+                          Getting Started with {post.category}
+                        </a>
+                      </li>
+                      <li className="relative">
+                        <a href="#" className="block text-base leading-tight pl-4 text-[#667085] hover:text-[#101828]">
+                          Essential {post.category} Tactics for Success
+                        </a>
+                      </li>
+                      <li className="relative">
+                        <a href="#" className="block text-base leading-tight pl-4 text-[#667085] hover:text-[#101828]">
+                          Creating {post.category}-Friendly Content
+                        </a>
+                      </li>
+                      <li className="relative">
+                        <a href="#" className="block text-base leading-tight pl-4 text-[#667085] hover:text-[#101828]">
+                          Technical Tips for Better Performance
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </aside>
               
-              <div dangerouslySetInnerHTML={{ __html: post.content }} />
+              {/* Main Content */}
+              <div>
+                <div className="relative w-full h-[400px] mb-8 rounded-xl overflow-hidden">
+                  <Image
+                    src={thumbnailError ? defaultThumbnail : post.thumbnail}
+                    alt={post.title}
+                    fill
+                    className="object-cover"
+                    onError={() => setThumbnailError(true)}
+                  />
+                </div>
+                
+                <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
+              </div>
             </div>
 
             {/* Newsletter Section */}
-            <Newsletter />
+            <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 3rem)' }}>
+              <Newsletter />
+            </div>
 
-            <div className="mt-8">
+            <div className="mt-8 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 3rem)' }}>
               <h4 className="text-sm font-semibold mb-4 uppercase">Related Articles</h4>
               <div className="space-y-4">
                 {blogs
