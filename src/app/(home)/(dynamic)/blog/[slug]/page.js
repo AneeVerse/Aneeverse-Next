@@ -300,10 +300,6 @@ export default function BlogDetail({ params }) {
           
           {/* Author section */}
           <div className="mb-10 text-center">
-<<<<<<< HEAD
-=======
-            <div className="text-gray-700 text-sm mb-2">Author</div>
->>>>>>> b8378cb4e126270fce0a118c9d4874c07521f6f9
             <div className="flex items-center gap-5 justify-center">
               {post.coAuthors ? (
                 <>
