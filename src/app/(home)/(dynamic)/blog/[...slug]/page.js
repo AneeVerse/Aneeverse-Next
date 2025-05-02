@@ -131,7 +131,7 @@ export default function BlogDetail({ params }) {
                 <span className="uppercase text-gray-500">{post.title}</span>
               </div>
 
-              <h1 className="text-4xl font-bold text-gray-900 mb-6">{post.title}</h1>
+              <h1 className="text-4xl font-normal text-gray-900 mb-6">{post.title}</h1>
               
               <div className="flex items-center gap-6">
                 <div className="flex items-center gap-3">
