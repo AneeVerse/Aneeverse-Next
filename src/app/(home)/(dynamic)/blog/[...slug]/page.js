@@ -11,6 +11,9 @@ import Newsletter from '@/components/blog/NewsLetter';
 import BlogCard from '@/components/blog/BlogCard';
 import React from 'react';
 
+// Add the import for our CSS file:
+import '../blogStyles.css';
+
 // More efficient approach to fetch blog post
 const getBlogPost = async (category, slug) => {
   try {
@@ -114,66 +117,180 @@ export default function BlogDetail({ params }) {
           </div>
         ) : post ? (
           <>
-            {/* Blog Header */}
-            <header className="mb-12">
-              <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            {/* Blog Header - Superside Style */}
+            <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 3rem)' }}>
+              {/* Breadcrumb navigation */}
+              <div className="flex items-center text-sm gap-2 mb-8 justify-center">
+                <Link href="/blog" className="uppercase hover:underline text-gray-500">
+                  Blog
+                </Link>
+                <IoIosArrowForward className="text-gray-400" />
+                <Link 
+                  href={`/blog/category/${post.category.toLowerCase().replace(/\s+/g, "-")}`} 
+                  className="text-gray-500 uppercase hover:underline"
+                >
+                  {post.category}
+                </Link>
+              </div>
+            
+              {/* Date display - exact Superside format */}
+              <div className="text-center mt-16 mb-10">
+                <div className="uppercase text-[#475467] tracking-wide text-base font-medium">
+                  {/* Format date to match Superside (MONTH DD, YYYY) */}
+                  {new Date(post.date).toLocaleDateString('en-US', {
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                  }).toUpperCase()}
+                </div>
+              </div>
+              
+              {/* Title - exact Superside specs */}
+              <h1 className="text-4xl md:text-5xl lg:text-[3.75rem] font-normal text-[#101828] leading-[1.1] mb-16 text-center mx-auto max-w-[900px] tracking-tight">
                 {post.title}
               </h1>
-              <div className="flex flex-wrap items-center gap-6 text-gray-600">
-                {/* Author Info */}
-                <div className="flex items-center gap-3">
-                  <div className="relative w-10 h-10 rounded-full overflow-hidden">
+              
+              {/* Author section - exactly like Superside */}
+              <div className="flex items-center justify-center mb-8">
+                <div className="flex items-center">
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gray-100 mr-3">
                     <Image
                       src={authorImageError ? defaultAuthorImage : post.author.image}
                       alt={post.author.name}
-                      fill
+                      width={40}
+                      height={40}
                       className="object-cover"
                       onError={() => setAuthorImageError(true)}
                     />
                   </div>
-                  <div className="flex items-center gap-2 text-gray-900 font-medium">
-                    <span>{post.author.name}</span>
-                    <span className="mx-1 text-gray-400">·</span>
-                    <span className="text-gray-500 font-normal">{post.author.role}</span>
+                  <div className="flex items-center">
+                    <div className="text-[#475467] mr-2">By</div>
+                    <Link 
+                      href="#" 
+                      className="font-semibold text-[#101828] hover:underline mr-2"
+                    >
+                      {post.author.name}
+                    </Link>
+                    <div className="text-[#475467]">{post.author.role}</div>
                   </div>
                 </div>
-                {/* Read Time */}
-                <div className="flex items-center gap-2">
-                  <FaRegClock />
-                  <span>{post.timeToRead}</span>
-                </div>
-                {/* Date */}
-                {post.date && (
-                  <time className="text-gray-500">
-                    {new Date(post.date).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
-                  </time>
-                )}
-              </div>
-            </header>
-
-            {/* Blog Content */}
-            <div className="prose prose-lg max-w-none">
-              <div className="relative w-full h-[400px] mb-8 rounded-xl overflow-hidden">
-                <Image
-                  src={thumbnailError ? defaultThumbnail : post.thumbnail}
-                  alt={post.title}
-                  fill
-                  className="object-cover"
-                  onError={() => setThumbnailError(true)}
-                />
               </div>
               
-              <div dangerouslySetInnerHTML={{ __html: post.content }} />
+              {/* Social sharing icons - Superside style */}
+              <div className="flex items-center justify-center gap-3 mb-20">
+                <Link href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`} 
+                  className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
+                  target="_blank" rel="noopener noreferrer"
+                  aria-label="Share on LinkedIn"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-gray-700">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                </Link>
+                <Link href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`} 
+                  className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
+                  target="_blank" rel="noopener noreferrer"
+                  aria-label="Share on Facebook"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-gray-700">
+                    <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                  </svg>
+                </Link>
+                <button 
+                  onClick={() => {
+                    if (navigator.clipboard) {
+                      navigator.clipboard.writeText(typeof window !== 'undefined' ? window.location.href : '');
+                      alert('Link copied to clipboard!');
+                    }
+                  }} 
+                  className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
+                  aria-label="Copy link to clipboard"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-700">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                  </svg>
+                </button>
+                <Link 
+                  href={`mailto:?subject=${encodeURIComponent(post.title)}&body=${encodeURIComponent(`Check out this article: ${typeof window !== 'undefined' ? window.location.href : ''}`)}`} 
+                  className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
+                  aria-label="Share via email"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-700">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                </Link>
+              </div>
+            </div>
+
+            {/* Main Grid Container with TOC Sidebar */}
+            <div className="grid grid-cols-1 md:grid-cols-[270px_1fr] gap-8 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 3rem)' }}>
+              {/* Left Sidebar with TOC */}
+              <aside className="hidden md:block">
+                {/* Table of Contents */}
+                <div className="bg-[#E6ECD6] p-6 rounded-lg sticky top-24">
+                  <h4 className="uppercase text-[#101828] text-sm font-semibold tracking-wide mb-4">TABLE OF CONTENTS</h4>
+                  <div className="max-h-[200px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                    <ul className="space-y-2">
+                      {post.title && (
+                        <li className="relative">
+                          <a
+                            href="#introduction"
+                            className="block text-base leading-tight pl-4 text-[#101828] font-medium"
+                          >
+                            <div className="absolute left-0 top-[8px] w-2 h-2 rounded-full bg-[#101828] animate-pulse"></div>
+                            Understanding {post.title.split(' ').slice(0, 3).join(' ')}...
+                          </a>
+                        </li>
+                      )}
+                      <li className="relative">
+                        <a href="#" className="block text-base leading-tight pl-4 text-[#667085] hover:text-[#101828]">
+                          Getting Started with {post.category}
+                        </a>
+                      </li>
+                      <li className="relative">
+                        <a href="#" className="block text-base leading-tight pl-4 text-[#667085] hover:text-[#101828]">
+                          Essential {post.category} Tactics for Success
+                        </a>
+                      </li>
+                      <li className="relative">
+                        <a href="#" className="block text-base leading-tight pl-4 text-[#667085] hover:text-[#101828]">
+                          Creating {post.category}-Friendly Content
+                        </a>
+                      </li>
+                      <li className="relative">
+                        <a href="#" className="block text-base leading-tight pl-4 text-[#667085] hover:text-[#101828]">
+                          Technical Tips for Better Performance
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </aside>
+              
+              {/* Main Content */}
+              <div>
+                <div className="relative w-full h-[400px] mb-8 rounded-xl overflow-hidden">
+                  <Image
+                    src={thumbnailError ? defaultThumbnail : post.thumbnail}
+                    alt={post.title}
+                    fill
+                    className="object-cover"
+                    onError={() => setThumbnailError(true)}
+                  />
+                </div>
+                
+                <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
+              </div>
             </div>
 
             {/* Newsletter Section */}
-            <Newsletter />
+            <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 3rem)' }}>
+              <Newsletter />
+            </div>
 
-            <div className="mt-8">
+            <div className="mt-8 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 3rem)' }}>
               <h4 className="text-sm font-semibold mb-4 uppercase">Related Articles</h4>
               <div className="space-y-4">
                 {blogs

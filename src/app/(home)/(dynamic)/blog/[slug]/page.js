@@ -11,6 +11,8 @@ import BlogCard from '@/components/blog/BlogCard';
 import React from 'react';
 import RelatedBlogs from '@/components/blog/RelatedBlogs';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
+import { motion } from 'framer-motion';
+import '../blogStyles.css';
 
 // More efficient approach to fetch blog post
 const getBlogPost = async (slug) => {
@@ -287,75 +289,117 @@ export default function BlogDetail({ params }) {
   return (
     <div className='bg-white py-16'>
       <Layout>
-        {/* Blog Header */}
-        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-0 mb-12">
-          {/* Date display with increased top margin */}
-          <div className="uppercase text-gray-600 tracking-wider text-sm font-medium mb-8 text-center mt-16">
-            {post.date}
+        {/* Blog Header - Superside Style */}
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 3rem)' }}>
+          {/* Date display - exact Superside format */}
+          <div className="text-center mt-16 mb-10">
+            <div className="uppercase text-[#475467] tracking-wide text-base font-medium">
+              {/* Format date to match Superside (MONTH DD, YYYY) */}
+              {new Date(post.date).toLocaleDateString('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric'
+              }).toUpperCase()}
+            </div>
           </div>
           
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0A2E3D] leading-[1.2] px-4 mb-10 text-center max-w-[1200px] mx-auto">
+          {/* Title - exact Superside specs */}
+          <h1 className="text-4xl md:text-5xl lg:text-[3.75rem] font-normal text-[#101828] leading-[1.1] mb-16 text-center mx-auto max-w-[900px] tracking-tight">
             {post.title}
           </h1>
           
-          {/* Author section */}
-          <div className="mb-10 text-center">
-            <div className="text-gray-700 text-sm mb-2">Author</div>
-            <div className="flex items-center gap-5 justify-center">
-              {post.coAuthors ? (
-                <>
-                  {post.coAuthors.map((author, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <div className="relative w-8 h-8 rounded-full overflow-hidden bg-gray-100">
-                        <Image
-                          src={author.image || defaultAuthorImage}
-                          alt={author.name}
-                          fill
-                          className="object-cover"
-                          onError={() => setAuthorImageError(true)}
-                        />
-                      </div>
-                      <Link href="#" className="font-medium text-sm hover:underline">{author.name}</Link>
-                      {index < post.coAuthors.length - 1 && <span className="ml-3">&</span>}
-                    </div>
-                  ))}
-                </>
-              ) : (
-                <div className="flex items-center gap-2">
-                  <div className="relative w-8 h-8 rounded-full overflow-hidden bg-gray-100">
-                    <Image
-                      src={authorImageError ? defaultAuthorImage : post.author.image}
-                      alt={post.author.name}
-                      fill
-                      className="object-cover"
-                      onError={() => setAuthorImageError(true)}
-                    />
-                  </div>
-                  <Link href="#" className="font-medium text-sm hover:underline">{post.author.name}</Link>
-                </div>
-              )}
+          {/* Author section - exactly like Superside */}
+          <div className="flex items-center justify-center mb-8">
+            <div className="flex items-center">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gray-100 mr-3">
+                <Image
+                  src={authorImageError ? defaultAuthorImage : post.author?.image}
+                  alt={post.author?.name}
+                  width={40}
+                  height={40}
+                  className="object-cover"
+                  onError={() => setAuthorImageError(true)}
+                />
+              </div>
+              <div className="flex items-center">
+                <div className="text-[#475467] mr-2">By</div>
+                <Link 
+                  href="#" 
+                  className="font-semibold text-[#101828] hover:underline mr-2"
+                >
+                  {post.author?.name}
+                </Link>
+                <div className="text-[#475467]">{post.author?.role}</div>
+              </div>
             </div>
+          </div>
+          
+          {/* Social sharing icons - Superside style */}
+          <div className="flex items-center justify-center gap-3 mb-20">
+            <Link href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`} 
+              className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
+              target="_blank" rel="noopener noreferrer"
+              aria-label="Share on LinkedIn"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-gray-700">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </Link>
+            <Link href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`} 
+              className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
+              target="_blank" rel="noopener noreferrer"
+              aria-label="Share on Facebook"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-gray-700">
+                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+              </svg>
+            </Link>
+            <button 
+              onClick={() => {
+                if (navigator.clipboard) {
+                  navigator.clipboard.writeText(typeof window !== 'undefined' ? window.location.href : '');
+                  alert('Link copied to clipboard!');
+                }
+              }} 
+              className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
+              aria-label="Copy link to clipboard"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-700">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+            </button>
+            <Link 
+              href={`mailto:?subject=${encodeURIComponent(post.title)}&body=${encodeURIComponent(`Check out this article: ${typeof window !== 'undefined' ? window.location.href : ''}`)}`} 
+              className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
+              aria-label="Share via email"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-700">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </Link>
           </div>
         </div>
 
         {/* Main Grid Container */}
-        <div className="grid grid-cols-1 lg:grid-cols-[270px_1fr] gap-16 px-4 max-w-[2000px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-[270px_1fr] gap-16 px-5 sm:px-6 lg:px-8 max-w-7xl mx-auto" style={{ width: 'calc(100% - 3rem)' }}>
           {/* Left Sidebar */}
           <aside className="lg:sticky top-24 self-start hidden lg:block space-y-8 shrink-0">
-            {/* Table of Contents */}
-            <div className="bg-[#EAF2E3] p-3 rounded-lg">
-              <h4 className="uppercase text-[#333] text-xs font-bold mb-2">Table of Contents</h4>
+            {/* Table of Contents - Updated with black dot and exact beige color */}
+            <div className="bg-[#E6ECD6] p-6 rounded-lg">
+              <h4 className="uppercase text-[#101828] text-sm font-semibold tracking-wide mb-4">TABLE OF CONTENTS</h4>
               {h2Headings.length > 0 && (
-                <div className="max-h-[220px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
-                  <ul className="space-y-0.5">
+                <div className="max-h-[200px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                  <ul className="space-y-2">
                     {h2Headings.map((section, index) => (
-                      <li key={index}>
+                      <li key={index} className="relative">
                         <a
                           href={`#${section.id}`}
-                          className={`block group text-xs py-1 pl-2 transition-all duration-200 rounded-sm ${
+                          className={`block text-base leading-tight pl-4 ${
                             activeId === section.id
-                            ? 'text-black font-bold border-l-2 border-primary-600 pl-3' 
-                            : 'text-gray-600 hover:text-primary-600 hover:bg-white/30 hover:pl-3'
+                            ? 'text-[#101828] font-medium' 
+                            : 'text-[#667085] hover:text-[#101828]'
                           }`}
                           onClick={(e) => {
                             e.preventDefault();
@@ -365,6 +409,9 @@ export default function BlogDetail({ params }) {
                             }
                           }}
                         >
+                          {activeId === section.id && (
+                            <div className="absolute left-0 top-[8px] w-2 h-2 rounded-full bg-[#101828] animate-pulse"></div>
+                          )}
                           {section.title}
                         </a>
                       </li>
@@ -411,7 +458,7 @@ export default function BlogDetail({ params }) {
 
       {/* Related Blogs - "You may also like these" section */}
       <section className="mt-20 pb-12 w-full">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 3rem)' }}>
           <h2 className="text-2xl md:text-3xl font-semibold mb-12 text-center text-gray-900">
             <div className="text-sm text-gray-500 mb-2 uppercase tracking-wider">RELATED ARTICLES</div>
             You may also like these
@@ -420,84 +467,6 @@ export default function BlogDetail({ params }) {
           <RelatedBlogs currentPost={post} defaultThumbnail={defaultThumbnail} defaultAuthorImage={defaultAuthorImage} />
         </div>
       </section>
-      
-      <style jsx global>{`
-        .blog-content {
-          font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-          color: #4B5563;
-          line-height: 1.8;
-          width: 100%;
-        }
-
-        .blog-content h2 {
-          font-size: 1.875rem;
-          margin-top: 2.5rem;
-          margin-bottom: 1.25rem;
-          font-weight: 600;
-          color: #0A2E3D;
-          scroll-margin-top: 100px;
-          padding-top: 1.5rem;
-          border-top: 1px solid #F3F4F6;
-        }
-
-        .blog-content h3 {
-          font-size: 1.5rem;
-          margin-top: 2rem;
-          margin-bottom: 1rem;
-          font-weight: 600;
-          color: #0A2E3D;
-          scroll-margin-top: 100px;
-        }
-
-        .blog-content p {
-          margin-bottom: 1.5rem;
-          font-size: 1.125rem;
-          color: #4B5563;
-          line-height: 1.75;
-        }
-
-        .blog-content ul {
-          margin-top: 1.25rem;
-          margin-bottom: 1.25rem;
-          list-style-type: disc;
-          padding-left: 1.25rem;
-        }
-
-        .blog-content ul li {
-          margin-top: 0.5rem;
-          margin-bottom: 0.5rem;
-          font-size: 1.125rem;
-          color: #4B5563;
-        }
-
-        .blog-content img {
-          border-radius: 0.5rem;
-          margin: 2rem auto;
-          width: 100%;
-          height: auto;
-          max-width: 100%;
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-
-        .blog-content blockquote {
-          border-left: 4px solid #88D7F0; 
-          padding: 0.75rem 1.25rem;
-          margin: 1.5rem 0;
-          font-style: italic;
-          color: #4B5563;
-          background: #f9fafb;
-        }
-        
-        .blog-content a {
-          color: #088AB2;
-          text-decoration: underline;
-          text-underline-offset: 2px;
-        }
-        
-        .blog-content a:hover {
-          color: #0A2E3D;
-        }
-      `}</style>
     </div>
   );
 }
