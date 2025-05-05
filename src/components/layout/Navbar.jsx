@@ -17,8 +17,8 @@ const Navbar = () => {
 
   // State for colors
   const [color, setColor] = useState({
-    text: ((pathName === "/") || (pathName.includes("/services/"))) ? "#EBFAFE" : "#073742",
-    bg: "#ebfafe00",
+    text: (pathName === "/" || pathName.includes("/services/")) ? "#EBFAFE" : "#073742",
+    bg: "transparent",
   });
 
   // Update color dynamically on scroll
@@ -26,19 +26,15 @@ const Navbar = () => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
         setScrolled(true);
-        setColor({
-          text: "#073742",
-          bg: "#EBFAFE",
-        });
+        setColor({ text: "#073742", bg: "#EBFAFE" });
       } else {
         setScrolled(false);
         setColor({
-          text: ((pathName === "/") || (pathName.includes("/services/")))  ? "#EBFAFE" : "#073742",
-          bg: "#ebfafe00",
+          text: (pathName === "/" || pathName.includes("/services/")) ? "#EBFAFE" : "#073742",
+          bg: "transparent",
         });
       }
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pathName]);
@@ -46,53 +42,91 @@ const Navbar = () => {
   // Ensure color is updated correctly on route change
   useEffect(() => {
     setColor({
-      text: ((pathName === "/") || (pathName.includes("/services/"))) ? "#EBFAFE" : "#073742",
-    bg: "#ebfafe00",
+      text: (pathName === "/" || pathName.includes("/services/")) ? "#EBFAFE" : "#073742",
+      bg: "transparent",
     });
   }, [pathName]);
 
+  // Determine button text color for "Book a Call"
+  const callTextColor = pathName !== "/"
+    ? pathName.includes("/services/")
+      ? (color.bg !== "#EBFAFE" ? "#073742" : "#EBFAFE")
+      : "#EBFAFE"
+    : (color.bg !== "#EBFAFE" ? "#073742" : "#EBFAFE");
+
   return (
     <nav
-      className={`fixed top-0 w-full h-[70px] sm:h-[80px] flex items-center z-30 transition-all duration-300 bg-[${color.bg}]`}
+      style={{ backgroundColor: color.bg }}
+      className="fixed top-0 w-full h-[70px] sm:h-[80px] flex items-center z-30 transition-all duration-300"
     >
       <Layout className="flex w-full justify-between items-center">
         {/* Logo */}
-        <Link href={"/"} className="text-3xl ml-2 sm:ml-0 tracking-wide font-bold flex items-center">
-          <span className={`text-[${color.text}]`}>aneeverse</span>
+        <Link href="/" className="text-3xl ml-2 sm:ml-0 tracking-wide font-bold flex items-center">
+          <span style={{ color: color.text }}>aneeverse</span>
         </Link>
 
         {/* Large Screen Menu */}
-        <div className="hidden lg:flex lg:gap-3 xl:gap-6 gap-6 items-center">
+        <div className="hidden lg:flex lg:gap-6 gap-3 items-center">
           <ServicesMegaMenu color={color} />
+
           <Link
             href="/works"
-            className={` text-[${color.text}] flex items-center group`}
+            className="flex items-center group"
+            style={{ color: color.text }}
           >
-           <span className={`h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full bg-[${color.text}]`}></span>  <span>Our Works</span> 
+            <span
+              className="h-[5px] w-[5px] inline-block rounded-full transition-all duration-300 scale-0 group-hover:scale-100 mr-0 group-hover:mr-1.5"
+              style={{ backgroundColor: color.text }}
+            />
+            <span>Our Works</span>
           </Link>
+
           <WhyUsMegaMenu color={color} />
           <ResourcesMegaMenu color={color} />
+
           <Link
             href="/pricing"
-            className={`group flex items-center  text-[${color.text}]`}
+            className="flex items-center group"
+            style={{ color: color.text }}
           >
-           <span className={`h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full bg-[${color.text}]`}></span>   <span>Pricing</span> 
+            <span
+              className="h-[5px] w-[5px] inline-block rounded-full transition-all duration-300 scale-0 group-hover:scale-100 mr-0 group-hover:mr-1.5"
+              style={{ backgroundColor: color.text }}
+            />
+            <span>Pricing</span>
           </Link>
         </div>
 
+        {/* Buttons */}
         <div className="hidden lg:flex items-center gap-4">
-          <Link href={"/contact"} className={`text-[${pathName != "/" ?  pathName.includes("/services/") ?(color.bg !=  "#EBFAFE") ?  "#073742":  "#EBFAFE" : "#EBFAFE" : (color.bg !=  "#EBFAFE") ?  "#073742":  "#EBFAFE" }] bg-[${color.text}] text-sm border border-[${color.bg}]  px-6 py-[10px] rounded-full`}>
+          <Link
+            href="/contact"
+            className="px-6 py-2 rounded-full border"
+            style={{
+              color: callTextColor,
+              backgroundColor: color.text,
+              borderColor: color.bg
+            }}
+          >
             Book a Call
           </Link>
-          <Link href={"/register"} className={`text-[${color.text}] text-sm bg-[${color.bg}] border border-[${color.text}] px-6 py-[10px] rounded-full`}>
+          <Link
+            href="/register"
+            className="px-6 py-2 rounded-full border"
+            style={{
+              color: color.text,
+              backgroundColor: color.bg,
+              borderColor: color.text
+            }}
+          >
             Login
           </Link>
         </div>
+
         {/* Mobile Menu Icon */}
         <button
-          className={`lg:hidden mr-2 sm:mr-0 text-2xl ${
-            scrolled ? "text-[#073742]" : `text-[${color.text}]`
-          }`}
+          className={`lg:hidden mr-2 sm:mr-0 text-2xl`}
+          style={{ color: scrolled ? "#073742" : color.text }}
           onClick={() => setSidebarOpen(true)}
         >
           <FiMenu />
@@ -100,7 +134,9 @@ const Navbar = () => {
       </Layout>
 
       {/* Sidebar for small screens */}
-      {sidebarOpen && <Sidebar isOpen={sidebarOpen} toggleSidebar={() => setSidebarOpen(false)}/>}
+      {sidebarOpen && (
+        <Sidebar isOpen={sidebarOpen} toggleSidebar={() => setSidebarOpen(false)} />
+      )}
     </nav>
   );
 };

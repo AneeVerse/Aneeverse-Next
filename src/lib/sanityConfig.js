@@ -1,0 +1,12 @@
+import { defineConfig } from 'sanity'
+import { deskTool } from 'sanity/desk'
+import { schemaTypes } from '../sanity/schemaTypes'
+
+export default defineConfig({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'be9i5ty1',
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+  title: 'Aneeverse Blog',
+  basePath: '/studio',
+  plugins: [deskTool()],
+  schema: { types: schemaTypes }
+}) 
