@@ -1,3 +1,5 @@
+const path = require('path');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -75,6 +77,11 @@ const nextConfig = {
         ]
       }
     ];
+  },
+  webpack: (config) => {
+    // Alias '@' to the 'src' directory for cleaner imports
+    config.resolve.alias['@'] = path.resolve(__dirname, 'src');
+    return config;
   }
 };
 

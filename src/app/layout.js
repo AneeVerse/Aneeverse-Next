@@ -1,26 +1,15 @@
 'use client';
 
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import "@/styles/fonts.css"; // Import fonts CSS
-import Navbar from "@/components/layout/Navbar";
-import NewFooter from "@/components/layout/NewFooter";
-import NextTopLoader from "nextjs-toploader";
+import Navbar from '@/components/layout/Navbar';
+import NewFooter from '@/components/layout/NewFooter';
+import NextTopLoader from 'nextjs-toploader';
 import { usePathname } from 'next/navigation';
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
-  const isAuthPage = pathname === '/register' || pathname === '/login';
+  const isStudio = pathname.startsWith('/studio');
+  const isAuth = pathname === '/register' || pathname === '/login';
 
   return (
     <html lang="en">
@@ -29,21 +18,26 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet" />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-primary-500`}
-      >
-          <NextTopLoader
-         color="#0e2f50"
-         initialPosition={0.08}
-         height={3}
-         showSpinner={false}
-         easing="ease"
-         speed={500}
-         shadow="0 0 10px #2299DD,0 0 5px #2299DD"
-         />
-        {!isAuthPage && <Navbar />}
+      <body>
+        {/* Top Loader */}
+        <NextTopLoader
+          color="#0e2f50"
+          initialPosition={0.08}
+          height={3}
+          showSpinner={false}
+          easing="ease"
+          speed={500}
+          shadow="0 0 10px #2299DD,0 0 5px #2299DD"
+        />
+
+        {/* Navbar for all non-studio, non-auth pages */}
+        {!isStudio && !isAuth && <Navbar />}
+
+        {/* Page content */}
         {children}
-        {!isAuthPage && <NewFooter />}
+
+        {/* Footer for all non-studio, non-auth pages */}
+        {!isStudio && !isAuth && <NewFooter />}
       </body>
     </html>
   );

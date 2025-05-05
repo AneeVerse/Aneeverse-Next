@@ -69,8 +69,20 @@ const ServicesMegaMenu = ({color}) => {
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <Link href={"/services"} className={`text-[${color.text}] p-2 cursor-pointer flex items-center group`}>
-      <span className={`${isOpen ? "mr-[6px] scale-100 ": " "} h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full bg-[${color.text}]`}></span>  <span className="flex items-center gap-2">Services <FaChevronDown className={`${isOpen ? " -rotate-180 ": " " } group-hover:-rotate-180 duration-300 transition-all self-center text-[10px]`} /> </span>  </Link>
+      <Link 
+        href={"/services"} 
+        style={{ color: color.text }}
+        className="p-2 cursor-pointer flex items-center group"
+      >
+        <span 
+          style={{ backgroundColor: color.text }}
+          className={`${isOpen ? "mr-[6px] scale-100" : ""} h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full`}
+        ></span>  
+        <span className="flex items-center gap-2">
+          Services 
+          <FaChevronDown className={`${isOpen ? "-rotate-180" : ""} group-hover:-rotate-180 duration-300 transition-all self-center text-[10px]`} />
+        </span>
+      </Link>
       {isOpen && (
         <motion.div
           className="absolute left-0 top-[60px] pt-[20px] w-full z-40"
