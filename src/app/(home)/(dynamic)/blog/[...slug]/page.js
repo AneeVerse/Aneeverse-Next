@@ -115,46 +115,43 @@ export default function BlogDetail({ params }) {
         ) : post ? (
           <>
             {/* Blog Header */}
-            <header className="mb-16">
-              <div className="flex items-center text-md text-secondary-500/80 font-semibold gap-2 mb-3">
-                <Link href="/blog" className="uppercase hover:underline">
-                  Blog
-                </Link>
-                <IoIosArrowForward className="" />
-                <Link 
-                  href={`/blog/category/${post.category.toLowerCase().replace(/\s+/g, "-")}`} 
-                  className="text-gray-900 text-sm uppercase"
-                >
-                  {post.category}
-                </Link>
-                <IoIosArrowForward className="" />
-                <span className="uppercase text-gray-500">{post.title}</span>
-              </div>
-
-              <h1 className="text-4xl font-bold text-gray-900 mb-6">{post.title}</h1>
-              
-              <div className="flex items-center gap-6">
+            <header className="mb-12">
+              <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                {post.title}
+              </h1>
+              <div className="flex flex-wrap items-center gap-6 text-gray-600">
+                {/* Author Info */}
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full overflow-hidden">
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden">
                     <Image
                       src={authorImageError ? defaultAuthorImage : post.author.image}
                       alt={post.author.name}
-                      width={48}
-                      height={48}
+                      fill
                       className="object-cover"
                       onError={() => setAuthorImageError(true)}
                     />
                   </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">{post.author.name}</p>
-                    <p className="text-sm text-gray-500">{post.author.role}</p>
+                  <div className="flex items-center gap-2 text-gray-900 font-medium">
+                    <span>{post.author.name}</span>
+                    <span className="mx-1 text-gray-400">·</span>
+                    <span className="text-gray-500 font-normal">{post.author.role}</span>
                   </div>
                 </div>
-                
-                <div className="flex items-center gap-2 text-gray-500">
+                {/* Read Time */}
+                <div className="flex items-center gap-2">
                   <FaRegClock />
                   <span>{post.timeToRead}</span>
                 </div>
+                {/* Date */}
+                {post.date && (
+                  <time className="text-gray-500">
+                    {new Date(post.date).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </time>
+                )}
               </div>
             </header>
 
@@ -218,4 +215,4 @@ export default function BlogDetail({ params }) {
       </Layout>
     </div>
   );
-} 
+}
