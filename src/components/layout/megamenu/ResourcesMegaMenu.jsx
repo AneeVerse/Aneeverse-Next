@@ -14,30 +14,104 @@ import Layout from "@/components/common/Layout";
 import Link from "next/link";
 import { customerStories } from "@/data/customerStoriesData";
 
+// Initialize data fetching early - this will be shared across instances
+let blogsCache = [];
+let isBlogsFetched = false;
+let isFetchingBlogs = false;
+
+// Prefetch blogs outside component to share across renders
+const prefetchBlogs = async () => {
+  if (isFetchingBlogs || isBlogsFetched) return;
+  
+  try {
+    isFetchingBlogs = true;
+    const response = await fetch('/api/sanity-blogs?limit=2', { 
+      cache: 'no-store',
+      next: { revalidate: 300 } // Revalidate every 5 minutes
+    });
+    if (response.ok) {
+      const data = await response.json();
+      if (data.success) {
+        blogsCache = data.blogs;
+        isBlogsFetched = true;
+      }
+    }
+  } catch (error) {
+    console.error('Error prefetching blogs:', error);
+  } finally {
+    isFetchingBlogs = false;
+  }
+};
+
+// Start prefetching as soon as this module is loaded
+if (typeof window !== 'undefined') {
+  prefetchBlogs();
+}
+
 const ResourcesMegaMenu = ({ color }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [blogs, setBlogs] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [blogs, setBlogs] = useState(blogsCache);
+  const [isLoading, setIsLoading] = useState(!isBlogsFetched);
 
+  // Fetch blogs as soon as the component mounts, not waiting for menu open
   useEffect(() => {
     const fetchBlogs = async () => {
+      // If we already have blogs cached, use them
+      if (isBlogsFetched) {
+        setBlogs(blogsCache);
+        setIsLoading(false);
+        return;
+      }
+      
+      // If already fetching, just wait
+      if (isFetchingBlogs) {
+        const checkCache = setInterval(() => {
+          if (isBlogsFetched) {
+            setBlogs(blogsCache);
+            setIsLoading(false);
+            clearInterval(checkCache);
+          }
+        }, 100);
+        return () => clearInterval(checkCache);
+      }
+      
+      // Otherwise fetch them now
       try {
-        const response = await fetch('/api/blogs?limit=2');
+        setIsLoading(true);
+        isFetchingBlogs = true;
+        const response = await fetch('/api/sanity-blogs?limit=2', { 
+          cache: 'no-store',
+          next: { revalidate: 300 } // Revalidate every 5 minutes
+        });
         const data = await response.json();
         if (data.success) {
+          blogsCache = data.blogs;
+          isBlogsFetched = true;
           setBlogs(data.blogs);
+        } else {
+          console.error('Failed to fetch blogs:', data.error);
         }
       } catch (error) {
         console.error('Error fetching blogs:', error);
       } finally {
         setIsLoading(false);
+        isFetchingBlogs = false;
       }
     };
 
-    if (isOpen) {
-      fetchBlogs();
+    // Fetch immediately when component mounts, don't wait for menu to open
+    fetchBlogs();
+  }, []);
+
+  // Prefetch when user moves mouse near the menu to speed up hover
+  const handleMouseNear = () => {
+    if (!isBlogsFetched && !isFetchingBlogs) {
+      prefetchBlogs().then(() => {
+        setBlogs(blogsCache);
+        setIsLoading(false);
+      });
     }
-  }, [isOpen]);
+  };
 
   const resources = [
     {
@@ -86,9 +160,10 @@ const ResourcesMegaMenu = ({ color }) => {
 
   return (
     <div
-      className=" "
+      className=""
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
+      onMouseOver={handleMouseNear}
     >
       <button
         style={{ color: color.text }}
@@ -107,7 +182,7 @@ const ResourcesMegaMenu = ({ color }) => {
       </button>
       {isOpen && (
         <motion.div
-          className="fixed h-screen inset-0 w-full top-[60px]  pt-5 z-40"
+          className="fixed h-screen inset-0 w-full top-[60px] pt-5 z-40"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
@@ -119,20 +194,20 @@ const ResourcesMegaMenu = ({ color }) => {
                 setIsOpen(false);
               }}
           
-          className="bg-[#EBFAFE] shadow-lg  border border-gray-200 ">
+          className="bg-[#EBFAFE] shadow-lg border border-gray-200">
             <Layout>
               <div className="grid grid-cols-3 gap-6 py-8">
                 {/* Learning Center */}
                 <div className="border-r border-gray-200 pr-6">
                  
-                  <ul className="mt-12  space-y-4">
+                  <ul className="mt-12 space-y-4">
                     {resources[0].items.map((item, idx) => (
                       <li key={idx}>
                         <Link href={item.link} onClick={()=>{setIsOpen(false)}} 
                        className="flex cursor-pointer border-b pb-3 items-start group justify-between gap-3">
                         <div>
                           <h4 className="text-md flex items-center font-medium text-gray-700">
-                           <span className="h-[5px] bg-secondary-500 w-[5px] inline-block transition-all  duration-300 scale-0 group-hover:scale-100 rounded-full"></span> <span className=" ml-[-5px] group-hover:ml-[6px]  transition-all duration-300">{item.name}</span>
+                           <span className="h-[5px] bg-secondary-500 w-[5px] inline-block transition-all duration-300 scale-0 group-hover:scale-100 rounded-full"></span> <span className="ml-[-5px] group-hover:ml-[6px] transition-all duration-300">{item.name}</span>
                           </h4>
                           <p className="text-sm text-gray-500">
                             {item.description}
@@ -148,18 +223,18 @@ const ResourcesMegaMenu = ({ color }) => {
                 {/* Blog */}
                 <div className="border-r border-gray-200 pr-6">
                   <Link onClick={()=>{setIsOpen(false)}} href={resources[1].link} className="text-lg group font-semibold cursor-pointer hover:underline flex items-center text-secondary-500 gap-2">
-                    Blog <div className="relative"> <FiArrowUpRight className="  z-10 group-hover:translate-x-[80%] group-hover:translate-y-[-80%] group-hover:opacity-0 transition-all duration-300" /> <FiArrowUpRight className=" absolute inset-0 z-10 opacity-0 translate-x-[-80%] translate-y-[80%] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" /></div>
+                    Blog <div className="relative"> <FiArrowUpRight className="z-10 group-hover:translate-x-[80%] group-hover:translate-y-[-80%] group-hover:opacity-0 transition-all duration-300" /> <FiArrowUpRight className="absolute inset-0 z-10 opacity-0 translate-x-[-80%] translate-y-[80%] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" /></div>
                   </Link>
                   <div className="grid grid-cols-1 gap-4 mt-4">
                     {isLoading ? (
-                      // Loading placeholders
+                      // Loading placeholders with reduced height for faster rendering
                       Array(2).fill(0).map((_, idx) => (
                         <div key={idx} className="animate-pulse">
-                          <div className="bg-gray-200 h-[160px] rounded-md"></div>
+                          <div className="bg-gray-200 h-[120px] rounded-md"></div>
                           <div className="h-4 bg-gray-200 rounded mt-3 w-3/4"></div>
                         </div>
                       ))
-                    ) : blogs.length > 0 ? (
+                    ) : blogs && blogs.length > 0 ? (
                       // Render actual blogs
                       blogs.map((blog, idx) => (
                         <Link onClick={()=>{setIsOpen(false)}} href={`/blog/${blog.slug}`} key={idx} className="flex flex-col cursor-pointer gap-3">
@@ -178,7 +253,7 @@ const ResourcesMegaMenu = ({ color }) => {
                     ) : (
                       // No blogs found
                       <div className="text-center py-4 text-gray-500">
-                        No blog posts available
+                        Check out our blog for latest updates
                       </div>
                     )}
                   </div>
@@ -186,8 +261,8 @@ const ResourcesMegaMenu = ({ color }) => {
 
                 {/* Customer Stories */}
                 <div>
-                  <Link  onClick={()=>{setIsOpen(false)}} href={resources[2].link} className="text-lg group font-semibold flex items-center hover:underline cursor-pointer text-secondary-500 gap-2">
-                    Customer Stories <div className="relative"> <FiArrowUpRight className="  z-10 group-hover:translate-x-[80%] group-hover:translate-y-[-80%] group-hover:opacity-0 transition-all duration-300" /> <FiArrowUpRight className=" absolute inset-0 z-10 opacity-0 translate-x-[-80%] translate-y-[80%] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" /></div>
+                  <Link onClick={()=>{setIsOpen(false)}} href={resources[2].link} className="text-lg group font-semibold flex items-center hover:underline cursor-pointer text-secondary-500 gap-2">
+                    Customer Stories <div className="relative"> <FiArrowUpRight className="z-10 group-hover:translate-x-[80%] group-hover:translate-y-[-80%] group-hover:opacity-0 transition-all duration-300" /> <FiArrowUpRight className="absolute inset-0 z-10 opacity-0 translate-x-[-80%] translate-y-[80%] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" /></div>
                   </Link>
                   <div className="grid grid-cols-1 gap-4 mt-4">
                     {resources[2].cards.map((card, idx) => (

@@ -14,7 +14,6 @@ export default function ClientBlogPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [fetchTries, setFetchTries] = useState(0);
-  const [useSanity, setUseSanity] = useState(true); // Control which API to use
 
   const fetchBlogs = async () => {
     try {
@@ -28,10 +27,7 @@ export default function ClientBlogPage() {
       const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
       
       try {
-        // Choose which API endpoint to use
-        const apiUrl = useSanity 
-          ? `/api/sanity-blogs?limit=100&t=${Date.now()}` 
-          : `/api/blogs?limit=100&t=${Date.now()}`;
+        const apiUrl = `/api/sanity-blogs?limit=100&t=${Date.now()}`;
         
         const response = await fetch(apiUrl, {
           signal: controller.signal,
@@ -43,13 +39,6 @@ export default function ClientBlogPage() {
         clearTimeout(timeoutId);
         
         if (!response.ok) {
-          // If Sanity API fails, try fallback to the original API
-          if (useSanity) {
-            console.log('Sanity API failed, falling back to original API');
-            setUseSanity(false);
-            throw new Error('Sanity API failed. Retrying with original API...');
-          }
-          
           const errorText = await response.text();
           throw new Error(`Failed to fetch blogs: ${response.status} ${response.statusText} - ${errorText}`);
         }
@@ -88,14 +77,6 @@ export default function ClientBlogPage() {
           throw new Error('Request timed out. The server took too long to respond.');
         }
         
-        // If we were using Sanity and it failed but the message indicates retrying, 
-        // don't treat it as a final error
-        if (useSanity && fetchError.message.includes('Retrying with original API')) {
-          // We already set useSanity to false, just retry the fetch without showing an error
-          fetchBlogs();
-          return;
-        }
-        
         throw fetchError;
       }
     } catch (err) {
@@ -119,7 +100,6 @@ export default function ClientBlogPage() {
 
   const handleRetry = () => {
     setFetchTries(prev => prev + 1);
-    setUseSanity(true); // Reset to try Sanity first on retry
     fetchBlogs();
   };
 
@@ -146,9 +126,8 @@ export default function ClientBlogPage() {
             <p className="font-semibold mb-2">Troubleshooting Tips:</p>
             <ul className="list-disc pl-5 space-y-1">
               <li>Check your internet connection</li>
-              <li>Verify that the MongoDB connection string is correct</li>
-              <li>Ensure your IP address is whitelisted in MongoDB Atlas</li>
-              <li>Check that the MongoDB cluster is running</li>
+              <li>Verify your Sanity project settings</li>
+              <li>Check that the Sanity API is accessible</li>
             </ul>
           </div>
           
