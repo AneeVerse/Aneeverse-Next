@@ -1,6 +1,6 @@
-# Aneeverse Blog System with MongoDB
+# Aneeverse Blog System with Sanity.io
 
-This project is a Next.js-based blog system that uses MongoDB for data storage. This approach is production-ready and works well with deployments on platforms like Vercel.
+This project is a Next.js-based blog system that uses Sanity.io for content management. This approach is production-ready and works well with deployments on platforms like Vercel.
 
 ## Getting Started
 
@@ -13,49 +13,46 @@ This project is a Next.js-based blog system that uses MongoDB for data storage. 
    ```
    cp .env.example .env.local
    ```
-4. Set up MongoDB:
-   - Create a free MongoDB Atlas account (https://www.mongodb.com/atlas/database)
-   - Create a new cluster
-   - Set up database access (username and password)
-   - Get your connection string and update it in `.env.local`
+4. Set up Sanity.io:
+   - Create a free Sanity account (https://www.sanity.io/get-started)
+   - Create a new project
+   - Get your project ID and dataset name
+   - Add these to your `.env.local` file
 5. Run the development server:
    ```
    npm run dev
    ```
 6. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## MongoDB Setup
+## Sanity.io Setup
 
-### Creating a MongoDB Atlas Account
+### Creating a Sanity.io Account
 
-1. Go to [MongoDB Atlas](https://www.mongodb.com/atlas/database)
+1. Go to [Sanity.io](https://www.sanity.io/get-started)
 2. Sign up for a free account
 3. Create a new project
-4. Build a new cluster (you can use the free tier)
-5. Set up a database user with read/write privileges
-6. Configure network access (you can allow access from anywhere during development)
-7. Get your connection string from the "Connect" button on your cluster
+4. Note your project ID and dataset name
+5. Set up an API token with read/write privileges
 
 ### Configuring Your Application
 
-Update your `.env.local` file with your MongoDB connection details:
+Update your `.env.local` file with your Sanity.io details:
 
 ```
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/aneeverse?retryWrites=true&w=majority
-MONGODB_DB=aneeverse
+NEXT_PUBLIC_SANITY_PROJECT_ID=your-project-id
+NEXT_PUBLIC_SANITY_DATASET=production
+SANITY_API_TOKEN=your-api-token
 ```
 
-Replace `username`, `password`, and `cluster.mongodb.net` with your actual credentials.
+Replace `your-project-id` and `your-api-token` with your actual credentials.
 
-## API Routes
+## Sanity Studio
 
-The application includes the following API routes:
+This project includes Sanity Studio for content management:
 
-- `GET /api/blogs` - Get all blogs with optional filtering
-- `POST /api/blogs` - Create a new blog
-- `GET /api/blogs/[id]` - Get a specific blog by ID
-- `PUT /api/blogs/[id]` - Update a blog
-- `DELETE /api/blogs/[id]` - Delete a blog
+1. Access the Studio at `/studio` route
+2. Log in with your Sanity credentials
+3. Create and manage your content
 
 ## Deployment on Vercel
 
@@ -68,8 +65,8 @@ This application is designed to work seamlessly with Vercel:
 
 ## Features
 
-- MongoDB integration for production-ready data storage
-- Admin dashboard for managing blog posts
-- Create, read, update, and delete blog posts
+- Sanity.io integration for content management
+- Built-in Sanity Studio for content editing
+- Responsive design for all devices
 - Categorized blog listings
-- Responsive design
+- SEO optimized content delivery
