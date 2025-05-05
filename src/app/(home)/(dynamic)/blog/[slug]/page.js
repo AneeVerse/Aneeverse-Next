@@ -17,26 +17,54 @@ import '../blogStyles.css';
 // More efficient approach to fetch blog post
 const getBlogPost = async (slug) => {
   try {
-    // First try to fetch from API
-    const response = await fetch(`/api/blogs/${slug}`, {
-      cache: 'no-store', // Don't cache the request
-      next: { revalidate: 60 } // Revalidate every 60 seconds
-    });
+    console.log('Attempting to fetch blog post with slug:', slug);
     
-    const data = await response.json();
-    console.log('API Response:', data);
-    
-    if (response.ok && data.success && data.blog) {
-      return data.blog;
+    // First try to fetch from Sanity API
+    try {
+      const sanityResponse = await fetch(`/api/sanity-blogs/${slug}`, {
+        cache: 'no-store',
+        next: { revalidate: 60 }
+      });
+      
+      if (sanityResponse.ok) {
+        const sanityData = await sanityResponse.json();
+        console.log('Sanity API Response:', sanityData);
+        
+        if (sanityData.success && sanityData.blog) {
+          console.log('Successfully fetched from Sanity');
+          return sanityData.blog;
+        }
+      }
+      console.log('Sanity fetch failed or returned no data, trying regular API');
+    } catch (sanityErr) {
+      console.error("Error fetching from Sanity:", sanityErr);
     }
     
-    // Fall back to static data if API fails
+    // If Sanity fails, try the regular API
+    try {
+      const response = await fetch(`/api/blogs/${slug}`, {
+        cache: 'no-store',
+        next: { revalidate: 60 }
+      });
+      
+      const data = await response.json();
+      console.log('Regular API Response:', data);
+      
+      if (response.ok && data.success && data.blog) {
+        console.log('Successfully fetched from regular API');
+        return data.blog;
+      }
+    } catch (apiErr) {
+      console.error("Error fetching from regular API:", apiErr);
+    }
+    
+    // Fall back to static data if both APIs fail
     const staticBlog = blogs.find((blog) => blog.slug === slug);
-    console.log('Static Blog:', staticBlog);
+    console.log('Using static blog data:', staticBlog);
     return staticBlog;
   } catch (err) {
-    console.error("Error fetching blog:", err);
-    // Fall back to static data
+    console.error("Error in blog fetching process:", err);
+    // Final fallback to static data
     return blogs.find((blog) => blog.slug === slug);
   }
 };
