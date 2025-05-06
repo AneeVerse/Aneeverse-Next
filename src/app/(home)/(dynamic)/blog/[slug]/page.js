@@ -318,10 +318,10 @@ export default function BlogDetail({ params }) {
     <div className='bg-white py-16'>
       <Layout>
         {/* Blog Header - Superside Style */}
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 3rem)' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 2rem)' }}>
           {/* Date display - exact Superside format */}
-          <div className="text-center mt-16 mb-10">
-            <div className="uppercase text-[#475467] tracking-wide text-base font-medium">
+          <div className="text-center mt-10 sm:mt-16 mb-6 sm:mb-10">
+            <div className="uppercase text-[#475467] tracking-wide text-sm sm:text-base font-medium">
               {/* Format date to match Superside (MONTH DD, YYYY) */}
               {new Date(post.date).toLocaleDateString('en-US', {
                 month: 'long',
@@ -332,12 +332,12 @@ export default function BlogDetail({ params }) {
           </div>
           
           {/* Title - exact Superside specs */}
-          <h1 className="text-4xl md:text-5xl lg:text-[3.75rem] font-normal text-[#101828] leading-[1.1] mb-16 text-center mx-auto max-w-[900px] tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.75rem] font-normal text-[#101828] leading-[1.2] sm:leading-[1.1] mb-8 sm:mb-16 text-center mx-auto max-w-[900px] tracking-tight">
             {post.title}
           </h1>
           
           {/* Author section - exactly like Superside */}
-          <div className="flex items-center justify-center mb-8">
+          <div className="flex items-center justify-center mb-6 sm:mb-8">
             <div className="flex items-center">
               <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gray-100 mr-3">
                 <Image
@@ -349,7 +349,7 @@ export default function BlogDetail({ params }) {
                   onError={() => setAuthorImageError(true)}
                 />
               </div>
-              <div className="flex items-center">
+              <div className="flex items-center flex-wrap">
                 <div className="text-[#475467] mr-2">By</div>
                 <Link 
                   href="#" 
@@ -363,7 +363,7 @@ export default function BlogDetail({ params }) {
           </div>
           
           {/* Social sharing icons - Superside style */}
-          <div className="flex items-center justify-center gap-3 mb-20">
+          <div className="flex items-center justify-center gap-3 mb-10 sm:mb-20">
             <Link href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`} 
               className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
               target="_blank" rel="noopener noreferrer"
@@ -410,9 +410,9 @@ export default function BlogDetail({ params }) {
           </div>
         </div>
 
-        {/* Main Grid Container */}
-        <div className="grid grid-cols-1 lg:grid-cols-[270px_1fr] gap-16 px-5 sm:px-6 lg:px-8 max-w-7xl mx-auto" style={{ width: 'calc(100% - 3rem)' }}>
-          {/* Left Sidebar */}
+        {/* Main Grid Container - Improved responsive layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-[270px_1fr] gap-8 lg:gap-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto" style={{ width: 'calc(100% - 2rem)' }}>
+          {/* Left Sidebar - Only shown on desktop */}
           <aside className="lg:sticky top-24 self-start hidden lg:block space-y-8 shrink-0">
             {/* Table of Contents - Updated with black dot and exact beige color */}
             <div className="bg-[#E6ECD6] p-6 rounded-lg">
@@ -473,22 +473,80 @@ export default function BlogDetail({ params }) {
             </div>
           </aside>
 
-          {/* Main Content Section */}
-          <div className="lg:pl-8 w-full min-w-0">
+          {/* Mobile TOC - Only visible on mobile */}
+          {h2Headings.length > 0 && (
+            <div className="lg:hidden mb-8 bg-[#E6ECD6] p-4 rounded-lg">
+              <h4 className="uppercase text-[#101828] text-sm font-semibold tracking-wide mb-3">TABLE OF CONTENTS</h4>
+              <div className="overflow-y-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                <ul className="space-y-2">
+                  {h2Headings.map((section, index) => (
+                    <li key={index} className="relative">
+                      <a
+                        href={`#${section.id}`}
+                        className={`block text-sm leading-tight pl-4 ${
+                          activeId === section.id
+                          ? 'text-[#101828] font-medium' 
+                          : 'text-[#667085] hover:text-[#101828]'
+                        }`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          const element = document.getElementById(section.id);
+                          if (element) {
+                            element.scrollIntoView({ behavior: 'smooth' });
+                          }
+                        }}
+                      >
+                        {activeId === section.id && (
+                          <div className="absolute left-0 top-[6px] w-2 h-2 rounded-full bg-[#101828] animate-pulse"></div>
+                        )}
+                        {section.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          )}
+
+          {/* Main Content Section - Improved for mobile */}
+          <div className="w-full min-w-0">
             <article className="w-full">
-              <div className="blog-content">
+              <div className="blog-content description">
                 {renderContent(post.content)}
               </div>
             </article>
+            
+            {/* Mobile Promotional CTA - Only shown on mobile */}
+            <div className="lg:hidden relative overflow-hidden rounded-lg shadow-lg mt-10 mb-6">
+              <div className="h-[140px] overflow-hidden bg-[#034352]">
+                <Image 
+                  src="/blog-poster.avif" 
+                  alt="Get hassle-free service" 
+                  width={400} 
+                  height={200} 
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
+              <div className="bg-[#073742] p-4" style={{marginTop: "-1px"}}>
+                <h3 className="text-white text-base font-bold leading-tight">Get hassle-free video at scale</h3>
+                <p className="text-white/90 text-xs my-1.5">See how we can help.</p>
+                <Link 
+                  href="/contact" 
+                  className="block bg-[#C0FF7C] hover:bg-[#9DF550] text-[#073742] text-center py-2 w-full rounded-md font-medium transition-colors mt-2"
+                >
+                  Book a call
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </Layout>
 
       {/* Related Blogs - "You may also like these" section */}
-      <section className="mt-20 pb-12 w-full">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 3rem)' }}>
-          <h2 className="text-2xl md:text-3xl font-semibold mb-12 text-center text-gray-900">
-            <div className="text-sm text-gray-500 mb-2 uppercase tracking-wider">RELATED ARTICLES</div>
+      <section className="mt-12 sm:mt-20 pb-12 w-full">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 2rem)' }}>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-8 sm:mb-12 text-center text-gray-900">
+            <div className="text-xs sm:text-sm text-gray-500 mb-2 uppercase tracking-wider">RELATED ARTICLES</div>
             You may also like these
           </h2>
           

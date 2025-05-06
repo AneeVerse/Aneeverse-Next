@@ -19,6 +19,12 @@ export function blockContentToHtml(blocks) {
           return textBlockToHtml(block);
         case 'image':
           return imageBlockToHtml(block);
+        case 'youtube':
+          return youtubeBlockToHtml(block);
+        case 'youtubeEmbed':
+          return youtubeBlockToHtml(block);
+        case 'table':
+          return tableBlockToHtml(block);
         default:
           console.warn('Unsupported block type:', block._type);
           return '';
@@ -123,4 +129,79 @@ function imageBlockToHtml(block) {
       ${caption}
     </figure>
   `;
+}
+
+/**
+ * Convert a YouTube block to HTML
+ */
+function youtubeBlockToHtml(block) {
+  if (!block || !block.url) {
+    return '';
+  }
+
+  // Extract YouTube video ID from URL
+  let videoId = '';
+  const url = block.url;
+  
+  if (url.includes('youtube.com/watch')) {
+    const urlParams = new URL(url).searchParams;
+    videoId = urlParams.get('v');
+  } else if (url.includes('youtu.be/')) {
+    videoId = url.split('youtu.be/')[1].split('?')[0];
+  }
+  
+  if (!videoId) {
+    return `<p>Invalid YouTube URL: ${url}</p>`;
+  }
+  
+  // Create responsive embed like Superside uses
+  const caption = block.caption ? `<figcaption>${block.caption}</figcaption>` : '';
+  
+  return `
+    <figure class="youtube-embed">
+      <iframe 
+        src="https://www.youtube.com/embed/${videoId}" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen
+        class="youtube-player"
+      ></iframe>
+      ${caption}
+    </figure>
+  `;
+}
+
+/**
+ * Convert a table block to HTML
+ */
+function tableBlockToHtml(block) {
+  if (!block || !block.rows || !Array.isArray(block.rows)) {
+    return '';
+  }
+  
+  const hasHeaderRow = block.hasHeaderRow;
+  const caption = block.caption ? `<caption>${block.caption}</caption>` : '';
+  let tableHtml = `<div class="table-container"><table class="table-auto w-full border-collapse">${caption}`;
+  
+  // Process rows
+  block.rows.forEach((row, rowIndex) => {
+    tableHtml += '<tr>';
+    
+    // Process cells
+    if (row.cells && Array.isArray(row.cells)) {
+      row.cells.forEach((cell, cellIndex) => {
+        // Use th for header row if specified
+        if (hasHeaderRow && rowIndex === 0) {
+          tableHtml += `<th class="border p-2 font-semibold text-left">${cell}</th>`;
+        } else {
+          tableHtml += `<td class="border p-2">${cell}</td>`;
+        }
+      });
+    }
+    
+    tableHtml += '</tr>';
+  });
+  
+  tableHtml += '</table></div>';
+  return tableHtml;
 }
