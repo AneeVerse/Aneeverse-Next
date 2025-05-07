@@ -19,6 +19,12 @@ export const authorType = defineType({
       },
     }),
     defineField({
+      name: 'role',
+      title: 'Role',
+      type: 'string',
+      description: 'Author role or title (e.g. "Content Writer", "UX Designer")',
+    }),
+    defineField({
       name: 'image',
       type: 'image',
       options: {
@@ -40,6 +46,7 @@ export const authorType = defineType({
   preview: {
     select: {
       title: 'name',
+      subtitle: 'role',
       media: 'image',
     },
   },
