@@ -39,28 +39,28 @@ const BlogHeroSection = ({ blogData }) => {
             </div>
             
             {/* Subscription Box */}
-            <div className="bg-[#EAF2E3] rounded-xl p-8 flex flex-col justify-between">
+            <div className="bg-[#E6ECD6] rounded-xl p-8 flex flex-col justify-between shadow-sm">
               <div>
-                <p className="text-sm uppercase tracking-wide text-gray-500">
+                <p className="text-sm uppercase tracking-wide text-secondary-500/70">
                   CREATIVE GOLD
                 </p>
-                <h3 className="text-3xl font-semibold text-gray-900 mt-2">
+                <h3 className="text-3xl font-semibold text-secondary-500 mt-2">
                   For Your Inbox
                 </h3>
-                <p className="text-lg text-gray-600 mt-3">
+                <p className="text-lg text-secondary-500/80 mt-3">
                   The best events, articles and insights to spark your next big idea.
                 </p>
               </div>
               <div className="mt-6">
-                <div className="flex items-center bg-white px-4 py-3 rounded-full border border-gray-300">
-                  <FaEnvelope className="text-gray-500" />
+                <div className="flex items-center bg-transparent px-4 py-3 rounded-full border border-secondary-500/40">
+                  <FaEnvelope className="text-secondary-500/60" />
                   <input
                     type="email"
                     placeholder="buzz@nasa.gov"
-                    className="flex-1 bg-transparent outline-none pl-3 text-gray-900"
+                    className="flex-1 bg-transparent outline-none pl-3 text-secondary-500"
                   />
                 </div>
-                <button className="mt-4 w-full bg-gray-900 text-white py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors">
+                <button className="mt-4 w-full bg-secondary-500 text-white py-3 rounded-full font-semibold hover:bg-secondary-500/90 transition-colors">
                   Subscribe now
                 </button>
               </div>
@@ -144,28 +144,28 @@ const BlogHeroSection = ({ blogData }) => {
           </Link>
 
           {/* Subscription Box */}
-          <div className="bg-[#EAF2E3] rounded-xl p-8 flex flex-col justify-between">
+          <div className="bg-[#E6ECD6] rounded-xl p-8 flex flex-col justify-between shadow-sm">
             <div>
-              <p className="text-sm uppercase tracking-wide text-gray-500">
+              <p className="text-sm uppercase tracking-wide text-secondary-500/70">
                 CREATIVE GOLD
               </p>
-              <h3 className="text-3xl font-semibold text-gray-900 mt-2">
+              <h3 className="text-3xl font-semibold text-secondary-500 mt-2">
                 For Your Inbox
               </h3>
-              <p className="text-lg text-gray-600 mt-3">
+              <p className="text-lg text-secondary-500/80 mt-3">
                 The best events, articles and insights to spark your next big idea.
               </p>
             </div>
             <div className="mt-6">
-              <div className="flex items-center bg-white px-4 py-3 rounded-full border border-gray-300">
-                <FaEnvelope className="text-gray-500" />
+              <div className="flex items-center bg-transparent px-4 py-3 rounded-full border border-secondary-500/40">
+                <FaEnvelope className="text-secondary-500/60" />
                 <input
                   type="email"
                   placeholder="buzz@nasa.gov"
-                  className="flex-1 bg-transparent outline-none pl-3 text-gray-900"
+                  className="flex-1 bg-transparent outline-none pl-3 text-secondary-500"
                 />
               </div>
-              <button className="mt-4 w-full bg-gray-900 text-white py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors">
+              <button className="mt-4 w-full bg-secondary-500 text-white py-3 rounded-full font-semibold hover:bg-secondary-500/90 transition-colors">
                 Subscribe now
               </button>
             </div>
