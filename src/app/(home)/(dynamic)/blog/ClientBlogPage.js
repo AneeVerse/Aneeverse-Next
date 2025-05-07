@@ -105,7 +105,7 @@ export default function ClientBlogPage() {
 
   if (isLoading) {
     return (
-      <div className='bg-white min-h-screen flex items-center justify-center'>
+      <div className='bg-[#EBFAFE] min-h-screen flex items-center justify-center'>
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-primary-500 mx-auto"></div>
           <p className="mt-4 text-gray-600">Loading blogs...</p>
@@ -117,7 +117,7 @@ export default function ClientBlogPage() {
 
   if (error && blogs.length === 0) {
     return (
-      <div className='bg-white min-h-screen flex items-center justify-center'>
+      <div className='bg-[#EBFAFE] min-h-screen flex items-center justify-center'>
         <div className="text-center max-w-lg mx-auto p-6 bg-red-50 rounded-lg">
           <h2 className="text-2xl font-bold text-red-700 mb-2">Error Loading Blogs</h2>
           <p className="text-red-600 mb-4">{error}</p>
@@ -148,7 +148,7 @@ export default function ClientBlogPage() {
   // If we got blogs but the array is empty, display a message instead of empty sections
   if (blogs.length === 0) {
     return (
-      <div className='bg-white min-h-screen py-16'>
+      <div className='bg-[#EBFAFE] min-h-screen py-16'>
         <Layout>
           <div className="text-center p-10 bg-blue-50 rounded-lg max-w-xl mx-auto">
             <h2 className="text-2xl font-bold text-blue-700 mb-4">Blogs Temporarily Unavailable</h2>
@@ -164,7 +164,7 @@ export default function ClientBlogPage() {
   const categories = [...new Set(blogs.map(blog => blog.category))].filter(Boolean);
 
   return (
-    <div className='bg-white pb-16'>
+    <div className='bg-[#EBFAFE] pb-16'>
       {apiWarning && (
         <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
           <div className="flex items-center">
@@ -192,7 +192,7 @@ export default function ClientBlogPage() {
           const categorySlug = category.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '-');
           
           return (
-            <section key={`category-${category}`} className='bg-white pb-16'>
+            <section key={`category-${category}`} className='bg-[#EBFAFE] pb-16'>
               <Layout>
                 <div className='flex justify-between items-center mb-8'>
                   <h2 className='text-[40px] text-[#0A2E3D] font-normal uppercase'>{category}</h2>
@@ -217,7 +217,7 @@ export default function ClientBlogPage() {
         };
         
         const renderNewsletter = (key) => (
-          <div key={`newsletter-${key}`} className="bg-white pb-16">
+          <div key={`newsletter-${key}`} className="bg-[#EBFAFE] pb-16">
             <Layout>
               <Newsletter />
             </Layout>

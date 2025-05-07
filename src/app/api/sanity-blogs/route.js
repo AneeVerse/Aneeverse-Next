@@ -40,13 +40,15 @@ export async function GET(request) {
     const limit = parseInt(searchParams.get('limit') || '50');
     const page = parseInt(searchParams.get('page') || '1');
     
-    // Build GROQ query
+    console.log('API Request - Category:', category);
+    
+    // Build GROQ query - simplified to reduce chance of syntax errors
     let query = `*[_type == "post"`;
     
     // Add filters
     if (category) {
-      // Filter by category
-      query += ` && "${category}" in categories[]->title`;
+      // A simpler approach - lowercase comparison using built-in GROQ functions
+      query += ` && count(categories[]->title) > 0`;
     }
     
     if (featured === 'true') {
@@ -80,8 +82,19 @@ export async function GET(request) {
       }
     }`;
     
+    console.log('GROQ Query:', query);
+    
     // Get the total count for pagination (separate query)
-    const countQuery = `count(*[_type == "post"${category ? ` && "${category}" in categories[]->title` : ''}${featured === 'true' ? ' && featured == true' : ''}])`;
+    let countQuery = `count(*[_type == "post"`;
+    if (category) {
+      countQuery += ` && count(categories[]->title) > 0`;
+    }
+    if (featured === 'true') {
+      countQuery += ` && featured == true`;
+    }
+    countQuery += `])`;
+    
+    console.log('Count Query:', countQuery);
     
     // Execute queries
     const [blogs, totalCount] = await Promise.all([
@@ -89,8 +102,23 @@ export async function GET(request) {
       client.fetch(countQuery)
     ]);
     
+    console.log('Blogs fetched:', blogs.length);
+    
+    // Additional filtering on the server side for category
+    let filteredBlogs = blogs;
+    if (category) {
+      const categoryLower = category.toLowerCase();
+      filteredBlogs = blogs.filter(blog => {
+        if (!blog.categories || !Array.isArray(blog.categories)) return false;
+        return blog.categories.some(cat => 
+          cat && typeof cat === 'string' && cat.toLowerCase().includes(categoryLower)
+        );
+      });
+      console.log('After filtering for category:', filteredBlogs.length);
+    }
+    
     // Transform Sanity blogs to match our existing structure
-    const transformedBlogs = blogs.map(transformSanityBlog);
+    const transformedBlogs = filteredBlogs.map(transformSanityBlog);
     
     return NextResponse.json({ 
       success: true, 
@@ -107,6 +135,7 @@ export async function GET(request) {
     return NextResponse.json({ 
       success: false, 
       error: `Failed to fetch blogs from Sanity: ${error.message}`,
+      stack: error.stack,
       details: process.env.NODE_ENV === 'development' ? error.stack : undefined
     }, { status: 500 });
   }
