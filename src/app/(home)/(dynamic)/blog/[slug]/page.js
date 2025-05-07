@@ -14,6 +14,8 @@ import { useScrollSpy } from '@/hooks/useScrollSpy';
 import { motion } from 'framer-motion';
 import BlogFAQ from '@/components/blog/BlogFAQ';
 import '../blogStyles.css';
+import TableOfContents from '@/components/blog/TableOfContents';
+import ReadTimeProgress from '@/components/blog/ReadTimeProgress';
 
 // More efficient approach to fetch blog post
 const getBlogPost = async (slug) => {
@@ -612,7 +614,10 @@ export default function BlogDetail({ params }) {
         <div className="grid grid-cols-1 lg:grid-cols-[270px_1fr] gap-8 lg:gap-16">
           {/* Left Sidebar - Only shown on desktop */}
           <aside className="lg:sticky top-24 self-start hidden lg:block space-y-8 shrink-0">
-            {/* Table of Contents - Updated with black dot and exact beige color */}
+            {/* Read Time Animation - Added without changing structure */}
+            <ReadTimeProgress timeToRead={post.timeToRead || "5 min read"} />
+            
+            {/* Table of Contents - Unchanged */}
             <div className="bg-[#E6ECD6] p-6 rounded-lg mt-8">
               <h4 className="uppercase text-[#101828] text-sm font-semibold tracking-wide mb-4">TABLE OF CONTENTS</h4>
               {h2Headings.length > 0 && (
