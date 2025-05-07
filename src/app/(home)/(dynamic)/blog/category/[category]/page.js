@@ -175,7 +175,7 @@ export default function BlogCategoryPage() {
   
   if (isLoading) {
     return (
-      <div className="bg-white py-16">
+      <div className="bg-[#EBFAFE] py-16">
         <Layout>
           <div className="text-center py-10">
             <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status">
@@ -189,7 +189,7 @@ export default function BlogCategoryPage() {
   }
 
   return (
-    <div className="bg-white py-16">
+    <div className="bg-[#EBFAFE] py-16">
       <Layout>
         <div className="flex items-center text-md text-secondary-500/80 font-semibold gap-2 mb-1">
           <Link href="/blog" className="uppercase hover:underline">

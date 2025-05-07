@@ -315,10 +315,10 @@ export default function BlogDetail({ params }) {
   };
 
   return (
-    <div className='bg-white py-16'>
+    <div className='bg-[#EBFAFE] py-16'>
       <Layout>
         {/* Blog Header - Superside Style */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 2rem)' }}>
+        <div className="mb-16">
           {/* Date display - exact Superside format */}
           <div className="text-center mt-10 sm:mt-16 mb-6 sm:mb-10">
             <div className="uppercase text-[#475467] tracking-wide text-sm sm:text-base font-medium">
@@ -411,7 +411,7 @@ export default function BlogDetail({ params }) {
         </div>
 
         {/* Main Grid Container - Improved responsive layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-[270px_1fr] gap-8 lg:gap-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto" style={{ width: 'calc(100% - 2rem)' }}>
+        <div className="grid grid-cols-1 lg:grid-cols-[270px_1fr] gap-8 lg:gap-16">
           {/* Left Sidebar - Only shown on desktop */}
           <aside className="lg:sticky top-24 self-start hidden lg:block space-y-8 shrink-0">
             {/* Table of Contents - Updated with black dot and exact beige color */}
@@ -544,14 +544,14 @@ export default function BlogDetail({ params }) {
 
       {/* Related Blogs - "You may also like these" section */}
       <section className="mt-12 sm:mt-20 pb-12 w-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 2rem)' }}>
+        <Layout>
           <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-8 sm:mb-12 text-center text-gray-900">
             <div className="text-xs sm:text-sm text-gray-500 mb-2 uppercase tracking-wider">RELATED ARTICLES</div>
             You may also like these
           </h2>
           
           <RelatedBlogs currentPost={post} defaultThumbnail={defaultThumbnail} defaultAuthorImage={defaultAuthorImage} />
-        </div>
+        </Layout>
       </section>
     </div>
   );
