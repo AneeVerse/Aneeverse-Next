@@ -11,12 +11,82 @@
 export function htmlToPortableText(html) {
   if (!html) return [];
   
+  console.log('Converting HTML to Portable Text...');
+  
+  // Check specifically for Google Sheets tables
+  const isGoogleSheetsTable = 
+    html.includes('google-sheets-html-origin') || 
+    html.includes('docs.google.com/spreadsheets') ||
+    html.includes('data-sheets-') ||
+    (html.includes('<table') && 
+     (html.includes('border="1"') || 
+      html.includes('cellspacing="0"') || 
+      html.includes('cellpadding="0"')));
+  
+  if (isGoogleSheetsTable) {
+    console.log('Google Sheets table detected in htmlToPortableText');
+    
+    // Create a DOM parser
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    
+    // Find the table
+    const tableElement = doc.querySelector('table');
+    if (tableElement) {
+      // Process the table into a Sanity table
+      return [createTableBlock(tableElement)];
+    }
+  }
+  
   // Create a DOM parser
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, 'text/html');
   
   // Process the main content
   return processNode(doc.body);
+}
+
+/**
+ * Create a Sanity table block from an HTML table element
+ * @param {Element} tableElement - The HTML table element
+ * @returns {Object} - A Sanity table block
+ */
+function createTableBlock(tableElement) {
+  // Create table rows and cells
+  const rows = [];
+  
+  // Check if first row is likely a header
+  const firstRow = tableElement.querySelector('tr:first-child');
+  const hasHeader = firstRow && 
+                   (firstRow.querySelector('th') || 
+                    firstRow.style.fontWeight === 'bold' ||
+                    firstRow.classList.contains('header'));
+  
+  // Process all rows
+  tableElement.querySelectorAll('tr').forEach((row, rowIndex) => {
+    const cells = [];
+    
+    // Process cells (th or td)
+    row.querySelectorAll('th, td').forEach(cell => {
+      cells.push(cell.textContent.trim());
+    });
+    
+    if (cells.length > 0) {
+      rows.push({
+        _key: `row_${Date.now()}_${rowIndex}`,
+        _type: 'row',
+        cells
+      });
+    }
+  });
+  
+  // Create and return the table block
+  return {
+    _key: `table_${Date.now()}`,
+    _type: 'table',
+    hasHeaderRow: !!hasHeader,
+    rows
+  };
 }
 
 /**
@@ -28,18 +98,53 @@ function processNode(node) {
   if (!node) return [];
   
   const blocks = [];
+  let currentBlock = null;
+  
+  // Check specifically for table elements first
+  const tables = node.querySelectorAll('table');
+  if (tables.length > 0) {
+    // Process each table into a separate block
+    tables.forEach(table => {
+      blocks.push(createTableBlock(table));
+    });
+    
+    // Only process non-table content if there's more to process
+    if (tables.length === 1 && tables[0] === node) {
+      // The node itself is a table, so we're done
+      return blocks;
+    }
+  }
   
   // Process all child nodes
   Array.from(node.childNodes).forEach(child => {
     // Handle different node types
     switch (child.nodeType) {
       case Node.ELEMENT_NODE:
-        blocks.push(...processElement(child));
+        // Skip tables - we've already processed them
+        if (child.tagName.toLowerCase() === 'table') {
+          return;
+        }
+        
+        // Process block elements
+        const childBlocks = processElement(child);
+        if (childBlocks.length > 0) {
+          blocks.push(...childBlocks);
+        }
         break;
       case Node.TEXT_NODE:
         // Only add text nodes with actual content
         if (child.textContent.trim()) {
-          blocks.push(createTextBlock(child.textContent.trim()));
+          // Create a default block if none exists
+          if (!currentBlock) {
+            currentBlock = createTextBlock(child.textContent.trim());
+            blocks.push(currentBlock);
+          } else {
+            // Add to the current block
+            currentBlock.children.push({
+              _type: 'span',
+              text: child.textContent.trim()
+            });
+          }
         }
         break;
     }
@@ -59,8 +164,14 @@ function processElement(element) {
   
   // Handle block elements
   switch (tagName) {
-    case 'table':
-      blocks.push(processTable(element));
+    case 'div':
+    case 'section':
+    case 'article':
+    case 'main':
+    case 'header':
+    case 'footer':
+      // For container elements, process all children
+      blocks.push(...processNode(element));
       break;
     case 'p':
       blocks.push(processParagraph(element));
@@ -77,22 +188,57 @@ function processElement(element) {
     case 'ol':
       blocks.push(...processList(element));
       break;
+    case 'li':
+      // Skip list items - they are handled by processList
+      break;
     case 'blockquote':
       blocks.push(processBlockquote(element));
       break;
-    case 'div':
-      // For divs, process all children
-      blocks.push(...processNode(element));
+    case 'table':
+      blocks.push(processTable(element));
+      break;
+    case 'pre':
+      blocks.push(processPreformatted(element));
+      break;
+    case 'hr':
+      blocks.push(processHorizontalRule());
+      break;
+    case 'figure':
+      blocks.push(...processFigure(element));
       break;
     default:
-      // For inline elements or unknown elements, just get their text content
-      if (element.textContent.trim()) {
-        blocks.push(processInlineElement(element));
+      // Check if it's an inline element
+      if (isInlineElement(tagName)) {
+        // Create a text block with the inline content
+        blocks.push({
+          _type: 'block',
+          style: 'normal',
+          children: processInlineContent(element)
+        });
+      } else if (element.textContent.trim()) {
+        // For unknown elements, just get their text content
+        blocks.push(createTextBlock(element.textContent.trim()));
       }
       break;
   }
   
   return blocks;
+}
+
+/**
+ * Check if an element is an inline element
+ * @param {string} tagName - The tag name to check
+ * @returns {boolean} - True if it's an inline element
+ */
+function isInlineElement(tagName) {
+  const inlineElements = [
+    'a', 'abbr', 'acronym', 'b', 'bdo', 'big', 'br', 'button', 'cite', 'code',
+    'dfn', 'em', 'i', 'img', 'input', 'kbd', 'label', 'map', 'object', 'q',
+    'samp', 'script', 'select', 'small', 'span', 'strong', 'sub', 'sup',
+    'textarea', 'time', 'tt', 'var'
+  ];
+  
+  return inlineElements.includes(tagName);
 }
 
 /**
@@ -104,24 +250,36 @@ function processTable(tableElement) {
   const rows = [];
   let hasHeaderRow = false;
   
-  // Process rows
-  tableElement.querySelectorAll('tr').forEach((rowElement, rowIndex) => {
+  // Check for header row in thead
+  const thead = tableElement.querySelector('thead');
+  if (thead) {
+    hasHeaderRow = true;
+  }
+  
+  // Process all rows (both in thead and tbody)
+  const allRows = tableElement.querySelectorAll('tr');
+  allRows.forEach((rowElement, rowIndex) => {
     const cells = [];
-    const isHeader = rowIndex === 0 && rowElement.querySelectorAll('th').length > 0;
     
-    if (isHeader) {
-      hasHeaderRow = true;
+    // If first row and not already determined to have header
+    if (rowIndex === 0 && !hasHeaderRow) {
+      // Check if first row has th elements
+      hasHeaderRow = rowElement.querySelectorAll('th').length > 0;
     }
     
     // Process cells
     rowElement.querySelectorAll('th, td').forEach(cellElement => {
-      cells.push(cellElement.textContent.trim());
+      // Process rich content inside the cell
+      const cellContent = cellElement.textContent.trim();
+      cells.push(cellContent);
     });
     
-    rows.push({
-      _type: 'row',
-      cells
-    });
+    if (cells.length > 0) {
+      rows.push({
+        _type: 'row',
+        cells
+      });
+    }
   });
   
   return {
@@ -137,10 +295,28 @@ function processTable(tableElement) {
  * @returns {Object} - A Portable Text block
  */
 function processParagraph(element) {
+  // Check for alignment
+  let alignment = 'left'; // default
+  
+  if (element.style?.textAlign) {
+    alignment = element.style.textAlign;
+  } else if (element.hasAttribute('align')) {
+    alignment = element.getAttribute('align');
+  } else if (element.classList.contains('text-center')) {
+    alignment = 'center';
+  } else if (element.classList.contains('text-right')) {
+    alignment = 'right';
+  } else if (element.classList.contains('text-justify')) {
+    alignment = 'justify';
+  }
+  
   return {
     _type: 'block',
     style: 'normal',
-    children: processInlineContent(element)
+    children: processInlineContent(element),
+    markDefs: [],
+    // Add alignment as a custom property if not left (default)
+    ...(alignment !== 'left' && { alignment })
   };
 }
 
@@ -155,7 +331,8 @@ function processHeading(element) {
   return {
     _type: 'block',
     style: tagName, // h1, h2, etc.
-    children: processInlineContent(element)
+    children: processInlineContent(element),
+    markDefs: []
   };
 }
 
@@ -169,12 +346,12 @@ function processList(element) {
   const listType = element.tagName.toLowerCase() === 'ol' ? 'number' : 'bullet';
   
   // Process list items
-  element.querySelectorAll('li').forEach(item => {
+  element.querySelectorAll('li').forEach((item, index) => {
     blocks.push({
       _type: 'block',
       style: 'normal',
       listItem: listType,
-      level: 1,
+      level: 1, // Default level, would need to be calculated for nested lists
       children: processInlineContent(item)
     });
   });
@@ -191,8 +368,82 @@ function processBlockquote(element) {
   return {
     _type: 'block',
     style: 'blockquote',
-    children: processInlineContent(element)
+    children: processInlineContent(element),
+    markDefs: []
   };
+}
+
+/**
+ * Process a preformatted code block
+ * @param {Element} element - The pre element to process
+ * @returns {Object} - A Portable Text block
+ */
+function processPreformatted(element) {
+  // Check if it contains a code element
+  const codeElement = element.querySelector('code');
+  const content = codeElement ? codeElement.textContent : element.textContent;
+  
+  return {
+    _type: 'block',
+    style: 'normal',
+    children: [{
+      _type: 'span',
+      text: content,
+      marks: ['code']
+    }],
+    markDefs: []
+  };
+}
+
+/**
+ * Create a horizontal rule block
+ * @returns {Object} - A Portable Text block for horizontal rule
+ */
+function processHorizontalRule() {
+  // Sanity doesn't have a built-in hr type, so we use a custom type
+  return {
+    _type: 'horizontalRule'
+  };
+}
+
+/**
+ * Process a figure element (images, videos, etc.)
+ * @param {Element} element - The figure element to process
+ * @returns {Array} - Array of Portable Text blocks
+ */
+function processFigure(element) {
+  const blocks = [];
+  
+  // Check for image
+  const img = element.querySelector('img');
+  if (img) {
+    // In a real implementation, you would probably want to fetch and upload the image
+    // For now, we'll just create a text block with the image description
+    const alt = img.getAttribute('alt') || 'Image';
+    blocks.push(createTextBlock(`[Image: ${alt}]`));
+  }
+  
+  // Check for figcaption
+  const caption = element.querySelector('figcaption');
+  if (caption) {
+    blocks.push({
+      _type: 'block',
+      style: 'normal',
+      children: [{
+        _type: 'span',
+        text: caption.textContent,
+        marks: ['strong']
+      }],
+      markDefs: []
+    });
+  }
+  
+  // If no specific content found, process as normal
+  if (blocks.length === 0 && element.textContent.trim()) {
+    blocks.push(createTextBlock(element.textContent.trim()));
+  }
+  
+  return blocks;
 }
 
 /**
@@ -202,9 +453,10 @@ function processBlockquote(element) {
  */
 function processInlineContent(element) {
   const spans = [];
+  let markDefs = [];
   
   // Process all inline nodes
-  processInlineNodes(element, spans);
+  processInlineNodes(element, spans, [], markDefs);
   
   // If no spans, add a default span with the text content
   if (spans.length === 0 && element.textContent.trim()) {
@@ -222,14 +474,15 @@ function processInlineContent(element) {
  * @param {Node} node - The node to process
  * @param {Array} spans - Array of spans to add to
  * @param {Array} marks - Current active marks
+ * @param {Array} markDefs - Array of mark definitions
  */
-function processInlineNodes(node, spans, marks = []) {
+function processInlineNodes(node, spans, marks = [], markDefs = []) {
   if (!node) return;
   
   // Process different node types
   switch (node.nodeType) {
     case Node.TEXT_NODE:
-      // Add text node with current marks
+      // Add text node with current marks if it has content
       if (node.textContent.trim()) {
         spans.push({
           _type: 'span',
@@ -239,20 +492,41 @@ function processInlineNodes(node, spans, marks = []) {
       }
       break;
     case Node.ELEMENT_NODE:
+      // Process element node
+      const element = node;
+      const tagName = element.tagName.toLowerCase();
+      
       // Get marks for this element
-      const elementMarks = getMarksForElement(node, marks);
+      const elementMarks = getMarksForElement(element, marks, markDefs);
+      
+      // Special handling for links
+      if (tagName === 'a') {
+        const href = element.getAttribute('href');
+        if (href) {
+          // Create a mark definition for the link
+          const linkMarkId = `link-${markDefs.length}`;
+          markDefs.push({
+            _key: linkMarkId,
+            _type: 'link',
+            href
+          });
+          
+          // Add the link mark to the current marks
+          elementMarks.push(linkMarkId);
+        }
+      }
       
       // If element has no children, add its text content with current marks
-      if (node.childNodes.length === 0 && node.textContent.trim()) {
+      if (element.childNodes.length === 0 && element.textContent.trim()) {
         spans.push({
           _type: 'span',
-          text: node.textContent,
+          text: element.textContent,
           marks: elementMarks
         });
       } else {
         // Process all children with updated marks
-        Array.from(node.childNodes).forEach(child => {
-          processInlineNodes(child, spans, elementMarks);
+        Array.from(element.childNodes).forEach(child => {
+          processInlineNodes(child, spans, elementMarks, markDefs);
         });
       }
       break;
@@ -263,9 +537,10 @@ function processInlineNodes(node, spans, marks = []) {
  * Get marks for an element based on its tag and attributes
  * @param {Element} element - The element to get marks for
  * @param {Array} currentMarks - Current active marks
+ * @param {Array} markDefs - Array of mark definitions
  * @returns {Array} - Updated marks array
  */
-function getMarksForElement(element, currentMarks = []) {
+function getMarksForElement(element, currentMarks = [], markDefs = []) {
   const newMarks = [...currentMarks];
   const tagName = element.tagName.toLowerCase();
   
@@ -287,30 +562,57 @@ function getMarksForElement(element, currentMarks = []) {
     case 'del':
       newMarks.push('strike-through');
       break;
-    case 'a':
-      // For links, we would normally create a link annotation
-      // This is simplified for the example
-      newMarks.push('link');
-      break;
     case 'code':
       newMarks.push('code');
       break;
+    // Links are handled separately
   }
   
-  // Check for style attribute (simplified)
+  // Check for style attribute
   if (element.style) {
-    if (element.style.fontWeight === 'bold' || parseInt(element.style.fontWeight) >= 600) {
-      newMarks.push('strong');
+    if (element.style.fontWeight === 'bold' || parseInt(element.style.fontWeight, 10) >= 600) {
+      if (!newMarks.includes('strong')) {
+        newMarks.push('strong');
+      }
     }
     if (element.style.fontStyle === 'italic') {
-      newMarks.push('em');
+      if (!newMarks.includes('em')) {
+        newMarks.push('em');
+      }
     }
     if (element.style.textDecoration === 'underline') {
-      newMarks.push('underline');
+      if (!newMarks.includes('underline')) {
+        newMarks.push('underline');
+      }
     }
     if (element.style.textDecoration === 'line-through') {
-      newMarks.push('strike-through');
+      if (!newMarks.includes('strike-through')) {
+        newMarks.push('strike-through');
+      }
     }
+  }
+  
+  // Check for classes that might indicate formatting
+  if (element.classList) {
+    if (
+      element.classList.contains('bold') || 
+      element.classList.contains('font-bold') ||
+      element.classList.contains('fw-bold')
+    ) {
+      if (!newMarks.includes('strong')) {
+        newMarks.push('strong');
+      }
+    }
+    if (
+      element.classList.contains('italic') || 
+      element.classList.contains('font-italic') ||
+      element.classList.contains('fst-italic')
+    ) {
+      if (!newMarks.includes('em')) {
+        newMarks.push('em');
+      }
+    }
+    // Add more class checks as needed
   }
   
   return newMarks;
@@ -330,19 +632,7 @@ function createTextBlock(text) {
         _type: 'span',
         text
       }
-    ]
-  };
-}
-
-/**
- * Process an inline element into a text block
- * @param {Element} element - The element to process
- * @returns {Object} - A Portable Text block
- */
-function processInlineElement(element) {
-  return {
-    _type: 'block',
-    style: 'normal',
-    children: processInlineContent(element)
+    ],
+    markDefs: []
   };
 } 

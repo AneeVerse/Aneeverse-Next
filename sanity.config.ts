@@ -14,6 +14,7 @@ import {schema} from './src/sanity/schemaTypes'
 import {structure} from './src/sanity/structure'
 import {customComponents} from './src/sanity/components'
 import {pastePlugin} from './src/sanity/plugins/pastePlugin'
+import {directPastePlugin} from './src/sanity/plugins/directPastePlugin'
 
 export default defineConfig({
   basePath: '/studio',
@@ -30,5 +31,7 @@ export default defineConfig({
     customComponents,
     // Plugin for handling paste operations
     pastePlugin,
+    // Enhanced direct paste functionality
+    directPastePlugin,
   ],
 })
