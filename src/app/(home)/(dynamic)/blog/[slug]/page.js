@@ -331,8 +331,8 @@ export default function BlogDetail({ params }) {
             </div>
           </div>
           
-          {/* Title - exact Superside specs */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.75rem] font-normal text-[#101828] leading-[1.2] sm:leading-[1.1] mb-8 sm:mb-16 text-center mx-auto max-w-[900px] tracking-tight">
+          {/* Title - improved to handle long titles while maintaining original size */}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.75rem] font-normal text-[#101828] leading-tight mb-8 sm:mb-16 text-center mx-auto max-w-[1000px] tracking-tight break-words hyphens-auto px-4">
             {post.title}
           </h1>
           
