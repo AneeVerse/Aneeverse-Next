@@ -47,7 +47,7 @@ const RelatedBlogs = ({ currentPost, defaultThumbnail, defaultAuthorImage }) => 
             console.log(`No same-category blogs found, showing ${filteredBlogs.length} alternative blogs`);
           }
           
-          // Sort by date (newest first) and limit to 4 results
+          // Sort by date (newest first) and limit to 3 results
           const sortedBlogs = filteredBlogs
             .sort((a, b) => {
               if (a.date && b.date) {
@@ -55,7 +55,7 @@ const RelatedBlogs = ({ currentPost, defaultThumbnail, defaultAuthorImage }) => 
               }
               return 0;
             })
-            .slice(0, 4);
+            .slice(0, 3);
           
           setRelatedBlogs(sortedBlogs);
           console.log(`Displaying ${sortedBlogs.length} related blogs`);
@@ -105,7 +105,7 @@ const RelatedBlogs = ({ currentPost, defaultThumbnail, defaultAuthorImage }) => 
   }
 
   return (
-    // Changed grid to have fewer columns and wider cards like Superside
+    // Changed grid to have 3 columns for desktop views
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
       {relatedBlogs.map((blog, index) => (
         <div key={index} className="group cursor-pointer">

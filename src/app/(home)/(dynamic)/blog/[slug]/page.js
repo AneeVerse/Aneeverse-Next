@@ -353,7 +353,7 @@ export default function BlogDetail({ params }) {
                 <div className="text-[#475467] mr-2">By</div>
                 <Link 
                   href="#" 
-                  className="font-semibold text-[#101828] hover:underline mr-2"
+                  className="font-semibold text-[#101828] underline hover:text-secondary-500 mr-2"
                 >
                   {post.author?.name}
                 </Link>
