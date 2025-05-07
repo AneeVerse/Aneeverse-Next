@@ -15,6 +15,7 @@ import {structure} from './src/sanity/structure'
 import {customComponents} from './src/sanity/components'
 import {pastePlugin} from './src/sanity/plugins/pastePlugin'
 import {directPastePlugin} from './src/sanity/plugins/directPastePlugin'
+import {faqDashboardPlugin} from './src/sanity/plugins/faqDashboardPlugin'
 
 export default defineConfig({
   basePath: '/studio',
@@ -33,5 +34,7 @@ export default defineConfig({
     pastePlugin,
     // Enhanced direct paste functionality
     directPastePlugin,
+    // FAQ Dashboard Widget
+    faqDashboardPlugin,
   ],
 })

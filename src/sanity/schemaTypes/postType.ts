@@ -50,6 +50,59 @@ export const postType = defineType({
       name: 'body',
       type: 'blockContent',
     }),
+    defineField({
+      name: 'includeFaq',
+      title: 'Include FAQ Section',
+      type: 'boolean',
+      description: 'Toggle to include an FAQ section in this post',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'faqSection',
+      title: 'FAQ Section',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'title',
+          title: 'FAQ Section Title',
+          type: 'string',
+          description: 'Title for this post\'s FAQ section',
+          initialValue: 'Frequently Asked Questions',
+        }),
+        defineField({
+          name: 'questions',
+          type: 'array',
+          title: 'FAQ Items',
+          description: 'Add question/answer pairs for this post',
+          of: [
+            {
+              type: 'object',
+              name: 'faqItem',
+              fields: [
+                defineField({
+                  name: 'question',
+                  type: 'string',
+                  title: 'Question',
+                  validation: (Rule) => Rule.required(),
+                }),
+                defineField({
+                  name: 'answer',
+                  type: 'blockContent',
+                  title: 'Answer',
+                  validation: (Rule) => Rule.required(),
+                }),
+              ],
+              preview: {
+                select: {
+                  title: 'question',
+                },
+              },
+            },
+          ],
+        }),
+      ],
+      hidden: ({document}) => !document?.includeFaq,
+    }),
   ],
   preview: {
     select: {
