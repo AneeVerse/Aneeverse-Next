@@ -13,7 +13,7 @@ const BlogHeroSection = ({ blogData }) => {
   if (isLoading || blogs.length === 0) {
     return (
       <section className="pb-16 pt-[160px] mt-[-80px]">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <Layout>
           {/* Heading */}
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-[80px] mt-16 font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] relative inline-block group">
@@ -66,7 +66,7 @@ const BlogHeroSection = ({ blogData }) => {
               </div>
             </div>
           </div>
-        </div>
+        </Layout>
       </section>
     );
   }
@@ -76,7 +76,7 @@ const BlogHeroSection = ({ blogData }) => {
   
   return (
     <section className="pb-16 pt-[160px] mt-[-80px]">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+      <Layout>
         {/* Heading */}
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-[80px] mt-16 font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] relative inline-block group">
@@ -171,7 +171,7 @@ const BlogHeroSection = ({ blogData }) => {
             </div>
           </div>
         </div>
-      </div>
+      </Layout>
     </section>
   );
 };
