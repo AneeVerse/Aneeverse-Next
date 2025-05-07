@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 /**
  * A component for creating and pasting tables into Sanity Studio
@@ -10,6 +10,16 @@ export default function TableInput({ value, onChange }) {
   const [pasteText, setPasteText] = useState('');
   const [pasteStatus, setPasteStatus] = useState('');
 
+  // Sync internal state with incoming value
+  useEffect(() => {
+    if (value?.rows) {
+      setRows(value.rows);
+    }
+    if (value?.hasHeaderRow !== undefined) {
+      setHasHeaderRow(value.hasHeaderRow);
+    }
+  }, [value]);
+
   // Function to handle pasting table data from Excel/Google Sheets/etc.
   const handleManualPaste = () => {
     if (!pasteText) return;
@@ -17,10 +27,14 @@ export default function TableInput({ value, onChange }) {
     try {
       // Split by lines first
       const lines = pasteText.trim().split('\n');
-      const newRows = lines.map(line => {
+      const newRows = lines.map((line, index) => {
         // Split by tabs (common delimiter when copying from spreadsheets)
         const cells = line.split('\t').map(cell => cell.trim());
-        return { _type: 'row', cells };
+        return { 
+          _type: 'row', 
+          _key: `row_${Date.now()}_${index}`,
+          cells 
+        };
       });
 
       setRows(newRows);
@@ -49,18 +63,25 @@ export default function TableInput({ value, onChange }) {
     const plainText = clipboardData.getData('text/plain');
     const htmlContent = clipboardData.getData('text/html');
     
+    console.log('Paste detected', { plainText: plainText?.length, htmlContent: htmlContent?.length });
+    
     if (htmlContent && htmlContent.includes('<table')) {
       try {
+        console.log('HTML table detected, parsing...');
         // Parse HTML table
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlContent, 'text/html');
         const table = doc.querySelector('table');
         
         if (table) {
+          console.log('Table element found, extracting data...');
           const newRows = [];
           const tableRows = table.querySelectorAll('tr');
           
-          tableRows.forEach(tr => {
+          // Check if first row has th elements (likely a header)
+          const firstRowHasHeaders = table.querySelector('tr:first-child th') !== null;
+          
+          tableRows.forEach((tr, rowIndex) => {
             const cells = [];
             const tableCells = tr.querySelectorAll('th, td');
             
@@ -69,13 +90,21 @@ export default function TableInput({ value, onChange }) {
             });
             
             if (cells.length > 0) {
-              newRows.push({ _type: 'row', cells });
+              newRows.push({ 
+                _type: 'row', 
+                _key: `row_${Date.now()}_${rowIndex}`,
+                cells 
+              });
             }
           });
           
           if (newRows.length > 0) {
             setRows(newRows);
-            onChange({ _type: 'table', rows: newRows, hasHeaderRow: true });
+            onChange({ 
+              _type: 'table', 
+              rows: newRows, 
+              hasHeaderRow: firstRowHasHeaders || hasHeaderRow 
+            });
             setPasteStatus('Table imported successfully from HTML!');
             
             // Clear status after 3 seconds
@@ -91,6 +120,37 @@ export default function TableInput({ value, onChange }) {
     // If HTML parsing failed or no table found, try plain text
     if (plainText) {
       try {
+        console.log('Processing plain text as table data...');
+        
+        // Check if it looks like a table (contains tabs or multiple lines)
+        if (plainText.includes('\t') || plainText.includes('\n')) {
+          // Process as tabular data
+          const lines = plainText.trim().split('\n');
+          
+          // Check if all lines have roughly the same number of columns
+          const columnCounts = lines.map(line => line.split('\t').length);
+          const isConsistentColumns = Math.max(...columnCounts) - Math.min(...columnCounts) <= 1;
+          
+          if (isConsistentColumns) {
+            const newRows = lines.map((line, index) => {
+              const cells = line.split('\t').map(cell => cell.trim());
+              return { 
+                _type: 'row', 
+                _key: `row_${Date.now()}_${index}`,
+                cells 
+              };
+            });
+            
+            setRows(newRows);
+            onChange({ _type: 'table', rows: newRows, hasHeaderRow });
+            setPasteStatus('Table imported successfully from plain text!');
+            
+            // Clear status after 3 seconds
+            setTimeout(() => setPasteStatus(''), 3000);
+            return;
+          }
+        }
+        
         // Set the text in the textarea for manual confirmation
         setPasteText(plainText);
         setPasteStatus('Content pasted! Click "Create Table" to import.');
@@ -106,7 +166,11 @@ export default function TableInput({ value, onChange }) {
 
   // Function to add a new row
   const addRow = () => {
-    const newRow = { _type: 'row', cells: rows[0]?.cells?.map(() => '') || [''] };
+    const newRow = { 
+      _type: 'row', 
+      _key: `row_${Date.now()}`,
+      cells: rows[0]?.cells?.map(() => '') || [''] 
+    };
     const newRows = [...rows, newRow];
     setRows(newRows);
     onChange({ _type: 'table', rows: newRows, hasHeaderRow });
@@ -139,8 +203,16 @@ export default function TableInput({ value, onChange }) {
 
   // Initialize with a basic table if empty
   if (rows.length === 0) {
-    const initialRow = { _type: 'row', cells: ['Header 1', 'Header 2', 'Header 3'] };
-    const initialSecondRow = { _type: 'row', cells: ['Data 1', 'Data 2', 'Data 3'] };
+    const initialRow = { 
+      _type: 'row', 
+      _key: `row_${Date.now()}_0`,
+      cells: ['Header 1', 'Header 2', 'Header 3'] 
+    };
+    const initialSecondRow = { 
+      _type: 'row', 
+      _key: `row_${Date.now()}_1`,
+      cells: ['Data 1', 'Data 2', 'Data 3'] 
+    };
     setRows([initialRow, initialSecondRow]);
     onChange({ _type: 'table', rows: [initialRow, initialSecondRow], hasHeaderRow });
   }
@@ -208,7 +280,7 @@ export default function TableInput({ value, onChange }) {
         <table className="min-w-full border-collapse">
           <tbody>
             {rows.map((row, rowIndex) => (
-              <tr key={rowIndex} className={rowIndex === 0 && hasHeaderRow ? 'bg-gray-100' : ''}>
+              <tr key={row._key || rowIndex} className={rowIndex === 0 && hasHeaderRow ? 'bg-gray-100' : ''}>
                 {row.cells.map((cell, cellIndex) => (
                   <td key={cellIndex} className="border p-2">
                     <input
