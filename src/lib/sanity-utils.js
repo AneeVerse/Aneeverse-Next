@@ -181,20 +181,31 @@ function tableBlockToHtml(block) {
   
   const hasHeaderRow = block.hasHeaderRow;
   const caption = block.caption ? `<caption>${block.caption}</caption>` : '';
-  let tableHtml = `<div class="table-container"><table class="table-auto w-full border-collapse">${caption}`;
+  
+  // Updated table styling to match blog design
+  let tableHtml = `
+    <div class="overflow-x-auto my-8">
+      <table class="min-w-full border-collapse bg-white rounded-lg shadow-sm">
+        ${caption}
+  `;
   
   // Process rows
   block.rows.forEach((row, rowIndex) => {
-    tableHtml += '<tr>';
+    const isHeader = hasHeaderRow && rowIndex === 0;
+    const rowClass = isHeader 
+      ? 'bg-[#0A2E3D] text-white' 
+      : rowIndex % 2 === 0 ? 'bg-[#EBFAFE]' : 'bg-white';
+    
+    tableHtml += `<tr class="${rowClass}">`;
     
     // Process cells
     if (row.cells && Array.isArray(row.cells)) {
       row.cells.forEach((cell, cellIndex) => {
         // Use th for header row if specified
-        if (hasHeaderRow && rowIndex === 0) {
-          tableHtml += `<th class="border p-2 font-semibold text-left">${cell}</th>`;
+        if (isHeader) {
+          tableHtml += `<th class="px-4 py-3 text-left font-semibold">${cell}</th>`;
         } else {
-          tableHtml += `<td class="border p-2">${cell}</td>`;
+          tableHtml += `<td class="border-t border-gray-200 px-4 py-3">${cell}</td>`;
         }
       });
     }
