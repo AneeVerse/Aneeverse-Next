@@ -415,7 +415,7 @@ export default function BlogDetail({ params }) {
           {/* Left Sidebar - Only shown on desktop */}
           <aside className="lg:sticky top-24 self-start hidden lg:block space-y-8 shrink-0">
             {/* Table of Contents - Updated with black dot and exact beige color */}
-            <div className="bg-[#E6ECD6] p-6 rounded-lg">
+            <div className="bg-[#E6ECD6] p-6 rounded-lg mt-8">
               <h4 className="uppercase text-[#101828] text-sm font-semibold tracking-wide mb-4">TABLE OF CONTENTS</h4>
               {h2Headings.length > 0 && (
                 <div className="max-h-[200px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
@@ -475,7 +475,7 @@ export default function BlogDetail({ params }) {
 
           {/* Mobile TOC - Only visible on mobile */}
           {h2Headings.length > 0 && (
-            <div className="lg:hidden mb-8 bg-[#E6ECD6] p-4 rounded-lg">
+            <div className="lg:hidden mb-8 bg-[#E6ECD6] p-4 rounded-lg mt-6">
               <h4 className="uppercase text-[#101828] text-sm font-semibold tracking-wide mb-3">TABLE OF CONTENTS</h4>
               <div className="overflow-y-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                 <ul className="space-y-2">
