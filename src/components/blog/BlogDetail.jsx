@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
 import { FaRegClock, FaLinkedin, FaFacebookF, FaLink, FaEnvelope } from 'react-icons/fa';
+import BlogFAQ from './BlogFAQ';
 
 const BlogDetail = ({ blog = {} }) => {
   const [activeSection, setActiveSection] = useState('');
@@ -24,6 +25,8 @@ const BlogDetail = ({ blog = {} }) => {
       image: '/images/blog/author/default.png'
     },
     tldr = '',
+    includeFaq = false,
+    faqSection = null
   } = blog;
 
   // Format date - similar to Superside's date format (Month Day, Year)
@@ -88,6 +91,13 @@ const BlogDetail = ({ blog = {} }) => {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  // Prepare FAQ data for the component
+  const faqItems = includeFaq && faqSection?.questions ? 
+    faqSection.questions.map(item => ({
+      question: item.question,
+      answer: item.answer
+    })) : [];
 
   return (
     <article className="max-w-4xl mx-auto px-4 sm:px-6 py-16">
@@ -206,6 +216,14 @@ const BlogDetail = ({ blog = {} }) => {
             className="prose prose-lg max-w-none prose-headings:text-[#0A2E3D] prose-p:text-gray-700 prose-a:text-primary-600 prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-primary-500"
             dangerouslySetInnerHTML={{ __html: content }}
           />
+          
+          {/* FAQ Section */}
+          {includeFaq && faqItems.length > 0 && (
+            <BlogFAQ 
+              title={faqSection?.title || 'Frequently Asked Questions'} 
+              questions={faqItems} 
+            />
+          )}
           
           {/* Author Bio - Bottom */}
           <div className="mt-12 pt-8 border-t">

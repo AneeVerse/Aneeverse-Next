@@ -30,6 +30,15 @@ export async function GET(request, { params }) {
         name,
         role,
         "image": image.asset->url
+      },
+      includeFaq,
+      faqSection {
+        title,
+        questions[] {
+          _key,
+          question,
+          answer
+        }
       }
     }`;
     
@@ -41,6 +50,21 @@ export async function GET(request, { params }) {
         error: 'Blog post not found' 
       }, { status: 404 });
     }
+    
+    console.log('Raw post data:', JSON.stringify(post, null, 2));
+    console.log('FAQ data exists:', !!post.includeFaq && !!post.faqSection);
+    
+    // Transform the FAQ content to HTML if needed
+    const transformedFaqSection = post.faqSection && post.includeFaq ? {
+      ...post.faqSection,
+      questions: post.faqSection.questions?.map(item => ({
+        _key: item._key,
+        question: item.question,
+        // For blockContent fields, preserve the original structure
+        // The frontend component will handle rendering it
+        answer: item.answer
+      })) || []
+    } : null;
     
     // Transform the post to match the existing blog structure
     const transformedPost = {
@@ -64,7 +88,12 @@ export async function GET(request, { params }) {
       },
       isFeatured: post.featured || false,
       tags: post.tags || [],
+      // Add FAQ data
+      includeFaq: post.includeFaq || false,
+      faqSection: transformedFaqSection
     };
+    
+    console.log('Transformed FAQ data:', JSON.stringify(transformedPost.faqSection, null, 2));
     
     return NextResponse.json({ 
       success: true, 
