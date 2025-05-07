@@ -26,6 +26,14 @@ export const postType = defineType({
       },
     }),
     defineField({
+      name: 'timeToRead',
+      title: 'Read Time (minutes)',
+      type: 'number',
+      description: 'Estimated time to read this article in minutes',
+      validation: Rule => Rule.required().min(1).integer(),
+      initialValue: 5,
+    }),
+    defineField({
       name: 'author',
       type: 'reference',
       to: {type: 'author'},
