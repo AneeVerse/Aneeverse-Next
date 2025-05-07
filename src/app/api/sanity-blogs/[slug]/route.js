@@ -23,8 +23,8 @@ export async function GET(request, { params }) {
       "date": publishedAt,
       "category": categories[0]->title,
       "timeToRead": estimatedReadingTime,
-      "shortDescription": excerpt,
-      "description": excerpt,
+      "shortDescription": shortDescription,
+      "description": shortDescription || excerpt,
       "author": {
         "name": author->name,
         "role": author->role,
