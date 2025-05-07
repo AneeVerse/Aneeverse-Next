@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+import BlogCard from './BlogCard';
 
 /**
  * RelatedBlogs component that fetches and displays related blog posts
@@ -105,55 +104,10 @@ const RelatedBlogs = ({ currentPost, defaultThumbnail, defaultAuthorImage }) => 
   }
 
   return (
-    // Changed grid to have 3 columns for desktop views
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14 w-full">
       {relatedBlogs.map((blog, index) => (
-        <div key={index} className="group cursor-pointer">
-          <Link href={`/blog/${blog.slug || '#'}`} className="block">
-            <div className="relative aspect-[16/9] overflow-hidden rounded-lg bg-gray-100 mb-4">
-              <Image
-                src={blog.thumbnail || defaultThumbnail}
-                alt={blog.title || "Blog post"}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                onError={(e) => {
-                  console.log('Image error for blog:', blog.id);
-                  e.target.src = defaultThumbnail;
-                }}
-              />
-            </div>
-            <div className="mt-4">
-              <div className="flex items-center mb-2">
-                <span className="text-xs uppercase font-medium text-gray-500 mr-2">{blog.category || 'Article'}</span>
-                <span className="text-xs text-gray-400">•</span>
-                <span className="text-xs text-gray-500 ml-2">
-                  {typeof blog.timeToRead === 'number' || !isNaN(parseInt(blog.timeToRead)) 
-                    ? `${blog.timeToRead} min Read` 
-                    : (blog.timeToRead || '5 min Read')}
-                </span>
-              </div>
-              <h3 className="text-lg font-medium mb-3 text-gray-800 group-hover:text-primary-600 transition-colors line-clamp-2 related-article-title">
-                {blog.title || "Untitled Post"}
-              </h3>
-              <p className="text-sm text-gray-600 mb-3 line-clamp-2">
-                {blog.description || blog.excerpt || "No description available for this article."}
-              </p>
-              <div className="flex items-center mt-3">
-                <div className="relative w-7 h-7 rounded-full overflow-hidden bg-gray-100 mr-2">
-                  <Image
-                    src={blog.author?.image || defaultAuthorImage}
-                    alt={blog.author?.name || "Author"}
-                    fill
-                    className="object-cover"
-                    onError={(e) => {
-                      e.target.src = defaultAuthorImage;
-                    }}
-                  />
-                </div>
-                <span className="text-xs text-gray-500">{blog.author?.name || 'Editorial Team'}</span>
-              </div>
-            </div>
-          </Link>
+        <div key={index} className="h-full flex flex-col">
+          <BlogCard blog={blog} />
         </div>
       ))}
     </div>

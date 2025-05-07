@@ -222,9 +222,13 @@ export default function BlogCategoryPage() {
         )}
 
         {/* ✅ Blog Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
           {filteredBlogs.length > 0 ? (
-            filteredBlogs.map((blog) => <BlogCard key={blog.id} blog={blog} />)
+            filteredBlogs.map((blog) => (
+              <div key={blog.id} className="h-full flex flex-col">
+                <BlogCard blog={blog} />
+              </div>
+            ))
           ) : (
             <p className="col-span-full text-center text-gray-600 py-10">
               No blogs found in this category. <Link href="/admin/blogs/new" className="text-blue-600 hover:underline">Create one</Link>

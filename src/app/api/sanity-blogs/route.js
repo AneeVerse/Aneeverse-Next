@@ -13,7 +13,7 @@ function transformSanityBlog(sanityBlog) {
       : Array.isArray(sanityBlog.content) 
         ? blockContentToHtml(sanityBlog.content)
         : '',
-    shortDescription: sanityBlog.excerpt,
+    shortDescription: sanityBlog.excerpt || sanityBlog.shortDescription || '',
     thumbnail: sanityBlog.mainImage,
     category: sanityBlog.categories?.[0] || 'Uncategorized',
     date: sanityBlog.publishedAt,
@@ -68,6 +68,7 @@ export async function GET(request) {
       title,
       slug,
       excerpt,
+      shortDescription,
       "content": body,
       "mainImage": mainImage.asset->url,
       publishedAt,
