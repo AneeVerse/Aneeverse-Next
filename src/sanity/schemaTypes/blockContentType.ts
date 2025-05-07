@@ -1,5 +1,5 @@
 import {defineType, defineArrayMember} from 'sanity'
-import {ImageIcon, PlayIcon} from '@sanity/icons'
+import {ImageIcon, PlayIcon, EditIcon} from '@sanity/icons'
 
 /**
  * This is the schema type for block content used in the post document type
@@ -104,6 +104,62 @@ export const blockContentType = defineType({
             subtitle: url || '',
             media: PlayIcon
           };
+        }
+      }
+    }),
+    // Table Component
+    defineArrayMember({
+      name: 'table',
+      title: 'Table',
+      type: 'object',
+      icon: EditIcon,
+      fields: [
+        {
+          name: 'rows',
+          title: 'Rows',
+          type: 'array',
+          of: [
+            {
+              name: 'row',
+              title: 'Row',
+              type: 'object',
+              fields: [
+                {
+                  name: 'cells',
+                  title: 'Cells',
+                  type: 'array',
+                  of: [{ type: 'text' }]
+                }
+              ],
+              preview: {
+                select: {
+                  cells: 'cells'
+                },
+                prepare({ cells }) {
+                  return {
+                    title: cells ? cells.join(' | ') : 'Empty row'
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          name: 'hasHeaderRow',
+          title: 'Has Header Row',
+          type: 'boolean',
+          initialValue: true
+        }
+      ],
+      preview: {
+        select: {
+          rows: 'rows'
+        },
+        prepare({ rows }) {
+          return {
+            title: 'Table',
+            subtitle: rows ? `${rows.length} row(s)` : 'Empty table'
+          }
         }
       }
     }),
