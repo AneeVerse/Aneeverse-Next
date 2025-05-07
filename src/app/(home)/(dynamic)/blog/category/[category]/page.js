@@ -67,7 +67,7 @@ const fetchBlogsByCategory = async (category) => {
     const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
     
     try {
-      const apiUrl = `/api/blogs?category=${encodeURIComponent(normalizedCategory)}`;
+      const apiUrl = `/api/sanity-blogs?category=${encodeURIComponent(normalizedCategory)}`;
       console.log('Fetching from API:', apiUrl);
       
       const response = await fetch(apiUrl, { 
@@ -78,11 +78,22 @@ const fetchBlogsByCategory = async (category) => {
       
       clearTimeout(timeoutId);
       
+      // Check if response is ok first
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('API error response:', response.status, errorText);
+        throw new Error(`API returned ${response.status}: ${errorText}`);
+      }
+      
       const data = await response.json();
-      console.log('API Response status:', response.status);
+      console.log('API Response data:', {
+        success: data.success,
+        blogCount: data.blogs?.length,
+        pagination: data.pagination
+      });
       
       let apiBlogs = [];
-      if (response.ok && data.success && data.blogs) {
+      if (data.success && data.blogs) {
         apiBlogs = data.blogs;
         console.log('API Blogs:', apiBlogs.length);
       }
