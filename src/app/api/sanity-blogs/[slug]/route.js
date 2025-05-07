@@ -13,98 +13,105 @@ export async function GET(request, { params }) {
       }, { status: 400 });
     }
     
-    // Query Sanity for the blog post with the given slug
+    // Query for the blog post using the slug
     const query = `*[_type == "post" && slug.current == $slug][0]{
-      _id,
       title,
       slug,
-      excerpt,
+      mainImage,
       body,
-      "mainImage": mainImage.asset->url,
-      publishedAt,
-      estimatedReadingTime,
-      "categories": categories[]->title,
-      featured,
-      "tags": tags[]->title,
-      "author": author->{
-        name,
-        role,
-        "image": image.asset->url
+      "content": body,
+      "date": publishedAt,
+      "category": categories[0]->title,
+      "timeToRead": estimatedReadingTime,
+      "shortDescription": excerpt,
+      "description": excerpt,
+      "author": {
+        "name": author->name,
+        "role": author->role,
+        "image": author->image.asset->url
       },
-      includeFaq,
-      faqSection {
-        title,
-        questions[] {
-          _key,
-          question,
-          answer
+      "includeFaq": defined(faqSection),
+      "faqSection": faqSection {
+        "title": title,
+        "questions": questions[] {
+          "question": question,
+          "answer": answer
         }
       }
     }`;
     
-    const post = await client.fetch(query, { slug });
+    const blog = await client.fetch(query, { slug });
     
-    if (!post) {
+    if (!blog) {
       return NextResponse.json({ 
         success: false, 
-        error: 'Blog post not found' 
+        error: 'Blog not found' 
       }, { status: 404 });
     }
     
-    console.log('Raw post data:', JSON.stringify(post, null, 2));
-    console.log('FAQ data exists:', !!post.includeFaq && !!post.faqSection);
-    
-    // Transform the FAQ content to HTML if needed
-    const transformedFaqSection = post.faqSection && post.includeFaq ? {
-      ...post.faqSection,
-      questions: post.faqSection.questions?.map(item => ({
-        _key: item._key,
-        question: item.question,
-        // For blockContent fields, preserve the original structure
-        // The frontend component will handle rendering it
-        answer: item.answer
-      })) || []
-    } : null;
-    
-    // Transform the post to match the existing blog structure
-    const transformedPost = {
-      id: post._id,
-      title: post.title,
-      slug: post.slug?.current || '',
-      content: typeof post.body === 'string' 
-        ? post.body 
-        : Array.isArray(post.body) 
-          ? blockContentToHtml(post.body)
-          : '',
-      shortDescription: post.excerpt,
-      thumbnail: post.mainImage,
-      category: post.categories?.[0] || 'Uncategorized',
-      date: post.publishedAt,
-      timeToRead: post.estimatedReadingTime || 5,
-      author: {
-        name: post.author?.name || 'Anonymous',
-        role: post.author?.role || 'Author',
-        image: post.author?.image || '/images/blog/author/abhi.png',
-      },
-      isFeatured: post.featured || false,
-      tags: post.tags || [],
-      // Add FAQ data
-      includeFaq: post.includeFaq || false,
-      faqSection: transformedFaqSection
-    };
-    
-    console.log('Transformed FAQ data:', JSON.stringify(transformedPost.faqSection, null, 2));
+    // Process content to ensure proper HTML format
+    if (blog.content) {
+      // Handle Portable Text conversion using the imported function
+      if (typeof blog.content !== 'string' && Array.isArray(blog.content)) {
+        console.log('Converting Portable Text to HTML');
+        blog.content = blockContentToHtml(blog.content);
+      }
+      
+      // Additional cleanup for any text-based bullets
+      if (typeof blog.content === 'string') {
+        blog.content = fixBulletPoints(blog.content);
+      }
+    }
     
     return NextResponse.json({ 
       success: true, 
-      blog: transformedPost
+      blog
     });
   } catch (error) {
-    console.error('Error fetching blog post from Sanity:', error);
+    console.error('Error fetching blog:', error);
     return NextResponse.json({ 
       success: false, 
-      error: `Failed to fetch blog post from Sanity: ${error.message}`,
-      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      error: 'Failed to fetch blog', 
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
     }, { status: 500 });
   }
+}
+
+// Keep only the fixBulletPoints function as it might be useful for text-based bullets
+function fixBulletPoints(html) {
+  // Fix text bullets that should be proper list items
+  if (typeof html === 'string') {
+    // Find Key Takeaways section and convert bullet points to proper lists
+    const keyTakeawaysRegex = /<h[23][^>]*>Key Takeaways<\/h[23]>([\s\S]*?)(<h[23]|$)/i;
+    const match = html.match(keyTakeawaysRegex);
+    
+    if (match && match[1]) {
+      const takeawaysContent = match[1];
+      const bulletRegex = /<p>\s*[•·-]\s*(.*?)<\/p>/g;
+      
+      if (bulletRegex.test(takeawaysContent)) {
+        // Convert bullet paragraphs to a proper list
+        const listItems = takeawaysContent.replace(bulletRegex, '<li>$1</li>');
+        const properList = `<ul class="list-disc pl-6">${listItems}</ul>`;
+        
+        // Replace the original content with the proper list
+        html = html.replace(match[1], properList);
+      }
+    }
+    
+    // Look for any other bullet-like paragraphs and convert them
+    html = html.replace(/<p>\s*[•·-]\s*(.*?)<\/p>/g, '<li>$1</li>');
+    
+    // Wrap consecutive li elements in ul tags if they're not already
+    html = html.replace(/(<li>.*?<\/li>)(?:\s*<li>)/g, '$1</ul><ul class="list-disc pl-6"><li>');
+    html = html.replace(/(<\/h[23]>)(\s*<li>)/g, '$1<ul class="list-disc pl-6">$2');
+    html = html.replace(/(<\/li>)(\s*<h[23])/g, '$1</ul>$2');
+    
+    // Ensure all li elements are wrapped in ul tags
+    if (html.includes('<li>') && !html.includes('<ul')) {
+      html = html.replace(/(<li>.*?<\/li>)/g, '<ul class="list-disc pl-6">$1</ul>');
+    }
+  }
+  
+  return html;
 } 

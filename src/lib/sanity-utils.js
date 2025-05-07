@@ -11,26 +11,132 @@ export function blockContentToHtml(blocks) {
     return '';
   }
 
-  return blocks
-    .map(block => {
-      // Handle different block types
-      switch (block._type) {
-        case 'block':
-          return textBlockToHtml(block);
-        case 'image':
-          return imageBlockToHtml(block);
-        case 'youtube':
-          return youtubeBlockToHtml(block);
-        case 'youtubeEmbed':
-          return youtubeBlockToHtml(block);
-        case 'table':
-          return tableBlockToHtml(block);
-        default:
-          console.warn('Unsupported block type:', block._type);
-          return '';
+  // Track list state
+  let inList = false;
+  let currentListType = null;
+  let html = '';
+
+  // Process blocks with list awareness
+  for (let i = 0; i < blocks.length; i++) {
+    const block = blocks[i];
+    const isListItem = block.listItem === 'bullet' || block.listItem === 'number';
+    
+    // Opening a new list
+    if (isListItem && !inList) {
+      currentListType = block.listItem === 'bullet' ? 'ul' : 'ol';
+      html += `<${currentListType} class="${currentListType === 'ul' ? 'list-disc' : 'list-decimal'} pl-6 my-4">`;
+      inList = true;
+    }
+    
+    // Closing a list
+    if (!isListItem && inList) {
+      html += `</${currentListType}>`;
+      inList = false;
+      currentListType = null;
+    }
+    
+    // Changing list type
+    if (isListItem && inList && 
+        ((currentListType === 'ul' && block.listItem === 'number') || 
+         (currentListType === 'ol' && block.listItem === 'bullet'))) {
+      html += `</${currentListType}>`;
+      currentListType = block.listItem === 'bullet' ? 'ul' : 'ol';
+      html += `<${currentListType} class="${currentListType === 'ul' ? 'list-disc' : 'list-decimal'} pl-6 my-4">`;
+    }
+    
+    // Handle different block types
+    switch (block._type) {
+      case 'block':
+        if (isListItem) {
+          html += textBlockToListItem(block);
+        } else {
+          html += textBlockToHtml(block);
+        }
+        break;
+      case 'image':
+        if (inList) {
+          html += `</${currentListType}>`;
+          inList = false;
+          currentListType = null;
+        }
+        html += imageBlockToHtml(block);
+        break;
+      case 'youtube':
+      case 'youtubeEmbed':
+        if (inList) {
+          html += `</${currentListType}>`;
+          inList = false;
+          currentListType = null;
+        }
+        html += youtubeBlockToHtml(block);
+        break;
+      case 'table':
+        if (inList) {
+          html += `</${currentListType}>`;
+          inList = false;
+          currentListType = null;
+        }
+        html += tableBlockToHtml(block);
+        break;
+      default:
+        console.warn('Unsupported block type:', block._type);
+    }
+  }
+  
+  // Close any remaining open list
+  if (inList) {
+    html += `</${currentListType}>`;
+  }
+  
+  return html;
+}
+
+/**
+ * Convert a text block to a list item
+ */
+function textBlockToListItem(block) {
+  if (!block) return '';
+
+  // Get the base text with spans applied
+  const text = block.children
+    .map(child => {
+      let text = child.text;
+      
+      // Apply marks (formatting)
+      if (child.marks && child.marks.length > 0) {
+        child.marks.forEach(mark => {
+          switch (mark) {
+            case 'strong':
+              text = `<strong>${text}</strong>`;
+              break;
+            case 'em':
+              text = `<em>${text}</em>`;
+              break;
+            case 'code':
+              text = `<code>${text}</code>`;
+              break;
+            case 'underline':
+              text = `<u>${text}</u>`;
+              break;
+            case 'strike-through':
+              text = `<s>${text}</s>`;
+              break;
+            default:
+              // Handle link marks or custom marks here
+              if (mark.startsWith('link-')) {
+                // For a robust solution, use the proper annotation data
+                text = `<a href="#">${text}</a>`;
+              }
+          }
+        });
       }
+      
+      return text;
     })
     .join('');
+
+  // Return properly styled list item
+  return `<li class="my-1">${text}</li>`;
 }
 
 /**
