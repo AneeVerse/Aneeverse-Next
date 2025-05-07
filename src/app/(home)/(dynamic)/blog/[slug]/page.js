@@ -134,6 +134,81 @@ export default function BlogDetail({ params }) {
       const tempDiv = document.createElement('div');
       tempDiv.innerHTML = htmlContent;
       
+      // Find Key Takeaways sections and convert text bullets to proper lists
+      const paragraphs = tempDiv.querySelectorAll('p');
+      paragraphs.forEach(p => {
+        // Check if paragraph text starts with a bullet-like character
+        if (p.textContent.trim().startsWith('•') || p.textContent.trim().startsWith('·') || p.textContent.trim().startsWith('-')) {
+          // Option 1: Convert to list items
+          // Find all bullet paragraphs that should be in a list
+          const bulletItems = [];
+          let currentP = p;
+          
+          // Collect consecutive bullet paragraphs
+          while (currentP && 
+                (currentP.textContent.trim().startsWith('•') || 
+                 currentP.textContent.trim().startsWith('·') || 
+                 currentP.textContent.trim().startsWith('-'))) {
+            bulletItems.push(currentP);
+            currentP = currentP.nextElementSibling;
+          }
+          
+          if (bulletItems.length > 0) {
+            // Create a new list
+            const ul = document.createElement('ul');
+            ul.className = 'list-disc pl-6 my-4';
+            ul.style.listStyleType = 'disc';
+            ul.style.paddingLeft = '1.5rem';
+            
+            // Add each bullet paragraph as a list item
+            bulletItems.forEach(item => {
+              const li = document.createElement('li');
+              // Remove the bullet character from the beginning
+              li.innerHTML = item.textContent.replace(/^[•·-]\s*/, '');
+              li.style.display = 'list-item';
+              li.style.listStyleType = 'disc';
+              ul.appendChild(li);
+              
+              // Remove the original paragraph
+              if (item.parentNode) {
+                item.parentNode.removeChild(item);
+              }
+            });
+            
+            // Insert the list before the next element after the bullet list
+            if (p.parentNode) {
+              if (currentP) {
+                p.parentNode.insertBefore(ul, currentP);
+              } else {
+                p.parentNode.appendChild(ul);
+              }
+            }
+          }
+        }
+        
+        // Option 2: For any remaining bullet paragraphs, apply special styling
+        if (p.textContent.trim().startsWith('•') || p.textContent.trim().startsWith('·') || p.textContent.trim().startsWith('-')) {
+          p.classList.add('bullet-point');
+          // Apply inline styling for maximum compatibility
+          p.style.position = 'relative';
+          p.style.paddingLeft = '1.5rem';
+          p.style.display = 'block';
+          
+          // Add a ::before pseudo-element for the bullet
+          const style = document.createElement('style');
+          style.textContent = `
+            .bullet-point::before {
+              content: "•" !important;
+              position: absolute !important;
+              left: 0 !important;
+              top: 0.25em !important;
+              font-size: 1.2em !important;
+            }
+          `;
+          document.head.appendChild(style);
+        }
+      });
+      
       // Add IDs to h2 elements
       const headings = tempDiv.querySelectorAll('h2');
       const usedIds = new Set(); // Track used IDs to prevent duplicates
@@ -152,6 +227,22 @@ export default function BlogDetail({ params }) {
         
         usedIds.add(id);
         heading.id = id;
+      });
+      
+      // Ensure all list items have proper styling
+      const listItems = tempDiv.querySelectorAll('ul li');
+      listItems.forEach(li => {
+        // Add a class for styling if needed
+        li.classList.add('list-disc');
+        li.style.display = 'list-item';
+        li.style.listStyleType = 'disc';
+        li.style.marginLeft = '1.5rem';
+        
+        // For Key Takeaways section, add extra emphasis
+        const parentHeading = li.parentElement.previousElementSibling;
+        if (parentHeading && parentHeading.textContent.includes('Key Takeaways')) {
+          li.style.fontWeight = '500';
+        }
       });
       
       // Apply direct styling to tables
@@ -342,7 +433,7 @@ export default function BlogDetail({ params }) {
         
         return (
           <div 
-            className="prose max-w-none prose-img:rounded-lg prose-img:shadow-lg prose-headings:scroll-mt-24 prose-headings:pt-6 prose-headings:mt-6 prose-headings:border-t prose-headings:border-gray-100 prose-table:border-collapse prose-td:p-3 prose-th:p-3 prose-th:text-left prose-td:text-gray-700 prose-th:text-gray-800 prose-td:border prose-th:border prose-table:my-8 prose-table:w-full" 
+            className="prose max-w-none prose-img:rounded-lg prose-img:shadow-lg prose-headings:scroll-mt-24 prose-headings:pt-6 prose-headings:mt-6 prose-headings:border-t prose-headings:border-gray-100 prose-table:border-collapse prose-td:p-3 prose-th:p-3 prose-th:text-left prose-td:text-gray-700 prose-th:text-gray-800 prose-td:border prose-th:border prose-table:my-8 prose-table:w-full prose-ul:list-disc prose-ul:pl-6 prose-li:text-gray-600 prose-li:my-1 prose-li:marker:text-gray-500" 
             dangerouslySetInnerHTML={{ __html: processedContent }} 
           />
         );
@@ -620,6 +711,42 @@ export default function BlogDetail({ params }) {
             <article className="w-full">
               <div className="blog-content description">
                 {renderContent(post.content)}
+                {/* Add direct CSS for bullet points */}
+                <style jsx global>{`
+                  .blog-content ul {
+                    list-style-type: disc !important;
+                    padding-left: 1.5rem !important;
+                    margin: 1rem 0 !important;
+                  }
+                  
+                  .blog-content ul li {
+                    display: list-item !important;
+                    list-style-type: disc !important;
+                    margin-bottom: 0.5rem !important;
+                    position: relative !important;
+                  }
+                  
+                  /* Direct styling for Key Takeaways */
+                  .blog-content h2 + ul li,
+                  .blog-content h3 + ul li {
+                    font-weight: 500 !important;
+                    color: #333 !important;
+                  }
+                  
+                  /* Style text bullets as a fallback */
+                  .blog-content p.bullet-point {
+                    position: relative;
+                    padding-left: 1.5rem !important;
+                  }
+                  
+                  .blog-content p.bullet-point::before {
+                    content: "•" !important;
+                    position: absolute !important;
+                    left: 0.5rem !important;
+                    top: 0 !important;
+                    font-size: 1.2em !important;
+                  }
+                `}</style>
               </div>
               
               {/* FAQ Section */}

@@ -3,6 +3,99 @@ div[class*="overflow-y-auto"]::-webkit-scrollbar {
   display: none;
 }
 
+/* Make bullets more visible with brute force approach */
+.blog-content li {
+  display: list-item !important;
+  list-style-type: disc !important;
+  list-style-position: outside !important;
+  margin-left: 1.5rem !important;
+  padding-left: 0.5rem !important;
+}
+
+/* Text-based bullet fallback for when list-style-type fails */
+.blog-content p[class*="bullet"],
+.blog-content p.bullet-point {
+  position: relative;
+  padding-left: 1.5rem !important;
+}
+
+.blog-content p.bullet-point::before {
+  content: "•" !important;
+  position: absolute;
+  left: 0;
+  font-size: 1.2em;
+  line-height: 1;
+}
+
+/* Direct Key Takeaways section styling */
+.blog-content h3 + ul > li,
+.blog-content h2 + ul > li {
+  font-weight: 500 !important;
+  list-style-type: disc !important;
+  display: list-item !important;
+  margin-bottom: 0.75rem !important;
+}
+
+/* Make bullets more visible */
+.blog-content ul,
+.prose ul {
+  margin-top: 1.25rem;
+  margin-bottom: 1.5rem;
+  list-style-type: disc !important;
+  padding-left: 1.5rem !important;
+}
+
+.blog-content ul li,
+.prose ul li {
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.125rem;
+  color: #475467;
+  display: list-item !important;
+  position: relative !important;
+  list-style-position: outside !important;
+  list-style-type: disc !important;
+}
+
+/* Force bullet points to display with a visual marker */
+.blog-content ul li::marker,
+.prose ul li::marker {
+  content: "•" !important;
+  color: #475467 !important;
+  font-size: 1.2em !important;
+  display: inline-block !important;
+}
+
+/* Ensure no conflicting styles */
+.blog-content ul li::before,
+.prose ul li::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* Ensure nested lists also display properly */
+.blog-content ul ul,
+.prose ul ul {
+  list-style-type: circle !important;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-content ul ul li::marker,
+.prose ul ul li::marker {
+  content: "○" !important;
+}
+
+.blog-content ul ul ul,
+.prose ul ul ul {
+  list-style-type: square !important;
+}
+
+.blog-content ul ul ul li::marker,
+.prose ul ul ul li::marker {
+  content: "▪" !important;
+}
+
 .blog-content {
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   color: #475467;
@@ -35,20 +128,6 @@ div[class*="overflow-y-auto"]::-webkit-scrollbar {
   font-size: 1.125rem;
   color: #475467;
   line-height: 1.75;
-}
-
-.blog-content ul {
-  margin-top: 1.25rem;
-  margin-bottom: 1.5rem;
-  list-style-type: disc;
-  padding-left: 1.5rem;
-}
-
-.blog-content ul li {
-  margin-top: 0.5rem;
-  margin-bottom: 0.75rem;
-  font-size: 1.125rem;
-  color: #475467;
 }
 
 .blog-content img {
