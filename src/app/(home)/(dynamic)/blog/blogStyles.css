@@ -94,33 +94,77 @@ div[class*="overflow-y-auto"]::-webkit-scrollbar {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* Table styling like Superside */
+/* Table styling fixes - more aggressive approach */
 .blog-content table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 2rem 0;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin: 2rem 0 !important;
+  font-size: 1rem !important;
+  font-family: inherit !important;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  border: 1px solid #E2E8F0 !important;
 }
 
-.blog-content th {
-  background-color: #f8f9fa;
-  font-weight: 600;
-  color: #101828;
-  text-align: left;
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid #e5e7eb;
+.blog-content table th {
+  background-color: #0A2E3D !important;
+  color: white !important;
+  font-weight: 600 !important;
+  padding: 12px 16px !important;
+  text-align: left !important;
+  border: 1px solid #E2E8F0 !important;
+  text-transform: none !important;
+  font-size: 1rem !important;
 }
 
-.blog-content td {
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid #e5e7eb;
-  color: #475467;
+.blog-content table td {
+  padding: 12px 16px !important;
+  text-align: left !important;
+  color: #475467 !important;
+  border: 1px solid #E2E8F0 !important;
+  font-size: 1rem !important;
+  background-color: white !important;
 }
 
-.blog-content tr:last-child td {
-  border-bottom: none;
+.blog-content table tr:nth-child(even) td {
+  background-color: #F8FAFC !important;
+}
+
+.blog-content table tr:hover td {
+  background-color: #EDF2F7 !important;
+}
+
+/* Strongest override for any blue text or links inside tables */
+.blog-content table *,
+.blog-content table a,
+.blog-content table span,
+.blog-content table p,
+.blog-content table div {
+  color: #475467 !important;
+  text-decoration: none !important;
+}
+
+.blog-content table th *,
+.blog-content table th span,
+.blog-content table th p,
+.blog-content table th div {
+  color: white !important;
+}
+
+/* First row styling for when there's no <th> element but first row should be a header */
+.blog-content table tr:first-child td {
+  font-weight: 600 !important;
+  background-color: #0A2E3D !important;
+  color: white !important;
+}
+
+/* First row styling overrides */
+.blog-content table tr:first-child td *,
+.blog-content table tr:first-child td span,
+.blog-content table tr:first-child td p,
+.blog-content table tr:first-child td div {
+  color: white !important;
 }
 
 /* Mobile responsive styles */

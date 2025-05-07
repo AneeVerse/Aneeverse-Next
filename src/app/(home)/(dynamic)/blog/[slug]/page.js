@@ -124,7 +124,7 @@ export default function BlogDetail({ params }) {
     loadBlog();
   }, [resolvedParams.slug]);
 
-  // Function to add IDs to HTML headings for linking
+  // Function to add IDs to HTML headings for linking and fix table styling
   const processHtmlContent = (htmlContent) => {
     if (!htmlContent || typeof htmlContent !== 'string') return htmlContent;
     if (typeof window === 'undefined') return htmlContent; // Skip on server
@@ -152,6 +152,67 @@ export default function BlogDetail({ params }) {
         
         usedIds.add(id);
         heading.id = id;
+      });
+      
+      // Apply direct styling to tables
+      const tables = tempDiv.querySelectorAll('table');
+      tables.forEach(table => {
+        // Style the table element
+        table.style.width = '100%';
+        table.style.borderCollapse = 'collapse';
+        table.style.margin = '2rem 0';
+        table.style.fontFamily = 'inherit';
+        table.style.borderRadius = '8px';
+        table.style.overflow = 'hidden';
+        table.style.border = '1px solid #E2E8F0';
+        
+        // Check if table has header cells
+        const hasTh = table.querySelector('th') !== null;
+        
+        // If there are no <th> elements, treat the first row as a header
+        if (!hasTh && table.rows.length > 0) {
+          const firstRow = table.rows[0];
+          Array.from(firstRow.cells).forEach(cell => {
+            cell.style.backgroundColor = '#0A2E3D';
+            cell.style.color = 'white';
+            cell.style.fontWeight = '600';
+            cell.style.padding = '12px 16px';
+          });
+        }
+        
+        // Style all th elements
+        const thElements = table.querySelectorAll('th');
+        thElements.forEach(th => {
+          th.style.backgroundColor = '#0A2E3D';
+          th.style.color = 'white';
+          th.style.fontWeight = '600';
+          th.style.padding = '12px 16px';
+          th.style.textAlign = 'left';
+          th.style.border = '1px solid #E2E8F0';
+        });
+        
+        // Style all td elements
+        const tdElements = table.querySelectorAll('td');
+        tdElements.forEach((td, index) => {
+          td.style.padding = '12px 16px';
+          td.style.color = '#475467';
+          td.style.border = '1px solid #E2E8F0';
+          
+          // Apply zebra striping for better readability
+          const row = td.parentElement;
+          if (row && row.rowIndex > 0 && row.rowIndex % 2 === 0) {
+            td.style.backgroundColor = '#F8FAFC';
+          } else {
+            td.style.backgroundColor = 'white';
+          }
+          
+          // Fix any links inside table cells
+          const links = td.querySelectorAll('a');
+          links.forEach(link => {
+            link.style.color = '#475467';
+            link.style.textDecoration = 'none';
+          });
+        });
       });
       
       return tempDiv.innerHTML;
@@ -281,7 +342,7 @@ export default function BlogDetail({ params }) {
         
         return (
           <div 
-            className="prose max-w-none prose-img:rounded-lg prose-img:shadow-lg prose-headings:scroll-mt-24 prose-headings:pt-6 prose-headings:mt-6 prose-headings:border-t prose-headings:border-gray-100" 
+            className="prose max-w-none prose-img:rounded-lg prose-img:shadow-lg prose-headings:scroll-mt-24 prose-headings:pt-6 prose-headings:mt-6 prose-headings:border-t prose-headings:border-gray-100 prose-table:border-collapse prose-td:p-3 prose-th:p-3 prose-th:text-left prose-td:text-gray-700 prose-th:text-gray-800 prose-td:border prose-th:border prose-table:my-8 prose-table:w-full" 
             dangerouslySetInnerHTML={{ __html: processedContent }} 
           />
         );
@@ -403,7 +464,7 @@ export default function BlogDetail({ params }) {
                 >
                   {post.author?.name}
                 </Link>
-                <div className="text-[#475467]">{post.author?.role}</div>
+                <div className="text-[#475467]">{post.author?.role || ''}</div>
               </div>
             </div>
           </div>

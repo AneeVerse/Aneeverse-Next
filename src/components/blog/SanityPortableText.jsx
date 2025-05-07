@@ -32,14 +32,14 @@ const components = {
 
       return (
         <div className="my-8 overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200 border border-gray-200">
+          <table className="min-w-full divide-y divide-gray-200 border border-gray-200 rounded-lg">
             {rows.length > 0 && hasHeaderRow && (
               <thead className="bg-gray-50">
                 <tr>
                   {rows[0].cells.map((cell, cellIndex) => (
                     <th
                       key={cellIndex}
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider border border-gray-200"
                     >
                       {cell}
                     </th>
@@ -53,7 +53,7 @@ const components = {
                   {row.cells.map((cell, cellIndex) => (
                     <td
                       key={cellIndex}
-                      className="px-6 py-4 whitespace-normal text-sm text-gray-500"
+                      className="px-6 py-4 whitespace-normal text-sm text-gray-700 border border-gray-200"
                     >
                       {cell}
                     </td>
