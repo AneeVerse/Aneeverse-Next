@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
+import { FaRegClock } from "react-icons/fa6";
 
-const TableOfContents = () => {
+const TableOfContents = ({ timeToRead = "5 min read" }) => {
   const [headings, setHeadings] = useState([]);
   const activeId = useScrollSpy('h2, h3'); // Adjust selectors based on your needs
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     // Get all headings from the article
@@ -15,9 +17,46 @@ const TableOfContents = () => {
     setHeadings(elements);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (scrollY / docHeight) * 100;
+      setScrollProgress(progress);
+    };
+
+    // Smooth Scroll Optimization with Throttle Effect
+    let throttleTimeout = null;
+    const throttledScroll = () => {
+      if (!throttleTimeout) {
+        throttleTimeout = setTimeout(() => {
+          handleScroll();
+          throttleTimeout = null;
+        }, 100);
+      }
+    };
+
+    window.addEventListener("scroll", throttledScroll);
+    return () => window.removeEventListener("scroll", throttledScroll);
+  }, []);
+
   return (
     <nav className="table-of-contents sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto">
       <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6">
+        {/* Read Time Indicator with Progress Bar */}
+        <div className="mb-6">
+          <div className="text-[#EBFAFE] flex items-center gap-3 font-medium mb-2">
+            <FaRegClock />
+            <div>{timeToRead}</div>
+          </div>
+          <div className="h-1 bg-gray-200/30 rounded-full">
+            <div
+              className="h-full bg-[#88D7F0] transition-all duration-300 rounded-full"
+              style={{ width: `${scrollProgress}%` }}
+            ></div>
+          </div>
+        </div>
+
         <h2 className="text-lg font-semibold mb-4 text-[#EBFAFE]">Table of Contents</h2>
         <ul className="space-y-3">
           {headings.map((heading) => (
