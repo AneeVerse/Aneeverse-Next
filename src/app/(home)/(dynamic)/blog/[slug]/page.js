@@ -12,6 +12,7 @@ import React from 'react';
 import RelatedBlogs from '@/components/blog/RelatedBlogs';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
 import { motion } from 'framer-motion';
+import BlogFAQ from '@/components/blog/BlogFAQ';
 import '../blogStyles.css';
 
 // More efficient approach to fetch blog post
@@ -32,7 +33,10 @@ const getBlogPost = async (slug) => {
         
         if (sanityData.success && sanityData.blog) {
           console.log('Successfully fetched from Sanity');
-          return sanityData.blog;
+          // Make sure we have FAQ data if available
+          const blogData = sanityData.blog;
+          console.log('Checking for FAQ data:', blogData.includeFaq, blogData.faqSection);
+          return blogData;
         }
       }
       console.log('Sanity fetch failed or returned no data, trying regular API');
@@ -132,12 +136,21 @@ export default function BlogDetail({ params }) {
       
       // Add IDs to h2 elements
       const headings = tempDiv.querySelectorAll('h2');
-      headings.forEach((heading) => {
+      const usedIds = new Set(); // Track used IDs to prevent duplicates
+      
+      headings.forEach((heading, index) => {
         // Create URL-friendly ID from heading text
-        const id = heading.textContent
+        let id = heading.textContent
           .toLowerCase()
           .replace(/[^a-z0-9]+/g, '-')
           .replace(/(^-|-$)/g, '');
+        
+        // If this ID is already used, append an index to make it unique
+        if (usedIds.has(id)) {
+          id = `${id}-${index}`;
+        }
+        
+        usedIds.add(id);
         heading.id = id;
       });
       
@@ -148,7 +161,7 @@ export default function BlogDetail({ params }) {
     }
   };
 
-  // Extract h2 headings from content
+  // Update the h2Headings extraction logic to prevent duplicates
   const h2Headings = React.useMemo(() => {
     if (!post) return [];
     
@@ -160,31 +173,54 @@ export default function BlogDetail({ params }) {
         // Create a temporary div to parse HTML content
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = post.content;
-        const headings = tempDiv.querySelectorAll('h2');
+        const headingElements = tempDiv.querySelectorAll('h2');
+        
+        // Use a Set to track unique IDs
+        const uniqueIds = new Set();
+        const uniqueHeadings = [];
         
         // Convert to array and extract info
-        return Array.from(headings).map((h2) => {
+        Array.from(headingElements).forEach((h2) => {
           const title = h2.textContent;
+          // Create URL-friendly ID from heading text
           const id = title
             .toLowerCase()
             .replace(/[^a-z0-9]+/g, '-')
             .replace(/(^-|-$)/g, '');
-          return { id, title };
+            
+          // Only add if this ID hasn't been seen before
+          if (!uniqueIds.has(id)) {
+            uniqueIds.add(id);
+            uniqueHeadings.push({ id, title });
+          }
         });
+        
+        return uniqueHeadings;
       }
       
       // For React element content
       if (post.content.props?.children) {
-        return post.content.props.children
+        // Use a Set to track unique IDs
+        const uniqueIds = new Set();
+        const uniqueHeadings = [];
+        
+        post.content.props.children
           .filter(child => child && child.type === 'h2')
-          .map((h2) => {
+          .forEach((h2) => {
             const title = h2.props.children;
             const id = title
               .toLowerCase()
               .replace(/[^a-z0-9]+/g, '-')
               .replace(/(^-|-$)/g, '');
-            return { id, title };
+            
+            // Only add if this ID hasn't been seen before
+            if (!uniqueIds.has(id)) {
+              uniqueIds.add(id);
+              uniqueHeadings.push({ id, title });
+            }
           });
+        
+        return uniqueHeadings;
       }
       
       return [];
@@ -192,6 +228,16 @@ export default function BlogDetail({ params }) {
       console.error('Error extracting h2 headings:', err);
       return [];
     }
+  }, [post]);
+
+  // Prepare FAQ data for the component
+  const faqItems = React.useMemo(() => {
+    if (!post || !post.includeFaq || !post.faqSection?.questions) return [];
+    
+    return post.faqSection.questions.map(item => ({
+      question: item.question,
+      answer: item.answer
+    }));
   }, [post]);
 
   if (isLoading) {
@@ -418,7 +464,7 @@ export default function BlogDetail({ params }) {
             <div className="bg-[#E6ECD6] p-6 rounded-lg mt-8">
               <h4 className="uppercase text-[#101828] text-sm font-semibold tracking-wide mb-4">TABLE OF CONTENTS</h4>
               {h2Headings.length > 0 && (
-                <div className="max-h-[200px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                <div className="max-h-[140px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   <ul className="space-y-2">
                     {h2Headings.map((section, index) => (
                       <li key={index} className="relative">
@@ -514,6 +560,14 @@ export default function BlogDetail({ params }) {
               <div className="blog-content description">
                 {renderContent(post.content)}
               </div>
+              
+              {/* FAQ Section */}
+              {post.includeFaq && faqItems.length > 0 && (
+                <BlogFAQ 
+                  title={post.faqSection?.title || 'Frequently Asked Questions'} 
+                  questions={faqItems} 
+                />
+              )}
             </article>
             
             {/* Mobile Promotional CTA - Only shown on mobile */}
