@@ -12,6 +12,13 @@ export const postType = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'shortDescription',
+      title: 'Short Description',
+      type: 'text',
+      description: 'A brief summary of the post that will appear on blog cards (150-200 characters recommended)',
+      validation: Rule => Rule.max(200).warning('Short descriptions work best when kept under 200 characters'),
+    }),
+    defineField({
       name: 'slug',
       type: 'slug',
       options: {

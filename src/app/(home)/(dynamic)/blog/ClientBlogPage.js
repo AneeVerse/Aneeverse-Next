@@ -204,9 +204,9 @@ export default function ClientBlogPage() {
                     <FaChevronRight className='text-lg transition-transform duration-300 group-hover:translate-x-1' />
                   </Link>
                 </div>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14'>
                   {categoryBlogs.slice(0, 3).map((blog) => (
-                    <div key={blog.id}>
+                    <div key={blog.id} className="h-full flex flex-col">
                       <BlogCard blog={blog} />
                     </div>
                   ))}
