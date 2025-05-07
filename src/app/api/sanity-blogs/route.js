@@ -17,7 +17,7 @@ function transformSanityBlog(sanityBlog) {
     thumbnail: sanityBlog.mainImage,
     category: sanityBlog.categories?.[0] || 'Uncategorized',
     date: sanityBlog.publishedAt,
-    timeToRead: sanityBlog.estimatedReadingTime || 5,
+    timeToRead: sanityBlog.timeToRead || 5,
     author: {
       name: sanityBlog.author?.name || 'Anonymous',
       role: sanityBlog.author?.role || 'Author',
@@ -72,7 +72,7 @@ export async function GET(request) {
       "content": body,
       "mainImage": mainImage.asset->url,
       publishedAt,
-      estimatedReadingTime,
+      timeToRead,
       "categories": categories[]->title,
       featured,
       "tags": tags[]->title,
