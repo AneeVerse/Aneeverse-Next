@@ -1,3 +1,5 @@
+import { getBlogPost } from '@/lib/blogUtils';
+
 // ✅ Generate Dynamic Metadata
 export async function generateMetadata({ params }) {
   const post = getBlogPost(params.slug);
@@ -31,4 +33,9 @@ export async function generateMetadata({ params }) {
       image: post.thumbnail,
     },
   };
+}
+
+// Add the missing default export function
+export default function BlogSlugLayout({ children }) {
+  return children;
 } 
