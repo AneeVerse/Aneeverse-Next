@@ -430,6 +430,14 @@ export default function BlogDetail({ params }) {
     try {
       // Handle string content (HTML)
       if (typeof content === 'string') {
+        // Add image debugging - log image URLs in the content
+        const imgRegex = /<img[^>]+src="([^"]+)"[^>]*>/g;
+        let match;
+        console.log('Checking images in content:');
+        while ((match = imgRegex.exec(content)) !== null) {
+          console.log('Found image URL:', match[1]);
+        }
+        
         // Process HTML to add IDs to headings
         const processedContent = processHtmlContent(content);
         
