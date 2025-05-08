@@ -20,14 +20,16 @@ const RelatedBlogs = ({ currentPost, defaultThumbnail, defaultAuthorImage }) => 
         setError(null);
         
         // Fetch from API with timestamp to prevent caching
-        const response = await fetch(`/api/blogs?limit=100&t=${Date.now()}`);
-        const data = await response.json();
+        const response = await fetch(`/api/sanity/blogs?limit=100&t=${Date.now()}`);
         
         if (!response.ok) {
+          console.error('Related blogs API returned status:', response.status);
           throw new Error('Failed to fetch blogs');
         }
         
-        if (data && data.blogs) {
+        const data = await response.json();
+        
+        if (data && data.blogs && Array.isArray(data.blogs)) {
           console.log(`API fetched ${data.blogs.length} blogs`);
           
           // First attempt to get blogs from the same category
@@ -59,19 +61,19 @@ const RelatedBlogs = ({ currentPost, defaultThumbnail, defaultAuthorImage }) => 
           setRelatedBlogs(sortedBlogs);
           console.log(`Displaying ${sortedBlogs.length} related blogs`);
         } else {
-          console.warn('No blogs data received from API');
+          console.warn('No blogs data received from API or data format incorrect');
           setRelatedBlogs([]);
         }
       } catch (error) {
         console.error('Error fetching related blogs:', error);
         setError('Failed to load related articles');
-        setRelatedBlogs([]);
+        // Don't set relatedBlogs to empty here to preserve any previous data
       } finally {
         setIsLoading(false);
       }
     };
     
-    if (currentPost && currentPost.id) {
+    if (currentPost) {
       fetchRelatedBlogs();
     }
   }, [currentPost]);
@@ -87,18 +89,38 @@ const RelatedBlogs = ({ currentPost, defaultThumbnail, defaultAuthorImage }) => 
     );
   }
   
-  if (error) {
+  if (error && relatedBlogs.length === 0) {
+    // Create placeholder data if we have an error and no content
     return (
-      <div className="text-center py-8 text-gray-500">
-        {error}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14 w-full">
+        <div className="h-full flex flex-col">
+          <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full">
+            <div className="relative h-48 bg-gray-200"></div>
+            <div className="p-5 flex flex-col flex-grow">
+              <p className="text-sm text-gray-500 mb-2">Example Article</p>
+              <h3 className="text-xl font-semibold mb-2 text-gray-800">Check out our other content</h3>
+              <p className="text-gray-600 mb-4 line-clamp-3">While we couldn't load related articles, you might find other interesting content in our blog section.</p>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
   
   if (relatedBlogs.length === 0) {
+    // Create a placeholder if no related blogs found
     return (
-      <div className="text-center py-8 text-gray-500">
-        No related articles found. Check back soon for more content!
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-14 w-full">
+        <div className="h-full flex flex-col">
+          <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full">
+            <div className="relative h-48 bg-gray-200"></div>
+            <div className="p-5 flex flex-col flex-grow">
+              <p className="text-sm text-gray-500 mb-2">Coming Soon</p>
+              <h3 className="text-xl font-semibold mb-2 text-gray-800">More Content Coming Soon</h3>
+              <p className="text-gray-600 mb-4 line-clamp-3">We're working on adding more articles in this category. Check back soon!</p>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -106,7 +128,7 @@ const RelatedBlogs = ({ currentPost, defaultThumbnail, defaultAuthorImage }) => 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14 w-full">
       {relatedBlogs.map((blog, index) => (
-        <div key={index} className="h-full flex flex-col">
+        <div key={blog.id || index} className="h-full flex flex-col">
           <BlogCard blog={blog} />
         </div>
       ))}
