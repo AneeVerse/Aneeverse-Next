@@ -20,7 +20,7 @@ const RelatedBlogs = ({ currentPost, defaultThumbnail, defaultAuthorImage }) => 
         setError(null);
         
         // Fetch from API with timestamp to prevent caching
-        const response = await fetch(`/api/sanity/blogs?limit=100&t=${Date.now()}`);
+        const response = await fetch(`/api/sanity-blogs?limit=100&t=${Date.now()}`);
         
         if (!response.ok) {
           console.error('Related blogs API returned status:', response.status);
