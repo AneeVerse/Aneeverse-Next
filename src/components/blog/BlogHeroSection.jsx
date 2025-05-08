@@ -16,15 +16,14 @@ const BlogHeroSection = ({ blogData }) => {
         <Layout>
           {/* Heading */}
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-[80px] mt-16 font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] relative inline-block group">
+            <p className="text-base uppercase tracking-wider text-secondary-500 mb-2 mt-8">BLOG</p>
+            <h2 className="text-4xl md:text-6xl -mt-1 font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] relative inline-block group">
               <span className="relative inline-block">
                 Creative Performance
-                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#0A2E3D] transition-all duration-300 group-hover:w-full"></span>
               </span>
             </h2>
-            <p className="text-lg text-secondary-500 mt-8 max-w-3xl mx-auto">
-              Creative ideas, practical tips and insider info—the Aneeverse blog
-              helps your team get great design done at scale.
+            <p className="text-lg text-secondary-500 mt-4 text-center mx-auto">
+              Creative ideas, practical tips and insider info—the Aneeverse blog helps your team get great design done at scale.
             </p>
           </div>
           
@@ -39,28 +38,28 @@ const BlogHeroSection = ({ blogData }) => {
             </div>
             
             {/* Subscription Box */}
-            <div className="bg-[#E6ECD6] rounded-xl p-8 flex flex-col justify-between shadow-sm">
+            <div className="bg-[#073742] rounded-xl p-8 flex flex-col justify-between shadow-sm">
               <div>
-                <p className="text-sm uppercase tracking-wide text-secondary-500/70">
+                <p className="text-sm uppercase tracking-wide text-[#EBFAFE]/70">
                   CREATIVE GOLD
                 </p>
-                <h3 className="text-3xl font-semibold text-secondary-500 mt-2">
+                <h3 className="text-3xl font-semibold text-[#ebfafe] mt-2">
                   For Your Inbox
                 </h3>
-                <p className="text-lg text-secondary-500/80 mt-3">
+                <p className="text-lg text-[#ebfafe]/80 mt-3">
                   The best events, articles and insights to spark your next big idea.
                 </p>
               </div>
               <div className="mt-6">
-                <div className="flex items-center bg-transparent px-4 py-3 rounded-full border border-secondary-500/40">
-                  <FaEnvelope className="text-secondary-500/60" />
+                <div className="flex items-center bg-transparent px-4 py-3 rounded-full border border-[#ebfafe]/40">
+                  <FaEnvelope className="text-[#ebfafe]/60" />
                   <input
                     type="email"
                     placeholder="buzz@nasa.gov"
-                    className="flex-1 bg-transparent outline-none pl-3 text-secondary-500"
+                    className="flex-1 bg-transparent outline-none pl-3 text-[#ebfafe]"
                   />
                 </div>
-                <button className="mt-4 w-full bg-secondary-500 text-white py-3 rounded-full font-semibold hover:bg-secondary-500/90 transition-colors">
+                <button className="mt-4 w-full bg-[#ebfafe] text-[#073742] py-3 rounded-full font-semibold hover:bg-[#ebfafe]/90 transition-colors">
                   Subscribe now
                 </button>
               </div>
@@ -79,15 +78,14 @@ const BlogHeroSection = ({ blogData }) => {
       <Layout>
         {/* Heading */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-[80px] mt-16 font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] relative inline-block group">
+          <p className="text-base uppercase tracking-wider text-secondary-500 mb-2 mt-8">BLOG</p>
+          <h2 className="text-4xl md:text-6xl -mt-1 font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] relative inline-block group">
             <span className="relative inline-block">
               Creative Performance
-              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#0A2E3D] transition-all duration-300 group-hover:w-full"></span>
             </span>
           </h2>
-          <p className="text-lg text-secondary-500 mt-8 max-w-3xl mx-auto">
-            Creative ideas, practical tips and insider info—the Aneeverse blog
-            helps your team get great design done at scale.
+          <p className="text-lg text-secondary-500 mt-4 text-center mx-auto">
+            Creative ideas, practical tips and insider info—the Aneeverse blog helps your team get great design done at scale.
           </p>
         </div>
 
@@ -144,28 +142,28 @@ const BlogHeroSection = ({ blogData }) => {
           </Link>
 
           {/* Subscription Box */}
-          <div className="bg-[#E6ECD6] rounded-xl p-8 flex flex-col justify-between shadow-sm">
+          <div className="bg-[#073742] rounded-xl p-8 flex flex-col justify-between shadow-sm">
             <div>
-              <p className="text-sm uppercase tracking-wide text-secondary-500/70">
+              <p className="text-sm uppercase tracking-wide text-[#ebfafe]/70">
                 CREATIVE GOLD
               </p>
-              <h3 className="text-3xl font-semibold text-secondary-500 mt-2">
+              <h3 className="text-3xl font-semibold text-[#ebfafe] mt-2">
                 For Your Inbox
               </h3>
-              <p className="text-lg text-secondary-500/80 mt-3">
+              <p className="text-lg text-[#ebfafe]/80 mt-3">
                 The best events, articles and insights to spark your next big idea.
               </p>
             </div>
             <div className="mt-6">
-              <div className="flex items-center bg-transparent px-4 py-3 rounded-full border border-secondary-500/40">
-                <FaEnvelope className="text-secondary-500/60" />
+              <div className="flex items-center bg-transparent px-4 py-3 rounded-full border-2 border-[#ebfafe]/40">
+                <FaEnvelope className="text-[#ebfafe]/60" />
                 <input
                   type="email"
                   placeholder="buzz@nasa.gov"
-                  className="flex-1 bg-transparent outline-none pl-3 text-secondary-500"
+                  className="flex-1 bg-transparent outline-none pl-3 text-[#ebfafe]"
                 />
               </div>
-              <button className="mt-4 w-full bg-secondary-500 text-white py-3 rounded-full font-semibold hover:bg-secondary-500/90 transition-colors">
+              <button className="mt-4 w-full bg-[#ebfafe] text-[#073742] py-3 rounded-full font-semibold border-2 border-[#ebfafe]/100 hover:bg-transparent hover:text-[#ebfafe] hover:border-2 hover:border-[#ebfafe]/40 transition-colors">
                 Subscribe now
               </button>
             </div>
