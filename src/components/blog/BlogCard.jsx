@@ -72,9 +72,10 @@ export default function BlogCard({ blog }) {
 
         {/* Title - Superside style with underline animation */}
         <Link href={`/blog/${slug}`} className="group block">
-          <h3 className="text-xl sm:text-[22px] leading-tight text-[#101828] font-normal mb-3 line-clamp-2 group-hover:text-[#0A2E3D] transition-colors duration-200 relative">
-            {title}
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#0A2E3D] group-hover:w-full transition-all duration-300"></span>
+          <h3 className="text-xl sm:text-[22px] leading-tight text-[#101828] font-normal mb-3 line-clamp-2 group-hover:text-[#0A2E3D] transition-colors duration-200">
+            <span className="bg-gradient-to-r from-[#0A2E3D] to-[#0A2E3D] bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 group-hover:bg-[length:100%_2px] pb-0.5">
+              {title}
+            </span>
           </h3>
         </Link>
 
