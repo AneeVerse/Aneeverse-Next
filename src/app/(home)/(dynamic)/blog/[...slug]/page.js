@@ -225,11 +225,14 @@ export default function BlogDetail({ params }) {
 
             {/* Main Grid Container with TOC Sidebar */}
             <div className="grid grid-cols-1 md:grid-cols-[270px_1fr] gap-8 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 3rem)' }}>
-              {/* Left Sidebar with TOC */}
-              <aside className="hidden md:block">
-                {/* Table of Contents */}
-                <div className="bg-[#E6ECD6] p-6 rounded-lg sticky top-24">
-                  <h4 className="uppercase text-[#101828] text-sm font-semibold tracking-wide mb-4">TABLE OF CONTENTS</h4>
+              {/* Left Sidebar - Only shown on desktop */}
+              <aside className="lg:sticky top-24 self-start hidden lg:block space-y-8 shrink-0">
+                {/* Read Time Animation - Added without changing structure */}
+                <ReadTimeProgress timeToRead={post.timeToRead || "5 min read"} />
+                
+                {/* Table of Contents - More compact with smaller text */}
+                <div className="bg-[#0A2E3D] p-4 rounded-lg mt-6">
+                  <h4 className="uppercase text-white text-xs font-semibold tracking-wide mb-3">TABLE OF CONTENTS</h4>
                   {h2Headings.length > 0 && (
                     <div className="max-h-[120px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                       <ul className="space-y-1.5">
@@ -239,8 +242,8 @@ export default function BlogDetail({ params }) {
                               href={`#${section.id}`}
                               className={`block text-sm leading-tight pl-4 truncate ${
                                 activeId === section.id
-                                ? 'text-[#101828] font-medium' 
-                                : 'text-[#667085] hover:text-[#101828]'
+                                ? 'text-white font-medium' 
+                                : 'text-gray-300 hover:text-white'
                               }`}
                               onClick={(e) => {
                                 e.preventDefault();
@@ -252,7 +255,7 @@ export default function BlogDetail({ params }) {
                               title={section.title}
                             >
                               {activeId === section.id && (
-                                <div className="absolute left-0 top-[6px] w-1.5 h-1.5 rounded-full bg-[#101828] animate-pulse"></div>
+                                <div className="absolute left-0 top-[6px] w-1.5 h-1.5 rounded-full bg-white animate-pulse"></div>
                               )}
                               {section.title}
                             </a>
@@ -261,6 +264,29 @@ export default function BlogDetail({ params }) {
                       </ul>
                     </div>
                   )}
+                </div>
+                
+                {/* Promotional Poster */}
+                <div className="relative overflow-hidden rounded-lg shadow-lg mt-8">
+                  <div className="h-[170px] overflow-hidden bg-[#0A2E3D]">
+                    <Image 
+                      src="/blog-poster.avif" 
+                      alt="Get hassle-free service" 
+                      width={500} 
+                      height={300} 
+                      className="w-full h-full object-cover object-center"
+                    />
+                  </div>
+                  <div className="bg-[#0A2E3D] p-4 text-white" style={{marginTop: "-1px"}}>
+                    <h3 className="text-white text-lg font-bold leading-tight">Get hassle-free video at scale</h3>
+                    <p className="text-gray-300 text-xs my-1.5">See how we can help.</p>
+                    <Link 
+                      href="/contact" 
+                      className="block bg-white hover:bg-gray-100 text-[#0A2E3D] text-center py-2.5 w-full rounded-md font-medium transition-colors mt-2.5"
+                    >
+                      Book a call
+                    </Link>
+                  </div>
                 </div>
               </aside>
               
@@ -323,10 +349,10 @@ export default function BlogDetail({ params }) {
               </Link>
             </div>
 
-            {/* Mobile TOC - Only visible on mobile - updated to match compact style */}
+            {/* Mobile TOC - Only visible on mobile */}
             {h2Headings.length > 0 && (
-              <div className="lg:hidden mb-6 bg-[#E6ECD6] p-4 rounded-lg mt-4">
-                <h4 className="uppercase text-[#101828] text-xs font-semibold tracking-wide mb-2">TABLE OF CONTENTS</h4>
+              <div className="lg:hidden mb-6 bg-[#073742] p-4 rounded-lg mt-4">
+                <h4 className="uppercase text-white text-xs font-semibold tracking-wide mb-2">TABLE OF CONTENTS</h4>
                 <div className="overflow-y-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   <ul className="space-y-1.5">
                     {h2Headings.map((section, index) => (
@@ -335,8 +361,8 @@ export default function BlogDetail({ params }) {
                           href={`#${section.id}`}
                           className={`block text-sm leading-tight pl-4 truncate ${
                             activeId === section.id
-                            ? 'text-[#101828] font-medium' 
-                            : 'text-[#667085] hover:text-[#101828]'
+                            ? 'text-white font-medium' 
+                            : 'text-gray-300 hover:text-white'
                           }`}
                           onClick={(e) => {
                             e.preventDefault();
@@ -348,7 +374,7 @@ export default function BlogDetail({ params }) {
                           title={section.title}
                         >
                           {activeId === section.id && (
-                            <div className="absolute left-0 top-[6px] w-1.5 h-1.5 rounded-full bg-[#101828] animate-pulse"></div>
+                            <div className="absolute left-0 top-[6px] w-1.5 h-1.5 rounded-full bg-white animate-pulse"></div>
                           )}
                           {section.title}
                         </a>

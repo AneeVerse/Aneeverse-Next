@@ -626,8 +626,8 @@ export default function BlogDetail({ params }) {
             <ReadTimeProgress timeToRead={post.timeToRead || "5 min read"} />
             
             {/* Table of Contents */}
-            <div className="bg-[#E6ECD6] p-4 rounded-lg">
-              <h4 className="uppercase text-[#101828] text-xs font-semibold tracking-wide mb-3">TABLE OF CONTENTS</h4>
+            <div className="bg-[#0A2E3D] p-4 rounded-lg">
+              <h4 className="uppercase text-white text-xs font-semibold tracking-wide mb-3">TABLE OF CONTENTS</h4>
               {h2Headings.length > 0 && (
                 <div className="max-h-[120px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   <ul className="space-y-1.5">
@@ -637,8 +637,8 @@ export default function BlogDetail({ params }) {
                           href={`#${section.id}`}
                           className={`block text-sm leading-tight pl-4 truncate ${
                             activeId === section.id
-                            ? 'text-[#101828] font-medium' 
-                            : 'text-[#667085] hover:text-[#101828]'
+                            ? 'text-white font-medium' 
+                            : 'text-gray-300 hover:text-white'
                           }`}
                           onClick={(e) => {
                             e.preventDefault();
@@ -650,7 +650,7 @@ export default function BlogDetail({ params }) {
                           title={section.title}
                         >
                           {activeId === section.id && (
-                            <div className="absolute left-0 top-[6px] w-1.5 h-1.5 rounded-full bg-[#101828] animate-pulse"></div>
+                            <div className="absolute left-0 top-[6px] w-1.5 h-1.5 rounded-full bg-white animate-pulse"></div>
                           )}
                           {section.title}
                         </a>
@@ -687,8 +687,8 @@ export default function BlogDetail({ params }) {
 
           {/* Mobile TOC - Only visible on mobile - updated to match compact style */}
           {h2Headings.length > 0 && (
-            <div className="lg:hidden mb-6 bg-[#E6ECD6] p-4 rounded-lg mt-4">
-              <h4 className="uppercase text-[#101828] text-xs font-semibold tracking-wide mb-2">TABLE OF CONTENTS</h4>
+            <div className="lg:hidden mb-6 bg-[#0A2E3D] p-4 rounded-lg mt-4">
+              <h4 className="uppercase text-white text-xs font-semibold tracking-wide mb-2">TABLE OF CONTENTS</h4>
               <div className="overflow-y-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                 <ul className="space-y-1.5">
                   {h2Headings.map((section, index) => (
@@ -697,8 +697,8 @@ export default function BlogDetail({ params }) {
                         href={`#${section.id}`}
                         className={`block text-sm leading-tight pl-4 truncate ${
                           activeId === section.id
-                          ? 'text-[#101828] font-medium' 
-                          : 'text-[#667085] hover:text-[#101828]'
+                          ? 'text-white font-medium' 
+                          : 'text-gray-300 hover:text-white'
                         }`}
                         onClick={(e) => {
                           e.preventDefault();
@@ -710,7 +710,7 @@ export default function BlogDetail({ params }) {
                         title={section.title}
                       >
                         {activeId === section.id && (
-                          <div className="absolute left-0 top-[6px] w-1.5 h-1.5 rounded-full bg-[#101828] animate-pulse"></div>
+                          <div className="absolute left-0 top-[6px] w-1.5 h-1.5 rounded-full bg-white animate-pulse"></div>
                         )}
                         {section.title}
                       </a>
