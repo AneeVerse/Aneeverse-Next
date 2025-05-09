@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import BlogHeroSection from '@/components/blog/BlogHeroSection';
+import LatestArticlesSection from '@/components/blog/LatestArticlesSection';
 import Newsletter from '@/components/blog/NewsLetter';
 import Layout from '@/components/common/Layout';
 import { blogs as staticBlogs } from '@/data/blogData';
@@ -183,6 +184,9 @@ export default function ClientBlogPage() {
       )}
       
       <BlogHeroSection blogData={blogData} />
+      
+      {/* Latest Articles Section (new) */}
+      <LatestArticlesSection blogData={blogData} />
 
       {/* Dynamically render all categories (including SEO) with Newsletter after every 2 categories */}
       {(() => {
