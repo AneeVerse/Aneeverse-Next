@@ -7,6 +7,7 @@ export default defineConfig({
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   title: 'Aneeverse Blog',
   basePath: '/studio',
+  hostname: 'blog.aneeverse.com',
   plugins: [deskTool()],
   schema: { types: schemaTypes }
 }) 
