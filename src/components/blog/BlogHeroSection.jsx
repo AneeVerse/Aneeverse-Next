@@ -21,8 +21,8 @@ const BlogHeroSection = ({ blogData }) => {
               <h1 className="text-4xl md:text-6xl font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] font-['Inter',sans-serif]">
                 Creative Performance
               </h1>
-              <p className="text-lg text-secondary-500 mt-4 text-center max-w-3xl font-['Inter',sans-serif]">
-                Creative ideas, practical tips and insider info—the Aneeverse blog helps your team get great design done at scale.
+              <p className="text-lg text-secondary-500 mt-4 text-center max-w-3xl font-['Inter',sans-serif] whitespace-nowrap overflow-hidden">
+                Creative ideas, practical tips and insider info the Aneeverse blog helps your team get great design done at scale.
               </p>
             </div>
           </div>
@@ -83,8 +83,8 @@ const BlogHeroSection = ({ blogData }) => {
             <h1 className="text-4xl md:text-6xl font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] font-['Inter',sans-serif]">
               Creative Performance
             </h1>
-            <p className="text-lg text-secondary-500 mt-4 text-center max-w-3xl font-['Inter',sans-serif]">
-              Creative ideas, practical tips and insider info—the Aneeverse blog helps your team get great design done at scale.
+            <p className="text-lg text-secondary-500 mt-4 text-center max-w-3xl font-['Inter',sans-serif] whitespace-nowrap overflow-hidden">
+              Creative ideas, practical tips and insider info the Aneeverse blog helps your team get great design done at scale.
             </p>
           </div>
         </div>
