@@ -195,7 +195,7 @@ export const mainImageBodySyncPlugin = definePlugin((config = { autoSync: true }
                     <p style={{ margin: 0, fontSize: '14px', color: hasImageInBody ? '#0F854A' : '#664D03' }}>
                       {hasImageInBody 
                         ? '✓ This image is synchronized with your body content.' 
-                        : 'This image will be automatically added to your body content when you publish.'}
+                        : ''}
                     </p>
                   </div>
                 </div>
