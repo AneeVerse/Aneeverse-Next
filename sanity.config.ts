@@ -16,6 +16,7 @@ import {customComponents} from './src/sanity/components'
 import {pastePlugin} from './src/sanity/plugins/pastePlugin'
 import {directPastePlugin} from './src/sanity/plugins/directPastePlugin'
 import {faqDashboardPlugin} from './src/sanity/plugins/faqDashboardPlugin'
+import {mainImageBodySyncPlugin} from './src/sanity/plugins/mainImageBodySyncPlugin'
 
 export default defineConfig({
   basePath: '/studio',
@@ -36,5 +37,10 @@ export default defineConfig({
     directPastePlugin,
     // FAQ Dashboard Widget
     faqDashboardPlugin,
+    // Auto-sync main image to body content
+    // @ts-ignore - Type definitions are complex for plugin functions
+    mainImageBodySyncPlugin({
+      autoSync: true
+    }),
   ],
 })
