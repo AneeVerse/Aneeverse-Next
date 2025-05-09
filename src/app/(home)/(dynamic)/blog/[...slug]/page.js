@@ -230,41 +230,37 @@ export default function BlogDetail({ params }) {
                 {/* Table of Contents */}
                 <div className="bg-[#E6ECD6] p-6 rounded-lg sticky top-24">
                   <h4 className="uppercase text-[#101828] text-sm font-semibold tracking-wide mb-4">TABLE OF CONTENTS</h4>
-                  <div className="max-h-[200px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                    <ul className="space-y-2">
-                      {post.title && (
-                        <li className="relative">
-                          <a
-                            href="#introduction"
-                            className="block text-base leading-tight pl-4 text-[#101828] font-medium"
-                          >
-                            <div className="absolute left-0 top-[8px] w-2 h-2 rounded-full bg-[#101828] animate-pulse"></div>
-                            Understanding {post.title.split(' ').slice(0, 3).join(' ')}...
-                          </a>
-                        </li>
-                      )}
-                      <li className="relative">
-                        <a href="#" className="block text-base leading-tight pl-4 text-[#667085] hover:text-[#101828]">
-                          Getting Started with {post.category}
-                        </a>
-                      </li>
-                      <li className="relative">
-                        <a href="#" className="block text-base leading-tight pl-4 text-[#667085] hover:text-[#101828]">
-                          Essential {post.category} Tactics for Success
-                        </a>
-                      </li>
-                      <li className="relative">
-                        <a href="#" className="block text-base leading-tight pl-4 text-[#667085] hover:text-[#101828]">
-                          Creating {post.category}-Friendly Content
-                        </a>
-                      </li>
-                      <li className="relative">
-                        <a href="#" className="block text-base leading-tight pl-4 text-[#667085] hover:text-[#101828]">
-                          Technical Tips for Better Performance
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
+                  {h2Headings.length > 0 && (
+                    <div className="max-h-[120px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                      <ul className="space-y-1.5">
+                        {h2Headings.map((section, index) => (
+                          <li key={index} className="relative">
+                            <a
+                              href={`#${section.id}`}
+                              className={`block text-sm leading-tight pl-4 truncate ${
+                                activeId === section.id
+                                ? 'text-[#101828] font-medium' 
+                                : 'text-[#667085] hover:text-[#101828]'
+                              }`}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                const element = document.getElementById(section.id);
+                                if (element) {
+                                  element.scrollIntoView({ behavior: 'smooth' });
+                                }
+                              }}
+                              title={section.title}
+                            >
+                              {activeId === section.id && (
+                                <div className="absolute left-0 top-[6px] w-1.5 h-1.5 rounded-full bg-[#101828] animate-pulse"></div>
+                              )}
+                              {section.title}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </aside>
               
@@ -326,6 +322,42 @@ export default function BlogDetail({ params }) {
                 View all articles
               </Link>
             </div>
+
+            {/* Mobile TOC - Only visible on mobile - updated to match compact style */}
+            {h2Headings.length > 0 && (
+              <div className="lg:hidden mb-6 bg-[#E6ECD6] p-4 rounded-lg mt-4">
+                <h4 className="uppercase text-[#101828] text-xs font-semibold tracking-wide mb-2">TABLE OF CONTENTS</h4>
+                <div className="overflow-y-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                  <ul className="space-y-1.5">
+                    {h2Headings.map((section, index) => (
+                      <li key={index} className="relative">
+                        <a
+                          href={`#${section.id}`}
+                          className={`block text-sm leading-tight pl-4 truncate ${
+                            activeId === section.id
+                            ? 'text-[#101828] font-medium' 
+                            : 'text-[#667085] hover:text-[#101828]'
+                          }`}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            const element = document.getElementById(section.id);
+                            if (element) {
+                              element.scrollIntoView({ behavior: 'smooth' });
+                            }
+                          }}
+                          title={section.title}
+                        >
+                          {activeId === section.id && (
+                            <div className="absolute left-0 top-[6px] w-1.5 h-1.5 rounded-full bg-[#101828] animate-pulse"></div>
+                          )}
+                          {section.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )}
           </>
         ) : null}
       </Layout>
