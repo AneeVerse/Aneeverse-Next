@@ -267,7 +267,7 @@ export default function BlogDetail({ params }) {
                 </div>
                 
                 {/* Promotional Poster */}
-                <div className="relative overflow-hidden rounded-lg shadow-lg mt-8">
+                <div className="relative overflow-hidden rounded-lg shadow-[0_0_15px_rgba(0,0,0,0.2)] mt-8">
                   <div className="h-[170px] overflow-hidden bg-[#0A2E3D]">
                     <Image 
                       src="/blog-poster.avif" 
@@ -384,6 +384,29 @@ export default function BlogDetail({ params }) {
                 </div>
               </div>
             )}
+
+            {/* Mobile Promotional CTA - Only shown on mobile */}
+            <div className="lg:hidden relative overflow-hidden rounded-lg shadow-[0_0_15px_rgba(0,0,0,0.2)] mt-10 mb-6">
+              <div className="h-[140px] overflow-hidden bg-[#0A2E3D]">
+                <Image 
+                  src="/blog-poster.avif" 
+                  alt="Get hassle-free service" 
+                  width={400} 
+                  height={200} 
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
+              <div className="bg-[#0A2E3D] p-4 text-white" style={{marginTop: "-1px"}}>
+                <h3 className="text-white text-base font-bold leading-tight">Get hassle-free video at scale</h3>
+                <p className="text-gray-300 text-xs my-1.5">See how we can help.</p>
+                <Link 
+                  href="/contact" 
+                  className="block bg-white hover:bg-gray-100 text-[#0A2E3D] text-center py-2 w-full rounded-md font-medium transition-colors mt-2"
+                >
+                  Book a call
+                </Link>
+              </div>
+            </div>
           </>
         ) : null}
       </Layout>
