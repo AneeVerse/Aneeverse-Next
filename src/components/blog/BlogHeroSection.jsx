@@ -107,7 +107,7 @@ const BlogHeroSection = ({ blogData }) => {
               <div className="relative flex flex-col justify-between z-10 w-full h-full">
                 <div className="flex flex-col pt-4">
                   <p className="text-md uppercase tracking-wide text-white font-['Inter',sans-serif] mb-[10px]">
-                    ANEEVERSE NEWS • {featuredBlog.timeToRead ? `${featuredBlog.timeToRead} min read` : '5 MIN READ'}
+                    ANEEVERSE NEWS • <span className="normal-case">{featuredBlog.timeToRead ? `${featuredBlog.timeToRead} min read` : '5 min read'}</span>
                   </p>
                   <h3 className="text-4xl sm:text-5xl max-w-full sm:max-w-2xl font-normal leading-[1.1] font-['Inter',sans-serif]" style={{ '--underline-height': '3px', '--underline-speed': '500ms' }}>
                     <span className="bg-[linear-gradient(currentColor,currentColor)] bg-left-bottom bg-no-repeat transition-[background] duration-[var(--underline-speed)] bg-[length:0%_var(--underline-height)] hover:bg-[length:100%_var(--underline-height)] group-hover:bg-[length:100%_var(--underline-height)]">
