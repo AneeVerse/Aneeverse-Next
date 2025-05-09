@@ -263,6 +263,40 @@ function youtubeBlockToHtml(block) {
   // Create responsive embed like Superside uses
   const caption = block.caption ? `<figcaption>${block.caption}</figcaption>` : '';
   
+  // Check if custom thumbnail is available
+  let thumbnailHtml = '';
+  if (block.customThumbnail && block.customThumbnail.asset && block.customThumbnail.asset._ref) {
+    // Extract image ID from reference
+    const ref = block.customThumbnail.asset._ref;
+    const [, id, dimensions, format] = ref.split('-');
+    
+    // Get Sanity project ID and dataset from environment
+    const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'be9i5ty1';
+    const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
+    
+    // Build image URL
+    const imageUrl = `https://cdn.sanity.io/images/${projectId}/${dataset}/${id}-${dimensions}.${format}`;
+    const alt = block.customThumbnail.alt || `YouTube video: ${block.url}`;
+    
+    // Create YouTube embed with custom thumbnail
+    return `
+      <figure class="youtube-embed">
+        <div class="relative">
+          <img src="${imageUrl}" alt="${alt}" class="w-full rounded-lg" />
+          <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener noreferrer" class="absolute inset-0 flex items-center justify-center">
+            <div class="rounded-full bg-black bg-opacity-70 p-4 transition-transform hover:scale-110">
+              <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="white">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+          </a>
+        </div>
+        ${caption}
+      </figure>
+    `;
+  }
+  
+  // Default YouTube embed with iframe
   return `
     <figure class="youtube-embed">
       <iframe 

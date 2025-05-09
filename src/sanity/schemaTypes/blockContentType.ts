@@ -89,20 +89,37 @@ export const blockContentType = defineType({
           name: 'caption',
           title: 'Caption (optional)',
           type: 'string',
+        },
+        {
+          name: 'customThumbnail',
+          title: 'Custom Thumbnail',
+          type: 'image',
+          description: 'Upload a custom thumbnail instead of using the default YouTube thumbnail',
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative Text',
+            }
+          ]
         }
       ],
       preview: {
         select: {
-          url: 'url'
+          url: 'url',
+          customThumbnail: 'customThumbnail'
         },
-        prepare({url}) {
+        prepare({url, customThumbnail}) {
           const id = url
             ? url.split('v=')[1]?.split('&')[0] || url.split('youtu.be/')[1]?.split('?')[0] || ''
             : '';
           return {
             title: 'YouTube Video',
             subtitle: url || '',
-            media: PlayIcon
+            media: customThumbnail ? customThumbnail : PlayIcon
           };
         }
       }
