@@ -70,3 +70,12 @@ This application is designed to work seamlessly with Vercel:
 - Responsive design for all devices
 - Categorized blog listings
 - SEO optimized content delivery
+
+### Main Image Auto-Sync
+
+The blog includes an automatic main image sync feature that:
+- Automatically adds the main image to the beginning of the blog post body content
+- Eliminates the need to add the same image twice
+- Updates the body content image if the main image changes
+
+For more details, see [MAIN-IMAGE-SYNC.md](./MAIN-IMAGE-SYNC.md).
