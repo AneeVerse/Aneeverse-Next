@@ -127,7 +127,7 @@ export default function AllBlogsPage() {
   // Show error message if there was an error and no blogs are available
   if (error && allBlogs.length === 0) {
     return (
-      <div className='bg-white min-h-screen flex items-center justify-center py-16'>
+      <div className='bg-[#EBFAFE] min-h-screen flex items-center justify-center py-16'>
         <Layout>
           <div className="text-center max-w-lg mx-auto p-6 bg-red-50 rounded-lg">
             <h2 className="text-2xl font-bold text-red-700 mb-2">Error Loading Blogs</h2>
@@ -155,7 +155,7 @@ export default function AllBlogsPage() {
   }
 
   return (
-    <div className="bg-white py-16">
+    <div className="bg-[#EBFAFE] py-16">
       <Layout>
         {/* Display warning if API failed but we have static blogs */}
         {error && allBlogs.length > 0 && (
@@ -176,7 +176,7 @@ export default function AllBlogsPage() {
         )}
       
         {/* Breadcrumb */}
-        <div className="mb-6">
+        <div className="mb-6 mt-8">
           <Link href="/blog" className="text-secondary-500 hover:underline">
             BLOG
           </Link>
