@@ -12,7 +12,7 @@ const BlogHeroSection = ({ blogData }) => {
   // If no blogs exist or still loading, render a simplified version
   if (isLoading || blogs.length === 0) {
     return (
-      <section className="pb-16 pt-[100px] mt-[-20px] bg-[#EBFAFE]">
+      <section className="pb-16 pt-[100px] mt-[-20px] bg-[#EBFAFE] overflow-x-hidden">
         <Layout>
           {/* Heading */}
           <div className="mb-12">
@@ -74,7 +74,7 @@ const BlogHeroSection = ({ blogData }) => {
   const featuredBlog = blogs[0];
   
   return (
-    <section className="pb-16 pt-[100px] mt-[-20px] bg-[#EBFAFE]">
+    <section className="pb-16 pt-[100px] mt-[-20px] bg-[#EBFAFE] overflow-x-hidden">
       <Layout>
         {/* Heading */}
         <div className="mb-12">
