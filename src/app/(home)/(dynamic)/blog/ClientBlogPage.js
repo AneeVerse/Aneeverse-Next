@@ -165,7 +165,7 @@ export default function ClientBlogPage() {
   const categories = [...new Set(blogs.map(blog => blog.category))].filter(Boolean);
 
   return (
-    <div className='bg-[#EBFAFE] pb-16 overflow-x-hidden w-full'>
+    <div className='bg-[#EBFAFE] pb-16'>
       {apiWarning && (
         <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
           <div className="flex items-center">
@@ -208,7 +208,7 @@ export default function ClientBlogPage() {
                     <FaChevronRight className='text-base md:text-lg transition-transform duration-300 group-hover:translate-x-1' />
                   </Link>
                 </div>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 md:gap-x-8 gap-y-10 md:gap-y-14'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14'>
                   {categoryBlogs.slice(0, 3).map((blog) => (
                     <div key={blog.id} className="h-full flex flex-col">
                       <BlogCard blog={blog} />
