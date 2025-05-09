@@ -14,7 +14,7 @@ const LatestArticlesSection = ({ blogData }) => {
   const latestBlogs = blogs.slice(0, 6);
   
   return (
-    <section className="py-16 bg-[#EBFAFE] overflow-x-hidden">
+    <section className="py-16 bg-[#EBFAFE]">
       <Layout>
         {/* Header with See All Link */}
         <div className="flex justify-between items-center mb-6 md:mb-8">
@@ -41,7 +41,7 @@ const LatestArticlesSection = ({ blogData }) => {
             <p className="text-gray-500">No articles available at the moment.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 md:gap-x-8 gap-y-10 md:gap-y-14">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
             {latestBlogs.map((blog, index) => (
               <div key={blog.id || index} className="h-full flex flex-col">
                 <BlogCard blog={blog} />

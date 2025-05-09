@@ -43,7 +43,7 @@ export default function BlogCard({ blog }) {
   };
   
   return (
-    <div className="flex flex-col h-full overflow-hidden">
+    <div className="flex flex-col h-full">
       {/* Image Section - Superside style */}
       <Link href={`/blog/${slug}`} className="block group overflow-hidden rounded-lg">
         <div className="relative w-full aspect-[16/9] overflow-hidden">
