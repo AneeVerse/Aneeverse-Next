@@ -198,14 +198,14 @@ export default function ClientBlogPage() {
           return (
             <section key={`category-${category}`} className='bg-[#EBFAFE] pb-16'>
               <Layout>
-                <div className='flex justify-between items-center mb-8'>
-                  <h2 className='text-[40px] text-[#0A2E3D] font-normal uppercase'>{category}</h2>
+                <div className='flex justify-between items-center mb-6 md:mb-8'>
+                  <h2 className='text-2xl md:text-[40px] text-[#0A2E3D] font-normal font-["Inter",sans-serif]'>{category}</h2>
                   <Link 
                     href={`/blog/category/${categorySlug}`} 
-                    className='text-[#0A2E3D] hover:text-blue-600 flex items-center gap-2 font-medium text-lg'
+                    className='text-[#0A2E3D] hover:text-blue-600 flex items-center gap-1 md:gap-2 font-medium text-base md:text-lg font-["Inter",sans-serif]'
                   >
-                    <span>See All</span>
-                    <FaChevronRight className='text-lg transition-transform duration-300 group-hover:translate-x-1' />
+                    <span>See all</span>
+                    <FaChevronRight className='text-base md:text-lg transition-transform duration-300 group-hover:translate-x-1' />
                   </Link>
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14'>
