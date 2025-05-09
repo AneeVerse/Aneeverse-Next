@@ -47,6 +47,26 @@ const nextConfig = {
         ],
         destination: 'https://blog.aneeverse.com/:path*',
       },
+      {
+        source: '/',
+        has: [
+          {
+            type: 'host',
+            value: 'blog.aneeverse.com',
+          },
+        ],
+        destination: '/studio',
+      },
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'blog.aneeverse.com',
+          },
+        ],
+        destination: '/studio/:path*',
+      },
     ];
   },
   async headers() {
