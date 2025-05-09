@@ -12,19 +12,19 @@ const BlogHeroSection = ({ blogData }) => {
   // If no blogs exist or still loading, render a simplified version
   if (isLoading || blogs.length === 0) {
     return (
-      <section className="pb-16 pt-[160px] mt-[-80px]">
+      <section className="pb-16 pt-[100px] mt-[-20px] bg-[#f7fbfd]">
         <Layout>
           {/* Heading */}
-          <div className="text-center mb-12">
-            <p className="text-base uppercase tracking-wider text-secondary-500 mb-2 mt-8">BLOG</p>
-            <h2 className="text-4xl md:text-6xl -mt-1 font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] relative inline-block group">
-              <span className="relative inline-block">
+          <div className="mb-12">
+            <div className="flex flex-col items-center md:items-center text-center">
+              <p className="text-base uppercase tracking-wider text-secondary-500 mb-2 font-['Inter',sans-serif]">BLOG</p>
+              <h1 className="text-4xl md:text-6xl font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] font-['Inter',sans-serif]">
                 Creative Performance
-              </span>
-            </h2>
-            <p className="text-lg text-secondary-500 mt-4 text-center mx-auto">
-              Creative ideas, practical tips and insider info—the Aneeverse blog helps your team get great design done at scale.
-            </p>
+              </h1>
+              <p className="text-lg text-secondary-500 mt-4 text-center max-w-3xl font-['Inter',sans-serif]">
+                Creative ideas, practical tips and insider info—the Aneeverse blog helps your team get great design done at scale.
+              </p>
+            </div>
           </div>
           
           {/* Loading state or empty blogs */}
@@ -40,26 +40,26 @@ const BlogHeroSection = ({ blogData }) => {
             {/* Subscription Box */}
             <div className="bg-[#073742] rounded-xl p-8 flex flex-col justify-between shadow-sm">
               <div>
-                <p className="text-sm uppercase tracking-wide text-[#EBFAFE]/70">
+                <p className="text-sm uppercase tracking-wide text-[#EBFAFE]/70 font-['Inter',sans-serif]">
                   CREATIVE GOLD
                 </p>
-                <h3 className="text-3xl font-semibold text-[#ebfafe] mt-2">
+                <h3 className="text-3xl font-semibold text-[#ebfafe] mt-2 font-['Inter',sans-serif]">
                   For Your Inbox
                 </h3>
-                <p className="text-lg text-[#ebfafe]/80 mt-3">
+                <p className="text-lg text-[#ebfafe]/80 mt-3 font-['Inter',sans-serif]">
                   The best events, articles and insights to spark your next big idea.
                 </p>
               </div>
               <div className="mt-6">
-                <div className="flex items-center bg-transparent px-4 py-3 rounded-full border border-[#ebfafe]/40">
+                <div className="flex items-center bg-transparent px-4 py-3 rounded-full border-2 border-[#ebfafe]/40">
                   <FaEnvelope className="text-[#ebfafe]/60" />
                   <input
                     type="email"
                     placeholder="buzz@nasa.gov"
-                    className="flex-1 bg-transparent outline-none pl-3 text-[#ebfafe]"
+                    className="flex-1 bg-transparent outline-none pl-3 text-[#ebfafe] placeholder-[#ebfafe]/60 font-['Inter',sans-serif]"
                   />
                 </div>
-                <button className="mt-4 w-full bg-[#ebfafe] text-[#073742] py-3 rounded-full font-semibold hover:bg-[#ebfafe]/90 transition-colors">
+                <button className="mt-4 w-full bg-[#ebfafe] text-[#073742] py-3 rounded-full font-semibold border-2 border-[#ebfafe]/100 hover:bg-transparent hover:text-[#ebfafe] hover:border-2 hover:border-[#ebfafe]/40 transition-colors font-['Inter',sans-serif]">
                   Subscribe now
                 </button>
               </div>
@@ -74,19 +74,19 @@ const BlogHeroSection = ({ blogData }) => {
   const featuredBlog = blogs[0];
   
   return (
-    <section className="pb-16 pt-[160px] mt-[-80px]">
+    <section className="pb-16 pt-[100px] mt-[-20px] bg-[#f7fbfd]">
       <Layout>
         {/* Heading */}
-        <div className="text-center mb-12">
-          <p className="text-base uppercase tracking-wider text-secondary-500 mb-2 mt-8">BLOG</p>
-          <h2 className="text-4xl md:text-6xl -mt-1 font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] relative inline-block group">
-            <span className="relative inline-block">
+        <div className="mb-12">
+          <div className="flex flex-col items-center md:items-center text-center">
+            <p className="text-base uppercase tracking-wider text-secondary-500 mb-2 font-['Inter',sans-serif]">BLOG</p>
+            <h1 className="text-4xl md:text-6xl font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] font-['Inter',sans-serif]">
               Creative Performance
-            </span>
-          </h2>
-          <p className="text-lg text-secondary-500 mt-4 text-center mx-auto">
-            Creative ideas, practical tips and insider info—the Aneeverse blog helps your team get great design done at scale.
-          </p>
+            </h1>
+            <p className="text-lg text-secondary-500 mt-4 text-center max-w-3xl font-['Inter',sans-serif]">
+              Creative ideas, practical tips and insider info—the Aneeverse blog helps your team get great design done at scale.
+            </p>
+          </div>
         </div>
 
         {/* Main Content */}
@@ -103,37 +103,23 @@ const BlogHeroSection = ({ blogData }) => {
                   sizes="(max-width: 768px) 100vw, 66vw"
                 />
               </div>
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/80 via-black/50 to-transparent"></div>
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#031B34]/95 via-[#031B34]/75 to-transparent"></div>
               <div className="relative flex flex-col justify-between z-10 w-full h-full">
-                <p className="text-sm sm:text-md font-semibold uppercase tracking-wide text-gray-300">
-                  {featuredBlog.category?.toUpperCase()} • {featuredBlog.timeToRead || '5 min read'}
-                </p>
-                <div>
-                  <h3 className="text-3xl sm:text-4xl max-w-full sm:max-w-2xl font-semibold mt-3 leading-tight relative">
-                    <span className="inline-block relative">
+                <div className="flex flex-col pt-4">
+                  <p className="text-md uppercase tracking-wide text-white font-['Inter',sans-serif] mb-[10px]">
+                    ANEEVERSE NEWS • {featuredBlog.timeToRead ? `${featuredBlog.timeToRead} min read` : '5 MIN READ'}
+                  </p>
+                  <h3 className="text-4xl sm:text-5xl max-w-full sm:max-w-2xl font-normal leading-[1.1] font-['Inter',sans-serif]" style={{ '--underline-height': '3px', '--underline-speed': '500ms' }}>
+                    <span className="bg-[linear-gradient(currentColor,currentColor)] bg-left-bottom bg-no-repeat transition-[background] duration-[var(--underline-speed)] bg-[length:0%_var(--underline-height)] hover:bg-[length:100%_var(--underline-height)] group-hover:bg-[length:100%_var(--underline-height)]">
                       {featuredBlog.title}
-                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 group-hover:w-full"></span>
                     </span>
                   </h3>
-                  <div className="flex items-center gap-3 mt-6">
-                    <div className="relative w-10 h-10 rounded-full overflow-hidden">
-                      <Image
-                        src={featuredBlog.author.image}
-                        alt={featuredBlog.author.name}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="flex items-center text-sm gap-2">
-                      <div className="pr-4 border-r border-gray-400">
-                        <p className="font-medium">{featuredBlog.author.name}</p>
-                        <p className="text-gray-400">
-                          {featuredBlog.author.role}
-                        </p>
-                      </div>
-                      <div className="pl-4">
-                        Published <br /> {featuredBlog.date}
-                      </div>
+                  <div className="flex items-center gap-3 mt-20">
+                    <div className="font-['Inter',sans-serif]">
+                      <p className="text-base text-white font-bold">Published</p>
+                      <p className="text-lg font-medium">
+                        {new Date(featuredBlog.date).toLocaleDateString('en-US', {month: 'short', day: 'numeric'})}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -144,13 +130,13 @@ const BlogHeroSection = ({ blogData }) => {
           {/* Subscription Box */}
           <div className="bg-[#073742] rounded-xl p-8 flex flex-col justify-between shadow-sm">
             <div>
-              <p className="text-sm uppercase tracking-wide text-[#ebfafe]/70">
+              <p className="text-sm uppercase tracking-wide text-[#EBFAFE]/70 font-['Inter',sans-serif]">
                 CREATIVE GOLD
               </p>
-              <h3 className="text-3xl font-semibold text-[#ebfafe] mt-2">
+              <h3 className="text-3xl font-semibold text-[#ebfafe] mt-2 font-['Inter',sans-serif]">
                 For Your Inbox
               </h3>
-              <p className="text-lg text-[#ebfafe]/80 mt-3">
+              <p className="text-lg text-[#ebfafe]/80 mt-3 font-['Inter',sans-serif]">
                 The best events, articles and insights to spark your next big idea.
               </p>
             </div>
@@ -160,10 +146,10 @@ const BlogHeroSection = ({ blogData }) => {
                 <input
                   type="email"
                   placeholder="buzz@nasa.gov"
-                  className="flex-1 bg-transparent outline-none pl-3 text-[#ebfafe]"
+                  className="flex-1 bg-transparent outline-none pl-3 text-[#ebfafe] placeholder-[#ebfafe]/60 font-['Inter',sans-serif]"
                 />
               </div>
-              <button className="mt-4 w-full bg-[#ebfafe] text-[#073742] py-3 rounded-full font-semibold border-2 border-[#ebfafe]/100 hover:bg-transparent hover:text-[#ebfafe] hover:border-2 hover:border-[#ebfafe]/40 transition-colors">
+              <button className="mt-4 w-full bg-[#ebfafe] text-[#073742] py-3 rounded-full font-semibold border-2 border-[#ebfafe]/100 hover:bg-transparent hover:text-[#ebfafe] hover:border-2 hover:border-[#ebfafe]/40 transition-colors font-['Inter',sans-serif]">
                 Subscribe now
               </button>
             </div>
