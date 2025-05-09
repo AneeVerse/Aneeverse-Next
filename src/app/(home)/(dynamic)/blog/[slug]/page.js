@@ -625,8 +625,8 @@ export default function BlogDetail({ params }) {
             {/* Read Time Animation - Added without changing structure */}
             <ReadTimeProgress timeToRead={post.timeToRead || "5 min read"} />
             
-            {/* Table of Contents - More compact with smaller text */}
-            <div className="bg-[#E6ECD6] p-4 rounded-lg mt-6">
+            {/* Table of Contents */}
+            <div className="bg-[#E6ECD6] p-4 rounded-lg">
               <h4 className="uppercase text-[#101828] text-xs font-semibold tracking-wide mb-3">TABLE OF CONTENTS</h4>
               {h2Headings.length > 0 && (
                 <div className="max-h-[120px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
@@ -635,7 +635,7 @@ export default function BlogDetail({ params }) {
                       <li key={index} className="relative">
                         <a
                           href={`#${section.id}`}
-                          className={`block text-sm leading-tight pl-4 ${
+                          className={`block text-sm leading-tight pl-4 truncate ${
                             activeId === section.id
                             ? 'text-[#101828] font-medium' 
                             : 'text-[#667085] hover:text-[#101828]'
@@ -647,6 +647,7 @@ export default function BlogDetail({ params }) {
                               element.scrollIntoView({ behavior: 'smooth' });
                             }
                           }}
+                          title={section.title}
                         >
                           {activeId === section.id && (
                             <div className="absolute left-0 top-[6px] w-1.5 h-1.5 rounded-full bg-[#101828] animate-pulse"></div>
@@ -694,7 +695,7 @@ export default function BlogDetail({ params }) {
                     <li key={index} className="relative">
                       <a
                         href={`#${section.id}`}
-                        className={`block text-sm leading-tight pl-4 ${
+                        className={`block text-sm leading-tight pl-4 truncate ${
                           activeId === section.id
                           ? 'text-[#101828] font-medium' 
                           : 'text-[#667085] hover:text-[#101828]'
@@ -706,6 +707,7 @@ export default function BlogDetail({ params }) {
                             element.scrollIntoView({ behavior: 'smooth' });
                           }
                         }}
+                        title={section.title}
                       >
                         {activeId === section.id && (
                           <div className="absolute left-0 top-[6px] w-1.5 h-1.5 rounded-full bg-[#101828] animate-pulse"></div>
