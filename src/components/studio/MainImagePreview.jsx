@@ -13,7 +13,7 @@ const MainImagePreview = (props) => {
       <Card padding={4} radius={2} shadow={1} tone="primary">
         <Stack space={3}>
           <Text size={1} weight="semibold">Main Image Preview</Text>
-          <Text size={1}>Add a main image to automatically include it in your content</Text>
+          <Text size={1}>Add a main image to your post</Text>
         </Stack>
       </Card>
     );
@@ -38,7 +38,7 @@ const MainImagePreview = (props) => {
     <Card padding={4} radius={2} shadow={1}>
       <Stack space={3}>
         <Text size={1} weight="semibold">Main Image Preview</Text>
-        <Text size={1}>This image is automatically included in your body content</Text>
+        <Text size={1}>Main post image</Text>
         <Box paddingTop={2}>
           <img 
             src={imageUrl} 
