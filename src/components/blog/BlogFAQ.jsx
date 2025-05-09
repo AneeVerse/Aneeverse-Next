@@ -8,7 +8,7 @@ import SanityPortableText from './SanityPortableText';
 const BlogFAQItem = ({ question, answer, isOpen, toggleOpen, index }) => {
   return (
     <motion.div 
-      className="border-b border-gray-200 last:border-0"
+      className="border-b border-gray-700 last:border-0"
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.1 }}
@@ -19,11 +19,11 @@ const BlogFAQItem = ({ question, answer, isOpen, toggleOpen, index }) => {
         aria-expanded={isOpen}
         aria-controls={`answer-${question.replace(/\s+/g, '-').toLowerCase()}`}
       >
-        <h3 className="text-lg font-medium text-[#101828] group-hover:text-primary-600 transition-colors">
+        <h3 className="text-lg font-bold text-white group-hover:text-gray-300 transition-colors">
           {question}
         </h3>
         <IoChevronDown 
-          className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${isOpen ? 'transform rotate-180 text-primary-600' : ''} group-hover:text-primary-600`} 
+          className={`w-5 h-5 text-gray-300 transition-transform duration-300 ${isOpen ? 'transform rotate-180 text-white' : ''} group-hover:text-white`} 
         />
       </button>
       <AnimatePresence>
@@ -36,7 +36,7 @@ const BlogFAQItem = ({ question, answer, isOpen, toggleOpen, index }) => {
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <div className="pb-5 prose prose-lg max-w-none prose-p:text-gray-700">
+            <div className="pb-5 prose prose-lg max-w-none prose-p:text-gray-300 prose-a:text-white prose-a:underline prose-strong:text-white">
               {typeof answer === 'string' ? (
                 <div dangerouslySetInnerHTML={{ __html: answer }} />
               ) : (
@@ -82,7 +82,7 @@ const BlogFAQ = ({ title = 'Frequently Asked Questions', questions = [] }) => {
       </motion.div>
       
       <motion.div 
-        className="bg-[#E6ECD6] rounded-xl p-6 md:p-8 divide-y divide-gray-200"
+        className="bg-[#073742] rounded-xl p-6 md:p-8 divide-y divide-gray-700 text-white"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
