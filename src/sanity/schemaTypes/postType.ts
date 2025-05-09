@@ -24,6 +24,7 @@ export const postType = defineType({
       options: {
         hotspot: true,
       },
+      description: 'This image will be automatically added to the beginning of your body content. You don\'t need to add it twice.',
       fields: [
         defineField({
           name: 'alt',

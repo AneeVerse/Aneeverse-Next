@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { client } from '@/lib/sanity';
-import { blockContentToHtml } from '@/lib/sanity-utils';
+import { blockContentToHtml, imageBlockToHtml } from '@/lib/sanity-utils';
 
 export async function GET(request, { params }) {
   try {
@@ -17,7 +17,13 @@ export async function GET(request, { params }) {
     const query = `*[_type == "post" && slug.current == $slug][0]{
       title,
       slug,
-      mainImage,
+      mainImage{
+        asset->{
+          _id,
+          url
+        },
+        alt
+      },
       body,
       "content": body,
       "date": publishedAt,
@@ -51,6 +57,19 @@ export async function GET(request, { params }) {
     
     // Process content to ensure proper HTML format
     if (blog.content) {
+      // Check if main image exists and ensure it's added to the body content
+      let contentWithMainImage = '';
+      
+      // Convert main image to HTML if it exists
+      if (blog.mainImage && blog.mainImage.asset) {
+        const mainImageHtml = `
+          <figure class="main-image">
+            <img src="${blog.mainImage.asset.url}" alt="${blog.mainImage.alt || 'Blog image'}" class="rounded-lg w-full" />
+          </figure>
+        `;
+        contentWithMainImage += mainImageHtml;
+      }
+      
       // Handle Portable Text conversion using the imported function
       if (typeof blog.content !== 'string' && Array.isArray(blog.content)) {
         console.log('Converting Portable Text to HTML');
@@ -61,6 +80,9 @@ export async function GET(request, { params }) {
       if (typeof blog.content === 'string') {
         blog.content = fixBulletPoints(blog.content);
       }
+      
+      // Add the body content after the main image
+      blog.content = contentWithMainImage + blog.content;
     }
     
     return NextResponse.json({ 
