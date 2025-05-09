@@ -21,7 +21,7 @@ const BlogHeroSection = ({ blogData }) => {
               <h1 className="text-4xl md:text-6xl font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] font-['Inter',sans-serif]">
                 Creative Performance
               </h1>
-              <p className="text-lg text-secondary-500 mt-4 text-center max-w-3xl font-['Inter',sans-serif] whitespace-nowrap overflow-hidden">
+              <p className="text-lg text-secondary-500 mt-4 text-center max-w-3xl font-['Inter',sans-serif] px-4">
                 Creative ideas, practical tips and insider info the Aneeverse blog helps your team get great design done at scale.
               </p>
             </div>
@@ -83,7 +83,7 @@ const BlogHeroSection = ({ blogData }) => {
             <h1 className="text-4xl md:text-6xl font-normal tracking-[-2px] text-[#0A2E3D] leading-[1.1] font-['Inter',sans-serif]">
               Creative Performance
             </h1>
-            <p className="text-lg text-secondary-500 mt-4 text-center max-w-3xl font-['Inter',sans-serif] whitespace-nowrap overflow-hidden">
+            <p className="text-lg text-secondary-500 mt-4 text-center max-w-3xl font-['Inter',sans-serif] px-4">
               Creative ideas, practical tips and insider info the Aneeverse blog helps your team get great design done at scale.
             </p>
           </div>
@@ -93,7 +93,7 @@ const BlogHeroSection = ({ blogData }) => {
         <div className="grid md:grid-cols-3 gap-8 w-full">
           {/* Featured Blog */}
           <Link href={`blog/${featuredBlog.id}`} className="md:col-span-2 bg-[#031B34] text-white rounded-xl overflow-hidden group">
-            <div className="relative z-10 h-[400px] w-full p-8">
+            <div className="relative z-10 h-[350px] sm:h-[400px] w-full p-4 sm:p-8">
               <div className="absolute inset-0">
                 <Image
                   src={featuredBlog.thumbnail}
@@ -109,12 +109,12 @@ const BlogHeroSection = ({ blogData }) => {
                   <p className="text-md uppercase tracking-wide text-white font-['Inter',sans-serif] mb-[10px]">
                     {featuredBlog.category || "BLOG"} • <span className="normal-case">{featuredBlog.timeToRead ? `${featuredBlog.timeToRead} min read` : '5 min read'}</span>
                   </p>
-                  <h3 className="text-4xl sm:text-5xl max-w-full sm:max-w-2xl font-normal leading-[1.1] font-['Inter',sans-serif]" style={{ '--underline-height': '3px', '--underline-speed': '500ms' }}>
+                  <h3 className="text-3xl sm:text-4xl md:text-5xl max-w-full sm:max-w-2xl font-normal leading-[1.1] font-['Inter',sans-serif]" style={{ '--underline-height': '3px', '--underline-speed': '500ms' }}>
                     <span className="bg-[linear-gradient(currentColor,currentColor)] bg-left-bottom bg-no-repeat transition-[background] duration-[var(--underline-speed)] bg-[length:0%_var(--underline-height)] hover:bg-[length:100%_var(--underline-height)] group-hover:bg-[length:100%_var(--underline-height)]">
                       {featuredBlog.title}
                     </span>
                   </h3>
-                  <div className="flex items-center gap-3 mt-20">
+                  <div className="flex items-center gap-3 mt-8 sm:mt-20">
                     <div className="font-['Inter',sans-serif]">
                       <p className="text-base text-white font-bold">Published</p>
                       <p className="text-lg font-medium">
