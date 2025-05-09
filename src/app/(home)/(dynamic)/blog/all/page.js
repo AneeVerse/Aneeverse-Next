@@ -185,16 +185,17 @@ export default function AllBlogsPage() {
         </div>
         
         {/* Page Title */}
-        <h1 className="text-5xl font-normal text-[#0A2E3D] mb-6">All articles</h1>
-        <p className="text-xl text-gray-600 mb-12">
+        <h1 className="text-3xl md:text-5xl font-normal text-[#0A2E3D] mb-3 md:mb-6 font-['Inter',sans-serif]">All articles</h1>
+        <p className="text-base md:text-xl text-gray-600 mb-8 md:mb-12 font-['Inter',sans-serif]">
           Stay up to date with the latest articles from our stellar crew.
         </p>
         
         {/* Category Filters */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-medium text-[#0A2E3D] mb-6">Main Categories</h2>
+        <div className="mb-8 md:mb-12">
+          <h2 className="text-xl md:text-2xl font-medium text-[#0A2E3D] mb-4 md:mb-6 font-['Inter',sans-serif]">Main Categories</h2>
           
-          <div className="flex flex-wrap gap-3 mb-8">
+          {/* Desktop Category Buttons */}
+          <div className="hidden md:flex flex-wrap gap-3 mb-8">
             {categories.map((category, index) => (
               <button
                 key={index}
@@ -208,6 +209,28 @@ export default function AllBlogsPage() {
                 {category}
               </button>
             ))}
+          </div>
+          
+          {/* Mobile Category Dropdown */}
+          <div className="md:hidden mb-8">
+            <div className="relative">
+              <select
+                value={selectedCategory}
+                onChange={(e) => handleCategoryChange(e.target.value)}
+                className="appearance-none w-full p-4 pr-10 bg-[#0A2E3D] text-white rounded-xl cursor-pointer focus:outline-none"
+              >
+                {categories.map((category, index) => (
+                  <option key={index} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4">
+                <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
           </div>
         </div>
         

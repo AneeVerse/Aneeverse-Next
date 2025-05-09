@@ -17,14 +17,17 @@ const LatestArticlesSection = ({ blogData }) => {
     <section className="py-16 bg-[#EBFAFE]">
       <Layout>
         {/* Header with See All Link */}
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-[40px] text-[#0A2E3D] font-normal uppercase">Latest articles</h2>
+        <div className="flex justify-between items-center mb-6 md:mb-8">
+          <h2 className="text-2xl md:text-[40px] text-[#0A2E3D] font-normal font-['Inter',sans-serif]">
+            <span>Latest</span>
+            <span className="inline ml-1 md:ml-2">articles</span>
+          </h2>
           <Link 
             href="/blog/all" 
-            className="text-[#0A2E3D] hover:text-blue-600 flex items-center gap-2 font-medium text-lg"
+            className="text-[#0A2E3D] hover:text-blue-600 flex items-center gap-1 md:gap-2 font-medium text-base md:text-lg font-['Inter',sans-serif]"
           >
-            <span>See All</span>
-            <FaChevronRight className="text-lg transition-transform duration-300 group-hover:translate-x-1" />
+            <span>See all</span>
+            <FaChevronRight className="text-base md:text-lg transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </div>
 
