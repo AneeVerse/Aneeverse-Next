@@ -1,5 +1,5 @@
 "use client";
-import { use, useEffect, useRef, useState } from 'react';
+import { use, useEffect, useRef, useState, useMemo } from 'react';
 import Layout from '@/components/common/Layout';
 import { blogs } from '@/data/blogData';
 import Image from 'next/image';
@@ -394,37 +394,6 @@ export default function BlogDetail({ params }) {
     }));
   }, [post]);
 
-  if (isLoading) {
-    return (
-      <div className="bg-white py-16">
-        <Layout>
-          <div className="text-center py-10">
-            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status">
-              <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
-            </div>
-            <p className="mt-2">Loading blog content...</p>
-          </div>
-        </Layout>
-      </div>
-    );
-  }
-
-  if (error || !post) {
-    return (
-      <div className="bg-white py-16">
-        <Layout>
-          <div className="text-center py-20">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">{error || 'Blog not found'}</h2>
-            <p className="text-gray-600 mb-8">The blog post you're looking for could not be found.</p>
-            <Link href="/blog" className="px-6 py-3 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors">
-              Return to Blog
-            </Link>
-          </div>
-        </Layout>
-      </div>
-    );
-  }
-
   // Function to render content with proper image handling
   const renderContent = (content) => {
     try {
@@ -521,6 +490,39 @@ export default function BlogDetail({ params }) {
       return <div className="prose max-w-none">Error displaying content. Please try again later.</div>;
     }
   };
+
+  const memoizedContent = useMemo(() => renderContent(post?.content), [post?.content]);
+
+  if (isLoading) {
+    return (
+      <div className="bg-white py-16">
+        <Layout>
+          <div className="text-center py-10">
+            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status">
+              <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
+            </div>
+            <p className="mt-2">Loading blog content...</p>
+          </div>
+        </Layout>
+      </div>
+    );
+  }
+
+  if (error || !post) {
+    return (
+      <div className="bg-white py-16">
+        <Layout>
+          <div className="text-center py-20">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">{error || 'Blog not found'}</h2>
+            <p className="text-gray-600 mb-8">The blog post you're looking for could not be found.</p>
+            <Link href="/blog" className="px-6 py-3 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors">
+              Return to Blog
+            </Link>
+          </div>
+        </Layout>
+      </div>
+    );
+  }
 
   return (
     <div className='bg-[#EBFAFE] py-16'>
@@ -725,7 +727,7 @@ export default function BlogDetail({ params }) {
           <div className="w-full min-w-0">
             <article className="w-full">
               <div className="blog-content description">
-                {renderContent(post.content)}
+                {memoizedContent}
                 {/* Add direct CSS for bullet points */}
                 <style jsx global>{`
                   .blog-content ul {
