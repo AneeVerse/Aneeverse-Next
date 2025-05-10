@@ -630,12 +630,12 @@ export default function BlogDetail({ params }) {
               <h4 className="uppercase text-white text-xs font-semibold tracking-wide mb-3">TABLE OF CONTENTS</h4>
               {h2Headings.length > 0 && (
                 <div className="max-h-[120px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                  <ul className="space-y-1.5">
+                  <ul className="space-y-4">
                     {h2Headings.map((section, index) => (
                       <li key={index} className="relative">
                         <a
                           href={`#${section.id}`}
-                          className={`block text-sm leading-tight pl-4 truncate ${
+                          className={`block text-xs leading-tight pl-4 truncate ${
                             activeId === section.id
                             ? 'text-white font-medium' 
                             : 'text-gray-300 hover:text-white'
@@ -690,12 +690,12 @@ export default function BlogDetail({ params }) {
             <div className="lg:hidden mb-6 bg-[#0A2E3D] p-4 rounded-lg mt-4">
               <h4 className="uppercase text-white text-xs font-semibold tracking-wide mb-2">TABLE OF CONTENTS</h4>
               <div className="overflow-y-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                <ul className="space-y-1.5">
+                <ul className="space-y-4">
                   {h2Headings.map((section, index) => (
                     <li key={index} className="relative">
                       <a
                         href={`#${section.id}`}
-                        className={`block text-sm leading-tight pl-4 truncate ${
+                        className={`block text-xs leading-tight pl-4 truncate ${
                           activeId === section.id
                           ? 'text-white font-medium' 
                           : 'text-gray-300 hover:text-white'
