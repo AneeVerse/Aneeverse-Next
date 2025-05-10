@@ -650,9 +650,9 @@ export default function BlogDetail({ params }) {
                           title={section.title}
                         >
                           {activeId === section.id && (
-                            <span className="text-white leading-none" style={{ fontSize: '10px' }}>●</span>
+                            <span className="text-white leading-none animate-toc-pulse" style={{ fontSize: '10px' }}>●</span>
                           )}
-                          <span className="truncate">{section.title}</span>
+                          <span className={`truncate transition-all duration-300 ${activeId === section.id ? 'toc-smooth-in' : 'toc-smooth-out'}`}>{section.title}</span>
                         </a>
                       </li>
                     ))}
@@ -710,9 +710,9 @@ export default function BlogDetail({ params }) {
                         title={section.title}
                       >
                         {activeId === section.id && (
-                          <span className="text-white leading-none" style={{ fontSize: '10px' }}>●</span>
+                          <span className="text-white leading-none animate-toc-pulse" style={{ fontSize: '10px' }}>●</span>
                         )}
-                        <span className="truncate">{section.title}</span>
+                        <span className={`truncate transition-all duration-300 ${activeId === section.id ? 'toc-smooth-in' : 'toc-smooth-out'}`}>{section.title}</span>
                       </a>
                     </li>
                   ))}
