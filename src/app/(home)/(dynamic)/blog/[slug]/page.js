@@ -635,10 +635,10 @@ export default function BlogDetail({ params }) {
                       <li key={index} className="relative">
                         <a
                           href={`#${section.id}`}
-                          className={`block text-xs leading-tight pl-4 truncate ${
+                          className={`flex items-center gap-2 text-xs leading-tight pl-4 ${
                             activeId === section.id
-                            ? 'text-white font-medium' 
-                            : 'text-gray-300 hover:text-white'
+                              ? 'text-white font-medium'
+                              : 'text-gray-300 hover:text-white'
                           }`}
                           onClick={(e) => {
                             e.preventDefault();
@@ -650,9 +650,9 @@ export default function BlogDetail({ params }) {
                           title={section.title}
                         >
                           {activeId === section.id && (
-                            <div className="absolute left-0 top-[6px] w-1.5 h-1.5 rounded-full bg-white animate-pulse"></div>
+                            <span className="text-white leading-none" style={{ fontSize: '10px' }}>●</span>
                           )}
-                          {section.title}
+                          <span className="truncate">{section.title}</span>
                         </a>
                       </li>
                     ))}
@@ -695,10 +695,10 @@ export default function BlogDetail({ params }) {
                     <li key={index} className="relative">
                       <a
                         href={`#${section.id}`}
-                        className={`block text-xs leading-tight pl-4 truncate ${
+                        className={`flex items-center gap-2 text-xs leading-tight pl-4 ${
                           activeId === section.id
-                          ? 'text-white font-medium' 
-                          : 'text-gray-300 hover:text-white'
+                            ? 'text-white font-medium'
+                            : 'text-gray-300 hover:text-white'
                         }`}
                         onClick={(e) => {
                           e.preventDefault();
@@ -710,9 +710,9 @@ export default function BlogDetail({ params }) {
                         title={section.title}
                       >
                         {activeId === section.id && (
-                          <div className="absolute left-0 top-[6px] w-1.5 h-1.5 rounded-full bg-white animate-pulse"></div>
+                          <span className="text-white leading-none" style={{ fontSize: '10px' }}>●</span>
                         )}
-                        {section.title}
+                        <span className="truncate">{section.title}</span>
                       </a>
                     </li>
                   ))}
