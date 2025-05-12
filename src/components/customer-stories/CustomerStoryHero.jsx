@@ -1,40 +1,33 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Layout from "../common/Layout";
 import LongStoryCard from "./common/LongStoryCard";
-
-const team = [
-  {
-    title: "Email Campaign Strategy",
-    link: "/customer-stories/boosting-sales-with-optimized-landing-pages",
-    image: "/images/customer-stories/story1/portrait-image.avif",
-    logo: "/images/customer-stories/story1/shopify-logo.avif",
-  },
-  {
-    title: "Automated Email Sequences",
-    link: "/customer-stories/boosting-sales-with-optimized-landing-pages",
-    image: "/images/customer-stories/story2/portrait-image.avif",
-    logo: "/images/customer-stories/story2/amazon-logo.avif",
-  },
-  {
-    title: "Targeted Email Segmentation",
-    link: "/customer-stories/boosting-sales-with-optimized-landing-pages",
-    image: "/images/customer-stories/story3/portrait-image.avif",
-    logo: "/images/customer-stories/story3/boomi-logo.avif",
-  },
-  {
-    title: "Email Campaign Strategy",
-    link: "/customer-stories/boosting-sales-with-optimized-landing-pages",
-    image: "/images/customer-stories/story1/portrait-image.avif",
-    logo: "/images/customer-stories/story1/shopify-logo.avif",
-  },
-];
+import { client } from '@/sanity/lib/client';
+import { getCustomerStoriesQuery } from '@/sanity/lib/queries';
 
 const CustomerStoryHero = () => {
   const scrollRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
+  const [featuredStories, setFeaturedStories] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch customer stories
+  useEffect(() => {
+    async function fetchStories() {
+      try {
+        const stories = await client.fetch(getCustomerStoriesQuery);
+        // Take the first 4 customer stories
+        setFeaturedStories(stories.slice(0, 4));
+      } catch (error) {
+        console.error("Error fetching customer stories:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchStories();
+  }, []);
 
   // Start Dragging
   const handleMouseDown = (e) => {
@@ -67,7 +60,7 @@ const CustomerStoryHero = () => {
             Customer Stories
           </h2>
           <p className="text-lg max-w-2xl mx-auto text-secondary-500 mt-8">
-            Hear from Superside customers about the design challenges they've faced. From better branding to battling burnout, find out how we helped them implement solutions, fast.
+            Hear from our customers about the challenges they've faced and how we helped them implement effective solutions.
           </p>
         </div>
 
@@ -80,9 +73,25 @@ const CustomerStoryHero = () => {
           onMouseUp={handleMouseUp}
           onMouseMove={handleMouseMove}
         >
-          {team.map((item, index) => (
-            <LongStoryCard item={item} key={index} />
-          ))}
+          {loading ? (
+            // Loading skeleton
+            Array(4).fill().map((_, index) => (
+              <div key={index} className="min-w-[280px] h-80 flex-shrink-0 bg-gray-200 animate-pulse rounded-lg"></div>
+            ))
+          ) : featuredStories.length > 0 ? (
+            // Render actual stories
+            featuredStories.map((story, index) => (
+              <LongStoryCard 
+                key={story._id}
+                story={story}
+              />
+            ))
+          ) : (
+            // Fallback message if no stories
+            <div className="w-full text-center py-10 text-gray-500">
+              No customer stories available yet. Check back soon!
+            </div>
+          )}
         </div>
       </Layout>
     </section>

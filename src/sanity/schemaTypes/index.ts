@@ -5,13 +5,15 @@ import {categoryType} from './categoryType'
 import {postType} from './postType'
 import {authorType} from './authorType'
 import {faqType} from './faqType'
+import {customerStoryType} from './customerStoryType'
 
 export const schemaTypes = [
   blockContentType, 
   categoryType, 
   postType, 
   authorType,
-  faqType
+  faqType,
+  customerStoryType
 ]
 
 export const schema: { types: SchemaTypeDefinition[] } = {
