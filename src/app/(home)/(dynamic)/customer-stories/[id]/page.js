@@ -307,20 +307,6 @@ export default function CustomerStoryDetail({ params }) {
             {post.title}
           </h1>
           
-          {/* Customer Logo - Larger Size */}
-          {post.customerLogo && (
-            <div className="flex justify-center mb-10">
-              <div className="w-44 h-20 relative">
-                <Image
-                  src={urlForImage(post.customerLogo).url()}
-                  alt={post.customerLogo.alt || `${post.title} customer logo`}
-                  fill
-                  className="object-contain"
-                />
-              </div>
-            </div>
-          )}
-          
           {/* Social sharing icons */}
           <div className="flex items-center justify-center gap-3 mb-10 sm:mb-20">
             <Link href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`} 

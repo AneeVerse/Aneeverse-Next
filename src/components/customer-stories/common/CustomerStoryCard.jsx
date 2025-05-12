@@ -73,24 +73,6 @@ export default function CustomerStoryCard({ story }) {
               className="object-cover transition-transform duration-500 group-hover:scale-105"
               onError={() => setImageError(true)}
             />
-            
-            {/* Customer Logo Centered on Image - Like Superside */}
-            {!logoError && logoUrl && (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative h-20 w-48">
-                  <Image
-                    src={logoUrl}
-                    alt={story.customerLogo?.alt || `${story.title} logo`}
-                    fill
-                    className="object-contain"
-                    onError={(e) => {
-                      console.error("Card logo failed to load:", logoUrl);
-                      setLogoError(true);
-                    }}
-                  />
-                </div>
-              </div>
-            )}
           </>
         ) : (
           <div className="w-full h-full bg-gray-200 flex items-center justify-center">
@@ -117,7 +99,7 @@ export default function CustomerStoryCard({ story }) {
         </div>
         
         {/* Footer with See Customer Story CTA */}
-        <div className="flex justify-end mt-auto pt-4 border-t border-[#D0E8F2]">
+        <div className="flex justify-start mt-auto pt-4 border-t border-[#D0E8F2]">
           <span className="text-sm font-medium text-primary-600 flex items-center">
             See Customer Story
             <FaChevronRight className="ml-1 text-xs" />
