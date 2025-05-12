@@ -85,7 +85,7 @@ export default function LongStoryCard({ story }) {
 
   return (
     <div
-      className="block min-w-[300px] sm:min-w-[350px] md:min-w-[420px] relative rounded-xl overflow-hidden shadow-lg bg-white select-none"
+      className="block min-w-[300px] sm:min-w-[300px] md:min-w-[418px] relative rounded-xl overflow-hidden shadow-lg bg-white select-none ml-2"
       onMouseDown={handlePointerStart}
       onMouseMove={handlePointerMove}
       onMouseUp={handlePointerEnd}
@@ -160,7 +160,7 @@ const CardContent = ({ story, categoryName, imageUrl, imageError, setImageError,
       {/* Content - Superside Style */}
       <div className="absolute bottom-0 left-0 right-0 p-6 text-white select-none pointer-events-none">
         {/* Title - Large, Bold, Positioned at Bottom */}
-        <h3 className="text-2xl md:text-3xl font-semibold mb-5 leading-tight max-w-[90%]">{story.title}</h3>
+        <h3 className="text-xl md:text-2xl font-semibold mb-5 leading-tight max-w-[90%]">{story.title}</h3>
         
         {/* Logo and CTA Row */}
         <div className="flex items-center justify-between w-full">

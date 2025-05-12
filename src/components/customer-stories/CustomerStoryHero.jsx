@@ -67,7 +67,7 @@ const CustomerStoryHero = () => {
         {/* Main Content */}
         <div
           ref={scrollRef}
-          className="flex gap-6 overflow-x-auto py-4 scrollbar-hide cursor-grab active:cursor-grabbing"
+          className="flex gap-6 overflow-x-auto py-4 scrollbar-hide cursor-grab active:cursor-grabbing -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 pr-8 sm:pr-10 lg:pr-12 "
           onMouseDown={handleMouseDown}
           onMouseLeave={handleMouseUp}
           onMouseUp={handleMouseUp}
