@@ -6,6 +6,7 @@ const ALLOWED_EMAILS = ['admin@aneeverse.com'];
 export function middleware(request) {
   const url = request.nextUrl;
   const hostname = request.headers.get('host');
+  const path = url.pathname;
 
   // Handle blog subdomain
   if (hostname === 'blog.aneeverse.com') {
@@ -53,6 +54,28 @@ export function middleware(request) {
     }
   }
 
+  // Redirect old blog URL patterns to new simplified format
+  if (path.match(/^\/blog\/category\/([^\/]+)$/)) {
+    // Handle old category URLs like /blog/category/web to /blog/web
+    return NextResponse.redirect(new URL(`/blog/${path.replace('/blog/category/', '')}`, request.url));
+  }
+
+  // Handle typos in the category segment
+  if (path.match(/^\/blog\/cateory\/([^\/]+)$/)) {
+    return NextResponse.redirect(new URL(`/blog/${path.replace('/blog/cateory/', '')}`, request.url));
+  }
+
+  if (path.match(/^\/blog\/catehoy\/([^\/]+)$/)) {
+    return NextResponse.redirect(new URL(`/blog/${path.replace('/blog/catehoy/', '')}`, request.url));
+  }
+
+  // Handle old blog post URLs with category in the path
+  if (path.match(/^\/blog\/[^\/]+\/([^\/]+)$/)) {
+    // Extract the slug from the old path (the part after the last slash)
+    const slug = path.substring(path.lastIndexOf('/') + 1);
+    return NextResponse.redirect(new URL(`/blog/${slug}`, request.url));
+  }
+
   // If accessing /admin or /dashboard from main domain, redirect to blog subdomain
   if ((hostname === 'www.aneeverse.com' || hostname === 'aneeverse.com') && 
       (url.pathname.startsWith('/admin') || url.pathname.startsWith('/dashboard'))) {
@@ -76,5 +99,9 @@ export function middleware(request) {
 export const config = {
   matcher: [
     '/((?!_next/static|_next/image|favicon.ico|logo.png).*)',
+    '/blog/:path*',
+    '/blog/category/:path*',
+    '/blog/cateory/:path*', // For typos
+    '/blog/catehoy/:path*', // For typos
   ],
 }; 
