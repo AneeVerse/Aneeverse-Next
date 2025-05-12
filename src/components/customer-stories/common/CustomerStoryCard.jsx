@@ -70,7 +70,7 @@ export default function CustomerStoryCard({ story }) {
               src={imageUrl}
               alt={story.mainImage?.alt || story.title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
               onError={() => setImageError(true)}
             />
           </>
@@ -100,7 +100,7 @@ export default function CustomerStoryCard({ story }) {
         
         {/* Footer with See Customer Story CTA */}
         <div className="flex justify-start mt-auto pt-4 border-t border-[#D0E8F2]">
-          <span className="text-sm font-medium text-primary-600 flex items-center">
+          <span className="text-sm font-medium text-primary-600 flex items-center group-hover:underline transition-all duration-300">
             See Customer Story
             <FaChevronRight className="ml-1 text-xs" />
           </span>
