@@ -129,7 +129,7 @@ const fetchBlogsByCategory = async (category) => {
         const x = acc.find(item => item.id === current.id);
         if (!x) {
           return acc.concat([current]);
-        } else {
+          } else {
           // If duplicate found, prefer API version
           const apiVersion = apiBlogs.find(blog => blog.id === current.id);
           if (apiVersion) {
@@ -149,7 +149,7 @@ const fetchBlogsByCategory = async (category) => {
       return { blogs: staticBlogs, categoryInfo: null, error: "API request failed" };
     }
     
-  } catch (err) {
+    } catch (err) {
     console.error("Error in fetchBlogsByCategory:", err);
     return { blogs: [], categoryInfo: null, error: "Failed to fetch blogs" };
   }
@@ -195,48 +195,48 @@ export default function SlugPage() {
   const renderSocialIcons = () => (
     <div className="flex items-center justify-center gap-3 mb-20">
       <Link href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`} 
-        className="w-12 h-12 rounded-full border border-[#1A5170] bg-transparent flex items-center justify-center hover:bg-[#0A2E3D]/10 transition-colors"
-        target="_blank" rel="noopener noreferrer"
-        aria-label="Share on LinkedIn"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-[#0A2E3D]">
-          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-        </svg>
-      </Link>
+              className="w-12 h-12 rounded-full border border-[#1A5170] bg-transparent flex items-center justify-center hover:bg-[#0A2E3D]/10 transition-colors"
+              target="_blank" rel="noopener noreferrer"
+              aria-label="Share on LinkedIn"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-[#0A2E3D]">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </Link>
       <Link href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`} 
-        className="w-12 h-12 rounded-full border border-[#1A5170] bg-transparent flex items-center justify-center hover:bg-[#0A2E3D]/10 transition-colors"
-        target="_blank" rel="noopener noreferrer"
-        aria-label="Share on Facebook"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-[#0A2E3D]">
-          <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
-        </svg>
-      </Link>
-      <button 
-        onClick={() => {
+              className="w-12 h-12 rounded-full border border-[#1A5170] bg-transparent flex items-center justify-center hover:bg-[#0A2E3D]/10 transition-colors"
+              target="_blank" rel="noopener noreferrer"
+              aria-label="Share on Facebook"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-[#0A2E3D]">
+                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+              </svg>
+            </Link>
+            <button 
+              onClick={() => {
           if (typeof window !== 'undefined' && navigator.clipboard) {
             navigator.clipboard.writeText(pageUrl);
-            alert('Link copied to clipboard!');
-          }
-        }} 
-        className="w-12 h-12 rounded-full border border-[#1A5170] bg-transparent flex items-center justify-center hover:bg-[#0A2E3D]/10 transition-colors"
-        aria-label="Copy link to clipboard"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#0A2E3D]">
-          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-        </svg>
-      </button>
-      <Link 
+                  alert('Link copied to clipboard!');
+                }
+              }} 
+              className="w-12 h-12 rounded-full border border-[#1A5170] bg-transparent flex items-center justify-center hover:bg-[#0A2E3D]/10 transition-colors"
+              aria-label="Copy link to clipboard"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#0A2E3D]">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+            </button>
+            <Link 
         href={`mailto:?subject=${post?.title ? encodeURIComponent(post.title) : ''}&body=${encodeURIComponent(`Check out this article: ${pageUrl}`)}`} 
-        className="w-12 h-12 rounded-full border border-[#1A5170] bg-transparent flex items-center justify-center hover:bg-[#0A2E3D]/10 transition-colors"
-        aria-label="Share via email"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#0A2E3D]">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-          <polyline points="22,6 12,13 2,6"></polyline>
-        </svg>
-      </Link>
+              className="w-12 h-12 rounded-full border border-[#1A5170] bg-transparent flex items-center justify-center hover:bg-[#0A2E3D]/10 transition-colors"
+              aria-label="Share via email"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#0A2E3D]">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </Link>
     </div>
   );
   
@@ -426,80 +426,80 @@ export default function SlugPage() {
                   </Link>
                   <div className="text-[#475467]">{post.author.role}</div>
                 </div>
-              </div>
-            </div>
-            
+          </div>
+        </div>
+
             {/* Social sharing icons - using the function */}
             {renderSocialIcons()}
           </div>
 
           {/* Main Grid Container with TOC Sidebar */}
           <div className="grid grid-cols-1 md:grid-cols-[270px_1fr] gap-8 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 3rem)' }}>
-            {/* Left Sidebar - Only shown on desktop */}
-            <aside className="lg:sticky top-24 self-start hidden lg:block space-y-8 shrink-0">
+          {/* Left Sidebar - Only shown on desktop */}
+          <aside className="lg:sticky top-24 self-start hidden lg:block space-y-8 shrink-0">
               {/* Read Time Animation */}
-              <ReadTimeProgress timeToRead={post.timeToRead || "5 min read"} />
-              
-              {/* Table of Contents */}
+            <ReadTimeProgress timeToRead={post.timeToRead || "5 min read"} />
+            
+            {/* Table of Contents */}
               {h2Headings.length > 0 && (
                 <div className="bg-[#0A2E3D] p-4 rounded-lg mt-6">
                   <h4 className="uppercase text-white text-xs font-semibold tracking-wide mb-3">TABLE OF CONTENTS</h4>
-                  <div className="max-h-[120px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                <div className="max-h-[120px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                     <ul className="space-y-1.5">
-                      {h2Headings.map((section, index) => (
-                        <li key={index} className="relative">
-                          <a
-                            href={`#${section.id}`}
+                    {h2Headings.map((section, index) => (
+                      <li key={index} className="relative">
+                        <a
+                          href={`#${section.id}`}
                             className={`block text-sm leading-tight pl-4 truncate ${
-                              activeId === section.id
-                              ? 'text-white font-medium' 
+                            activeId === section.id
+                              ? 'text-white font-medium'
                               : 'text-gray-300 hover:text-white'
-                            }`}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              const element = document.getElementById(section.id);
-                              if (element) {
-                                element.scrollIntoView({ behavior: 'smooth' });
-                              }
-                            }}
-                            title={section.title}
-                          >
-                            {activeId === section.id && (
+                          }`}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            const element = document.getElementById(section.id);
+                            if (element) {
+                              element.scrollIntoView({ behavior: 'smooth' });
+                            }
+                          }}
+                          title={section.title}
+                        >
+                          {activeId === section.id && (
                               <div className="absolute left-0 top-[6px] w-1.5 h-1.5 rounded-full bg-white animate-pulse"></div>
-                            )}
+                          )}
                             {section.title}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                   </div>
                 </div>
               )}
-              
-              {/* Promotional Poster */}
-              <div className="relative overflow-hidden rounded-lg shadow-[0_0_15px_rgba(0,0,0,0.2)] mt-8">
-                <div className="h-[170px] overflow-hidden bg-[#0A2E3D]">
-                  <Image 
-                    src="/blog-poster.avif" 
-                    alt="Get hassle-free service" 
-                    width={500} 
-                    height={300} 
-                    className="w-full h-full object-cover object-center"
-                  />
-                </div>
-                <div className="bg-[#0A2E3D] p-4 text-white" style={{marginTop: "-1px"}}>
-                  <h3 className="text-white text-lg font-bold leading-tight">Get hassle-free video at scale</h3>
-                  <p className="text-gray-300 text-xs my-1.5">See how we can help.</p>
-                  <Link 
-                    href="/contact" 
-                    className="block bg-white hover:bg-gray-100 text-[#0A2E3D] text-center py-2.5 w-full rounded-md font-medium transition-colors mt-2.5"
-                  >
-                    Book a call
-                  </Link>
-                </div>
-              </div>
-            </aside>
             
+            {/* Promotional Poster */}
+            <div className="relative overflow-hidden rounded-lg shadow-[0_0_15px_rgba(0,0,0,0.2)] mt-8">
+              <div className="h-[170px] overflow-hidden bg-[#0A2E3D]">
+                <Image 
+                  src="/blog-poster.avif" 
+                  alt="Get hassle-free service" 
+                  width={500} 
+                  height={300} 
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
+              <div className="bg-[#0A2E3D] p-4 text-white" style={{marginTop: "-1px"}}>
+                <h3 className="text-white text-lg font-bold leading-tight">Get hassle-free video at scale</h3>
+                <p className="text-gray-300 text-xs my-1.5">See how we can help.</p>
+                <Link 
+                  href="/contact" 
+                  className="block bg-white hover:bg-gray-100 text-[#0A2E3D] text-center py-2.5 w-full rounded-md font-medium transition-colors mt-2.5"
+                >
+                  Book a call
+                </Link>
+              </div>
+            </div>
+          </aside>
+
             {/* Main Content */}
             <div>
               <div className="relative w-full h-[400px] mb-8 rounded-xl overflow-hidden">
@@ -569,8 +569,8 @@ export default function SlugPage() {
                         href={`#${section.id}`}
                         className={`block text-sm leading-tight pl-4 truncate ${
                           activeId === section.id
-                          ? 'text-white font-medium' 
-                          : 'text-gray-300 hover:text-white'
+                            ? 'text-white font-medium'
+                            : 'text-gray-300 hover:text-white'
                         }`}
                         onClick={(e) => {
                           e.preventDefault();
@@ -609,8 +609,8 @@ export default function SlugPage() {
           <div className="uppercase">
             {categoryInfo?.title || slug.replace(/-/g, " ")}
           </div>
-        </div>
-        
+              </div>
+              
         {/* Category Header */}
         <header className="mb-12 flex flex-col md:flex-row items-center gap-6">
           {/* Left - Category Info */}
@@ -649,3 +649,4 @@ export default function SlugPage() {
     </div>
   );
 }
+  
