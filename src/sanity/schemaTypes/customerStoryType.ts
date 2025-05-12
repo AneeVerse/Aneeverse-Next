@@ -25,12 +25,16 @@ export const customerStoryType = defineType({
       type: 'image',
       options: {
         hotspot: true,
+        storeOriginalFilename: true,
+        accept: 'image/*',
       },
+      description: 'Main image for the customer story. Will be displayed at full width on the story page.',
       fields: [
         defineField({
           name: 'alt',
           type: 'string',
           title: 'Alternative text',
+          description: 'Important for SEO and accessibility',
         })
       ],
       validation: Rule => Rule.required(),
