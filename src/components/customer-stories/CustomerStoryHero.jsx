@@ -51,12 +51,12 @@ const CustomerStoryHero = () => {
   };
 
   return (
-    <section className="pb-16 pt-[160px] mt-[-80px]">
+    <section className="pb-16 pt-[160px] mt-[-80px] bg-primary-500 text-secondary-500">
       <Layout>
         {/* Heading */}
         <div className="text-center mb-12">
-          <h4 className="text-sm uppercase tracking-wide text-secondary-500">Learning Center</h4>
-          <h2 className="text-4xl md:text-6xl mt-3 font-semibold text-secondary-500">
+          <h4 className="text-sm uppercase tracking-wide text-secondary-600 font-semibold">Learning Center</h4>
+          <h2 className="text-6xl md:text-7xl mt-3  text-secondary-600">
             Customer Stories
           </h2>
           <p className="text-lg max-w-2xl mx-auto text-secondary-500 mt-8">

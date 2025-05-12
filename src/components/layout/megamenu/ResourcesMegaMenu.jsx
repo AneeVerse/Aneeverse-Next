@@ -12,12 +12,16 @@ import {
 import { FaChevronDown } from "react-icons/fa6";
 import Layout from "@/components/common/Layout";
 import Link from "next/link";
-import { customerStories } from "@/data/customerStoriesData";
 
 // Initialize data fetching early - this will be shared across instances
 let blogsCache = [];
 let isBlogsFetched = false;
 let isFetchingBlogs = false;
+
+// Add similar caching mechanism for customer stories
+let storiesCache = [];
+let isStoriesFetched = false;
+let isFetchingStories = false;
 
 // Prefetch blogs outside component to share across renders
 const prefetchBlogs = async () => {
@@ -43,15 +47,42 @@ const prefetchBlogs = async () => {
   }
 };
 
-// Start prefetching as soon as this module is loaded
+// Add prefetch function for customer stories
+const prefetchCustomerStories = async () => {
+  if (isFetchingStories || isStoriesFetched) return;
+  
+  try {
+    isFetchingStories = true;
+    const response = await fetch('/api/sanity-customer-stories?limit=2', { 
+      cache: 'no-store',
+      next: { revalidate: 300 } // Revalidate every 5 minutes
+    });
+    if (response.ok) {
+      const data = await response.json();
+      if (data.success) {
+        storiesCache = data.stories;
+        isStoriesFetched = true;
+      }
+    }
+  } catch (error) {
+    console.error('Error prefetching customer stories:', error);
+  } finally {
+    isFetchingStories = false;
+  }
+};
+
+// Start prefetching both resources as soon as this module is loaded
 if (typeof window !== 'undefined') {
   prefetchBlogs();
+  prefetchCustomerStories();
 }
 
 const ResourcesMegaMenu = ({ color }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [blogs, setBlogs] = useState(blogsCache);
+  const [customerStories, setCustomerStories] = useState(storiesCache);
   const [isLoading, setIsLoading] = useState(!isBlogsFetched);
+  const [isLoadingStories, setIsLoadingStories] = useState(!isStoriesFetched);
 
   // Fetch blogs as soon as the component mounts, not waiting for menu open
   useEffect(() => {
@@ -103,12 +134,68 @@ const ResourcesMegaMenu = ({ color }) => {
     fetchBlogs();
   }, []);
 
+  // Add useEffect for fetching customer stories
+  useEffect(() => {
+    const fetchCustomerStories = async () => {
+      // If we already have stories cached, use them
+      if (isStoriesFetched) {
+        setCustomerStories(storiesCache);
+        setIsLoadingStories(false);
+        return;
+      }
+      
+      // If already fetching, just wait
+      if (isFetchingStories) {
+        const checkCache = setInterval(() => {
+          if (isStoriesFetched) {
+            setCustomerStories(storiesCache);
+            setIsLoadingStories(false);
+            clearInterval(checkCache);
+          }
+        }, 100);
+        return () => clearInterval(checkCache);
+      }
+      
+      // Otherwise fetch them now
+      try {
+        setIsLoadingStories(true);
+        isFetchingStories = true;
+        const response = await fetch('/api/sanity-customer-stories?limit=2', { 
+          cache: 'no-store',
+          next: { revalidate: 300 } // Revalidate every 5 minutes
+        });
+        const data = await response.json();
+        if (data.success) {
+          storiesCache = data.stories;
+          isStoriesFetched = true;
+          setCustomerStories(data.stories);
+        } else {
+          console.error('Failed to fetch customer stories:', data.error);
+        }
+      } catch (error) {
+        console.error('Error fetching customer stories:', error);
+      } finally {
+        setIsLoadingStories(false);
+        isFetchingStories = false;
+      }
+    };
+
+    // Fetch immediately when component mounts
+    fetchCustomerStories();
+  }, []);
+
   // Prefetch when user moves mouse near the menu to speed up hover
   const handleMouseNear = () => {
     if (!isBlogsFetched && !isFetchingBlogs) {
       prefetchBlogs().then(() => {
         setBlogs(blogsCache);
         setIsLoading(false);
+      });
+    }
+    if (!isStoriesFetched && !isFetchingStories) {
+      prefetchCustomerStories().then(() => {
+        setCustomerStories(storiesCache);
+        setIsLoadingStories(false);
       });
     }
   };
@@ -152,9 +239,7 @@ const ResourcesMegaMenu = ({ color }) => {
     {
       title: "Customer Stories",
       link: "/customer-stories",
-      cards: [
-        ...customerStories.slice(0, 2)
-      ],
+      cards: customerStories,
     },
   ];
 
@@ -261,23 +346,37 @@ const ResourcesMegaMenu = ({ color }) => {
 
                 {/* Customer Stories */}
                 <div>
-                  <Link onClick={()=>{setIsOpen(false)}} href={resources[2].link} className="text-lg group font-semibold flex items-center hover:underline cursor-pointer text-secondary-500 gap-2">
+                  <Link onClick={()=>{setIsOpen(false)}} href={resources[2].link} className="text-lg group font-semibold cursor-pointer hover:underline flex items-center text-secondary-500 gap-2">
                     Customer Stories <div className="relative"> <FiArrowUpRight className="z-10 group-hover:translate-x-[80%] group-hover:translate-y-[-80%] group-hover:opacity-0 transition-all duration-300" /> <FiArrowUpRight className="absolute inset-0 z-10 opacity-0 translate-x-[-80%] translate-y-[80%] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" /></div>
                   </Link>
                   <div className="grid grid-cols-1 gap-4 mt-4">
-                    {resources[2].cards.map((card, idx) => (
-                      <Link onClick={()=>{setIsOpen(false)}} href={`/customer-stories/${card.id}`} key={idx} className="flex flex-col cursor-pointer gap-3">
-                        <div className="overflow-hidden rounded-md">
-                        <img
-                          src={card.thumbnail}
-                          alt={card.title}
-                          className="w-full h-[160px] hover:scale-110 transition-all duration-300 object-cover rounded-md"
-                        /></div>
-                        <p className="text-sm line-clamp-1 font-medium text-gray-700">
-                          {card.title}
-                        </p>
-                      </Link>
-                    ))}
+                    {isLoadingStories ? (
+                      // Loading placeholders
+                      Array(2).fill(0).map((_, idx) => (
+                        <div key={idx} className="animate-pulse">
+                          <div className="bg-gray-200 h-[120px] rounded-md"></div>
+                          <div className="h-4 bg-gray-200 rounded mt-3 w-3/4"></div>
+                        </div>
+                      ))
+                    ) : customerStories && customerStories.length > 0 ? (
+                      // Render actual customer stories
+                      customerStories.map((story, idx) => (
+                        <Link onClick={()=>{setIsOpen(false)}} href={`/customer-stories/${story.slug}`} key={idx} className="flex flex-col cursor-pointer gap-3">
+                          <div className="overflow-hidden rounded-md">
+                            <img
+                              src={story.thumbnail}
+                              alt={story.title}
+                              className="w-full h-[160px] hover:scale-110 transition-all duration-300 object-cover rounded-md"
+                            />
+                          </div>
+                          <p className="text-sm line-clamp-1 font-medium text-gray-700">
+                            {story.title}
+                          </p>
+                        </Link>
+                      ))
+                    ) : (
+                      <p className="text-sm text-gray-500 italic">No customer stories available</p>
+                    )}
                   </div>
                 </div>
               </div>
