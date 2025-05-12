@@ -69,6 +69,38 @@ export function middleware(request) {
     return NextResponse.next();
   }
 
+  // Fix for blog category URLs - handle typos and inconsistent formats
+  if (url.pathname.match(/^\/blog\/cateory\/(.+)$/)) {
+    // Fix the typo 'cateory' -> 'category'
+    const categorySlug = url.pathname.replace(/^\/blog\/cateory\//, '');
+    return NextResponse.redirect(new URL(`/blog/${categorySlug}`, request.url));
+  }
+
+  // Fix for "catehoy" typo specifically for aneeverse-news
+  if (url.pathname.match(/^\/blog\/catehoy\/aneeverse-news$/) || 
+      url.pathname.match(/^\/blog\/catehoy\/(.+)$/)) {
+    const categorySlug = url.pathname.includes('aneeverse-news') 
+      ? 'aneeverse-news' 
+      : url.pathname.replace(/^\/blog\/catehoy\//, '');
+    return NextResponse.redirect(new URL(`/blog/${categorySlug}`, request.url));
+  }
+  
+  // Redirect old format (/blog/category/xxx) to new format (/blog/xxx)
+  if (url.pathname.match(/^\/blog\/category\/(.+)$/)) {
+    const categorySlug = url.pathname.replace(/^\/blog\/category\//, '');
+    return NextResponse.redirect(new URL(`/blog/${categorySlug}`, request.url));
+  }
+
+  // Redirect old format blog posts with category in URL to direct format
+  if (url.pathname.match(/^\/blog\/[^/]+\/[^/]+$/)) {
+    // Extract the slug from /blog/category/slug pattern
+    const parts = url.pathname.split('/');
+    if (parts.length === 4) {
+      const slug = parts[3];
+      return NextResponse.redirect(new URL(`/blog/${slug}`, request.url));
+    }
+  }
+
   return NextResponse.next();
 }
 
@@ -76,5 +108,13 @@ export function middleware(request) {
 export const config = {
   matcher: [
     '/((?!_next/static|_next/image|favicon.ico|logo.png).*)',
+    // Match blog category paths with potential typos
+    '/blog/cateory/:path*',
+    '/blog/catehoy/:path*',
+    '/blog/category/:path*',
+    // Match blog post paths with category
+    '/blog/:category/:slug',
+    // Match direct blog post paths
+    '/blog/:slug',
   ],
 }; 

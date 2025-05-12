@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { getCategoryUrl, getCategorySlug } from '@/utils/categoryUtils';
 
 export default function BlogCard({ blog }) {
   const [thumbnailError, setThumbnailError] = useState(false);
@@ -21,6 +22,13 @@ export default function BlogCard({ blog }) {
   const shortDescription = blog?.shortDescription || '';
   const author = blog?.author || { name: 'Anonymous', role: 'Author', image: defaultAuthorImage };
   const slug = blog?.slug || '#';
+  
+  // Get the correct category URL
+  const categoryUrl = getCategoryUrl(category);
+  const categorySlug = getCategorySlug(category);
+  
+  // Get the correct blog post URL - now using direct /blog/slug format
+  const blogUrl = `/blog/${slug}`;
   
   // Ensure thumbnail exists and is a non-empty string
   const thumbnailSrc = blog?.thumbnail && typeof blog.thumbnail === 'string' && blog.thumbnail.trim() !== '' 
@@ -45,7 +53,7 @@ export default function BlogCard({ blog }) {
   return (
     <div className="flex flex-col h-full">
       {/* Image Section - Superside style */}
-      <Link href={`/blog/${slug}`} className="block group overflow-hidden rounded-lg">
+      <Link href={blogUrl} className="block group overflow-hidden rounded-lg">
         <div className="relative w-full aspect-[16/9] overflow-hidden">
           <Image
             src={thumbnailError ? defaultThumbnail : thumbnailSrc}
@@ -65,13 +73,18 @@ export default function BlogCard({ blog }) {
       <div className="flex flex-col flex-1 mt-5">
         {/* Category and Read Time - Superside style */}
         <div className="flex items-center gap-2 text-sm uppercase tracking-wide text-[#475467] mb-2">
-          <span className="font-medium">{category}</span>
+          <Link 
+            href={categoryUrl} 
+            className="font-medium hover:text-[#0A2E3D] transition-colors"
+          >
+            {category}
+          </Link>
           <span className="text-[#D9D9D9]">•</span>
           <span>{timeToRead}</span>
         </div>
 
         {/* Title - Superside style with underline animation */}
-        <Link href={`/blog/${slug}`} className="group block">
+        <Link href={blogUrl} className="group block">
           <h3 className="text-xl sm:text-[22px] leading-tight text-[#101828] font-normal mb-3 line-clamp-2 group-hover:text-[#0A2E3D] transition-colors duration-200">
             <span className="underline-animation">{title}</span>
           </h3>

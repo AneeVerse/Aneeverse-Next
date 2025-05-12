@@ -10,6 +10,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import Newsletter from '@/components/blog/NewsLetter';
 import BlogCard from '@/components/blog/BlogCard';
 import React from 'react';
+import { getCategoryUrl } from '@/utils/categoryUtils';
 
 // Add the import for our CSS file:
 import '../blogStyles.css';
@@ -126,7 +127,7 @@ export default function BlogDetail({ params }) {
                 </Link>
                 <IoIosArrowForward className="text-gray-400" />
                 <Link 
-                  href={`/blog/category/${post.category.toLowerCase().replace(/\s+/g, "-")}`} 
+                  href={getCategoryUrl(post.category)} 
                   className="text-gray-500 uppercase hover:underline"
                 >
                   {post.category}

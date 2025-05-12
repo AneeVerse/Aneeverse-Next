@@ -1,14 +1,29 @@
 import { useState, useEffect } from 'react';
 
-export function useScrollSpy(selectors) {
+export function useScrollSpy(selectorsOrIds, options = {}) {
   const [activeId, setActiveId] = useState('');
+  const { threshold = 100 } = options;
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
     // Function to check which section is visible
     const checkVisibility = () => {
-      const headingElements = Array.from(document.querySelectorAll(selectors));
+      let headingElements;
+      
+      // Handle both selector strings and arrays of IDs
+      if (typeof selectorsOrIds === 'string') {
+        // If it's a CSS selector string
+        headingElements = Array.from(document.querySelectorAll(selectorsOrIds));
+      } else if (Array.isArray(selectorsOrIds)) {
+        // If it's an array of IDs
+        headingElements = selectorsOrIds
+          .map(id => document.getElementById(id))
+          .filter(Boolean); // Filter out null elements
+      } else {
+        return; // Invalid input
+      }
+      
       if (!headingElements.length) return;
       
       // Simple approach: which heading is closest to the top of the viewport
@@ -16,11 +31,12 @@ export function useScrollSpy(selectors) {
         const { id } = element;
         const rect = element.getBoundingClientRect();
         // Distance from the top of the viewport, adjusted to prioritize headings just above the viewport
-        const distanceFromViewportTop = rect.top <= 100 ? Math.abs(rect.top) : 10000 + rect.top;
+        const distanceFromViewportTop = rect.top <= threshold ? Math.abs(rect.top) : 10000 + rect.top;
         
         return {
           id,
-          distance: distanceFromViewportTop
+          distance: distanceFromViewportTop,
+          top: rect.top
         };
       });
       
@@ -59,7 +75,7 @@ export function useScrollSpy(selectors) {
       window.removeEventListener('resize', checkVisibility);
       if (scrollTimer) clearTimeout(scrollTimer);
     };
-  }, [selectors, activeId]);
+  }, [selectorsOrIds, activeId, threshold]);
 
   return activeId;
 } 

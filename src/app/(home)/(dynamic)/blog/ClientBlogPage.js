@@ -9,6 +9,7 @@ import { blogs as staticBlogs } from '@/data/blogData';
 import BlogCard from '@/components/blog/BlogCard';
 import { FaChevronRight } from "react-icons/fa6";
 import Link from 'next/link';
+import { getCategorySlug, getCategoryUrl } from '@/utils/categoryUtils';
 
 export default function ClientBlogPage() {
   const [blogs, setBlogs] = useState([]);
@@ -192,8 +193,8 @@ export default function ClientBlogPage() {
       {(() => {
         // Create a helper function to render a category section
         const renderCategorySection = (category, categoryBlogs, isSEO = false) => {
-          // Convert category to URL-friendly format
-          const categorySlug = category.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '-');
+          // Use utility function to get consistent URL
+          const categoryUrl = getCategoryUrl(category);
           
           return (
             <section key={`category-${category}`} className='bg-[#EBFAFE] pb-16'>
@@ -201,7 +202,7 @@ export default function ClientBlogPage() {
                 <div className='flex justify-between items-center mb-6 md:mb-8'>
                   <h2 className='text-2xl md:text-[40px] text-[#0A2E3D] font-normal font-["Inter",sans-serif]'>{category}</h2>
                   <Link 
-                    href={`/blog/category/${categorySlug}`} 
+                    href={categoryUrl}
                     className='text-[#0A2E3D] hover:text-blue-600 flex items-center gap-1 md:gap-2 font-medium text-base md:text-lg font-["Inter",sans-serif]'
                   >
                     <span>See all</span>

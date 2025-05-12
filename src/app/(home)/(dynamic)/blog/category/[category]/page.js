@@ -8,6 +8,7 @@ import Image from "next/image";
 import BlogCard from "@/components/blog/BlogCard";
 import { IoIosArrowForward } from "react-icons/io";
 import Link from "next/link";
+import { getNormalizedCategoryName } from "@/utils/categoryUtils";
 
 // ✅ Category Images Map
 const categoryImages = {
@@ -51,8 +52,8 @@ const categoryImages = {
 // More efficient function to fetch blogs by category
 const fetchBlogsByCategory = async (category) => {
   try {
-    // Get normalized category
-    const normalizedCategory = category.toLowerCase().replace(/-/g, " ");
+    // Get normalized category using the utility function
+    const normalizedCategory = getNormalizedCategoryName(category);
     console.log('Normalized Category:', normalizedCategory);
     
     // Get static data first
@@ -143,12 +144,12 @@ export default function BlogCategoryPage() {
       setIsLoading(true);
       
       try {
-        // Get category info
-        const normalizedCategory = category.toLowerCase();
+        // Get category info using the utility function
+        const normalizedCategory = getNormalizedCategoryName(category);
         setCategoryInfo({
-          title: normalizedCategory.replace(/-/g, " "),
-          description: categoryImages[normalizedCategory]?.description || 
-            `Discover our latest articles about ${normalizedCategory.replace(/-/g, " ")}.`,
+          title: normalizedCategory,
+          description: categoryImages[category.toLowerCase()]?.description || 
+            `Discover our latest articles about ${normalizedCategory}.`,
         });
         
         // Fetch blogs with the more efficient function
