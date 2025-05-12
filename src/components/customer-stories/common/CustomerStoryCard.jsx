@@ -60,63 +60,68 @@ export default function CustomerStoryCard({ story }) {
   return (
     <Link
       href={`/customer-stories/${story.slug.current}`}
-      className="block group rounded-2xl"
+      className="block group overflow-hidden rounded-lg shadow-lg bg-[#EBFAFE] hover:shadow-xl transition-shadow duration-300 w-full max-w-[420px] mx-auto"
     >
       {/* Image Section */}
-      <div className="relative w-full h-48 sm:h-56 rounded-xl overflow-hidden bg-gray-200">
+      <div className="relative w-full h-64 overflow-hidden bg-gray-200">
         {!imageError && imageUrl ? (
-          <Image
-            src={imageUrl}
-            alt={story.mainImage?.alt || story.title}
-            fill
-            className="object-cover"
-            onError={() => setImageError(true)}
-          />
+          <>
+            <Image
+              src={imageUrl}
+              alt={story.mainImage?.alt || story.title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              onError={() => setImageError(true)}
+            />
+            
+            {/* Customer Logo Centered on Image - Like Superside */}
+            {!logoError && logoUrl && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="relative h-20 w-48">
+                  <Image
+                    src={logoUrl}
+                    alt={story.customerLogo?.alt || `${story.title} logo`}
+                    fill
+                    className="object-contain"
+                    onError={(e) => {
+                      console.error("Card logo failed to load:", logoUrl);
+                      setLogoError(true);
+                    }}
+                  />
+                </div>
+              </div>
+            )}
+          </>
         ) : (
           <div className="w-full h-full bg-gray-200 flex items-center justify-center">
             <span className="text-gray-400">No image</span>
           </div>
         )}
-        
-        {/* Customer Logo Overlay - Improved Visibility */}
-        {!logoError && logoUrl && (
-          <div className="absolute bottom-3 left-3">
-            <div className="relative w-12 h-10">
-              <Image
-                src={logoUrl}
-                alt={story.customerLogo?.alt || `${story.title} logo`}
-                fill
-                className="object-contain"
-                onError={(e) => {
-                  console.error("Card logo failed to load:", logoUrl);
-                  setLogoError(true);
-                }}
-              />
-            </div>
-          </div>
-        )}
       </div>
 
       {/* Content Section */}
-      <div className="mt-4">
-        <p className="text-sm text-gray-500 uppercase tracking-widest font-medium">
-          {categoryName} • {story.readTime} min read
-        </p>
-        <h2 className="text-lg line-clamp-1 font-semibold mt-1 text-black group-hover:underline underline-offset-2 transition-all duration-300">
+      <div className="p-6">
+        {/* Category - Now below the image */}
+        <div className="mb-3">
+          <span className="text-sm font-semibold uppercase tracking-wide text-gray-600">
+            {categoryName}
+          </span>
+        </div>
+        
+        <h2 className="text-xl font-bold text-gray-800 mb-3 line-clamp-2 group-hover:text-primary-600 transition-colors">
           {story.title}
         </h2>
-        <div className="text-sm text-gray-600 mt-2 line-clamp-2">
+        
+        <div className="text-base text-gray-600 mb-6 line-clamp-2 min-h-[48px]">
           {story.shortDescription}
         </div>
-      </div>
-
-      {/* Footer Section */}
-      <div className="flex items-center mt-4">
-        <div>
-          <button className="flex group-hover:underline underline-offset-2 items-center text-gray-800 font-medium">
+        
+        {/* Footer with See Customer Story CTA */}
+        <div className="flex justify-end mt-auto pt-4 border-t border-[#D0E8F2]">
+          <span className="text-sm font-medium text-primary-600 flex items-center">
             See Customer Story
-            <FaChevronRight className="ml-2 text-sm" />
-          </button>
+            <FaChevronRight className="ml-1 text-xs" />
+          </span>
         </div>
       </div>
     </Link>
