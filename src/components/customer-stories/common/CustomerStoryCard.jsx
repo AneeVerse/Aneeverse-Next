@@ -60,7 +60,7 @@ export default function CustomerStoryCard({ story }) {
   return (
     <Link
       href={`/customer-stories/${story.slug.current}`}
-      className="block group overflow-hidden rounded-lg shadow-lg bg-[#EBFAFE] hover:shadow-xl transition-shadow duration-300 w-full max-w-[420px] mx-auto"
+      className="block group overflow-hidden rounded-lg shadow-lg bg-[#EBFAFE] hover:shadow-xl transition-shadow duration-300 w-full max-w-[420px] mx-auto h-full flex flex-col"
     >
       {/* Image Section */}
       <div className="relative w-full h-64 overflow-hidden bg-gray-200">
@@ -82,7 +82,7 @@ export default function CustomerStoryCard({ story }) {
       </div>
 
       {/* Content Section */}
-      <div className="p-6">
+      <div className="p-6 flex flex-col flex-grow">
         {/* Category - Now below the image */}
         <div className="mb-3">
           <span className="text-sm font-semibold uppercase tracking-wide text-gray-600">
@@ -98,8 +98,11 @@ export default function CustomerStoryCard({ story }) {
           {story.shortDescription}
         </div>
         
+        {/* Spacer to push footer to bottom */}
+        <div className="flex-grow"></div>
+        
         {/* Footer with See Customer Story CTA */}
-        <div className="flex justify-start mt-auto pt-4 border-t border-[#D0E8F2]">
+        <div className="flex justify-start pt-4 border-t border-[#D0E8F2] mt-auto">
           <span className="text-sm font-medium text-primary-600 flex items-center group-hover:underline transition-all duration-300">
             See Customer Story
             <FaChevronRight className="ml-1 text-xs" />
