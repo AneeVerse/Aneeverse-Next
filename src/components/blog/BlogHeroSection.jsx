@@ -103,24 +103,24 @@ const BlogHeroSection = ({ blogData }) => {
                   sizes="(max-width: 768px) 100vw, 66vw"
                 />
               </div>
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#031B34]/95 via-[#031B34]/75 to-transparent"></div>
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#031B34]/100 via-[#031B34]/90 to-transparent"></div>
               <div className="relative flex flex-col justify-between z-10 w-full h-full">
                 <div className="flex flex-col pt-4">
                   <p className="text-md uppercase tracking-wide text-white font-['Inter',sans-serif] mb-[10px]">
                     {featuredBlog.category || "BLOG"} • <span className="normal-case">{featuredBlog.timeToRead ? `${featuredBlog.timeToRead} min read` : '5 min read'}</span>
                   </p>
-                  <h3 className="text-3xl sm:text-4xl md:text-5xl max-w-full sm:max-w-2xl font-normal leading-[1.1] font-['Inter',sans-serif]" style={{ '--underline-height': '3px', '--underline-speed': '500ms' }}>
+                  <h3 className="text-3xl sm:text-4xl md:text-5xl max-w-md sm:max-w-xl overflow-hidden font-normal leading-[1.2] line-clamp-3 h-[calc(3*1.2*1em)] font-['Inter',sans-serif]" style={{ '--underline-height': '3px', '--underline-speed': '500ms' }}>
                     <span className="bg-[linear-gradient(currentColor,currentColor)] bg-left-bottom bg-no-repeat transition-[background] duration-[var(--underline-speed)] bg-[length:0%_var(--underline-height)] hover:bg-[length:100%_var(--underline-height)] group-hover:bg-[length:100%_var(--underline-height)]">
                       {featuredBlog.title}
                     </span>
                   </h3>
-                  <div className="flex items-center gap-3 mt-8 sm:mt-20">
-                    <div className="font-['Inter',sans-serif]">
-                      <p className="text-base text-white font-bold">Published</p>
-                      <p className="text-lg font-medium">
-                        {new Date(featuredBlog.date).toLocaleDateString('en-US', {month: 'short', day: 'numeric'})}
-                      </p>
-                    </div>
+                </div>
+                <div className="absolute bottom-0 left-0 mt-6">
+                  <div className="font-['Inter',sans-serif]">
+                    <p className="text-base text-white font-bold">Published</p>
+                    <p className="text-lg font-medium">
+                      {new Date(featuredBlog.date).toLocaleDateString('en-US', {month: 'short', day: 'numeric'})}
+                    </p>
                   </div>
                 </div>
               </div>
