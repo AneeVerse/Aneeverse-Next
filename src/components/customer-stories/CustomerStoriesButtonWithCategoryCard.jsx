@@ -1,24 +1,34 @@
 "use client";
 
 import { useState } from "react";
-import { customerStories } from "@/data/customerStoriesData"; // Import your customer stories data
 import Link from "next/link";
 import CustomerStoryCard from "./common/CustomerStoryCard";
 
-const CustomerStoriesButtonWithCategoryCard = () => {
+const CustomerStoriesButtonWithCategoryCard = ({ stories = [] }) => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  // Get all unique categories
-  const categories = [
-    "All",
-    ...new Set(customerStories.map((story) => story.category)),
-  ];
+  // Get all unique categories from stories
+  const allCategories = stories.reduce((acc, story) => {
+    if (story.categories && story.categories.length > 0) {
+      story.categories.forEach(cat => {
+        if (!acc.includes(cat.title)) {
+          acc.push(cat.title);
+        }
+      });
+    }
+    return acc;
+  }, []);
+
+  const categories = ["All", ...allCategories];
 
   // Filter stories by selected category
   const filteredStories =
     selectedCategory === "All"
-      ? customerStories
-      : customerStories.filter((story) => story.category === selectedCategory);
+      ? stories
+      : stories.filter((story) => 
+          story.categories && 
+          story.categories.some(cat => cat.title === selectedCategory)
+        );
 
   return (
     <section className="bg-primary-500 py-12">
@@ -47,7 +57,7 @@ const CustomerStoriesButtonWithCategoryCard = () => {
         {/* Display Filtered Customer Stories */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {filteredStories.map((story) => (
-           <CustomerStoryCard story={story} key={story.id} />
+           <CustomerStoryCard story={story} key={story._id} />
           ))}
         </div>
       </div>
