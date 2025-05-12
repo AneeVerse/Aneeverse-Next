@@ -143,7 +143,7 @@ const CardContent = ({ story, categoryName, imageUrl, imageError, setImageError,
             alt={story.mainImage?.alt || story.title}
             fill
             draggable={false}
-            className="object-cover duration-300 w-full h-full select-none pointer-events-none"
+            className="object-cover duration-500 w-full h-full select-none pointer-events-none group-hover:scale-110 transition-transform"
             priority
             onError={() => setImageError(true)}
           />
@@ -184,7 +184,7 @@ const CardContent = ({ story, categoryName, imageUrl, imageError, setImageError,
           
           {/* Read the story link */}
           <div className="flex items-center pointer-events-auto">
-            <span className="text-sm font-medium whitespace-nowrap bg-black/30 px-3 py-1 rounded">
+            <span className="text-sm font-medium whitespace-nowrap hover:underline transition-all duration-300">
               Read the story
               <span className="inline-block ml-1 transform translate-y-px">›</span>
             </span>
