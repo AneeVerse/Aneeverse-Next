@@ -58,7 +58,7 @@ const CreativeStatsOurWorks = () => {
                   <MdOutlineArrowOutward className="inline-block" />
                 </a>
               </div>
-              <p className="text-6xl font-bold ">{item.percentage}</p>
+              <p className="text-7xl font-extrabold text-blue-600">{item.percentage}</p>
             </div>
           ))}
         </div>

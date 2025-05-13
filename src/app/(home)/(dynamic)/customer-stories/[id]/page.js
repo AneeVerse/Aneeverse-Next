@@ -256,9 +256,11 @@ export default function CustomerStoryDetail({ params }) {
             <Image
               src={urlForImage(value).url()}
               alt={value.alt || "Customer Story Image"}
-              width={800}
-              height={500}
-              className="rounded-lg shadow-lg max-w-full h-auto"
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: '100%', height: 'auto' }}
+              className="rounded-lg shadow-lg"
             />
           </div>
         );
