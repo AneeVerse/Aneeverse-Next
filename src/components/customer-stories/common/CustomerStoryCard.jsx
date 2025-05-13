@@ -63,19 +63,22 @@ export default function CustomerStoryCard({ story }) {
       className="block group overflow-hidden rounded-lg shadow-lg bg-[#EBFAFE] hover:shadow-xl transition-shadow duration-300 w-full max-w-[420px] mx-auto h-full flex flex-col"
     >
       {/* Image Section */}
-      <div className="relative w-full h-64 overflow-hidden bg-gray-200">
+      <div className="relative w-full overflow-hidden bg-gray-200">
         {!imageError && imageUrl ? (
           <>
             <Image
               src={imageUrl}
               alt={story.mainImage?.alt || story.title}
-              fill
-              className="object-cover transition-transform duration-500 group-hover:scale-110"
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: '100%', height: 'auto' }}
+              className="transition-transform duration-500 group-hover:scale-110"
               onError={() => setImageError(true)}
             />
           </>
         ) : (
-          <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+          <div className="w-full h-64 bg-gray-200 flex items-center justify-center">
             <span className="text-gray-400">No image</span>
           </div>
         )}
