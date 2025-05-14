@@ -33,26 +33,25 @@ const CustomerStoriesButtonWithCategoryCard = ({ stories = [] }) => {
   return (
     <section className="py-12 md:py-16 bg-[#EBFAFE]">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-semibold text-[#0A2E3D] mb-4" style={{ fontFamily: '"Inter", sans-serif' }}>
-            On-demand Content
-          </h2>
-        </div>
+        {/* Heading - Left aligned like Superside */}
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-[#0A2E3D] mb-8" style={{ fontFamily: '"Inter", sans-serif' }}>
+          On-demand Content
+        </h2>
 
-        {/* Category Buttons */}
-        <div className="flex flex-wrap justify-center gap-3 mb-14">
+        {/* Category Buttons styled like Superside */}
+        <div className="flex flex-wrap gap-3 mb-14">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-5 py-2 text-sm font-medium rounded-full transition-colors duration-300 ${
+              className={`px-6 py-3 text-base font-medium rounded-full transition-colors duration-300 ${
                 selectedCategory === category
                   ? "bg-[#0A2E3D] text-white"
-                  : "bg-white text-[#0A2E3D] border border-[#0A2E3D]"
+                  : "bg-[#e8f4f8] text-[#0A2E3D] hover:bg-gray-200"
               }`}
               style={{ fontFamily: '"Inter", sans-serif' }}
             >
-              {category}
+              {category === "All" ? "All content" : category}
             </button>
           ))}
         </div>
