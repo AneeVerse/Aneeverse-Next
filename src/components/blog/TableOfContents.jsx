@@ -71,7 +71,7 @@ const TableOfContents = ({ timeToRead = "5 min read" }) => {
               >
                 <a
                   href={`#${heading.id}`}
-                  className={`block text-sm transition-colors duration-200 ${
+                  className={`block text-sm transition-colors duration-200 font-bold ${
                     activeId === heading.id
                       ? 'text-[#88D7F0] font-medium'
                       : 'text-[#EBFAFE]/80 hover:text-[#88D7F0]'
