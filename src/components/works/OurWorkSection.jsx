@@ -17,48 +17,55 @@ const OurWorkSection = ({ portfolioItems = [], isLoading = false }) => {
       title: "Webflow",
       url: "/works/webflow",
       description: "Illustration Design, Ad Creative",
-      colSpan: 2,
+      size: "large", // large items span 2 columns
     },
     {
       image: "/images/home/works2.avif",
       title: "Pernod Ricard",
       url: "/works/pernod-ricard",
       description: "eBook & Digital Reports, Video Production",
-      colSpan: 1,
+      size: "small",
     },
     {
       image: "/images/home/works3.avif",
       title: "PPC Advertising",
       url: "/works/ppc-advertising",
       description: "Google Ads Management, Facebook Ads, Remarketing Campaigns",
-      colSpan: 1,
+      size: "small",
     },
     {
-      image: "/images/home/works3.avif",
+      image: "/images/home/works6.avif",
       title: "Salesforce",
       url: "/works/salesforce",
       description: "Motion Design, Ad Creative",
-      colSpan: 1,
+      size: "small",
     },
     {
       image: "/images/home/works5.avif",
       title: "Content Marketing",
       url: "/works/content-marketing",
       description: "Blog Writing, Video Production, Infographic Design",
-      colSpan: 2,
+      size: "large",
     },
     {
       image: "/images/home/works4.avif",
       title: "Shopify",
       url: "/works/shopify",
       description: "Ad Creative",
-      colSpan: 1,
+      size: "small",
+    },
+    {
+      image: "/images/home/works-ban-1.avif",
+      title: "Reddit",
+      url: "/works/reddit",
+      description: "Digital Design, Social Media Creative",
+      size: "small",
     },
   ];
 
   // Use Sanity data if available, otherwise use static data
   const projects = portfolioItems.length > 0 
-    ? portfolioItems.map(item => ({
+    ? portfolioItems.map((item, index) => ({
         id: item._id,
         image: item.thumbnailImage || item.mainImage 
           ? urlForImage(item.thumbnailImage || item.mainImage).url() 
@@ -66,31 +73,14 @@ const OurWorkSection = ({ portfolioItems = [], isLoading = false }) => {
         title: item.title,
         url: `/works/${item.slug.current}`,
         description: item.services?.join(', ') || item.shortDescription || '',
-        colSpan: item.featured ? 2 : 1, // Give featured items a larger span
+        size: index % 3 === 0 ? "large" : "small", // Assign varying sizes
       }))
     : staticProjects;
 
   // Duplicate items for infinite scroll effect if needed
   const displayProjects = projects.length > 6 
     ? projects 
-    : [...projects, ...projects]; // Duplicate if not enough items
-
-  const [smallScreen, setSmallScreen] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setSmallScreen(true);
-      } else {
-        setSmallScreen(false);
-      }
-    };
-
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    : [...projects]; // Use as is or duplicate if needed
 
   return (
     <div className="bg-primary-500 py-16">
@@ -127,23 +117,22 @@ const OurWorkSection = ({ portfolioItems = [], isLoading = false }) => {
 
         {/* Project Grid */}
         {!isLoading && (
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-4 md:gap-6">
             {displayProjects.map((project, index) => (
               <Link
                 href={project.url}
                 key={project.id || index}
-                style={{
-                  gridColumn: `span ${smallScreen ? 1 : project.colSpan || 1}`,
-                }}
                 className={`group rounded-lg cursor-pointer overflow-hidden ${
-                  project.colSpan ? ` md:col-span-${project.colSpan}` : ""
+                  project.size === "large" ? "md:col-span-3" : "md:col-span-2"
                 }`}
               >
                 {/* Image */}
                 <div className="rounded-lg overflow-hidden">
                   {project.image.startsWith('http') ? (
                     // For Sanity images
-                    <div className="relative h-[200px] sm:h-[280px] xl:h-[340px] 2xl:h-[380px] w-full">
+                    <div className={`relative w-full ${
+                      project.size === "large" ? "h-[260px] md:h-[340px]" : "h-[200px] md:h-[280px]"
+                    }`}>
                       <Image
                         src={project.image}
                         alt={project.title}
@@ -156,7 +145,9 @@ const OurWorkSection = ({ portfolioItems = [], isLoading = false }) => {
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="h-[200px] sm:h-[280px] xl:h-[340px] 2xl:h-[380px] w-full group-hover:scale-105 transition-transform duration-300 rounded-lg object-cover"
+                      className={`w-full group-hover:scale-105 transition-transform duration-300 rounded-lg object-cover ${
+                        project.size === "large" ? "h-[260px] md:h-[340px]" : "h-[200px] md:h-[280px]"
+                      }`}
                     />
                   )}
                 </div>
