@@ -50,16 +50,16 @@ export default function CustomerStoryCard({ story }) {
       {/* Main Card */}
       <Link
         href={`/customer-stories/${story.slug.current}`}
-        className="block bg-transparent transition-all duration-300 h-full flex flex-col overflow-hidden group"
+        className="block bg-transparent transition-all duration-300 h-full flex flex-col overflow-hidden group w-full"
       >
         {/* Image Section with increased height and rounded corners */}
-        <div className="relative w-full pb-[65%] overflow-hidden rounded-lg">
+        <div className="relative w-full pb-[66%] overflow-hidden rounded-lg">
           {!imageError && imageUrl ? (
             <Image
               src={imageUrl}
               alt={story.mainImage?.alt || story.title}
               fill
-              sizes="(max-width: 768px) 100vw, 33vw"
+              sizes="(max-width: 768px) 100vw, (max-width: 1400px) 50vw, 33vw"
               className="object-cover transition-transform duration-700 group-hover:scale-110"
               priority
               onError={() => setImageError(true)}
@@ -72,9 +72,9 @@ export default function CustomerStoryCard({ story }) {
         </div>
 
         {/* Content Section */}
-        <div className="py-4 px-0 flex flex-col flex-grow">
+        <div className="py-5 px-0 flex flex-col flex-grow">
           {/* Category - AFTER the image with bold text */}
-          <div className="mb-2">
+          <div className="mb-3">
             <span className="text-xs font-bold uppercase tracking-wider text-gray-600" style={{ fontFamily: '"Inter", sans-serif' }}>
               {categoryName}
             </span>

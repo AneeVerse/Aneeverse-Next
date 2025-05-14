@@ -54,7 +54,7 @@ const CustomerStoryHero = () => {
     <section className="py-16 md:py-20 bg-[#EBFAFE]">
       <Layout>
         {/* Heading */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-xl mb-16">
+        <div className="mx-auto px-4 sm:px-8 lg:px-12 max-w-[1400px] mb-16">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[#0A2E3D] mb-6" style={{ fontFamily: '"Inter", sans-serif' }}>
               Customer Stories
@@ -68,7 +68,7 @@ const CustomerStoryHero = () => {
         {/* Main Content */}
         <div
           ref={scrollRef}
-          className="flex gap-6 overflow-x-auto py-4 scrollbar-hide cursor-grab active:cursor-grabbing px-4 sm:px-6 lg:px-8"
+          className="flex gap-8 overflow-x-auto py-4 scrollbar-hide cursor-grab active:cursor-grabbing px-4 sm:px-8 lg:px-12"
           onMouseDown={handleMouseDown}
           onMouseLeave={handleMouseUp}
           onMouseUp={handleMouseUp}
