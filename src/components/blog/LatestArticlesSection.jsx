@@ -20,10 +20,10 @@ const LatestArticlesSection = ({ blogData }) => {
         <div className="flex justify-between items-center mb-6 md:mb-8">
           <Link href="/blog/all" className="group">
             <h2 className="text-2xl md:text-[40px] text-[#0A2E3D] hover:text-blue-600 transition-colors font-normal font-['Inter',sans-serif] flex items-center">
-              <span>Latest</span>
-              <span className="inline ml-1 md:ml-2">articles</span>
+            <span>Latest</span>
+            <span className="inline ml-1 md:ml-2">articles</span>
               <FaChevronRight className="ml-2 text-base md:text-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1" />
-            </h2>
+          </h2>
           </Link>
           <Link 
             href="/blog/all" 
