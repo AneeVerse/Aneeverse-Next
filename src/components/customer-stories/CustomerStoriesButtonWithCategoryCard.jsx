@@ -32,7 +32,7 @@ const CustomerStoriesButtonWithCategoryCard = ({ stories = [] }) => {
 
   return (
     <section className="py-12 md:py-16 bg-[#EBFAFE]">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-xl">
+      <div className="mx-auto px-4 sm:px-8 lg:px-12 max-w-[1400px]">
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-semibold text-[#0A2E3D] mb-4" style={{ fontFamily: '"Inter", sans-serif' }}>
             On-demand Content
@@ -58,7 +58,7 @@ const CustomerStoriesButtonWithCategoryCard = ({ stories = [] }) => {
         </div>
 
         {/* Display Filtered Customer Stories */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-10 gap-y-16">
           {filteredStories.map((story) => (
             <CustomerStoryCard story={story} key={story._id} />
           ))}
