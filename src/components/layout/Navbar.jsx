@@ -17,7 +17,7 @@ const Navbar = () => {
 
   // State for colors
   const [color, setColor] = useState({
-    text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/")) ? "#EBFAFE" : "#073742",
+    text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/") || pathName === "/customer-stories" || pathName.includes("/customer-stories/")) ? "#EBFAFE" : "#073742",
     bg: "transparent",
   });
 
@@ -30,7 +30,7 @@ const Navbar = () => {
       } else {
         setScrolled(false);
         setColor({
-          text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/")) ? "#EBFAFE" : "#073742",
+          text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/") || pathName === "/customer-stories" || pathName.includes("/customer-stories/")) ? "#EBFAFE" : "#073742",
           bg: "transparent",
         });
       }
@@ -42,56 +42,58 @@ const Navbar = () => {
   // Ensure color is updated correctly on route change
   useEffect(() => {
     setColor({
-      text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/")) ? "#EBFAFE" : "#073742",
+      text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/") || pathName === "/customer-stories" || pathName.includes("/customer-stories/")) ? "#EBFAFE" : "#073742",
       bg: "transparent",
     });
   }, [pathName]);
 
   // Determine button text color for "Book a Call"
   const callTextColor = pathName !== "/"
-    ? (pathName === "/services" || pathName.includes("/services/"))
+    ? (pathName === "/services" || pathName.includes("/services/") || pathName === "/customer-stories" || pathName.includes("/customer-stories/"))
       ? (color.bg !== "#EBFAFE" ? "#073742" : "#EBFAFE")
       : "#EBFAFE"
     : (color.bg !== "#EBFAFE" ? "#073742" : "#EBFAFE");
 
   return (
     <nav
-      style={{ backgroundColor: color.bg }}
+      style={{ 
+        backgroundColor: pathName.includes('/customer-stories') ? '#EBFAFE' : color.bg 
+      }}
       className="fixed top-0 w-full h-[70px] sm:h-[80px] flex items-center z-30 transition-all duration-300"
     >
       <Layout className="flex w-full justify-between items-center">
         {/* Logo */}
         <Link href="/" className="text-3xl ml-2 sm:ml-0 tracking-wide font-bold flex items-center">
-          <span style={{ color: color.text }}>aneeverse</span>
+          <span style={{ color: pathName.includes('/customer-stories') ? '#073742' : color.text }}>aneeverse</span>
         </Link>
 
         {/* Large Screen Menu */}
         <div className="hidden lg:flex lg:gap-6 gap-3 items-center">
-          <ServicesMegaMenu color={color} />
+          <ServicesMegaMenu color={pathName.includes('/customer-stories') ? { text: '#073742', bg: '#EBFAFE' } : color} />
 
           <Link
             href="/works"
             className="flex items-center group"
-            style={{ color: color.text }}
+            style={{ color: pathName.includes('/customer-stories') ? '#073742' : color.text }}
           >
             <span
               className="h-[5px] w-[5px] inline-block rounded-full transition-all duration-300 scale-0 group-hover:scale-100 mr-0 group-hover:mr-1.5"
-              style={{ backgroundColor: color.text }}
+              style={{ backgroundColor: pathName.includes('/customer-stories') ? '#073742' : color.text }}
             />
             <span>Our Works</span>
           </Link>
 
-          <WhyUsMegaMenu color={color} />
-          <ResourcesMegaMenu color={color} />
+          <WhyUsMegaMenu color={pathName.includes('/customer-stories') ? { text: '#073742', bg: '#EBFAFE' } : color} />
+          <ResourcesMegaMenu color={pathName.includes('/customer-stories') ? { text: '#073742', bg: '#EBFAFE' } : color} />
 
           <Link
             href="/pricing"
             className="flex items-center group"
-            style={{ color: color.text }}
+            style={{ color: pathName.includes('/customer-stories') ? '#073742' : color.text }}
           >
             <span
               className="h-[5px] w-[5px] inline-block rounded-full transition-all duration-300 scale-0 group-hover:scale-100 mr-0 group-hover:mr-1.5"
-              style={{ backgroundColor: color.text }}
+              style={{ backgroundColor: pathName.includes('/customer-stories') ? '#073742' : color.text }}
             />
             <span>Pricing</span>
           </Link>
@@ -103,9 +105,9 @@ const Navbar = () => {
             href="/contact"
             className="px-6 py-2 rounded-full border"
             style={{
-              color: callTextColor,
-              backgroundColor: color.text,
-              borderColor: color.bg
+              color: pathName.includes('/customer-stories') ? '#EBFAFE' : callTextColor,
+              backgroundColor: pathName.includes('/customer-stories') ? '#073742' : color.text,
+              borderColor: pathName.includes('/customer-stories') ? '#EBFAFE' : color.bg
             }}
           >
             Book a Call
@@ -114,9 +116,9 @@ const Navbar = () => {
             href="/register"
             className="px-6 py-2 rounded-full border"
             style={{
-              color: color.text,
-              backgroundColor: color.bg,
-              borderColor: color.text
+              color: pathName.includes('/customer-stories') ? '#073742' : color.text,
+              backgroundColor: pathName.includes('/customer-stories') ? '#EBFAFE' : color.bg,
+              borderColor: pathName.includes('/customer-stories') ? '#073742' : color.text
             }}
           >
             Login
@@ -126,7 +128,7 @@ const Navbar = () => {
         {/* Mobile Menu Icon */}
         <button
           className={`lg:hidden mr-2 sm:mr-0 text-2xl`}
-          style={{ color: scrolled ? "#073742" : color.text }}
+          style={{ color: pathName.includes('/customer-stories') ? '#073742' : (scrolled ? "#073742" : color.text) }}
           onClick={() => setSidebarOpen(true)}
         >
           <FiMenu />
