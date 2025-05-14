@@ -31,23 +31,26 @@ const CustomerStoriesButtonWithCategoryCard = ({ stories = [] }) => {
         );
 
   return (
-    <section className="bg-primary-500 py-12">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-5xl text-secondary-500 font-semibold">On-demand Content</h2>
+    <section className="py-12 md:py-16 bg-[#EBFAFE]">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-xl">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-semibold text-[#0A2E3D] mb-4" style={{ fontFamily: '"Inter", sans-serif' }}>
+            On-demand Content
+          </h2>
         </div>
-
+        
         {/* Category Buttons */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-3 mb-14">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-2 text-lg font-medium rounded-full transition-colors duration-300 ${
+              className={`px-5 py-2 text-sm font-medium rounded-full transition-colors duration-300 ${
                 selectedCategory === category
-                  ? "bg-secondary-500 text-primary-500 "
-                  : "bg-primary-500 text-secondary-500 border border-secondary-500"
+                  ? "bg-[#0A2E3D] text-white"
+                  : "bg-white text-[#0A2E3D] border border-[#0A2E3D]"
               }`}
+              style={{ fontFamily: '"Inter", sans-serif' }}
             >
               {category}
             </button>
@@ -55,9 +58,9 @@ const CustomerStoriesButtonWithCategoryCard = ({ stories = [] }) => {
         </div>
 
         {/* Display Filtered Customer Stories */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
           {filteredStories.map((story) => (
-           <CustomerStoryCard story={story} key={story._id} />
+            <CustomerStoryCard story={story} key={story._id} />
           ))}
         </div>
       </div>
