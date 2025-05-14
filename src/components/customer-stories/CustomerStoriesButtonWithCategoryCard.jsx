@@ -32,7 +32,7 @@ const CustomerStoriesButtonWithCategoryCard = ({ stories = [] }) => {
 
   return (
     <section className="py-12 md:py-16 bg-[#EBFAFE]">
-      <div className="mx-auto px-4 sm:px-8 lg:px-12 max-w-[1400px]">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-semibold text-[#0A2E3D] mb-4" style={{ fontFamily: '"Inter", sans-serif' }}>
             On-demand Content

@@ -54,21 +54,19 @@ const CustomerStoryHero = () => {
     <section className="py-16 md:py-20 bg-[#EBFAFE]">
       <Layout>
         {/* Heading */}
-        <div className="mx-auto px-4 sm:px-8 lg:px-12 max-w-[1400px] mb-16">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[#0A2E3D] mb-6" style={{ fontFamily: '"Inter", sans-serif' }}>
-            Customer Stories
-            </h1>
-            <p className="text-lg max-w-2xl mx-auto text-gray-600" style={{ fontFamily: '"Inter", sans-serif', lineHeight: '1.6' }}>
-            Hear from our customers about the challenges they've faced and how we helped them implement effective solutions.
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[#0A2E3D] mb-6" style={{ fontFamily: '"Inter", sans-serif' }}>
+          Customer Stories
+          </h1>
+          <p className="text-lg max-w-2xl mx-auto text-gray-600" style={{ fontFamily: '"Inter", sans-serif', lineHeight: '1.6' }}>
+          Hear from our customers about the challenges they've faced and how we helped them implement effective solutions.
           </p>
-          </div>
         </div>
 
         {/* Main Content */}
         <div
           ref={scrollRef}
-          className="flex gap-8 overflow-x-auto py-4 scrollbar-hide cursor-grab active:cursor-grabbing px-4 sm:px-8 lg:px-12"
+          className="flex gap-8 overflow-x-auto py-4 scrollbar-hide cursor-grab active:cursor-grabbing"
           onMouseDown={handleMouseDown}
           onMouseLeave={handleMouseUp}
           onMouseUp={handleMouseUp}
