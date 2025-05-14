@@ -160,7 +160,7 @@ const CardContent = ({ story, categoryName, imageUrl, imageError, setImageError,
       {/* Content - Superside Style */}
       <div className="absolute bottom-0 left-0 right-0 p-6 text-white select-none pointer-events-none">
         {/* Title - Large, Bold, Positioned at Bottom */}
-        <h3 className="text-xl md:text-2xl font-semibold mb-5 leading-tight max-w-[90%]">{story.title}</h3>
+        <h3 className="text-xl md:text-2xl font-normal mb-5 leading-tight max-w-[90%]">{story.title}</h3>
         
         {/* Logo and CTA Row */}
         <div className="flex items-center justify-between w-full">
@@ -183,8 +183,8 @@ const CardContent = ({ story, categoryName, imageUrl, imageError, setImageError,
           )}
           
           {/* Read the story link */}
-          <div className="flex items-center pointer-events-auto">
-            <span className="text-sm font-medium whitespace-nowrap hover:underline transition-all duration-300">
+          <div className="flex items-center pointer-events-auto mr-16">
+            <span className="text-sm font-semibold whitespace-nowrap hover:underline transition-all duration-300">
               Read the story
               <span className="inline-block ml-1 transform translate-y-px">›</span>
             </span>
