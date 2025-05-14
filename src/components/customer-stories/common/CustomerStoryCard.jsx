@@ -53,7 +53,7 @@ export default function CustomerStoryCard({ story }) {
         className="block bg-transparent transition-all duration-300 h-full flex flex-col overflow-hidden group w-full"
       >
         {/* Image Section with increased height and rounded corners */}
-        <div className="relative w-full pb-[66%] overflow-hidden rounded-lg">
+        <div className="relative w-full pb-[70%] overflow-hidden rounded-lg">
           {!imageError && imageUrl ? (
             <Image
               src={imageUrl}
@@ -75,13 +75,13 @@ export default function CustomerStoryCard({ story }) {
         <div className="py-5 px-0 flex flex-col flex-grow">
           {/* Category - AFTER the image with bold text */}
           <div className="mb-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-gray-600" style={{ fontFamily: '"Inter", sans-serif' }}>
+            <span className="text-sm font-bold uppercase tracking-wider text-black" style={{ fontFamily: '"Inter", sans-serif' }}>
               {categoryName}
             </span>
           </div>
           
           {/* Title with underline animation on hover */}
-          <h3 className="text-xl md:text-2xl font-normal text-gray-900 mb-4 line-clamp-2 group-hover:text-[#0A2E3D] transition-colors duration-200" style={{ fontFamily: '"Inter", sans-serif' }}>
+          <h3 className="text-xl md:text-2xl font-normal text-black mb-4 line-clamp-2 group-hover:text-[#0A2E3D] transition-colors duration-200" style={{ fontFamily: '"Inter", sans-serif' }}>
             <span className="bg-gradient-to-r from-[#0A2E3D] to-[#0A2E3D] bg-[length:0%_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-out group-hover:bg-[length:100%_1px]">
               {story.title}
             </span>
@@ -93,7 +93,7 @@ export default function CustomerStoryCard({ story }) {
           
           {/* See Customer Story link */}
           <div className="flex items-center mt-auto">
-            <span className="text-sm font-medium text-[#0A2E3D] flex items-center hover:underline" style={{ fontFamily: '"Inter", sans-serif' }}>
+            <span className="text-sm font-semibold text-black flex items-center hover:underline" style={{ fontFamily: '"Inter", sans-serif' }}>
               See Customer Story
               <FaChevronRight className="ml-1 text-xs" />
             </span>
