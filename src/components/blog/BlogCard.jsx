@@ -20,7 +20,10 @@ export default function BlogCard({ blog }) {
     : (blog?.timeToRead || '5 min read');
   const shortDescription = blog?.shortDescription || '';
   const author = blog?.author || { name: 'Anonymous', role: 'Author', image: defaultAuthorImage };
-  const slug = blog?.slug || '#';
+  
+  // Check for slug first, then fall back to id for compatibility
+  // If slug is an object (from Sanity), use slug.current
+  const slug = blog?.slug?.current || blog?.slug || blog?.id || '#';
   
   // Ensure thumbnail exists and is a non-empty string
   const thumbnailSrc = blog?.thumbnail && typeof blog.thumbnail === 'string' && blog.thumbnail.trim() !== '' 

@@ -22,9 +22,17 @@ const getBlogPost = async (slug) => {
   try {
     console.log('Attempting to fetch blog post with slug:', slug);
     
+    // Check if the slug looks like a UUID (contains dashes and is roughly the right length)
+    const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slug);
+    
     // First try to fetch from Sanity API
     try {
-      const sanityResponse = await fetch(`/api/sanity-blogs/${slug}`, {
+      // Construct the appropriate API URL
+      const apiUrl = isUuid 
+        ? `/api/blogs/id/${slug}` // If it's a UUID, use the ID endpoint if you have one
+        : `/api/sanity-blogs/${slug}`;
+      
+      const sanityResponse = await fetch(apiUrl, {
         cache: 'no-store',
         next: { revalidate: 60 }
       });
@@ -65,13 +73,13 @@ const getBlogPost = async (slug) => {
     }
     
     // Fall back to static data if both APIs fail
-    const staticBlog = blogs.find((blog) => blog.slug === slug);
+    const staticBlog = blogs.find((blog) => blog.slug === slug || blog.id === slug);
     console.log('Using static blog data:', staticBlog);
     return staticBlog;
   } catch (err) {
     console.error("Error in blog fetching process:", err);
     // Final fallback to static data
-    return blogs.find((blog) => blog.slug === slug);
+    return blogs.find((blog) => blog.slug === slug || blog.id === slug);
   }
 };
 

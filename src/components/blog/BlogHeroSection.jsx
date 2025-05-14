@@ -92,7 +92,7 @@ const BlogHeroSection = ({ blogData }) => {
         {/* Main Content */}
         <div className="grid md:grid-cols-3 gap-8 w-full">
           {/* Featured Blog */}
-          <Link href={`blog/${featuredBlog.id}`} className="md:col-span-2 bg-[#031B34] text-white rounded-xl overflow-hidden group">
+          <Link href={`blog/${featuredBlog.slug?.current || featuredBlog.slug || featuredBlog.id}`} className="md:col-span-2 bg-[#031B34] text-white rounded-xl overflow-hidden group">
             <div className="relative z-10 h-[350px] sm:h-[400px] w-full p-4 sm:p-8">
               <div className="absolute inset-0">
                 <Image
