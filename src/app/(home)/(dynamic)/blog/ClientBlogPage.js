@@ -194,14 +194,20 @@ export default function ClientBlogPage() {
         const renderCategorySection = (category, categoryBlogs, isSEO = false) => {
           // Convert category to URL-friendly format
           const categorySlug = category.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '-');
+          const categoryUrl = `/blog/category/${categorySlug}`;
           
           return (
             <section key={`category-${category}`} className='bg-[#EBFAFE] pb-16'>
               <Layout>
                 <div className='flex justify-between items-center mb-6 md:mb-8'>
-                  <h2 className='text-2xl md:text-[40px] text-[#0A2E3D] font-normal font-["Inter",sans-serif]'>{category}</h2>
+                  <Link href={categoryUrl} className="group">
+                    <h2 className='text-2xl md:text-[40px] text-[#0A2E3D] hover:text-blue-600 transition-colors font-normal font-["Inter",sans-serif] flex items-center'>
+                      {category}
+                      <FaChevronRight className="ml-2 text-base md:text-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1" />
+                    </h2>
+                  </Link>
                   <Link 
-                    href={`/blog/category/${categorySlug}`} 
+                    href={categoryUrl} 
                     className='text-[#0A2E3D] hover:text-blue-600 flex items-center gap-1 md:gap-2 font-medium text-base md:text-lg font-["Inter",sans-serif]'
                   >
                     <span>See all</span>
