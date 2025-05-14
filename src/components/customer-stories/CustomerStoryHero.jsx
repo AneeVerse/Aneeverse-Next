@@ -51,23 +51,24 @@ const CustomerStoryHero = () => {
   };
 
   return (
-    <section className="pb-16 pt-[160px] mt-[-80px] bg-primary-500 text-secondary-500">
+    <section className="py-16 md:py-20 bg-[#EBFAFE]">
       <Layout>
         {/* Heading */}
-        <div className="text-center mb-12">
-          <h4 className="text-sm uppercase tracking-wide text-secondary-600 font-semibold">Learning Center</h4>
-          <h2 className="text-6xl md:text-7xl mt-3  text-secondary-600">
-            Customer Stories
-          </h2>
-          <p className="text-lg max-w-2xl mx-auto text-secondary-500 mt-8">
-            Hear from our customers about the challenges they've faced and how we helped them implement effective solutions.
-          </p>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-xl mb-16">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[#0A2E3D] mb-6" style={{ fontFamily: '"Inter", sans-serif' }}>
+              Customer Stories
+            </h1>
+            <p className="text-lg max-w-2xl mx-auto text-gray-600" style={{ fontFamily: '"Inter", sans-serif', lineHeight: '1.6' }}>
+              Hear from our customers about the challenges they've faced and how we helped them implement effective solutions.
+            </p>
+          </div>
         </div>
 
         {/* Main Content */}
         <div
           ref={scrollRef}
-          className="flex gap-6 overflow-x-auto py-4 scrollbar-hide cursor-grab active:cursor-grabbing -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 pr-8 sm:pr-10 lg:pr-12 "
+          className="flex gap-6 overflow-x-auto py-4 scrollbar-hide cursor-grab active:cursor-grabbing px-4 sm:px-6 lg:px-8"
           onMouseDown={handleMouseDown}
           onMouseLeave={handleMouseUp}
           onMouseUp={handleMouseUp}

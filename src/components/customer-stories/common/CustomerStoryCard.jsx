@@ -30,88 +30,76 @@ export default function CustomerStoryCard({ story }) {
     if (story?.customerLogo?.asset?._ref) {
       try {
         const logo = urlForImage(story.customerLogo).url();
-        console.log("Card customer logo URL:", logo); // Debug log
         setLogoUrl(logo);
-        setLogoError(false); // Reset error state when logo is found
       } catch (error) {
         console.error("Error processing logo in CustomerStoryCard:", error);
         setLogoError(true);
       }
     } else {
-      console.log("No customer logo found for card:", story.title);
       setLogoError(true);
     }
   }, [story]);
 
-  // Format date for display
-  const formattedDate = story.publishedAt 
-    ? new Date(story.publishedAt).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-      })
-    : '';
-
   // Get the category name (using first category if multiple exist)
   const categoryName = story.categories && story.categories.length > 0
-    ? story.categories[0].title
-    : 'Uncategorized';
+    ? story.categories[0].title.toUpperCase()
+    : 'UNCATEGORIZED';
 
   return (
-    <Link
-      href={`/customer-stories/${story.slug.current}`}
-      className="block group overflow-hidden rounded-lg shadow-lg bg-[#EBFAFE] hover:shadow-xl transition-shadow duration-300 w-full max-w-[420px] mx-auto h-full flex flex-col"
-    >
-      {/* Image Section */}
-      <div className="relative w-full overflow-hidden bg-gray-200">
-        {!imageError && imageUrl ? (
-          <>
+    <div className="h-full flex flex-col">
+      {/* Main Card */}
+      <Link
+        href={`/customer-stories/${story.slug.current}`}
+        className="block bg-transparent transition-all duration-300 h-full flex flex-col overflow-hidden group"
+      >
+        {/* Image Section with increased height and rounded corners */}
+        <div className="relative w-full pb-[65%] overflow-hidden rounded-lg">
+          {!imageError && imageUrl ? (
             <Image
               src={imageUrl}
               alt={story.mainImage?.alt || story.title}
-              width={0}
-              height={0}
-              sizes="100vw"
-              style={{ width: '100%', height: 'auto' }}
-              className="transition-transform duration-500 group-hover:scale-110"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover transition-transform duration-700 group-hover:scale-110"
+              priority
               onError={() => setImageError(true)}
             />
-          </>
-        ) : (
-          <div className="w-full h-64 bg-gray-200 flex items-center justify-center">
-            <span className="text-gray-400">No image</span>
-          </div>
-        )}
-      </div>
+          ) : (
+            <div className="absolute inset-0 bg-gray-200 flex items-center justify-center rounded-lg">
+              <span className="text-gray-400">No image</span>
+            </div>
+          )}
+        </div>
 
-      {/* Content Section */}
-      <div className="p-6 flex flex-col flex-grow">
-        {/* Category - Now below the image */}
-        <div className="mb-3">
-          <span className="text-sm font-semibold uppercase tracking-wide text-gray-600">
-            {categoryName}
-          </span>
+        {/* Content Section */}
+        <div className="py-4 px-0 flex flex-col flex-grow">
+          {/* Category - AFTER the image with bold text */}
+          <div className="mb-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-gray-600" style={{ fontFamily: '"Inter", sans-serif' }}>
+              {categoryName}
+            </span>
+          </div>
+          
+          {/* Title with underline animation on hover */}
+          <h3 className="text-xl md:text-2xl font-normal text-gray-900 mb-4 line-clamp-2 group-hover:text-[#0A2E3D] transition-colors duration-200" style={{ fontFamily: '"Inter", sans-serif' }}>
+            <span className="bg-gradient-to-r from-[#0A2E3D] to-[#0A2E3D] bg-[length:0%_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-out group-hover:bg-[length:100%_1px]">
+              {story.title}
+            </span>
+          </h3>
+          
+          <div className="text-base text-gray-600 mb-5 line-clamp-3 flex-grow" style={{ fontFamily: '"Inter", sans-serif' }}>
+            {story.shortDescription}
+          </div>
+          
+          {/* See Customer Story link */}
+          <div className="flex items-center mt-auto">
+            <span className="text-sm font-medium text-[#0A2E3D] flex items-center hover:underline" style={{ fontFamily: '"Inter", sans-serif' }}>
+              See Customer Story
+              <FaChevronRight className="ml-1 text-xs" />
+            </span>
+          </div>
         </div>
-        
-        <h2 className="text-xl font-bold text-gray-800 mb-3 line-clamp-2 group-hover:text-primary-600 transition-colors">
-          {story.title}
-        </h2>
-        
-        <div className="text-base text-gray-600 mb-6 line-clamp-2 min-h-[48px]">
-          {story.shortDescription}
-        </div>
-        
-        {/* Spacer to push footer to bottom */}
-        <div className="flex-grow"></div>
-        
-        {/* Footer with See Customer Story CTA */}
-        <div className="flex justify-start pt-4 border-t border-[#D0E8F2] mt-auto">
-          <span className="text-sm font-medium text-primary-600 flex items-center group-hover:underline transition-all duration-300">
-            See Customer Story
-            <FaChevronRight className="ml-1 text-xs" />
-          </span>
-        </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
