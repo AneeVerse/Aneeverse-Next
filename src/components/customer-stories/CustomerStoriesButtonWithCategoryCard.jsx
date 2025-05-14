@@ -38,7 +38,7 @@ const CustomerStoriesButtonWithCategoryCard = ({ stories = [] }) => {
             On-demand Content
           </h2>
         </div>
-        
+
         {/* Category Buttons */}
         <div className="flex flex-wrap justify-center gap-3 mb-14">
           {categories.map((category) => (
@@ -60,7 +60,7 @@ const CustomerStoriesButtonWithCategoryCard = ({ stories = [] }) => {
         {/* Display Filtered Customer Stories */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-10 gap-y-16">
           {filteredStories.map((story) => (
-            <CustomerStoryCard story={story} key={story._id} />
+           <CustomerStoryCard story={story} key={story._id} />
           ))}
         </div>
       </div>
