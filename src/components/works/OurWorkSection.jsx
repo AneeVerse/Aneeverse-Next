@@ -117,50 +117,47 @@ const OurWorkSection = ({ portfolioItems = [], isLoading = false }) => {
 
         {/* Project Grid */}
         {!isLoading && (
-          <div className="grid grid-cols-1 md:grid-cols-6 gap-4 md:gap-6">
-            {displayProjects.map((project, index) => (
-              <Link
-                href={project.url}
-                key={project.id || index}
-                className={`group rounded-lg cursor-pointer overflow-hidden ${
-                  project.size === "large" ? "md:col-span-3" : "md:col-span-2"
-                }`}
-              >
-                {/* Image */}
-                <div className="rounded-lg overflow-hidden">
-                  {project.image.startsWith('http') ? (
-                    // For Sanity images
-                    <div className={`relative w-full ${
-                      project.size === "large" ? "h-[260px] md:h-[340px]" : "h-[200px] md:h-[280px]"
-                    }`}>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {displayProjects.map((project, index) => {
+              // Use colSpan property if available, else default to 1
+              const colSpan = project.colSpan || ((index % 6 === 0 || index % 6 === 4) ? 2 : 1);
+              // Height classes as in DynamicOurWorks
+              const heightClass = colSpan === 2 ? "h-[280px] xl:h-[340px] 2xl:h-[380px]" : "h-[200px] sm:h-[280px] xl:h-[340px] 2xl:h-[380px]";
+              return (
+                <Link
+                  href={project.url}
+                  key={project.id || index}
+                  style={{ gridColumn: `span ${colSpan}` }}
+                  className={`group rounded-lg cursor-pointer overflow-hidden${colSpan ? ` md:col-span-${colSpan}` : ""}`}
+                >
+                  {/* Image */}
+                  <div className={`relative rounded-lg overflow-hidden ${heightClass}`}>
+                    {project.image.startsWith('http') ? (
                       <Image
                         src={project.image}
                         alt={project.title}
                         fill
                         className="group-hover:scale-105 transition-transform duration-300 rounded-lg object-cover"
                       />
-                    </div>
-                  ) : (
-                    // For static images
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className={`w-full group-hover:scale-105 transition-transform duration-300 rounded-lg object-cover ${
-                        project.size === "large" ? "h-[260px] md:h-[340px]" : "h-[200px] md:h-[280px]"
-                      }`}
-                    />
-                  )}
-                </div>
-                {/* Text Content */}
-                <div className="py-4">
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-lg font-semibold">{project.title}</h3>
-                    <MdOutlineArrowOutward className="opacity-0 self-center translate-x-[-50%] translate-y-[50%] group-hover:translate-y-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                    ) : (
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className={`w-full group-hover:scale-105 transition-transform duration-300 rounded-lg object-cover ${heightClass}`}
+                      />
+                    )}
                   </div>
-                  <p className="text-sm text-gray-600">{project.description}</p>
-                </div>
-              </Link>
-            ))}
+                  {/* Text Content */}
+                  <div className="py-4">
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-lg font-semibold">{project.title}</h3>
+                      <MdOutlineArrowOutward className="opacity-0 self-center translate-x-[-50%] translate-y-[50%] group-hover:translate-y-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                    </div>
+                    <p className="text-sm text-gray-600">{project.description}</p>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         )}
       </Layout>
