@@ -23,6 +23,9 @@ export const metadata = {
   },
 };
 
+// Set revalidation time (in seconds)
+export const revalidate = 3600; // 1 hour
+
 export default function OurWorkLayout({ children }) {
   return <>{children}</>;
 } 
