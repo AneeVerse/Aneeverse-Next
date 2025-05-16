@@ -10,7 +10,7 @@ import { AccentText } from "../common/typography/AccentText";
 
 export default function AIDesignSection() {
   return (
-    <section className="bg-primary-500 py-12 px-2">
+    <section className="py-12 px-2">
       <Layout className="relative  flex flex-col md:flex-row items-center gap-8 rounded-lg overflow-hidden">
         {/* Right Side (Image) */}
         <div className="absolute z-0 inset-0">
