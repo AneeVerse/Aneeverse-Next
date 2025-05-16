@@ -4,9 +4,9 @@ import SlidingLogos from '@/components/home/SlidingLogos'
 import React, { Suspense } from 'react'
 import { client } from '@/sanity/lib/client'
 import { getCustomerStoriesQuery } from '@/sanity/lib/queries'
-import { revalidate } from './config'
 
-export { revalidate }
+// Define revalidate directly in the page file
+export const revalidate = 60; // Revalidate content every 60 seconds
 
 export const metadata = {
     title: "Customer Stories | Aneeverse",
