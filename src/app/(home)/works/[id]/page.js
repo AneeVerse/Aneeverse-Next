@@ -16,6 +16,9 @@ import ProjectSummary from '@/components/portfolio/ProjectSummary';
 import PortfolioMetrics from '@/components/portfolio/PortfolioMetrics';
 import ProjectGallery from '@/components/portfolio/ProjectGallery';
 
+// Set revalidation time (in seconds)
+export const revalidate = 3600; // 1 hour
+
 // PortableText components
 const portableTextComponents = {
   block: {
