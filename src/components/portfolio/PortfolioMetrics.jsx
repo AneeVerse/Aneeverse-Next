@@ -5,7 +5,7 @@ export default function PortfolioMetrics({ results = [] }) {
   if (!results || results.length === 0) return null;
   
   return (
-    <div className="py-16 bg-secondary-500">
+    <div className="py-16">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {results.map((result, index) => (
