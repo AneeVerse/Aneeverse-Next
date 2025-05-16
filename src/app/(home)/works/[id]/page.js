@@ -16,9 +16,6 @@ import ProjectSummary from '@/components/portfolio/ProjectSummary';
 import PortfolioMetrics from '@/components/portfolio/PortfolioMetrics';
 import ProjectGallery from '@/components/portfolio/ProjectGallery';
 
-// Set revalidation time (in seconds)
-export const revalidate = 3600; // 1 hour
-
 // PortableText components
 const portableTextComponents = {
   block: {
@@ -274,31 +271,36 @@ export default function ProjectPage({ params }) {
               <Link
                 key={relatedProject._id || relatedProject.slug}
                 href={`/works/${relatedProject.slug?.current || relatedProject.slug}`}
-                className="group"
+                className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow flex flex-col"
               >
-                <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  {relatedProject.mainImage ? (
+                <div className="relative aspect-video w-full overflow-hidden">
+                  {relatedProject.mainImage || relatedProject.thumbnailImage ? (
                     <Image
-                      src={urlForImage(relatedProject.mainImage).url()}
+                      src={urlForImage(relatedProject.mainImage || relatedProject.thumbnailImage).url()}
                       alt={relatedProject.title}
                       fill
-                      className="object-cover transform group-hover:scale-105 transition-transform duration-300"
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   ) : (
                     <img
-                      src={relatedProject.thumbnail}
+                      src={relatedProject.thumbnail || '/images/home/works-ban-1.avif'}
                       alt={relatedProject.title}
-                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   )}
                 </div>
-                <div className="mt-4">
-                  <h3 className="text-xl font-semibold text-secondary-500">
+                <div className="p-6 flex-1 flex flex-col justify-end">
+                  <div className="text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">
+                    {relatedProject.services && relatedProject.services.length > 0
+                      ? relatedProject.services[0]
+                      : relatedProject.meta?.services?.[0] || ''}
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-1 group-hover:text-primary-500 transition-colors">
                     {relatedProject.title}
                   </h3>
-                  <p className="text-gray-600">
-                    {relatedProject.services 
-                      ? relatedProject.services.join(", ") 
+                  <p className="text-gray-600 text-sm">
+                    {relatedProject.services
+                      ? relatedProject.services.join(", ")
                       : relatedProject.meta?.services?.join(", ") || ""}
                   </p>
                 </div>
