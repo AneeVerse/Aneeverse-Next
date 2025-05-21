@@ -15,6 +15,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        {/* Google Search Console Verification */}
+        <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
+        
         {/* GTM script */}
         <Script id="gtm-init" strategy="afterInteractive">
           {`
