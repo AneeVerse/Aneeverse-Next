@@ -40,48 +40,48 @@ export default function TeamSectionAbout() {
         role: "Co-founder and CEO",
         bio: "Previously Head of Marketing at Revolut, where he led growth across Europe and established global partnerships with brands such as Visa, Mastercard, and Samsung.",
         image: "/images/about/team1.avif",
-        bgColor: "bg-[#edf4ea]",
-        textColor: "text-[#1c4437]",
+        bgColor: "bg-[#004235]",
+        textColor: "text-white",
       },
       {
         name: "Haakon Heir",
         role: "Co-founder and CTO",
         bio: "Led engineering at Dropbox, where he scaled the platform's infrastructure to serve millions of users worldwide. Expert in cloud architecture and AI integration.",
         image: "/images/about/team2.avif",
-        bgColor: "bg-[#edf4ea]",
-        textColor: "text-[#1c4437]",
+        bgColor: "bg-[#fff9e7]",
+        textColor: "text-[#002f2c]",
       },
       {
         name: "Jing Kjeldsen",
         role: "Co-founder and CPO",
         bio: "Former Design Lead at Airbnb, where he revolutionized the user experience and visual identity. Passionate about creating beautiful, functional products that solve real problems.",
         image: "/images/about/team3.avif",
-        bgColor: "bg-[#e7f9d1]",
-        textColor: "text-[#365314]",
+        bgColor: "bg-[#c6e9c5]",
+        textColor: "text-[#104218]",
       },
       {
         name: "Jen Rapp",
         role: "Co-founder and CMO",
         bio: "Previously Marketing Director at Patagonia, where she led award-winning campaigns focused on sustainability and social impact. Experienced in building purpose-driven brands.",
         image: "/images/about/team4.avif",
-        bgColor: "bg-[#f6edf9]",
-        textColor: "text-[#4a124f]",
+        bgColor: "bg-[#c8e1ff]",
+        textColor: "text-[#002f75]",
       },
       {
         name: "Kai Kjeldsen",
         role: "Co-founder and COO",
         bio: "Former Operations Director at Spotify, where he optimized global team structures and workflows. Expert in scaling businesses efficiently while maintaining culture and quality.",
         image: "/images/about/team5.avif",
-        bgColor: "bg-[#f9f9f9]",
-        textColor: "text-[#3d3d3d]",
+        bgColor: "bg-[#fff5d1]",
+        textColor: "text-[#654b00]",
       },
       {
         name: "Kari Rapp",
         role: "Co-founder and CCO",
         bio: "Previously Creative Director with Ogilvy in New York where she worked on brands such as IBM, American Express, IKEA, and Coca-Cola. Award-winning designer with multiple Cannes Lions.",
         image: "/images/about/team6.avif",
-        bgColor: "bg-[#f6edf9]",
-        textColor: "text-[#4a124f]",
+        bgColor: "bg-[#ffe3e1]",
+        textColor: "text-[#6d1213]",
       },
     ];
   
@@ -111,23 +111,30 @@ export default function TeamSectionAbout() {
             {team.map((member, index) => (
               <div
                 key={index}
-                className={`min-w-[350px] relative h-[480px] pb-[30px] hover:pb-[90px] hover:mt-[-5px] transition-all duration-300 ${isDragging ? '' : 'cursor-pointer'} group ${member.bgColor} shadow-sm rounded-lg overflow-hidden`}>
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full h-[400px] object-cover transition-transform duration-300 group-hover:-translate-y-10"
-                  draggable="false"
-                />
-                <div className={`p-4 h-[80px] group-hover:h-[150px] transition-all duration-300 absolute bottom-0 left-0 w-full ${member.bgColor}`}>
-                  <p className={`text-2xl font-semibold ${member.textColor}`}>
-                    {member.name}
-                  </p>
-                  <p className={`${member.textColor} text-md font-medium`}>
-                    {member.role}
-                  </p>
-                  <p className="text-md h-0 group-hover:h-fit group-hover:mt-2 overflow-hidden duration-300 transition-transform">
-                    <span className={`${member.textColor} text-sm line-clamp-3`}>{member.bio}</span>
-                  </p>
+                className={`min-w-[350px] relative h-[550px] hover:mt-[-5px] transition-all duration-300 ${isDragging ? '' : 'cursor-pointer'} group overflow-hidden rounded-lg`}>
+                <div className="w-full h-full overflow-hidden">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:-translate-y-[120px]"
+                    draggable="false"
+                  />
+                </div>
+                <div className={`absolute inset-x-0 bottom-0 ${member.bgColor} transition-transform duration-500 ease-out group-hover:h-[200px]`}>
+                  <div className="p-6">
+                    <h3 className={`text-3xl font-light ${member.textColor}`}>
+                      {member.name}
+                    </h3>
+                    
+                    <div className="h-0 group-hover:h-[120px] transition-all overflow-hidden">
+                      <p className={`mt-2 text-lg font-medium ${member.textColor}`}>
+                        {member.role}
+                      </p>
+                      <p className={`mt-4 ${member.textColor} leading-relaxed`}>
+                        {member.bio}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
