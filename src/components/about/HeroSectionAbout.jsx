@@ -8,7 +8,7 @@ export default function HeroSectionAbout() {
                 {/* Text Content */}
                 <Layout className="flex pb-8 flex-col gap-4 md:flex-row  justify-between">
                     <div>
-                        <span className="text-[#a5bcc5] ">About Aneeverse</span>
+                        <span className="text-[#a5bcc5] mt-12 block">ABOUT ANEEVERSE</span>
                         <h1 style={{lineHeight: "120%"}} className="text-4xl max-w-xl mt-2 lg:text-6xl font-semibold">
                             The creative force{" "}
                             <span className=" font-Rock_Salt text-[#d9d9d9]">behind
@@ -18,7 +18,7 @@ export default function HeroSectionAbout() {
                         </h1>
                     </div>
 
-                    <p className="text-md self-end max-w-md text-[#a5bcc5] mt-6">
+                    <p className="text-md self-end max-w-md text-white mt-6">
                         The only creative service where enterprise teams get the top 1% of
                         global talent, powered by AI, plugged directly into their workflows.
                     </p>
@@ -27,7 +27,7 @@ export default function HeroSectionAbout() {
                 {/* Image */}
                 <div className=" mt-12 ">
                     <img
-                        src="/images/about/about-hero-banner.avif"
+                        src="/images/our-team/our-team-banner.avif"
                         alt="Creative Showcase"
                         className="rounded-lg h-[400px] w-full object-cover shadow-lg"
                     />
