@@ -1,83 +1,64 @@
 "use client";
-import { useEffect, useState } from "react";
-import { motion, useAnimation } from "framer-motion";
-import Layout from "../common/Layout";
+import { useEffect } from 'react';
+import { motion } from 'framer-motion';
+import Layout from '../common/Layout';
 
-const ParnterSection = () => {
-  const logos = [
-    "/images/about/figma.png",
-    "/images/about/google.png",
-    "/images/about/figma.png",
-    "/images/logos/ishanyafoundation.png",
-    "/images/about/webflow.png",
-    "/images/logos/ishanyafoundation.png",
+const logos = [
     "/images/logos/bharathaksha2.png",
+    "/images/logos/ishanyafoundation.png",
     "/images/logos/deepakfertilizer.png",
-  ];
+    "/images/logos/amazon.png",
+    "/images/logos/bookings.png",
+    "/images/logos/coinbase.png",
+    "/images/logos/meta.png",
+    "/images/logos/reddit.png",
+    "/images/logos/salesforce.png",
+    "/images/logos/shopify.png",
+    "/images/logos/webflow.png",
+    "/images/logos/figma.png",
+    "/images/logos/google.png",
+    "/images/logos/ishanyafoundation.png",
+];
 
-  const controls = useAnimation();
-  const [currentX, setCurrentX] = useState(0); // Track the current position
-
-  const startAnimation = (fromX = 0) => {
-    controls.start({
-      x: [fromX, -1000], // Resume from the current position
-      transition: {
+const slideVariants = {
+  animate: (direction) => ({
+    x: direction === 'left' ? [0, '-50%'] : ['-50%', 0],
+    transition: {
+      x: {
         repeat: Infinity,
-        duration: 20, // Adjust for speed
-        ease: "linear",
+        repeatType: 'loop',
+        duration: 100,
+        ease: 'linear',
       },
-    });
-  };
+    },
+  }),
+};
 
-  // const stopAnimation = () => {
-  //   controls.stop();
-  // };
-
-  useEffect(() => {
-    startAnimation();
-  }, []);
-
-  // Debug which logos are actually loading
-  useEffect(() => {
-    logos.forEach((logo, index) => {
-      const img = new Image();
-      img.onload = () => console.log(`Partner Logo ${index} loaded successfully: ${logo}`);
-      img.onerror = () => console.error(`Partner Logo ${index} failed to load: ${logo}`);
-      img.src = logo;
-    });
-  }, []);
-
+const SliderLogo = ({ direction }) => {
   return (
-    <Layout>
-    <div className="overflow-hidden   mx-auto max-w-7xl text-white relative">
-      <div className="text-center text-md font-light tracking-widest text-secondary mb-12">
-      {"Trusted by 500+ of the world's biggest brands".toUpperCase()}
-      </div>
-
-      <div className="relative  py-6">
-        <motion.div
-          animate={controls}
-          className="flex whitespace-nowrap"
-          onUpdate={(latest) => {
-            // Track the current animation progress
-            setCurrentX(latest.x || 0);
-          }}
-          // onHoverStart={stopAnimation} // Stop animation on hover
-          // onHoverEnd={() => startAnimation(currentX)} // Resume from the same point
-        >
-          {/* Original Logos */}
-          {[...logos, ...logos, ...logos, ...logos].map((logo, index) => {
-            // Check specific logos to resize
-            const isIshanya = logo.includes('ishanyafoundation');
-            const isBharathaksha = logo.includes('bharathaksha');
-            const isDeepak = logo.includes('deepakfertilizer');
-            
-            return (
-              <img
-                key={index}
-                src={logo}
-                alt={`Partner ${index + 1}: ${logo}`}
-                className={`${isIshanya || isBharathaksha ? 'h-32' : isDeepak ? 'h-24' : 'h-6'} object-contain px-6 w-auto transition-all`}
+    <div className="relative overflow-hidden w-full">
+      <motion.div
+        className="flex h-[80px] sm:h-[120px] gap-2 sm:gap-6 min-w-max"
+        variants={slideVariants}
+        animate="animate"
+        custom={direction}
+      >
+        {/* First set of logos */}
+        {logos.map((logo, ind) => {
+          // Check specific logos to resize
+          const isIshanya = logo.includes('ishanyafoundation');
+          const isBharathaksha = logo.includes('bharathaksha');
+          const isDeepak = logo.includes('deepakfertilizer');
+          
+          return (
+            <div
+              key={ind}
+              className="flex h-full py-2 px-1 sm:py-6 sm:px-5 min-w-fit items-center justify-center"
+            >
+              <img 
+                src={logo} 
+                alt={`Logo ${ind}: ${logo}`} 
+                className={`w-auto ${isIshanya || isBharathaksha ? 'h-[120px] sm:h-[200px]' : isDeepak ? 'h-[100px] sm:h-[160px]' : 'h-[30px] sm:h-[40px]'} object-contain`} 
                 onError={(e) => {
                   console.error(`Failed to load logo: ${logo}`);
                   e.target.onerror = null; // Prevent infinite loop
@@ -85,18 +66,75 @@ const ParnterSection = () => {
                   e.target.src = "/images/logos/placeholder-logo.png"; // Try to show a placeholder
                 }}
               />
-            );
-          })}
-        </motion.div>
-
-        {/* Optional gradient fade on edges */}
-        <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-secondary-500 to-transparent"></div>
-        <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-secondary-500 to-transparent"></div>
-      </div>
-    
-      
+            </div>
+          );
+        })}
+        
+        {/* Duplicate the entire logo set for seamless looping */}
+        {logos.map((logo, ind) => {
+          // Check specific logos to resize
+          const isIshanya = logo.includes('ishanyafoundation');
+          const isBharathaksha = logo.includes('bharathaksha');
+          const isDeepak = logo.includes('deepakfertilizer');
+          
+          return (
+            <div
+              key={`dup-${ind}`}
+              className="flex h-full py-2 px-1 sm:py-6 sm:px-5 min-w-fit items-center justify-center"
+            >
+              <img 
+                src={logo} 
+                alt={`Logo ${ind}: ${logo}`} 
+                className={`w-auto ${isIshanya || isBharathaksha ? 'h-[120px] sm:h-[200px]' : isDeepak ? 'h-[100px] sm:h-[160px]' : 'h-[30px] sm:h-[40px]'} object-contain`} 
+                onError={(e) => {
+                  console.error(`Failed to load logo: ${logo}`);
+                  e.target.onerror = null; // Prevent infinite loop
+                  e.target.alt = `Error loading: ${logo}`;
+                  e.target.src = "/images/logos/placeholder-logo.png"; // Try to show a placeholder
+                }}
+              />
+            </div>
+          );
+        })}
+      </motion.div>
     </div>
-    </Layout>
+  );
+};
+
+const ParnterSection = () => {
+  // Debug which logos are actually loading
+  useEffect(() => {
+    logos.forEach((logo, index) => {
+      const img = new window.Image();
+      img.onload = () => console.log(`Logo ${index} loaded successfully: ${logo}`);
+      img.onerror = () => console.error(`Logo ${index} failed to load: ${logo}`);
+      img.src = logo;
+    });
+  }, []);
+
+  return (
+    <div className="relative bg-primary-500 pt-12 pb-16 sm:py-20 overflow-hidden">
+      <Layout>
+        <h2 className="text-center text-xl md:text-2xl lg:text-3xl font-medium text-gray-700 mb-12">
+          Trusted by 500+ of the world's biggest brands
+        </h2>
+        <div className="relative">
+          {/* Left fade overlay */}
+          <div className="absolute top-0 left-0 w-[60px] sm:w-[200px] lg:w-[400px] h-full z-10 bg-gradient-to-r via-primary-500/80 from-primary-500 to-transparent"></div>
+          
+          {/* Right fade overlay */}
+          <div className="absolute z-10 top-0 right-0 w-[60px] sm:w-[200px] lg:w-[400px] h-full bg-gradient-to-l from-primary-500 via-primary-500/80 to-transparent"></div>
+          
+          {/* First slider - moving left */}
+          <SliderLogo direction="left" />
+          
+          {/* Second slider - moving right */}
+          <div className="mt-8">
+            <SliderLogo direction="right" />
+          </div>
+        </div>
+      </Layout>
+    </div>
   );
 };
 

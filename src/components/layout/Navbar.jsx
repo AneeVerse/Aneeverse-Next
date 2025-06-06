@@ -14,10 +14,13 @@ const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathName = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  
+  // Check if current path is in the Why Us section
+  const isWhyUsSection = pathName === "/about-us" || pathName === "/our-team";
 
   // State for colors
   const [color, setColor] = useState({
-    text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/") || pathName === "/customer-stories" || pathName.includes("/customer-stories/")) ? "#EBFAFE" : "#073742",
+    text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/") || pathName === "/customer-stories" || pathName.includes("/customer-stories/") || pathName === "/about-us") ? "#EBFAFE" : "#073742",
     bg: "transparent",
   });
 
@@ -30,7 +33,7 @@ const Navbar = () => {
       } else {
         setScrolled(false);
         setColor({
-          text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/") || pathName === "/customer-stories" || pathName.includes("/customer-stories/")) ? "#EBFAFE" : "#073742",
+          text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/") || pathName === "/customer-stories" || pathName.includes("/customer-stories/") || pathName === "/about-us") ? "#EBFAFE" : "#073742",
           bg: "transparent",
         });
       }
@@ -42,14 +45,14 @@ const Navbar = () => {
   // Ensure color is updated correctly on route change
   useEffect(() => {
     setColor({
-      text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/") || pathName === "/customer-stories" || pathName.includes("/customer-stories/")) ? "#EBFAFE" : "#073742",
+      text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/") || pathName === "/customer-stories" || pathName.includes("/customer-stories/") || pathName === "/about-us") ? "#EBFAFE" : "#073742",
       bg: "transparent",
     });
   }, [pathName]);
 
   // Determine button text color for "Book a Call"
   const callTextColor = pathName !== "/"
-    ? (pathName === "/services" || pathName.includes("/services/") || pathName === "/customer-stories" || pathName.includes("/customer-stories/"))
+    ? (pathName === "/services" || pathName.includes("/services/") || pathName === "/customer-stories" || pathName.includes("/customer-stories/") || pathName === "/about-us")
       ? (color.bg !== "#EBFAFE" ? "#073742" : "#EBFAFE")
       : "#EBFAFE"
     : (color.bg !== "#EBFAFE" ? "#073742" : "#EBFAFE");
@@ -105,15 +108,15 @@ const Navbar = () => {
             href="/contact"
             className="px-6 py-2 rounded-full border"
             style={{
-              color: pathName.includes('/customer-stories') ? '#EBFAFE' : callTextColor,
-              backgroundColor: pathName.includes('/customer-stories') ? '#073742' : color.text,
+              color: pathName === "/about-us" ? "#073742" : (pathName.includes('/customer-stories') ? '#EBFAFE' : callTextColor),
+              backgroundColor: pathName === "/about-us" ? "#EBFAFE" : (pathName.includes('/customer-stories') ? '#073742' : color.text),
               borderColor: pathName.includes('/customer-stories') ? '#EBFAFE' : color.bg
             }}
           >
             Book a Call
           </Link>
           <Link
-            href="/register"
+            href="/login"
             className="px-6 py-2 rounded-full border"
             style={{
               color: pathName.includes('/customer-stories') ? '#073742' : color.text,

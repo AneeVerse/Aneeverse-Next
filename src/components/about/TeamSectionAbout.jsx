@@ -1,10 +1,44 @@
+"use client";
 import Layout from "../common/Layout";
+import { useRef, useState, useEffect } from "react";
 
 export default function TeamSectionAbout() {
+    const scrollContainerRef = useRef(null);
+    const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [scrollLeft, setScrollLeft] = useState(0);
+
+    const handleMouseDown = (e) => {
+        setIsDragging(true);
+        setStartX(e.pageX - scrollContainerRef.current.offsetLeft);
+        setScrollLeft(scrollContainerRef.current.scrollLeft);
+    };
+
+    const handleMouseUp = () => {
+        setIsDragging(false);
+    };
+
+    const handleMouseMove = (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - scrollContainerRef.current.offsetLeft;
+        const walk = (x - startX) * 2; // Scroll speed multiplier
+        scrollContainerRef.current.scrollLeft = scrollLeft - walk;
+    };
+
+    useEffect(() => {
+        // Add event listeners to document to handle mouse events outside the container
+        document.addEventListener('mouseup', handleMouseUp);
+        return () => {
+            document.removeEventListener('mouseup', handleMouseUp);
+        };
+    }, []);
+
     const team = [
       {
         name: "Fredrik Thomassen",
         role: "Co-founder and CEO",
+        bio: "Previously Head of Marketing at Revolut, where he led growth across Europe and established global partnerships with brands such as Visa, Mastercard, and Samsung.",
         image: "/images/about/team1.avif",
         bgColor: "bg-[#edf4ea]",
         textColor: "text-[#1c4437]",
@@ -12,6 +46,7 @@ export default function TeamSectionAbout() {
       {
         name: "Haakon Heir",
         role: "Co-founder and CTO",
+        bio: "Led engineering at Dropbox, where he scaled the platform's infrastructure to serve millions of users worldwide. Expert in cloud architecture and AI integration.",
         image: "/images/about/team2.avif",
         bgColor: "bg-[#edf4ea]",
         textColor: "text-[#1c4437]",
@@ -19,6 +54,7 @@ export default function TeamSectionAbout() {
       {
         name: "Jing Kjeldsen",
         role: "Co-founder and CPO",
+        bio: "Former Design Lead at Airbnb, where he revolutionized the user experience and visual identity. Passionate about creating beautiful, functional products that solve real problems.",
         image: "/images/about/team3.avif",
         bgColor: "bg-[#e7f9d1]",
         textColor: "text-[#365314]",
@@ -26,24 +62,27 @@ export default function TeamSectionAbout() {
       {
         name: "Jen Rapp",
         role: "Co-founder and CMO",
+        bio: "Previously Marketing Director at Patagonia, where she led award-winning campaigns focused on sustainability and social impact. Experienced in building purpose-driven brands.",
         image: "/images/about/team4.avif",
         bgColor: "bg-[#f6edf9]",
         textColor: "text-[#4a124f]",
       },
-        {
-            name: "Kai Kjeldsen",
-            role: "Co-founder and COO",
-            image: "/images/about/team5.avif",
-            bgColor: "bg-[#f9f9f9]",
-            textColor: "text-[#3d3d3d]",
-        },
-        {
-            name: "Kari Rapp",
-            role: "Co-founder and CCO",
-            image: "/images/about/team6.avif",
-            bgColor: "bg-[#f6edf9]",
-            textColor: "text-[#4a124f]",
-        },
+      {
+        name: "Kai Kjeldsen",
+        role: "Co-founder and COO",
+        bio: "Former Operations Director at Spotify, where he optimized global team structures and workflows. Expert in scaling businesses efficiently while maintaining culture and quality.",
+        image: "/images/about/team5.avif",
+        bgColor: "bg-[#f9f9f9]",
+        textColor: "text-[#3d3d3d]",
+      },
+      {
+        name: "Kari Rapp",
+        role: "Co-founder and CCO",
+        bio: "Previously Creative Director with Ogilvy in New York where she worked on brands such as IBM, American Express, IKEA, and Coca-Cola. Award-winning designer with multiple Cannes Lions.",
+        image: "/images/about/team6.avif",
+        bgColor: "bg-[#f6edf9]",
+        textColor: "text-[#4a124f]",
+      },
     ];
   
     return (
@@ -61,27 +100,43 @@ export default function TeamSectionAbout() {
           </div>
   
           {/* Horizontal Scroll Section */}
-          <div className="flex gap-6 overflow-x-auto py-4 scrollbar-hide">
+          <div 
+            ref={scrollContainerRef}
+            className={`flex gap-6 overflow-x-auto py-4 scrollbar-hide ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseUp}
+          >
             {team.map((member, index) => (
               <div
                 key={index}
-                className={`min-w-[350px] relative h-[480px] pb-[30px] hover:pb-[90px]  hover:mt-[-5px] transition-all duration-300 cursor-pointer group ${member.bgColor} shadow-sm rounded-lg overflow-hidden`}>
+                className={`min-w-[350px] relative h-[480px] transition-all duration-500 ease-in-out ${isDragging ? '' : 'cursor-pointer'} group ${member.bgColor} shadow-sm rounded-lg overflow-hidden`}>
                 <img
                   src={member.image}
                   alt={member.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-[400px] object-cover"
+                  draggable="false"
                 />
-                <div className={`p-4 h-[60px] group-hover:h-[90px] transition-all duration-300 absolute bottom-0 left-0 w-full ${member.bgColor}`}>
-                  <p className={`text-2xl font-semibold ${member.textColor}`}>
-                    {member.name}
-                  </p>
-                  <p className="text-md h-0 group-hover:h-fit overflow-hidden duration-300 transition-transform">
-                    <span className={`${member.textColor}`}>{member.role}</span>
-                  </p>
+                <div className={`p-4 absolute bottom-0 left-0 w-full ${member.bgColor} transition-all duration-500 ease-in-out`}>
+                  <div className="overflow-hidden">
+                    <p className={`text-2xl font-semibold ${member.textColor} transition-all duration-500`}>
+                      {member.name}
+                    </p>
+                    <p className={`${member.textColor} text-md font-medium transition-all duration-500`}>
+                      {member.role}
+                    </p>
+                    <div className="overflow-hidden transition-all duration-500 ease-in-out h-0 group-hover:h-auto">
+                      <p className={`${member.textColor} text-sm mt-2 transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-in-out`}>
+                        {member.bio}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
+         
         </Layout>
       </section>
     );
