@@ -10,22 +10,27 @@ import {
 import Link from "next/link";
 import Layout from "@/components/common/Layout";
 import { FaChevronDown } from "react-icons/fa6";
+import { usePathname } from "next/navigation";
 
 const WhyUsMegaMenu = ({ color }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const isActive = pathname === '/about-us' || pathname === '/our-team';
 
   const whyUs = [
     {
       title: "About Us",
       link: "/about-us",
-      des: "Our upcoming events and recordings",
+      des: "Learn about our mission, vision, and values",
       image: "/images/blog1.avif",
+      active: pathname === '/about-us'
     },
     {
       title: "Our Team",
       link: "/our-team",
-      des: "Creative Leadership Decoded: Lessons from Two Industry Experts",
+      des: "Meet our talented team of experts",
       image: "/images/blog2.avif",
+      active: pathname === '/our-team'
     },
   ];
 
@@ -41,7 +46,7 @@ const WhyUsMegaMenu = ({ color }) => {
       >
         <span
           style={{ backgroundColor: color.text }}
-          className={`${isOpen ? "mr-[6px] scale-100" : ""} h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full`}
+          className={`${isOpen || isActive ? "mr-[6px] scale-100" : ""} h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full`}
         ></span>{" "}
         <span className="flex items-center gap-2">
           Why Us{" "}
@@ -52,7 +57,7 @@ const WhyUsMegaMenu = ({ color }) => {
       </button>
       {isOpen && (
         <motion.div
-          className="fixed h-screen  inset-0 w-full top-[60px] pt-5 z-40"
+          className="fixed h-screen inset-0 w-full top-[60px] pt-5 z-40"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
@@ -75,7 +80,7 @@ const WhyUsMegaMenu = ({ color }) => {
                       }}
                       href={card.link}
                       key={idx}
-                      className="flex group cursor-pointer flex-col gap-0"
+                      className={`flex group cursor-pointer flex-col gap-0 ${card.active ? 'bg-blue-50 p-2 rounded-lg' : ''}`}
                     >
                       <div className="overflow-hidden  rounded-md">
                         <img

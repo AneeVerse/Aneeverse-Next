@@ -5,6 +5,8 @@ import TeamSectionAbout from '@/components/about/TeamSectionAbout';
 import TestimonialSlider from '@/components/about/TestimonialSlider';
 import TextWithVideo from '@/components/about/TextWithVideo';
 import ValuesComponent from '@/components/about/ValuesComponent';
+import ResultsHeroSection from '@/components/about/ResultsHeroSection';
+import OurWorkWithVideoOurTeam from '@/components/ourTeam/OurWorkWithVideoOurTeam';
 import UnderConstructionPage from '@/components/layout/UnderConstructionPage';
 import Link from 'next/link';
 import React from 'react';
@@ -40,8 +42,6 @@ export const metadata = {
 
 
 const AboutUsPage = () => {
-  return <UnderConstructionPage />;
-
   return (
    
     <>
@@ -54,7 +54,9 @@ const AboutUsPage = () => {
     <FeaturesSectionAbout/>
     <TeamSectionAbout/>
     <TestimonialSlider/>
+    <ResultsHeroSection/>
     <ValuesComponent/>
+    <OurWorkWithVideoOurTeam/>
     </>
   );
 };
