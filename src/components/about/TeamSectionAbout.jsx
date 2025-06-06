@@ -86,14 +86,14 @@ export default function TeamSectionAbout() {
     ];
   
     return (
-      <section className="bg-primary-500 py-12">
+      <section className="bg-primary-500 py-8 md:py-12">
         <Layout>
           {/* Heading */}
-          <div className="text-center mb-8">
-            <p className="uppercase text-sm text-secondary-500 tracking-wide">
+          <div className="text-center mb-6 md:mb-8 px-4">
+            <p className="uppercase text-xs md:text-sm text-secondary-500 tracking-wide">
               Our Executive Team
             </p>
-            <h2 className="text-4xl mt-3 md:text-5xl max-w-4xl mx-auto font-bold text-secondary-500">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl mt-2 md:mt-3 md:max-w-4xl mx-auto font-bold text-secondary-500">
               A team of <span className="font-Rock_Salt">experts and leaders</span> helping democratize access to{" "}
               <span className="italic">good creative</span>
             </h2>
@@ -102,16 +102,28 @@ export default function TeamSectionAbout() {
           {/* Horizontal Scroll Section */}
           <div 
             ref={scrollContainerRef}
-            className={`flex gap-6 overflow-x-auto py-4 scrollbar-hide ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+            className={`flex gap-3 md:gap-6 overflow-x-auto py-2 md:py-4 px-4 md:px-0 scrollbar-hide ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseUp}
+            onTouchStart={(e) => {
+              setIsDragging(true);
+              setStartX(e.touches[0].clientX - scrollContainerRef.current.offsetLeft);
+              setScrollLeft(scrollContainerRef.current.scrollLeft);
+            }}
+            onTouchMove={(e) => {
+              if (!isDragging) return;
+              const x = e.touches[0].clientX - scrollContainerRef.current.offsetLeft;
+              const walk = (x - startX) * 2;
+              scrollContainerRef.current.scrollLeft = scrollLeft - walk;
+            }}
+            onTouchEnd={handleMouseUp}
           >
             {team.map((member, index) => (
               <div
                 key={index}
-                className={`min-w-[350px] relative h-[550px] hover:mt-[-5px] transition-all duration-300 ${isDragging ? '' : 'cursor-pointer'} group overflow-hidden rounded-lg`}>
+                className={`min-w-[270px] sm:min-w-[300px] md:min-w-[350px] relative h-[400px] md:h-[500px] lg:h-[550px] hover:mt-[-5px] transition-all duration-300 ${isDragging ? '' : 'cursor-pointer'} group overflow-hidden rounded-lg`}>
                 <div className="w-full h-full overflow-hidden">
                   <img
                     src={member.image}
@@ -121,16 +133,16 @@ export default function TeamSectionAbout() {
                   />
                 </div>
                 <div className={`absolute inset-x-0 bottom-0 ${member.bgColor} transition-transform duration-500 ease-out group-hover:h-[200px]`}>
-                  <div className="p-6">
-                    <h3 className={`text-3xl font-light ${member.textColor}`}>
+                  <div className="p-4 md:p-6">
+                    <h3 className={`text-xl sm:text-2xl md:text-3xl font-light ${member.textColor}`}>
                       {member.name}
                     </h3>
                     
                     <div className="h-0 group-hover:h-[120px] transition-all overflow-hidden">
-                      <p className={`mt-2 text-lg font-medium ${member.textColor}`}>
+                      <p className={`mt-2 text-base md:text-lg font-medium ${member.textColor}`}>
                         {member.role}
                       </p>
-                      <p className={`mt-4 ${member.textColor} leading-relaxed`}>
+                      <p className={`mt-2 md:mt-4 text-sm md:text-base ${member.textColor} leading-relaxed`}>
                         {member.bio}
                       </p>
                     </div>
