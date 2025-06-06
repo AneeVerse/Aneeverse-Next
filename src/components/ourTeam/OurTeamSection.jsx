@@ -1,4 +1,4 @@
-import Layout from "../common/Layout";
+ import Layout from "../common/Layout";
 
 export default function OurTeamSection() {
     const team = [
