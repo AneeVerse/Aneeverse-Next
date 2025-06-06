@@ -7,6 +7,7 @@ import TextWithVideo from '@/components/about/TextWithVideo';
 import ValuesComponent from '@/components/about/ValuesComponent';
 import ResultsHeroSection from '@/components/about/ResultsHeroSection';
 import OurWorkWithVideoOurTeam from '@/components/ourTeam/OurWorkWithVideoOurTeam';
+import AIAdvantageSection from '@/components/about/AIAdvantageSection';
 import UnderConstructionPage from '@/components/layout/UnderConstructionPage';
 import Link from 'next/link';
 import React from 'react';
@@ -46,17 +47,23 @@ const AboutUsPage = () => {
    
     <>
     <div className='bg-secondary-500 space-y-[60px] py-16'>
-    <HeroSectionAbout/>
-    <ParnterSection/>
-    <TextWithVideo/>
+      <HeroSectionAbout/>
     </div>
+    
+    <AIAdvantageSection/>
+    
+    <ParnterSection/>
+      <div className='bg-secondary-500 space-y-[60px] py-16'>
+      <TextWithVideo/>
+      </div>
+    
 
     <FeaturesSectionAbout/>
     <TeamSectionAbout/>
     <TestimonialSlider/>
     <ResultsHeroSection/>
     <ValuesComponent/>
-    <OurWorkWithVideoOurTeam/>
+    {/* <OurWorkWithVideoOurTeam/> */}
     </>
   );
 };

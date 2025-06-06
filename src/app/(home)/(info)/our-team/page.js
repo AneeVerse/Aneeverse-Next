@@ -35,7 +35,7 @@ export const metadata = {
 }
 
 const page = () => {
-  return <UnderConstructionPage />;
+
 
   return (
     <div>
