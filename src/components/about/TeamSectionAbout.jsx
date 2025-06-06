@@ -111,27 +111,23 @@ export default function TeamSectionAbout() {
             {team.map((member, index) => (
               <div
                 key={index}
-                className={`min-w-[350px] relative h-[480px] transition-all duration-500 ease-in-out ${isDragging ? '' : 'cursor-pointer'} group ${member.bgColor} shadow-sm rounded-lg overflow-hidden`}>
+                className={`min-w-[350px] relative h-[480px] pb-[30px] hover:pb-[90px] hover:mt-[-5px] transition-all duration-300 ${isDragging ? '' : 'cursor-pointer'} group ${member.bgColor} shadow-sm rounded-lg overflow-hidden`}>
                 <img
                   src={member.image}
                   alt={member.name}
-                  className="w-full h-[400px] object-cover"
+                  className="w-full h-[400px] object-cover transition-transform duration-300 group-hover:-translate-y-10"
                   draggable="false"
                 />
-                <div className={`p-4 absolute bottom-0 left-0 w-full ${member.bgColor} transition-all duration-500 ease-in-out`}>
-                  <div className="overflow-hidden">
-                    <p className={`text-2xl font-semibold ${member.textColor} transition-all duration-500`}>
-                      {member.name}
-                    </p>
-                    <p className={`${member.textColor} text-md font-medium transition-all duration-500`}>
-                      {member.role}
-                    </p>
-                    <div className="overflow-hidden transition-all duration-500 ease-in-out h-0 group-hover:h-auto">
-                      <p className={`${member.textColor} text-sm mt-2 transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-in-out`}>
-                        {member.bio}
-                      </p>
-                    </div>
-                  </div>
+                <div className={`p-4 h-[80px] group-hover:h-[150px] transition-all duration-300 absolute bottom-0 left-0 w-full ${member.bgColor}`}>
+                  <p className={`text-2xl font-semibold ${member.textColor}`}>
+                    {member.name}
+                  </p>
+                  <p className={`${member.textColor} text-md font-medium`}>
+                    {member.role}
+                  </p>
+                  <p className="text-md h-0 group-hover:h-fit group-hover:mt-2 overflow-hidden duration-300 transition-transform">
+                    <span className={`${member.textColor} text-sm line-clamp-3`}>{member.bio}</span>
+                  </p>
                 </div>
               </div>
             ))}
