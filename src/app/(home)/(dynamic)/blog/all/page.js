@@ -183,12 +183,6 @@ export default function AllBlogsPage() {
 
   return (
     <div className="bg-[#EBFAFE] py-16 relative">
-      {isCategoryDropdownOpen && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-30 z-10 md:hidden animate-fadeIn"
-          onClick={() => setIsCategoryDropdownOpen(false)}
-        ></div>
-      )}
       <Layout>
         {/* Display warning if API failed but we have static blogs */}
         {error && allBlogs.length > 0 && (
@@ -246,10 +240,11 @@ export default function AllBlogsPage() {
           
           {/* Mobile Category Dropdown */}
           <div className="md:hidden mb-8 relative z-20">
-            <div className="relative category-dropdown">
+            <div className="category-dropdown">
+              {/* Main dropdown button */}
               <button
                 onClick={() => setIsCategoryDropdownOpen(!isCategoryDropdownOpen)}
-                className="flex justify-between items-center w-full p-4 bg-gradient-to-r from-[#0A2E3D] to-[#124559] text-white rounded-xl cursor-pointer focus:outline-none hover:shadow-md transition-all duration-300 border-2 border-transparent hover:border-blue-300"
+                className={`flex justify-between items-center w-full p-4 bg-gradient-to-r from-[#0A2E3D] to-[#124559] text-white rounded-t-xl cursor-pointer focus:outline-none transition-all duration-300 border-2 border-transparent ${isCategoryDropdownOpen ? 'shadow-md border-b-blue-300' : 'hover:shadow-md hover:border-blue-300'}`}
               >
                 <span className="font-medium flex items-center">
                   <svg className="w-5 h-5 mr-2 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -267,8 +262,15 @@ export default function AllBlogsPage() {
                 </svg>
               </button>
               
-              {isCategoryDropdownOpen && (
-                <div className="absolute z-10 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-2xl max-h-60 overflow-y-auto transform transition-all duration-300 origin-top scale-100 opacity-100 animate-fadeIn">
+              {/* Dropdown menu */}
+              <div 
+                className={`w-full bg-white border-2 border-blue-200 border-t-0 rounded-b-xl shadow-2xl overflow-hidden transition-all duration-300 origin-top ${
+                  isCategoryDropdownOpen 
+                    ? 'max-h-[240px] opacity-100 visible' 
+                    : 'max-h-0 opacity-0 invisible'
+                }`}
+              >
+                <div className="overflow-y-auto max-h-[240px] py-1">
                   {categories.map((category, index) => (
                     <button
                       key={index}
@@ -278,7 +280,7 @@ export default function AllBlogsPage() {
                       }}
                       className={`w-full text-left px-4 py-3.5 hover:bg-blue-50 transition-colors flex items-center ${
                         selectedCategory === category 
-                          ? 'bg-blue-50 text-[#0A2E3D] font-medium' 
+                          ? 'bg-blue-50 text-blue-700 font-medium' 
                           : 'text-gray-800'
                       }`}
                     >
@@ -287,11 +289,11 @@ export default function AllBlogsPage() {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       )}
-                      <span className={selectedCategory === category ? 'text-blue-700' : ''}>{category}</span>
+                      <span>{category}</span>
                     </button>
                   ))}
                 </div>
-              )}
+              </div>
             </div>
           </div>
         </div>
