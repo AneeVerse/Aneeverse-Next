@@ -15,6 +15,7 @@ export default function AllBlogsPage() {
   const [fetchTries, setFetchTries] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('All Categories');
   const [categories, setCategories] = useState([]);
+  const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
 
   const fetchBlogs = async () => {
     try {
@@ -107,6 +108,32 @@ export default function AllBlogsPage() {
     fetchBlogs();
   }, []);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (isCategoryDropdownOpen) {
+        // Check if the click was outside the dropdown
+        const dropdowns = document.querySelectorAll('.category-dropdown');
+        let clickedOutside = true;
+        
+        dropdowns.forEach(dropdown => {
+          if (dropdown.contains(event.target)) {
+            clickedOutside = false;
+          }
+        });
+        
+        if (clickedOutside) {
+          setIsCategoryDropdownOpen(false);
+        }
+      }
+    }
+    
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isCategoryDropdownOpen]);
+
   // Filter blogs by category
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
@@ -155,7 +182,13 @@ export default function AllBlogsPage() {
   }
 
   return (
-    <div className="bg-[#EBFAFE] py-16">
+    <div className="bg-[#EBFAFE] py-16 relative">
+      {isCategoryDropdownOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-30 z-10 md:hidden animate-fadeIn"
+          onClick={() => setIsCategoryDropdownOpen(false)}
+        ></div>
+      )}
       <Layout>
         {/* Display warning if API failed but we have static blogs */}
         {error && allBlogs.length > 0 && (
@@ -212,24 +245,53 @@ export default function AllBlogsPage() {
           </div>
           
           {/* Mobile Category Dropdown */}
-          <div className="md:hidden mb-8">
-            <div className="relative">
-              <select
-                value={selectedCategory}
-                onChange={(e) => handleCategoryChange(e.target.value)}
-                className="appearance-none w-full p-4 pr-10 bg-[#0A2E3D] text-white rounded-xl cursor-pointer focus:outline-none"
+          <div className="md:hidden mb-8 relative z-20">
+            <div className="relative category-dropdown">
+              <button
+                onClick={() => setIsCategoryDropdownOpen(!isCategoryDropdownOpen)}
+                className="flex justify-between items-center w-full p-4 bg-gradient-to-r from-[#0A2E3D] to-[#124559] text-white rounded-xl cursor-pointer focus:outline-none hover:shadow-md transition-all duration-300 border-2 border-transparent hover:border-blue-300"
               >
-                {categories.map((category, index) => (
-                  <option key={index} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4">
-                <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <span className="font-medium flex items-center">
+                  <svg className="w-5 h-5 mr-2 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" />
+                  </svg>
+                  {selectedCategory}
+                </span>
+                <svg 
+                  className={`h-5 w-5 text-blue-300 transition-transform duration-300 ${isCategoryDropdownOpen ? 'rotate-180' : ''}`} 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
-              </div>
+              </button>
+              
+              {isCategoryDropdownOpen && (
+                <div className="absolute z-10 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-2xl max-h-60 overflow-y-auto transform transition-all duration-300 origin-top scale-100 opacity-100 animate-fadeIn">
+                  {categories.map((category, index) => (
+                    <button
+                      key={index}
+                      onClick={() => {
+                        handleCategoryChange(category);
+                        setIsCategoryDropdownOpen(false);
+                      }}
+                      className={`w-full text-left px-4 py-3.5 hover:bg-blue-50 transition-colors flex items-center ${
+                        selectedCategory === category 
+                          ? 'bg-blue-50 text-[#0A2E3D] font-medium' 
+                          : 'text-gray-800'
+                      }`}
+                    >
+                      {selectedCategory === category && (
+                        <svg className="w-4 h-4 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      )}
+                      <span className={selectedCategory === category ? 'text-blue-700' : ''}>{category}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
