@@ -56,17 +56,25 @@ export const postType = defineType({
           name: 'ogLocale',
           title: 'OG Locale',
           type: 'string',
-          description: 'Language and region for this content (og:locale)',
+          description: 'Primary language and region for this content (og:locale)',
           initialValue: 'en_US',
           options: {
             list: [
               {title: 'English (US)', value: 'en_US'},
               {title: 'English (UK)', value: 'en_GB'},
+              {title: 'English (Ireland)', value: 'en_IE'},
+              {title: 'English (India)', value: 'en_IN'},
+              {title: 'English (Singapore)', value: 'en_SG'},
+              {title: 'English (Australia)', value: 'en_AU'},
+              {title: 'English (Canada)', value: 'en_CA'},
               {title: 'Spanish', value: 'es_ES'},
               {title: 'French', value: 'fr_FR'},
               {title: 'German', value: 'de_DE'},
               {title: 'Italian', value: 'it_IT'},
               {title: 'Portuguese (Brazil)', value: 'pt_BR'},
+              {title: 'Arabic (UAE)', value: 'ar_AE'},
+              {title: 'Arabic (Qatar)', value: 'ar_QA'},
+              {title: 'Arabic (Saudi Arabia)', value: 'ar_SA'},
               {title: 'Arabic', value: 'ar_AR'},
               {title: 'Chinese (Simplified)', value: 'zh_CN'},
               {title: 'Japanese', value: 'ja_JP'},
@@ -82,6 +90,55 @@ export const postType = defineType({
               {title: 'Turkish', value: 'tr_TR'}
             ],
             layout: 'dropdown'
+          }
+        }),
+        defineField({
+          name: 'ogLocaleAlternate',
+          title: 'OG Alternate Locales',
+          type: 'array',
+          description: 'Additional languages this content is available in (og:locale:alternate)',
+          of: [
+            {
+              type: 'string',
+              name: 'locale',
+              title: 'Locale',
+              options: {
+                list: [
+                  {title: 'English (US)', value: 'en_US'},
+                  {title: 'English (UK)', value: 'en_GB'},
+                  {title: 'English (Ireland)', value: 'en_IE'},
+                  {title: 'English (India)', value: 'en_IN'},
+                  {title: 'English (Singapore)', value: 'en_SG'},
+                  {title: 'English (Australia)', value: 'en_AU'},
+                  {title: 'English (Canada)', value: 'en_CA'},
+                  {title: 'Spanish', value: 'es_ES'},
+                  {title: 'French', value: 'fr_FR'},
+                  {title: 'German', value: 'de_DE'},
+                  {title: 'Italian', value: 'it_IT'},
+                  {title: 'Portuguese (Brazil)', value: 'pt_BR'},
+                  {title: 'Arabic (UAE)', value: 'ar_AE'},
+                  {title: 'Arabic (Qatar)', value: 'ar_QA'},
+                  {title: 'Arabic (Saudi Arabia)', value: 'ar_SA'},
+                  {title: 'Arabic', value: 'ar_AR'},
+                  {title: 'Chinese (Simplified)', value: 'zh_CN'},
+                  {title: 'Japanese', value: 'ja_JP'},
+                  {title: 'Korean', value: 'ko_KR'},
+                  {title: 'Russian', value: 'ru_RU'},
+                  {title: 'Hindi', value: 'hi_IN'},
+                  {title: 'Dutch', value: 'nl_NL'},
+                  {title: 'Swedish', value: 'sv_SE'},
+                  {title: 'Norwegian', value: 'nb_NO'},
+                  {title: 'Danish', value: 'da_DK'},
+                  {title: 'Finnish', value: 'fi_FI'},
+                  {title: 'Polish', value: 'pl_PL'},
+                  {title: 'Turkish', value: 'tr_TR'}
+                ],
+                layout: 'dropdown'
+              }
+            }
+          ],
+          options: {
+            sortable: false
           }
         }),
         defineField({
