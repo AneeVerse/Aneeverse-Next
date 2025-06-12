@@ -57,7 +57,32 @@ export const postType = defineType({
           title: 'OG Locale',
           type: 'string',
           description: 'Language and region for this content (og:locale)',
-          initialValue: 'en_US'
+          initialValue: 'en_US',
+          options: {
+            list: [
+              {title: 'English (US)', value: 'en_US'},
+              {title: 'English (UK)', value: 'en_GB'},
+              {title: 'Spanish', value: 'es_ES'},
+              {title: 'French', value: 'fr_FR'},
+              {title: 'German', value: 'de_DE'},
+              {title: 'Italian', value: 'it_IT'},
+              {title: 'Portuguese (Brazil)', value: 'pt_BR'},
+              {title: 'Arabic', value: 'ar_AR'},
+              {title: 'Chinese (Simplified)', value: 'zh_CN'},
+              {title: 'Japanese', value: 'ja_JP'},
+              {title: 'Korean', value: 'ko_KR'},
+              {title: 'Russian', value: 'ru_RU'},
+              {title: 'Hindi', value: 'hi_IN'},
+              {title: 'Dutch', value: 'nl_NL'},
+              {title: 'Swedish', value: 'sv_SE'},
+              {title: 'Norwegian', value: 'nb_NO'},
+              {title: 'Danish', value: 'da_DK'},
+              {title: 'Finnish', value: 'fi_FI'},
+              {title: 'Polish', value: 'pl_PL'},
+              {title: 'Turkish', value: 'tr_TR'}
+            ],
+            layout: 'dropdown'
+          }
         }),
         defineField({
           name: 'ogType',
