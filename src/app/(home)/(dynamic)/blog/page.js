@@ -1,10 +1,10 @@
 import BlogPage from './ClientBlogPage';
 
 export const metadata = {
-  title: "Blog | Aneeverse",
+  title: "Blog",
   description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
   openGraph: {
-    title: "Blog | Aneeverse",
+    title: "Blog",
     description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
     url: `https://aneeverse.com/blog`,
     images: [
@@ -12,14 +12,14 @@ export const metadata = {
         url: "/images/meta/phone.avif", // ✅ Dynamic Image
         width: 1200,
         height: 630,
-        alt: "Blog | Aneeverse",
+        alt: "Blog",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Blog | Aneeverse",
+    title: "Blog",
     description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
     image: "/images/meta/phone.avif",
   },

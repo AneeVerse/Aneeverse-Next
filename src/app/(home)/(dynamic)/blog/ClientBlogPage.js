@@ -16,6 +16,13 @@ export default function ClientBlogPage() {
   const [error, setError] = useState(null);
   const [fetchTries, setFetchTries] = useState(0);
 
+  useEffect(() => {
+    // Set the document title to just "Blog" without the suffix
+    if (typeof document !== 'undefined') {
+      document.title = "Blog";
+    }
+  }, []);
+
   const fetchBlogs = async () => {
     try {
       setIsLoading(true);
