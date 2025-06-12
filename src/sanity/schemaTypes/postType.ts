@@ -139,7 +139,13 @@ export const postType = defineType({
           ],
           options: {
             sortable: false
-          }
+          },
+          initialValue: [
+            'en_US', 'en_GB', 'en_IE', 'en_IN', 'en_SG', 'en_AU', 'en_CA',
+            'es_ES', 'fr_FR', 'de_DE', 'it_IT', 'pt_BR', 'ar_AE', 'ar_QA',
+            'ar_SA', 'ar_AR', 'zh_CN', 'ja_JP', 'ko_KR', 'ru_RU', 'hi_IN',
+            'nl_NL', 'sv_SE', 'nb_NO', 'da_DK', 'fi_FI', 'pl_PL', 'tr_TR'
+          ]
         }),
         defineField({
           name: 'ogType',
@@ -226,76 +232,76 @@ export const postType = defineType({
           type: 'datetime',
           description: 'When this article was last modified (article:modified_time)'
         }),
-        // Twitter Card
-        defineField({
-          name: 'twitterCard',
-          title: 'Twitter Card Type',
-          type: 'string',
-          description: 'The type of Twitter card to use',
-          options: {
-            list: [
-              {title: 'Summary', value: 'summary'},
-              {title: 'Summary with Large Image', value: 'summary_large_image'},
-              {title: 'App', value: 'app'},
-              {title: 'Player', value: 'player'}
-            ]
-          },
-          initialValue: 'summary_large_image'
-        }),
-        defineField({
-          name: 'twitterTitle',
-          title: 'Twitter Title',
-          type: 'string',
-          description: 'Custom title for Twitter (twitter:title)'
-        }),
-        defineField({
-          name: 'twitterDescription',
-          title: 'Twitter Description',
-          type: 'text',
-          rows: 2,
-          description: 'Custom description for Twitter (twitter:description)'
-        }),
-        defineField({
-          name: 'twitterImage',
-          title: 'Twitter Image',
-          type: 'image',
-          description: 'Custom image for Twitter (twitter:image)',
-          options: {
-            hotspot: true
-          }
-        }),
-        defineField({
-          name: 'twitterAuthor',
-          title: 'Twitter Author',
-          type: 'string',
-          description: 'The author name to display on Twitter (twitter:data1)'
-        }),
-        defineField({
-          name: 'twitterLabel1',
-          title: 'Twitter Label 1',
-          type: 'string',
-          description: 'First custom label for Twitter (twitter:label1)',
-          initialValue: 'Written by'
-        }),
-        defineField({
-          name: 'twitterData1',
-          title: 'Twitter Data 1',
-          type: 'string',
-          description: 'First custom data for Twitter (twitter:data1)'
-        }),
-        defineField({
-          name: 'twitterLabel2',
-          title: 'Twitter Label 2',
-          type: 'string',
-          description: 'Second custom label for Twitter (twitter:label2)',
-          initialValue: 'Est. reading time'
-        }),
-        defineField({
-          name: 'twitterData2',
-          title: 'Twitter Data 2',
-          type: 'string',
-          description: 'Second custom data for Twitter (twitter:data2)'
-        }),
+        // // Twitter Card
+        // defineField({
+        //   name: 'twitterCard',
+        //   title: 'Twitter Card Type',
+        //   type: 'string',
+        //   description: 'The type of Twitter card to use',
+        //   options: {
+        //     list: [
+        //       {title: 'Summary', value: 'summary'},
+        //       {title: 'Summary with Large Image', value: 'summary_large_image'},
+        //       {title: 'App', value: 'app'},
+        //       {title: 'Player', value: 'player'}
+        //     ]
+        //   },
+        //   initialValue: 'summary_large_image'
+        // }),
+        // defineField({
+        //   name: 'twitterTitle',
+        //   title: 'Twitter Title',
+        //   type: 'string',
+        //   description: 'Custom title for Twitter (twitter:title)'
+        // }),
+        // defineField({
+        //   name: 'twitterDescription',
+        //   title: 'Twitter Description',
+        //   type: 'text',
+        //   rows: 2,
+        //   description: 'Custom description for Twitter (twitter:description)'
+        // }),
+        // defineField({
+        //   name: 'twitterImage',
+        //   title: 'Twitter Image',
+        //   type: 'image',
+        //   description: 'Custom image for Twitter (twitter:image)',
+        //   options: {
+        //     hotspot: true
+        //   }
+        // }),
+        // defineField({
+        //   name: 'twitterAuthor',
+        //   title: 'Twitter Author',
+        //   type: 'string',
+        //   description: 'The author name to display on Twitter (twitter:data1)'
+        // }),
+        // defineField({
+        //   name: 'twitterLabel1',
+        //   title: 'Twitter Label 1',
+        //   type: 'string',
+        //   description: 'First custom label for Twitter (twitter:label1)',
+        //   initialValue: 'Written by'
+        // }),
+        // defineField({
+        //   name: 'twitterData1',
+        //   title: 'Twitter Data 1',
+        //   type: 'string',
+        //   description: 'First custom data for Twitter (twitter:data1)'
+        // }),
+        // defineField({
+        //   name: 'twitterLabel2',
+        //   title: 'Twitter Label 2',
+        //   type: 'string',
+        //   description: 'Second custom label for Twitter (twitter:label2)',
+        //   initialValue: 'Est. reading time'
+        // }),
+        // defineField({
+        //   name: 'twitterData2',
+        //   title: 'Twitter Data 2',
+        //   type: 'string',
+        //   description: 'Second custom data for Twitter (twitter:data2)'
+        // }),
         // General SEO Fields
         defineField({
           name: 'keywords',
