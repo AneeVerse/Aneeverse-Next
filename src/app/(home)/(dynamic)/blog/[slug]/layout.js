@@ -9,7 +9,7 @@ export async function generateMetadata({ params }) {
   if (!post) return { title: "Blog | Aneeverse", description: "This blog post does not exist." };
 
   return {
-    title: `${post.title} | Aneeverse Blog`,
+    title: post.title,
     description: post.shortDescription,
     openGraph: {
       title: post.title,

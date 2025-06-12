@@ -145,11 +145,18 @@ export default function BlogCategoryPage() {
       try {
         // Get category info
         const normalizedCategory = category.toLowerCase();
+        const formattedTitle = normalizedCategory.replace(/-/g, " ");
+        
         setCategoryInfo({
-          title: normalizedCategory.replace(/-/g, " "),
+          title: formattedTitle,
           description: categoryImages[normalizedCategory]?.description || 
-            `Discover our latest articles about ${normalizedCategory.replace(/-/g, " ")}.`,
+            `Discover our latest articles about ${formattedTitle}.`,
         });
+        
+        // Set page title to just the category name
+        if (typeof document !== 'undefined') {
+          document.title = `${formattedTitle.charAt(0).toUpperCase() + formattedTitle.slice(1)} Blogs`;
+        }
         
         // Fetch blogs with the more efficient function
         const result = await fetchBlogsByCategory(category);
