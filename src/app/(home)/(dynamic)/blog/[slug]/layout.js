@@ -19,6 +19,7 @@ export async function generateMetadata({ params }) {
   const ogUrl = post.seo?.ogUrl || `https://aneeverse.com/blog/${post.slug}`;
   const ogType = post.seo?.ogType || 'article';
   const ogLocale = post.seo?.ogLocale || 'en_US';
+  const ogLocaleAlternate = post.seo?.ogLocaleAlternate || [];
   const ogSiteName = post.seo?.ogSiteName || 'Aneeverse';
   
   // Twitter
@@ -42,6 +43,7 @@ export async function generateMetadata({ params }) {
       url: ogUrl,
       siteName: ogSiteName,
       locale: ogLocale,
+      alternateLocale: ogLocaleAlternate,
       type: ogType,
       images: [
         {
