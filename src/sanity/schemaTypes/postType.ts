@@ -54,10 +54,14 @@ export const postType = defineType({
         }),
         defineField({
           name: 'ogLocale',
-          title: 'OG Locale',
-          type: 'string',
-          description: 'Language and region for this content (og:locale)',
-          initialValue: 'en_US',
+          title: 'OG Locales',
+          type: 'array',
+          description: 'Languages and regions for this content (og:locale and og:locale:alternate)',
+          of: [
+            {
+              type: 'string'
+            }
+          ],
           options: {
             list: [
               {title: 'English (US)', value: 'en_US'},
@@ -81,8 +85,10 @@ export const postType = defineType({
               {title: 'Polish', value: 'pl_PL'},
               {title: 'Turkish', value: 'tr_TR'}
             ],
-            layout: 'dropdown'
-          }
+            layout: 'tags'
+          },
+          validation: Rule => Rule.min(1).warning('At least one locale should be selected'),
+          initialValue: ['en_US']
         }),
         defineField({
           name: 'ogType',

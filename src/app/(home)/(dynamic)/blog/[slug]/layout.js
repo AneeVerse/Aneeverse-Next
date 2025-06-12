@@ -18,7 +18,12 @@ export async function generateMetadata({ params }) {
   const ogImage = post.seo?.ogImage?.asset?.url || post.thumbnail;
   const ogUrl = post.seo?.ogUrl || `https://aneeverse.com/blog/${post.slug}`;
   const ogType = post.seo?.ogType || 'article';
-  const ogLocale = post.seo?.ogLocale || 'en_US';
+  
+  // Handle multiple locales or fallback to default
+  const ogLocales = post.seo?.ogLocale || ['en_US'];
+  const primaryLocale = ogLocales[0] || 'en_US';
+  const alternateLocales = ogLocales.length > 1 ? ogLocales.slice(1) : [];
+  
   const ogSiteName = post.seo?.ogSiteName || 'Aneeverse';
   
   // Twitter
@@ -41,7 +46,8 @@ export async function generateMetadata({ params }) {
       description: ogDescription,
       url: ogUrl,
       siteName: ogSiteName,
-      locale: ogLocale,
+      locale: primaryLocale,
+      alternateLocale: alternateLocales,
       type: ogType,
       images: [
         {
