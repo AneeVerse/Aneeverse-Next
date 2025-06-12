@@ -59,7 +59,7 @@ const AboutUsPage = () => {
     
 
     <FeaturesSectionAbout/>
-    <TeamSectionAbout/>
+    {/* <TeamSectionAbout/> */}
     <TestimonialSlider/>
     <ResultsHeroSection/>
     <ValuesComponent/>

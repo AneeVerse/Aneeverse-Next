@@ -22,11 +22,11 @@ export async function generateMetadata({ params }) {
   const ogLocaleAlternate = post.seo?.ogLocaleAlternate || [];
   const ogSiteName = post.seo?.ogSiteName || 'Aneeverse';
   
-  // Twitter
-  const twitterCard = post.seo?.twitterCard || 'summary_large_image';
-  const twitterTitle = post.seo?.twitterTitle || ogTitle;
-  const twitterDescription = post.seo?.twitterDescription || ogDescription;
-  const twitterImage = post.seo?.twitterImage?.asset?.url || ogImage;
+  // // Twitter
+  // const twitterCard = post.seo?.twitterCard || 'summary_large_image';
+  // const twitterTitle = post.seo?.twitterTitle || ogTitle;
+  // const twitterDescription = post.seo?.twitterDescription || ogDescription;
+  // const twitterImage = post.seo?.twitterImage?.asset?.url || ogImage;
   
   // Other SEO
   const keywords = post.seo?.keywords || [];
