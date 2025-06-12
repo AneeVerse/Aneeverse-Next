@@ -7,16 +7,16 @@ export async function generateMetadata({ params }) {
 
   if (categoryBlogs.length === 0) {
     return {
-      title: "Blog | Aneeverse",
+      title: "Blog",
       description: "This Blog Category does not exist.",
     };
   }
 
   return {
-    title: `${category} Blogs | Aneeverse`,
+    title: `${category} Blogs`,
     description: `Explore the latest insights and articles on ${category}. Stay updated with the latest trends and expert advice.`,
     openGraph: {
-      title: `${category} Blogs | Aneeverse`,
+      title: `${category} Blogs`,
       description: `Stay informed with expert insights on ${category}.`,
       url: `https://aneeverse.com/blog/category/${params.category}`,
       images: categoryBlogs[0]?.thumbnail
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }) {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${category} Blogs | Aneeverse`,
+      title: `${category} Blogs`,
       description: `Explore expert insights on ${category}.`,
       image: categoryBlogs[0]?.thumbnail || "/default-thumbnail.jpg",
     },

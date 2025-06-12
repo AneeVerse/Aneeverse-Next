@@ -85,6 +85,11 @@ export default function BlogDetail({ params }) {
           console.error('Blog not found with slug:', blogSlug);
         } else {
           setPost(blogPost);
+          
+          // Set the document title to just the blog post title
+          if (typeof document !== 'undefined' && blogPost.title) {
+            document.title = blogPost.title;
+          }
         }
       } catch (err) {
         console.error('Error loading blog:', err);

@@ -122,6 +122,11 @@ export default function BlogDetail({ params }) {
         } else {
           setPost(blogPost);
           console.log('Blog loaded successfully:', blogPost.title);
+          
+          // Set the document title to just the blog post title
+          if (typeof document !== 'undefined' && blogPost.title) {
+            document.title = blogPost.title;
+          }
         }
       } catch (err) {
         console.error('Error loading blog:', err);
