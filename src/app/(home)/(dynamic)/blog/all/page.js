@@ -17,6 +17,13 @@ export default function AllBlogsPage() {
   const [categories, setCategories] = useState([]);
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
 
+  // Set the document title
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.title = "All Blog Articles";
+    }
+  }, []);
+
   const fetchBlogs = async () => {
     try {
       setIsLoading(true);
