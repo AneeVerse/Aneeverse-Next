@@ -86,9 +86,9 @@ export default function BlogDetail({ params }) {
         } else {
           setPost(blogPost);
           
-          // Set the document title to just the blog post title
-          if (typeof document !== 'undefined' && blogPost.title) {
-            document.title = blogPost.title;
+          // Set the document title to use SEO meta title if available
+          if (typeof document !== 'undefined') {
+            document.title = blogPost.seo?.metaTitle || blogPost.title;
           }
         }
       } catch (err) {
