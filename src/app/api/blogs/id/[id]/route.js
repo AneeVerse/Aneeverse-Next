@@ -43,6 +43,47 @@ export async function GET(request, { params }) {
           "question": question,
           "answer": answer
         }
+      },
+      "seo": seo {
+        metaTitle,
+        metaDescription,
+        ogTitle,
+        ogDescription,
+        ogLocale,
+        ogType,
+        ogSiteName,
+        ogUrl,
+        "ogImage": ogImage {
+          asset->{
+            _id,
+            url
+          },
+          alt
+        },
+        ogImageWidth,
+        ogImageHeight,
+        ogImageType,
+        articlePublishedTime,
+        articleModifiedTime,
+        twitterCard,
+        twitterTitle,
+        twitterDescription,
+        "twitterImage": twitterImage {
+          asset->{
+            _id,
+            url
+          },
+          alt
+        },
+        twitterAuthor,
+        twitterLabel1,
+        twitterData1,
+        twitterLabel2,
+        twitterData2,
+        "keywords": keywords,
+        canonicalUrl,
+        noIndex,
+        msapplicationTileImage
       }
     }`;
     
@@ -79,6 +120,47 @@ export async function GET(request, { params }) {
             "question": question,
             "answer": answer
           }
+        },
+        "seo": seo {
+          metaTitle,
+          metaDescription,
+          ogTitle,
+          ogDescription,
+          ogLocale,
+          ogType,
+          ogSiteName,
+          ogUrl,
+          "ogImage": ogImage {
+            asset->{
+              _id,
+              url
+            },
+            alt
+          },
+          ogImageWidth,
+          ogImageHeight,
+          ogImageType,
+          articlePublishedTime,
+          articleModifiedTime,
+          twitterCard,
+          twitterTitle,
+          twitterDescription,
+          "twitterImage": twitterImage {
+            asset->{
+              _id,
+              url
+            },
+            alt
+          },
+          twitterAuthor,
+          twitterLabel1,
+          twitterData1,
+          twitterLabel2,
+          twitterData2,
+          "keywords": keywords,
+          canonicalUrl,
+          noIndex,
+          msapplicationTileImage
         }
       }`;
       
