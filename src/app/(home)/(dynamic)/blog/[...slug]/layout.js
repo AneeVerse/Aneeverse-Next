@@ -12,7 +12,6 @@ export async function generateMetadata({ params }) {
   // Open Graph
   const ogTitle = post.seo?.ogTitle || metaTitle;
   const ogDescription = post.seo?.ogDescription || metaDescription;
-  const ogImage = post.seo?.ogImage?.asset?.url || post.thumbnail;
   const ogUrl = post.seo?.ogUrl || `https://aneeverse.com/blog/${post.slug}`;
   const ogType = post.seo?.ogType || 'article';
   const ogLocale = post.seo?.ogLocale || 'en_US';
@@ -23,7 +22,7 @@ export async function generateMetadata({ params }) {
   const twitterCard = post.seo?.twitterCard || 'summary_large_image';
   const twitterTitle = post.seo?.twitterTitle || ogTitle;
   const twitterDescription = post.seo?.twitterDescription || ogDescription;
-  const twitterImage = post.seo?.twitterImage?.asset?.url || ogImage;
+  const twitterImage = post.thumbnail; // Use thumbnail for Twitter image
   
   // Other SEO
   const keywords = post.seo?.keywords || [];
@@ -44,11 +43,11 @@ export async function generateMetadata({ params }) {
       type: ogType,
       images: [
         {
-          url: ogImage,
-          width: post.seo?.ogImageWidth || 1200,
-          height: post.seo?.ogImageHeight || 630,
+          url: post.thumbnail, // Use post thumbnail directly
+          width: 1200,
+          height: 630,
           alt: post.title,
-          type: post.seo?.ogImageType || 'image/jpeg',
+          type: post.seo?.ogImageType || 'image/webp',
         },
       ],
       article: {
@@ -70,22 +69,13 @@ export async function generateMetadata({ params }) {
       'twitter:data1': post.seo?.twitterData1 || post.author.name,
       'twitter:label2': post.seo?.twitterLabel2 || 'Est. reading time',
       'twitter:data2': post.seo?.twitterData2 || `${post.timeToRead} minutes`,
-      'msapplication-TileImage': post.seo?.msapplicationTileImage || '',
     }
   };
   
   // Add canonical URL if specified
-  if (post.seo?.canonicalUrl) {
+  if (canonicalUrl) {
     metadata.alternates = {
-      canonical: post.seo.canonicalUrl,
-    };
-  }
-  
-  // Add robots tag if noIndex is true
-  if (post.seo?.noIndex) {
-    metadata.robots = {
-      index: false,
-      follow: true,
+      canonical: canonicalUrl,
     };
   }
   
