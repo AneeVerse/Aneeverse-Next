@@ -11,6 +11,13 @@ export const postType = defineType({
       name: 'title',
       type: 'string',
     }),
+    defineField({
+      name: 'slug',
+      type: 'slug',
+      options: {
+        source: 'title',
+      },
+    }),
     // SEO Metadata Section - Positioned right after the title
     defineField({
       name: 'seo',
@@ -215,13 +222,6 @@ export const postType = defineType({
           description: 'Use this if the content exists elsewhere (defaults to post slug URL)'
         })
       ]
-    }),
-    defineField({
-      name: 'slug',
-      type: 'slug',
-      options: {
-        source: 'title',
-      },
     }),
     defineField({
       name: 'mainImage',
