@@ -70,7 +70,7 @@ export async function GET(request) {
       excerpt,
       shortDescription,
       "content": body,
-      "mainImage": mainImage.asset->url,
+      "mainImage": coalesce(mainImage.externalImage, mainImage.sanityImage.asset->url, mainImage.asset->url),
       publishedAt,
       timeToRead,
       "categories": categories[]->title,

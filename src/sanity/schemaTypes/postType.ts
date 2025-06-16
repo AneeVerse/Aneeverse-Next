@@ -225,18 +225,50 @@ export const postType = defineType({
     }),
     defineField({
       name: 'mainImage',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-      description: '',
+      type: 'object',
       fields: [
+        defineField({
+          name: 'sanityImage',
+          type: 'image',
+          title: 'Sanity Image',
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            defineField({
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative text',
+            })
+          ]
+        }),
+        defineField({
+          name: 'externalImage',
+          type: 'url',
+          title: 'External Image URL',
+          description: 'Paste an ImageKit URL here (e.g., https://ik.imagekit.io/your-account/image.jpg)',
+        }),
         defineField({
           name: 'alt',
           type: 'string',
           title: 'Alternative text',
+          description: 'Required for accessibility and SEO',
         })
-      ]
+      ],
+      preview: {
+        select: {
+          sanityImage: 'sanityImage',
+          externalImage: 'externalImage',
+          alt: 'alt'
+        },
+        prepare({ sanityImage, externalImage, alt }) {
+          return {
+            title: 'Main Image',
+            subtitle: alt || 'No alt text provided',
+            media: sanityImage || externalImage
+          }
+        }
+      }
     }),
     defineField({
       name: 'categories',
@@ -329,7 +361,7 @@ export const postType = defineType({
     select: {
       title: 'title',
       author: 'author.name',
-      media: 'mainImage',
+      media: 'mainImage.sanityImage',
     },
     prepare(selection) {
       const {author} = selection

@@ -35,40 +35,52 @@ export const mainImageBodySyncPlugin = definePlugin((config = { autoSync: true }
           publishAction.onHandle = async (props) => {
             const { draft, documentId, documentType, client } = props;
             
-            // Only proceed with custom logic for post documents
-            if (documentType === 'post' && draft?.mainImage?.asset?._ref) {
+            // Only proceed with custom logic for post documents and when a mainImage is set
+            if (documentType === 'post' && (draft?.mainImage?.sanityImage?.asset?._ref || draft?.mainImage?.externalImage)) {
               try {
                 const mainImage = draft.mainImage;
                 const body = draft.body || [];
                 
-                // Check if image is already in body
-                const hasImageInBody = body.some(
-                  block => block._type === 'image' && block.asset?._ref === mainImage.asset._ref
+                // Check if a customImage block for this mainImage already exists
+                const hasImageInBody = body.some(block =>
+                  block._type === 'customImage' && (
+                    mainImage.sanityImage?.asset?._ref
+                      ? block.sanityImage?.asset?._ref === mainImage.sanityImage.asset._ref
+                      : block.externalImage === mainImage.externalImage
+                  )
                 );
                 
                 // If not in body, add it first
                 if (!hasImageInBody) {
                   console.log('Auto-syncing main image to body before publish');
                   
-                  // Create image block
+                  // Create customImage block
                   const imageBlock = {
                     _key: `image_${Date.now()}`,
-                    _type: 'image',
-                    asset: {
-                      _ref: mainImage.asset._ref,
-                      _type: 'reference'
-                    },
-                    alt: mainImage.alt || 'Blog post image'
+                    _type: 'customImage',
+                    // Include Sanity asset reference if present
+                    ...(mainImage.sanityImage?.asset?._ref && {
+                      sanityImage: {
+                        _type: 'image',
+                        asset: {
+                          _ref: mainImage.sanityImage.asset._ref,
+                          _type: 'reference'
+                        },
+                        alt: mainImage.alt || ''
+                      }
+                    }),
+                    // Include external URL if present
+                    ...(mainImage.externalImage && { externalImage: mainImage.externalImage }),
+                    // Use top-level alt and empty caption
+                    alt: mainImage.alt || '',
+                    caption: ''
                   };
                   
-                  // Create new body with image at beginning
+                  // Prepend the new customImage block to body
                   const newBody = [imageBlock, ...body];
                   
-                  // Update the draft document before publishing
-                  await client
-                    .patch(documentId)
-                    .set({ body: newBody })
-                    .commit();
+                  // Commit the update
+                  await client.patch(documentId).set({ body: newBody }).commit();
                   
                   console.log('Successfully synced main image before publish');
                 }
@@ -99,7 +111,8 @@ export const mainImageBodySyncPlugin = definePlugin((config = { autoSync: true }
             // Get the current document
             const document = draft || published;
             
-            if (!document || !document.mainImage || !document.mainImage.asset) {
+            // Only continue if a mainImage is set
+            if (!document || !(document.mainImage?.sanityImage?.asset?._ref || document.mainImage?.externalImage)) {
               console.log('No document or main image found');
               return;
             }
@@ -107,40 +120,45 @@ export const mainImageBodySyncPlugin = definePlugin((config = { autoSync: true }
             const mainImage = document.mainImage;
             const body = document.body || [];
             
-            // Check if the image is already in the body
-            const hasImageInBody = body.some(
-              block => block._type === 'image' && block.asset?._ref === mainImage.asset._ref
+            // Check if a customImage block already exists
+            const hasImageInBody = body.some(block =>
+              block._type === 'customImage' && (
+                mainImage.sanityImage?.asset?._ref
+                  ? block.sanityImage?.asset?._ref === mainImage.sanityImage.asset._ref
+                  : block.externalImage === mainImage.externalImage
+              )
             );
             
-            // If image not in body, add it
-            if (!hasImageInBody && mainImage.asset._ref) {
+            // If not in body, prepend it
+            if (!hasImageInBody) {
               console.log('Adding main image to body');
               
-              // Create image block
+              // Create customImage block
               const imageBlock = {
                 _key: `image_${Date.now()}`,
-                _type: 'image',
-                asset: {
-                  _ref: mainImage.asset._ref,
-                  _type: 'reference'
-                },
-                alt: mainImage.alt || 'Blog post image'
+                _type: 'customImage',
+                ...(mainImage.sanityImage?.asset?._ref && {
+                  sanityImage: {
+                    _type: 'image',
+                    asset: {
+                      _ref: mainImage.sanityImage.asset._ref,
+                      _type: 'reference'
+                    },
+                    alt: mainImage.alt || ''
+                  }
+                }),
+                ...(mainImage.externalImage && { externalImage: mainImage.externalImage }),
+                alt: mainImage.alt || '',
+                caption: ''
               };
               
-              // Create new body with image at the beginning
+              // Prepend the new customImage block
               const newBody = [imageBlock, ...body];
               
-              // Update the document
-              client
-                .patch(documentId)
-                .set({ body: newBody })
-                .commit()
-                .then(() => {
-                  console.log('Successfully added main image to body');
-                })
-                .catch((err) => {
-                  console.error('Failed to add main image to body:', err);
-                });
+              // Commit the update
+              client.patch(documentId).set({ body: newBody }).commit()
+                .then(() => console.log('Successfully added main image to body'))
+                .catch(err => console.error('Failed to add main image to body:', err));
             } else {
               console.log('Image already in body or no main image');
             }

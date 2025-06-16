@@ -18,11 +18,13 @@ export async function GET(request, { params }) {
       title,
       slug,
       mainImage{
-        asset->{
-          _id,
-          url
+        sanityImage{
+          asset->{_id, url},
+          alt
         },
-        alt
+        externalImage,
+        alt,
+        asset->{url}
       },
       body,
       "content": body,
@@ -98,17 +100,25 @@ export async function GET(request, { params }) {
     
     // Process content to ensure proper HTML format
     if (blog.content) {
-      // Check if main image exists and ensure it's added to the body content
+      // Convert main image (uploaded or external) to HTML if present
       let contentWithMainImage = '';
       
-      // Convert main image to HTML if it exists
-      if (blog.mainImage && blog.mainImage.asset) {
-        const mainImageHtml = `
-          <figure class="main-image">
-            <img src="${blog.mainImage.asset.url}" alt="${blog.mainImage.alt || 'Blog image'}" class="rounded-lg w-full" />
-          </figure>
-        `;
-        contentWithMainImage += mainImageHtml;
+      if (blog.mainImage) {
+        // Determine URL and alt text
+        const url = blog.mainImage.externalImage
+          || blog.mainImage.sanityImage?.asset?.url
+          || blog.mainImage.asset?.url;
+        const alt = blog.mainImage.alt
+          || blog.mainImage.sanityImage?.alt
+          || '';
+        if (url) {
+          const mainImageHtml = `
+            <figure class="main-image">
+              <img src="${url}" alt="${alt}" class="rounded-lg w-full" />
+            </figure>
+          `;
+          contentWithMainImage += mainImageHtml;
+        }
       }
       
       // Handle Portable Text conversion using the imported function
@@ -117,13 +127,15 @@ export async function GET(request, { params }) {
         blog.content = blockContentToHtml(blog.content);
       }
       
-      // Additional cleanup for any text-based bullets
+      // Fix any text-based bullet points in the HTML
       if (typeof blog.content === 'string') {
         blog.content = fixBulletPoints(blog.content);
       }
       
-      // Add the body content after the main image
-      blog.content = contentWithMainImage + blog.content;
+      // Inject main image HTML at the top if available
+      if (contentWithMainImage && typeof blog.content === 'string') {
+        blog.content = contentWithMainImage + blog.content;
+      }
     }
     
     return NextResponse.json({ 

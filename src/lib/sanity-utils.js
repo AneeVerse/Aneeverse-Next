@@ -53,6 +53,14 @@ export function blockContentToHtml(blocks) {
           html += textBlockToHtml(block);
         }
         break;
+      case 'customImage':
+        if (inList) {
+          html += `</${currentListType}>`;
+          inList = false;
+          currentListType = null;
+        }
+        html += customImageBlockToHtml(block);
+        break;
       case 'image':
         if (inList) {
           html += `</${currentListType}>`;
@@ -355,4 +363,26 @@ function tableBlockToHtml(block) {
   
   tableHtml += '</table></div>';
   return tableHtml;
+}
+
+/**
+ * Convert a customImage block to HTML
+ */
+function customImageBlockToHtml(block) {
+  const alt = block.alt || '';
+  const caption = block.caption ? `<figcaption>${block.caption}</figcaption>` : '';
+  // External image takes precedence
+  if (block.externalImage) {
+    return `<figure><img src="${block.externalImage}" alt="${alt}" />${caption}</figure>`;
+  }
+  // Fallback to Sanity image
+  if (block.sanityImage?.asset?._ref) {
+    const ref = block.sanityImage.asset._ref;
+    const [, id, dimensions, format] = ref.split('-');
+    const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'be9i5ty1';
+    const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
+    const imageUrl = `https://cdn.sanity.io/images/${projectId}/${dataset}/${id}-${dimensions}.${format}`;
+    return `<figure><img src="${imageUrl}" alt="${alt}" />${caption}</figure>`;
+  }
+  return '';
 }
