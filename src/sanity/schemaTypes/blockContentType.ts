@@ -61,16 +61,58 @@ export const blockContentType = defineType({
     // primitive types such as 'string' and 'number' in the same array
     // as a block type.
     defineArrayMember({
-      type: 'image',
+      type: 'object',
+      name: 'customImage',
+      title: 'Image',
       icon: ImageIcon,
-      options: {hotspot: true},
       fields: [
+        {
+          name: 'sanityImage',
+          type: 'image',
+          title: 'Sanity Image',
+          options: { hotspot: true },
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative Text',
+            }
+          ]
+        },
+        {
+          name: 'externalImage',
+          type: 'url',
+          title: 'External Image URL',
+          description: 'Paste an ImageKit URL here (e.g., https://ik.imagekit.io/your-account/image.jpg)',
+        },
         {
           name: 'alt',
           type: 'string',
           title: 'Alternative Text',
+          description: 'Required for accessibility and SEO',
+        },
+        {
+          name: 'caption',
+          type: 'string',
+          title: 'Caption',
         }
-      ]
+      ],
+      preview: {
+        select: {
+          sanityImage: 'sanityImage',
+          externalImage: 'externalImage',
+          alt: 'alt',
+          caption: 'caption'
+        },
+        prepare({ sanityImage, externalImage, alt, caption }) {
+          // Use Sanity image if available, otherwise show default icon for external image
+          return {
+            title: caption || alt || 'Image',
+            subtitle: caption ? `Caption: ${caption}` : '',
+            media: sanityImage ? sanityImage : ImageIcon
+          }
+        }
+      }
     }),
     // YouTube embed
     defineArrayMember({

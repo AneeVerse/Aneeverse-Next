@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
 import { FaRegClock, FaLinkedin, FaFacebookF, FaLink, FaEnvelope } from 'react-icons/fa';
 import BlogFAQ from './BlogFAQ';
+import SanityImage from '../common/SanityImage';
 
 const BlogDetail = ({ blog = {} }) => {
   const [activeSection, setActiveSection] = useState('');
@@ -229,8 +230,8 @@ const BlogDetail = ({ blog = {} }) => {
           <div className="mt-12 pt-8 border-t">
             <div className="flex items-start">
               <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-                <Image 
-                  src={author.image} 
+                <SanityImage 
+                  image={author.image} 
                   alt={author.name}
                   width={80}
                   height={80}

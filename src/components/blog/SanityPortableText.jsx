@@ -3,19 +3,25 @@
 import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import SanityImage from '../common/SanityImage';
 
 // Custom components for portable text rendering
 const components = {
   types: {
     image: ({ value }) => {
-      if (!value?.asset?._ref) {
-        return null;
-      }
+      if (!value) return null;
+
+      // Get image URL from either Sanity or external source
+      const imageUrl = value.externalImage || (value.sanityImage?.asset?._ref ? urlForImage(value.sanityImage).url() : null);
+      const alt = value.alt || '';
+
+      if (!imageUrl) return null;
+
       return (
         <div className="my-8 relative w-full aspect-video">
-          <Image
-            src={value.asset.url}
-            alt={value.alt || ''}
+          <SanityImage
+            image={value}
+            alt={alt}
             fill
             className="object-cover rounded-lg"
           />
