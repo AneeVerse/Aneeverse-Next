@@ -3,13 +3,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import SanityImage from '../common/SanityImage';
 
 export default function BlogCard({ blog }) {
-  const [thumbnailError, setThumbnailError] = useState(false);
   const [authorImageError, setAuthorImageError] = useState(false);
   
   // Default placeholder images
-  const defaultThumbnail = "/images/blog1.avif";
   const defaultAuthorImage = "/images/blog/author/abhi.png";
   
   // Safe access to blog data with fallbacks
@@ -25,20 +24,10 @@ export default function BlogCard({ blog }) {
   // If slug is an object (from Sanity), use slug.current
   const slug = blog?.slug?.current || blog?.slug || blog?.id || '#';
   
-  // Ensure thumbnail exists and is a non-empty string
-  const thumbnailSrc = blog?.thumbnail && typeof blog.thumbnail === 'string' && blog.thumbnail.trim() !== '' 
-    ? blog.thumbnail
-    : defaultThumbnail;
-  
   // Ensure author image exists and is a non-empty string
   const authorImageSrc = author?.image && typeof author.image === 'string' && author.image.trim() !== ''
     ? author.image
     : defaultAuthorImage;
-
-  const handleThumbnailError = () => {
-    console.error('Failed to load thumbnail:', thumbnailSrc);
-    setThumbnailError(true);
-  };
 
   const handleAuthorImageError = () => {
     console.error('Failed to load author image:', authorImageSrc);
@@ -50,8 +39,8 @@ export default function BlogCard({ blog }) {
       {/* Image Section - Superside style */}
       <Link href={`/blog/${slug}`} className="block group overflow-hidden rounded-lg">
         <div className="relative w-full aspect-[16/9] overflow-hidden">
-          <Image
-            src={thumbnailError ? defaultThumbnail : thumbnailSrc}
+          <SanityImage
+            image={blog?.thumbnail}
             alt={title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -59,7 +48,6 @@ export default function BlogCard({ blog }) {
             className="object-cover transition-transform duration-700 group-hover:scale-105"
             placeholder="blur"
             blurDataURL="/images/placeholder.jpg"
-            onError={handleThumbnailError}
           />
         </div>
       </Link>
