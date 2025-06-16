@@ -1,4 +1,5 @@
 import {DocumentTextIcon} from '@sanity/icons'
+import React from 'react'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 
 export const postType = defineType({
@@ -262,10 +263,21 @@ export const postType = defineType({
           alt: 'alt'
         },
         prepare({ sanityImage, externalImage, alt }) {
+          // Choose appropriate media element
+          let media = undefined
+          if (sanityImage) {
+            media = sanityImage
+          } else if (externalImage) {
+            media = React.createElement('img', {
+              src: externalImage,
+              alt: alt || '',
+              style: { width: '100%', height: '100%', objectFit: 'cover' }
+            })
+          }
           return {
             title: 'Main Image',
             subtitle: alt || 'No alt text provided',
-            media: sanityImage || externalImage
+            media
           }
         }
       }
@@ -361,11 +373,33 @@ export const postType = defineType({
     select: {
       title: 'title',
       author: 'author.name',
-      media: 'mainImage.sanityImage',
+      sanityImage: 'mainImage.sanityImage',
+      externalImage: 'mainImage.externalImage',
+      legacyImage: 'mainImage.asset->url'
     },
-    prepare(selection) {
-      const {author} = selection
-      return {...selection, subtitle: author && `by ${author}`}
+    prepare({ title, author, sanityImage, externalImage, legacyImage }) {
+      // Determine media: prefer sanityImage, then external, then legacy URL
+      let media = undefined
+      if (sanityImage) {
+        media = sanityImage
+      } else if (externalImage) {
+        media = React.createElement('img', {
+          src: externalImage,
+          alt: title || '',
+          style: { width: '100%', height: '100%', objectFit: 'cover' }
+        })
+      } else if (legacyImage) {
+        media = React.createElement('img', {
+          src: legacyImage,
+          alt: title || '',
+          style: { width: '100%', height: '100%', objectFit: 'cover' }
+        })
+      }
+      return {
+        title,
+        subtitle: author && `by ${author}`,
+        media
+      }
     },
   },
 })
