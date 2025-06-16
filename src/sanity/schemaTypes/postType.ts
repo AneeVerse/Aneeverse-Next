@@ -260,16 +260,23 @@ export const postType = defineType({
         select: {
           sanityImage: 'sanityImage',
           externalImage: 'externalImage',
+          legacyImage: 'asset->url',
           alt: 'alt'
         },
-        prepare({ sanityImage, externalImage, alt }) {
+        prepare({ sanityImage, externalImage, legacyImage, alt }) {
           // Choose appropriate media element
-          let media = undefined
+          let media: any = undefined
           if (sanityImage) {
             media = sanityImage
           } else if (externalImage) {
             media = React.createElement('img', {
               src: externalImage,
+              alt: alt || '',
+              style: { width: '100%', height: '100%', objectFit: 'cover' }
+            })
+          } else if (legacyImage) {
+            media = React.createElement('img', {
+              src: legacyImage,
               alt: alt || '',
               style: { width: '100%', height: '100%', objectFit: 'cover' }
             })
@@ -379,7 +386,7 @@ export const postType = defineType({
     },
     prepare({ title, author, sanityImage, externalImage, legacyImage }) {
       // Determine media: prefer sanityImage, then external, then legacy URL
-      let media = undefined
+      let media: any = undefined
       if (sanityImage) {
         media = sanityImage
       } else if (externalImage) {
