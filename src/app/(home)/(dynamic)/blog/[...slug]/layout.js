@@ -1,8 +1,19 @@
-import { getBlogPost } from '@/lib/blogUtils';
+import { client } from '@/lib/sanity';
 
 // ✅ Generate Dynamic Metadata
 export async function generateMetadata({ params }) {
-  const post = getBlogPost(params.slug);
+  // Normalize slug (use last part for blog slug)
+  const slugParts = Array.isArray(params.slug) ? params.slug : [params.slug];
+  const slug = slugParts.pop();
+  // Fetch post data from Sanity
+  const query = `*[_type == "post" && slug.current == $slug][0]{
+    title, slug, "thumbnail": mainImage.asset->url, shortDescription, publishedAt as date,
+    timeToRead, author->{name}, seo{metaTitle,metaDescription,ogTitle,ogDescription,ogUrl,ogType,ogLocale,ogSiteName,
+      ogImage{asset->{url},alt},ogImageWidth,ogImageHeight,ogImageType,articlePublishedTime,articleModifiedTime,
+      twitterCard,twitterTitle,twitterDescription,twitterImage{asset->{url},alt},twitterAuthor,
+      twitterLabel1,twitterData1,twitterLabel2,twitterData2,keywords,canonicalUrl,noIndex,msapplicationTileImage}
+  }`;
+  const post = await client.fetch(query, { slug });
   if (!post) return { title: "Blog | Aneeverse", description: "This blog post does not exist." };
 
   // Use SEO fields if available, otherwise fall back to default values

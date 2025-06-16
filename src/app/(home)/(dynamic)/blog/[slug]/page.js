@@ -504,7 +504,9 @@ export default function BlogDetail({ params }) {
     }
   };
 
-  const memoizedContent = useMemo(() => renderContent(post?.content), [post?.content]);
+  // Ensure we always pass a string to renderContent (fall back to description if content is missing)
+  const rawContent = post?.content ?? post?.description ?? '';
+  const memoizedContent = useMemo(() => renderContent(rawContent), [rawContent]);
 
   if (isLoading) {
     return (
