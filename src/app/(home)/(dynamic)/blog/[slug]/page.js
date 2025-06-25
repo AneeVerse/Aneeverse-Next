@@ -423,9 +423,15 @@ export default function BlogDetail({ params }) {
         // Process HTML to add IDs to headings
         const processedContent = processHtmlContent(content);
         
+        // Debug: log the HTML to see what list elements are being generated
+        console.log('Processed HTML content:', processedContent);
+        
         return (
           <div 
-            className="prose max-w-none prose-img:rounded-lg prose-img:shadow-lg prose-headings:scroll-mt-24 prose-headings:pt-6 prose-headings:mt-6 prose-headings:border-t prose-headings:border-gray-100 prose-table:border-collapse prose-td:p-3 prose-th:p-3 prose-th:text-left prose-td:text-gray-700 prose-th:text-gray-800 prose-td:border prose-th:border prose-table:my-8 prose-table:w-full prose-ul:list-disc prose-ul:pl-6 prose-li:text-gray-600 prose-li:my-1 prose-li:marker:text-gray-500" 
+            className="blog-content description prose max-w-none prose-img:rounded-lg prose-img:shadow-lg prose-headings:scroll-mt-24 prose-headings:pt-6 prose-headings:mt-6 prose-headings:border-t prose-headings:border-gray-100 prose-table:border-collapse prose-td:p-3 prose-th:p-3 prose-th:text-left prose-td:text-gray-700 prose-th:text-gray-800 prose-td:border prose-th:border prose-table:my-8 prose-table:w-full prose-ul:list-disc prose-ul:pl-6 prose-ol:list-decimal prose-ol:pl-6 prose-li:text-gray-600 prose-li:my-1 prose-li:marker:text-gray-500" 
+            style={{
+              ['--tw-prose-ol-li']: 'list-decimal'
+            }}
             dangerouslySetInnerHTML={{ __html: processedContent }} 
           />
         );
