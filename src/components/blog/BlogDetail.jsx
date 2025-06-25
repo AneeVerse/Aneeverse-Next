@@ -214,7 +214,7 @@ const BlogDetail = ({ blog = {} }) => {
         <div className="flex-1 overflow-hidden">
           <div 
             ref={contentRef}
-            className="prose prose-lg max-w-none prose-headings:text-[#0A2E3D] prose-p:text-gray-700 prose-a:text-primary-600 prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-primary-500"
+            className="description prose prose-lg max-w-none prose-headings:text-[#0A2E3D] prose-p:text-gray-700 prose-a:text-primary-600 prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-primary-500"
             dangerouslySetInnerHTML={{ __html: content }}
           />
           

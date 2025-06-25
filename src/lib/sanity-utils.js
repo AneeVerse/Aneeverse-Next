@@ -21,11 +21,19 @@ export function blockContentToHtml(blocks) {
     const block = blocks[i];
     const isListItem = block.listItem === 'bullet' || block.listItem === 'number';
     
+    // Debug logging
+    if (isListItem) {
+      console.log('Processing list item:', block.listItem, block.children);
+    }
+    
     // Opening a new list
     if (isListItem && !inList) {
       currentListType = block.listItem === 'bullet' ? 'ul' : 'ol';
-      html += `<${currentListType} class="${currentListType === 'ul' ? 'list-disc' : 'list-decimal'} pl-6 my-4">`;
+      const listClass = currentListType === 'ul' ? 'list-disc pl-6 my-4' : 'list-decimal pl-6 my-4';
+      const listStyle = currentListType === 'ul' ? 'disc' : 'decimal';
+      html += `<${currentListType} class="${listClass}" style="list-style-type: ${listStyle}; padding-left: 1.5rem; margin-bottom: 1.5rem;">`;
       inList = true;
+      console.log(`Opening ${currentListType} list with style: ${listStyle}`);
     }
     
     // Closing a list
@@ -41,7 +49,8 @@ export function blockContentToHtml(blocks) {
          (currentListType === 'ol' && block.listItem === 'bullet'))) {
       html += `</${currentListType}>`;
       currentListType = block.listItem === 'bullet' ? 'ul' : 'ol';
-      html += `<${currentListType} class="${currentListType === 'ul' ? 'list-disc' : 'list-decimal'} pl-6 my-4">`;
+      const listClass = currentListType === 'ul' ? 'list-disc pl-6 my-4' : 'list-decimal pl-6 my-4';
+      html += `<${currentListType} class="${listClass}" style="list-style-type: ${currentListType === 'ul' ? 'disc' : 'decimal'}; padding-left: 1.5rem;">`;
     }
     
     // Handle different block types
@@ -144,7 +153,7 @@ function textBlockToListItem(block) {
     .join('');
 
   // Return properly styled list item
-  return `<li class="my-1">${text}</li>`;
+  return `<li class="my-1" style="display: list-item;">${text}</li>`;
 }
 
 /**
