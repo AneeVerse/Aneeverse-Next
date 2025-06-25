@@ -307,7 +307,7 @@ export default function BlogDetail({ params }) {
                   />
                 </div>
                 
-                <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
+                <div className="description prose prose-lg max-w-none prose-ul:list-disc prose-ul:pl-6 prose-ol:list-decimal prose-ol:pl-6" dangerouslySetInnerHTML={{ __html: post.content }} />
               </div>
             </div>
 

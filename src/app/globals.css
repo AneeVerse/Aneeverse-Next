@@ -192,9 +192,16 @@ body{
   }
 
   .description ol {
-    list-style-type: decimal;
-    padding-left: 1.5rem;
-    margin-bottom: 1.5rem;
+    list-style-type: decimal !important;
+    padding-left: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+    display: block !important;
+  }
+  
+  .description ol li {
+    display: list-item !important;
+    list-style-type: decimal !important;
+    margin-bottom: 0.5rem !important;
   }
 
   .description li {
@@ -249,4 +256,33 @@ body{
       margin: 1.5rem 0;
       font-size: 1rem;
     }
+  }
+
+  /* Force numbered lists to display properly */
+  .blog-content ol, 
+  .description ol,
+  .prose ol {
+    list-style-type: decimal !important;
+    list-style-position: outside !important;
+    padding-left: 2rem !important;
+    margin-left: 0 !important;
+    margin-bottom: 1.5rem !important;
+    display: block !important;
+  }
+  
+  .blog-content ol li, 
+  .description ol li,
+  .prose ol li {
+    display: list-item !important;
+    list-style-type: decimal !important;
+    list-style-position: outside !important;
+    margin-bottom: 0.5rem !important;
+    padding-left: 0.25rem !important;
+  }
+  
+  /* Reset any conflicting styles */
+  .blog-content ol li::before, 
+  .description ol li::before,
+  .prose ol li::before {
+    content: none !important;
   }
