@@ -10,4 +10,4 @@ Disallow: /api
 Host: https://www.aneeverse.com
 
 # Sitemaps
-Sitemap: https://www.aneeverse.com/api/sitemap
+Sitemap: https://www.aneeverse.com/sitemap.xml
