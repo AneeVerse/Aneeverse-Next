@@ -3,6 +3,24 @@ import { blockContentToHtml } from '@/lib/sanity-utils';
 import { notFound } from 'next/navigation';
 import BlogDetailClient from './BlogDetailClient';
 
+// Generate static params for all blog posts
+export async function generateStaticParams() {
+  try {
+    const posts = await client.fetch(`*[_type == "post" && defined(slug.current)] {
+      "slug": slug.current
+    }`);
+    
+    console.log(`Generated static params for ${posts.length} blog posts`);
+    
+    return posts.map((post) => ({
+      slug: post.slug,
+    }));
+  } catch (error) {
+    console.error('Error generating static params for blog posts:', error);
+    return [];
+  }
+}
+
 // Server-side function to fetch blog data for SEO and initial render
 async function getServerBlogPost(slug) {
   try {
