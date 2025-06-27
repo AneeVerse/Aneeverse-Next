@@ -1,3 +1,13 @@
+# *
 User-agent: *
 Allow: /
-Sitemap: https://www.aneeverse.com/sitemap.xml
+Disallow: /dashboard
+Disallow: /studio
+Disallow: /admin
+Disallow: /api
+
+# Host
+Host: https://www.aneeverse.com
+
+# Sitemaps
+Sitemap: https://www.aneeverse.com/api/sitemap
