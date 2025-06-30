@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaTimes, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { FiArrowUpRight } from "react-icons/fi";
@@ -10,8 +10,12 @@ import { FaChartPie, FaEnvelope, FaGoogle, FaFacebook, FaUserFriends } from "rea
 import { FaEnvelopeOpenText, FaSlideshare, FaPaintBrush, FaFilePdf } from "react-icons/fa";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa6";
-import { blogs } from "@/data/blogData";
-import { customerStories } from "@/data/customerStoriesData";
+
+// Cache for dynamic content to avoid refetching
+let blogsCache = [];
+let storiesCache = [];
+let isBlogsFetched = false;
+let isStoriesFetched = false;
 
 // Menu Categories Data
 const menuCategories = [
@@ -61,61 +65,128 @@ const menuCategories = [
   },
 ];
 
-// Resources Data
-const resources = [
-  {
-    title: "",
-    link: "#",
-    items: [
-      {
-               name: "Blog",
-               link: "/blog",
-               description: "Latest articles and insights",
-               icon: <HiOutlinePencilAlt />,
-             },
-             {
-               name: "Customer Stories",
-               link: "/customer-stories",
-               description: "Success stories from our clients",
-               icon: <HiOutlineUserGroup />,
-             },
-             {
-               name: "Guides & Quizzes",
-               link: "/blog",
-               description: "Insights from marketing leaders",
-               icon: <HiOutlineBookOpen />,
-             },
-             {
-               name: "Video Library",
-               link: "/video-library",
-               description: "Aneeverse's latest videos",
-               icon: <HiOutlinePlay />,
-             }
-    ],
-  },
-  {
-    title: "Blog",
-    link: "/blog",
-    cards: [
-      ...blogs.slice(0, 2)
-    ],
-  },
-  {
-    title: "Customer Stories",
-    link: "/customer-stories",
-    cards: [
-   
-      ...customerStories.slice(0, 2)
-    ],
-  },
-];
-
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const [openSection, setOpenSection] = useState(null);
+  const [blogs, setBlogs] = useState(blogsCache);
+  const [customerStories, setCustomerStories] = useState(storiesCache);
+  const [isLoadingBlogs, setIsLoadingBlogs] = useState(!isBlogsFetched);
+  const [isLoadingStories, setIsLoadingStories] = useState(!isStoriesFetched);
 
   const toggleSection = (section) => {
     setOpenSection(openSection === section ? null : section);
   };
+
+  // Fetch dynamic blogs
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      if (isBlogsFetched) {
+        setBlogs(blogsCache);
+        setIsLoadingBlogs(false);
+        return;
+      }
+
+      try {
+        setIsLoadingBlogs(true);
+        const response = await fetch('/api/sanity-blogs?limit=2', { 
+          cache: 'no-store',
+          next: { revalidate: 300 }
+        });
+        const data = await response.json();
+        if (data.success) {
+          blogsCache = data.blogs;
+          isBlogsFetched = true;
+          setBlogs(data.blogs);
+        } else {
+          console.error('Failed to fetch blogs:', data.error);
+        }
+      } catch (error) {
+        console.error('Error fetching blogs:', error);
+      } finally {
+        setIsLoadingBlogs(false);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
+
+  // Fetch dynamic customer stories
+  useEffect(() => {
+    const fetchCustomerStories = async () => {
+      if (isStoriesFetched) {
+        setCustomerStories(storiesCache);
+        setIsLoadingStories(false);
+        return;
+      }
+
+      try {
+        setIsLoadingStories(true);
+        const response = await fetch('/api/sanity-customer-stories?limit=2', { 
+          cache: 'no-store',
+          next: { revalidate: 300 }
+        });
+        const data = await response.json();
+        if (data.success) {
+          storiesCache = data.stories;
+          isStoriesFetched = true;
+          setCustomerStories(data.stories);
+        } else {
+          console.error('Failed to fetch customer stories:', data.error);
+        }
+      } catch (error) {
+        console.error('Error fetching customer stories:', error);
+      } finally {
+        setIsLoadingStories(false);
+      }
+    };
+
+    fetchCustomerStories();
+  }, []);
+
+  // Dynamic resources data
+  const resources = [
+    {
+      title: "",
+      link: "#",
+      items: [
+        {
+          name: "Blog",
+          link: "/blog",
+          description: "Latest articles and insights",
+          icon: <HiOutlinePencilAlt />,
+        },
+        {
+          name: "Customer Stories",
+          link: "/customer-stories",
+          description: "Success stories from our clients",
+          icon: <HiOutlineUserGroup />,
+        },
+        {
+          name: "Guides & Quizzes",
+          link: "/blog",
+          description: "Insights from marketing leaders",
+          icon: <HiOutlineBookOpen />,
+        },
+        {
+          name: "Video Library",
+          link: "/video-library",
+          description: "Aneeverse's latest videos",
+          icon: <HiOutlinePlay />,
+        }
+      ],
+    },
+    {
+      title: "Blog",
+      link: "/blog",
+      cards: blogs,
+      isLoading: isLoadingBlogs,
+    },
+    {
+      title: "Customer Stories",
+      link: "/customer-stories",
+      cards: customerStories,
+      isLoading: isLoadingStories,
+    },
+  ];
 
   return (
     <motion.div
@@ -256,13 +327,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               <div className="grid grid-cols-1 gap-6 px-2 max-w-6xl mx-auto py-2">
                 {resources.map((resource, index) => (
                   <div key={index}>
-                    <Link href={resource.link}  onClick={toggleSidebar}  className={`${index == 0 ? "hidden " : "inline-flex "} text-lg hover:underline font-bold flex-row min-w-fit items-center gap-2`}>
+                    <Link href={resource.link} onClick={toggleSidebar} className={`${index == 0 ? "hidden " : "inline-flex "} text-lg hover:underline font-bold flex-row min-w-fit items-center gap-2`}>
                       <span>{resource.title}</span> <FiArrowUpRight />
                     </Link>
                     <div className={`${index == 0 ? " mt-0 " : " mt-4 "} space-y-4`}>
                       {resource.items &&
                         resource.items.map((item, idx) => (
-                          <Link href={item.link} key={idx}  onClick={toggleSidebar}  className="flex items-start justify-between gap-3">
+                          <Link href={item.link} key={idx} onClick={toggleSidebar} className="flex items-start justify-between gap-3">
                             <div>
                               <h4 className="text-md font-medium text-gray-700">{item.name}</h4>
                               <p className="text-sm text-gray-500">{item.description}</p>
@@ -270,17 +341,66 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                             <div className="text-gray-700 text-xl">{item.icon}</div>
                           </Link>
                         ))}
-                      {resource.cards &&
-                        resource.cards.map((card, idx) => (
-                          <Link href={`/${resource.title == "Blog" ? "blog":"customer-stories"}/${card.id}`}  onClick={toggleSidebar}  key={idx} className="flex flex-row gap-3">
-                            <img
-                              src={card.thumbnail}
-                              alt={card.title}
-                              className="w-[60px] h-[60px] object-cover rounded-md"
-                            />
-                            <p className="text-sm font-medium text-gray-700">{card.title}</p>
-                          </Link>
-                        ))}
+                      
+                      {/* Dynamic Cards Section */}
+                      {resource.cards !== undefined && (
+                        <div className="space-y-3">
+                          {resource.isLoading ? (
+                                                         // Loading state - skeleton cards
+                             <>
+                               <div className="flex flex-row gap-3 animate-pulse">
+                                 <div className="w-[100px] h-[60px] bg-gray-300 rounded-md"></div>
+                                 <div className="flex-1">
+                                   <div className="h-4 bg-gray-300 rounded mb-2"></div>
+                                   <div className="h-3 bg-gray-200 rounded w-3/4"></div>
+                                 </div>
+                               </div>
+                               <div className="flex flex-row gap-3 animate-pulse">
+                                 <div className="w-[100px] h-[60px] bg-gray-300 rounded-md"></div>
+                                 <div className="flex-1">
+                                   <div className="h-4 bg-gray-300 rounded mb-2"></div>
+                                   <div className="h-3 bg-gray-200 rounded w-2/3"></div>
+                                 </div>
+                               </div>
+                             </>
+                          ) : resource.cards && resource.cards.length > 0 ? (
+                                                         // Actual dynamic cards
+                             resource.cards.map((card, idx) => (
+                               <Link 
+                                 href={`/${resource.title === "Blog" ? "blog" : "customer-stories"}/${card.slug}`} 
+                                 onClick={toggleSidebar} 
+                                 key={idx} 
+                                 className="flex flex-row gap-3 hover:bg-gray-50 rounded-lg p-2 -m-2 transition-colors"
+                               >
+                                 <div className="relative overflow-hidden rounded-md flex-shrink-0">
+                                   <img
+                                     src={card.thumbnail}
+                                     alt={card.title}
+                                     className="w-[100px] h-[60px] object-cover"
+                                   />
+                                 </div>
+                                 <div className="flex-1 min-w-0 flex flex-col justify-center">
+                                   <p className="text-sm font-medium text-gray-700 line-clamp-2 leading-snug mt-1">
+                                     {card.title}
+                                   </p>
+                                   {card.excerpt && (
+                                     <p className="text-xs text-gray-500 mt-1 line-clamp-1">
+                                       {card.excerpt}
+                                     </p>
+                                   )}
+                                 </div>
+                               </Link>
+                             ))
+                          ) : (
+                            // No content available
+                            <div className="text-center py-4 px-2">
+                              <p className="text-sm text-gray-500">
+                                {resource.title === "Blog" ? "Check out our blog for latest updates" : "No stories available yet"}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
