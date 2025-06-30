@@ -3,26 +3,39 @@ import { client } from '@/lib/sanity';
 
 export async function GET() {
   try {
-    // Simple GROQ query to test the connection
-    const query = `*[_type == "post"][0...5]{
+    // Simple query to get all posts with their categories
+    const query = `*[_type == "post"]{
       _id,
       title,
-      "slug": slug.current
+      "categories": categories[]->title,
+      publishedAt
     }`;
     
     const posts = await client.fetch(query);
     
-    return NextResponse.json({ 
-      success: true, 
-      message: 'Successfully connected to Sanity',
-      posts
+    // Get all unique categories
+    const allCategories = new Set();
+    posts.forEach(post => {
+      if (post.categories && Array.isArray(post.categories)) {
+        post.categories.forEach(cat => {
+          if (cat) allCategories.add(cat);
+        });
+      }
     });
+    
+    return NextResponse.json({
+      success: true,
+      totalPosts: posts.length,
+      posts: posts,
+      uniqueCategories: Array.from(allCategories),
+      message: "Sanity connection successful"
+    });
+    
   } catch (error) {
-    console.error('Error connecting to Sanity:', error);
-    return NextResponse.json({ 
-      success: false, 
-      error: `Failed to connect to Sanity: ${error.message}`,
-      details: error.stack
+    return NextResponse.json({
+      success: false,
+      error: error.message,
+      message: "Failed to connect to Sanity"
     }, { status: 500 });
   }
 } 

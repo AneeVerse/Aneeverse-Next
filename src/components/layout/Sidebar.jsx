@@ -143,50 +143,50 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   }, []);
 
   // Dynamic resources data
-  const resources = [
-    {
-      title: "",
-      link: "#",
-      items: [
-        {
-          name: "Blog",
-          link: "/blog",
-          description: "Latest articles and insights",
-          icon: <HiOutlinePencilAlt />,
-        },
-        {
-          name: "Customer Stories",
-          link: "/customer-stories",
-          description: "Success stories from our clients",
-          icon: <HiOutlineUserGroup />,
-        },
-        {
-          name: "Guides & Quizzes",
-          link: "/blog",
-          description: "Insights from marketing leaders",
-          icon: <HiOutlineBookOpen />,
-        },
-        {
-          name: "Video Library",
-          link: "/video-library",
-          description: "Aneeverse's latest videos",
-          icon: <HiOutlinePlay />,
-        }
-      ],
-    },
-    {
-      title: "Blog",
-      link: "/blog",
+const resources = [
+  {
+    title: "",
+    link: "#",
+    items: [
+      {
+               name: "Blog",
+               link: "/blog",
+               description: "Latest articles and insights",
+               icon: <HiOutlinePencilAlt />,
+             },
+             {
+               name: "Customer Stories",
+               link: "/customer-stories",
+               description: "Success stories from our clients",
+               icon: <HiOutlineUserGroup />,
+             },
+             {
+               name: "Guides & Quizzes",
+               link: "/blog",
+               description: "Insights from marketing leaders",
+               icon: <HiOutlineBookOpen />,
+             },
+             {
+               name: "Video Library",
+               link: "/video-library",
+               description: "Aneeverse's latest videos",
+               icon: <HiOutlinePlay />,
+             }
+    ],
+  },
+  {
+    title: "Blog",
+    link: "/blog",
       cards: blogs,
       isLoading: isLoadingBlogs,
-    },
-    {
-      title: "Customer Stories",
-      link: "/customer-stories",
+  },
+  {
+    title: "Customer Stories",
+    link: "/customer-stories",
       cards: customerStories,
       isLoading: isLoadingStories,
-    },
-  ];
+  },
+];
 
   return (
     <motion.div
@@ -365,7 +365,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                              </>
                           ) : resource.cards && resource.cards.length > 0 ? (
                                                          // Actual dynamic cards
-                             resource.cards.map((card, idx) => (
+                        resource.cards.map((card, idx) => (
                                <Link 
                                  href={`/${resource.title === "Blog" ? "blog" : "customer-stories"}/${card.slug}`} 
                                  onClick={toggleSidebar} 
@@ -373,11 +373,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                                  className="flex flex-row gap-3 hover:bg-gray-50 rounded-lg p-2 -m-2 transition-colors"
                                >
                                  <div className="relative overflow-hidden rounded-md flex-shrink-0">
-                                   <img
-                                     src={card.thumbnail}
-                                     alt={card.title}
+                            <img
+                              src={card.thumbnail}
+                              alt={card.title}
                                      className="w-[120px] h-[70px] object-cover"
-                                   />
+                            />
                                  </div>
                                  <div className="flex-1 min-w-0 flex flex-col justify-center">
                                    <p className="text-sm font-medium text-gray-700 line-clamp-2 leading-snug mt-1">
@@ -389,7 +389,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                                      </p>
                                    )}
                                  </div>
-                               </Link>
+                          </Link>
                              ))
                           ) : (
                             // No content available
