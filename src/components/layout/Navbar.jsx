@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 import WhyUsMegaMenu from "./megamenu/WhyUsMegaMenu";
 import Layout from "../common/Layout";
 import Button from "../common/Button";
+import AnimatedButton from "../common/AnimatedButton";
 
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -104,7 +105,7 @@ const Navbar = () => {
 
         {/* Buttons */}
         <div className="hidden lg:flex items-center gap-4">
-          <Link
+          <AnimatedButton
             href="/contact"
             className="px-6 py-2 rounded-full border"
             style={{
@@ -114,7 +115,7 @@ const Navbar = () => {
             }}
           >
             Book a Call
-          </Link>
+          </AnimatedButton>
           <Link
             href="/register"
             className="px-6 py-2 rounded-full border"
