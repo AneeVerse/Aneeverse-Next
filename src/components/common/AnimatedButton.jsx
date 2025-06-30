@@ -23,7 +23,7 @@ const AnimatedButton = ({
       <Link href={href} className="block w-full h-full relative">
         {/* Current text - slides up on hover */}
         <motion.div
-          className="block relative z-10 font-medium"
+          className="block relative z-10"
           variants={{
             initial: { y: 0 },
             hover: { y: mainTextSlide }
@@ -35,7 +35,7 @@ const AnimatedButton = ({
         
         {/* Duplicate text - hidden below, comes up on hover */}
         <motion.div
-          className="absolute top-full left-0 w-full font-medium"
+          className="absolute top-full left-0 w-full"
           variants={{
             initial: { y: duplicateTextStart },
             hover: { y: duplicateTextEnd }
