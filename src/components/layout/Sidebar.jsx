@@ -349,14 +349,14 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                                                          // Loading state - skeleton cards
                              <>
                                <div className="flex flex-row gap-3 animate-pulse">
-                                 <div className="w-[100px] h-[60px] bg-gray-300 rounded-md"></div>
+                                 <div className="w-[120px] h-[70px] bg-gray-300 rounded-md"></div>
                                  <div className="flex-1">
                                    <div className="h-4 bg-gray-300 rounded mb-2"></div>
                                    <div className="h-3 bg-gray-200 rounded w-3/4"></div>
                                  </div>
                                </div>
                                <div className="flex flex-row gap-3 animate-pulse">
-                                 <div className="w-[100px] h-[60px] bg-gray-300 rounded-md"></div>
+                                 <div className="w-[120px] h-[70px] bg-gray-300 rounded-md"></div>
                                  <div className="flex-1">
                                    <div className="h-4 bg-gray-300 rounded mb-2"></div>
                                    <div className="h-3 bg-gray-200 rounded w-2/3"></div>
@@ -376,7 +376,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                                    <img
                                      src={card.thumbnail}
                                      alt={card.title}
-                                     className="w-[100px] h-[60px] object-cover"
+                                     className="w-[120px] h-[70px] object-cover"
                                    />
                                  </div>
                                  <div className="flex-1 min-w-0 flex flex-col justify-center">
