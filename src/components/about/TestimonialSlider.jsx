@@ -86,7 +86,7 @@ export default function TestimonialSlider() {
       name: "Navin Agarwal",
       role: "Founder",
       company: "Novino Inks Pvt Ltd",
-      feedback: <>The biggest win? The time we saved. AneeVerse built a stunning eCommerce site that truly reflects our brand. <span className="font-bold">Abhijeet understood my paintings on a personal level</span>—he knew exactly what I wanted to express and brought it to life with unmatched customization and efficiency.</>,
+      feedback: <>The biggest win? The time we saved. AneeVerse built a stunning eCommerce site that truly reflects our brand. <span className="font-bold">Abhijeet understood my paintings on a personal level</span> he knew exactly what I wanted to express and brought it to life with unmatched customization and efficiency.</>,
       imageUrl: "/images/testimonals/navino.png"
     },
     {
@@ -275,7 +275,7 @@ export default function TestimonialSlider() {
           {/* Content Section */}
           <motion.div
             key={currentIndex}
-            className={`flex flex-col w-full lg:w-auto px-2 sm:px-0 ${
+            className={`flex flex-col w-full lg:w-auto px-3 sm:px-0 ${
               testimonials[currentIndex].company === "JM Visa Services" && !isMobile ? "-mt-20" : ""
             }`}
             initial={{ opacity: 0, y: 20 }}
@@ -303,23 +303,39 @@ export default function TestimonialSlider() {
                   )}
                 </div>
               ) : (
-                <h2 className="text-3xl sm:text-4xl font-semibold mb-2 text-center lg:text-left w-full">
+                <h2 className={`text-2xl sm:text-3xl md:text-4xl font-semibold mb-2 w-full ${
+                  isMobile ? 'text-center' : 'text-center lg:text-left'
+                }`}>
                   {testimonials[currentIndex].company}
                 </h2>
               )}
             </div>
-            <p className={`text-lg sm:text-xl md:text-2xl lg:text-3xl 2xl:text-4xl text-center lg:text-left ${
-              testimonials[currentIndex].company === "JM Visa Services" 
-                ? isMobile ? "mt-0" : "-mt-4" 
-                : isMobile ? "mt-0" : "my-4 sm:my-6"
-            }`}>
-              "{testimonials[currentIndex].feedback}"
-            </p>
-            <p className={`font-medium italic text-gray-300 text-center lg:text-left ${
-              testimonials[currentIndex].company === "JM Visa Services" ? "mt-4" : "mt-4"
-            }`}>
-              {testimonials[currentIndex].name}, {testimonials[currentIndex].role}
-            </p>
+            
+            {/* Main Testimonial Text */}
+            <div className={`w-full ${isMobile ? 'max-w-none px-2' : 'max-w-[600px]'}`}>
+              <p className={`leading-relaxed font-normal ${
+                isMobile 
+                  ? 'text-base sm:text-lg text-center leading-7 px-1' 
+                  : 'text-lg sm:text-xl md:text-2xl lg:text-3xl 2xl:text-4xl text-center lg:text-left leading-relaxed'
+              } ${
+                testimonials[currentIndex].company === "JM Visa Services" 
+                  ? isMobile ? "mt-2 mb-6" : "-mt-4" 
+                  : isMobile ? "mt-2 mb-6" : "my-4 sm:my-6"
+              }`}>
+                "{testimonials[currentIndex].feedback}"
+              </p>
+            </div>
+            
+            {/* Attribution */}
+            <div className={`w-full ${isMobile ? 'text-center' : 'text-center lg:text-left'}`}>
+              <p className={`font-medium italic text-gray-300 ${
+                isMobile ? 'text-sm leading-5' : 'text-base'
+              } ${
+                testimonials[currentIndex].company === "JM Visa Services" ? "mt-0" : "mt-2"
+              }`}>
+                {testimonials[currentIndex].name}, {testimonials[currentIndex].role}
+              </p>
+            </div>
           </motion.div>
 
           {/* Navigation Buttons */}
