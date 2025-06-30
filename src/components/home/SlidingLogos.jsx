@@ -8,7 +8,7 @@ const logos = [
     "/images/logos/ishanyafoundation.png",
     "/images/logos/deepakfertilizer.png",
     "/images/logos/amazon.png",
-    "/images/logos/bookings.png",
+   
     "/images/logos/coinbase.png",
     "/images/logos/meta.png",
     "/images/logos/reddit.png",
@@ -38,7 +38,7 @@ const SliderLogo = ({ direction }) => {
   return (
     <div className="relative overflow-hidden w-full">
       <motion.div
-        className="flex h-[80px] sm:h-[120px] gap-2 sm:gap-6 min-w-max"
+        className="flex h-[60px] sm:h-[80px] gap-4 sm:gap-8 min-w-max"
         variants={slideVariants}
         animate="animate"
         custom={direction}
@@ -53,12 +53,12 @@ const SliderLogo = ({ direction }) => {
           return (
             <div
               key={ind}
-              className="flex h-full py-2 px-1 sm:py-6 sm:px-5 min-w-fit items-center justify-center"
+              className="flex h-full py-3 px-4 sm:py-4 sm:px-6 min-w-fit items-center justify-center"
             >
               <img 
                 src={logo} 
                 alt={`Logo ${ind}: ${logo}`} 
-                className={`w-auto ${isIshanya || isBharathaksha ? 'h-[120px] sm:h-[200px]' : isDeepak ? 'h-[100px] sm:h-[160px]' : 'h-[30px] sm:h-[40px]'} object-contain`} 
+                className={`w-auto ${isIshanya || isBharathaksha ? 'h-[120px] sm:h-[120px]' : isDeepak ? 'h-[100px] sm:h-[100px]' : 'h-[32px] sm:h-[30px]'} object-contain opacity-70 hover:opacity-100 transition-opacity duration-300`} 
                 onError={(e) => {
                   console.error(`Failed to load logo: ${logo}`);
                   e.target.onerror = null; // Prevent infinite loop
@@ -80,12 +80,12 @@ const SliderLogo = ({ direction }) => {
           return (
             <div
               key={`dup-${ind}`}
-              className="flex h-full py-2 px-1 sm:py-6 sm:px-5 min-w-fit items-center justify-center"
+              className="flex h-full py-3 px-4 sm:py-4 sm:px-6 min-w-fit items-center justify-center"
             >
               <img 
                 src={logo} 
                 alt={`Logo ${ind}: ${logo}`} 
-                className={`w-auto ${isIshanya || isBharathaksha ? 'h-[120px] sm:h-[200px]' : isDeepak ? 'h-[100px] sm:h-[160px]' : 'h-[30px] sm:h-[40px]'} object-contain`} 
+                className={`w-auto ${isIshanya || isBharathaksha ? 'h-[120px] sm:h-[120px]' : isDeepak ? 'h-[100px] sm:h-[100px]' : 'h-[32px] sm:h-[30px]'} object-contain opacity-70 hover:opacity-100 transition-opacity duration-300`} 
                 onError={(e) => {
                   console.error(`Failed to load logo: ${logo}`);
                   e.target.onerror = null; // Prevent infinite loop
@@ -120,16 +120,16 @@ const SlidingLogos = () => {
         </h2>
         <div className="relative">
           {/* Left fade overlay */}
-          <div className="absolute top-0 left-0 w-[60px] sm:w-[200px] lg:w-[400px] h-full z-10 bg-gradient-to-r via-primary-500/80 from-primary-500 to-transparent"></div>
+          <div className="absolute top-0 left-0 w-[40px] sm:w-[100px] lg:w-[200px] h-full z-10 bg-gradient-to-r from-primary-500 via-primary-500/90 to-transparent"></div>
           
           {/* Right fade overlay */}
-          <div className="absolute z-10 top-0 right-0 w-[60px] sm:w-[200px] lg:w-[400px] h-full bg-gradient-to-l from-primary-500 via-primary-500/80 to-transparent"></div>
+          <div className="absolute z-10 top-0 right-0 w-[40px] sm:w-[100px] lg:w-[200px] h-full bg-gradient-to-l from-primary-500 via-primary-500/90 to-transparent"></div>
           
           {/* First slider - moving left */}
           <SliderLogo direction="left" />
           
           {/* Second slider - moving right */}
-          <div className="mt-8">
+          <div className="mt-6 sm:mt-8">
             <SliderLogo direction="right" />
           </div>
         </div>
