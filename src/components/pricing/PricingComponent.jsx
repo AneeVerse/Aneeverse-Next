@@ -4,7 +4,7 @@ import { FaCheck } from "react-icons/fa6";
 import Layout from "../common/Layout";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Button from "../common/Button";
+import AnimatedButton from "../common/AnimatedButton";
 import { UiSubheading } from "../common/typography/UiSubheading";
 import { Heading } from "../common/typography/Heading";
 import { AccentText } from "../common/typography/AccentText";
@@ -79,17 +79,15 @@ export default function PricingComponent() {
           <p className="text-sm opacity-80 mt-4">{pricingData.leftBox.note}</p>
       
 
-    <Button
+    <AnimatedButton
           href="/contact"
-          textColor="text-[#0A211F]"
-          bgColor="bg-[#D8FF85]"
-          borderColor="border-[#D8FF85]"
-          hoverBgColor="bg-[#2A4E45]"
-          hoverTextColor="#D8FF85"
-          className="mt-6 w-full  flex justify-center  mx-auto sm:mx-0 text-center"
+          className="mt-6 w-full flex justify-center mx-auto sm:mx-0 text-center px-6 py-3 rounded-full font-medium text-[#0A211F] bg-[#D8FF85] border border-[#D8FF85] hover:bg-[#2A4E45] hover:text-[#D8FF85] transition-colors"
+          mainTextSlide="-130%"
+          duplicateTextStart="40%"
+          duplicateTextEnd="-100%"
         >
           {pricingData.leftBox.buttonText}
-        </Button>
+        </AnimatedButton>
         </div>
 
         {/* Right Box */}

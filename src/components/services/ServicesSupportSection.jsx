@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Layout from "../common/Layout";
 import { useEffect, useState, useRef } from "react";
-import Button from "../common/Button";
+import AnimatedButton from "../common/AnimatedButton";
 import { UiSubheading } from "../common/typography/UiSubheading";
 import { Heading } from "../common/typography/Heading";
 import { AccentText } from "../common/typography/AccentText";
@@ -81,7 +81,7 @@ const ServicesSupportSection = () => {
 
           <p className="text-lg text-secondary-500 mb-4">
             Whether you need an out-of-this-world illustration, beautiful print
-            designs, or engaging digital marketing assets, aneeverse’s
+            designs, or engaging digital marketing assets, aneeverse's
             world-class graphic designers from around the world will make it
             happen.
           </p>
@@ -90,17 +90,15 @@ const ServicesSupportSection = () => {
             most impactful and creative work.
           </p> */}
 
-          <Button
+          <AnimatedButton
             href="/contact"
-            textColor="text-primary-500"
-            bgColor="bg-secondary-500"
-            borderColor="border-secondary-500"
-            hoverBgColor="bg-primary-500"
-            hoverTextColor="#073742"
-            className="mt-6"
+            className="mt-6 px-6 py-3 rounded-full font-medium text-primary-500 bg-secondary-500 border border-secondary-500 hover:bg-primary-500 hover:text-[#073742] transition-colors"
+            mainTextSlide="-130%"
+            duplicateTextStart="40%"
+            duplicateTextEnd="-100%"
           >
             Book a Call
-          </Button>
+          </AnimatedButton>
         </div>
 
         {/* Right Video Section */}
