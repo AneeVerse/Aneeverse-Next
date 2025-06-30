@@ -42,15 +42,10 @@ export async function GET(request) {
     
     console.log('API Request - Category:', category);
     
-    // Build GROQ query - simplified to reduce chance of syntax errors
+    // Build GROQ query
     let query = `*[_type == "post"`;
     
     // Add filters
-    if (category) {
-      // A simpler approach - lowercase comparison using built-in GROQ functions
-      query += ` && count(categories[]->title) > 0`;
-    }
-    
     if (featured === 'true') {
       query += ` && featured == true`;
     }
@@ -87,9 +82,6 @@ export async function GET(request) {
     
     // Get the total count for pagination (separate query)
     let countQuery = `count(*[_type == "post"`;
-    if (category) {
-      countQuery += ` && count(categories[]->title) > 0`;
-    }
     if (featured === 'true') {
       countQuery += ` && featured == true`;
     }
@@ -103,19 +95,48 @@ export async function GET(request) {
       client.fetch(countQuery)
     ]);
     
-    console.log('Blogs fetched:', blogs.length);
+    console.log('Blogs fetched from Sanity:', blogs.length);
+    console.log('Sample blog categories:', blogs.slice(0, 3).map(b => ({
+      title: b.title,
+      categories: b.categories
+    })));
     
-    // Additional filtering on the server side for category
+    // Filter on the server side for category if specified
     let filteredBlogs = blogs;
     if (category) {
-      const categoryLower = category.toLowerCase();
+      const categoryLower = category.toLowerCase().replace(/-/g, ' ');
+      console.log('Filtering for category:', categoryLower);
+      
       filteredBlogs = blogs.filter(blog => {
         if (!blog.categories || !Array.isArray(blog.categories)) return false;
-        return blog.categories.some(cat => 
-          cat && typeof cat === 'string' && cat.toLowerCase().includes(categoryLower)
-        );
+        
+        return blog.categories.some(cat => {
+          if (!cat || typeof cat !== 'string') return false;
+          
+          // Normalize both category strings for comparison
+          const catNormalized = cat.toLowerCase()
+            .replace(/&/g, ' ')           // Replace & with space
+            .replace(/\s+/g, ' ')         // Replace multiple spaces with single space
+            .replace(/-/g, ' ')           // Replace hyphens with spaces
+            .trim();
+            
+          const searchNormalized = categoryLower
+            .replace(/&/g, ' ')           // Replace & with space
+            .replace(/\s+/g, ' ')         // Replace multiple spaces with single space
+            .replace(/-/g, ' ')           // Replace hyphens with spaces
+            .trim();
+          
+          console.log(`Comparing: "${catNormalized}" with "${searchNormalized}"`);
+          
+          // Check for exact match or partial match
+          return catNormalized === searchNormalized || 
+                 catNormalized.includes(searchNormalized) || 
+                 searchNormalized.includes(catNormalized);
+        });
       });
+      
       console.log('After filtering for category:', filteredBlogs.length);
+      console.log('Filtered blog titles:', filteredBlogs.map(b => b.title));
     }
     
     // Transform Sanity blogs to match our existing structure
@@ -125,10 +146,16 @@ export async function GET(request) {
       success: true, 
       blogs: transformedBlogs,
       pagination: {
-        total: totalCount,
+        total: category ? filteredBlogs.length : totalCount,
         page,
         limit,
-        pages: Math.ceil(totalCount / limit)
+        pages: Math.ceil((category ? filteredBlogs.length : totalCount) / limit)
+      },
+      debug: {
+        originalCategory: category,
+        normalizedCategory: category ? category.toLowerCase().replace(/-/g, ' ') : null,
+        totalBlogsFromSanity: blogs.length,
+        filteredCount: filteredBlogs.length
       }
     });
   } catch (error) {
