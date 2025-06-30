@@ -3,7 +3,7 @@ import Image from "next/image";
 import Layout from "../common/Layout";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Button from "../common/Button";
+import AnimatedButton from "../common/AnimatedButton";
 
 export default function AboutDesignServicesSection() {
   return (
@@ -32,17 +32,15 @@ export default function AboutDesignServicesSection() {
       
      
     
-    <Button
+    <AnimatedButton
           href="/contact"
-          textColor="text-secondary-500"
-          bgColor="bg-[#D8FF85]"
-          borderColor="border-[#D8FF85]"
-          hoverBgColor="bg-secondary-500"
-          hoverTextColor="#D8FF85"
-          className="mt-8 w-full md:w-fit max-w-[400px] flex justify-center mx-auto md:mx-0 text-center"
+          className="mt-8 w-full md:w-fit max-w-[400px] flex justify-center mx-auto md:mx-0 text-center px-6 py-3 rounded-full font-medium text-secondary-500 bg-[#D8FF85] border border-[#D8FF85] hover:bg-secondary-500 hover:text-[#D8FF85] transition-colors"
+          mainTextSlide="-130%"
+          duplicateTextStart="40%"
+          duplicateTextEnd="-100%"
         >
           BOOK A CALL
-        </Button>
+        </AnimatedButton>
         </div>
       </div>
       </Layout>

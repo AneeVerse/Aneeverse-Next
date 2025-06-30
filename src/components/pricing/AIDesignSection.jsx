@@ -7,54 +7,60 @@ import Button from "../common/Button";
 import { UiSubheading } from "../common/typography/UiSubheading";
 import { Heading } from "../common/typography/Heading";
 import { AccentText } from "../common/typography/AccentText";
+import AnimatedButton from "../common/AnimatedButton";
 
 export default function AIDesignSection() {
   return (
-    <section className="py-12 px-2">
-      <Layout className="relative  flex flex-col md:flex-row items-center gap-8 rounded-lg overflow-hidden">
-        {/* Right Side (Image) */}
-        <div className="absolute z-0 inset-0">
+    <section className="bg-secondary-500 py-16">
+      <Layout className="flex flex-col lg:flex-row items-center gap-12">
+        {/* Left Image Section */}
+        <div className="lg:w-1/2">
           <img
-            src="/images/pricing/ai-banner.avif" // Replace with actual image path
-            alt="AI Design Services"
-            className="rounded-lg object-cover w-full h-full shadow-lg"
+            src="/images/pricing/ai-banner.avif"
+            alt="AI-powered design tools"
+            className="w-full h-auto rounded-lg shadow-lg"
           />
         </div>
-        {/* overlap */}
-        <div className="bg-gradient-to-r from-black/50 to-transparent absolute z-0 top-0 left-0 h-full w-full"></div>
 
-        {/* Left Side (Text Content) */}
-        <div className=" w-full  md:w-[40%] relative z-20 text-white px-2 py-4 md:p-10 rounded-lg">
+        {/* Right Content Section */}
+        <div className="lg:w-1/2 text-center lg:text-left">
           <UiSubheading className="text-primary-500 mb-2">
-            AI DESIGN SERVICES
+            Design with AI & ML tools
           </UiSubheading>
           <Heading
             level="h2"
             color="light"
             spacing="lg"
-            className="text-left font-semibold"
+            className="font-semibold"
           >
-            Save <AccentText size="lg">up to 70% </AccentText>
-            on production costs
+            Enhanced design{" "}
+            <AccentText size="lg" className={""}>
+              powered by
+            </AccentText>{" "}
+            AI
           </Heading>
 
-          <p className="mt-4 text-sm md:text-md text-gray-300">
-            Through AI, customers like Amazon, Reddit, and Salesforce managed to
-            spend less than half of what they normally would on similar
-            projects.
+          <p className="text-lg text-gray-300 leading-relaxed mb-6">
+            Our AI-powered tools help create stunning designs faster than ever.
+            From automated layouts to intelligent color suggestions, experience
+            the future of design with aneeverse.
           </p>
 
-          <Button
+          <p className="text-gray-400 leading-relaxed mb-8">
+            Combine human creativity with AI precision. Our advanced algorithms
+            learn from your preferences and suggest improvements, making every
+            project more efficient and impactful.
+          </p>
+
+          <AnimatedButton
             href="/contact"
-            textColor="text-white"
-            bgColor="bg-transparent"
-            borderColor="border-white"
-            hoverBgColor="bg-white"
-            hoverTextColor="#000000"
-            className="mt-8 w-full md:w-fit max-w-[400px] flex justify-center  mx-auto sm:mx-0 text-center"
+            className="mt-8 w-full md:w-fit max-w-[400px] flex justify-center mx-auto sm:mx-0 text-center px-6 py-3 rounded-full font-medium text-white bg-transparent border border-white hover:bg-white hover:text-[#000000] transition-colors"
+            mainTextSlide="-130%"
+            duplicateTextStart="40%"
+            duplicateTextEnd="-100%"
           >
             BOOK A CALL
-          </Button>
+          </AnimatedButton>
         </div>
       </Layout>
     </section>

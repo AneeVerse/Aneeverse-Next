@@ -6,7 +6,7 @@ import Link from "next/link";
 import { UiSubheading } from "@/components/common/typography/UiSubheading";
 import { Heading } from "@/components/common/typography/Heading";
 import { AccentText } from "@/components/common/typography/AccentText";
-import Button from "@/components/common/Button";
+import AnimatedButton from "@/components/common/AnimatedButton";
 
 const CommonServicesOurWorks = () => {
   const projects = [
@@ -86,18 +86,16 @@ const CommonServicesOurWorks = () => {
               with Aneeverse
             </Heading>
           </div>
-          <Button
+          <AnimatedButton
             href={"/works"}
-            textColor="text-primary-500"
-            bgColor="bg-secondary-500"
-            borderColor="border-primary-500"
-            hoverBgColor="bg-primary-500"
-            hoverTextColor="#073742"
-            className="mt-6 whitespace-nowrap"
+            className="mt-6 whitespace-nowrap px-6 py-3 rounded-full font-medium text-primary-500 bg-secondary-500 border border-primary-500 hover:bg-primary-500 hover:text-[#073742] transition-colors"
+            mainTextSlide="-130%"
+            duplicateTextStart="40%"
+            duplicateTextEnd="-100%"
           >
             Explore all{" "}
             <span className="hidden sm:inline-block"> our works</span>
-          </Button>
+          </AnimatedButton>
         </div>
 
         {/* Project Grid */}
