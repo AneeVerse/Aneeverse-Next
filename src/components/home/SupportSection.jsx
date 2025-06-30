@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { Heading } from "../common/typography/Heading";
 import { AccentText } from "../common/typography/AccentText";
 import { UiSubheading } from "../common/typography/UiSubheading";
+import AnimatedButton from "../common/AnimatedButton";
 
 const SupportSection = () => {
   const vimeoVideoId = "347119375"; // Replace with your Vimeo video ID
@@ -87,9 +88,15 @@ const SupportSection = () => {
             See us as an extension of your team, freeing you to focus on your
             most impactful and creative work.
           </p>
-          <button className="px-6 py-3 bg-orange-400 hover:bg-orange-500 text-white font-semibold text-md rounded-full transition-colors">
+          <AnimatedButton
+            href="/contact"
+            className="px-6 py-3 bg-orange-400 hover:bg-orange-500 text-white font-semibold text-md rounded-full transition-colors"
+            mainTextSlide="-130%"
+            duplicateTextStart="40%"
+            duplicateTextEnd="-100%"
+          >
             Get Started
-          </button>
+          </AnimatedButton>
         </div>
 
         {/* Right Video Section */}

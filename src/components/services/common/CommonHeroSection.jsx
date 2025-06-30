@@ -1,12 +1,13 @@
 "use client";
 
-import Button from "@/components/common/Button";
+
 import Layout from "@/components/common/Layout";
 import { Heading } from "@/components/common/typography/Heading";
 import { UiSubheading } from "@/components/common/typography/UiSubheading";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import AnimatedButton from "@/components/common/AnimatedButton";
 
 // ✅ Infinite Scroll Animation
 const scrollVariants = {
@@ -76,17 +77,15 @@ export default function CommonServicesHeroSection({
             
               <p className="  sm:-mt-2 text-lg text-gray-200">{description}</p>
          
-              <Button
+              <AnimatedButton
                 href={ctaLink}
-                textColor="text-primary-500"
-                bgColor="bg-transparent"
-                borderColor="border-primary-500"
-                hoverBgColor="bg-primary-500"
-                hoverTextColor="#073742"
-                className="mt-6 min-w-fit whitespace-nowrap"
+                className="mt-6 min-w-fit whitespace-nowrap px-6 py-3 rounded-full font-medium text-primary-500 bg-transparent border border-primary-500 hover:bg-primary-500 hover:text-[#073742] transition-colors"
+                mainTextSlide="-130%"
+                duplicateTextStart="40%"
+                duplicateTextEnd="-100%"
               >
                 {ctaText}
-              </Button>
+              </AnimatedButton>
             </div>
             <div className=""></div>
           </div>

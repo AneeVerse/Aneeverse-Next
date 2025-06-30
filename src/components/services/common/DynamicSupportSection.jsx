@@ -5,7 +5,7 @@ import Link from "next/link";
 import { UiSubheading } from "@/components/common/typography/UiSubheading";
 import { Heading } from "@/components/common/typography/Heading";
 import { AccentText } from "@/components/common/typography/AccentText";
-import Button from "@/components/common/Button";
+import AnimatedButton from "@/components/common/AnimatedButton";
 
 const DynamicSupportSection = ({
   // Component props with default values
@@ -52,17 +52,15 @@ const DynamicSupportSection = ({
         {additionalText &&  <p className={`${theme.textColor} text-md leading-relaxed mb-8`}>
             {additionalText}
           </p>} 
-          <Button
+          <AnimatedButton
             href={ctaLink}
-            textColor="text-primary-500"
-            bgColor="bg-secondary-500"
-            borderColor="border-secondary-500"
-            hoverBgColor="bg-primary-500"
-            hoverTextColor="#073742"
-            className="mt-6"
+            className="mt-6 px-6 py-3 rounded-full font-medium text-primary-500 bg-secondary-500 border border-secondary-500 hover:bg-primary-500 hover:text-[#073742] transition-colors"
+            mainTextSlide="-130%"
+            duplicateTextStart="40%"
+            duplicateTextEnd="-100%"
           >
             {ctaText}
-          </Button>
+          </AnimatedButton>
         </div>
 
         {/* Right Image Section */}

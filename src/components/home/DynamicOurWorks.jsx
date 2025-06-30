@@ -3,13 +3,14 @@ import React, { use, useEffect, useState } from "react";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import Layout from "../common/Layout";
 import Link from "next/link";
-import Button from "../common/Button";
+
 import { AccentText } from "../common/typography/AccentText";
 import { Heading } from "../common/typography/Heading";
 import { UiSubheading } from "../common/typography/UiSubheading";
 import { client } from "@/sanity/lib/client";
 import { getPortfolioWorksQuery } from "@/sanity/lib/queries";
 import { urlForImage } from "@/sanity/lib/image";
+import AnimatedButton from "../common/AnimatedButton";
 
 const DynamicOurWorks = () => {
   const [projects, setProjects] = useState([]);
@@ -76,18 +77,16 @@ const DynamicOurWorks = () => {
               </AccentText>
             </Heading>
           </div>
-          <Button
+          <AnimatedButton
             href="/works"
-            textColor="text-secondary-500"
-            bgColor="bg-primary-500"
-            borderColor="border-secondary-500"
-            hoverBgColor="bg-secondary-500"
-            hoverTextColor="#EBFAFE"
-            className="mt-4 min-w-fit whitespace-nowrap"
+            className="mt-4 min-w-fit whitespace-nowrap px-6 py-3 rounded-full font-medium text-secondary-500 bg-primary-500 border border-secondary-500 hover:bg-secondary-500 hover:text-[#EBFAFE] transition-colors"
+            mainTextSlide="-150%"
+            duplicateTextStart="40%"
+            duplicateTextEnd="-100%"
           >
             Explore all{" "}
             <span className="hidden sm:inline-block"> our works</span>
-          </Button>
+          </AnimatedButton>
         </div>
 
         {/* Loading State */}

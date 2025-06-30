@@ -5,7 +5,7 @@ import { FiArrowUpRight, FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Layout from "../common/Layout";
-import Button from "../common/Button";
+import AnimatedButton from "../common/AnimatedButton";
 import { Heading } from "../common/typography/Heading";
 import { AccentText } from "../common/typography/AccentText";
 
@@ -120,17 +120,15 @@ export default function NewFooter() {
           </AccentText>
         </Heading>
           
-          <Button
+          <AnimatedButton
             href="/contact"
-            textColor="text-secondary-500"
-            bgColor="bg-primary-500"
-            borderColor="border-primary-500"
-            hoverBgColor="bg-secondary-500"
-            hoverTextColor="#EBFAFE"
-            className="mt-2"
+            className="mt-2 px-6 py-3 rounded-full font-medium text-secondary-500 bg-primary-500 border border-primary-500 hover:bg-secondary-500 hover:text-[#EBFAFE] transition-colors"
+            mainTextSlide="-130%"
+            duplicateTextStart="40%"
+            duplicateTextEnd="-100%"
           >
             GET STARTED
-          </Button>
+          </AnimatedButton>
         </div>
         <div className="mt-16 border-b border-gray-600 pb-1">
           {/* Mobile Accordions */}
