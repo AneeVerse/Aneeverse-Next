@@ -116,7 +116,7 @@ const Navbar = () => {
           >
             Book a Call
           </AnimatedButton>
-          <Link
+          <AnimatedButton
             href="/register"
             className="px-6 py-2 rounded-full border"
             style={{
@@ -126,7 +126,7 @@ const Navbar = () => {
             }}
           >
             Login
-          </Link>
+          </AnimatedButton>
         </div>
 
         {/* Mobile Menu Icon */}
