@@ -10,7 +10,7 @@ const Newsletter = () => {
         {/* Background Image */}
         <div className="absolute inset-0 w-full h-full">
           <Image 
-            src="/letterbox-bg.avif" 
+            src="/AV.jpg" 
             alt="Newsletter background" 
             fill 
             className="object-cover"
