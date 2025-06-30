@@ -326,7 +326,7 @@ export default function BlogDetail({ params }) {
                     const categorySlug = blog.category.toLowerCase().replace(/\s+/g, '-');
                     return (
                       <div key={blog.id} className="border-b pb-4">
-                        <Link href={`/blog/${categorySlug}/${blog.slug}`} className="block group">
+                        <Link href={`/blog/category/${categorySlug}/${blog.slug}`} className="block group">
                           <div className="relative h-36 mb-2 overflow-hidden rounded-md">
                             <Image
                               src={blog.thumbnail}
