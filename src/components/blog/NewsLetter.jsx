@@ -1,6 +1,7 @@
 import { MdOutlineEmail } from "react-icons/md";
 import Image from "next/image";
 import Layout from "../common/Layout";
+import AnimatedButton from "../common/AnimatedButton";
 
 const Newsletter = () => {
   return (
@@ -40,9 +41,15 @@ const Newsletter = () => {
                   className="bg-transparent text-white outline-none w-full"
                 />
               </div>
-              <button className="bg-[#C0FF7C] text-secondary-500 font-semibold px-8 py-3 rounded-full hover:bg-[#D5FFB0] transition sm:whitespace-nowrap">
+              <AnimatedButton
+                href="/contact"
+                className="bg-[#C0FF7C] text-secondary-500 font-bold px-8 py-3 rounded-full hover:bg-[#C0FF7C] transition sm:whitespace-nowrap text-center"
+                mainTextSlide="-130%"
+                duplicateTextStart="40%"
+                duplicateTextEnd="-100%"
+              >
                 Subscribe
-              </button>
+              </AnimatedButton>
             </div>
           </div>
         </div>
