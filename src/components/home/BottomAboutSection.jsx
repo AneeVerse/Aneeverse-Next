@@ -5,7 +5,7 @@ import Link from "next/link";
 import { UiSubheading } from "@/components/common/typography/UiSubheading";
 import { Heading } from "@/components/common/typography/Heading";
 import { AccentText } from "@/components/common/typography/AccentText";
-import Button from "@/components/common/Button";
+import AnimatedButton from "@/components/common/AnimatedButton";
 
 const BottomAboutSection = () => {
   return (
@@ -46,17 +46,15 @@ const BottomAboutSection = () => {
                 </p>
               </div>
 
-              <Button
+              <AnimatedButton
                 href={"/contact"}
-                textColor="text-[#e6ecd6]"
-                bgColor="bg-secondary-500"
-                borderColor="border-secondary-500"
-                hoverBgColor="bg-[#e6ecd6]"
-                hoverTextColor="#073742"
-                className="mt-8 lg:mt-12"
+                className="mt-8 lg:mt-12 px-6 py-3 rounded-full font-medium text-[#e6ecd6] bg-secondary-500 border border-secondary-500 hover:bg-[#e6ecd6] hover:text-[#073742] transition-colors"
+                mainTextSlide="-130%"
+                duplicateTextStart="40%"
+                duplicateTextEnd="-100%"
               >
                 Book a Call
-              </Button>
+              </AnimatedButton>
             </div></div>
           </div>
 
