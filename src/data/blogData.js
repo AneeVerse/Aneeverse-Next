@@ -13,5 +13,5 @@ import { WebDesignBlog } from '@/___BlogData/webDesignBlog/index-webdesign';
 */
 
 // data/blogs.js
-// Temporarily returning empty array to disable static blogs
+// Returning empty array to use only dynamic Sanity data
 export const blogs = [];

@@ -26,6 +26,11 @@ const categoryImages = {
     alt: "Digital Advertising",
     description: "Stay updated with the latest trends in digital advertising. Learn how to create effective ad campaigns. ",
   },
+  "branding-web-design": {
+    src: "/images/categories/digital-advertising.jpg",
+    alt: "Branding & Web Design",
+    description: "Discover the latest trends in branding and web design. Learn how to create compelling brand experiences.",
+  },
   "ebay": {
     src: "/images/categories/digital-advertising.jpg",
     alt: "eBay",
@@ -48,23 +53,16 @@ const categoryImages = {
   },
 };
 
-// More efficient function to fetch blogs by category
+// Fetch blogs by category from Sanity API only
 const fetchBlogsByCategory = async (category) => {
   try {
     // Get normalized category
     const normalizedCategory = category.toLowerCase().replace(/-/g, " ");
     console.log('Normalized Category:', normalizedCategory);
     
-    // Get static data first
-    const staticBlogs = blogs.filter(blog => {
-      if (!blog || !blog.category) return false;
-      return blog.category.toLowerCase() === normalizedCategory;
-    });
-    console.log('Static Blogs:', staticBlogs.length);
-    
-    // Then fetch from API with timeout
+    // Fetch from API with timeout
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
     
     try {
       const apiUrl = `/api/sanity-blogs?category=${encodeURIComponent(normalizedCategory)}`;
@@ -89,44 +87,25 @@ const fetchBlogsByCategory = async (category) => {
       console.log('API Response data:', {
         success: data.success,
         blogCount: data.blogs?.length,
-        pagination: data.pagination
+        debug: data.debug
       });
       
-      let apiBlogs = [];
       if (data.success && data.blogs) {
-        apiBlogs = data.blogs;
-        console.log('API Blogs:', apiBlogs.length);
+        console.log('API Blogs:', data.blogs.length);
+        return { blogs: data.blogs, categoryInfo: null, error: null };
+      } else {
+        return { blogs: [], categoryInfo: null, error: data.error || "No blogs found" };
       }
-      
-      // Combine both sources and remove duplicates by ID
-      const allBlogs = [...staticBlogs, ...apiBlogs];
-      const uniqueBlogs = allBlogs.reduce((acc, current) => {
-        const x = acc.find(item => item.id === current.id);
-        if (!x) {
-          return acc.concat([current]);
-        } else {
-          // If duplicate found, prefer API version
-          const apiVersion = apiBlogs.find(blog => blog.id === current.id);
-          if (apiVersion) {
-            // Replace with API version
-            return acc.map(item => item.id === current.id ? apiVersion : item);
-          }
-          return acc;
-        }
-      }, []);
-      
-      console.log('Total unique blogs:', uniqueBlogs.length);
-      return { blogs: uniqueBlogs, categoryInfo: null, error: null };
       
     } catch (err) {
       console.error("API fetch error:", err);
       clearTimeout(timeoutId);
-      return { blogs: staticBlogs, categoryInfo: null, error: "API request failed" };
+      return { blogs: [], categoryInfo: null, error: "API request failed: " + err.message };
     }
     
   } catch (err) {
     console.error("Error in fetchBlogsByCategory:", err);
-    return { blogs: [], categoryInfo: null, error: "Failed to fetch blogs" };
+    return { blogs: [], categoryInfo: null, error: "Failed to fetch blogs: " + err.message };
   }
 };
 
@@ -136,11 +115,13 @@ export default function BlogCategoryPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [categoryInfo, setCategoryInfo] = useState(null);
+  const [debugInfo, setDebugInfo] = useState(null);
 
   useEffect(() => {
     const loadBlogs = async () => {
       if (!category) return;
       setIsLoading(true);
+      setError(null);
       
       try {
         // Get category info
@@ -163,12 +144,14 @@ export default function BlogCategoryPage() {
         
         if (result.error) {
           console.warn(result.error);
+          setError(result.error);
         }
         
         setFilteredBlogs(result.blogs);
+        console.log('Final filtered blogs:', result.blogs.length);
       } catch (err) {
         console.error("Error loading blogs:", err);
-        setError("Failed to load blogs");
+        setError("Failed to load blogs: " + err.message);
         setFilteredBlogs([]);
       } finally {
         setIsLoading(false);
@@ -224,7 +207,9 @@ export default function BlogCategoryPage() {
         {/* Show error if any */}
         {error && (
           <div className="bg-red-50 text-red-700 p-4 rounded-lg mb-8">
-            {error}
+            <p className="font-semibold">Error loading blogs:</p>
+            <p className="text-sm">{error}</p>
+            <p className="text-xs mt-2">Category: {category}</p>
           </div>
         )}
 
@@ -238,10 +223,17 @@ export default function BlogCategoryPage() {
             ))
           ) : (
             <p className="col-span-full text-center text-gray-600 py-10">
-              No blogs found in this category. <Link href="/admin/blogs/new" className="text-blue-600 hover:underline">Create one</Link>
+              No blogs found in this category. {error ? "Please check the Sanity CMS." : <Link href="/admin/blogs/new" className="text-blue-600 hover:underline">Create one</Link>}
             </p>
           )}
         </div>
+
+        {/* Debug info in development */}
+        {process.env.NODE_ENV === 'development' && debugInfo && (
+          <div className="mt-8 p-4 bg-gray-100 rounded text-xs">
+            <pre>{JSON.stringify(debugInfo, null, 2)}</pre>
+          </div>
+        )}
       </Layout>
     </div>
   );
