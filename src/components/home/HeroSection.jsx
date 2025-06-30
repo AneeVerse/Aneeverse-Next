@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Layout from "../common/Layout";
 import Link from "next/link";
 import Button from "../common/Button";
+import AnimatedButton from "../common/AnimatedButton";
 import { Heading } from "../common/typography/Heading";
 import { AccentText } from "../common/typography/AccentText";
 
@@ -199,17 +200,15 @@ const HeroSection = () => {
 
             {/* Call to Action */}
             <div className="flex w-full flex-col lg:flex-row items-center gap-4">
-              <Button
+              <AnimatedButton
                 href="/contact"
-                textColor="text-secondary-500"
-                bgColor="bg-[#88D7F0]"
-                borderColor="border-[#88D7F0]"
-                hoverBgColor="bg-secondary-500"
-                hoverTextColor="#88D7F0"
-                className="block w-[250px] text-center md:w-auto sm:w-[400px] mx-auto md:mx-0"
+                className="block w-[250px] text-center md:w-auto sm:w-[400px] mx-auto md:mx-0 px-6 py-3 rounded-full font-medium text-secondary-500 bg-[#88D7F0] border border-[#88D7F0] hover:bg-secondary-500 hover:text-[#88D7F0] transition-colors"
+                mainTextSlide="-140%"
+                duplicateTextStart="40%"
+                duplicateTextEnd="-100%"
               >
                 GET STARTED
-              </Button>
+              </AnimatedButton>
             </div>
           </div>
 

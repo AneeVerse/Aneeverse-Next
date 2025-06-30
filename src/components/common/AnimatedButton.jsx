@@ -7,6 +7,9 @@ const AnimatedButton = ({
   children, 
   className = "", 
   style = {},
+  mainTextSlide = "-120%",  // How far main text slides up
+  duplicateTextStart = "10%", // Starting position of duplicate text
+  duplicateTextEnd = "-100%", // End position of duplicate text
   ...props 
 }) => {
   return (
@@ -20,10 +23,10 @@ const AnimatedButton = ({
       <Link href={href} className="block w-full h-full relative">
         {/* Current text - slides up on hover */}
         <motion.div
-          className="block relative z-10"
+          className="block relative z-10 font-medium"
           variants={{
             initial: { y: 0 },
-            hover: { y: "-120%" }
+            hover: { y: mainTextSlide }
           }}
           transition={{ duration: 0.25, ease: "easeOut" }}
         >
@@ -32,10 +35,10 @@ const AnimatedButton = ({
         
         {/* Duplicate text - hidden below, comes up on hover */}
         <motion.div
-          className="absolute top-full left-0 w-full"
+          className="absolute top-full left-0 w-full font-medium"
           variants={{
-            initial: { y: 0 },
-            hover: { y: "-100%" }
+            initial: { y: duplicateTextStart },
+            hover: { y: duplicateTextEnd }
           }}
           transition={{ duration: 0.25, ease: "easeOut" }}
         >
