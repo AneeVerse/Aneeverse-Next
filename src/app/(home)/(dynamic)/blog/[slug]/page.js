@@ -2,8 +2,139 @@ import { client } from '@/lib/sanity';
 import { blockContentToHtml } from '@/lib/sanity-utils';
 import { notFound } from 'next/navigation';
 import BlogDetailClient from './BlogDetailClient';
+import BlogCategoryClient from './BlogCategoryClient';
 
-// Generate static params for all blog posts
+// Check if slug is a category by querying Sanity for available categories
+async function isCategory(slug) {
+  try {
+    console.log('Checking if slug is category:', slug);
+    
+    // First check if category exists by slug (most accurate)
+    const categoryBySlugQuery = `*[_type == "category" && slug.current == $slug][0] {
+      title,
+      slug
+    }`;
+    
+    const categoryBySlug = await client.fetch(categoryBySlugQuery, { slug });
+    console.log('Category found by slug:', categoryBySlug);
+    
+    if (categoryBySlug) {
+      return true;
+    }
+    
+    // Check by converting slug to title format (fallback)
+    const titleFromSlug = slug.toLowerCase().replace(/-/g, " ");
+    const categoryByTitleQuery = `*[_type == "category" && lower(title) == $titleFromSlug][0] {
+      title
+    }`;
+    
+    const categoryByTitle = await client.fetch(categoryByTitleQuery, { titleFromSlug });
+    console.log('Category found by title:', categoryByTitle);
+    
+    if (categoryByTitle) {
+      return true;
+    }
+    
+    // Check if any posts have a category matching this slug
+    const postsQuery = `*[_type == "post" && defined(categories)] {
+      "categories": categories[]->{title, slug}
+    }`;
+    
+    const posts = await client.fetch(postsQuery);
+    console.log('Posts with categories:', posts.length);
+    
+    // Check if any post has a category that matches our search
+    const hasMatchingCategory = posts.some(post => {
+      if (!post.categories || !Array.isArray(post.categories)) return false;
+      
+      return post.categories.some(cat => {
+        if (!cat) return false;
+        
+        // Check slug match
+        if (cat.slug?.current === slug) return true;
+        
+        // Check title match (convert to slug format)
+        if (cat.title) {
+          const catSlug = cat.title.toLowerCase()
+            .replace(/\s+/g, '-')
+            .replace(/[&]/g, '-')
+            .replace(/[^a-z0-9-]/g, '')
+            .replace(/-+/g, '-')
+            .replace(/^-|-$/g, '');
+          
+          if (catSlug === slug) return true;
+          
+          // Also check direct title match with space conversion
+          const titleMatch = cat.title.toLowerCase().replace(/\s+/g, ' ').trim();
+          const slugAsTitle = slug.toLowerCase().replace(/-/g, ' ').trim();
+          if (titleMatch === slugAsTitle) return true;
+        }
+        
+        return false;
+      });
+    });
+    
+    console.log('Has matching category in posts:', hasMatchingCategory);
+    return hasMatchingCategory;
+  } catch (error) {
+    console.error('Error checking if slug is category:', error);
+    return false;
+  }
+}
+
+// Get all available categories from Sanity for static generation
+async function getAllCategories() {
+  try {
+    // Get categories from the category collection
+    const categoriesQuery = `*[_type == "category"] {
+      title,
+      "slug": slug.current
+    }`;
+    
+    const categories = await client.fetch(categoriesQuery);
+    console.log('Categories from Sanity:', categories);
+    
+    const categorySlugs = categories.map(cat => cat.slug).filter(Boolean);
+    
+    // Also get unique categories from posts (fallback)
+    const postsQuery = `*[_type == "post" && defined(categories)] {
+      "categories": categories[]->{title, "slug": slug.current}
+    }`;
+    
+    const posts = await client.fetch(postsQuery);
+    const postCategorySlugs = new Set();
+    
+    posts.forEach(post => {
+      if (post.categories) {
+        post.categories.forEach(cat => {
+          if (cat?.slug) {
+            postCategorySlugs.add(cat.slug);
+          } else if (cat?.title) {
+            // Generate slug from title if slug is missing
+            const generatedSlug = cat.title.toLowerCase()
+              .replace(/\s+/g, '-')
+              .replace(/[&]/g, '-')
+              .replace(/[^a-z0-9-]/g, '')
+              .replace(/-+/g, '-')
+              .replace(/^-|-$/g, '');
+            if (generatedSlug) postCategorySlugs.add(generatedSlug);
+          }
+        });
+      }
+    });
+    
+    // Combine both sources
+    const allSlugs = [...new Set([...categorySlugs, ...Array.from(postCategorySlugs)])];
+    console.log('All category slugs:', allSlugs);
+    
+    return allSlugs;
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    return [];
+  }
+}
+
+// Generate static params for all blog posts and categories
 export async function generateStaticParams() {
   try {
     const posts = await client.fetch(`*[_type == "post" && defined(slug.current)] {
@@ -12,9 +143,20 @@ export async function generateStaticParams() {
     
     console.log(`Generated static params for ${posts.length} blog posts`);
     
-    return posts.map((post) => ({
+    // Include both blog posts and categories
+    const blogParams = posts.map((post) => ({
       slug: post.slug,
     }));
+    
+    // Get categories dynamically from Sanity
+    const dynamicCategories = await getAllCategories();
+    const categoryParams = dynamicCategories.map((category) => ({
+      slug: category,
+    }));
+    
+    console.log(`Generated static params for ${dynamicCategories.length} categories`);
+    
+    return [...blogParams, ...categoryParams];
   } catch (error) {
     console.error('Error generating static params for blog posts:', error);
     return [];
@@ -202,6 +344,54 @@ function fixBulletPoints(html) {
 // Generate metadata for SEO (this puts content in HTML head)
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
+  
+  // Check if this is a category
+  if (await isCategory(resolvedParams.slug)) {
+    // Get category info from Sanity
+    try {
+      // First try to find by slug
+      let categoryInfo = await client.fetch(`*[_type == "category" && slug.current == $slug][0] {
+        title,
+        description
+      }`, { slug: resolvedParams.slug });
+      
+      // If not found by slug, try by title
+      if (!categoryInfo) {
+        const titleFromSlug = resolvedParams.slug.toLowerCase().replace(/-/g, " ");
+        categoryInfo = await client.fetch(`*[_type == "category" && lower(title) == $titleFromSlug][0] {
+          title,
+          description
+        }`, { titleFromSlug });
+      }
+      
+      const title = categoryInfo?.title || resolvedParams.slug.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase());
+      const description = categoryInfo?.description || `Discover our latest articles about ${title}.`;
+      
+      return {
+        title: `${title} Blogs | Aneeverse`,
+        description: description,
+        openGraph: {
+          title: `${title} Blogs`,
+          description: description,
+          type: 'website'
+        }
+      };
+    } catch (error) {
+      console.error('Error fetching category metadata:', error);
+      const fallbackTitle = resolvedParams.slug.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase());
+      return {
+        title: `${fallbackTitle} Blogs | Aneeverse`,
+        description: `Discover our latest articles about ${fallbackTitle}.`,
+        openGraph: {
+          title: `${fallbackTitle} Blogs`,
+          description: `Discover our latest articles about ${fallbackTitle}.`,
+          type: 'website'
+        }
+      };
+    }
+  }
+  
+  // Handle blog post metadata
   const post = await getServerBlogPost(resolvedParams.slug);
   
   if (!post) {
@@ -253,6 +443,12 @@ export async function generateMetadata({ params }) {
 export default async function BlogDetail({ params }) {
   const resolvedParams = await params;
   
+  // Check if this is a category page
+  if (await isCategory(resolvedParams.slug)) {
+    return <BlogCategoryClient category={resolvedParams.slug} />;
+  }
+  
+  // Handle blog post
   // Fetch data server-side for SEO
   const initialPost = await getServerBlogPost(resolvedParams.slug);
   
