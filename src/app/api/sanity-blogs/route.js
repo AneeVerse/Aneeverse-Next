@@ -36,11 +36,55 @@ export async function GET(request) {
     
     // Handle query parameters for filtering
     const category = searchParams.get('category');
+    const categorySlug = searchParams.get('categorySlug');
     const featured = searchParams.get('featured');
+    const getCategoryInfo = searchParams.get('getCategoryInfo');
     const limit = parseInt(searchParams.get('limit') || '50');
     const page = parseInt(searchParams.get('page') || '1');
     
     console.log('API Request - Category:', category);
+    console.log('API Request - Category Slug:', categorySlug);
+    console.log('API Request - Get Category Info:', getCategoryInfo);
+    
+    // Handle category info request
+    if (getCategoryInfo === 'true' && (category || categorySlug)) {
+      try {
+        let categoryInfo = null;
+        
+        // First try by slug if provided
+        if (categorySlug) {
+          const categoryBySlugQuery = `*[_type == "category" && slug.current == $categorySlug][0] {
+            title,
+            description
+          }`;
+          
+          categoryInfo = await client.fetch(categoryBySlugQuery, { categorySlug });
+        }
+        
+        // If not found by slug, try by title
+        if (!categoryInfo && category) {
+          const categoryByTitleQuery = `*[_type == "category" && lower(title) == $categoryName][0] {
+            title,
+            description
+          }`;
+          
+          categoryInfo = await client.fetch(categoryByTitleQuery, { 
+            categoryName: category.toLowerCase() 
+          });
+        }
+        
+        return NextResponse.json({
+          success: true,
+          categoryInfo: categoryInfo || null
+        });
+      } catch (error) {
+        console.error('Error fetching category info:', error);
+        return NextResponse.json({
+          success: false,
+          error: 'Failed to fetch category info'
+        }, { status: 500 });
+      }
+    }
     
     // Build GROQ query
     let query = `*[_type == "post"`;
