@@ -201,7 +201,7 @@ export default function ClientBlogPage() {
         const renderCategorySection = (category, categoryBlogs, isSEO = false) => {
           // Convert category to URL-friendly format
           const categorySlug = category.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '-');
-          const categoryUrl = `/blog/category/${categorySlug}`;
+          const categoryUrl = `/blog/${categorySlug}`;
           
           return (
             <section key={`category-${category}`} className='bg-[#EBFAFE] pb-16'>
