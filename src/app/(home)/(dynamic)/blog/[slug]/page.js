@@ -206,6 +206,7 @@ async function getServerBlogPost(slug) {
         ogTitle,
         ogDescription,
         ogLocale,
+        ogLocaleAlternate,
         ogType,
         ogSiteName,
         ogUrl,
@@ -403,6 +404,22 @@ export async function generateMetadata({ params }) {
   
   const seo = post.seo || {};
   
+  // ✅ Fix og:locale:alternate - ensure it's always an array and excludes current locale
+  const ogLocale = seo.ogLocale || 'en_US';
+  const defaultAlternateLocales = [
+    "en_US", "en_GB", "fr_FR", "de_DE", "es_ES", "it_IT", "pt_PT", "ru_RU", "zh_CN", "ja_JP", "ko_KR", "hi_IN"
+  ];
+  
+  let alternateLocales = [];
+  if (seo.ogLocaleAlternate && Array.isArray(seo.ogLocaleAlternate) && seo.ogLocaleAlternate.length > 0) {
+    alternateLocales = seo.ogLocaleAlternate;
+  } else {
+    alternateLocales = defaultAlternateLocales;
+  }
+  
+  // Remove the current locale from alternates to avoid duplication
+  const ogLocaleAlternate = alternateLocales.filter(locale => locale !== ogLocale);
+
   return {
     title: seo.metaTitle || post.title,
     description: seo.metaDescription || post.description || post.shortDescription,
@@ -413,7 +430,8 @@ export async function generateMetadata({ params }) {
       type: seo.ogType || 'article',
       url: seo.ogUrl,
       siteName: seo.ogSiteName,
-      locale: seo.ogLocale || 'en_US',
+      locale: ogLocale,
+      alternateLocale: ogLocaleAlternate, // ✅ Now includes og:locale:alternate tags
       images: seo.ogImage ? [{
         url: seo.ogImage.asset?.url,
         width: seo.ogImageWidth,
