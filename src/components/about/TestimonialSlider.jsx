@@ -184,14 +184,14 @@ export default function TestimonialSlider() {
   }, [currentIndex, isDragging]);
 
   return (
-    <div className="relative py-6 sm:py-10 bg-secondary-500 text-primary-500">
+    <div className="relative py-12 sm:py-16 lg:py-20 bg-secondary-500 text-primary-500">
       <Layout>
         {/* Main Container */}
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-4 lg:gap-8 px-4 sm:px-0">
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-12 xl:gap-16 px-4 sm:px-0">
           {/* Image Section */}
           <div 
             ref={containerRef}
-            className="flex min-w-fit flex-row lg:flex-col justify-center items-center gap-2 sm:gap-4 select-none cursor-grab active:cursor-grabbing overflow-hidden"
+            className="flex min-w-fit flex-row lg:flex-col justify-center items-center gap-3 sm:gap-6 select-none cursor-grab active:cursor-grabbing overflow-hidden lg:min-w-[300px]"
             onMouseDown={handleDragStart}
             onMouseMove={handleDrag}
             onMouseUp={handleDragEnd}
@@ -208,13 +208,13 @@ export default function TestimonialSlider() {
               {/* Previous Testimonial Image */}
               <motion.div
                 key={`prev-${currentIndex}`}
-                className="w-[80px] h-[80px] sm:w-[150px] sm:h-[150px] relative"
+                className="w-[80px] h-[80px] sm:w-[120px] sm:h-[120px] lg:w-[140px] lg:h-[140px] relative"
                 initial={isMobile ? { x: -50, opacity: 0 } : { y: -50, opacity: 0 }}
                 animate={{ 
                   x: isMobile ? (isDragging ? dragOffset.x * 0.5 : 0) : 0,
                   y: !isMobile ? (isDragging ? dragOffset.y * 0.5 : 0) : 0,
-                  opacity: 0.5,
-                  scale: 0.8
+                  opacity: 0.4,
+                  scale: 0.75
                 }}
                 exit={isMobile ? { x: 50, opacity: 0 } : { y: 50, opacity: 0 }}
                 transition={{ duration: 0.3 }}
@@ -222,7 +222,7 @@ export default function TestimonialSlider() {
                 <img
                   src={testimonials[(currentIndex - 1 + testimonials.length) % testimonials.length].imageUrl}
                   alt="Previous Testimonial"
-                  className="w-full h-full rounded-full object-cover opacity-50"
+                  className="w-full h-full rounded-full object-cover opacity-60"
                   draggable={false}
                 />
               </motion.div>
@@ -230,7 +230,7 @@ export default function TestimonialSlider() {
               {/* Current Testimonial Image */}
               <motion.div
                 key={`current-${currentIndex}`}
-                className="w-[160px] h-[160px] sm:w-[200px] sm:h-[200px] relative z-10"
+                className="w-[140px] h-[140px] sm:w-[180px] sm:h-[180px] lg:w-[220px] lg:h-[220px] relative z-10"
                 initial={{ scale: 0.8 }}
                 animate={{ 
                   x: isMobile ? (isDragging ? dragOffset.x * 0.8 : 0) : 0,
@@ -243,7 +243,7 @@ export default function TestimonialSlider() {
                 <img
                   src={testimonials[currentIndex].imageUrl}
                   alt="Current Testimonial"
-                  className="w-full h-full rounded-full object-cover border-4 border-gray-300 shadow-md"
+                  className="w-full h-full rounded-full object-cover border-4 border-white/20 shadow-2xl"
                   draggable={false}
                 />
               </motion.div>
@@ -251,13 +251,13 @@ export default function TestimonialSlider() {
               {/* Next Testimonial Image */}
               <motion.div
                 key={`next-${currentIndex}`}
-                className="w-[80px] h-[80px] sm:w-[150px] sm:h-[150px] relative"
+                className="w-[80px] h-[80px] sm:w-[120px] sm:h-[120px] lg:w-[140px] lg:h-[140px] relative"
                 initial={isMobile ? { x: 50, opacity: 0 } : { y: 50, opacity: 0 }}
                 animate={{ 
                   x: isMobile ? (isDragging ? dragOffset.x * 0.5 : 0) : 0,
                   y: !isMobile ? (isDragging ? dragOffset.y * 0.5 : 0) : 0,
-                  opacity: 0.5,
-                  scale: 0.8
+                  opacity: 0.4,
+                  scale: 0.75
                 }}
                 exit={isMobile ? { x: -50, opacity: 0 } : { y: -50, opacity: 0 }}
                 transition={{ duration: 0.3 }}
@@ -265,27 +265,30 @@ export default function TestimonialSlider() {
                 <img
                   src={testimonials[(currentIndex + 1) % testimonials.length].imageUrl}
                   alt="Next Testimonial"
-                  className="w-full h-full rounded-full object-cover opacity-50"
+                  className="w-full h-full rounded-full object-cover opacity-60"
                   draggable={false}
                 />
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* Content Section */}
+          {/* Content Section - Expanded Horizontal Width */}
           <motion.div
             key={currentIndex}
-            className={`flex flex-col w-full lg:w-auto px-3 sm:px-0 ${
-              testimonials[currentIndex].company === "JM Visa Services" && !isMobile ? "-mt-20" : ""
+            className={`flex flex-col flex-1 w-full px-3 sm:px-0 ${
+              testimonials[currentIndex].company === "JM Visa Services" && !isMobile ? "-mt-8" : ""
             }`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.4 }}
           >
-            <div className="flex flex-col items-start lg:items-start gap-2 w-full">
+            {/* Company Logo/Name Section */}
+            <div className={`flex flex-col items-start lg:items-start gap-2 w-full ${
+              testimonials[currentIndex].company === "JM Visa Services" && !isMobile ? "mb-0 -mb-8" : "mb-4 lg:mb-6"
+            }`}>
               {testimonials[currentIndex].companyLogo ? (
-                <div className={`flex flex-col ${isMobile ? 'items-center' : 'items-start'} w-full max-w-[600px]`}>
+                <div className={`flex flex-col ${isMobile ? 'items-center' : 'items-start'} w-full`}>
                   {testimonials[currentIndex].company === "VMC" ? (
                     <VMCLogo isMobile={isMobile} />
                   ) : testimonials[currentIndex].company === "JM Visa Services" ? (
@@ -303,7 +306,7 @@ export default function TestimonialSlider() {
                   )}
                 </div>
               ) : (
-                <h2 className={`text-2xl sm:text-3xl md:text-4xl font-semibold mb-2 w-full ${
+                <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mb-2 w-full ${
                   isMobile ? 'text-center' : 'text-center lg:text-left'
                 }`}>
                   {testimonials[currentIndex].company}
@@ -311,58 +314,61 @@ export default function TestimonialSlider() {
               )}
             </div>
             
-            {/* Main Testimonial Text */}
-            <div className={`w-full ${isMobile ? 'max-w-none px-2' : 'max-w-[600px]'}`}>
-              <p className={`leading-relaxed font-normal ${
+            {/* Main Testimonial Text - Full Width Usage */}
+            <div className="w-full flex-1">
+              <blockquote className={`relative w-full ${
                 isMobile 
-                  ? 'text-base sm:text-lg text-center leading-7 px-1' 
-                  : 'text-lg sm:text-xl md:text-2xl lg:text-3xl 2xl:text-4xl text-center lg:text-left leading-relaxed'
-              } ${
-                testimonials[currentIndex].company === "JM Visa Services" 
-                  ? isMobile ? "mt-2 mb-6" : "-mt-4" 
-                  : isMobile ? "mt-2 mb-6" : "my-4 sm:my-6"
-              }`}>
-                "{testimonials[currentIndex].feedback}"
-              </p>
+                  ? 'text-xl sm:text-xl text-center leading-8 px-2' 
+                  : 'text-2xl sm:text-xl md:text-2xl lg:text-3xl text-center lg:text-left leading-relaxed'
+              } font-light text-white/95 mb-6 lg:mb-8`}>
+                <span className="relative z-10 block w-full">
+                  "{testimonials[currentIndex].feedback}"
+                </span>
+              </blockquote>
             </div>
             
-            {/* Attribution */}
-            <div className={`w-full ${isMobile ? 'text-center' : 'text-center lg:text-left'}`}>
-              <p className={`font-medium italic text-gray-300 ${
-                isMobile ? 'text-sm leading-5' : 'text-base'
-              } ${
-                testimonials[currentIndex].company === "JM Visa Services" ? "mt-0" : "mt-2"
-              }`}>
-                {testimonials[currentIndex].name}, {testimonials[currentIndex].role}
-              </p>
+            {/* Attribution - Enhanced */}
+            <div className={`w-full ${isMobile ? 'text-center' : 'text-center lg:text-left'} border-t border-white/20 pt-4 lg:pt-6 mt-auto`}>
+              <div className="flex flex-col gap-1">
+                <p className={`font-semibold text-white ${
+                  isMobile ? 'text-base' : 'text-lg'
+                }`}>
+                  {testimonials[currentIndex].name}
+                </p>
+                <p className={`text-white/70 ${
+                  isMobile ? 'text-sm' : 'text-base'
+                }`}>
+                  {testimonials[currentIndex].role}
+                </p>
+              </div>
             </div>
           </motion.div>
-
-          {/* Navigation Buttons */}
-          <div className="flex flex-row lg:flex-col items-center gap-6">
-            <button
-              onClick={handlePrev}
-              className="p-2 border -rotate-90 lg:rotate-0 rounded-full shadow hover:bg-gray-300"
-            >
-              <FaArrowUp />
-            </button>
-            <button
-              onClick={handleNext}
-              className="p-2 border -rotate-90 lg:rotate-0 rounded-full shadow hover:bg-gray-300"
-            >
-              <FaArrowDown />
-            </button>
-          </div>
         </div>
 
-        {/* Progress Dots */}
-        <div className="flex justify-center gap-2 mt-8">
+        {/* Fixed Navigation Buttons - Always Centered */}
+        <div className="absolute right-4 lg:right-8 top-1/2 transform -translate-y-1/2 flex flex-col items-center gap-4 lg:gap-6 z-20">
+          <button
+            onClick={handlePrev}
+            className="p-3 lg:p-4 border border-white/30 rounded-full shadow-lg hover:bg-white/20 hover:border-white/50 transition-all duration-300 text-white backdrop-blur-sm"
+          >
+            <FaArrowUp className="w-4 h-4 lg:w-5 lg:h-5" />
+          </button>
+          <button
+            onClick={handleNext}
+            className="p-3 lg:p-4 border border-white/30 rounded-full shadow-lg hover:bg-white/20 hover:border-white/50 transition-all duration-300 text-white backdrop-blur-sm"
+          >
+            <FaArrowDown className="w-4 h-4 lg:w-5 lg:h-5" />
+          </button>
+        </div>
+
+        {/* Progress Dots - Enhanced */}
+        <div className="flex justify-center gap-3 mt-12 lg:mt-16">
           {testimonials.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`w-3 h-3 rounded-full transition-all ${
-                index === currentIndex ? "bg-white scale-125" : "bg-white/30"
+              className={`w-3 h-3 lg:w-4 lg:h-4 rounded-full transition-all duration-300 ${
+                index === currentIndex ? "bg-white scale-125 shadow-lg" : "bg-white/40 hover:bg-white/60"
               }`}
             />
           ))}
