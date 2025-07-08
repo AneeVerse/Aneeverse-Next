@@ -35,13 +35,6 @@ export default function WebsiteServices() {
       imgUrl: "/images/services/website/seo-optimization.png",
       pageUrl: "/services/meta-ads",
     },
-    {
-      title: "Influencer Marketing",
-      description:
-        "Boost brand visibility with trusted influencers. Leverage influencer partnerships to grow your brand.",
-      imgUrl: "/images/services/website/email-design.png",
-      pageUrl: "/services/influencer-marketing",
-    },
   ];
 
   return (

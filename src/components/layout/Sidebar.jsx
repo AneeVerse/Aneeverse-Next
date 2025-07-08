@@ -41,7 +41,6 @@ const menuCategories = [
       { name: "Email Campaign", description: "Personalized email campaigns that convert.", icon: <FaEnvelope />, link: "/services/email-campaign" },
       { name: "Google Ads", description: "Targeted ads to maximize ROI.", icon: <FaGoogle />, link: "/services/google-ads" },
       { name: "Meta Ads", description: "Creative campaigns that get noticed.", icon: <FaFacebook />, link: "/services/meta-ads" },
-      { name: "Influencer Marketing", description: "Boost brand visibility with trusted influencers.", icon: <FaUserFriends />, link: "/services/influencer-marketing" },
     ],
   },
   {
