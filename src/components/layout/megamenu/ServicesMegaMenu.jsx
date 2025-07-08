@@ -38,7 +38,6 @@ const ServicesMegaMenu = ({color}) => {
         { name: "Email Campaign", description: "Personalized email campaigns that convert.", icon: <FaEnvelope /> },
         { name: "Google Ads", description: "Targeted ads to maximize ROI.", icon: <FaGoogle /> },
         { name: "Meta Ads", description: "Creative campaigns that get noticed.", icon: <FaFacebook /> },
-        { name: "Influencer Marketing", description: "Boost brand visibility with trusted influencers.", icon: <FaUserFriends /> },
       ],
     },
     {

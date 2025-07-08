@@ -38,10 +38,7 @@ export default function NewFooter() {
             { title: "Email Campaigns", link: "/services/email-campaign" },
             { title: "Google Ads", link: "/services/google-ads" },
             { title: "Meta Ads", link: "/services/meta-ads" },
-            {
-              title: "Influencer Marketing",
-              link: "/services/influencer-marketing",
-            },
+            
           ],
         },
         {
