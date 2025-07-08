@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import BlogDetailClient from './BlogDetailClient';
 import BlogCategoryClient from './BlogCategoryClient';
 
+export const revalidate = 60; // Revalidate this page every 60 seconds (Incremental Static Regeneration)
+
 // Check if slug is a category by querying Sanity for available categories
 async function isCategory(slug) {
   try {
