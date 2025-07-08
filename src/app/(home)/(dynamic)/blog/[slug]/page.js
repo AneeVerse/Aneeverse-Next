@@ -419,7 +419,7 @@ export async function generateMetadata({ params }) {
   
   // Remove the current locale from alternates to avoid duplication
   const ogLocaleAlternate = alternateLocales.filter(locale => locale !== ogLocale);
-
+  
   return {
     title: seo.metaTitle || post.title,
     description: seo.metaDescription || post.description || post.shortDescription,
