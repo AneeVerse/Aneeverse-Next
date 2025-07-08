@@ -306,8 +306,8 @@ export default function TestimonialSlider() {
                   )}
                 </div>
               ) : (
-                <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mb-2 w-full ${
-                  isMobile ? 'text-center' : 'text-center lg:text-left'
+                <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold w-full ${
+                  isMobile ? 'text-center mb-4' : 'text-center lg:text-left mb-2'
                 }`}>
                   {testimonials[currentIndex].company}
                 </h2>
@@ -346,23 +346,35 @@ export default function TestimonialSlider() {
         </div>
 
         {/* Fixed Navigation Buttons - Always Centered */}
-        <div className="absolute right-4 lg:right-8 top-1/2 transform -translate-y-1/2 flex flex-col items-center gap-4 lg:gap-6 z-20">
+        <div className={`absolute ${
+          isMobile 
+            ? 'bottom-20 left-1/2 transform -translate-x-1/2 flex flex-row gap-3' 
+            : 'right-4 lg:right-8 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 lg:gap-6'
+        } items-center z-20`}>
           <button
             onClick={handlePrev}
             className="p-3 lg:p-4 border border-white/30 rounded-full shadow-lg hover:bg-white/20 hover:border-white/50 transition-all duration-300 text-white backdrop-blur-sm"
           >
-            <FaArrowUp className="w-4 h-4 lg:w-5 lg:h-5" />
+            {isMobile ? (
+              <FaArrowUp className="w-4 h-4 -rotate-90" />
+            ) : (
+              <FaArrowUp className="w-4 h-4 lg:w-5 lg:h-5" />
+            )}
           </button>
           <button
             onClick={handleNext}
             className="p-3 lg:p-4 border border-white/30 rounded-full shadow-lg hover:bg-white/20 hover:border-white/50 transition-all duration-300 text-white backdrop-blur-sm"
           >
-            <FaArrowDown className="w-4 h-4 lg:w-5 lg:h-5" />
+            {isMobile ? (
+              <FaArrowUp className="w-4 h-4 rotate-90" />
+            ) : (
+              <FaArrowDown className="w-4 h-4 lg:w-5 lg:h-5" />
+            )}
           </button>
         </div>
 
         {/* Progress Dots - Enhanced */}
-        <div className="flex justify-center gap-3 mt-12 lg:mt-16">
+        <div className="flex justify-center gap-3 mt-20">
           {testimonials.map((_, index) => (
             <button
               key={index}
