@@ -130,12 +130,12 @@ export default function RegisterPage() {
       </div>
 
       {/* Right Section - Form */}
-      <div className="w-full lg:w-1/2 bg-[#1F1F1F] p-8 lg:p-16 flex flex-col justify-center">
+      <div className="w-full lg:w-1/2 bg-white p-8 lg:p-16 flex flex-col justify-center">
         <div className="max-w-md w-full mx-auto">
-          <h1 className="text-3xl font-semibold text-white mb-2">Create an account</h1>
-          <p className="text-gray-400 mb-8">
+          <h1 className="text-3xl font-semibold text-[#073742] mb-2">Create an account</h1>
+          <p className="text-gray-600 mb-8">
             Already have an account?{' '}
-            <Link href="/login" className="text-[white] hover:underline">
+            <Link href="/login" className="text-[#073742] hover:underline">
               Log in
             </Link>
           </p>
@@ -149,7 +149,7 @@ export default function RegisterPage() {
                   placeholder="First name"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg bg-[#2D2D2D] text-white border border-[#3D3D3D] focus:outline-none focus:border-[#073742]"
+                  className="w-full px-4 py-3 rounded-lg bg-gray-100 text-gray-900 border border-gray-300 focus:outline-none focus:border-[#073742]"
                   required
                 />
               </div>
@@ -159,7 +159,7 @@ export default function RegisterPage() {
                   placeholder="Last name"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg bg-[#2D2D2D] text-white border border-[#3D3D3D] focus:outline-none focus:border-[#073742]"
+                  className="w-full px-4 py-3 rounded-lg bg-gray-100 text-gray-900 border border-gray-300 focus:outline-none focus:border-[#073742]"
                   required
                 />
               </div>
@@ -172,7 +172,7 @@ export default function RegisterPage() {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-[#2D2D2D] text-white border border-[#3D3D3D] focus:outline-none focus:border-[#073742]"
+                className="w-full px-4 py-3 rounded-lg bg-gray-100 text-gray-900 border border-gray-300 focus:outline-none focus:border-[#073742]"
                 required
               />
             </div>
@@ -184,7 +184,7 @@ export default function RegisterPage() {
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-[#2D2D2D] text-white border border-[#3D3D3D] focus:outline-none focus:border-[#073742]"
+                className="w-full px-4 py-3 rounded-lg bg-gray-100 text-gray-900 border border-gray-300 focus:outline-none focus:border-[#073742]"
                 required
               />
               <button
@@ -203,11 +203,11 @@ export default function RegisterPage() {
                 id="terms"
                 checked={agreedToTerms}
                 onChange={(e) => setAgreedToTerms(e.target.checked)}
-                className="w-4 h-4 rounded border-gray-600 text-[#073742] focus:ring-[#073742] bg-[#2D2D2D]"
+                className="w-4 h-4 rounded border-gray-300 text-[#073742] focus:ring-[#073742] bg-white"
               />
-              <label htmlFor="terms" className="ml-2 text-sm text-gray-400">
+              <label htmlFor="terms" className="ml-2 text-sm text-gray-600">
                 I agree to the{' '}
-                <Link href="/terms" className="text-[white] hover:underline">
+                <Link href="/terms" className="text-[#073742] hover:underline">
                   Terms & Conditions
                 </Link>
               </label>
@@ -224,10 +224,10 @@ export default function RegisterPage() {
             {/* Divider */}
             <div className="relative my-8">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-700"></div>
+                <div className="w-full border-t border-gray-300"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 text-gray-400 bg-[#1F1F1F]">Or register with</span>
+                <span className="px-2 text-gray-600 bg-white">Or register with</span>
               </div>
             </div>
 
@@ -235,14 +235,14 @@ export default function RegisterPage() {
             <div className="grid grid-cols-2 gap-4">
               <button
                 type="button"
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg border border-[#3D3D3D] text-white hover:bg-[#2D2D2D] transition-colors"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-white border border-gray-300 text-[#073742] hover:bg-gray-50 transition-colors"
               >
                 <FcGoogle size={20} />
                 <span>Google</span>
               </button>
               <button
                 type="button"
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg border border-[#3D3D3D] text-white hover:bg-[#2D2D2D] transition-colors"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-white border border-gray-300 text-[#073742] hover:bg-gray-50 transition-colors"
               >
                 <FaApple size={20} />
                 <span>Apple</span>
