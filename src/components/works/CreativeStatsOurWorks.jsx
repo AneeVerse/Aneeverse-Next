@@ -42,23 +42,23 @@ const CreativeStatsOurWorks = () => {
           We help the world's leading brands create standout ads and campaigns
           at speed—from concept to execution to results.
         </p>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 border-b border-gray-300 pb-8 pt-8">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 border-b border-gray-300 pb-12">
           {stats.map((item, index) => (
-            <div
-              key={index}
-              className="flex text-center md:text-left flex-col-reverse md:flex-row flex-wrap items-center text-secondary-500"
-            >
-              <div className="flex-1 md:self-end">
-                <p className="text-gray-600 mt-2">{item.description}</p>
+            <div key={index} className="flex flex-col items-center text-center text-secondary-500">
+              <div className="mb-6">
+                <p className="text-lg font-medium text-gray-600">
+                  {item.description}
+                </p>
                 <a
                   href="#"
-                  className=" font-medium mt-2 inline-block hover:underline"
+                  className="flex items-center justify-center gap-1 text-gray-600 hover:underline mt-1"
                 >
-                  {item.caseStudy}{" "}
-                  <MdOutlineArrowOutward className="inline-block" />
+                  {item.caseStudy} <MdOutlineArrowOutward />
                 </a>
               </div>
-              <p className="text-7xl font-extrabold" style={{ color: '#073742' }}>{item.percentage}</p>
+              <h3 className="text-7xl md:text-8xl font-light mt-auto" style={{ color: '#073742' }}>
+                {item.percentage}
+              </h3>
             </div>
           ))}
         </div>
