@@ -6,7 +6,7 @@ import AIDesignSection from '@/components/pricing/AIDesignSection'
 import CreativeStatsOurWorks from '@/components/works/CreativeStatsOurWorks'
 import OurWorkSection from '@/components/works/OurWorkSection'
 import { client } from '@/sanity/lib/client';
-import { getPortfolioWorksQuery } from '@/sanity/lib/queries';
+import { getPortfolioWorksQuery, getCustomerStoriesQuery } from '@/sanity/lib/queries';
 
 // Note: Metadata has been moved to metadata.js file to fix 
 // the "cannot export metadata from a client component" error
@@ -14,29 +14,40 @@ import { getPortfolioWorksQuery } from '@/sanity/lib/queries';
 
 const WorksPage = () => {
   const [portfolioItems, setPortfolioItems] = useState([]);
+  const [customerStories, setCustomerStories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
-    async function fetchPortfolioItems() {
+    async function fetchData() {
       try {
-        const data = await client.fetch(getPortfolioWorksQuery);
-        setPortfolioItems(data);
-        console.log("Fetched portfolio items:", data);
+        const [portfolioData, storiesData] = await Promise.all([
+          client.fetch(getPortfolioWorksQuery),
+          client.fetch(getCustomerStoriesQuery)
+        ]);
+        
+        setPortfolioItems(portfolioData);
+        setCustomerStories(storiesData);
+        console.log("Fetched portfolio items:", portfolioData);
+        console.log("Fetched customer stories:", storiesData);
       } catch (error) {
-        console.error('Error fetching portfolio items:', error);
+        console.error('Error fetching data:', error);
       } finally {
         setIsLoading(false);
       }
     }
     
-    fetchPortfolioItems();
+    fetchData();
   }, []);
 
   return (
     <div>
       <CreativeStatsOurWorks/>
       <SlidingLogos/>
-      <OurWorkSection portfolioItems={portfolioItems} isLoading={isLoading} />
+      <OurWorkSection 
+        portfolioItems={portfolioItems} 
+        customerStories={customerStories}
+        isLoading={isLoading} 
+      />
       <AIDesignSection/>
     </div>
   )

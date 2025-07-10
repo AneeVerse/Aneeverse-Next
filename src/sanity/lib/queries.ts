@@ -5,6 +5,8 @@ export const getCustomerStoriesQuery = groq`
   *[_type == "customerStory"] | order(publishedAt desc) {
     _id,
     title,
+    projectTitle,
+    servicesProvided,
     slug,
     mainImage,
     customerLogo,
