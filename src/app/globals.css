@@ -28,7 +28,9 @@ body{
   display: none; /* Safari and Chrome */
 }
 
-
+.font-poppins {
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
 
 
   /* Blog description Styling */
