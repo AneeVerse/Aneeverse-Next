@@ -12,6 +12,21 @@ export const customerStoryType = defineType({
       type: 'string',
       validation: Rule => Rule.required(),
     }),
+    // NEW: Project Title field
+    defineField({
+      name: 'projectTitle',
+      title: 'Project Title',
+      type: 'string',
+      description: 'Name of the project featured in this customer story (e.g., Shopify Growth Workshop)',
+    }),
+    // NEW: Services Provided field
+    defineField({
+      name: 'servicesProvided',
+      title: 'Services Provided',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'List of services provided for this project (e.g., Marketing Strategy, Growth Consulting)',
+    }),
     defineField({
       name: 'slug',
       type: 'slug',
