@@ -9,7 +9,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { urlForImage } from "@/sanity/lib/image";
 
-const OurWorkSection = ({ portfolioItems = [], isLoading = false }) => {
+const OurWorkSection = ({ portfolioItems = [], customerStories = [], isLoading = false }) => {
   // Fallback to existing static projects if no Sanity data is available
   const staticProjects = [
     {
@@ -18,6 +18,7 @@ const OurWorkSection = ({ portfolioItems = [], isLoading = false }) => {
       url: "/works/webflow",
       description: "Illustration Design, Ad Creative",
       size: "large", // large items span 2 columns
+      type: "work"
     },
     {
       image: "/images/home/works2.avif",
@@ -25,6 +26,7 @@ const OurWorkSection = ({ portfolioItems = [], isLoading = false }) => {
       url: "/works/pernod-ricard",
       description: "eBook & Digital Reports, Video Production",
       size: "small",
+      type: "work"
     },
     {
       image: "/images/home/works3.avif",
@@ -32,6 +34,7 @@ const OurWorkSection = ({ portfolioItems = [], isLoading = false }) => {
       url: "/works/ppc-advertising",
       description: "Google Ads Management, Facebook Ads, Remarketing Campaigns",
       size: "small",
+      type: "work"
     },
     {
       image: "/images/home/works6.avif",
@@ -39,6 +42,7 @@ const OurWorkSection = ({ portfolioItems = [], isLoading = false }) => {
       url: "/works/salesforce",
       description: "Motion Design, Ad Creative",
       size: "small",
+      type: "work"
     },
     {
       image: "/images/home/works5.avif",
@@ -46,6 +50,7 @@ const OurWorkSection = ({ portfolioItems = [], isLoading = false }) => {
       url: "/works/content-marketing",
       description: "Blog Writing, Video Production, Infographic Design",
       size: "large",
+      type: "work"
     },
     {
       image: "/images/home/works4.avif",
@@ -53,6 +58,7 @@ const OurWorkSection = ({ portfolioItems = [], isLoading = false }) => {
       url: "/works/shopify",
       description: "Ad Creative",
       size: "small",
+      type: "work"
     },
     {
       image: "/images/home/works-ban-1.avif",
@@ -60,27 +66,50 @@ const OurWorkSection = ({ portfolioItems = [], isLoading = false }) => {
       url: "/works/reddit",
       description: "Digital Design, Social Media Creative",
       size: "small",
+      type: "work"
     },
   ];
 
-  // Use Sanity data if available, otherwise use static data
-  const projects = portfolioItems.length > 0 
-    ? portfolioItems.map((item, index) => ({
-        id: item._id,
-        image: item.thumbnailImage || item.mainImage 
-          ? urlForImage(item.thumbnailImage || item.mainImage).url() 
-          : "/images/home/works-ban-1.avif",
-        title: item.title,
-        url: `/works/${item.slug.current}`,
-        description: item.services?.join(', ') || item.shortDescription || '',
-        size: index % 3 === 0 ? "large" : "small", // Assign varying sizes
-      }))
-    : staticProjects;
+  // Transform portfolio items for the grid
+  const portfolioProjects = portfolioItems.map((item, index) => ({
+    id: item._id,
+    image: item.thumbnailImage || item.mainImage 
+      ? urlForImage(item.thumbnailImage || item.mainImage).url() 
+      : "/images/home/works-ban-1.avif",
+    title: item.title,
+    url: `/works/${item.slug.current}`,
+    description: item.services?.join(', ') || item.shortDescription || '',
+    size: index % 3 === 0 ? "large" : "small",
+    type: "work"
+  }));
 
-  // Duplicate items for infinite scroll effect if needed
-  const displayProjects = projects.length > 6 
-    ? projects 
-    : [...projects]; // Use as is or duplicate if needed
+  // Transform customer stories for the grid (they look like work cards but link to customer stories)
+  const storyProjects = customerStories.map((story, index) => ({
+    id: story._id,
+    image: story.mainImage 
+      ? urlForImage(story.mainImage).url() 
+      : "/images/home/works-ban-1.avif",
+    title: story.projectTitle || story.title, // Use projectTitle field if available, fallback to title
+    url: `/customer-stories/${story.slug.current}`,
+    description: story.servicesProvided?.join(', ') || story.services?.join(', ') || story.shortDescription || story.categories?.map(cat => cat.title).join(', ') || '',
+    size: index % 4 === 0 ? "large" : "small",
+    type: "story"
+  }));
+
+  // Combine and shuffle portfolio items and customer stories
+  const allProjects = [...portfolioProjects, ...storyProjects];
+  
+  // Use combined data if available, otherwise use static data
+  const projects = allProjects.length > 0 ? allProjects : staticProjects;
+
+  // Sort projects to mix them naturally (alternate between types)
+  const mixedProjects = projects.sort((a, b) => {
+    // Simple mixing algorithm - alternate types when possible
+    if (a.type !== b.type) {
+      return a.type === 'work' ? -1 : 1;
+    }
+    return 0;
+  });
 
   return (
     <div className="bg-primary-500 py-16">
@@ -118,7 +147,7 @@ const OurWorkSection = ({ portfolioItems = [], isLoading = false }) => {
         {/* Project Grid */}
         {!isLoading && (
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {displayProjects.map((project, index) => {
+            {mixedProjects.map((project, index) => {
               // Use colSpan property if available, else default to 1
               const colSpan = project.colSpan || ((index % 6 === 0 || index % 6 === 4) ? 2 : 1);
               // Height classes as in DynamicOurWorks
@@ -146,6 +175,8 @@ const OurWorkSection = ({ portfolioItems = [], isLoading = false }) => {
                         className={`w-full group-hover:scale-105 transition-transform duration-300 rounded-lg object-cover ${heightClass}`}
                       />
                     )}
+                    
+                    {/* Optional badge to differentiate customer stories */}
                   </div>
                   {/* Text Content */}
                   <div className="py-4">
