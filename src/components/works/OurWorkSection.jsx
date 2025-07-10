@@ -146,12 +146,12 @@ const OurWorkSection = ({ portfolioItems = [], customerStories = [], isLoading =
 
         {/* Project Grid */}
         {!isLoading && (
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {mixedProjects.map((project, index) => {
               // Use colSpan property if available, else default to 1
               const colSpan = project.colSpan || ((index % 6 === 0 || index % 6 === 4) ? 2 : 1);
               // Height classes as in DynamicOurWorks
-              const heightClass = colSpan === 2 ? "h-[280px] xl:h-[340px] 2xl:h-[380px]" : "h-[200px] sm:h-[280px] xl:h-[340px] 2xl:h-[380px]";
+              const heightClass = colSpan === 2 ? "h-[180px] sm:h-[220px] md:h-[280px] xl:h-[340px] 2xl:h-[380px]" : "h-[140px] sm:h-[180px] md:h-[200px] xl:h-[340px] 2xl:h-[380px]";
               return (
                 <Link
                   href={project.url}
@@ -166,6 +166,7 @@ const OurWorkSection = ({ portfolioItems = [], customerStories = [], isLoading =
                         src={project.image}
                         alt={project.title}
                         fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                         className="group-hover:scale-105 transition-transform duration-300 rounded-lg object-cover"
                       />
                     ) : (
@@ -175,16 +176,14 @@ const OurWorkSection = ({ portfolioItems = [], customerStories = [], isLoading =
                         className={`w-full group-hover:scale-105 transition-transform duration-300 rounded-lg object-cover ${heightClass}`}
                       />
                     )}
-                    
-                    {/* Optional badge to differentiate customer stories */}
                   </div>
                   {/* Text Content */}
-                  <div className="py-4">
-                    <div className="flex items-center gap-2">
-                      <h3 className="text-lg font-semibold">{project.title}</h3>
+                  <div className="py-3 px-2 sm:px-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h3 className="text-base sm:text-lg font-semibold line-clamp-2">{project.title}</h3>
                       <MdOutlineArrowOutward className="opacity-0 self-center translate-x-[-50%] translate-y-[50%] group-hover:translate-y-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                     </div>
-                    <p className="text-sm text-gray-600">{project.description}</p>
+                    <p className="text-xs sm:text-sm text-gray-600 line-clamp-2">{project.description}</p>
                   </div>
                 </Link>
               );
