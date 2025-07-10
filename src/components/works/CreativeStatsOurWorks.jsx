@@ -56,9 +56,9 @@ const CreativeStatsOurWorks = () => {
                   {item.caseStudy} <MdOutlineArrowOutward />
                 </a>
               </div>
-              <h3 className="text-7xl md:text-8xl font-light mt-auto" style={{ color: '#073742' }}>
+              <AccentText size="xl" className="text-orange-500 text-7xl md:text-8xl font-light mt-auto">
                 {item.percentage}
-              </h3>
+              </AccentText>
             </div>
           ))}
         </div>
