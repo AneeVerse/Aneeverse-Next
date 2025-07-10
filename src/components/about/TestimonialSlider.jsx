@@ -328,7 +328,7 @@ export default function TestimonialSlider() {
             </div>
             
             {/* Attribution - Enhanced */}
-            <div className={`w-full ${isMobile ? 'text-center' : 'text-center lg:text-left'} border-t border-white/20 pt-4 lg:pt-6 mt-auto`}>
+            <div className={`w-full ${isMobile ? 'text-center border-t border-white/20 pt-4 lg:pt-6 mt-auto' : 'text-center lg:text-left pt-4 lg:pt-6 mt-auto'}${!isMobile ? ' border-0' : ''}`}>
               <div className="flex flex-col gap-1">
                 <p className={`font-semibold text-white ${
                   isMobile ? 'text-base' : 'text-lg'
