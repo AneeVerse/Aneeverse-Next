@@ -49,9 +49,9 @@ export default function ProjectSummary({ project }) {
                       <Image
                         src={urlForImage(project.clientLogo).url()}
                         alt={`${project.title} logo`}
-                        width={200}
-                        height={70}
-                        className="object-contain"
+                        width={180}
+                        height={60}
+                        className="object-contain -ml-16 mt-4"
                       />
                     </div>
                   </div>
