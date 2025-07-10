@@ -19,27 +19,100 @@ import ProjectGallery from '@/components/portfolio/ProjectGallery';
 // PortableText components
 const portableTextComponents = {
   block: {
-    h2: ({children}) => <h2 className="text-2xl font-semibold text-secondary-500 mb-4 mt-8">{children}</h2>,
-    normal: ({children}) => <p className="mb-4 text-gray-700 leading-relaxed">{children}</p>,
+    h2: ({children}) => (
+      <h2 className="text-2xl font-semibold text-secondary-500 mb-4 mt-8">
+        {children}
+      </h2>
+    ),
+    normal: ({children}) => (
+      <p className="mb-4 text-gray-700 leading-relaxed">{children}</p>
+    ),
+  },
+  list: {
+    bullet: ({children}) => (
+      <ul className="list-disc pl-6 my-4">{children}</ul>
+    ),
+    number: ({children}) => (
+      <ol className="list-decimal pl-6 my-4">{children}</ol>
+    ),
+  },
+  listItem: {
+    bullet: ({children}) => <li className="my-1">{children}</li>,
+    number: ({children}) => <li className="my-1">{children}</li>,
+  },
+  marks: {
+    link: ({value, children}) => {
+      const href = value?.href || '#';
+      return (
+        <a
+          href={href}
+          className="text-secondary-500 underline hover:text-secondary-700"
+          target={href.startsWith('http') ? '_blank' : undefined}
+          rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+        >
+          {children}
+        </a>
+      );
+    },
   },
   types: {
     image: ({value}) => {
+      const imgUrl = urlForImage(value).url();
       return (
-        <div className="my-8">
-          <Image
-            src={urlForImage(value).url()}
+        <figure className="my-8">
+          <img
+            src={imgUrl}
             alt={value.alt || 'Project image'}
-            width={0}
-            height={0}
-            sizes="100vw"
-            style={{ width: '100%', height: 'auto' }}
-            className="rounded-lg"
+            className="w-full h-auto rounded-lg shadow-lg"
           />
           {value.caption && (
-            <p className="text-gray-500 text-sm mt-2">{value.caption}</p>
+            <figcaption className="text-gray-500 text-sm mt-2 text-center">
+              {value.caption}
+            </figcaption>
           )}
-        </div>
+        </figure>
       );
+    },
+    customImage: ({value}) => {
+      // Handle external image first (takes precedence)
+      if (value.externalImage) {
+        return (
+          <figure className="my-8">
+            <img
+              src={value.externalImage}
+              alt={value.alt || 'Project image'}
+              className="w-full h-auto rounded-lg shadow-lg"
+            />
+            {value.caption && (
+              <figcaption className="text-gray-500 text-sm mt-2 text-center">
+                {value.caption}
+              </figcaption>
+            )}
+          </figure>
+        );
+      }
+      
+      // Fallback to Sanity image
+      if (value.sanityImage?.asset) {
+        const imgUrl = urlForImage(value.sanityImage).url();
+        return (
+          <figure className="my-8">
+            <img
+              src={imgUrl}
+              alt={value.alt || 'Project image'}
+              className="w-full h-auto rounded-lg shadow-lg"
+            />
+            {value.caption && (
+              <figcaption className="text-gray-500 text-sm mt-2 text-center">
+                {value.caption}
+              </figcaption>
+            )}
+          </figure>
+        );
+      }
+      
+      // If no image is provided, return empty
+      return null;
     },
   },
 };
