@@ -8,7 +8,7 @@ import { AccentText } from "../common/typography/AccentText";
 import { Heading } from "../common/typography/Heading";
 import { UiSubheading } from "../common/typography/UiSubheading";
 import { client } from "@/sanity/lib/client";
-import { getPortfolioWorksQuery } from "@/sanity/lib/queries";
+import { getPortfolioWorksQuery, getCustomerStoriesQuery } from "@/sanity/lib/queries";
 import { urlForImage } from "@/sanity/lib/image";
 import AnimatedButton from "../common/AnimatedButton";
 
@@ -21,16 +21,32 @@ const DynamicOurWorks = () => {
     async function fetchProjects() {
       try {
         setIsLoading(true);
-        const data = await client.fetch(getPortfolioWorksQuery);
-        // Map to grid pattern: 0, 4, 8... colSpan 2, rest colSpan 1
-        const mapped = data.map((item, index) => ({
+        // Fetch both works and customer stories
+        const [works, stories] = await Promise.all([
+          client.fetch(getPortfolioWorksQuery),
+          client.fetch(getCustomerStoriesQuery)
+        ]);
+        // Map works
+        const mappedWorks = works.map((item, index) => ({
           image: item.thumbnailImage || item.mainImage ? urlForImage(item.thumbnailImage || item.mainImage).url() : "/images/home/works-ban-1.avif",
           title: item.title,
           url: `/works/${item.slug.current}`,
           description: item.services?.join(", ") || item.shortDescription || "",
           colSpan: (index % 6 === 0 || index % 6 === 4) ? 2 : 1,
+          type: "work"
         }));
-        setProjects(mapped);
+        // Map customer stories
+        const mappedStories = stories.map((story, index) => ({
+          image: story.mainImage ? urlForImage(story.mainImage).url() : "/images/home/works-ban-1.avif",
+          title: story.projectTitle || story.title,
+          url: `/customer-stories/${story.slug.current}`,
+          description: story.servicesProvided?.join(", ") || story.shortDescription || "",
+          colSpan: ((index + mappedWorks.length) % 6 === 0 || (index + mappedWorks.length) % 6 === 4) ? 2 : 1,
+          type: "story"
+        }));
+        // Combine and sort (works first, then stories, or mix as needed)
+        const combined = [...mappedWorks, ...mappedStories];
+        setProjects(combined);
       } catch (error) {
         setProjects([]);
       } finally {
