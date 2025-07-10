@@ -7,7 +7,7 @@ export default function ProjectGallery({ images = [] }) {
   if (!images || images.length === 0) return null;
   
   return (
-    <div className="py-12 md:py-16 bg-gray-50">
+    <div className="py-12 md:py-16 ">
       <div className="container mx-auto px-4 max-w-7xl">
         <h2 className="text-3xl font-bold text-gray-900 mb-10 text-center">Project Gallery</h2>
         
