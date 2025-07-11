@@ -278,12 +278,17 @@ export default function CustomerStoryDetail({ params }) {
         if (!value?.asset?._ref) {
           return null;
         }
+        // Check if it's a GIF and use raw URL to preserve animation
+        const isGif = value.asset._ref?.includes('gif') || value.asset.url?.endsWith('.gif');
+        const imgUrl = isGif ? value.asset.url : urlForImage(value).url();
+        
         return (
           <figure className="my-8">
             <img
-              src={urlForImage(value).url()}
+              src={imgUrl}
               alt={value.alt || "Customer Story Image"}
               className="w-full h-auto rounded-lg shadow-lg"
+              {...(isGif && { style: { maxWidth: '100%', height: 'auto' } })}
             />
             {value.caption && (
               <figcaption className="text-gray-500 text-sm mt-2 text-center">
@@ -312,15 +317,18 @@ export default function CustomerStoryDetail({ params }) {
           );
         }
         
-        // Fallback to Sanity image
+        // Fallback to Sanity image with GIF support
         if (value.sanityImage?.asset) {
-          const imgUrl = urlForImage(value.sanityImage).url();
+          const isGif = value.sanityImage.asset._ref?.includes('gif') || value.sanityImage.asset.url?.endsWith('.gif');
+          const imgUrl = isGif ? value.sanityImage.asset.url : urlForImage(value.sanityImage).url();
+          
           return (
             <figure className="my-8">
               <img
                 src={imgUrl}
                 alt={value.alt || 'Customer Story Image'}
                 className="w-full h-auto rounded-lg shadow-lg"
+                {...(isGif && { style: { maxWidth: '100%', height: 'auto' } })}
               />
               {value.caption && (
                 <figcaption className="text-gray-500 text-sm mt-2 text-center">
