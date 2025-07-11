@@ -15,6 +15,7 @@ import { PortableText } from '@portabletext/react';
 import ProjectSummary from '@/components/portfolio/ProjectSummary';
 import PortfolioMetrics from '@/components/portfolio/PortfolioMetrics';
 import ProjectGallery from '@/components/portfolio/ProjectGallery';
+import { projectId, dataset } from '@/sanity/env';
 
 // PortableText components
 const portableTextComponents = {
@@ -57,7 +58,25 @@ const portableTextComponents = {
   },
   types: {
     image: ({value}) => {
-      const imgUrl = urlForImage(value).url();
+      // Better GIF detection - check the asset reference for gif extension
+      const assetRef = value.asset?._ref || '';
+      const isGif = assetRef.includes('gif') || assetRef.includes('.gif');
+      
+      let imgUrl;
+      if (isGif) {
+        // For GIFs, try to get the raw URL first
+        if (value.asset?.url) {
+          imgUrl = value.asset.url;
+        } else {
+          // Construct the direct Sanity CDN URL for GIF
+          const [, id, dimensions, format] = assetRef.split('-');
+          imgUrl = `https://cdn.sanity.io/images/${projectId}/${dataset}/${id}-${dimensions}.${format}`;
+        }
+      } else {
+        // For regular images, use the optimized URL
+        imgUrl = urlForImage(value).url();
+      }
+      
       return (
         <figure className="my-8">
           <img
@@ -92,9 +111,26 @@ const portableTextComponents = {
         );
       }
       
-      // Fallback to Sanity image
+      // Fallback to Sanity image with better GIF support
       if (value.sanityImage?.asset) {
-        const imgUrl = urlForImage(value.sanityImage).url();
+        const assetRef = value.sanityImage.asset._ref || '';
+        const isGif = assetRef.includes('gif') || assetRef.includes('.gif');
+        
+        let imgUrl;
+        if (isGif) {
+          // For GIFs, try to get the raw URL first
+          if (value.sanityImage.asset.url) {
+            imgUrl = value.sanityImage.asset.url;
+          } else {
+            // Construct the direct Sanity CDN URL for GIF
+            const [, id, dimensions, format] = assetRef.split('-');
+            imgUrl = `https://cdn.sanity.io/images/${projectId}/${dataset}/${id}-${dimensions}.${format}`;
+          }
+        } else {
+          // For regular images, use the optimized URL
+          imgUrl = urlForImage(value.sanityImage).url();
+        }
+        
         return (
           <figure className="my-8">
             <img
