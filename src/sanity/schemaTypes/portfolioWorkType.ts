@@ -22,6 +22,13 @@ export const portfolioWorkType = defineType({
       validation: Rule => Rule.required(),
     }),
     defineField({
+      name: 'servicesProvided',
+      title: 'Services Provided',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'List of services provided for this project (e.g., Web Design, SEO, Marketing Strategy)',
+    }),
+    defineField({
       name: 'mainImage',
       title: 'Main Image',
       type: 'image',

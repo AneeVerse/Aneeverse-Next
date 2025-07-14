@@ -14,9 +14,9 @@ export default function ProjectSummary({ project }) {
           <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-widest">PROJECT SUMMARY</h2>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr,0.8fr] gap-8 lg:gap-20 items-start">
+        <div className="flex flex-col lg:grid lg:grid-cols-[1.2fr,0.8fr] gap-8 lg:gap-20 lg:items-start">
           {/* Left Content */}
-          <div className="space-y-8  lg:-ml-16">
+          <div className="space-y-8 lg:-ml-16 order-1">
             {/* Project Title */}
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-normal text-secondary-500 leading-tight">
               {project.title}
@@ -51,7 +51,7 @@ export default function ProjectSummary({ project }) {
           </div>
           
           {/* Right Image */}
-          <div className="relative flex items-center h-[420px] md:h-[500px] lg:h-[600px] xl:h-[700px] -mt-48">
+          <div className="relative flex items-center h-[300px] md:h-[400px] lg:h-[600px] xl:h-[700px] mt-8 lg:-mt-32 order-2">
             {project.projectSummaryImage ? (
               // Handle both external and Sanity images
               project.projectSummaryImage.useExternalImage && project.projectSummaryImage.externalImage ? (

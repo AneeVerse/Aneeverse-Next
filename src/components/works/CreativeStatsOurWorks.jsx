@@ -44,7 +44,7 @@ const CreativeStatsOurWorks = () => {
         </p>
         <div className="mt-12 sm:mt-16 space-y-8 md:space-y-0 md:grid md:grid-cols-3 md:gap-12 lg:gap-16 border-b border-gray-300 pb-8 sm:pb-12">
           {stats.map((item, index) => (
-            <div key={index} className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100 text-left md:text-center">
+            <div key={index} className="bg-transparent rounded-2xl p-6 sm:p-8 text-left md:text-center">
               {/* Mobile: Percentage first, then content */}
               <div className="md:hidden mb-4">
                 <AccentText size="xl" className="text-orange-500 text-6xl font-light">
