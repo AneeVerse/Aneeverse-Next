@@ -57,6 +57,7 @@ export const getPortfolioWorksQuery = groq`
     year,
     industry,
     projectSummary,
+    servicesProvided,
     featured,
     publishedAt
   }
