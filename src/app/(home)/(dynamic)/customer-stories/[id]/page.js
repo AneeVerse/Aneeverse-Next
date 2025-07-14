@@ -336,8 +336,8 @@ export default function CustomerStoryDetail({ params }) {
                 </figcaption>
               )}
             </figure>
-          );
-        }
+        );
+      }
         
         // If no image is provided, return empty
         return null;
