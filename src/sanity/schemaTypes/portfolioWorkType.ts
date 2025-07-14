@@ -60,26 +60,88 @@ export const portfolioWorkType = defineType({
       ],
     }),
     defineField({
-      name: 'clientLogo',
-      title: 'Client Logo',
-      type: 'image',
-      description: 'Logo of the client for this project',
-      options: {
-        hotspot: true,
-      },
+      name: 'projectSummaryImage',
+      title: 'Project Summary Image',
+      type: 'object',
+      description: 'Large image displayed alongside project summary (right side)',
       fields: [
+        defineField({
+          name: 'useExternalImage',
+          title: 'Use External Image URL',
+          type: 'boolean',
+          description: 'Toggle to use external image URL instead of upload',
+          initialValue: false,
+        }),
+        defineField({
+          name: 'externalImage',
+          title: 'External Image URL',
+          type: 'url',
+          description: 'Direct URL to the image (e.g., from CDN or external source)',
+          hidden: ({parent}) => !parent?.useExternalImage,
+          validation: Rule => Rule.custom((value, context) => {
+            const useExternal = (context.parent as any)?.useExternalImage;
+            if (useExternal && !value) {
+              return 'External image URL is required when using external images';
+            }
+            return true;
+          }),
+        }),
+        defineField({
+          name: 'sanityImage',
+          title: 'Upload Image',
+          type: 'image',
+          description: 'Upload image to Sanity',
+          options: {
+            hotspot: true,
+            storeOriginalFilename: false,
+          },
+          hidden: ({parent}) => parent?.useExternalImage,
+          validation: Rule => Rule.custom((value, context) => {
+            const useExternal = (context.parent as any)?.useExternalImage;
+            if (!useExternal && !value) {
+              return 'Please upload an image or use external image URL';
+            }
+            return true;
+          }),
+          fields: [
+            defineField({
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative text',
+              description: 'Important for SEO and accessibility',
+            })
+          ],
+        }),
         defineField({
           name: 'alt',
           type: 'string',
           title: 'Alternative text',
-        })
+          description: 'Important for SEO and accessibility (for external images)',
+          hidden: ({parent}) => !parent?.useExternalImage,
+        }),
+        defineField({
+          name: 'caption',
+          type: 'string',
+          title: 'Caption',
+          description: 'Optional caption for the image',
+        }),
       ],
-    }),
-    defineField({
-      name: 'categories',
-      type: 'array',
-      of: [defineArrayMember({type: 'reference', to: {type: 'category'}})],
-      validation: Rule => Rule.required().min(1).error('At least one category is required'),
+      preview: {
+        select: {
+          useExternal: 'useExternalImage',
+          externalUrl: 'externalImage',
+          sanityImage: 'sanityImage',
+          alt: 'alt',
+        },
+        prepare(selection) {
+          const {useExternal, externalUrl, sanityImage, alt} = selection;
+          return {
+            title: useExternal ? 'External Image' : 'Uploaded Image',
+            subtitle: alt || 'No alt text',
+            media: useExternal ? undefined : sanityImage,
+          };
+        },
+      },
     }),
     defineField({
       name: 'year',
@@ -94,39 +156,28 @@ export const portfolioWorkType = defineType({
       description: 'Industry of the client',
     }),
     defineField({
-      name: 'services',
-      title: 'Services Provided',
-      type: 'array',
-      of: [
-        defineField({
-          name: 'service',
-          type: 'string',
-        })
-      ],
-      description: 'List of services provided for this project',
-    }),
-    defineField({
-      name: 'shortDescription',
-      title: 'Short Description',
-      type: 'text',
-      description: 'A brief summary of the project (150-200 characters recommended)',
-      validation: Rule => Rule.max(200).warning('Short descriptions work best when kept under 200 characters'),
-    }),
-    defineField({
       name: 'projectSummary',
       title: 'Project Summary',
       type: 'text',
-      description: 'Detailed summary of the project goals and outcomes',
+      description: 'Brief summary of the project displayed in the project summary section',
+      rows: 4,
+    }),
+    defineField({
+      name: 'body',
+      title: 'Project Content',
+      type: 'blockContent',
+      description: 'Main content of the project case study',
     }),
     defineField({
       name: 'galleryImages',
       title: 'Gallery Images',
       type: 'array',
       of: [
-        {
+        defineArrayMember({
           type: 'image',
           options: {
             hotspot: true,
+            storeOriginalFilename: true,
           },
           fields: [
             defineField({
@@ -139,77 +190,90 @@ export const portfolioWorkType = defineType({
               type: 'string',
               title: 'Caption',
             })
-          ]
-        }
+          ],
+        })
       ],
-      description: 'Additional images showcasing the project',
+      description: 'Additional images to showcase the project',
     }),
     defineField({
       name: 'results',
-      title: 'Results',
+      title: 'Project Results',
       type: 'array',
       of: [
-        {
+        defineArrayMember({
           type: 'object',
           fields: [
             defineField({
               name: 'metric',
+              title: 'Metric Name',
               type: 'string',
-              title: 'Metric',
-              description: 'E.g., "Increase in CTR"',
+              description: 'e.g., "Increase in CTR", "Cost Reduction"',
             }),
             defineField({
               name: 'value',
-              type: 'string',
               title: 'Value',
-              description: 'E.g., "240%"',
+              type: 'string',
+              description: 'e.g., "85%", "13K+", "200%"',
             })
-          ]
-        }
+          ],
+          preview: {
+            select: {
+              title: 'metric',
+              subtitle: 'value',
+            }
+          }
+        })
       ],
-      description: 'Key metrics and results from the project',
-    }),
-    defineField({
-      name: 'body',
-      title: 'Full Description',
-      type: 'blockContent',
-      description: 'Full detailed description and case study of the work',
+      description: 'Key metrics and results achieved for this project',
     }),
     defineField({
       name: 'publishedAt',
-      title: 'Published Date',
+      title: 'Published at',
       type: 'datetime',
-      validation: Rule => Rule.required(),
+      initialValue: () => new Date().toISOString(),
     }),
     defineField({
       name: 'featured',
-      title: 'Featured Work',
+      title: 'Featured',
       type: 'boolean',
-      description: 'Mark this as a featured work to show prominently on the site',
+      description: 'Mark this project as featured to display prominently',
       initialValue: false,
-    }),
-    defineField({
-      name: 'order',
-      title: 'Display Order',
-      type: 'number',
-      description: 'Order to display in the portfolio (lower numbers appear first)',
-      initialValue: 100,
-    }),
+    })
   ],
   preview: {
     select: {
       title: 'title',
       media: 'mainImage',
-      category: 'categories.0.title',
       year: 'year',
+      industry: 'industry',
     },
     prepare(selection) {
-      const {title, media, category, year} = selection
+      const {title, media, year, industry} = selection
       return {
         title,
-        subtitle: `${category ? category + ' | ' : ''}${year ? year : 'No date'}`,
+        subtitle: [year, industry].filter(Boolean).join(' • '),
         media,
       }
     },
   },
+  orderings: [
+    {
+      title: 'Featured, newest first',
+      name: 'featuredFirst',
+      by: [
+        {field: 'featured', direction: 'desc'},
+        {field: 'publishedAt', direction: 'desc'}
+      ]
+    },
+    {
+      title: 'Newest first',
+      name: 'publishedAtDesc',
+      by: [{field: 'publishedAt', direction: 'desc'}]
+    },
+    {
+      title: 'Title A-Z',
+      name: 'titleAsc',
+      by: [{field: 'title', direction: 'asc'}]
+    }
+  ]
 }) 
