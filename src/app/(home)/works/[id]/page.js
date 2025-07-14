@@ -267,7 +267,7 @@ export default function ProjectPage({ params }) {
         {project ? (
           <ProjectSummary project={project} />
         ) : (
-          <section className="max-w-[1280px] mx-auto py-16">
+          <section className="py-16">
             <div className="grid lg:grid-cols-2 gap-12">
               <div className="space-y-8">
                 <h2 className="text-md uppercase tracking-wider font-bold">Project Summary</h2>
@@ -319,7 +319,7 @@ export default function ProjectPage({ params }) {
 
         {/* Main Content Sections - Static Project */}
         {!project && staticProject?.sections && (
-          <div className="max-w-[1280px] mx-auto space-y-24 px-4">
+          <div className="space-y-24">
             {staticProject.sections.map((section, index) => (
               <section key={index} className="space-y-12">
                 {section.type === 'text' && (
@@ -363,7 +363,7 @@ export default function ProjectPage({ params }) {
 
         {/* Sanity Rich Content */}
         {project?.body && (
-          <div className="max-w-[1280px] mx-auto py-12 px-4">
+          <div className="py-12">
             <div className="prose max-w-none">
               <PortableText value={project.body} components={portableTextComponents} />
             </div>
@@ -372,20 +372,14 @@ export default function ProjectPage({ params }) {
         
        
 
-        <div className='max-w-[1280px] mx-auto'>
+        <div>
           <AIDesignSection />
         </div>
         
         {/* Next and Previous Buttons */}
-        <div className="max-w-[1280px] mx-auto border-t-[1px] border-gray-300 pt-12">
+        {/* <div className="border-t-[1px] border-gray-300 pt-12">
           <div className="flex justify-between">
-            {/* Previous Button */}
-            {previousProject ? (
-              <Link
-                href={`/works/${previousProject.slug.current}`}
-                className="flex items-center text-secondary-500 font-semibold text-lg transition-colors"
-              >
-                <FaChevronLeft className='mr-1 text-3xl'/> Previous Project
+            <FaChevronLeft className='mr-1 text-3xl'/> Previous Project
               </Link>
             ) : (
               <span className="flex items-center text-gray-400 font-semibold text-lg cursor-not-allowed">
@@ -393,7 +387,6 @@ export default function ProjectPage({ params }) {
               </span>
             )}
 
-            {/* Next Button */}
             {nextProject ? (
               <Link
                 href={`/works/${nextProject.slug.current}`}
@@ -407,7 +400,7 @@ export default function ProjectPage({ params }) {
               </span>
             )}
           </div>
-        </div>
+        </div> */}
       </Layout>
     </div>
   );
