@@ -7,7 +7,7 @@ export default function ProjectSummary({ project }) {
   
   return (
     <div className="py-12 md:py-16 bg-white">
-      <div className="container mx-auto px-4 max-w-7xl">
+      <div className="py-12 md:py-16 -mt-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* Project Information */}
           <div className="lg:col-span-8 lg:pl-0">
