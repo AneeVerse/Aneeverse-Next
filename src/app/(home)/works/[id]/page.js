@@ -21,35 +21,35 @@ import { projectId, dataset } from '@/sanity/env';
 const portableTextComponents = {
   block: {
     h2: ({children}) => (
-      <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal text-secondary-500 leading-tight mb-6 mt-12 text-center max-w-4xl mx-auto">
+      <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal text-secondary-500 leading-tight mb-6 mt-12 text-left lg:text-center max-w-4xl lg:mx-auto">
         {children}
       </h2>
     ),
     h3: ({children}) => (
-      <h3 className="text-xl md:text-2xl lg:text-3xl font-normal text-secondary-500 leading-tight mb-6 mt-10 text-center max-w-4xl mx-auto">
+      <h3 className="text-xl md:text-2xl lg:text-3xl font-normal text-secondary-500 leading-tight mb-6 mt-10 text-left lg:text-center max-w-4xl lg:mx-auto">
         {children}
       </h3>
     ),
     h4: ({children}) => (
-      <h4 className="text-lg md:text-xl font-normal text-secondary-500 leading-tight mb-4 mt-8 text-center max-w-4xl mx-auto">
+      <h4 className="text-lg md:text-xl font-normal text-secondary-500 leading-tight mb-4 mt-8 text-left lg:text-center max-w-4xl lg:mx-auto">
         {children}
       </h4>
     ),
     normal: ({children}) => (
-      <p className="mb-6 text-gray-600 text-lg leading-relaxed text-center max-w-4xl mx-auto">{children}</p>
+      <p className="mb-6 text-gray-600 text-lg leading-relaxed text-left lg:text-center max-w-4xl lg:mx-auto">{children}</p>
     ),
     blockquote: ({children}) => (
-      <blockquote className="text-xl italic text-gray-700 text-center max-w-4xl mx-auto my-8 py-4 border-l-4 border-secondary-500 pl-6">
+      <blockquote className="text-xl italic text-gray-700 text-left lg:text-center max-w-4xl lg:mx-auto my-8 py-4 border-l-4 border-secondary-500 pl-6">
         {children}
       </blockquote>
     ),
   },
   list: {
     bullet: ({children}) => (
-      <ul className="list-disc my-4 max-w-4xl mx-auto text-center">{children}</ul>
+      <ul className="list-disc my-4 max-w-4xl lg:mx-auto text-left lg:text-center pl-6 lg:pl-0">{children}</ul>
     ),
     number: ({children}) => (
-      <ol className="list-decimal my-4 max-w-4xl mx-auto text-center">{children}</ol>
+      <ol className="list-decimal my-4 max-w-4xl lg:mx-auto text-left lg:text-center pl-6 lg:pl-0">{children}</ol>
     ),
   },
   listItem: {
@@ -261,7 +261,7 @@ export default function ProjectPage({ params }) {
         {/* Hero Section */}
         <div className="relative -mx-2 sm:-mx-8 lg:-mx-8">
           {project?.mainImage ? (
-            <div className="w-full h-[55vh] sm:h-[65vh] lg:h-[75vh] relative rounded-lg overflow-hidden">
+            <div className="w-full h-[30vh] sm:h-[65vh] lg:h-[75vh] relative rounded-lg overflow-hidden">
               <Image
                 src={urlForImage(project.mainImage).url()}
                 alt={project.title}
@@ -273,7 +273,7 @@ export default function ProjectPage({ params }) {
             <img
               src={staticProject?.thumbnail}
               alt={staticProject?.title}
-              className="w-full h-[55vh] sm:h-[65vh] lg:h-[75vh] rounded-lg object-cover object-center"
+              className="w-full h-[30vh] sm:h-[65vh] lg:h-[75vh] rounded-lg object-cover object-center"
             />
           )}
         </div>

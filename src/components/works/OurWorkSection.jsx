@@ -78,7 +78,7 @@ const OurWorkSection = ({ portfolioItems = [], customerStories = [], isLoading =
       : "/images/home/works-ban-1.avif",
     title: item.title,
     url: `/works/${item.slug.current}`,
-    description: item.services?.join(', ') || item.shortDescription || '',
+    description: item.servicesProvided?.join(', ') || item.services?.join(', ') || item.shortDescription || '',
     size: index % 3 === 0 ? "large" : "small",
     type: "work"
   }));
@@ -157,7 +157,7 @@ const OurWorkSection = ({ portfolioItems = [], customerStories = [], isLoading =
                 <Link
                   href={project.url}
                   key={project.id || index}
-                  className={`group rounded-xl cursor-pointer overflow-hidden transition-all duration-300 hover:shadow-lg ${
+                  className={`group rounded-xl cursor-pointer overflow-hidden transition-all duration-300 ${
                     colSpan === 2 ? 'lg:col-span-2' : 'lg:col-span-1'
                   }`}
                 >
@@ -186,13 +186,13 @@ const OurWorkSection = ({ portfolioItems = [], customerStories = [], isLoading =
                   </div>
                   
                   {/* Text Content */}
-                  <div className="py-4 px-1">
-                    <div className="flex items-start justify-between gap-2">
+                  <div className="py-6 px-2">
+                    <div className="flex items-start justify-between gap-3">
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-lg sm:text-xl font-semibold text-secondary-500 mb-2 line-clamp-2 leading-tight">
+                        <h3 className="text-xl sm:text-2xl font-normal text-gray-900 mb-3 line-clamp-1 leading-tight font-serif italic">
                           {project.title}
                         </h3>
-                        <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed">
+                        <p className="text-base text-gray-600 line-clamp-1 leading-relaxed font-normal font-sans">
                           {project.description}
                         </p>
                       </div>
