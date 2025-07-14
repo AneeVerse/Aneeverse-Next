@@ -1,97 +1,98 @@
 import React from 'react';
 import Image from 'next/image';
 import { urlForImage } from '@/sanity/lib/image';
+import Layout from '../common/Layout';
 
 export default function ProjectSummary({ project }) {
   if (!project) return null;
   
   return (
-    <div className="py-12 md:py-16 bg-white">
-      <div className="py-12 md:py-16 -mt-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          {/* Project Information */}
-          <div className="lg:col-span-8 lg:pl-0">
-            <h2 className="text-3xl font-bold text-secondary-500 mb-6">Project Summary</h2>
+    <div className="py-16 bg-white">
+      <Layout>
+        {/* PROJECT SUMMARY Header */}
+        <div className="mb-8 lg:-ml-16">
+          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-widest">PROJECT SUMMARY</h2>
+        </div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr,0.8fr] gap-8 lg:gap-20 items-start">
+          {/* Left Content */}
+          <div className="space-y-8  lg:-ml-16">
+            {/* Project Title */}
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-normal text-secondary-500 leading-tight">
+              {project.title}
+            </h1>
+            
+            {/* Project Description */}
             {project.projectSummary && (
-              <div className="prose max-w-none mb-8">
-                <p className="text-gray-700 text-lg leading-relaxed">{project.projectSummary}</p>
+              <div className="prose max-w-none">
+                <p className="text-gray-600 text-lg leading-relaxed">{project.projectSummary}</p>
               </div>
             )}
             
-            {/* Services List */}
-            {project.services && project.services.length > 0 && (
-              <div className="mt-8">
-                <h3 className="text-xl font-semibold text-secondary-500 mb-4">Services Provided</h3>
-                <div className="flex flex-wrap gap-2">
-                  {project.services.map((service, index) => (
-                    <span 
-                      key={index} 
-                      className="bg-gray-100 text-secondary-500 rounded-full px-4 py-2 text-sm font-medium"
-                    >
-                      {service}
-                    </span>
-                  ))}
+            {/* Meta Information */}
+            <div className="flex flex-row pt-8">
+              {/* Year */}
+              {project.year && (
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">YEAR</h3>
+                  <p className="text-4xl font-normal text-secondary-500">{project.year}</p>
                 </div>
-              </div>
-            )}
+              )}
+              {/* Industry */}
+              {project.industry && (
+                <div className="ml-40">
+                  <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">INDUSTRY</h3>
+                  <p className="text-4xl font-normal text-secondary-500">{project.industry}</p>
+                </div>
+              )}
+            </div>
+            
+
           </div>
           
-          {/* Project Meta Information */}
-          <div className="lg:col-span-4 lg:pr-0">
-            <div className="bg-secondary-50 p-8 rounded-xl shadow-sm h-full">
-              {/* Client Logo Section */}
-              <div className="flex flex-col space-y-8">
-                {/* Client Logo */}
-                {project.clientLogo && (
-                  <div className="mb-2">
-                    <h3 className="text-sm uppercase text-secondary-500 font-semibold mb-3">CLIENT</h3>
-                    <div className="h-20 relative w-full flex items-center">
-                      <Image
-                        src={urlForImage(project.clientLogo).url()}
-                        alt={`${project.title} logo`}
-                        width={140}
-                        height={40}
-                        className="object-contain -ml-12 mt-4"
-                      />
-                    </div>
-                  </div>
-                )}
-                
-                {/* Year */}
-                {project.year && (
-                  <div className="mb-2">
-                    <h3 className="text-sm uppercase text-secondary-500 font-semibold mb-3">YEAR</h3>
-                    <p className="text-secondary-700 text-lg font-medium">{project.year}</p>
-                  </div>
-                )}
-                
-                {/* Industry */}
-                {project.industry && (
-                  <div className="mb-2">
-                    <h3 className="text-sm uppercase text-secondary-500 font-semibold mb-3">INDUSTRY</h3>
-                    <p className="text-secondary-700 text-lg font-medium">{project.industry}</p>
-                  </div>
-                )}
-                
-                {/* Categories */}
-                {project.categories && project.categories.length > 0 && (
-                  <div>
-                    <h3 className="text-sm uppercase text-secondary-500 font-semibold mb-3">CATEGORIES</h3>
-                    <div>
-                      {project.categories.map((category, index) => (
-                        <span key={index} className="text-secondary-700 text-lg font-medium">
-                          {category.title}
-                          {index < project.categories.length - 1 && ', '}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
+          {/* Right Image */}
+          <div className="relative flex items-center h-[420px] md:h-[500px] lg:h-[600px] xl:h-[700px] -mt-48">
+            {project.projectSummaryImage ? (
+              // Handle both external and Sanity images
+              project.projectSummaryImage.useExternalImage && project.projectSummaryImage.externalImage ? (
+                <Image
+                  src={project.projectSummaryImage.externalImage}
+                  alt={project.projectSummaryImage.alt || `${project.title} project summary`}
+                  fill
+                  className="object-contain object-center"
+                />
+              ) : project.projectSummaryImage.sanityImage ? (
+                <Image
+                  src={urlForImage(project.projectSummaryImage.sanityImage).url()}
+                  alt={project.projectSummaryImage.sanityImage.alt || project.projectSummaryImage.alt || `${project.title} project summary`}
+                  fill
+                  className="object-contain object-center"
+                />
+              ) : (
+                // Fallback if no summary image configured properly
+                project.mainImage && (
+                  <Image
+                    src={urlForImage(project.mainImage).url()}
+                    alt={`${project.title} project summary`}
+                    fill
+                    className="object-contain object-center"
+                  />
+                )
+              )
+            ) : (
+              // Fallback if no summary image at all
+              project.mainImage && (
+                <Image
+                  src={urlForImage(project.mainImage).url()}
+                  alt={`${project.title} project summary`}
+                  fill
+                  className="object-contain object-center"
+                />
+              )
+            )}
           </div>
         </div>
-      </div>
+      </Layout>
     </div>
   );
 } 

@@ -102,7 +102,7 @@ export default function NewFooter() {
       {/* Desktop version */}
       <div className="hidden md:block pt-16 pb-6">
         {/* overlap image bg */}
-        <img src="/images/fbg.jpg" className="absolute inset-0 -z-0 w-full h-[400px] md:h-full object-cover" />
+        <img src="/footer2.jpg" className="absolute inset-0 -z-0 w-full h-[400px] md:h-full object-cover" />
         <div className="absolute inset-0 bg-secondary-500 opacity-50 z-0"></div>
         <Layout className="relative z-10">
           {/* Top Sections */}
@@ -246,7 +246,7 @@ export default function NewFooter() {
         {/* Hero Section for Mobile - with background image */}
         <div className="relative bg-secondary-500">
           {/* overlap image bg for mobile hero only */}
-          <img src="/images/fbg.jpg" className="absolute inset-0 -z-0 w-full h-full object-cover" />
+          <img src="/footer2.jpg" className="absolute inset-0 -z-0 w-full h-full object-cover" />
           <div className="absolute inset-0 bg-secondary-500 opacity-50 z-0"></div>
           <div className="max-w-7xl mx-auto px-4 py-8 relative z-10">
             <div className="text-center">
@@ -276,7 +276,7 @@ export default function NewFooter() {
         </div>
 
         {/* Clean background for accordions */}
-        <div className="bg-secondary-500">
+        <div className="bg-[#092c30]">
           <div className="max-w-7xl mx-auto px-4 py-8">
           
           {/* Services Accordion */}
