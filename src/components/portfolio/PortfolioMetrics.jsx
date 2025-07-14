@@ -49,39 +49,48 @@ export default function PortfolioMetrics({ results = [] }) {
   const [sectionRef, inViewOnce] = useInViewOnce(0.3);
 
   return (
-    <div ref={sectionRef} className="py-16">
-      <div className="container mx-auto px-4 max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {results.map((result, index) => {
-            // Animate single numbers and the first number in a range
-            let displayValue = result.value;
-            if (typeof result.value === 'string') {
-              const rangeMatch = result.value.match(/^(\d+)(%-\d+%.*)$/);
-              if (rangeMatch) {
-                // e.g., 20%-40%
-                const num = parseInt(rangeMatch[1], 10);
-                const count = useCountUp(num, 2200, inViewOnce);
-                displayValue = `${count}${rangeMatch[2]}`;
-              } else if (result.value.match(/^\d+/)) {
-                const num = parseInt(result.value.match(/^\d+/)[0], 10);
-                const count = useCountUp(num, 2200, inViewOnce);
-                displayValue = result.value.replace(/^\d+/, count);
-              }
+    <div ref={sectionRef} className="-mt-12 pb-12 sm:py-16 ">
+      <div className="space-y-6 sm:space-y-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-8">
+        {results.map((result, index) => {
+          // Animate single numbers and the first number in a range
+          let displayValue = result.value;
+          if (typeof result.value === 'string') {
+            const rangeMatch = result.value.match(/^(\d+)(%-\d+%.*)$/);
+            if (rangeMatch) {
+              // e.g., 20%-40%
+              const num = parseInt(rangeMatch[1], 10);
+              const count = useCountUp(num, 2200, inViewOnce);
+              displayValue = `${count}${rangeMatch[2]}`;
+            } else if (result.value.match(/^\d+/)) {
+              const num = parseInt(result.value.match(/^\d+/)[0], 10);
+              const count = useCountUp(num, 2200, inViewOnce);
+              displayValue = result.value.replace(/^\d+/, count);
             }
-            return (
-              <div key={index} className="text-center p-8 rounded-xl">
-                <div className="mb-4">
-                  <span className="text-7xl md:text-8xl tracking-tight text-secondary-500 font-poppins">
-                    {displayValue}
-                  </span>
-                </div>
-                <p className="text-gray-600 text-lg leading-relaxed">
+          }
+          return (
+            <div key={index} className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100 text-left sm:text-center">
+              {/* Mobile: Percentage first, then description */}
+              <div className="sm:hidden mb-4">
+                <span className="text-5xl tracking-tight text-secondary-500 font-poppins">
+                  {displayValue}
+                </span>
+              </div>
+              
+              <div className="sm:mb-4">
+                <p className="text-gray-700 text-base sm:text-lg leading-relaxed mb-3 sm:mb-0">
                   {result.metric}
                 </p>
               </div>
-            );
-          })}
-        </div>
+              
+              {/* Desktop: Percentage at bottom */}
+              <div className="hidden sm:block">
+                <span className="text-5xl lg:text-6xl xl:text-7xl tracking-tight text-secondary-500 font-poppins">
+                  {displayValue}
+                </span>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
