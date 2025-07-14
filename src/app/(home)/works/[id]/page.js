@@ -21,25 +21,40 @@ import { projectId, dataset } from '@/sanity/env';
 const portableTextComponents = {
   block: {
     h2: ({children}) => (
-      <h2 className="text-2xl font-semibold text-secondary-500 mb-4 mt-8">
+      <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal text-secondary-500 leading-tight mb-6 mt-12 text-center max-w-4xl mx-auto">
         {children}
       </h2>
     ),
+    h3: ({children}) => (
+      <h3 className="text-xl md:text-2xl lg:text-3xl font-normal text-secondary-500 leading-tight mb-6 mt-10 text-center max-w-4xl mx-auto">
+        {children}
+      </h3>
+    ),
+    h4: ({children}) => (
+      <h4 className="text-lg md:text-xl font-normal text-secondary-500 leading-tight mb-4 mt-8 text-center max-w-4xl mx-auto">
+        {children}
+      </h4>
+    ),
     normal: ({children}) => (
-      <p className="mb-4 text-gray-700 leading-relaxed">{children}</p>
+      <p className="mb-6 text-gray-600 text-lg leading-relaxed text-center max-w-4xl mx-auto">{children}</p>
+    ),
+    blockquote: ({children}) => (
+      <blockquote className="text-xl italic text-gray-700 text-center max-w-4xl mx-auto my-8 py-4 border-l-4 border-secondary-500 pl-6">
+        {children}
+      </blockquote>
     ),
   },
   list: {
     bullet: ({children}) => (
-      <ul className="list-disc pl-6 my-4">{children}</ul>
+      <ul className="list-disc my-4 max-w-4xl mx-auto text-center">{children}</ul>
     ),
     number: ({children}) => (
-      <ol className="list-decimal pl-6 my-4">{children}</ol>
+      <ol className="list-decimal my-4 max-w-4xl mx-auto text-center">{children}</ol>
     ),
   },
   listItem: {
-    bullet: ({children}) => <li className="my-1">{children}</li>,
-    number: ({children}) => <li className="my-1">{children}</li>,
+    bullet: ({children}) => <li className="my-1 text-gray-600">{children}</li>,
+    number: ({children}) => <li className="my-1 text-gray-600">{children}</li>,
   },
   marks: {
     link: ({value, children}) => {
@@ -246,7 +261,7 @@ export default function ProjectPage({ params }) {
         {/* Hero Section */}
         <div className="relative -mx-2 sm:-mx-8 lg:-mx-8">
           {project?.mainImage ? (
-            <div className="w-full h-[25vh] sm:h-[35vh] lg:h-[45vh] relative rounded-lg overflow-hidden">
+            <div className="w-full h-[55vh] sm:h-[65vh] lg:h-[75vh] relative rounded-lg overflow-hidden">
               <Image
                 src={urlForImage(project.mainImage).url()}
                 alt={project.title}
@@ -258,7 +273,7 @@ export default function ProjectPage({ params }) {
             <img
               src={staticProject?.thumbnail}
               alt={staticProject?.title}
-              className="w-full h-[25vh] sm:h-[35vh] lg:h-[45vh] rounded-lg object-cover object-center"
+              className="w-full h-[55vh] sm:h-[65vh] lg:h-[75vh] rounded-lg object-cover object-center"
             />
           )}
         </div>
@@ -273,21 +288,21 @@ export default function ProjectPage({ params }) {
                 <h2 className="text-md uppercase tracking-wider font-bold">Project Summary</h2>
                 <div className="space-y-6">
                   <div>
-                    <Heading level="h3" color="dark" spacing="lg" className="font-medium">
+                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-normal text-secondary-500 leading-tight">
                       {staticProject.about.title}
-                    </Heading>
+                    </h1>
                   </div>
                   <div>
-                    <p className="text-lg leading-relaxed">{staticProject.about.description}</p>
+                    <p className="text-gray-600 text-lg leading-relaxed">{staticProject.about.description}</p>
                   </div>
-                  <div className='flex gap-16 items-center'>
+                  <div className="flex flex-row pt-8">
                     <div>
-                      <h4 className="text-sm tracking-wider font-semibold uppercase mb-2">Year</h4>
-                      <div className='text-3xl font-medium'>{staticProject.about.year}</div>
+                      <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">YEAR</h3>
+                      <p className="text-4xl font-normal text-secondary-500">{staticProject.about.year}</p>
                     </div>
-                    <div>
-                      <h4 className="text-sm tracking-wider font-semibold uppercase mb-2">Industry</h4>
-                      <div className='text-3xl font-medium'>{staticProject.about.industry}</div>
+                    <div className="ml-2">
+                      <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">INDUSTRY</h3>
+                      <p className="text-4xl font-normal text-secondary-500">{staticProject.about.industry}</p>
                     </div>
                   </div>
                 </div>

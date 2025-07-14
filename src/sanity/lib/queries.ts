@@ -41,45 +41,47 @@ export const getCustomerStoryBySlugQuery = groq`
 
 // Query to get all portfolio work items
 export const getPortfolioWorksQuery = groq`
-  *[_type == "portfolioWork"] | order(order asc, publishedAt desc) {
+  *[_type == "portfolioWork"] | order(featured desc, publishedAt desc) {
     _id,
     title,
     slug,
     mainImage,
     thumbnailImage,
-    clientLogo,
+    projectSummaryImage {
+      useExternalImage,
+      externalImage,
+      sanityImage,
+      alt,
+      caption
+    },
     year,
     industry,
-    shortDescription,
-    services,
+    projectSummary,
     featured,
-    publishedAt,
-    categories[]->{
-      title,
-      slug
-    }
+    publishedAt
   }
 `
 
 // Query to get featured portfolio work items
 export const getFeaturedPortfolioWorksQuery = groq`
-  *[_type == "portfolioWork" && featured == true] | order(order asc, publishedAt desc) {
+  *[_type == "portfolioWork" && featured == true] | order(publishedAt desc) {
     _id,
     title,
     slug,
     mainImage,
     thumbnailImage,
-    clientLogo,
+    projectSummaryImage {
+      useExternalImage,
+      externalImage,
+      sanityImage,
+      alt,
+      caption
+    },
     year,
     industry,
-    shortDescription,
-    services,
+    projectSummary,
     featured,
-    publishedAt,
-    categories[]->{
-      title,
-      slug
-    }
+    publishedAt
   }
 `
 
@@ -91,20 +93,20 @@ export const getPortfolioWorkBySlugQuery = groq`
     slug,
     mainImage,
     thumbnailImage,
-    clientLogo,
+    projectSummaryImage {
+      useExternalImage,
+      externalImage,
+      sanityImage,
+      alt,
+      caption
+    },
     year,
     industry,
     projectSummary,
-    shortDescription,
-    services,
     galleryImages,
     results,
     body,
     featured,
-    publishedAt,
-    categories[]->{
-      title,
-      slug
-    }
+    publishedAt
   }
 `
