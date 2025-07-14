@@ -106,15 +106,15 @@ export default function PortfolioGrid({ portfolioItems = [] }) {
                   </h3>
                   
                   {/* Display Services */}
-                  {item.services && item.services.length > 0 && (
+                  {(item.servicesProvided || item.services) && (item.servicesProvided || item.services).length > 0 && (
                     <div className="flex flex-wrap gap-1 mb-3">
-                      {item.services.map((service, index) => (
+                      {(item.servicesProvided || item.services).map((service, index) => (
                         <span 
                           key={index} 
                           className="text-sm text-gray-500"
                         >
                           {service}
-                          {index < item.services.length - 1 && ', '}
+                          {index < (item.servicesProvided || item.services).length - 1 && ', '}
                         </span>
                       ))}
                     </div>
