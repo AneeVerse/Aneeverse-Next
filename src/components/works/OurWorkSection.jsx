@@ -115,26 +115,24 @@ const OurWorkSection = ({ portfolioItems = [], customerStories = [], isLoading =
     <div className="bg-primary-500 py-16">
       <Layout>
         {/* Section Header */}
-        <div className="flex justify-between items-center ">
-          <div className="max-w-3xl  ">
-            <UiSubheading className="text-secondary-500 mb-2">
-              Our Works
-            </UiSubheading>
-            <Heading
-              level="h2"
-              color="dark"
-              spacing="lg"
-              className="text-left font-semibold"
+        <div className="mb-8 sm:mb-12 text-center lg:text-left">
+          <UiSubheading className="text-secondary-500 mb-2">
+            Our Works
+          </UiSubheading>
+          <Heading
+            level="h2"
+            color="dark"
+            spacing="lg"
+            className="font-semibold px-4 sm:px-0"
+          >
+            See Our{" "}
+            <AccentText
+              size="lg"
+              className={"text-orange-500"}
             >
-              See Our{" "}
-              <AccentText
-                size="lg"
-                className={"text-orange-500 whitespace-nowrap  "}
-              >
-                works
-              </AccentText>
-            </Heading>
-          </div>
+              works
+            </AccentText>
+          </Heading>
         </div>
 
         {/* Loading State */}
@@ -146,44 +144,60 @@ const OurWorkSection = ({ portfolioItems = [], customerStories = [], isLoading =
 
         {/* Project Grid */}
         {!isLoading && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
             {mixedProjects.map((project, index) => {
-              // Use colSpan property if available, else default to 1
+              // Mobile: 1 column, Tablet: 2 columns, Desktop: 4 columns with spans
               const colSpan = project.colSpan || ((index % 6 === 0 || index % 6 === 4) ? 2 : 1);
-              // Height classes as in DynamicOurWorks
-              const heightClass = colSpan === 2 ? "h-[180px] sm:h-[220px] md:h-[280px] xl:h-[340px] 2xl:h-[380px]" : "h-[140px] sm:h-[180px] md:h-[200px] xl:h-[340px] 2xl:h-[380px]";
+              // Mobile-optimized height classes for better image visibility
+              const heightClass = colSpan === 2 
+                ? "h-[160px] sm:h-[200px] lg:h-[240px] xl:h-[300px]" 
+                : "h-[160px] sm:h-[180px] lg:h-[200px] xl:h-[300px]";
+              
               return (
                 <Link
                   href={project.url}
                   key={project.id || index}
-                  style={{ gridColumn: `span ${colSpan}` }}
-                  className={`group rounded-lg cursor-pointer overflow-hidden${colSpan ? ` md:col-span-${colSpan}` : ""}`}
+                  className={`group rounded-xl cursor-pointer overflow-hidden transition-all duration-300 hover:shadow-lg ${
+                    colSpan === 2 ? 'lg:col-span-2' : 'lg:col-span-1'
+                  }`}
                 >
-                  {/* Image */}
-                  <div className={`relative rounded-lg overflow-hidden ${heightClass}`}>
+                  {/* Image Container */}
+                  <div className={`relative rounded-xl overflow-hidden ${heightClass} bg-gray-100`}>
                     {project.image.startsWith('http') ? (
                       <Image
                         src={project.image}
                         alt={project.title}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                        className="group-hover:scale-105 transition-transform duration-300 rounded-lg object-cover"
+                        className="group-hover:scale-105 transition-transform duration-500 object-cover object-center"
+                        priority={index < 4}
                       />
                     ) : (
                       <img
                         src={project.image}
                         alt={project.title}
-                        className={`w-full group-hover:scale-105 transition-transform duration-300 rounded-lg object-cover ${heightClass}`}
+                        className="w-full h-full group-hover:scale-105 transition-transform duration-500 object-cover object-center"
+                        loading={index < 4 ? "eager" : "lazy"}
                       />
                     )}
+                    
+                    {/* Overlay on hover */}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300" />
                   </div>
+                  
                   {/* Text Content */}
-                  <div className="py-3 px-2 sm:px-0">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <h3 className="text-base sm:text-lg font-semibold line-clamp-2">{project.title}</h3>
-                      <MdOutlineArrowOutward className="opacity-0 self-center translate-x-[-50%] translate-y-[50%] group-hover:translate-y-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                  <div className="py-4 px-1">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-lg sm:text-xl font-semibold text-secondary-500 mb-2 line-clamp-2 leading-tight">
+                          {project.title}
+                        </h3>
+                        <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed">
+                          {project.description}
+                        </p>
+                      </div>
+                      <MdOutlineArrowOutward className="flex-shrink-0 w-5 h-5 text-gray-400 opacity-0 translate-x-[-8px] translate-y-[8px] group-hover:translate-y-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                     </div>
-                    <p className="text-xs sm:text-sm text-gray-600 line-clamp-2">{project.description}</p>
                   </div>
                 </Link>
               );
