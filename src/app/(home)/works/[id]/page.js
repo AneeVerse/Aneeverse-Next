@@ -244,21 +244,21 @@ export default function ProjectPage({ params }) {
         </div>
 
         {/* Hero Section */}
-        <div className="relative">
+        <div className="relative -mx-2 sm:-mx-8 lg:-mx-8">
           {project?.mainImage ? (
-            <div className="w-full h-[50vh] relative rounded-lg overflow-hidden">
+            <div className="w-full h-[25vh] sm:h-[35vh] lg:h-[45vh] relative rounded-lg overflow-hidden">
               <Image
                 src={urlForImage(project.mainImage).url()}
                 alt={project.title}
                 fill
-                className="object-cover object-top"
+                className="object-cover object-center"
               />
             </div>
           ) : (
             <img
               src={staticProject?.thumbnail}
               alt={staticProject?.title}
-              className="w-full rounded-lg h-auto object-cover object-top"
+              className="w-full h-[25vh] sm:h-[35vh] lg:h-[45vh] rounded-lg object-cover object-center"
             />
           )}
         </div>

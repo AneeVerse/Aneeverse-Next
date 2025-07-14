@@ -25,40 +25,51 @@ const stats = [
 
 const CreativeStatsOurWorks = () => {
   return (
-    <div className="bg-primary-500 text-secondary-500 py-16 pt-24 text-center">
+    <div className="bg-primary-500 text-secondary-500 py-12 sm:py-16 lg:py-24 text-center">
       <Layout>
         <Heading
           level="h1"
           color="dark"
           spacing="lg"
-          className="text-center font-medium mt-8"
+          className="text-center font-medium px-4 sm:px-0"
         >
           Creative that{" "}
           <AccentText size="xl" className={""}>
           works
           </AccentText>
         </Heading>
-        <p className="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">
+        <p className="text-base sm:text-lg text-gray-600 mt-4 max-w-2xl mx-auto px-4 sm:px-0 leading-relaxed">
           We help the world's leading brands create standout ads and campaigns
           at speed—from concept to execution to results.
         </p>
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 border-b border-gray-300 pb-12">
+        <div className="mt-12 sm:mt-16 space-y-8 md:space-y-0 md:grid md:grid-cols-3 md:gap-12 lg:gap-16 border-b border-gray-300 pb-8 sm:pb-12">
           {stats.map((item, index) => (
-            <div key={index} className="flex flex-col items-center text-center text-secondary-500">
-              <div className="mb-6">
-                <p className="text-lg font-medium text-gray-600">
+            <div key={index} className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100 text-left md:text-center">
+              {/* Mobile: Percentage first, then content */}
+              <div className="md:hidden mb-4">
+                <AccentText size="xl" className="text-orange-500 text-6xl font-light">
+                  {item.percentage}
+                </AccentText>
+              </div>
+              
+              <div className="md:mb-6">
+                <p className="text-base sm:text-lg font-medium text-gray-700 leading-relaxed mb-3">
                   {item.description}
                 </p>
                 <a
                   href="#"
-                  className="flex items-center justify-center gap-1 text-gray-600 hover:underline mt-1"
+                  className="inline-flex items-center gap-1 text-sm text-gray-600 hover:text-orange-500 hover:underline transition-colors"
                 >
-                  {item.caseStudy} <MdOutlineArrowOutward />
+                  {item.caseStudy} <MdOutlineArrowOutward className="w-4 h-4" />
                 </a>
               </div>
-              <AccentText size="xl" className="text-orange-500 text-7xl md:text-8xl font-light mt-auto">
-                {item.percentage}
-              </AccentText>
+              
+              {/* Desktop: Percentage at bottom */}
+              <div className="hidden md:block">
+                <AccentText size="xl" className="text-orange-500 text-5xl lg:text-6xl xl:text-7xl font-light">
+                  {item.percentage}
+                </AccentText>
+              </div>
             </div>
           ))}
         </div>
