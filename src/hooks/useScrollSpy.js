@@ -6,58 +6,34 @@ export function useScrollSpy(selectors) {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // Function to check which section is visible
-    const checkVisibility = () => {
-      const headingElements = Array.from(document.querySelectorAll(selectors));
-      if (!headingElements.length) return;
-      
-      // Simple approach: which heading is closest to the top of the viewport
-      const headingPositions = headingElements.map(element => {
-        const { id } = element;
-        const rect = element.getBoundingClientRect();
-        // Distance from the top of the viewport, adjusted to prioritize headings just above the viewport
-        const distanceFromViewportTop = rect.top <= 100 ? Math.abs(rect.top) : 10000 + rect.top;
-        
-        return {
-          id,
-          distance: distanceFromViewportTop
-        };
-      });
-      
-      // Sort by distance (closest to viewport top first)
-      headingPositions.sort((a, b) => a.distance - b.distance);
-      
-      // Set the closest heading as active
-      if (headingPositions.length > 0) {
-        const newActiveId = headingPositions[0].id;
-        if (newActiveId !== activeId) {
-          setActiveId(newActiveId);
+    const headingElements = Array.from(document.querySelectorAll(selectors));
+    if (!headingElements.length) return;
+
+    // IntersectionObserver callback
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          if (id && id !== activeId) {
+            setActiveId(id);
+          }
         }
-      }
+      });
     };
-    
-    // Check visibility on scroll and on load with throttling
-    let scrollTimer = null;
-    const handleScroll = () => {
-      if (scrollTimer === null) {
-        scrollTimer = setTimeout(() => {
-          checkVisibility();
-          scrollTimer = null;
-        }, 100);
-      }
+
+    // Aim to trigger when heading is roughly in top third of viewport
+    const observerOptions = {
+      root: null,
+      rootMargin: '-30% 0px -60% 0px',
+      threshold: 0
     };
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', checkVisibility, { passive: true });
-    
-    // Initial check after a short delay to ensure elements are rendered
-    setTimeout(checkVisibility, 300);
-    
-    // Cleanup
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    headingElements.forEach((el) => observer.observe(el));
+
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', checkVisibility);
-      if (scrollTimer) clearTimeout(scrollTimer);
+      headingElements.forEach((el) => observer.unobserve(el));
+      observer.disconnect();
     };
   }, [selectors, activeId]);
 
