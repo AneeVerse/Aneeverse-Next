@@ -187,16 +187,16 @@ const OurWorkSection = ({ portfolioItems = [], customerStories = [], isLoading =
                   
                   {/* Text Content */}
                   <div className="py-6 px-2">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-xl sm:text-2xl font-normal text-gray-900 mb-3 line-clamp-1 leading-tight font-serif italic">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-3">
+                        <h3 className="text-xl sm:text-2xl font-normal text-gray-900 line-clamp-1 leading-tight font-serif italic">
                           {project.title}
                         </h3>
-                        <p className="text-base text-gray-600 line-clamp-1 leading-relaxed font-normal font-sans">
-                          {project.description}
-                        </p>
+                        <MdOutlineArrowOutward className="flex-shrink-0 w-5 h-5 text-gray-600 opacity-0 translate-x-[-4px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                       </div>
-                      <MdOutlineArrowOutward className="flex-shrink-0 w-5 h-5 text-gray-400 opacity-0 translate-x-[-8px] translate-y-[8px] group-hover:translate-y-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                      <p className="text-base text-gray-600 line-clamp-1 leading-relaxed font-normal font-sans">
+                        {project.description}
+                      </p>
                     </div>
                   </div>
                 </Link>
