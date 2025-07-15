@@ -1,4 +1,12 @@
 import React, { useEffect, useState } from 'react';
+// Simple slug generator (lowercase, alphanum & dash)
+const generateSlug = (str) =>
+  str
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
 import { useScrollSpy } from '@/hooks/useScrollSpy';
 import { FaRegClock } from "react-icons/fa6";
 
@@ -8,12 +16,18 @@ const TableOfContents = ({ timeToRead = "5 min read" }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    // Get all headings from the article
-    const elements = Array.from(document.querySelectorAll('h2, h3')).map((element) => ({
-      id: element.id,
-      text: element.textContent,
-      level: Number(element.tagName.charAt(1))
-    }));
+    // Ensure each heading has an id; if missing generate one
+    const elements = Array.from(document.querySelectorAll('h2, h3')).map((element) => {
+      if (!element.id) {
+        const generatedId = generateSlug(element.textContent);
+        element.id = generatedId;
+      }
+      return {
+        id: element.id,
+        text: element.textContent,
+        level: Number(element.tagName.charAt(1))
+      };
+    });
     setHeadings(elements);
   }, []);
 
@@ -41,7 +55,7 @@ const TableOfContents = ({ timeToRead = "5 min read" }) => {
   }, []);
 
   return (
-    <nav className="table-of-contents sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto">
+    <nav className="hidden md:block table-of-contents sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto">
       <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6">
         {/* Read Time Indicator with Progress Bar */}
         <div className="mb-6">
