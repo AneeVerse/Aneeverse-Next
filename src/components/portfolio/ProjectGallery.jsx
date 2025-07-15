@@ -20,7 +20,7 @@ export default function ProjectGallery({ images = [] }) {
               viewport={{ once: true }}
               className="overflow-hidden rounded-xl shadow-md bg-white"
             >
-              <div className="relative h-64 w-full">
+              <div className="relative h-72 w-full">
                 <Image
                   src={urlForImage(image).url()}
                   alt={image.alt || 'Project image'}
