@@ -31,7 +31,7 @@ const DynamicOurWorks = () => {
           image: item.thumbnailImage || item.mainImage ? urlForImage(item.thumbnailImage || item.mainImage).url() : "/images/home/works-ban-1.avif",
           title: item.title,
           url: `/works/${item.slug.current}`,
-          description: item.services?.join(", ") || item.shortDescription || "",
+          description: item.servicesProvided?.join(", ") || item.shortDescription || "",
           colSpan: (index % 6 === 0 || index % 6 === 4) ? 2 : 1,
           type: "work"
         }));
@@ -128,12 +128,18 @@ const DynamicOurWorks = () => {
                   />
                 </div>
                 {/* Text Content */}
-                <div className="py-4">
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-lg font-semibold">{project.title}</h3>
-                    <MdOutlineArrowOutward className="opacity-0 self-center translate-x-[-50%] translate-y-[50%] group-hover:translate-y-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                <div className="py-6 px-2">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-3">
+                      <h3 className="text-xl sm:text-2xl font-normal text-gray-900 line-clamp-1 leading-tight font-serif italic">
+                        {project.title}
+                      </h3>
+                      <MdOutlineArrowOutward className="flex-shrink-0 w-5 h-5 text-gray-600 opacity-0 translate-x-[-4px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                    </div>
+                    <p className="text-base text-gray-600 line-clamp-1 leading-relaxed font-normal font-sans">
+                      {project.description}
+                    </p>
                   </div>
-                  <p className="text-sm text-gray-600">{project.description}</p>
                 </div>
               </Link>
             ))}
