@@ -655,7 +655,7 @@ export default function BlogDetailClient({ params, initialPost }) {
             
             {/* Table of Contents */}
             <div className="bg-[#0A2E3D] p-4 rounded-lg">
-              <h4 className="uppercase text-white text-xs font-semibold tracking-wide mb-3">TABLE OF CONTENTS</h4>
+              <h4 className="uppercase text-white text-[13px] font-medium tracking-[0.15em] mb-5">TABLE OF CONTENTS</h4>
               {h2Headings.length > 0 && (
                 <div className="max-h-[120px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   <ul className="space-y-4">
@@ -663,7 +663,7 @@ export default function BlogDetailClient({ params, initialPost }) {
                       <li key={index} className="relative">
                         <a
                           href={`#${section.id}`}
-                          className={`flex items-center gap-2 text-xs leading-tight pl-4 ${
+                          className={`flex items-center gap-2 text-[12px] leading-snug pl-3 ${
                             activeId === section.id
                               ? 'text-white font-medium'
                               : 'text-gray-300 hover:text-white'
@@ -680,7 +680,7 @@ export default function BlogDetailClient({ params, initialPost }) {
                           {activeId === section.id && (
                             <span className="text-white leading-none animate-toc-pulse" style={{ fontSize: '10px' }}>●</span>
                           )}
-                          <span className={`truncate transition-all duration-300 ${activeId === section.id ? 'toc-smooth-in' : 'toc-smooth-out'} font-bold`}>{section.title}</span>
+                          <span className={`truncate transition-all duration-300 ${activeId === section.id ? 'toc-smooth-in' : 'toc-smooth-out'} font-normal`}>{section.title}</span>
                         </a>
                       </li>
                     ))}
