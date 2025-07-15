@@ -51,7 +51,7 @@ export default function ProjectSummary({ project }) {
           </div>
           
           {/* Right Image */}
-          <div className="relative flex items-center h-[300px] md:h-[400px] lg:h-[600px] xl:h-[700px] mt-8 lg:-mt-32 order-2">
+          <div className="relative flex items-center h-[300px] md:h-[400px] lg:h-[600px] xl:h-[700px] mt-8 lg:-mt-48 order-2">
             {project.projectSummaryImage ? (
               // Handle both external and Sanity images
               project.projectSummaryImage.useExternalImage && project.projectSummaryImage.externalImage ? (
