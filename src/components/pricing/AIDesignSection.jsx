@@ -12,14 +12,11 @@ import AnimatedButton from "../common/AnimatedButton";
 export default function AIDesignSection() {
   return (
     <div className="py-12 px-4 sm:px-6 lg:px-0">
-      <section 
-        className="relative py-16 bg-cover bg-center bg-no-repeat lg:rounded-xl rounded-xl overflow-hidden w-full max-w-none mx-auto"
-        style={{
-          backgroundImage: "url('/images/pricing/ai-banner.avif')"
-        }}
+      <section
+        className="relative py-16 rounded-xl lg:rounded-xl overflow-hidden w-full max-w-none mx-auto bg-secondary-500 lg:bg-[url('/images/pricing/ai-banner.avif')] bg-cover bg-center bg-no-repeat"
       >
-        {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/50 rounded-xl"></div>
+        {/* Dark overlay for better text readability - only on large screens when bg image is visible */}
+        <div className="absolute inset-0 bg-black/50 rounded-xl hidden lg:block"></div>
         
         <div className="relative z-10 px-6 sm:px-12 lg:px-16 xl:px-20">
           <div className="max-w-2xl xl:max-w-3xl">
@@ -27,7 +24,7 @@ export default function AIDesignSection() {
               AI DESIGN SERVICES
             </UiSubheading>
             
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-white lg:text-orange-400 mb-6">
               Save <span className="italic">up to 70%</span> on production costs
             </h2>
 
