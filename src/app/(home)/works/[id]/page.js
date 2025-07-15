@@ -259,7 +259,7 @@ export default function ProjectPage({ params }) {
         </div>
 
         {/* Hero Section */}
-        <div className="relative -mx-2 sm:-mx-8 lg:-mx-8">
+        <div className="relative">
           {project?.mainImage ? (
             <div className="w-full h-[30vh] sm:h-[65vh] lg:h-[75vh] relative rounded-lg overflow-hidden">
               <Image
