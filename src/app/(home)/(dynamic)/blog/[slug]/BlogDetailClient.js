@@ -647,9 +647,9 @@ export default function BlogDetailClient({ params, initialPost }) {
         </div>
 
         {/* Main Grid Container - Improved responsive layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-[270px_1fr] gap-8 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-8 lg:gap-16">
           {/* Left Sidebar - Only shown on desktop */}
-          <aside className="lg:sticky top-24 self-start hidden lg:block space-y-8 shrink-0">
+          <aside className="lg:sticky top-24 self-start hidden lg:block space-y-8 shrink-0 w-[300px]">
             {/* Read Time Animation - Added without changing structure */}
             <ReadTimeProgress timeToRead={post.timeToRead || "5 min read"} />
             
@@ -750,7 +750,7 @@ export default function BlogDetailClient({ params, initialPost }) {
           )}
 
           {/* Main Content Section - Improved for mobile */}
-          <div className="w-full min-w-0">
+          <div className="w-full min-w-0 lg:pl-2">
             <article className="w-full">
               <div className="blog-content description">
                 {memoizedContent}
