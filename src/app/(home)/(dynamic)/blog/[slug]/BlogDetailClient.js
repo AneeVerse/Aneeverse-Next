@@ -97,16 +97,7 @@ export default function BlogDetailClient({ params, initialPost }) {
   const defaultThumbnail = "/images/blog1.avif";
   const defaultAuthorImage = "/images/blog/author/abhi.png";
   
-  // Update URL when active section changes
-  useEffect(() => {
-    if (activeId && typeof window !== 'undefined') {
-      // Update URL hash without scrolling
-      const newHash = `#${activeId}`;
-      if (window.location.hash !== newHash) {
-        window.history.replaceState(null, '', newHash);
-      }
-    }
-  }, [activeId]);
+  // (Removed auto URL hash updates to keep clean URLs)
 
   useEffect(() => {
     const loadBlog = async () => {
@@ -359,19 +350,21 @@ export default function BlogDetailClient({ params, initialPost }) {
         const uniqueHeadings = [];
         
         // Convert to array and extract info
-        Array.from(headingElements).forEach((h2) => {
+        Array.from(headingElements).forEach((h2, index) => {
           const title = h2.textContent;
           // Create URL-friendly ID from heading text
-          const id = title
+          let id = title
             .toLowerCase()
             .replace(/[^a-z0-9]+/g, '-')
             .replace(/(^-|-$)/g, '');
-            
-          // Only add if this ID hasn't been seen before
-          if (!uniqueIds.has(id)) {
-            uniqueIds.add(id);
-            uniqueHeadings.push({ id, title });
+
+          // If duplicate heading, append index to keep IDs in sync with processHtmlContent
+          if (uniqueIds.has(id)) {
+            id = `${id}-${index}`;
           }
+
+          uniqueIds.add(id);
+          uniqueHeadings.push({ id, title });
         });
         
         return uniqueHeadings;
@@ -385,7 +378,7 @@ export default function BlogDetailClient({ params, initialPost }) {
         
         post.content.props.children
           .filter(child => child && child.type === 'h2')
-          .forEach((h2) => {
+          .forEach((h2, index) => {
             const title = h2.props.children;
             const id = title
               .toLowerCase()
@@ -722,7 +715,7 @@ export default function BlogDetailClient({ params, initialPost }) {
 
           {/* Mobile TOC - Only visible on mobile - updated to match compact style */}
           {h2Headings.length > 0 && (
-            <div className="lg:hidden mb-6 bg-[#0A2E3D] p-4 rounded-lg mt-4">
+            <div className="hidden lg:hidden mb-6 bg-[#0A2E3D] p-4 rounded-lg mt-4">
               <h4 className="uppercase text-white text-xs font-semibold tracking-wide mb-2">TABLE OF CONTENTS</h4>
               <div className="overflow-y-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                 <ul className="space-y-4">
