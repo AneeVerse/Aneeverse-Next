@@ -97,7 +97,7 @@ const portableTextComponents = {
           <img
             src={imgUrl}
             alt={value.alt || 'Project image'}
-            className="w-full h-auto rounded-lg shadow-lg"
+            className="w-full h-auto rounded-lg"
           />
           {value.caption && (
             <figcaption className="text-gray-500 text-sm mt-2 text-center">
@@ -115,7 +115,7 @@ const portableTextComponents = {
             <img
               src={value.externalImage}
               alt={value.alt || 'Project image'}
-              className="w-full h-auto rounded-lg shadow-lg"
+              className="w-full h-auto rounded-lg"
             />
             {value.caption && (
               <figcaption className="text-gray-500 text-sm mt-2 text-center">
@@ -151,7 +151,7 @@ const portableTextComponents = {
             <img
               src={imgUrl}
               alt={value.alt || 'Project image'}
-              className="w-full h-auto rounded-lg shadow-lg"
+              className="w-full h-auto rounded-lg "
             />
             {value.caption && (
               <figcaption className="text-gray-500 text-sm mt-2 text-center">

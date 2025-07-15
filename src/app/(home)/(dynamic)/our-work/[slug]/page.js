@@ -126,7 +126,7 @@ export default function PortfolioItemDetail({ params }) {
         {/* Main Image */}
         {project.mainImage && (
           <motion.div 
-            className="relative w-full overflow-hidden rounded-xl shadow-md"
+            className="relative w-full overflow-hidden rounded-xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
