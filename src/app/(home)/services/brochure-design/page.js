@@ -3,7 +3,7 @@ import SlidingLogos from '@/components/home/SlidingLogos'
 import BrochureDesignFAQSection from '@/components/services/brochure-design/BrochureDesignFAQSection'
 import BrochureDesignStateSection from '@/components/services/brochure-design/BrochureDesignStateSection'
 import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
-import CommonServicesOurWorks from '@/components/services/common/CommonServicesOurWorks'
+import DynamicOurWorks from '@/components/home/DynamicOurWorks'
 import DynamicCreativeSection from '@/components/services/common/DynamicCreativeSection'
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
 import React from 'react'
@@ -126,8 +126,7 @@ const page = () => {
         heighlightText="Professional Brochure "
         items={items}
       />
-        <CommonServicesOurWorks />
-        <BrochureDesignStateSection />
+         <DynamicOurWorks />        <BrochureDesignStateSection />
         <TestimonialSlider />
         <BrochureDesignFAQSection />
       
