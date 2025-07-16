@@ -714,7 +714,7 @@ export default function BlogDetailClient({ params, initialPost }) {
                 </p>
                 <AnimatedButton
                   href="/contact"
-                  className="w-full bg-white text-[#073742] rounded-full font-semibold py-1 px-6 text-center  hover:bg-[#D8FF85] transition-colors"
+                  className="w-full bg-white text-[#073742] text-sm rounded-full font-semibold py-2 px-6 text-center  hover:bg-[#D8FF85] transition-colors"
                   mainTextSlide="-130%"
                   duplicateTextStart="40%"
                   duplicateTextEnd="-100%"
