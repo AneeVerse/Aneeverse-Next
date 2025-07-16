@@ -16,6 +16,7 @@ import BlogFAQ from '@/components/blog/BlogFAQ';
 import '../blogStyles.css';
 import TableOfContents from '@/components/blog/TableOfContents';
 import ReadTimeProgress from '@/components/blog/ReadTimeProgress';
+import AnimatedButton from '@/components/common/AnimatedButton';
 
 // Client-side fetch function (your existing logic)
 const getBlogPost = async (slug) => {
@@ -690,25 +691,36 @@ export default function BlogDetailClient({ params, initialPost }) {
             </div>
             
             {/* Promotional Poster */}
-            <div className="relative overflow-hidden rounded-lg shadow-[0_0_15px_rgba(0,0,0,0.2)] mt-8">
-              <div className="h-[170px] overflow-hidden bg-[#0A2E3D]">
+            <div className="relative overflow-hidden rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] mt-8 bg-gradient-to-br from-[#073742] via-[#0A2E3D] to-[#073742]">
+              <div className="relative h-[170px] overflow-hidden">
                 <Image 
-                  src="/blog-poster.avif" 
-                  alt="Get hassle-free service" 
+                  src="/images/book-left.avif" 
+                  alt="Transform your creative vision" 
                   width={500} 
                   height={300} 
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-full object-cover object-center opacity-100"
                 />
+                <div className="absolute inset"></div>
               </div>
-              <div className="bg-[#0A2E3D] p-4 text-white" style={{marginTop: "-1px"}}>
-                <h3 className="text-white text-lg font-bold leading-tight">Get hassle-free video at scale</h3>
-                <p className="text-gray-300 text-xs my-1.5">See how we can help.</p>
-                <Link 
-                  href="/contact" 
-                  className="block bg-white hover:bg-gray-100 text-[#0A2E3D] text-center py-2.5 w-full rounded-md font-medium transition-colors mt-2.5"
+              <div className="relative p-6 py-4 px-4 text-white">
+                <div className="mb-3">
+                
+                  <h3 className="text-white text-lg font-medium leading-tight bg-gradient-to-r from-white to-[#88D7F0] bg-clip-text text-transparent">
+                  The creative partner of the future
+                  </h3>
+                </div>
+                <p className="text-white font-medium text-sm leading-relaxed mb-4 -mt-1">
+                Scale creative and growth
+                </p>
+                <AnimatedButton
+                  href="/contact"
+                  className="w-full bg-white text-[#073742] rounded-full font-semibold py-1 px-6 text-center  hover:bg-[#D8FF85] transition-colors"
+                  mainTextSlide="-130%"
+                  duplicateTextStart="40%"
+                  duplicateTextEnd="-100%"
                 >
                   Book a call
-                </Link>
+                </AnimatedButton>
               </div>
             </div>
           </aside>
@@ -802,25 +814,38 @@ export default function BlogDetailClient({ params, initialPost }) {
             </article>
             
             {/* Mobile Promotional CTA - Only shown on mobile */}
-            <div className="lg:hidden relative overflow-hidden rounded-lg shadow-[0_0_15px_rgba(0,0,0,0.2)] mt-10 mb-6">
-              <div className="h-[140px] overflow-hidden bg-[#0A2E3D]">
+            <div className="lg:hidden relative overflow-hidden rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] mt-10 mb-6 bg-gradient-to-br from-[#073742] via-[#0A2E3D] to-[#073742]">
+              <div className="relative h-[140px] overflow-hidden">
                 <Image 
-                  src="/blog-poster.avif" 
-                  alt="Get hassle-free service" 
+                  src="/images/book-left.avif" 
+                  alt="Transform your creative vision" 
                   width={400} 
                   height={200} 
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-full object-cover object-center opacity-90"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#073742]/80 via-transparent to-transparent"></div>
               </div>
-              <div className="bg-[#0A2E3D] p-4 text-white" style={{marginTop: "-1px"}}>
-                <h3 className="text-white text-base font-bold leading-tight">Get hassle-free video at scale</h3>
-                <p className="text-gray-300 text-xs my-1.5">See how we can help.</p>
-                <Link 
-                  href="/contact" 
-                  className="block bg-white hover:bg-gray-100 text-[#0A2E3D] text-center py-2 w-full rounded-md font-medium transition-colors mt-2"
+              <div className="relative p-5 text-white">
+                <div className="mb-3">
+                  <span className="inline-block px-2.5 py-1 bg-[#88D7F0]/20 text-[#88D7F0] text-xs font-medium rounded-full mb-2 tracking-wide uppercase">
+                    Creative Partner
+                  </span>
+                  <h3 className="text-white text-lg font-bold leading-tight bg-gradient-to-r from-white to-[#88D7F0] bg-clip-text text-transparent">
+                    Scale creative and growth
+                  </h3>
+                </div>
+                <p className="text-[#EBFAFE]/80 text-sm leading-relaxed mb-4">
+                  Get access to high-velocity creative team that works with your brand.
+                </p>
+                <AnimatedButton
+                  href="/contact"
+                  className="w-full bg-white text-[#073742] rounded-full font-semibold py-2 px-5 text-center border border-[#D8FF85] hover:bg-[#D8FF85] transition-colors"
+                  mainTextSlide="-130%"
+                  duplicateTextStart="40%"
+                  duplicateTextEnd="-100%"
                 >
                   Book a call
-                </Link>
+                </AnimatedButton>
               </div>
             </div>
           </div>
