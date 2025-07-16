@@ -2,7 +2,7 @@ import TestimonialSlider from '@/components/about/TestimonialSlider'
 import SlidingLogos from '@/components/home/SlidingLogos'
 import BlogWritingFAQSection from '@/components/services/blog-writing/BlogWritingFAQSection'
 import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
-import CommonServicesOurWorks from '@/components/services/common/CommonServicesOurWorks'
+import DynamicOurWorks from '@/components/home/DynamicOurWorks'
 import DynamicCreativeSection from '@/components/services/common/DynamicCreativeSection'
 import DynamicStateSection from '@/components/services/common/DynamicStateSection'
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
@@ -148,8 +148,7 @@ const page = () => {
         heighlightText="Blog Writing"
         items={items}
       />
-      <CommonServicesOurWorks />
-
+       <DynamicOurWorks />
       <DynamicStateSection
         title="Performance Metrics for Blog Writing"
         subtitle="Content That Delivers Results"
