@@ -1,7 +1,7 @@
 import TestimonialSlider from '@/components/about/TestimonialSlider'
 import SlidingLogos from '@/components/home/SlidingLogos'
 import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
-import CommonServicesOurWorks from '@/components/services/common/CommonServicesOurWorks'
+import DynamicOurWorks from '@/components/home/DynamicOurWorks'
 import DynamicCreativeSection from '@/components/services/common/DynamicCreativeSection'
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
 import LocalSeoFAQSection from '@/components/services/local-seo/LocalSeoFAQSection'
@@ -129,8 +129,7 @@ const page = () => {
       />
       
       
-      <CommonServicesOurWorks />
-      <LocalSeoStateSection />
+       <DynamicOurWorks />      <LocalSeoStateSection />
       <TestimonialSlider />
       <LocalSeoFAQSection />
 

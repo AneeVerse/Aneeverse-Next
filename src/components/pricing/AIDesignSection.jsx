@@ -20,12 +20,14 @@ export default function AIDesignSection() {
         
         <div className="relative z-10 px-6 sm:px-12 lg:px-16 xl:px-20">
           <div className="max-w-2xl xl:max-w-3xl">
-            <UiSubheading className="text-primary-500 mb-2">
+            <UiSubheading className="text-primary-500 mb-2 ml-2">
               AI DESIGN SERVICES
             </UiSubheading>
             
-            <h2 className="text-4xl md:text-5xl font-bold text-white lg:text-orange-400 mb-6">
-              Save <span className="italic">up to 70%</span> on production costs
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            
+              <span className="italic text-orange-400">Save up to 70%</span>
+              <span className="text-white"> on production costs</span>
             </h2>
 
             <p className="text-lg text-white leading-relaxed mb-8">
