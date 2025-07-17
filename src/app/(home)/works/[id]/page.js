@@ -261,7 +261,7 @@ export default function ProjectPage({ params }) {
         {/* Hero Section */}
         <div className="relative">
           {project?.mainImage ? (
-            <div className="w-full h-[30vh] sm:h-[65vh] lg:h-[75vh] relative rounded-lg overflow-hidden">
+            <div className="w-full h-[40vh] sm:h-[75vh] lg:h-[85vh] relative rounded-lg overflow-hidden -mt-6">
               <Image
                 src={urlForImage(project.mainImage).url()}
                 alt={project.title}
@@ -273,7 +273,7 @@ export default function ProjectPage({ params }) {
             <img
               src={staticProject?.thumbnail}
               alt={staticProject?.title}
-              className="w-full h-[30vh] sm:h-[65vh] lg:h-[75vh] rounded-lg object-cover object-center"
+              className="w-full h-[40vh] sm:h-[75vh] lg:h-[85vh] rounded-lg object-cover object-center"
             />
           )}
         </div>
