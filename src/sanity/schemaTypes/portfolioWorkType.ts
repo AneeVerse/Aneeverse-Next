@@ -104,10 +104,8 @@ export const portfolioWorkType = defineType({
           },
           hidden: ({parent}) => parent?.useExternalImage,
           validation: Rule => Rule.custom((value, context) => {
-            const useExternal = (context.parent as any)?.useExternalImage;
-            if (!useExternal && !value) {
-              return 'Please upload an image or use external image URL';
-            }
+            // Allow this field to be optional. If neither external nor uploaded image is provided,
+            // we simply skip validation so the project summary image becomes optional.
             return true;
           }),
           fields: [

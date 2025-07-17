@@ -52,44 +52,50 @@ export default function ProjectSummary({ project }) {
           
           {/* Right Image */}
           <div className="relative flex items-center h-[300px] md:h-[400px] lg:h-[600px] xl:h-[700px] mt-8 lg:-mt-48 order-2">
-            {project.projectSummaryImage ? (
-              // Handle both external and Sanity images
-              project.projectSummaryImage.useExternalImage && project.projectSummaryImage.externalImage ? (
-                <Image
-                  src={project.projectSummaryImage.externalImage}
-                  alt={project.projectSummaryImage.alt || `${project.title} project summary`}
-                  fill
-                  className="object-contain object-center"
-                />
-              ) : project.projectSummaryImage.sanityImage ? (
-                <Image
-                  src={urlForImage(project.projectSummaryImage.sanityImage).url()}
-                  alt={project.projectSummaryImage.sanityImage.alt || project.projectSummaryImage.alt || `${project.title} project summary`}
-                  fill
-                  className="object-contain object-center"
-                />
-              ) : (
-                // Fallback if no summary image configured properly
-                project.mainImage && (
+            {(() => {
+              // Helper to decide which image to render
+              const summaryImg = project.projectSummaryImage;
+              // 1. If summary image object NOT provided, fallback to main image
+              if (!summaryImg) {
+                return (
+                  project.mainImage && (
+                    <Image
+                      src={urlForImage(project.mainImage).url()}
+                      alt={`${project.title} project summary`}
+                      fill
+                      className="object-contain object-center"
+                    />
+                  )
+                );
+              }
+
+              // 2. If external image is selected and URL exists
+              if (summaryImg.useExternalImage && summaryImg.externalImage) {
+                return (
                   <Image
-                    src={urlForImage(project.mainImage).url()}
-                    alt={`${project.title} project summary`}
+                    src={summaryImg.externalImage}
+                    alt={summaryImg.alt || `${project.title} project summary`}
                     fill
                     className="object-contain object-center"
                   />
-                )
-              )
-            ) : (
-              // Fallback if no summary image at all
-              project.mainImage && (
-                <Image
-                  src={urlForImage(project.mainImage).url()}
-                  alt={`${project.title} project summary`}
-                  fill
-                  className="object-contain object-center"
-                />
-              )
-            )}
+                );
+              }
+
+              // 3. If an uploaded Sanity image exists
+              if (summaryImg.sanityImage) {
+                return (
+                  <Image
+                    src={urlForImage(summaryImg.sanityImage).url()}
+                    alt={summaryImg.sanityImage.alt || summaryImg.alt || `${project.title} project summary`}
+                    fill
+                    className="object-contain object-center"
+                  />
+                );
+              }
+
+              // 4. No valid summary image – render nothing
+              return null;
+            })()}
           </div>
         </div>
       </Layout>
