@@ -275,26 +275,23 @@ async function getServerBlogPost(slug) {
         }
       }
       
-      // Handle Portable Text conversion using the imported function
+      // Keep Portable Text as-is for proper link rendering
       if (typeof blog.content !== 'string' && Array.isArray(blog.content)) {
-        console.log('Server: Converting Portable Text to HTML');
-        blog.content = blockContentToHtml(blog.content);
-      }
-      
-      // Fix any text-based bullet points in the HTML
-      if (typeof blog.content === 'string') {
+        console.log('Server: Keeping Portable Text as-is for proper link rendering');
+        // Keep as Portable Text array - don't convert to HTML
+        
+        // Don't inject main image here - let the client handle it
+        // The main image should be displayed separately from the content
+        console.log('Server: Keeping content as Portable Text without main image injection');
+      } else if (typeof blog.content === 'string') {
+        // If content is already HTML string, fix bullet points
         blog.content = fixBulletPoints(blog.content);
-      }
-      
-      // Inject main image HTML at the top if available
-      if (contentWithMainImage && typeof blog.content === 'string') {
-        console.log('Server: Injecting main image at top of content');
-        console.log('Main image HTML:', contentWithMainImage);
-        blog.content = contentWithMainImage + blog.content;
-      } else {
-        console.log('Server: No main image to inject or content is not string');
-        console.log('contentWithMainImage:', !!contentWithMainImage);
-        console.log('content type:', typeof blog.content);
+        
+        // Inject main image HTML at the top if available
+        if (contentWithMainImage) {
+          console.log('Server: Injecting main image HTML at top of content');
+          blog.content = contentWithMainImage + blog.content;
+        }
       }
     }
     
