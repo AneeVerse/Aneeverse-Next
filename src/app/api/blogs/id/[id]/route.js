@@ -189,31 +189,7 @@ export async function GET(request, { params }) {
 
 // Helper function to process the blog content and return the response
 function processAndReturnBlog(blog) {
-  // Process content to ensure proper HTML format
-  if (blog.content) {
-    // Check if main image exists and ensure it's added to the body content
-    let contentWithMainImage = '';
-    
-    // Convert main image to HTML if it exists
-    if (blog.mainImage && blog.mainImage.asset) {
-      const mainImageHtml = `
-        <figure class="main-image">
-          <img src="${blog.mainImage.asset.url}" alt="${blog.mainImage.alt || 'Blog image'}" class="rounded-lg w-full" />
-        </figure>
-      `;
-      contentWithMainImage += mainImageHtml;
-    }
-    
-    // Handle Portable Text conversion
-    if (typeof blog.content !== 'string' && Array.isArray(blog.content)) {
-      console.log('Converting Portable Text to HTML');
-      blog.content = blockContentToHtml(blog.content);
-    }
-    
-    // Add the body content after the main image
-    blog.content = contentWithMainImage + blog.content;
-  }
-  
+  // Do NOT convert Portable Text to HTML or prepend main image HTML
   return NextResponse.json({ 
     success: true, 
     blog

@@ -98,46 +98,8 @@ export async function GET(request, { params }) {
       }, { status: 404 });
     }
     
-    // Process content to ensure proper HTML format
-    if (blog.content) {
-      // Convert main image (uploaded or external) to HTML if present
-      let contentWithMainImage = '';
-      
-      if (blog.mainImage) {
-        // Determine URL and alt text
-        const url = blog.mainImage.externalImage
-          || blog.mainImage.sanityImage?.asset?.url
-          || blog.mainImage.asset?.url;
-        const alt = blog.mainImage.alt
-          || blog.mainImage.sanityImage?.alt
-          || '';
-        if (url) {
-          const mainImageHtml = `
-            <figure class="main-image">
-              <img src="${url}" alt="${alt}" class="rounded-lg w-full" />
-            </figure>
-          `;
-          contentWithMainImage += mainImageHtml;
-        }
-      }
-      
-      // Handle Portable Text conversion using the imported function
-      if (typeof blog.content !== 'string' && Array.isArray(blog.content)) {
-        console.log('Converting Portable Text to HTML');
-        blog.content = blockContentToHtml(blog.content);
-      }
-      
-      // Fix any text-based bullet points in the HTML
-      if (typeof blog.content === 'string') {
-        blog.content = fixBulletPoints(blog.content);
-      }
-      
-      // Inject main image HTML at the top if available
-      if (contentWithMainImage && typeof blog.content === 'string') {
-        blog.content = contentWithMainImage + blog.content;
-      }
-    }
-    
+    // Do NOT convert Portable Text to HTML or inject main image HTML
+    // Just send the blog as-is
     return NextResponse.json({ 
       success: true, 
       blog
