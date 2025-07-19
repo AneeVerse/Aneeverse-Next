@@ -58,7 +58,7 @@ const CreativeStatsOurWorks = () => {
                 </div>
 
                 {/* Percentage Value - Right Side */}
-                <div className="text-4xl sm:text-5xl lg:text-7xl font-light text-[#1a3c34] leading-none tracking-tight ml-4 lg:ml-0">
+                <div className="text-4xl sm:text-5xl lg:text-[3.75rem] xl:text-[4.90rem] font-light text-[#1a3c34] tracking-tight ml-4 lg:ml-0" style={{ fontFamily: 'CalmSerif, serif', lineHeight: '1.2' }}>
                   {item.percentage}
                 </div>
               </div>
