@@ -17,6 +17,8 @@ import '../blogStyles.css';
 import TableOfContents from '@/components/blog/TableOfContents';
 import ReadTimeProgress from '@/components/blog/ReadTimeProgress';
 import AnimatedButton from '@/components/common/AnimatedButton';
+import SanityPortableText from '@/components/blog/SanityPortableText';
+import SanityImage from '@/components/common/SanityImage';
 
 // Client-side fetch function (your existing logic)
 const getBlogPost = async (slug) => {
@@ -91,7 +93,7 @@ export default function BlogDetailClient({ params, initialPost }) {
   const [thumbnailError, setThumbnailError] = useState(false);
   const [authorImageError, setAuthorImageError] = useState(false);
   
-  // Use only one mechanism for scroll spy
+  // Use scroll spy for h2 headings
   const activeId = useScrollSpy('h2'); 
 
   // Default images
@@ -283,8 +285,8 @@ export default function BlogDetailClient({ params, initialPost }) {
         if (!hasTh && table.rows.length > 0) {
           const firstRow = table.rows[0];
           Array.from(firstRow.cells).forEach(cell => {
-            cell.style.backgroundColor = '#0A2E3D';
-            cell.style.color = 'white';
+            cell.style.backgroundColor = 'orange';
+            cell.style.color = 'purple';
             cell.style.fontWeight = '600';
             cell.style.padding = '12px 16px';
           });
@@ -293,8 +295,8 @@ export default function BlogDetailClient({ params, initialPost }) {
         // Style all th elements
         const thElements = table.querySelectorAll('th');
         thElements.forEach(th => {
-          th.style.backgroundColor = '#0A2E3D';
-          th.style.color = 'white';
+          th.style.backgroundColor = 'orange';
+          th.style.color = 'purple';
           th.style.fontWeight = '600';
           th.style.padding = '12px 16px';
           th.style.textAlign = 'left';
@@ -332,12 +334,54 @@ export default function BlogDetailClient({ params, initialPost }) {
     }
   };
 
-  // Update the h2Headings extraction logic to prevent duplicates
+  // Update the h2Headings extraction logic to work with Portable Text
   const h2Headings = React.useMemo(() => {
     if (!post) return [];
     
     try {
-      // For HTML string content
+      // For Portable Text content (array)
+      if (Array.isArray(post.content)) {
+        const uniqueIds = new Set();
+        const uniqueHeadings = [];
+        
+        // Recursively search for h2 blocks in Portable Text
+        const findH2Blocks = (blocks) => {
+          if (!Array.isArray(blocks)) return;
+          
+          blocks.forEach((block, index) => {
+            if (block._type === 'block' && block.style === 'h2') {
+              // Extract text from the block
+              const title = block.children
+                .map(child => child.text)
+                .join('');
+              
+              // Create URL-friendly ID
+              let id = title
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)/g, '');
+
+              // If duplicate heading, append index
+              if (uniqueIds.has(id)) {
+                id = `${id}-${index}`;
+              }
+
+              uniqueIds.add(id);
+              uniqueHeadings.push({ id, title });
+            }
+            
+            // Recursively search in nested blocks
+            if (block.children) {
+              findH2Blocks(block.children);
+            }
+          });
+        };
+        
+        findH2Blocks(post.content);
+        return uniqueHeadings;
+      }
+      
+      // For HTML string content (fallback)
       if (typeof post.content === 'string') {
         if (typeof window === 'undefined') return []; // Skip on server
         
@@ -371,7 +415,7 @@ export default function BlogDetailClient({ params, initialPost }) {
         return uniqueHeadings;
       }
       
-      // For React element content
+      // For React element content (fallback)
       if (post.content.props?.children) {
         // Use a Set to track unique IDs
         const uniqueIds = new Set();
@@ -518,7 +562,15 @@ export default function BlogDetailClient({ params, initialPost }) {
 
   // Ensure we always pass a string to renderContent (fall back to description if content is missing)
   const rawContent = post?.content ?? post?.description ?? '';
-  const memoizedContent = useMemo(() => renderContent(rawContent), [rawContent]);
+  // NEW: Check if content is Portable Text (array) or HTML string
+  const isPortableText = Array.isArray(rawContent);
+  const memoizedContent = useMemo(() => {
+    if (isPortableText) {
+      // Use Portable Text renderer for rich content (links, etc.)
+      return <SanityPortableText value={rawContent} />;
+    }
+    return renderContent(rawContent);
+  }, [rawContent, isPortableText]);
 
   if (isLoading) {
     return (
@@ -764,6 +816,21 @@ export default function BlogDetailClient({ params, initialPost }) {
           {/* Main Content Section - Improved for mobile */}
           <div className="w-full min-w-0 lg:pl-2">
             <article className="w-full">
+              {/* Main Image Display */}
+              {post.mainImage && (
+                <div className="mb-8">
+                  {console.log('Main image data:', post.mainImage)}
+                  <SanityImage
+                    image={post.mainImage}
+                    alt={post.mainImage.alt || post.title}
+                    width={1200}
+                    height={800}
+                    className="w-full h-auto rounded-lg shadow-lg"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                  />
+                </div>
+              )}
+              
               <div className="blog-content description">
                 {memoizedContent}
                 {/* Add direct CSS for bullet points */}
