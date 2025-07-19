@@ -228,14 +228,14 @@ div[class*="overflow-y-auto"]::-webkit-scrollbar {
 .blog-content table th span,
 .blog-content table th p,
 .blog-content table th div {
-  color: white !important;
+  color: #1f2937 !important;
 }
 
 /* First row styling for when there's no <th> element but first row should be a header */
 .blog-content table tr:first-child td {
   font-weight: 600 !important;
-  background-color: #0A2E3D !important;
-  color: white !important;
+  background-color: #f3f4f6 !important;
+  color: #1f2937 !important;
 }
 
 /* First row styling overrides */
@@ -243,7 +243,7 @@ div[class*="overflow-y-auto"]::-webkit-scrollbar {
 .blog-content table tr:first-child td span,
 .blog-content table tr:first-child td p,
 .blog-content table tr:first-child td div {
-  color: white !important;
+  color: #1f2937 !important;
 }
 
 /* Mobile responsive styles */

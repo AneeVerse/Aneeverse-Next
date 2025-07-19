@@ -8,11 +8,7 @@ function transformSanityBlog(sanityBlog) {
     id: sanityBlog._id,
     title: sanityBlog.title,
     slug: sanityBlog.slug?.current || '',
-    content: typeof sanityBlog.content === 'string' 
-      ? sanityBlog.content 
-      : Array.isArray(sanityBlog.content) 
-        ? blockContentToHtml(sanityBlog.content)
-        : '',
+    content: Array.isArray(sanityBlog.content) ? sanityBlog.content : sanityBlog.content || '',
     shortDescription: sanityBlog.excerpt || sanityBlog.shortDescription || '',
     thumbnail: sanityBlog.mainImage,
     category: sanityBlog.categories?.[0] || 'Uncategorized',

@@ -46,6 +46,16 @@ export default function SanityImage({
       return urlForImage(image).url();
     }
 
+    // If it's a legacy Sanity image object with direct URL (API response)
+    if (image.asset?.url) {
+      return image.asset.url;
+    }
+
+    // If it's a legacy Sanity image object with direct URL (API response)
+    if (image.url) {
+      return image.url;
+    }
+
     return null;
   };
 
