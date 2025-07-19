@@ -5,4 +5,12 @@
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+}
+
+@font-face {
+  font-family: 'CalmSerif';
+  src: url('/font/CalmSerif-1j6G4.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 } 
