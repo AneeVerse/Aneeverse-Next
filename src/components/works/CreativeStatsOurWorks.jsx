@@ -1,9 +1,6 @@
 import React from "react";
 import Layout from "../common/Layout";
-
 import { MdOutlineArrowOutward } from "react-icons/md";
-import { Heading } from "../common/typography/Heading";
-import { AccentText } from "../common/typography/AccentText";
 
 const stats = [
   {
@@ -25,53 +22,48 @@ const stats = [
 
 const CreativeStatsOurWorks = () => {
   return (
-    <div className="bg-primary-500 text-secondary-500 py-12 sm:py-16 lg:py-24 text-center">
+    <div className="bg-primary-500 text-[#1a3c34] py-20 sm:py-24 lg:py-28">
       <Layout>
-        <Heading
-          level="h1"
-          color="dark"
-          spacing="lg"
-          className="text-center font-medium px-4 sm:px-0"
-        >
-          Creative that{" "}
-          <AccentText size="xl" className={""}>
-          works
-          </AccentText>
-        </Heading>
-        <p className="text-base sm:text-lg text-gray-600 mt-4 max-w-2xl mx-auto px-4 sm:px-0 leading-relaxed">
-          We help the world's leading brands create standout ads and campaigns
-          at speed—from concept to execution to results.
-        </p>
-        <div className="mt-12 sm:mt-16 space-y-8 md:space-y-0 md:grid md:grid-cols-3 md:gap-12 lg:gap-16 border-b border-gray-300 pb-8 sm:pb-12">
-          {stats.map((item, index) => (
-            <div key={index} className="bg-transparent rounded-2xl p-6 sm:p-8 text-left md:text-center">
-              {/* Mobile: Percentage first, then content */}
-              <div className="md:hidden mb-4">
-                <AccentText size="xl" className="text-orange-500 text-6xl font-light">
+        <div className="max-w-9xl mx-auto text-center px-4 sm:px-6 lg:px-8 mt-10">
+          {/* Main Heading */}
+          <h1 className="text-4xl sm:text-5xl lg:text-[3.75rem] xl:text-[4.5rem] font-light text-[#1a3c34] mb-6 lg:mb-8 tracking-tight">
+            Creative that <span className="italic">works</span>
+          </h1>
+
+          {/* Description */}
+          <p className="text-base sm:text-lg lg:text-[1.45rem] text-[#4c5c55] max-w-xl mx-auto leading-relaxed mb-32 lg:mb-32">
+            We help the world's leading brands create standout ads and campaigns
+            at speed—from concept to execution to results.
+          </p>
+
+          {/* Stats Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-y-8 lg:gap-y-0">
+            {stats.map((item, index) => (
+              <div
+                key={index}
+                className="flex flex-row justify-between items-center text-left px-0 lg:px-8 py-6 lg:py-12 border-b border-[#d5dcd8]"
+              >
+                {/* Description and Case Study Link - Left Side */}
+                <div className="flex flex-col flex-1 lg:mr-8">
+                  <h3 className="text-base lg:text-lg text-gray-400 font-normal mb-2 lg:mb-3">
+                    {item.description}
+                  </h3>
+                  <a
+                    href="#"
+                    className="inline-flex items-center gap-1 text-sm text-black hover:text-[#1a3c34] transition-colors group hover:underline"
+                  >
+                    {item.caseStudy}
+                    <MdOutlineArrowOutward className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </a>
+                </div>
+
+                {/* Percentage Value - Right Side */}
+                <div className="text-4xl sm:text-5xl lg:text-7xl font-light text-[#1a3c34] leading-none tracking-tight ml-4 lg:ml-0">
                   {item.percentage}
-                </AccentText>
+                </div>
               </div>
-              
-              <div className="md:mb-6">
-                <p className="text-base sm:text-lg font-medium text-gray-700 leading-relaxed mb-3">
-                  {item.description}
-                </p>
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-1 text-sm text-gray-600 hover:text-orange-500 hover:underline transition-colors"
-                >
-                  {item.caseStudy} <MdOutlineArrowOutward className="w-4 h-4" />
-                </a>
-              </div>
-              
-              {/* Desktop: Percentage at bottom */}
-              <div className="hidden md:block">
-                <AccentText size="xl" className="text-orange-500 text-5xl lg:text-6xl xl:text-7xl font-light">
-                  {item.percentage}
-                </AccentText>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </Layout>
     </div>
