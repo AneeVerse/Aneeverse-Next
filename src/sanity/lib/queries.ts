@@ -13,6 +13,9 @@ export const getCustomerStoriesQuery = groq`
     readTime,
     publishedAt,
     shortDescription,
+    percentageSaved,
+    numberProduced,
+    metrics,
     categories[]->{
       title,
       slug
@@ -32,6 +35,9 @@ export const getCustomerStoryBySlugQuery = groq`
     publishedAt,
     shortDescription,
     body,
+    percentageSaved,
+    numberProduced,
+    metrics,
     categories[]->{
       title,
       slug

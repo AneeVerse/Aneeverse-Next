@@ -102,6 +102,34 @@ export const customerStoryType = defineType({
       type: 'blockContent',
       validation: Rule => Rule.required(),
     }),
+    defineField({
+      name: 'metrics',
+      title: 'Story Metrics',
+      type: 'array',
+      description: 'Key metrics and results for this customer story (e.g., Time Saved, Services Used, Number of Videos, etc.)',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'label',
+              title: 'Label',
+              type: 'string',
+              description: 'e.g., Percentage of Time Saved, Services Used, Number of Videos Produced',
+            },
+            {
+              name: 'value',
+              title: 'Value',
+              type: 'string',
+              description: 'e.g., ~90%, Seamless on-site and post-production video execution, 4',
+            },
+          ],
+          preview: {
+            select: { title: 'label', subtitle: 'value' }
+          }
+        }
+      ]
+    }),
   ],
   preview: {
     select: {
