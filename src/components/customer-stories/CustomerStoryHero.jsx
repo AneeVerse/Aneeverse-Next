@@ -2,6 +2,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import Layout from "../common/Layout";
 import LongStoryCard from "./common/LongStoryCard";
+import CustomerStoryMetrics from "./common/CustomerStoryMetrics";
 import { client } from '@/sanity/lib/client';
 import { getCustomerStoriesQuery } from '@/sanity/lib/queries';
 

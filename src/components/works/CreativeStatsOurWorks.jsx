@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../common/Layout";
 import { MdOutlineArrowOutward } from "react-icons/md";
+import { AccentText } from "../common/typography/AccentText";
 
 const stats = [
   {
@@ -27,7 +28,9 @@ const CreativeStatsOurWorks = () => {
         <div className="max-w-9xl mx-auto text-center px-4 sm:px-6 lg:px-8 mt-10">
           {/* Main Heading */}
           <h1 className="text-4xl sm:text-5xl lg:text-[3.75rem] xl:text-[4.5rem] font-light text-[#1a3c34] mb-6 lg:mb-8 tracking-tight">
-            Creative that <span className="italic">works</span>
+            Creative that <AccentText className="text-[2.0rem] xl:text-[3.5rem] ml-2 text-orange-500">
+              works
+            </AccentText>
           </h1>
 
           {/* Description */}

@@ -7,51 +7,47 @@ export default function ProjectSummary({ project }) {
   if (!project) return null;
   
   return (
-    <div className="py-16 bg-white">
+    <div className="pt-8 pb-0 mb-[-32px] bg-white">
       <Layout>
         {/* PROJECT SUMMARY Header */}
-        <div className="mb-8 lg:-ml-7">
-          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-widest">PROJECT SUMMARY</h2>
+        <div className="mb-0 lg:-ml-7">
+          <h2 className="text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-widest">PROJECT SUMMARY</h2>
         </div>
         
         <div className="flex flex-col lg:grid lg:grid-cols-[1.2fr,0.8fr] gap-8 lg:gap-20 lg:items-start">
           {/* Left Content */}
-          <div className="space-y-8 lg:-ml-7 order-1">
+          <div className="space-y-6 lg:-ml-7 order-1">
             {/* Project Title */}
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-normal text-secondary-500 leading-tight">
+            <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-normal text-secondary-500 leading-tight mt-6">
               {project.title}
             </h1>
-            
             {/* Project Description */}
             {project.projectSummary && (
               <div className="prose max-w-none">
-                <p className="text-gray-600 text-lg leading-relaxed">{project.projectSummary}</p>
+                <p className="text-base sm:text-lg text-gray-600 leading-relaxed">{project.projectSummary}</p>
               </div>
             )}
-            
             {/* Meta Information */}
-            <div className="flex flex-row pt-8">
+            <div className="flex flex-row pt-0 items-end">
               {/* Year */}
               {project.year && (
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">YEAR</h3>
-                  <p className="text-4xl font-normal text-secondary-500">{project.year}</p>
+                  <h3 className="text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">YEAR</h3>
+                  <p className="text-2xl sm:text-4xl font-normal text-secondary-500">{project.year}</p>
                 </div>
               )}
               {/* Industry */}
               {project.industry && (
-                <div className="ml-40">
-                  <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">INDUSTRY</h3>
-                  <p className="text-4xl font-normal text-secondary-500">{project.industry}</p>
+                <div className="ml-6 lg:ml-40">
+                  <h3 className="text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">INDUSTRY</h3>
+                  <p className="text-2xl sm:text-4xl font-normal text-secondary-500">{project.industry}</p>
                 </div>
               )}
             </div>
-            
-
           </div>
           
           {/* Right Image */}
-          <div className="relative flex items-center h-[300px] md:h-[400px] lg:h-[600px] xl:h-[700px] mt-8 lg:-mt-48 order-2">
+          <div className="relative flex items-center h-[300px] md:h-[400px] lg:h-[600px] xl:h-[700px] mt-8 lg:-mt-40 order-2">
             {(() => {
               // Helper to decide which image to render
               const summaryImg = project.projectSummaryImage;

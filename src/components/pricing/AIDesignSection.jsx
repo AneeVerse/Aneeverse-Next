@@ -24,7 +24,7 @@ export default function AIDesignSection() {
               AI DESIGN SERVICES
             </UiSubheading>
             
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 sm:text-xl">
             
               <span className="italic text-orange-400">Save up to 70%</span>
               <span className="text-white"> on production costs</span>

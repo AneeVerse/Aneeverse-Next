@@ -15,6 +15,7 @@ import { client } from '@/sanity/lib/client';
 import { getCustomerStoryBySlugQuery } from '@/sanity/lib/queries';
 import { urlForImage } from '@/sanity/lib/image';
 import { PortableText } from '@portabletext/react';
+import CustomerStoryMetrics from '@/components/customer-stories/common/CustomerStoryMetrics';
 
 // More efficient approach to fetch customer story
 const getCustomerStory = async (slug) => {
@@ -551,6 +552,12 @@ export default function CustomerStoryDetail({ params }) {
                     className="rounded-lg shadow-lg w-full h-auto object-cover"
                     onError={() => setThumbnailError(true)}
                   />
+                </div>
+              )}
+              {/* Metrics Bar - Only show if at least 1 metric is present */}
+              {post.metrics && post.metrics.length > 0 && (
+                <div className="mb-12 flex justify-center">
+                  <CustomerStoryMetrics metrics={post.metrics} />
                 </div>
               )}
               

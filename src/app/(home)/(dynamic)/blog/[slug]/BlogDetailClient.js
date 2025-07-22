@@ -870,6 +870,7 @@ export default function BlogDetailClient({ params, initialPost }) {
                   }
                 `}</style>
               </div>
+              <Newsletter />
               
               {/* FAQ Section */}
               {post.includeFaq && faqItems.length > 0 && (
