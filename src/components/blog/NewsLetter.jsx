@@ -1,57 +1,82 @@
-import { MdOutlineEmail } from "react-icons/md";
 import Image from "next/image";
-import Layout from "../common/Layout";
 import AnimatedButton from "../common/AnimatedButton";
+import { useEffect, useState } from "react";
 
 const Newsletter = () => {
-  return (
-    <div className="mt-16 mb-8">
-      <div className="relative w-full rounded-xl overflow-hidden bg-secondary-500">
-        {/* Background Image */}
-        <div className="absolute inset-0 w-full h-full">
-          <Image 
-            src="/AV.jpg" 
-            alt="Newsletter background" 
-            fill 
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const checkScreen = () => setIsDesktop(window.innerWidth >= 768);
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
+
+  if (!isDesktop) {
+    // Mobile: Card with image on top, text/button below, solid dark bg for text
+    return (
+      <div className="mt-8 mb-6 rounded-xl overflow-hidden shadow-md bg-[#f7faef] max-w-md mx-auto">
+        <div className="relative w-full h-48">
+          <Image
+            src="/images/custom-bg.avif"
+            alt="Custom video production astronaut"
+            fill
             className="object-cover"
             priority
           />
         </div>
-        
-        <div className="relative z-10">
-          {/* Content */}
-          <div className="p-10 sm:p-12">
-            <h4 className="text-[#C0FF7C] uppercase text-sm tracking-wide font-medium">
-              SUBSCRIBE TO
-            </h4>
-            <h2 className="text-3xl sm:text-4xl font-semibold text-white mt-2">
-              The Creative Brief
-            </h2>
-            <p className="text-white/80 mt-4 max-w-md">
-              Where 70K+ creatives and marketers find the latest events, articles and
-              insights sparking industry-wide interest.
-            </p>
-            
-            <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-              <div className="relative flex items-center bg-secondary-500/60 backdrop-blur-sm border border-white/20 rounded-full px-4 py-3 w-full sm:w-64">
-                <MdOutlineEmail className="text-white/60 text-lg self-center mr-2" />
-                <input 
-                  type="email" 
-                  placeholder="buzz@nasa.gov" 
-                  className="bg-transparent text-white outline-none w-full"
-                />
-              </div>
-              <AnimatedButton
-                href="/contact"
-                className="bg-[#C0FF7C] text-secondary-500 font-bold px-8 py-3 rounded-full hover:bg-[#C0FF7C] transition sm:whitespace-nowrap text-center"
-                mainTextSlide="-130%"
-                duplicateTextStart="40%"
-                duplicateTextEnd="-100%"
-              >
-                Subscribe
-              </AnimatedButton>
-            </div>
-          </div>
+        <div className="bg-[#073742] p-6 flex flex-col items-start">
+          <h2 className="text-xl font-bold text-white mb-4 text-left">
+            Custom video production at scale
+          </h2>
+          <p className="text-white text-sm mb-6 text-left">
+            Aneeverse covers all video needs—whether you're telling your brand story, launching a product or running ads. Discover how we can help you scale.
+          </p>
+          <AnimatedButton
+            href="/contact"
+            className="bg-[#C0FF7C] text-black font-bold w-full px-4 py-2 rounded-full hover:bg-[#C0FF7C] transition text-center text-base shadow-lg"
+            mainTextSlide="-130%"
+            duplicateTextStart="40%"
+            duplicateTextEnd="-100%"
+          >
+            Book a call
+          </AnimatedButton>
+        </div>
+      </div>
+    );
+  }
+
+  // Desktop: Split horizontal, text over image
+  return (
+    <div className="relative mt-10 mb-6 rounded-xl overflow-hidden shadow-md bg-[#f7faef] max-w-6xl mx-auto" style={{height: '360px'}}>
+      {/* Background Image */}
+      <div className="absolute inset-0 w-full h-full">
+        <Image
+          src="/images/custom-desktop-bg.avif"
+          alt="Custom video production astronaut"
+          fill
+          className="object-cover object-right"
+          priority
+        />
+      </div>
+      {/* Content */}
+      <div className="relative z-10 flex items-center h-full px-5 md:px-10">
+        <div className="max-w-lg">
+          <h2 className="text-2xl md:text-4xl font-bold text-white mb-4 drop-shadow-lg text-left">
+            Custom video production at scale
+          </h2>
+          <p className="text-white text-base md:text-lg mb-6 drop-shadow-lg text-left">
+            Aneeverse covers all video needs—whether you're telling your brand story, launching a product or running ads. Discover how we can help you scale.
+          </p>
+          <AnimatedButton
+            href="/contact"
+            className="bg-[#C0FF7C] text-black font-bold px-6 py-2 rounded-full hover:bg-[#C0FF7C] transition text-center text-base shadow-lg text-left"
+            mainTextSlide="-130%"
+            duplicateTextStart="40%"
+            duplicateTextEnd="-100%"
+          >
+            Book a call
+          </AnimatedButton>
         </div>
       </div>
     </div>

@@ -249,78 +249,84 @@ export default function ProjectPage({ params }) {
     : projects.filter(p => p.slug !== params.id).slice(0, 3);
 
   return (
-    <div>
+    <div className="max-w-xl mx-auto lg:max-w-none">
       <Layout className="space-y-8 py-16 text-secondary-500">
         {/* Breadcrumb */}
         <div className='flex font-semibold justify-between'>
-          <div className='text-secondary-500 tracking-widest uppercase'>
-            Our Work / {displayProject.title}
+          <div className='text-secondary-500 tracking-widest uppercase mt-16'>
+            <Link href="/works" className="hover:underline cursor-pointer">Our Work</Link>
+            {" / "}
+            {displayProject.title}
           </div>
         </div>
 
-        {/* Hero Section */}
-        <div className="relative">
-          {project?.mainImage ? (
-            <div className="w-full h-[40vh] sm:h-[75vh] lg:h-[85vh] relative rounded-lg overflow-hidden -mt-6">
-              <Image
-                src={urlForImage(project.mainImage).url()}
-                alt={project.title}
-                fill
-                className="object-cover object-center"
+        <div className="px-4 lg:px-0">
+          {/* Hero Section */}
+          <div className="relative">
+            {project?.mainImage ? (
+              <div className="w-full h-48 sm:h-[75vh] lg:h-[85vh] relative rounded-xl overflow-hidden mt-4 mb-4">
+                <Image
+                  src={urlForImage(project.mainImage).url()}
+                  alt={project.title}
+                  fill
+                  className="object-cover object-center"
+                />
+              </div>
+            ) : (
+              <img
+                src={staticProject?.thumbnail}
+                alt={staticProject?.title}
+                className="w-full h-48 sm:h-[75vh] lg:h-[85vh] rounded-xl object-cover object-center mt-4 mb-4"
               />
-            </div>
+            )}
+          </div>
+
+          {/* Project Summary Section */}
+          {project ? (
+            <section className="mt-4">
+              <ProjectSummary project={project} />
+            </section>
           ) : (
-            <img
-              src={staticProject?.thumbnail}
-              alt={staticProject?.title}
-              className="w-full h-[40vh] sm:h-[75vh] lg:h-[85vh] rounded-lg object-cover object-center"
-            />
+            <section className="py-16">
+              <div className="grid lg:grid-cols-2 gap-12">
+                <div className="space-y-8">
+                  <h2 className="text-md uppercase tracking-wider font-bold">Project Summary</h2>
+                  <div className="space-y-6">
+                    <div>
+                      <h1 className="text-2xl md:text-3xl lg:text-4xl font-normal text-secondary-500 leading-tight">
+                        {staticProject.about.title}
+                      </h1>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 text-lg leading-relaxed">{staticProject.about.description}</p>
+                    </div>
+                    <div className="flex flex-row pt-8">
+                      <div>
+                        <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">YEAR</h3>
+                        <p className="text-4xl font-normal text-secondary-500">{staticProject.about.year}</p>
+                      </div>
+                      <div className="ml-2">
+                        <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">INDUSTRY</h3>
+                        <p className="text-4xl font-normal text-secondary-500">{staticProject.about.industry}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Case Study Image Grid */}
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="col-span-2 h-96 rounded-xl overflow-hidden shadow-xl">
+                    <img
+                      src={staticProject.about.image}
+                      alt="Case Study"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+            </section>
           )}
         </div>
-
-        {/* Project Summary Section */}
-        {project ? (
-          <ProjectSummary project={project} />
-        ) : (
-          <section className="py-16">
-            <div className="grid lg:grid-cols-2 gap-12">
-              <div className="space-y-8">
-                <h2 className="text-md uppercase tracking-wider font-bold">Project Summary</h2>
-                <div className="space-y-6">
-                  <div>
-                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-normal text-secondary-500 leading-tight">
-                      {staticProject.about.title}
-                    </h1>
-                  </div>
-                  <div>
-                    <p className="text-gray-600 text-lg leading-relaxed">{staticProject.about.description}</p>
-                  </div>
-                  <div className="flex flex-row pt-8">
-                    <div>
-                      <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">YEAR</h3>
-                      <p className="text-4xl font-normal text-secondary-500">{staticProject.about.year}</p>
-                    </div>
-                    <div className="ml-2">
-                      <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">INDUSTRY</h3>
-                      <p className="text-4xl font-normal text-secondary-500">{staticProject.about.industry}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Case Study Image Grid */}
-              <div className="grid grid-cols-2 gap-6">
-                <div className="col-span-2 h-96 rounded-xl overflow-hidden shadow-xl">
-                  <img
-                    src={staticProject.about.image}
-                    alt="Case Study"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
 
         {/* Results Metrics Section */}
         {project?.results && project.results.length > 0 && (
