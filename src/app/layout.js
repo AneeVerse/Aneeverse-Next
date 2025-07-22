@@ -29,6 +29,20 @@ export default function RootLayout({ children }) {
           `}
         </Script>
 
+        {/* Google Analytics gtag.js */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-0D1BWK4QQF"
+          strategy="afterInteractive"
+        />
+        <Script id="ga-gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-0D1BWK4QQF');
+          `}
+        </Script>
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
