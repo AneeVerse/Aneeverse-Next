@@ -252,7 +252,7 @@ export default function ProjectPage({ params }) {
     <div className="max-w-xl mx-auto lg:max-w-none">
       <Layout className="space-y-8 py-16 text-secondary-500">
         {/* Breadcrumb */}
-        <div className='flex font-semibold justify-between'>
+        <div className='flex font-semibold justify-between px-4 lg:px-0'>
           <div className='text-secondary-500 tracking-widest uppercase mt-16'>
             <Link href="/works" className="hover:underline cursor-pointer">Our Work</Link>
             {" / "}
