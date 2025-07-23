@@ -1,7 +1,6 @@
 import React from 'react';
-import Image from 'next/image';
-import { urlForImage } from '@/sanity/lib/image';
 import { motion } from 'framer-motion';
+import SanityImage from '../common/SanityImage';
 
 export default function ProjectGallery({ images = [] }) {
   if (!images || images.length === 0) return null;
@@ -21,8 +20,8 @@ export default function ProjectGallery({ images = [] }) {
               className="overflow-hidden rounded-xl shadow-md bg-white"
             >
               <div className="relative h-72 w-full">
-                <Image
-                  src={urlForImage(image).url()}
+                <SanityImage
+                  image={image}
                   alt={image.alt || 'Project image'}
                   fill
                   className="object-cover"
