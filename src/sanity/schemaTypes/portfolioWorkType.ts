@@ -179,23 +179,79 @@ export const portfolioWorkType = defineType({
       type: 'array',
       of: [
         defineArrayMember({
-          type: 'image',
-          options: {
-            hotspot: true,
-            storeOriginalFilename: true,
-          },
+          type: 'object',
           fields: [
+            defineField({
+              name: 'useExternalImage',
+              title: 'Use External Image URL',
+              type: 'boolean',
+              description: 'Toggle to use external image URL instead of upload',
+              initialValue: false,
+            }),
+            defineField({
+              name: 'externalImage',
+              title: 'External Image URL',
+              type: 'url',
+              description: 'Direct URL to the image (e.g., from CDN or external source)',
+              hidden: ({parent}) => !parent?.useExternalImage,
+              validation: Rule => Rule.custom((value, context) => {
+                const useExternal = (context.parent as any)?.useExternalImage;
+                if (useExternal && !value) {
+                  return 'External image URL is required when using external images';
+                }
+                return true;
+              }),
+            }),
+            defineField({
+              name: 'sanityImage',
+              title: 'Upload Image',
+              type: 'image',
+              description: 'Upload image to Sanity',
+              options: {
+                hotspot: true,
+                storeOriginalFilename: true,
+              },
+              hidden: ({parent}) => parent?.useExternalImage,
+              validation: Rule => Rule.custom(() => true),
+              fields: [
+                defineField({
+                  name: 'alt',
+                  type: 'string',
+                  title: 'Alternative text',
+                  description: 'Important for SEO and accessibility',
+                })
+              ],
+            }),
             defineField({
               name: 'alt',
               type: 'string',
               title: 'Alternative text',
+              description: 'Important for SEO and accessibility (for external images)',
+              hidden: ({parent}) => !parent?.useExternalImage,
             }),
             defineField({
               name: 'caption',
               type: 'string',
               title: 'Caption',
-            })
+              description: 'Optional caption for the image',
+            }),
           ],
+          preview: {
+            select: {
+              useExternal: 'useExternalImage',
+              externalUrl: 'externalImage',
+              sanityImage: 'sanityImage',
+              alt: 'alt',
+            },
+            prepare(selection) {
+              const {useExternal, externalUrl, sanityImage, alt} = selection;
+              return {
+                title: useExternal ? 'External Image' : 'Uploaded Image',
+                subtitle: alt || 'No alt text',
+                media: useExternal ? undefined : sanityImage,
+              };
+            },
+          },
         })
       ],
       description: 'Additional images to showcase the project',
