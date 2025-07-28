@@ -225,5 +225,28 @@ export const blockContentType = defineType({
         }
       }
     }),
+    defineArrayMember({
+      type: 'object',
+      name: 'inlineTOC',
+      title: 'Inline Table of Contents',
+      fields: [
+        {
+          name: 'show',
+          type: 'boolean',
+          title: 'Show Inline TOC',
+          initialValue: true,
+          description: 'Insert this block anywhere in your content to show the "In This Article" table of contents at that position.'
+        }
+      ],
+      preview: {
+        prepare() {
+          return {
+            title: 'Inline Table of Contents',
+            subtitle: 'Shows a list of article sections here',
+            media: EditIcon
+          }
+        }
+      }
+    }),
   ],
 })

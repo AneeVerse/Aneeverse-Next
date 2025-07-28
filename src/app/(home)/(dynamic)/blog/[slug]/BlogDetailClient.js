@@ -567,7 +567,7 @@ export default function BlogDetailClient({ params, initialPost }) {
   const memoizedContent = useMemo(() => {
     if (isPortableText) {
       // Use Portable Text renderer for rich content (links, etc.)
-      return <SanityPortableText value={rawContent} />;
+      return <SanityPortableText value={rawContent} headings={h2Headings} />;
     }
     return renderContent(rawContent);
   }, [rawContent, isPortableText]);

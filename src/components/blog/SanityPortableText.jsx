@@ -7,6 +7,27 @@ import SanityImage from '../common/SanityImage';
 import { urlForImage } from '@/sanity/lib/image';
 
 // Custom components for portable text rendering
+const InlineTOC = ({ headings }) => {
+  if (!headings || headings.length === 0) return null;
+  return (
+    <div className="inline-toc my-8 bg-[#EBFAFE] rounded-xl p-6 border border-[#D6EAF8]">
+      <div className="uppercase text-[#475467] tracking-wider text-xs font-semibold mb-3">IN THIS ARTICLE</div>
+      <ul className="space-y-2">
+        {headings.map((section, idx) => (
+          <li key={section.id}>
+            <a
+              href={`#${section.id}`}
+              className="text-base text-[#101828] font-medium underline underline-offset-2 decoration-[#101828] transition-colors hover:text-[#0A2E3D] hover:no-underline"
+            >
+              {section.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
 const components = {
   types: {
     image: ({ value }) => {
@@ -154,6 +175,7 @@ const components = {
         </div>
       );
     },
+    inlineTOC: ({ value, headings }) => <InlineTOC headings={headings} />,
   },
   marks: {
     link: ({ children, value }) => {
@@ -223,15 +245,24 @@ const components = {
   },
 };
 
-export default function SanityPortableText({ value }) {
+export default function SanityPortableText({ value, headings }) {
   console.log('SanityPortableText value:', value);
   if (!value) {
     return null;
   }
 
+  // Patch: pass headings to custom block renderers
+  const patchedComponents = {
+    ...components,
+    types: {
+      ...components.types,
+      inlineTOC: (props) => <InlineTOC headings={headings} {...props} />,
+    },
+  };
+
   return (
     <div className="portable-text">
-      <PortableText value={value} components={components} />
+      <PortableText value={value} components={patchedComponents} />
     </div>
   );
 } 
