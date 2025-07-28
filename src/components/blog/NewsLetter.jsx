@@ -2,7 +2,7 @@ import Image from "next/image";
 import AnimatedButton from "../common/AnimatedButton";
 import { useEffect, useState } from "react";
 
-const Newsletter = () => {
+const Newsletter = ({ wide = false }) => {
   const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const Newsletter = () => {
   if (!isDesktop) {
     // Mobile: Card with image on top, text/button below, solid dark bg for text
     return (
-      <div className="mt-8 mb-6 rounded-xl overflow-hidden shadow-md bg-[#f7faef] max-w-md mx-auto">
+      <div className={`mt-8 mb-6 rounded-xl overflow-hidden shadow-md bg-[#f7faef] ${wide ? 'w-full' : 'max-w-md mx-auto'}`}>
         <div className="relative w-full h-48">
           <Image
             src="/images/custom-bg.avif"
@@ -30,7 +30,7 @@ const Newsletter = () => {
             Custom video production at scale
           </h2>
           <p className="text-white text-sm mb-6 text-left">
-            Aneeverse covers all video needs—whether you're telling your brand story, launching a product or running ads. Discover how we can help you scale.
+            Aneeverse covers all video needs whether you're telling your brand story, launching a product or running ads. Discover how we can help you scale.
           </p>
           <AnimatedButton
             href="/contact"
@@ -48,7 +48,7 @@ const Newsletter = () => {
 
   // Desktop: Split horizontal, text over image
   return (
-    <div className="relative mt-10 mb-6 rounded-xl overflow-hidden shadow-md bg-[#f7faef] max-w-6xl mx-auto" style={{height: '360px'}}>
+    <div className={`relative mt-10 mb-6 rounded-xl overflow-hidden shadow-md bg-[#f7faef] ${wide ? 'w-full' : 'max-w-6xl mx-auto'}`} style={{height: '360px'}}>
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full">
         <Image
