@@ -162,7 +162,7 @@ export default function ClientBlogPage() {
             <h2 className="text-2xl font-bold text-blue-700 mb-4">Blogs Temporarily Unavailable</h2>
             <p className="text-blue-600 mb-6">Our blog section is currently undergoing maintenance. Please check back later.</p>
           </div>
-          <Newsletter />
+          <Newsletter wide={true} />
         </Layout>
       </div>
     );
@@ -236,7 +236,7 @@ export default function ClientBlogPage() {
         const renderNewsletter = (key) => (
           <div key={`newsletter-${key}`} className="bg-[#EBFAFE] pb-16">
             <Layout>
-              <Newsletter />
+              <Newsletter wide={true} />
             </Layout>
           </div>
         );
