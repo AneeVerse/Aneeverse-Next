@@ -307,3 +307,15 @@ div[class*="overflow-y-auto"]::-webkit-scrollbar {
 .toc-smooth-out {
   animation: toc-smooth-out 0.4s cubic-bezier(0.4,0,0.6,1) both;
 } 
+
+.inline-toc a {
+  color: #101828 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #101828 !important;
+}
+.inline-toc a:hover,
+.inline-toc a:active,
+.inline-toc a:focus {
+  color: #088AB2 !important;
+  text-decoration: none !important;
+} 
