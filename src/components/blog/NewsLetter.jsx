@@ -66,7 +66,7 @@ const Newsletter = ({ wide = false }) => {
             Custom video production at scale
           </h2>
           <p className="text-white text-base md:text-lg mb-6 drop-shadow-lg text-left">
-            Aneeverse covers all video needs—whether you're telling your brand story, launching a product or running ads. Discover how we can help you scale.
+            Aneeverse covers all video needs whether you're telling your brand story, launching a product or running ads. Discover how we can help you scale.
           </p>
           <AnimatedButton
             href="/contact"
