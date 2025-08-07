@@ -48,9 +48,7 @@ const TextWithVideo = () => {
               agency networks and freelance marketplaces."
             </p>
 
-            <p className="text-sm md:text-base text-gray-400 mb-4 md:mb-6">
-              - Fredrik Thomassen, Co-founder and CEO
-            </p>
+           
            
           </div>
   
