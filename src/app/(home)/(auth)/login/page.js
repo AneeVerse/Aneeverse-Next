@@ -53,9 +53,7 @@ export default function LoginPage() {
         </div>
 
         <h2 className="text-5xl font-light leading-tight z-10 text-center">
-          Unleashing
-          <br className="hidden xl:block" />
-          Creativity,
+          Unleashing Creativity,
           <br />Powering Excellence
         </h2>
 
@@ -119,7 +117,7 @@ export default function LoginPage() {
           </form>
 
           {/* Divider */}
-          <div className="my-8 flex items-center gap-4">
+          {/* <div className="my-8 flex items-center gap-4">
             <span className="flex-1 h-px bg-gray-300" />
             <span className="text-gray-500 text-sm">Or continue with</span>
             <span className="flex-1 h-px bg-gray-300" />
@@ -132,7 +130,7 @@ export default function LoginPage() {
             <button className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-white border border-gray-300 text-[#073742] hover:bg-gray-50 transition-colors">
               <FaApple size={20} /> Apple
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </main>

@@ -61,7 +61,7 @@ export default function RegisterPage() {
           </div>
           <button type="submit" className="w-full py-2.5 rounded-lg bg-[#073742] text-white font-medium hover:bg-[#085061] transition-colors">Create account</button>
         </form>
-
+{/* 
         <div className="my-6 flex items-center gap-4">
           <span className="flex-1 h-px bg-gray-200"/>
           <span className="text-gray-600 text-sm">Or register with</span>
@@ -71,7 +71,7 @@ export default function RegisterPage() {
         <div className="grid grid-cols-2 gap-3">
           <button className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-white border border-gray-200 text-[#073742] hover:bg-gray-50 transition-colors"><FcGoogle size={20}/> Google</button>
           <button className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-white border border-gray-200 text-[#073742] hover:bg-gray-50 transition-colors"><FaApple size={20}/> Apple</button>
-        </div>
+        </div> */}
       </div>
     </main>
   );
