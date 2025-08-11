@@ -117,7 +117,7 @@ const Navbar = () => {
             Book a Call
           </AnimatedButton>
           <AnimatedButton
-            href="/register"
+            href="/login"
             className="px-6 py-2 rounded-full border"
             style={{
               color: pathName.includes('/customer-stories') ? '#073742' : color.text,
