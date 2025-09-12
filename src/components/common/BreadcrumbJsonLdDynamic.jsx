@@ -49,6 +49,7 @@ export default function BreadcrumbJsonLdDynamic({
 
   const itemListElements = [
     {
+      "@type": "ListItem",
       position: 1,
       name: rootName,
       item: baseUrl,
@@ -63,6 +64,7 @@ export default function BreadcrumbJsonLdDynamic({
     const breadcrumbName = customBreadcrumbNames[segment] || toTitleCase(segment);
     
     itemListElements.push({
+      "@type": "ListItem",
       position: index + 2,
       name: breadcrumbName,
       item: `${baseUrl}${cumulativePath}`,
@@ -89,7 +91,7 @@ export default function BreadcrumbJsonLdDynamic({
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
-            itemListElement: itemListElements
+            "itemListElement": itemListElements
           })
         }}
       />
