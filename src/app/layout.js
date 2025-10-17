@@ -30,6 +30,11 @@ export default function RootLayout({ children }) {
           `}
         </Script>
 
+
+<script> (function(ss,ex){ window.ldfdr=window.ldfdr||function(){(ldfdr._q=ldfdr._q||[]).push([].slice.call(arguments));}; (function(d,s){ fs=d.getElementsByTagName(s)[0]; function ce(src){ var cs=d.createElement(s); cs.src=src; cs.async=1; fs.parentNode.insertBefore(cs,fs); }; ce('https://sc.lfeeder.com/lftracker_v1_'+ss+(ex?'_'+ex:'')+'.js'); })(document,'script'); })('p1e024BX9mK8GB6d'); </script>
+            
+
+
         {/* Google Analytics gtag.js */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-0D1BWK4QQF"
@@ -43,6 +48,9 @@ export default function RootLayout({ children }) {
             gtag('config', 'G-0D1BWK4QQF');
           `}
         </Script>
+
+          
+        
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
