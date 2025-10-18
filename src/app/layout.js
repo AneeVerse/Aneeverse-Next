@@ -30,9 +30,24 @@ export default function RootLayout({ children }) {
           `}
         </Script>
 
-
-<script> (function(ss,ex){ window.ldfdr=window.ldfdr||function(){(ldfdr._q=ldfdr._q||[]).push([].slice.call(arguments));}; (function(d,s){ fs=d.getElementsByTagName(s)[0]; function ce(src){ var cs=d.createElement(s); cs.src=src; cs.async=1; fs.parentNode.insertBefore(cs,fs); }; ce('https://sc.lfeeder.com/lftracker_v1_'+ss+(ex?'_'+ex:'')+'.js'); })(document,'script'); })('p1e024BX9mK8GB6d'); </script>
-            
+        {/* LeadFeeder Script */}
+        <Script id="leadfeeder-init" strategy="afterInteractive">
+          {`
+            (function(ss,ex){ 
+              window.ldfdr=window.ldfdr||function(){(ldfdr._q=ldfdr._q||[]).push([].slice.call(arguments));}; 
+              (function(d,s){ 
+                fs=d.getElementsByTagName(s)[0]; 
+                function ce(src){ 
+                  var cs=d.createElement(s); 
+                  cs.src=src; 
+                  cs.async=1; 
+                  fs.parentNode.insertBefore(cs,fs); 
+                }; 
+                ce('https://sc.lfeeder.com/lftracker_v1_'+ss+(ex?'_'+ex:'')+'.js'); 
+              })(document,'script'); 
+            })('p1e024BX9mK8GB6d');
+          `}
+        </Script>
 
 
         {/* Google Analytics gtag.js */}
