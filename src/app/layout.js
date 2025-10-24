@@ -3,7 +3,8 @@
 import "./globals.css";
 import Navbar from '@/components/layout/Navbar';
 import NewFooter from '@/components/layout/NewFooter';
-import BreadcrumbJsonLdDynamic from '@/components/common/BreadcrumbJsonLdDynamic';
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
+import OrganizationSchema from '@/components/seo/OrganizationSchema';
 import NextTopLoader from 'nextjs-toploader';
 import { usePathname } from 'next/navigation';
 import Script from 'next/script';
@@ -96,8 +97,11 @@ export default function RootLayout({ children }) {
         {/* Navbar for all non-studio, non-auth pages */}
         {!isStudio && !isAuth && <Navbar />}
 
+        {/* Global Organization Schema */}
+        {!isStudio && !isAuth && <OrganizationSchema />}
+
         {/* Breadcrumb Schema for all non-studio, non-auth pages */}
-        {!isStudio && !isAuth && <BreadcrumbJsonLdDynamic />}
+        {!isStudio && !isAuth && <BreadcrumbSchema />}
 
         {/* Page content */}
         {children}

@@ -3,6 +3,7 @@ import { blockContentToHtml } from '@/lib/sanity-utils';
 import { notFound } from 'next/navigation';
 import BlogDetailClient from './BlogDetailClient';
 import BlogCategoryClient from './BlogCategoryClient';
+import BlogSchema from '@/components/seo/BlogSchema';
 
 export const revalidate = 1; // Revalidate this page every 60 seconds (Incremental Static Regeneration)
 
@@ -475,6 +476,11 @@ export default async function BlogDetail({ params }) {
   }
   
   // Pass initial data to client component
-  return <BlogDetailClient params={resolvedParams} initialPost={initialPost} />;
+  return (
+    <>
+      <BlogSchema post={initialPost} />
+      <BlogDetailClient params={resolvedParams} initialPost={initialPost} />
+    </>
+  );
 }
   

@@ -3,6 +3,7 @@ import { useState } from "react";
 import Layout from "../common/Layout";
 import { Heading } from "../common/typography/Heading";
 import { AccentText } from "../common/typography/AccentText";
+import FAQSchema from "../seo/FAQSchema";
 
 const FAQItem = ({ question, answer, isOpen, onClick }) => {
   return (
@@ -108,40 +109,46 @@ export default function FAQSection() {
   ];
 
   return (
-    <section className="py-12 bg-white">
-      <Layout>
-        <div className="max-w-4xl mx-auto">
-          <Heading level="h1" className="text-center mb-12 mt-12 text-4xl">
-            <span className="text-primary-900">Frequently Asked</span>{" "}
-            <AccentText size="lg" className="text-4xl">Questions</AccentText>
-          </Heading>
+    <>
+      <FAQSchema 
+        faqData={faqs} 
+        pageTitle="Frequently Asked Questions - Aneeverse" 
+      />
+      <section className="py-12 bg-white">
+        <Layout>
+          <div className="max-w-4xl mx-auto">
+            <Heading level="h1" className="text-center mb-12 mt-12 text-4xl">
+              <span className="text-primary-900">Frequently Asked</span>{" "}
+              <AccentText size="lg" className="text-4xl">Questions</AccentText>
+            </Heading>
 
-          <div className="space-y-2">
-            {faqs.map((faq, index) => (
-              <FAQItem
-                key={index}
-                question={faq.question}
-                answer={faq.answer}
-                isOpen={index === openIndex}
-                onClick={() => setOpenIndex(index === openIndex ? -1 : index)}
-              />
-            ))}
-          </div>
+            <div className="space-y-2">
+              {faqs.map((faq, index) => (
+                <FAQItem
+                  key={index}
+                  question={faq.question}
+                  answer={faq.answer}
+                  isOpen={index === openIndex}
+                  onClick={() => setOpenIndex(index === openIndex ? -1 : index)}
+                />
+              ))}
+            </div>
 
-          <div className="mt-12 text-center">
-            <p className="text-gray-600">
-              Still have questions?{" "}
-              <a
-                href="/contact"
-                className="text-primary-500 hover:text-primary-600 font-medium"
-              >
-                Contact us
-              </a>{" "}
-              for more information.
-            </p>
+            <div className="mt-12 text-center">
+              <p className="text-gray-600">
+                Still have questions?{" "}
+                <a
+                  href="/contact"
+                  className="text-primary-500 hover:text-primary-600 font-medium"
+                >
+                  Contact us
+                </a>{" "}
+                for more information.
+              </p>
+            </div>
           </div>
-        </div>
-      </Layout>
-    </section>
+        </Layout>
+      </section>
+    </>
   );
-} 
+}
