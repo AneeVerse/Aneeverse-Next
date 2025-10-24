@@ -10,6 +10,9 @@ import { IoIosArrowForward } from "react-icons/io";
 import Newsletter from '@/components/blog/NewsLetter';
 import BlogCard from '@/components/blog/BlogCard';
 import React from 'react';
+import BlogSchema from '@/components/seo/BlogSchema';
+import FAQSchema from '@/components/seo/FAQSchema';
+import SanityImage from '@/components/common/SanityImage';
 
 // Add the import for our CSS file:
 import '../blogStyles.css';
@@ -122,6 +125,31 @@ export default function BlogDetail({ params }) {
           </div>
         ) : post ? (
           <>
+            {/* Blog Schema */}
+            <BlogSchema 
+              title={post.title}
+              description={post.description || post.shortDescription}
+              slug={post.slug}
+              author={post.author}
+              publishedAt={post.date}
+              updatedAt={post.date}
+              mainImage={post.thumbnail}
+              estimatedReadingTime={post.timeToRead}
+              categories={post.category ? [post.category] : []}
+              tags={[]}
+            />
+            
+            {/* FAQ Schema for blog posts with FAQ sections */}
+            {post.includeFaq && post.faqSection?.questions && (
+              <FAQSchema 
+                faqData={post.faqSection.questions.map(item => ({
+                  question: item.question,
+                  answer: item.answer
+                }))} 
+                pageTitle={`${post.title} - FAQ`} 
+              />
+            )}
+            
             {/* Blog Header - Superside Style */}
             <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 3rem)' }}>
               {/* Breadcrumb navigation */}
