@@ -23,7 +23,7 @@ export async function POST(request) {
     });
     
     // Check if this is a relevant content type that should trigger sitemap update
-    const relevantTypes = ['post', 'category'];
+    const relevantTypes = ['post', 'category', 'customerStory'];
     
     if (body._type && relevantTypes.includes(body._type)) {
       console.log('🔄 Triggering sitemap revalidation for content type:', body._type);
@@ -43,6 +43,14 @@ export async function POST(request) {
       if (body._type === 'category') {
         if (body.slug?.current) {
           revalidatePath(`/blog/category/${body.slug.current}`);
+        }
+      }
+      
+      // Revalidate customer story pages if it's a customer story
+      if (body._type === 'customerStory') {
+        revalidatePath('/customer-stories');
+        if (body.slug?.current) {
+          revalidatePath(`/customer-stories/${body.slug.current}`);
         }
       }
       
@@ -82,6 +90,6 @@ export async function GET() {
     message: 'Sanity webhook endpoint is active',
     timestamp: new Date().toISOString(),
     supportedMethods: ['POST'],
-    contentTypes: ['post', 'category']
+    contentTypes: ['post', 'category', 'customerStory']
   });
 }
