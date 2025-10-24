@@ -478,7 +478,18 @@ export default async function BlogDetail({ params }) {
   // Pass initial data to client component
   return (
     <>
-      <BlogSchema post={initialPost} />
+      <BlogSchema 
+        title={initialPost.title}
+        description={initialPost.description || initialPost.shortDescription}
+        slug={initialPost.slug?.current || resolvedParams.slug}
+        author={initialPost.author}
+        publishedAt={initialPost.date}
+        updatedAt={initialPost.date}
+        mainImage={initialPost.mainImage?.sanityImage?.asset?.url || initialPost.mainImage?.externalImage || initialPost.mainImage?.asset?.url}
+        estimatedReadingTime={initialPost.timeToRead}
+        categories={initialPost.category ? [initialPost.category] : []}
+        tags={[]}
+      />
       <BlogDetailClient params={resolvedParams} initialPost={initialPost} />
     </>
   );

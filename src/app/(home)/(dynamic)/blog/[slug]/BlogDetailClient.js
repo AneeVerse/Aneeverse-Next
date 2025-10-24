@@ -18,6 +18,7 @@ import TableOfContents from '@/components/blog/TableOfContents';
 import ReadTimeProgress from '@/components/blog/ReadTimeProgress';
 import AnimatedButton from '@/components/common/AnimatedButton';
 import SanityPortableText from '@/components/blog/SanityPortableText';
+import FAQSchema from '@/components/seo/FAQSchema';
 import SanityImage from '@/components/common/SanityImage';
 
 // Client-side fetch function (your existing logic)
@@ -605,6 +606,14 @@ export default function BlogDetailClient({ params, initialPost }) {
 
   return (
     <div className='bg-[#EBFAFE] py-16'>
+      {/* FAQ Schema for blog posts with FAQ sections */}
+      {post.includeFaq && faqItems.length > 0 && (
+        <FAQSchema 
+          faqData={faqItems} 
+          pageTitle={`${post.title} - FAQ`} 
+        />
+      )}
+      
       <Layout>
         {/* Blog Header - Superside Style */}
         <div className="mb-16">
@@ -933,4 +942,4 @@ export default function BlogDetailClient({ params, initialPost }) {
       </section>
     </div>
   );
-} 
+}
