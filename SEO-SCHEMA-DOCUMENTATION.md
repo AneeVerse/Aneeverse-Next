@@ -15,11 +15,13 @@ The Aneeverse website implements structured data using JSON-LD format to help se
 
 ### Schema Types Implemented:
 - **Organization Schema** - Company information and services
+- **LocalBusiness Schema** - Local business information with geo-coordinates
+- **WebSite Schema** - Website-level information with search functionality
+- **WebPage Schema** - Dynamic page-specific information (UPDATED)
 - **BreadcrumbList Schema** - Navigation breadcrumbs
 - **BlogPosting Schema** - Blog post metadata
 - **FAQPage Schema** - Frequently asked questions
-- **WebPage Schema** - General page information
-- **Service Schema** - Service-specific structured data (NEW)
+- **Service Schema** - Service-specific structured data
 
 ## Global Schemas
 
@@ -44,7 +46,93 @@ These schemas are implemented globally across all pages (except studio and auth 
 - **Services:** Website Design, SEO, Digital Marketing, Content Creation
 - **Rating:** 4.8/5 (50 reviews)
 
-### 2. Breadcrumb Schema
+## Global Schemas
+
+These schemas are implemented globally across all pages (except studio and auth pages) via the root layout component.
+
+### 1. Organization Schema
+**File:** `src/components/seo/OrganizationSchema.jsx`
+**Implementation:** Global (Root Layout)
+
+```javascript
+// Automatically included in layout.js
+<OrganizationSchema />
+```
+
+**Schema Details:**
+- **@type:** Organization
+- **Company Name:** Aneeverse
+- **Description:** Digital Marketing, Web Development, SEO Optimization, and Creative Design Services
+- **Address:** Office No. 03, Plot No. 45, Seawoods West, Navi Mumbai, Maharashtra 400706
+- **Contact:** +91-91527-55529, team@aneeverse.com
+- **Social Media:** Instagram, LinkedIn, YouTube
+- **Services:** Website Design, SEO, Digital Marketing, Content Creation
+- **Rating:** 4.8/5 (50 reviews)
+
+### 2. LocalBusiness Schema
+**File:** `src/components/seo/LocalBusinessSchema.jsx`
+**Implementation:** Global (Root Layout)
+
+```javascript
+// Automatically included in layout.js
+<LocalBusinessSchema />
+```
+
+**Schema Details:**
+- **@type:** LocalBusiness
+- **Extends:** Organization schema with local business specifics
+- **Geo Coordinates:** Latitude/Longitude for Navi Mumbai office
+- **Opening Hours:** Business operating hours
+- **Price Range:** ₹₹ (moderate pricing)
+- **Payment Methods:** Cash, Credit Card, UPI, Bank Transfer
+- **Service Area:** 50km radius from Navi Mumbai
+- **Local Services:** Website Design, Local SEO, Google My Business Optimization
+
+### 3. WebSite Schema
+**File:** `src/components/seo/WebSiteSchema.jsx`
+**Implementation:** Global (Root Layout)
+
+```javascript
+// Automatically included in layout.js
+<WebSiteSchema />
+```
+
+**Schema Details:**
+- **@type:** WebSite
+- **Website Information:** Name, URL, description
+- **Search Action:** Enables site search functionality in search results
+- **Publisher:** Links to Organization schema
+- **Language:** English (en-US)
+
+### 4. WebPage Schema (UPDATED)
+**File:** `src/components/seo/WebPageSchema.jsx`
+**Implementation:** Global (Root Layout) - Dynamic per page
+
+```javascript
+// Automatically included in layout.js
+<WebPageSchema />
+```
+
+**Schema Details:**
+- **@type:** WebPage
+- **Dynamic Content:** Title and description based on current page URL
+- **Relationships:** Links to WebSite and Organization schemas
+- **Primary Image:** High-quality office image (1200x800)
+- **Content Selectors:** 
+  - `mainContentOfPage`: "article, section" (updated for better element matching)
+  - `speakable`: ["h1", "h2", "h3"] (updated for proper heading targeting)
+- **Breadcrumbs:** Dynamic breadcrumb generation
+- **Dates:** Publication and modification timestamps
+- **Significant Links:** Important page navigation links
+
+**Recent Updates (2025):**
+- Fixed CSS selectors to match actual page elements
+- Updated `mainContentOfPage` from "main" to "article, section"
+- Updated `speakable` selectors to use "h1, h2, h3" instead of paragraph tags
+- Improved primary image with proper dimensions
+- Enhanced dynamic content generation based on pathname
+
+### 5. Breadcrumb Schema
 **File:** `src/components/seo/BreadcrumbSchema.jsx`
 **Implementation:** Global (Root Layout)
 
@@ -416,7 +504,7 @@ const serviceSchema = {
 
 ## 2025 SEO Schema Best Practices
 
-The Service Schema implementation follows the latest 2025 SEO best practices:
+The comprehensive schema implementation follows the latest 2025 SEO best practices:
 
 1. **JSON-LD Format**: Uses the recommended JSON-LD format for structured data
 2. **Complete Provider Information**: Includes comprehensive organization details
@@ -426,6 +514,27 @@ The Service Schema implementation follows the latest 2025 SEO best practices:
 6. **Validation Ready**: Structured for Google Rich Results Test validation
 7. **Mobile Optimized**: Ensures schema works across all devices
 8. **Performance Optimized**: Minimal impact on page load times
+9. **CSS Selector Accuracy**: Uses selectors that match actual page elements
+10. **Schema Relationships**: Proper linking between different schema types
+
+## Recent Updates & Changelog
+
+### January 2025 - WebPage Schema Optimization
+- **Fixed CSS Selectors**: Updated `mainContentOfPage` from "main" to "article, section" for better element matching
+- **Improved Speakable Selectors**: Changed from ["h1", "h2", "p"] to ["h1", "h2", "h3"] for proper heading targeting
+- **Enhanced Primary Image**: Updated to high-quality office image with correct dimensions (1200x800)
+- **Validation Improvements**: Resolved Schema.org validator warnings for CSS selector matching
+- **Dynamic Content Enhancement**: Better pathname-based title and description generation
+
+### Schema Validation Status
+- ✅ **Organization Schema**: Fully validated, no errors
+- ✅ **LocalBusiness Schema**: Fully validated, no errors  
+- ✅ **WebSite Schema**: Fully validated, no errors
+- ✅ **WebPage Schema**: Recently optimized, validation confirmed
+- ✅ **BreadcrumbList Schema**: Fully validated, no errors
+- ✅ **BlogPosting Schema**: Fully validated, no errors
+- ✅ **FAQPage Schema**: Fully validated, no errors
+- ✅ **Service Schema**: Fully validated, no errors
 
 ---
 
