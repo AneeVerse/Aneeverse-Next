@@ -6,6 +6,7 @@ import DynamicCreativeSection from '@/components/services/common/DynamicCreative
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
 import SocialMediaFAQSection from '@/components/services/social-media-creatives/SocialMediaFAQSection'
 import SocialMediaStateSection from '@/components/services/social-media-creatives/SocialMediaStateSection'
+import ServiceSchema from '@/components/seo/ServiceSchema'
 import React from 'react'
 
 
@@ -97,6 +98,35 @@ const page = () => {
   ];
   return (
     <div>
+      <ServiceSchema 
+        serviceName="Social Media Creatives"
+        serviceType="ProfessionalService"
+        description="Professional social media creative design services that create engaging visuals, graphics, and content to boost brand awareness and audience engagement across all platforms."
+        slug="services/social-media-creatives"
+        priceRange="₹5,000 - ₹75,000"
+        category="Social Media Design"
+        features={[
+          "Social Media Branding",
+          "Ad Creatives Design",
+          "Content Graphics",
+          "Story Templates",
+          "Post Designs",
+          "Video Graphics",
+          "Brand Consistency",
+          "Platform Optimization"
+        ]}
+        benefits={[
+          "Increased Engagement",
+          "Brand Recognition",
+          "Professional Appearance",
+          "Higher Reach",
+          "Better Conversion Rates",
+          "Consistent Brand Image"
+        ]}
+        serviceOutput="Social Media Graphics & Creatives"
+        audience="Businesses, Influencers, Brands, Startups"
+        additionalType="https://schema.org/CreativeWork"
+      />
       <CommonServicesHeroSection
         title="Social Media Creatives"
         subtitle="Engaging Visuals, Maximum Reach"

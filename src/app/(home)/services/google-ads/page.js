@@ -5,8 +5,8 @@ import DynamicOurWorks from '@/components/home/DynamicOurWorks'
 import DynamicCreativeSection from '@/components/services/common/DynamicCreativeSection'
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
 import GoogleAdsFAQSection from '@/components/services/google-ads/GoogleAdsFAQSection'
-
 import GoogleAdsStateSection from '@/components/services/google-ads/GoogleAdsStateSection'
+import ServiceSchema from '@/components/seo/ServiceSchema'
 import React from 'react'
 
 
@@ -99,6 +99,35 @@ const page = () => {
   ];
   return (
     <div>
+      <ServiceSchema 
+        serviceName="Google Ads Management"
+        serviceType="ProfessionalService"
+        description="Expert Google Ads campaign management services to maximize ROI, drive high-quality traffic, and increase conversions through strategic paid search advertising."
+        slug="services/google-ads"
+        priceRange="₹20,000 - ₹2,00,000"
+        category="Paid Advertising"
+        features={[
+          "Google Ads Campaign Management",
+          "Keyword Research & Bidding",
+          "Ad Copy Creation",
+          "Landing Page Optimization",
+          "Performance Tracking",
+          "ROI Optimization",
+          "A/B Testing",
+          "Conversion Tracking"
+        ]}
+        benefits={[
+          "Immediate Traffic Results",
+          "Higher ROI",
+          "Targeted Audience Reach",
+          "Measurable Results",
+          "Cost-Effective Advertising",
+          "Increased Conversions"
+        ]}
+        serviceOutput="Google Ads Campaigns"
+        audience="Businesses, E-commerce, Service Providers"
+        additionalType="https://schema.org/AdvertisingAgency"
+      />
       <CommonServicesHeroSection
         title="Google Ads Services"
         subtitle="Maximize Your ROI with Google Ads"

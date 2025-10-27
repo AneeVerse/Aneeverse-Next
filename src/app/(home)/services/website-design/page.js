@@ -6,6 +6,7 @@ import DynamicCreativeSection from '@/components/services/common/DynamicCreative
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
 import WebsiteDesignFAQSection from '@/components/services/website-design/WebsiteDesignFAQSection'
 import WebsiteDesignStateSections from '@/components/services/website-design/WebsiteDesignStateSections'
+import ServiceSchema from '@/components/seo/ServiceSchema'
 import React from 'react'
 
 // metadata
@@ -101,6 +102,35 @@ const page = () => {
 
   return (
     <div>
+      <ServiceSchema 
+        serviceName="Website Design"
+        serviceType="ProfessionalService"
+        description="Professional website design and development services that create conversion-focused, user-centric websites tailored to your business goals and brand identity."
+        slug="services/website-design"
+        priceRange="₹25,000 - ₹2,00,000"
+        category="Web Design & Development"
+        features={[
+          "Custom Website Design",
+          "Responsive Web Development",
+          "User Experience (UX) Design",
+          "Website Strategy",
+          "Content Development",
+          "E-commerce Solutions",
+          "Landing Page Design",
+          "Website Optimization"
+        ]}
+        benefits={[
+          "Professional Online Presence",
+          "Improved User Engagement",
+          "Higher Conversion Rates",
+          "Mobile-Friendly Design",
+          "SEO-Optimized Structure",
+          "Fast Loading Speed"
+        ]}
+        serviceOutput="Custom Website"
+        audience="Businesses, Startups, E-commerce Stores"
+        additionalType="https://schema.org/WebDesign"
+      />
       <CommonServicesHeroSection
         title="Web Design"
         subtitle="Creative Services"

@@ -6,6 +6,7 @@ import DynamicCreativeSection from '@/components/services/common/DynamicCreative
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
 import GmbOptimizationFAQSection from '@/components/services/gmb-optimization/GmbOptimizationFAQSection'
 import GmbOptimizationStateSection from '@/components/services/gmb-optimization/GmbOptimizationStateSection'
+import ServiceSchema from '@/components/seo/ServiceSchema'
 import React from 'react'
 
 // metadata
@@ -96,6 +97,37 @@ const page = () => {
   ];
   return (
     <div>
+      <ServiceSchema
+        serviceName="GMB Optimization Services"
+        serviceType="LocalBusiness"
+        description="Boost your local visibility with expert GMB optimization services. From profile setup to review management, we help you attract more customers and improve local search rankings."
+        slug="gmb-optimization"
+        priceRange="$500-$2000"
+        category="Digital Marketing"
+        features={[
+          "GMB Profile Setup & Optimization",
+          "Review Management & Response",
+          "Local SEO Integration",
+          "Business Information Optimization",
+          "Photo & Video Management",
+          "Insights & Analytics Tracking",
+          "Local Citation Building",
+          "Q&A Management"
+        ]}
+        benefits={[
+          "Improved Local Search Visibility",
+          "Higher Customer Trust & Credibility",
+          "Increased Website Traffic",
+          "More Phone Calls & Directions",
+          "Better Online Reputation",
+          "Enhanced Local Rankings",
+          "Competitive Advantage",
+          "Measurable Results"
+        ]}
+        serviceOutput="Fully optimized Google My Business profile with improved local search visibility, professional business presentation, and ongoing management for sustained growth."
+        audience="Local businesses, service providers, retail stores, restaurants, healthcare practices, and any business targeting local customers."
+        additionalType="https://schema.org/ProfessionalService"
+      />
       <CommonServicesHeroSection
         title="GMB Optimization Services"
         subtitle="Google My Business Optimization"

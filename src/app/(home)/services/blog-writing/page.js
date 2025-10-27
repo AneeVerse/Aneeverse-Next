@@ -6,6 +6,7 @@ import DynamicOurWorks from '@/components/home/DynamicOurWorks'
 import DynamicCreativeSection from '@/components/services/common/DynamicCreativeSection'
 import DynamicStateSection from '@/components/services/common/DynamicStateSection'
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
+import ServiceSchema from '@/components/seo/ServiceSchema'
 import React from 'react'
 
 
@@ -120,6 +121,35 @@ const page = () => {
   ];
   return (
     <div>
+      <ServiceSchema 
+        serviceName="Blog Writing Services"
+        serviceType="ProfessionalService"
+        description="Transform your brand's online presence with compelling blog content. Our expert writers craft engaging, SEO-friendly articles that drive traffic, boost credibility, and enhance audience engagement."
+        slug="services/blog-writing"
+        priceRange="₹2,000 - ₹25,000"
+        category="Content Writing"
+        features={[
+          "SEO-Optimized Blogs",
+          "Industry Research",
+          "Content Strategy",
+          "Thought Leadership Articles",
+          "Keyword Integration",
+          "Engaging Headlines",
+          "Content Planning",
+          "Editorial Calendar"
+        ]}
+        benefits={[
+          "Increased Organic Traffic",
+          "Enhanced Brand Authority",
+          "Better Search Rankings",
+          "Improved Audience Engagement",
+          "Higher Conversion Rates",
+          "Consistent Content Flow"
+        ]}
+        serviceOutput="Blog Articles & Content"
+        audience="Businesses, Content Marketers, Bloggers"
+        additionalType="https://schema.org/CreativeWork"
+      />
       <CommonServicesHeroSection
         title="Blog Writing Services"
         subtitle="Content That Engages & Converts"

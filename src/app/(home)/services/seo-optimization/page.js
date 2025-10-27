@@ -6,6 +6,7 @@ import DynamicCreativeSection from '@/components/services/common/DynamicCreative
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
 import SeoFAQSection from '@/components/services/seo-optimization/SeoFAQSection'
 import SeoStateSection from '@/components/services/seo-optimization/SeoStateSection'
+import ServiceSchema from '@/components/seo/ServiceSchema'
 import React from 'react'
 
 
@@ -97,6 +98,35 @@ const page = () => {
   ];
   return (
     <div>
+      <ServiceSchema 
+        serviceName="SEO Optimization"
+        serviceType="ProfessionalService"
+        description="Comprehensive SEO optimization services to maximize search engine visibility, improve rankings, and drive quality organic traffic to your website."
+        slug="services/seo-optimization"
+        priceRange="₹15,000 - ₹1,50,000"
+        category="Search Engine Optimization"
+        features={[
+          "Keyword Research & Analysis",
+          "On-Page SEO Optimization",
+          "Technical SEO Audits",
+          "Content Optimization",
+          "Link Building Strategies",
+          "Local SEO Services",
+          "SEO Performance Tracking",
+          "Competitor Analysis"
+        ]}
+        benefits={[
+          "Higher Search Rankings",
+          "Increased Organic Traffic",
+          "Better Online Visibility",
+          "Improved User Experience",
+          "Long-term Growth",
+          "Cost-Effective Marketing"
+        ]}
+        serviceOutput="SEO-Optimized Website"
+        audience="Businesses, E-commerce, Local Services"
+        additionalType="https://schema.org/SearchEngineOptimization"
+      />
       <CommonServicesHeroSection
         title="SEO Optimization Services"
         subtitle="Data-Driven SEO Strategies"

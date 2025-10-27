@@ -6,6 +6,7 @@ import CommonServicesHeroSection from '@/components/services/common/CommonHeroSe
 import DynamicOurWorks from '@/components/home/DynamicOurWorks'
 import DynamicCreativeSection from '@/components/services/common/DynamicCreativeSection'
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
+import ServiceSchema from '@/components/seo/ServiceSchema'
 import React from 'react'
 
 
@@ -98,7 +99,36 @@ const page = () => {
   ];
   return (
     <div>
-           <CommonServicesHeroSection
+      <ServiceSchema 
+        serviceName="Brochure Design Services"
+        serviceType="ProfessionalService"
+        description="From concept to completion, we create brochures that effectively communicate your brand story with professional design and compelling visuals."
+        slug="services/brochure-design"
+        priceRange="₹3,000 - ₹30,000"
+        category="Graphic Design"
+        features={[
+          "Corporate Brochure Design",
+          "Product Catalogs",
+          "Tri-fold Brochures",
+          "Interactive PDF Brochures",
+          "Branding Materials",
+          "Print-Ready Designs",
+          "Digital Brochures",
+          "Custom Layouts"
+        ]}
+        benefits={[
+          "Professional Brand Image",
+          "Effective Communication",
+          "High-Quality Print Materials",
+          "Brand Consistency",
+          "Increased Customer Engagement",
+          "Versatile Marketing Tool"
+        ]}
+        serviceOutput="Brochure Designs & Print Materials"
+        audience="Businesses, Marketing Teams, Sales Teams"
+        additionalType="https://schema.org/CreativeWork"
+      />
+      <CommonServicesHeroSection
             title="Brochure Design Services"
             subtitle="Creative Brochure Designs"
             description="   From concept to completion, we create brochures that effectively communicate your brand story."
