@@ -37,18 +37,8 @@ const ServiceSchema = ({
       "name": serviceName,
       "description": description,
       "url": serviceUrl || `https://aneeverse.com/services/${slug}`,
-      "provider": {
-        "@type": "Organization",
-        "@id": "https://aneeverse.com/#organization",
-        "name": "Aneeverse",
-        "alternateName": "Aneeverse Creative Solutions",
-        "url": "https://aneeverse.com",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://aneeverse.com/logo.png",
-          "width": 200,
-          "height": 60
-        },
+      // Add address directly to ProfessionalService
+      ...(serviceType === "ProfessionalService" && {
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Office No. 03, Plot No. 45, near HP Petrol Pump, Seawoods West, Sector 44",
@@ -56,53 +46,56 @@ const ServiceSchema = ({
           "addressRegion": "Maharashtra",
           "postalCode": "400706",
           "addressCountry": "IN"
-        },
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "telephone": "+91-91527-55529",
-          "email": "team@aneeverse.com",
-          "contactType": "customer service",
-          "availableLanguage": availableLanguage,
-          "areaServed": serviceArea
-        },
-        "sameAs": [
-          "https://www.instagram.com/aneeverse/",
-          "https://www.linkedin.com/company/aneeverse",
-          "https://www.youtube.com/@AneeVerse"
-        ],
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "reviewCount": "50",
-          "bestRating": "5",
-          "worstRating": "1"
         }
-      },
-      "serviceType": serviceName,
+      }),
+      // Only add provider for non-ProfessionalService types
+      ...(serviceType !== "ProfessionalService" && {
+        "provider": {
+          "@type": "Organization",
+          "@id": "https://aneeverse.com/#organization",
+          "name": "Aneeverse",
+          "alternateName": "Aneeverse Creative Solutions",
+          "url": "https://aneeverse.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://aneeverse.com/logo.png",
+            "width": 200,
+            "height": 60
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Office No. 03, Plot No. 45, near HP Petrol Pump, Seawoods West, Sector 44",
+            "addressLocality": "Seawoods, Navi Mumbai",
+            "addressRegion": "Maharashtra",
+            "postalCode": "400706",
+            "addressCountry": "IN"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+91-91527-55529",
+            "email": "team@aneeverse.com",
+            "contactType": "customer service",
+            "availableLanguage": availableLanguage,
+            "areaServed": serviceArea
+          },
+          "sameAs": [
+            "https://www.instagram.com/aneeverse/",
+            "https://www.linkedin.com/company/aneeverse",
+            "https://www.youtube.com/@AneeVerse"
+          ],
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "reviewCount": "50",
+            "bestRating": "5",
+            "worstRating": "1"
+          }
+        }
+      }),
       "areaServed": {
         "@type": "Country",
         "name": serviceArea
       },
-      "availableLanguage": availableLanguage,
-      "category": category || "Digital Marketing Services",
-      "isRelatedTo": [
-        {
-          "@type": "Thing",
-          "name": "Digital Marketing"
-        },
-        {
-          "@type": "Thing",
-          "name": "Web Development"
-        },
-        {
-          "@type": "Thing",
-          "name": "SEO"
-        },
-        {
-          "@type": "Thing",
-          "name": "Creative Design"
-        }
-      ],
       "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": serviceUrl || `https://aneeverse.com/services/${slug}`
@@ -116,23 +109,26 @@ const ServiceSchema = ({
             "http://schema.org/DesktopWebPlatform",
             "http://schema.org/MobileWebPlatform"
           ]
-        },
-        "expectsAcceptanceOf": {
-          "@type": "Offer",
-          "category": "Service Consultation"
         }
       },
       "brand": {
         "@type": "Brand",
         "name": "Aneeverse"
-      },
-      "inLanguage": "en-US",
-      "dateModified": new Date().toISOString(),
-      "isAccessibleForFree": false
+      }
     };
 
-    // Add pricing information if provided
-    if (price || priceRange) {
+    // Add category if provided (only for Service type, not ProfessionalService)
+    if (category && serviceType !== "ProfessionalService") {
+      serviceSchema.category = category;
+    }
+
+    // Add available languages if provided (only for Service type, not ProfessionalService)
+    if (availableLanguage && availableLanguage.length > 0 && serviceType !== "ProfessionalService") {
+      serviceSchema.availableLanguage = availableLanguage;
+    }
+
+    // Add pricing information if provided (only for Service type, not ProfessionalService)
+    if ((price || priceRange) && serviceType !== "ProfessionalService") {
       serviceSchema.offers = {
         "@type": "Offer",
         "priceCurrency": currency,
@@ -170,7 +166,6 @@ const ServiceSchema = ({
         "name": `${serviceName} Features`,
         "itemListElement": features.map((feature, index) => ({
           "@type": "Offer",
-          "position": index + 1,
           "itemOffered": {
             "@type": "Service",
             "name": feature
@@ -179,24 +174,21 @@ const ServiceSchema = ({
       };
     }
 
-    // Add service output/deliverables
-    if (serviceOutput) {
-      serviceSchema.serviceOutput = {
-        "@type": "Thing",
-        "name": serviceOutput
-      };
+    // Add service output/deliverables (only for Service type, not ProfessionalService)
+    if (serviceOutput && serviceType !== "ProfessionalService") {
+      serviceSchema.produces = serviceOutput;
     }
 
-    // Add target audience
-    if (audience) {
+    // Add target audience (only for Service type, not ProfessionalService)
+    if (audience && serviceType !== "ProfessionalService") {
       serviceSchema.audience = {
         "@type": "Audience",
         "audienceType": audience
       };
     }
 
-    // Add benefits as about entities
-    if (benefits.length > 0) {
+    // Add benefits as about entities (only for Service type, not ProfessionalService)
+    if (benefits.length > 0 && serviceType !== "ProfessionalService") {
       serviceSchema.about = benefits.map(benefit => ({
         "@type": "Thing",
         "name": benefit

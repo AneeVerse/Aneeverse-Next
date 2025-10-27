@@ -18,14 +18,14 @@ const BlogSchema = ({
     if (!title || !slug) return;
 
     // Remove any existing blog schema to avoid duplicates
-    const existingScript = document.querySelector('script[data-schema="blog-posting"]');
+    const existingScript = document.querySelector('script[data-schema="article"]');
     if (existingScript) {
       existingScript.remove();
     }
 
     const blogSchema = {
       "@context": "https://schema.org",
-      "@type": "BlogPosting",
+      "@type": "Article",
       "headline": title,
       "description": description,
       "url": `https://aneeverse.com/blog/${slug}`,
@@ -102,13 +102,13 @@ const BlogSchema = ({
     // Create and append the script tag
     const script = document.createElement('script');
     script.type = 'application/ld+json';
-    script.setAttribute('data-schema', 'blog-posting');
+    script.setAttribute('data-schema', 'article');
     script.textContent = JSON.stringify(blogSchema);
     document.head.appendChild(script);
 
     // Cleanup function to remove script when component unmounts
     return () => {
-      const scriptToRemove = document.querySelector('script[data-schema="blog-posting"]');
+      const scriptToRemove = document.querySelector('script[data-schema="article"]');
       if (scriptToRemove) {
         scriptToRemove.remove();
       }
