@@ -6,6 +6,7 @@ import DynamicCreativeSection from '@/components/services/common/DynamicCreative
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
 import EmailCampaignFAQSection from '@/components/services/email-campaign/EmailCampaignFAQSection'
 import EmailCampaignStateSection from '@/components/services/email-campaign/EmailCampaignStateSection'
+import ServiceSchema from '@/components/seo/ServiceSchema'
 import React from 'react'
 
 
@@ -100,7 +101,36 @@ const page = () => {
   ];
   return (
     <div>
-           <CommonServicesHeroSection
+      <ServiceSchema 
+        serviceName="Email Campaign Services"
+        serviceType="ProfessionalService"
+        description="Unlock the full potential of email marketing with expertly designed campaigns that drive results. We optimize every aspect of your email strategy, from the design to the delivery."
+        slug="services/email-campaign"
+        priceRange="₹8,000 - ₹80,000"
+        category="Email Marketing"
+        features={[
+          "Email Campaign Strategy",
+          "Automated Email Sequences",
+          "A/B Testing",
+          "Performance Analytics",
+          "Mobile-Optimized Emails",
+          "Segmentation & Targeting",
+          "Campaign Management",
+          "Deliverability Optimization"
+        ]}
+        benefits={[
+          "Higher Open Rates",
+          "Increased Click-Through Rates",
+          "Better Customer Retention",
+          "Automated Lead Nurturing",
+          "Improved ROI",
+          "Enhanced Customer Engagement"
+        ]}
+        serviceOutput="Email Marketing Campaigns"
+        audience="Businesses, E-commerce, Marketing Teams"
+        additionalType="https://schema.org/MarketingService"
+      />
+      <CommonServicesHeroSection
             title="Email Campaign Services"
             subtitle="Data-Driven Email Campaigns"
             description="  Unlock the full potential of email marketing with expertly designed campaigns that drive results.

@@ -6,6 +6,7 @@ import DynamicCreativeSection from '@/components/services/common/DynamicCreative
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
 import LandingPagesFAQSection from '@/components/services/landign-pages/LandingPagesFAQSection'
 import LandingPagesStateSection from '@/components/services/landign-pages/LandingPagesStateSection'
+import ServiceSchema from '@/components/seo/ServiceSchema'
 import React from 'react'
 
 
@@ -101,6 +102,37 @@ const page = () => {
 ];
   return (
     <div>
+      <ServiceSchema
+        serviceName="Landing Page Design Services"
+        serviceType="Service"
+        description="High-converting landing pages crafted to maximize engagement, lead generation, and sales. Our expert team designs pages tailored to your goals, ensuring a seamless user experience."
+        slug="landing-pages"
+        priceRange="$800-$3000"
+        category="Web Design"
+        features={[
+          "Conversion-Focused Design",
+          "A/B Testing Integration",
+          "Mobile-Responsive Layouts",
+          "Lead Capture Forms",
+          "Performance Analytics Setup",
+          "SEO Optimization",
+          "Fast Loading Speed",
+          "Custom CTA Design"
+        ]}
+        benefits={[
+          "Higher Conversion Rates",
+          "Increased Lead Generation",
+          "Better User Experience",
+          "Improved ROI",
+          "Professional Brand Image",
+          "Mobile-Friendly Design",
+          "Data-Driven Insights",
+          "Competitive Advantage"
+        ]}
+        serviceOutput="Custom-designed, high-converting landing pages optimized for your specific goals, complete with analytics tracking and conversion optimization features."
+        audience="Businesses running marketing campaigns, e-commerce companies, SaaS providers, service-based businesses, and anyone looking to improve their online conversion rates."
+        additionalType="https://schema.org/ProfessionalService"
+      />
       <CommonServicesHeroSection
         title="Landing Page Design Services"
         subtitle="Performance-Driven Design"

@@ -6,6 +6,7 @@ import DynamicCreativeSection from '@/components/services/common/DynamicCreative
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
 import MetaAdsFAQSection from '@/components/services/meta-ads/MetaAdsFAQSection'
 import MetaAdsStateSection from '@/components/services/meta-ads/MetaAdsStateSection'
+import ServiceSchema from '@/components/seo/ServiceSchema'
 import React from 'react'
 
 
@@ -99,6 +100,35 @@ const page = () => {
   ];
   return (
     <div>
+      <ServiceSchema 
+        serviceName="Meta Ads Management"
+        serviceType="ProfessionalService"
+        description="Professional Meta Ads management services to drive targeted traffic, boost conversions, and scale your business through strategic Facebook and Instagram advertising campaigns."
+        slug="services/meta-ads"
+        priceRange="₹15,000 - ₹1,50,000"
+        category="Social Media Advertising"
+        features={[
+          "Targeted Audience Campaigns",
+          "Creative Ad Design",
+          "Performance Optimization",
+          "A/B Testing",
+          "Conversion Tracking",
+          "Custom Meta Ads Solutions",
+          "Campaign Management",
+          "ROI Analysis"
+        ]}
+        benefits={[
+          "Increased Brand Awareness",
+          "Higher Conversion Rates",
+          "Targeted Audience Reach",
+          "Cost-Effective Advertising",
+          "Measurable Results",
+          "Enhanced Social Media Presence"
+        ]}
+        serviceOutput="Meta Ads Campaigns"
+        audience="Businesses, E-commerce, Social Media Marketers"
+        additionalType="https://schema.org/AdvertisingAgency"
+      />
       <CommonServicesHeroSection
         title="Meta Ads Services"
         subtitle="Maximize Your Meta Ads Impact"

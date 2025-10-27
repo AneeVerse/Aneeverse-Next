@@ -7,6 +7,7 @@ import DynamicSupportSection from '@/components/services/common/DynamicSupportSe
 import EmailDesignAiDesignSection from '@/components/services/email-design/EmailDesignAiDesignSection'
 import EmailDesignFAQSection from '@/components/services/email-design/EmailDesignFAQSection'
 import EmailDesignStateSection from '@/components/services/email-design/EmailDesignStateSection'
+import ServiceSchema from '@/components/seo/ServiceSchema'
 import React from 'react'
 
 
@@ -101,7 +102,36 @@ const page = () => {
 ];
   return (
     <div>
-           <CommonServicesHeroSection
+      <ServiceSchema 
+        serviceName="Email Design Services"
+        serviceType="ProfessionalService"
+        description="Creative email design services that combine strategy and visual appeal to deliver stunning email templates that engage your audience and drive results."
+        slug="services/email-design"
+        priceRange="₹5,000 - ₹50,000"
+        category="Email Marketing"
+        features={[
+          "Email Design",
+          "Email Strategy",
+          "Email Automation",
+          "Email Design Systems",
+          "Responsive Templates",
+          "Brand Integration",
+          "A/B Testing",
+          "Performance Optimization"
+        ]}
+        benefits={[
+          "Higher Open Rates",
+          "Increased Click-Through Rates",
+          "Better Brand Recognition",
+          "Improved Customer Engagement",
+          "Professional Appearance",
+          "Mobile-Friendly Designs"
+        ]}
+        serviceOutput="Email Templates & Campaigns"
+        audience="Businesses, E-commerce, Marketing Teams"
+        additionalType="https://schema.org/CreativeWork"
+      />
+      <CommonServicesHeroSection
             title="Email Design Services"
             subtitle="Creative Services"
             description="  Our web design services combine creativity and strategy to deliver

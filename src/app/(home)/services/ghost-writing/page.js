@@ -6,6 +6,7 @@ import DynamicCreativeSection from '@/components/services/common/DynamicCreative
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
 import GhostWritingFAQSection from '@/components/services/ghost-writing/GhostWritingFAQSection'
 import GhostWritingStateSection from '@/components/services/ghost-writing/GhostWritingStateSection'
+import ServiceSchema from '@/components/seo/ServiceSchema'
 import React from 'react'
 
 
@@ -99,6 +100,35 @@ const page = () => {
   ];
   return (
     <div>
+      <ServiceSchema 
+        serviceName="Ghost Writing Services"
+        serviceType="ProfessionalService"
+        description="Transform your ideas into compelling narratives. Our ghostwriters craft books, articles, speeches, and more—seamlessly adapting to your unique voice and style."
+        slug="services/ghost-writing"
+        priceRange="₹10,000 - ₹5,00,000"
+        category="Content Writing"
+        features={[
+          "Book & Memoir Writing",
+          "Business Content Writing",
+          "Speech Writing",
+          "Article Writing",
+          "Voice Adaptation",
+          "Research & Development",
+          "Editing & Proofreading",
+          "Confidential Service"
+        ]}
+        benefits={[
+          "Professional Quality Content",
+          "Maintains Your Voice",
+          "Complete Confidentiality",
+          "Expert Research",
+          "Time-Saving Solution",
+          "Enhanced Brand Authority"
+        ]}
+        serviceOutput="Books, Articles, Speeches & Content"
+        audience="Authors, Business Leaders, Executives"
+        additionalType="https://schema.org/CreativeWork"
+      />
       <CommonServicesHeroSection
         title="Ghost writing Services"
         subtitle="Your Words, Our Expertise"

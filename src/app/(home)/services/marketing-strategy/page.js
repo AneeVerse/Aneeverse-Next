@@ -6,6 +6,7 @@ import DynamicSupportSection from '@/components/services/common/DynamicSupportSe
 import MarketingStrategyFAQSection from '@/components/services/marketing-strategy/MarketingStrategyFAQSection'
 import MarketingStrategyFeatureSection from '@/components/services/marketing-strategy/MarketingStrategyFeatureSection'
 import MarketingStrategyStateSection from '@/components/services/marketing-strategy/MarketingStrategyStateSection'
+import ServiceSchema from '@/components/seo/ServiceSchema'
 import React from 'react'
 
 
@@ -64,6 +65,37 @@ const page = () => {
   ];
   return (
     <div>
+      <ServiceSchema
+        serviceName="Marketing Strategy Services"
+        serviceType="Service"
+        description="Empower your business with data-driven marketing initiatives, plans, and exceptional insights from our team of expert consultants. Leverage our marketing strategy services for an on-demand marketing team extension."
+        slug="marketing-strategy"
+        priceRange="$1000-$5000"
+        category="Digital Marketing"
+        features={[
+          "Marketing Insight Projects",
+          "Marketing Foundations Insights",
+          "Brand Positioning Strategy",
+          "Competitive Analysis",
+          "Target Audience Research",
+          "Marketing Plan Development",
+          "Performance Metrics Setup",
+          "Strategic Consultation"
+        ]}
+        benefits={[
+          "Data-Driven Decision Making",
+          "Improved Brand Positioning",
+          "Better Target Audience Understanding",
+          "Increased Marketing ROI",
+          "Competitive Advantage",
+          "Clear Marketing Direction",
+          "Measurable Growth",
+          "Strategic Clarity"
+        ]}
+        serviceOutput="Comprehensive marketing strategy with actionable plans, strategic direction, and data-driven insights to enhance your brand's online presence and drive measurable results."
+        audience="Businesses looking to improve their marketing effectiveness, startups needing strategic direction, established companies seeking growth, and marketing teams requiring expert guidance."
+        additionalType="https://schema.org/ProfessionalService"
+      />
       <CommonServicesHeroSection
         title="Marketing Strategy Services"
         subtitle="Creative Services"

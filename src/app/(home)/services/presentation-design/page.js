@@ -6,6 +6,7 @@ import DynamicCreativeSection from '@/components/services/common/DynamicCreative
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
 import PresentationiDesignFAQSection from '@/components/services/presentation-design/PresentationiDesignFAQSection'
 import PresentationiDesignStateSection from '@/components/services/presentation-design/PresentationiDesignStateSection'
+import ServiceSchema from '@/components/seo/ServiceSchema'
 import React from 'react'
 
 // metadata
@@ -97,6 +98,37 @@ const page = () => {
   ];
   return (
     <div>
+      <ServiceSchema
+        serviceName="Presentation Design Services"
+        serviceType="Service"
+        description="Create visually compelling and engaging presentations that resonate with your audience. From pitch decks to corporate presentations, we bring your ideas to life."
+        slug="presentation-design"
+        priceRange="$300-$1500"
+        category="Design"
+        features={[
+          "Pitch Deck Design",
+          "Corporate Presentation Design",
+          "Sales Presentation Creation",
+          "Investor Presentation Design",
+          "Training Material Design",
+          "Conference Presentation Design",
+          "Template Creation",
+          "Brand-Consistent Design"
+        ]}
+        benefits={[
+          "Professional Visual Impact",
+          "Clear Message Communication",
+          "Increased Audience Engagement",
+          "Enhanced Brand Credibility",
+          "Improved Presentation Success",
+          "Time-Saving Solutions",
+          "Consistent Brand Identity",
+          "Memorable Content Delivery"
+        ]}
+        serviceOutput="Professionally designed presentations with compelling visuals, clear messaging, and brand-consistent design that captivates audiences and drives results."
+        audience="Business professionals, entrepreneurs, sales teams, executives, educators, and anyone needing impactful presentations for meetings, pitches, or conferences."
+        additionalType="https://schema.org/ProfessionalService"
+      />
       <CommonServicesHeroSection
         title="Presentation Designs"
         subtitle="Impactful Presentation Design"

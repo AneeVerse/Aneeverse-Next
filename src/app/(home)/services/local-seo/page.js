@@ -6,6 +6,7 @@ import DynamicCreativeSection from '@/components/services/common/DynamicCreative
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
 import LocalSeoFAQSection from '@/components/services/local-seo/LocalSeoFAQSection'
 import LocalSeoStateSection from '@/components/services/local-seo/LocalSeoStateSection'
+import ServiceSchema from '@/components/seo/ServiceSchema'
 import React from 'react'
 
 
@@ -99,6 +100,37 @@ const page = () => {
 
   return (
     <div>
+      <ServiceSchema
+        serviceName="Local SEO Optimization Services"
+        serviceType="LocalBusiness"
+        description="Enhance your local search presence with our expert local SEO services. We optimize your business for local visibility and drive targeted traffic from your area."
+        slug="local-seo"
+        priceRange="$600-$2500"
+        category="Digital Marketing"
+        features={[
+          "Local SEO Audits",
+          "Google My Business Optimization",
+          "Local Citation Building",
+          "Local Keyword Research",
+          "Review Management",
+          "Local Schema Markup",
+          "NAP Consistency",
+          "Local Link Building"
+        ]}
+        benefits={[
+          "Higher Local Search Rankings",
+          "Increased Local Visibility",
+          "More Qualified Local Traffic",
+          "Better Online Reputation",
+          "Improved Customer Trust",
+          "Higher Conversion Rates",
+          "Competitive Local Advantage",
+          "Measurable ROI"
+        ]}
+        serviceOutput="Comprehensive local SEO optimization with improved local search rankings, enhanced online presence, and increased visibility in your target geographic area."
+        audience="Local businesses, service providers, retail stores, restaurants, healthcare practices, law firms, and any business targeting customers in specific geographic locations."
+        additionalType="https://schema.org/ProfessionalService"
+      />
       <CommonServicesHeroSection
         title="Local SEO Optimization Services"
         subtitle="Data-Driven Local SEO Strategies"

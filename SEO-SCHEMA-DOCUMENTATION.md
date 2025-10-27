@@ -19,6 +19,7 @@ The Aneeverse website implements structured data using JSON-LD format to help se
 - **BlogPosting Schema** - Blog post metadata
 - **FAQPage Schema** - Frequently asked questions
 - **WebPage Schema** - General page information
+- **Service Schema** - Service-specific structured data (NEW)
 
 ## Global Schemas
 
@@ -113,7 +114,70 @@ These schemas are implemented globally across all pages (except studio and auth 
 - **Flexible:** Handles string, portable text, and object answer formats
 - **Context:** Optional page title for better categorization
 
+### 5. Service Schema (NEW)
+**File:** `src/components/seo/ServiceSchema.jsx`
+**Implementation:** Service pages
 
+**Used In:**
+- `src/app/(home)/services/page.js` (Main services page)
+- `src/app/(home)/services/website-design/page.js`
+- `src/app/(home)/services/seo-optimization/page.js`
+- `src/app/(home)/services/social-media-creatives/page.js`
+- All other service-specific pages
+
+```javascript
+<ServiceSchema 
+  serviceName="Website Design"
+  serviceType="ProfessionalService"
+  description="Professional website design and development services..."
+  slug="services/website-design"
+  priceRange="₹25,000 - ₹2,00,000"
+  category="Web Design & Development"
+  features={["Custom Website Design", "Responsive Development", ...]}
+  benefits={["Professional Online Presence", "Improved Engagement", ...]}
+  serviceOutput="Custom Website"
+  audience="Businesses, Startups, E-commerce Stores"
+  additionalType="https://schema.org/WebDesign"
+/>
+```
+
+**Schema Details:**
+- **@type:** Service
+- **Comprehensive:** Service name, description, pricing, features
+- **Provider:** Aneeverse organization information
+- **Contact:** Phone, email, address details
+- **Social Media:** All social media profiles
+- **Rating:** Aggregate rating (4.8/5 based on 50 reviews)
+- **Availability:** Service hours and availability
+- **Target Audience:** Specific audience targeting
+- **Benefits:** Service benefits and outcomes
+- **Additional Types:** Specific schema.org subtypes for different services
+
+**Service-Specific Implementations:**
+
+1. **Main Services Page** (`/services`)
+   - Service Name: "Digital Marketing Services"
+   - Category: "Digital Marketing & Web Development"
+   - Features: All comprehensive services offered
+   - Price Range: ₹10,000 - ₹5,00,000
+
+2. **Website Design** (`/services/website-design`)
+   - Service Name: "Website Design"
+   - Category: "Web Design & Development"
+   - Additional Type: https://schema.org/WebDesign
+   - Price Range: ₹25,000 - ₹2,00,000
+
+3. **SEO Optimization** (`/services/seo-optimization`)
+   - Service Name: "SEO Optimization"
+   - Category: "Search Engine Optimization"
+   - Additional Type: https://schema.org/SearchEngineOptimization
+   - Price Range: ₹15,000 - ₹1,50,000
+
+4. **Social Media Creatives** (`/services/social-media-creatives`)
+   - Service Name: "Social Media Creatives"
+   - Category: "Social Media Design"
+   - Additional Type: https://schema.org/CreativeWork
+   - Price Range: ₹5,000 - ₹75,000
 
 ## Schema Components
 
@@ -277,7 +341,93 @@ const faqSchema = {
 };
 ```
 
+### ServiceSchema.jsx (NEW)
+
+```javascript
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": serviceName,
+  "serviceType": serviceType,
+  "description": description,
+  "url": `https://aneeverse.com/${slug}`,
+  "provider": {
+    "@type": "Organization",
+    "name": "Aneeverse",
+    "url": "https://aneeverse.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aneeverse.com/logo.png",
+      "width": 200,
+      "height": 60
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Office No. 03, Plot No. 45, Seawoods West",
+      "addressLocality": "Navi Mumbai",
+      "addressRegion": "Maharashtra",
+      "postalCode": "400706",
+      "addressCountry": "IN"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91-91527-55529",
+      "email": "team@aneeverse.com",
+      "contactType": "customer service"
+    },
+    "sameAs": [
+      "https://www.instagram.com/aneeverse/",
+      "https://www.linkedin.com/company/aneeverse/",
+      "https://www.youtube.com/@aneeverse"
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "50"
+    }
+  },
+  "offers": {
+    "@type": "Offer",
+    "priceRange": priceRange,
+    "priceCurrency": "INR",
+    "availability": "https://schema.org/InStock",
+    "validFrom": new Date().toISOString()
+  },
+  "category": category,
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": `${serviceName} Features`,
+    "itemListElement": features.map((feature, index) => ({
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": feature
+      }
+    }))
+  },
+  "serviceOutput": serviceOutput,
+  "audience": {
+    "@type": "Audience",
+    "audienceType": audience
+  },
+  "additionalType": additionalType
+};
+```
+
+## 2025 SEO Schema Best Practices
+
+The Service Schema implementation follows the latest 2025 SEO best practices:
+
+1. **JSON-LD Format**: Uses the recommended JSON-LD format for structured data
+2. **Complete Provider Information**: Includes comprehensive organization details
+3. **Rich Service Details**: Features, benefits, pricing, and target audience
+4. **Proper Schema Types**: Uses appropriate Schema.org types and subtypes
+5. **Dynamic Content**: Generates schema based on actual page content
+6. **Validation Ready**: Structured for Google Rich Results Test validation
+7. **Mobile Optimized**: Ensures schema works across all devices
+8. **Performance Optimized**: Minimal impact on page load times
+
 ---
 
-**Last Updated:** December 2024
+**Last Updated:** January 2025
 **Maintained By:** Aneeverse Development Team
