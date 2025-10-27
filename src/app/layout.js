@@ -5,6 +5,9 @@ import Navbar from '@/components/layout/Navbar';
 import NewFooter from '@/components/layout/NewFooter';
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
 import OrganizationSchema from '@/components/seo/OrganizationSchema';
+import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema';
+import WebPageSchema from '@/components/seo/WebPageSchema';
+import HomeSchema from '@/components/seo/HomeSchema';
 import NextTopLoader from 'nextjs-toploader';
 import { usePathname } from 'next/navigation';
 import Script from 'next/script';
@@ -99,6 +102,15 @@ export default function RootLayout({ children }) {
 
         {/* Global Organization Schema */}
         {!isStudio && !isAuth && <OrganizationSchema />}
+
+        {/* Global LocalBusiness Schema */}
+        {!isStudio && !isAuth && <LocalBusinessSchema />}
+
+        {/* Global WebPage Schema */}
+        {!isStudio && !isAuth && <WebPageSchema />}
+
+        {/* Home Schema for homepage */}
+        {!isStudio && !isAuth && pathname === '/' && <HomeSchema />}
 
         {/* Breadcrumb Schema for all non-studio, non-auth pages */}
         {!isStudio && !isAuth && <BreadcrumbSchema />}

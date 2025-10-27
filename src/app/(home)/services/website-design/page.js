@@ -130,6 +130,7 @@ const page = () => {
         serviceOutput="Custom Website"
         audience="Businesses, Startups, E-commerce Stores"
         additionalType="https://schema.org/WebDesign"
+        availableLanguage={["English", "Hindi"]}
       />
       <CommonServicesHeroSection
         title="Web Design"
