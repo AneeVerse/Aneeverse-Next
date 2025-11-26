@@ -21,20 +21,20 @@ export default function WebsiteServices() {
       imgUrl: "/images/services/website/landing-page.png",
       pageUrl: "/services/email-campaign",
     },
-    {
-      title: "Google Ads",
-      description:
-        "Targeted ads to maximize ROI. Reach your audience with Google Ads campaigns that drive results.",
-      imgUrl: "/images/services/website/gmb-optimization.png",
-      pageUrl: "/services/google-ads",
-    },
-    {
-      title: "Meta Ads",
-      description:
-        "Creative campaigns that get noticed. Stand out with creative Meta Ads campaigns that drive engagement.",
-      imgUrl: "/images/services/website/seo-optimization.png",
-      pageUrl: "/services/meta-ads",
-    },
+    // {
+    //   title: "Google Ads",
+    //   description:
+    //     "Targeted ads to maximize ROI. Reach your audience with Google Ads campaigns that drive results.",
+    //   imgUrl: "/images/services/website/gmb-optimization.png",
+    //   pageUrl: "/services/google-ads",
+    // },
+    // {
+    //   title: "Meta Ads",
+    //   description:
+    //     "Creative campaigns that get noticed. Stand out with creative Meta Ads campaigns that drive engagement.",
+    //   imgUrl: "/images/services/website/seo-optimization.png",
+    //   pageUrl: "/services/meta-ads",
+    // },
   ];
 
   return (

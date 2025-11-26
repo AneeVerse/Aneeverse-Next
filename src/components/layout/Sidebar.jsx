@@ -27,8 +27,8 @@ const menuCategories = [
       { name: "Website Design", description: "Stunning websites built to engage.", icon: <FaDesktop />, link: "/services/website-design" },
       { name: "Landing Pages", description: "High-converting pages for your campaigns.", icon: <FaPager />, link: "/services/landing-pages" },
       { name: "SEO Optimization", description: "Boost your search rankings with expert SEO.", icon: <FaSearch />, link: "/services/seo-optimization" },
-      { name: "GMB Optimization", description: "Dominate local searches with GMB excellence.", icon: <FaMapMarkerAlt />, link: "/services/gmb-optimization" },
-      { name: "Local SEO", description: "Reach your audience with targeted local SEO strategies.", icon: <FaLocationArrow />, link: "/services/local-seo" },
+      // { name: "GMB Optimization", description: "Dominate local searches with GMB excellence.", icon: <FaMapMarkerAlt />, link: "/services/gmb-optimization" },
+      // { name: "Local SEO", description: "Reach your audience with targeted local SEO strategies.", icon: <FaLocationArrow />, link: "/services/local-seo" },
       { name: "Email Design", description: "Engaging email templates that convert.", icon: <FaEnvelopeOpenText />, link: "/services/email-design" },
     ],
   },
@@ -39,8 +39,8 @@ const menuCategories = [
     items: [
       { name: "Marketing Strategy", description: "Grow your brand with expert consultants.", icon: <FaChartPie />, link: "/services/marketing-strategy" },
       { name: "Email Campaign", description: "Personalized email campaigns that convert.", icon: <FaEnvelope />, link: "/services/email-campaign" },
-      { name: "Google Ads", description: "Targeted ads to maximize ROI.", icon: <FaGoogle />, link: "/services/google-ads" },
-      { name: "Meta Ads", description: "Creative campaigns that get noticed.", icon: <FaFacebook />, link: "/services/meta-ads" },
+      // { name: "Google Ads", description: "Targeted ads to maximize ROI.", icon: <FaGoogle />, link: "/services/google-ads" },
+      // { name: "Meta Ads", description: "Creative campaigns that get noticed.", icon: <FaFacebook />, link: "/services/meta-ads" },
     ],
   },
   {

@@ -24,8 +24,8 @@ const ServicesMegaMenu = ({color}) => {
          },
         { name: "Landing Pages", description: "High-converting pages for your campaigns.", icon: <FaPager /> },
         { name: "SEO Optimization", description: "Boost your search rankings with expert SEO.", icon: <FaSearch /> },
-        { name: "GMB Optimization", description: "Dominate local searches with GMB excellence.", icon: <FaMapMarkerAlt /> },
-        { name: "Local SEO", description: "Reach your audience with targeted local SEO strategies.", icon: <FaLocationArrow /> },
+        // { name: "GMB Optimization", description: "Dominate local searches with GMB excellence.", icon: <FaMapMarkerAlt /> },
+        // { name: "Local SEO", description: "Reach your audience with targeted local SEO strategies.", icon: <FaLocationArrow /> },
         { name: "Email Design", description: "Engaging email templates that convert.", icon: <FaEnvelopeOpenText /> },
       ],
     },
@@ -36,8 +36,8 @@ const ServicesMegaMenu = ({color}) => {
       items: [
         { name: "Marketing Strategy", description: "Grow your brand with expert consultants.", icon: <FaChartPie /> },
         { name: "Email Campaign", description: "Personalized email campaigns that convert.", icon: <FaEnvelope /> },
-        { name: "Google Ads", description: "Targeted ads to maximize ROI.", icon: <FaGoogle /> },
-        { name: "Meta Ads", description: "Creative campaigns that get noticed.", icon: <FaFacebook /> },
+        // { name: "Google Ads", description: "Targeted ads to maximize ROI.", icon: <FaGoogle /> },
+        // { name: "Meta Ads", description: "Creative campaigns that get noticed.", icon: <FaFacebook /> },
       ],
     },
     {

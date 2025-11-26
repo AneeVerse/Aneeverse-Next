@@ -28,18 +28,18 @@ const data = [
     url: "/services/seo-optimization",
     image: "/images/home/creative/creative2.png"
   },
-  {
-    firstTitle: "GMB", secondTitle: "Optimization",
-    tags: ["Google My Business", "Local Ranking", "Map SEO", "Business Profile", "Review Management"],
-    url: "/services/gmb-optimization",
-    image: "/images/home/creative/creative4.png"
-  },
-  {
-    firstTitle: "Local", secondTitle: "SEO",
-    tags: ["Geo-Targeting", "NAP Consistency", "Local Listings", "Customer Reviews", "Local Backlinks"],
-    url: "/services/local-seo",
-    image: "/images/home/creative/creative1.png"
-  },
+  // {
+  //   firstTitle: "GMB", secondTitle: "Optimization",
+  //   tags: ["Google My Business", "Local Ranking", "Map SEO", "Business Profile", "Review Management"],
+  //   url: "/services/gmb-optimization",
+  //   image: "/images/home/creative/creative4.png"
+  // },
+  // {
+  //   firstTitle: "Local", secondTitle: "SEO",
+  //   tags: ["Geo-Targeting", "NAP Consistency", "Local Listings", "Customer Reviews", "Local Backlinks"],
+  //   url: "/services/local-seo",
+  //   image: "/images/home/creative/creative1.png"
+  // },
   {
     firstTitle: "Email", secondTitle: "Design",
     tags: ["Responsive Emails", "Newsletter Templates", "HTML Emails", "Transactional Emails", "Marketing Campaigns"],
@@ -58,18 +58,18 @@ const data = [
     url: "/services/email-campaign",
     image: "/images/home/creative/creative3.png"
   },
-  {
-    firstTitle: "Google", secondTitle: "Ads",
-    tags: ["PPC", "Keyword Targeting", "Ad Copywriting", "Performance Tracking", "Conversion Optimization"],
-    url: "/services/google-ads",
-    image: "/images/home/creative/creative1.png"
-  },
-  {
-    firstTitle: "Meta", secondTitle: "Ads",
-    tags: ["Facebook Ads", "Instagram Ads", "Audience Targeting", "Video Ads", "Retargeting Campaigns"],
-    url: "/services/meta-ads",
-    image: "/images/home/creative/creative2.png"
-  },
+  // {
+  //   firstTitle: "Google", secondTitle: "Ads",
+  //   tags: ["PPC", "Keyword Targeting", "Ad Copywriting", "Performance Tracking", "Conversion Optimization"],
+  //   url: "/services/google-ads",
+  //   image: "/images/home/creative/creative1.png"
+  // },
+  // {
+  //   firstTitle: "Meta", secondTitle: "Ads",
+  //   tags: ["Facebook Ads", "Instagram Ads", "Audience Targeting", "Video Ads", "Retargeting Campaigns"],
+  //   url: "/services/meta-ads",
+  //   image: "/images/home/creative/creative2.png"
+  // },
   {
     firstTitle: "Influencer", secondTitle: "Marketing",
     tags: ["Brand Collaborations", "Social Proof", "Sponsored Posts", "Influencer Outreach", "Engagement Growth"],
