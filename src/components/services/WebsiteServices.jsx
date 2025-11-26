@@ -28,20 +28,20 @@ export default function WebsiteServices() {
       imgUrl: "/images/services/website/seo-optimization.png",
       pageUrl: "/services/seo-optimization",
     },
-    {
-      title: "GMB Optimization",
-      description:
-        "Enhance your Google My Business profile to attract more local customers and improve search visibility.",
-      imgUrl: "/images/services/website/gmb-optimization.png",
-      pageUrl: "/services/gmb-optimization",
-    },
-    {
-      title: "Local SEO",
-      description:
-        "Drive local traffic to your business with targeted SEO strategies tailored for your location.",
-      imgUrl: "/images/services/website/email-design.png",
-      pageUrl: "/services/local-seo",
-    },
+    // {
+    //   title: "GMB Optimization",
+    //   description:
+    //     "Enhance your Google My Business profile to attract more local customers and improve search visibility.",
+    //   imgUrl: "/images/services/website/gmb-optimization.png",
+    //   pageUrl: "/services/gmb-optimization",
+    // },
+    // {
+    //   title: "Local SEO",
+    //   description:
+    //     "Drive local traffic to your business with targeted SEO strategies tailored for your location.",
+    //   imgUrl: "/images/services/website/email-design.png",
+    //   pageUrl: "/services/local-seo",
+    // },
     {
       title: "Email Design",
       description:
