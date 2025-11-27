@@ -296,3 +296,11 @@ body{
   .prose ol li::before {
     content: none !important;
   }
+
+  /* GSAP Transform Support - Ensure transforms work correctly */
+  .marquee-vertical,
+  .marquee-vertical-reverse {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }

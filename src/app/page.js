@@ -1,17 +1,29 @@
+import dynamic from "next/dynamic";
 import HeroSection from "../components/home/HeroSection";
-import TestimonialsSection from "@/components/home/TestimonialsSection";
-import SlidingLogos from "@/components/home/SlidingLogos";
-import HumanCreativity from "@/components/home/HumanCreativity";
-import SupportSection from "@/components/home/SupportSection";
-import CreativeSection from "@/components/home/CreativeSection";
-import CommandCenter from "@/components/home/CommandCenter";
-import TableComponent from "@/components/home/TableComponent";
-import DynamicOurWorks from "@/components/home/DynamicOurWorks";
-import FeaturesSection from "@/components/home/FeaturesSection";
-import TestimonialSlider from "@/components/about/TestimonialSlider";
-import WeRecommend from "@/components/home/WeRecommend";
-import DiscoveryCall from "@/components/home/DiscoveryCall";
-import BottomAboutSection from "@/components/home/BottomAboutSection";
+import LazySection from "@/components/common/LazySection";
+
+// Lazy load all components below the fold using dynamic imports
+// Note: ssr: false is not allowed in Server Components in Next.js 15
+// Components are already client components, so they'll work without it
+const SlidingLogos = dynamic(() => import("@/components/home/SlidingLogos"));
+
+const HumanCreativity = dynamic(() => import("@/components/home/HumanCreativity"));
+
+const CreativeSection = dynamic(() => import("@/components/home/CreativeSection"));
+
+const CommandCenter = dynamic(() => import("@/components/home/CommandCenter"));
+
+const TableComponent = dynamic(() => import("@/components/home/TableComponent"));
+
+const DynamicOurWorks = dynamic(() => import("@/components/home/DynamicOurWorks"));
+
+const TestimonialSlider = dynamic(() => import("@/components/about/TestimonialSlider"));
+
+const WeRecommend = dynamic(() => import("@/components/home/WeRecommend"));
+
+const DiscoveryCall = dynamic(() => import("@/components/home/DiscoveryCall"));
+
+const BottomAboutSection = dynamic(() => import("@/components/home/BottomAboutSection"));
 
 // NEW: Default SEO metadata for the homepage
 export const metadata = {
@@ -45,18 +57,51 @@ export const metadata = {
 export default function Home() {
   return (
     <div>
+      {/* HeroSection loads immediately - above the fold content */}
       <HeroSection />
-      <SlidingLogos />
-      <HumanCreativity />
-      <CreativeSection />
-      <CommandCenter />
-      <TableComponent />
-      <DynamicOurWorks />
-      <TestimonialSlider />
-      <WeRecommend />
+      
+      {/* All other components lazy load when they're about to enter viewport */}
+      <LazySection>
+        <SlidingLogos />
+      </LazySection>
+      
+      <LazySection>
+        <HumanCreativity />
+      </LazySection>
+      
+      <LazySection>
+        <CreativeSection />
+      </LazySection>
+      
+      <LazySection>
+        <CommandCenter />
+      </LazySection>
+      
+      <LazySection>
+        <TableComponent />
+      </LazySection>
+      
+      <LazySection>
+        <DynamicOurWorks />
+      </LazySection>
+      
+      <LazySection>
+        <TestimonialSlider />
+      </LazySection>
+      
+      <LazySection>
+        <WeRecommend />
+      </LazySection>
+      
       {/* <FeaturesSection /> */}
-      <DiscoveryCall />
-      <BottomAboutSection />
+      
+      <LazySection>
+        <DiscoveryCall />
+      </LazySection>
+      
+      <LazySection>
+        <BottomAboutSection />
+      </LazySection>
     </div>
   );
 }
