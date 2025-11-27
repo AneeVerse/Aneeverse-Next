@@ -10,6 +10,7 @@ import DynamicOurWorks from "@/components/home/DynamicOurWorks";
 import FeaturesSection from "@/components/home/FeaturesSection";
 import TestimonialSlider from "@/components/about/TestimonialSlider";
 import WeRecommend from "@/components/home/WeRecommend";
+import DiscoveryCall from "@/components/home/DiscoveryCall";
 import BottomAboutSection from "@/components/home/BottomAboutSection";
 
 // NEW: Default SEO metadata for the homepage
@@ -54,6 +55,7 @@ export default function Home() {
       <TestimonialSlider />
       <WeRecommend />
       <FeaturesSection />
+      <DiscoveryCall />
       <BottomAboutSection />
     </div>
   );
