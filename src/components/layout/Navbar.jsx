@@ -15,7 +15,7 @@ const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathName = usePathname();
   const [scrolled, setScrolled] = useState(false);
-  
+
   // Check if current path is in the Why Us section
   const isWhyUsSection = pathName === "/about-us" || pathName === "/our-team";
 
@@ -60,8 +60,10 @@ const Navbar = () => {
 
   return (
     <nav
-      style={{ 
-        backgroundColor: pathName.includes('/customer-stories') ? '#EBFAFE' : color.bg 
+      style={{
+        backgroundColor: scrolled
+          ? (pathName.includes('/customer-stories') ? '#EBFAFE' : color.bg)
+          : (pathName === '/' ? 'rgba(7, 55, 66, 0)' : (pathName.includes('/customer-stories') ? '#EBFAFE' : color.bg))
       }}
       className="fixed top-0 w-full h-[70px] sm:h-[80px] flex items-center z-30 transition-all duration-300"
     >

@@ -26,7 +26,8 @@ export default {
         Rock_Salt: ['Rock Salt', 'cursive'],
         'sans': ['Inter', 'sans-serif'], // Primary font
         'accent': ['Rock Salt', 'cursive'], // Accent font
-        'helonik': ['Helonik Regular', 'sans-serif'] // Adding Helonik font
+        'helonik': ['Helonik Regular', 'sans-serif'], // Adding Helonik font
+        'bw-gradual': ['Bw Gradual', 'sans-serif']
       },
       spacing: {
         'type-lg': '1rem md:2rem', // Responsive spacing
@@ -42,7 +43,7 @@ export default {
         card: '300px'
       },
       colors: {
-        primary:{
+        primary: {
           100: "#E0F7FA",
           500: "#EBFAFE",
           900: "#073742",
@@ -53,7 +54,7 @@ export default {
           900: "#FF6F00",
         },
 
-      
+
         orange: {
           100: "#ffe3d3",
           900: "#ff6f00",
