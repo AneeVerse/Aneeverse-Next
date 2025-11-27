@@ -1,6 +1,7 @@
 import HeroSection from "../components/home/HeroSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import SlidingLogos from "@/components/home/SlidingLogos";
+import HumanCreativity from "@/components/home/HumanCreativity";
 import SupportSection from "@/components/home/SupportSection";
 import CreativeSection from "@/components/home/CreativeSection";
 import TableComponent from "@/components/home/TableComponent";
@@ -43,6 +44,7 @@ export default function Home() {
     <div>
       <HeroSection />
       <SlidingLogos />
+      <HumanCreativity />
       <CreativeSection />
       <TableComponent />
       <DynamicOurWorks />

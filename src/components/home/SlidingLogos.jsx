@@ -1,136 +1,89 @@
 "use client"
-import React, { useEffect } from 'react';
+import React from 'react';
 import Layout from '../common/Layout';
 import { motion } from 'framer-motion';
 
+// New logos from the logo directory
 const logos = [
-    "/images/logos/bharathaksha2.png",
-    "/images/logos/ishanyafoundation.png",
-    "/images/logos/deepakfertilizer.png",
-    "/images/logos/amazon.png",
-   
-    "/images/logos/coinbase.png",
-    "/images/logos/meta.png",
-    "/images/logos/reddit.png",
-    "/images/logos/salesforce.png",
-    "/images/logos/shopify.png",
-    "/images/logos/webflow.png",
-    "/images/logos/figma.png",
-    "/images/logos/google.png",
-    "/images/logos/ishanyafoundation.png",
+  "/images/home/logo/ishaniya foundashion logo 1.png",
+  "/images/home/logo/gilmoreoak logo 2.png",
+  "/images/home/logo/deepak fertilizers logo 3.png",
+  "/images/home/logo/Tiger Terrain logo 4.png",
+  "/images/home/logo/mesmerize india logo 5.png",
+  "/images/home/logo/novino logo 6.png",
+  "/images/home/logo/opus clip 7.png",
+  "/images/home/logo/Nisha Roadways logo 8.png",
+  "/images/home/logo/you com logo 9.png",
+  "/images/home/logo/aomni logo 10.png",
+  "/images/home/logo/bharathaksha foundashion logo 11.png",
 ];
 
 const slideVariants = {
-  animate: (direction) => ({
-    x: direction === 'left' ? [0, '-50%'] : ['-50%', 0],
+  animate: {
+    x: ['-50%', 0],
     transition: {
       x: {
         repeat: Infinity,
         repeatType: 'loop',
-        duration: 100,
+        duration: 30,
         ease: 'linear',
       },
     },
-  }),
-};
-
-const SliderLogo = ({ direction }) => {
-  return (
-    <div className="relative overflow-hidden w-full">
-      <motion.div
-        className="flex h-[60px] sm:h-[80px] gap-4 sm:gap-8 min-w-max"
-        variants={slideVariants}
-        animate="animate"
-        custom={direction}
-      >
-        {/* First set of logos */}
-        {logos.map((logo, ind) => {
-          // Check specific logos to resize
-          const isIshanya = logo.includes('ishanyafoundation');
-          const isBharathaksha = logo.includes('bharathaksha');
-          const isDeepak = logo.includes('deepakfertilizer');
-          
-          return (
-            <div
-              key={ind}
-              className="flex h-full py-3 px-4 sm:py-4 sm:px-6 min-w-fit items-center justify-center"
-            >
-              <img 
-                src={logo} 
-                alt={`Logo ${ind}: ${logo}`} 
-                className={`w-auto ${isIshanya || isBharathaksha ? 'h-[120px] sm:h-[120px]' : isDeepak ? 'h-[100px] sm:h-[100px]' : 'h-[32px] sm:h-[30px]'} object-contain opacity-70 hover:opacity-100 transition-opacity duration-300`} 
-                onError={(e) => {
-                  console.error(`Failed to load logo: ${logo}`);
-                  e.target.onerror = null; // Prevent infinite loop
-                  e.target.alt = `Error loading: ${logo}`;
-                  e.target.src = "/images/logos/placeholder-logo.png"; // Try to show a placeholder
-                }}
-              />
-            </div>
-          );
-        })}
-        
-        {/* Duplicate the entire logo set for seamless looping */}
-        {logos.map((logo, ind) => {
-          // Check specific logos to resize
-          const isIshanya = logo.includes('ishanyafoundation');
-          const isBharathaksha = logo.includes('bharathaksha');
-          const isDeepak = logo.includes('deepakfertilizer');
-          
-          return (
-            <div
-              key={`dup-${ind}`}
-              className="flex h-full py-3 px-4 sm:py-4 sm:px-6 min-w-fit items-center justify-center"
-            >
-              <img 
-                src={logo} 
-                alt={`Logo ${ind}: ${logo}`} 
-                className={`w-auto ${isIshanya || isBharathaksha ? 'h-[120px] sm:h-[120px]' : isDeepak ? 'h-[100px] sm:h-[100px]' : 'h-[32px] sm:h-[30px]'} object-contain opacity-70 hover:opacity-100 transition-opacity duration-300`} 
-                onError={(e) => {
-                  console.error(`Failed to load logo: ${logo}`);
-                  e.target.onerror = null; // Prevent infinite loop
-                  e.target.alt = `Error loading: ${logo}`;
-                  e.target.src = "/images/logos/placeholder-logo.png"; // Try to show a placeholder
-                }}
-              />
-            </div>
-          );
-        })}
-      </motion.div>
-    </div>
-  );
+  },
 };
 
 const SlidingLogos = () => {
-  // Debug which logos are actually loading
-  useEffect(() => {
-    logos.forEach((logo, index) => {
-      const img = new window.Image();
-      img.onload = () => console.log(`Logo ${index} loaded successfully: ${logo}`);
-      img.onerror = () => console.error(`Logo ${index} failed to load: ${logo}`);
-      img.src = logo;
-    });
-  }, []);
-
   return (
-    <div className="relative bg-primary-500 pt-12 pb-16 sm:py-20 overflow-hidden">
+    <div className="relative bg-[#03151A] py-12 sm:py-16 overflow-hidden">
       <Layout>
-        <h2 className="text-center text-xl md:text-2xl lg:text-3xl font-medium text-gray-700 mb-12">
-          Trusted by 500+ of the world's biggest brands
-        </h2>
+        <div className="mb-8">
+          <h2 className="text-left text-sm sm:text-base md:text-lg font-bold text-white/90">
+            Trusted by the world's fastest growing startups and established brands.
+          </h2>
+        </div>
+
         <div className="relative">
           {/* Left fade overlay */}
-          <div className="absolute top-0 left-0 w-[40px] sm:w-[100px] lg:w-[200px] h-full z-10 bg-gradient-to-r from-primary-500 via-primary-500/90 to-transparent"></div>
-          
+          <div className="absolute top-0 left-0 w-[60px] sm:w-[100px] lg:w-[150px] h-full z-10 bg-gradient-to-r from-[#03151A] via-[#03151A]/80 to-transparent pointer-events-none"></div>
+
           {/* Right fade overlay */}
-          <div className="absolute z-10 top-0 right-0 w-[40px] sm:w-[100px] lg:w-[200px] h-full bg-gradient-to-l from-primary-500 via-primary-500/90 to-transparent"></div>
-          
-          {/* First slider - moving left */}
-          <SliderLogo direction="left" />
-          
-          {/* Second slider - moving right */}
-          <div className="mt-6 sm:mt-8">
-            <SliderLogo direction="right" />
+          <div className="absolute z-10 top-0 right-0 w-[60px] sm:w-[100px] lg:w-[150px] h-full bg-gradient-to-l from-[#03151A] via-[#03151A]/80 to-transparent pointer-events-none"></div>
+
+          {/* Single slider row */}
+          <div className="relative overflow-hidden w-full">
+            <motion.div
+              className="flex gap-6 sm:gap-10 md:gap-12 lg:gap-16 min-w-max"
+              variants={slideVariants}
+              animate="animate"
+            >
+              {/* First set of logos */}
+              {logos.map((logo, ind) => (
+                <div
+                  key={ind}
+                  className="flex items-center justify-center"
+                >
+                  <img
+                    src={logo}
+                    alt={`Brand logo ${ind + 1}`}
+                    className="h-[30px] sm:h-[35px] md:h-[40px] w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300 filter brightness-0 invert"
+                  />
+                </div>
+              ))}
+
+              {/* Duplicate logos for seamless looping */}
+              {logos.map((logo, ind) => (
+                <div
+                  key={`dup-${ind}`}
+                  className="flex items-center justify-center"
+                >
+                  <img
+                    src={logo}
+                    alt={`Brand logo ${ind + 1}`}
+                    className="h-[30px] sm:h-[35px] md:h-[40px] w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300 filter brightness-0 invert"
+                  />
+                </div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </Layout>
