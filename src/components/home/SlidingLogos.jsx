@@ -34,7 +34,7 @@ const slideVariants = {
 
 const SlidingLogos = () => {
   return (
-    <div className="relative bg-[#03151A] py-12 sm:py-16 overflow-hidden">
+    <div className="relative bg-[#03151a] py-12 sm:py-16 overflow-hidden">
       <Layout>
         <div className="mb-8">
           <h2 className="text-left text-sm sm:text-base md:text-lg font-bold text-white/90">
@@ -44,10 +44,10 @@ const SlidingLogos = () => {
 
         <div className="relative">
           {/* Left fade overlay */}
-          <div className="absolute top-0 left-0 w-[60px] sm:w-[100px] lg:w-[150px] h-full z-10 bg-gradient-to-r from-[#03151A] via-[#03151A]/80 to-transparent pointer-events-none"></div>
+          <div className="absolute top-0 left-0 w-[60px] sm:w-[100px] lg:w-[150px] h-full z-10 bg-gradient-to-r from-[#03151a] via-[#03151a]/80 to-transparent pointer-events-none"></div>
 
           {/* Right fade overlay */}
-          <div className="absolute z-10 top-0 right-0 w-[60px] sm:w-[100px] lg:w-[150px] h-full bg-gradient-to-l from-[#03151A] via-[#03151A]/80 to-transparent pointer-events-none"></div>
+          <div className="absolute z-10 top-0 right-0 w-[60px] sm:w-[100px] lg:w-[150px] h-full bg-gradient-to-l from-[#03151a] via-[#03151a]/80 to-transparent pointer-events-none"></div>
 
           {/* Single slider row */}
           <div className="relative overflow-hidden w-full">

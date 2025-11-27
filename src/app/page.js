@@ -4,10 +4,12 @@ import SlidingLogos from "@/components/home/SlidingLogos";
 import HumanCreativity from "@/components/home/HumanCreativity";
 import SupportSection from "@/components/home/SupportSection";
 import CreativeSection from "@/components/home/CreativeSection";
+import CommandCenter from "@/components/home/CommandCenter";
 import TableComponent from "@/components/home/TableComponent";
 import DynamicOurWorks from "@/components/home/DynamicOurWorks";
 import FeaturesSection from "@/components/home/FeaturesSection";
 import TestimonialSlider from "@/components/about/TestimonialSlider";
+import WeRecommend from "@/components/home/WeRecommend";
 import BottomAboutSection from "@/components/home/BottomAboutSection";
 
 // NEW: Default SEO metadata for the homepage
@@ -46,9 +48,11 @@ export default function Home() {
       <SlidingLogos />
       <HumanCreativity />
       <CreativeSection />
+      <CommandCenter />
       <TableComponent />
       <DynamicOurWorks />
       <TestimonialSlider />
+      <WeRecommend />
       <FeaturesSection />
       <BottomAboutSection />
     </div>

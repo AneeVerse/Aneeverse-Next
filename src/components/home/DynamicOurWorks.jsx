@@ -70,19 +70,19 @@ const DynamicOurWorks = () => {
   }, []);
 
   return (
-    <div className="bg-primary-500 py-16">
+    <div className="bg-[#03151a] py-16">
       <Layout>
         {/* Section Header */}
         <div className="flex justify-between items-center mb-2">
           <div className="max-w-3xl  ">
-            <UiSubheading className="text-secondary-500 mb-2">
+            <UiSubheading className="text-white/70 mb-2">
               Our Works
             </UiSubheading>
             <Heading
               level="h2"
-              color="dark"
+              color="light"
               spacing="lg"
-              className="text-left font-semibold"
+              className="text-left font-semibold text-white"
             >
               See Our{" "}
               <AccentText
@@ -131,12 +131,12 @@ const DynamicOurWorks = () => {
                 <div className="py-6 px-2">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-3">
-                      <h3 className="text-xl sm:text-2xl font-normal text-gray-900 line-clamp-1 leading-tight font-serif italic">
+                      <h3 className="text-xl sm:text-2xl font-normal text-white line-clamp-1 leading-tight font-serif italic">
                         {project.title}
                       </h3>
-                      <MdOutlineArrowOutward className="flex-shrink-0 w-5 h-5 text-gray-600 opacity-0 translate-x-[-4px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                      <MdOutlineArrowOutward className="flex-shrink-0 w-5 h-5 text-white/80 opacity-0 translate-x-[-4px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                     </div>
-                    <p className="text-base text-gray-600 line-clamp-1 leading-relaxed font-normal font-sans">
+                    <p className="text-base text-white/70 line-clamp-1 leading-relaxed font-normal font-sans">
                       {project.description}
                     </p>
                   </div>

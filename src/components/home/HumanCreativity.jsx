@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const HumanCreativity = () => {
     return (
-        <div className="bg-[#03151A] py-16 sm:py-24 text-white">
+        <div className="bg-[#03151a] py-16 sm:py-24 text-white">
             <Layout>
                 {/* Header */}
                 <div className="text-center mb-16">
