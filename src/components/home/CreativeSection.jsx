@@ -11,13 +11,13 @@ const data = [
     firstTitle: "Website", secondTitle: "Design",
     tags: ["E-commerce", "UI/UX", "Custom Design"],
     url: "/services/website-design",
-    image: "/images/home/creative/creative1.png"
+    image: "/images/home/creative/UI, UX & WEB DEVLOPMENT 1.png"
   },
   {
     firstTitle: "Landing", secondTitle: "Pages",
     tags: ["High Conversion", "Lead Generation", "A/B Testing"],
     url: "/services/landing-pages",
-    image: "/images/home/creative/creative3.png"
+    image: "/images/home/creative/PLATFORM DEVLOPMENT 1.png"
   },
   {
     firstTitle: "SEO", secondTitle: "Optimization",
@@ -35,13 +35,13 @@ const data = [
     firstTitle: "Marketing", secondTitle: "Strategy",
     tags: ["Brand Awareness", "Customer Retention", "Market Research"],
     url: "/services/marketing-strategy",
-    image: "/images/home/creative/creative4.png"
+    image: "/images/home/creative/MARKETING STRATEGY 1.png"
   },
   {
     firstTitle: "Email", secondTitle: "Campaign",
     tags: ["Personalized Emails", "Automated Sequences", "Lead Nurturing"],
     url: "/services/email-campaign",
-    image: "/images/home/creative/creative3.png"
+    image: "/images/home/creative/EMAIL CAMPAIGN 1.png"
   },
   {
     firstTitle: "Influencer", secondTitle: "Marketing",
@@ -53,7 +53,7 @@ const data = [
     firstTitle: "Blog", secondTitle: "Writing",
     tags: ["SEO Blogs", "Long-Form Content", "Industry Research"],
     url: "/services/blog-writing",
-    image: "/images/home/creative/creative4.png"
+    image: "/images/home/creative/AI BLOG WRITING 1.png"
   },
   {
     firstTitle: "Ghost", secondTitle: "Writing",
@@ -65,7 +65,7 @@ const data = [
     firstTitle: "Social Media", secondTitle: "Creatives",
     tags: ["Social Posts", "Ad Creatives", "Engaging Graphics"],
     url: "/services/social-media-creatives",
-    image: "/images/home/creative/creative3.png"
+    image: "/images/home/creative/SOCIAL MEDIA CREATIVES 1.png"
   },
   {
     firstTitle: "Presentation", secondTitle: "Design",
