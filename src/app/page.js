@@ -54,7 +54,7 @@ export default function Home() {
       <DynamicOurWorks />
       <TestimonialSlider />
       <WeRecommend />
-      <FeaturesSection />
+      {/* <FeaturesSection /> */}
       <DiscoveryCall />
       <BottomAboutSection />
     </div>
