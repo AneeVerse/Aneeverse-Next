@@ -264,7 +264,7 @@ const HeroSection = () => {
   return (
     <div ref={heroSectionRef} className="bg-[#073742] relative text-[#EBFAFE] overflow-x-hidden" style={{ minHeight: 'clamp(600px, 100vh, 1200px)' }}>
       {/* Overlap */}
-      <div className="absolute top-[0px] left-0 w-full h-[140px] bg-gradient-to-b z-20 blur-sm from-secondary-500 via-secondary-300 to-secondary-300 opacity-92"></div>
+      <div className="absolute -top-[4px] left-0 w-full h-[140px] bg-gradient-to-b z-20 blur-sm from-secondary-500 via-secondary-300 to-secondary-300 opacity-92"></div>
       <div className="absolute hidden lg:block bottom-[0px] left-0 w-full h-[110px] bg-gradient-to-t z-20 from-secondary-500 to-transparent"></div>
 
       <div className="relative h-full" style={{ minHeight: 'clamp(600px, 100vh, 1200px)' }}>
