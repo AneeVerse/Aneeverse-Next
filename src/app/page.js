@@ -99,9 +99,9 @@ export default function Home() {
         <DiscoveryCall />
       </LazySection>
       
-      <LazySection>
+      {/* <LazySection>
         <BottomAboutSection />
-      </LazySection>
+      </LazySection> */}
     </div>
   );
 }
