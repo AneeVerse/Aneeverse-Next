@@ -8,28 +8,22 @@ import { UiSubheading } from "../common/typography/UiSubheading";
 
 const data = [
   {
-    firstTitle: "Website", secondTitle: "Design",
-    tags: ["E-commerce", "UI/UX", "Custom Design"],
-    url: "/services/website-design",
-    image: "/images/home/creative/DESIGN SYSTEM 1.png"
+    firstTitle: "Ad", secondTitle: "Creative",
+    tags: ["Social Ads", "Display Ads", "Creative Campaigns"],
+    url: "/services/ad-creative",
+    image: "/images/home/creative/AD CREATIVE 2.png"
   },
   {
-    firstTitle: "Landing", secondTitle: "Pages",
-    tags: ["High Conversion", "Lead Generation", "A/B Testing"],
-    url: "/services/landing-pages",
-    image: "/images/home/creative/PLATFORM DEVLOPMENT 1.png"
+    firstTitle: "Platform", secondTitle: "Development",
+    tags: ["Web Platforms", "Custom Development", "Full-Stack Solutions"],
+    url: "/services/platform-development",
+    image: "/images/home/creative/PLATFORM DEVLOPMENT 2.png"
   },
   {
-    firstTitle: "SEO", secondTitle: "Optimization",
-    tags: ["Keyword Research", "On-Page SEO", "Technical SEO"],
-    url: "/services/seo-optimization",
-    image: "/images/home/creative/AI SEO (GEO) (AEO) (AIO) 1.png"
-  },
-  {
-    firstTitle: "Email", secondTitle: "Design",
-    tags: ["Responsive Emails", "Newsletter Templates", "HTML Emails"],
-    url: "/services/email-design",
-    image: "/images/home/creative/EMAIL DESIGN  1.png"
+    firstTitle: "AI Powered", secondTitle: "Creatives",
+    tags: ["AI Design", "Automated Creatives", "Smart Graphics"],
+    url: "/services/ai-powered-creatives",
+    image: "/images/home/creative/AI POWERED CREATIVES 1.png"
   },
   {
     firstTitle: "Marketing", secondTitle: "Strategy",
@@ -38,34 +32,28 @@ const data = [
     image: "/images/home/creative/MARKETING STRATEGY 1.png"
   },
   {
+    firstTitle: "Social Media", secondTitle: "Creatives",
+    tags: ["Social Posts", "Ad Creatives", "Engaging Graphics"],
+    url: "/services/social-media-creatives",
+    image: "/images/home/creative/SOCIAL MEDIA CREATIVES 1.png"
+  },
+  {
+    firstTitle: "UI, UX & Web", secondTitle: "Development",
+    tags: ["User Interface", "User Experience", "Web Development"],
+    url: "/services/ui-ux-web-development",
+    image: "/images/home/creative/UI, UX & WEB DEVLOPMENT 2.png"
+  },
+  {
+    firstTitle: "AI Blog", secondTitle: "Writing",
+    tags: ["AI Content", "Automated Writing", "SEO Optimized"],
+    url: "/services/ai-blog-writing",
+    image: "/images/home/creative/AI BLOG WRITING 2.png"
+  },
+  {
     firstTitle: "Email", secondTitle: "Campaign",
     tags: ["Personalized Emails", "Automated Sequences", "Lead Nurturing"],
     url: "/services/email-campaign",
     image: "/images/home/creative/EMAIL CAMPAIGN 1.png"
-  },
-  // {
-  //   firstTitle: "Influencer", secondTitle: "Marketing",
-  //   tags: ["Brand Collaborations", "Social Proof", "Sponsored Posts"],
-  //   url: "/services/influencer-marketing",
-  //   image: "/images/home/creative/creative3.png"
-  // },
-  {
-    firstTitle: "Blog", secondTitle: "Writing",
-    tags: ["SEO Blogs", "Long-Form Content", "Industry Research"],
-    url: "/services/blog-writing",
-    image: "/images/home/creative/AI BLOG WRITING 1.png"
-  },
-  {
-    firstTitle: "Ghost", secondTitle: "Writing",
-    tags: ["Personal Branding", "Book Writing", "Thought Leadership"],
-    url: "/services/ghost-writing",
-    image: "/images/home/creative/creative2.png"
-  },
-  {
-    firstTitle: "Social Media", secondTitle: "Creatives",
-    tags: ["Social Posts", "Ad Creatives", "Engaging Graphics"],
-    url: "/services/social-media-creatives",
-    image: "/images/home/creative/AD CREATIVE 1.png"
   },
   {
     firstTitle: "Presentation", secondTitle: "Design",
@@ -74,10 +62,88 @@ const data = [
     image: "/images/home/creative/PRESENTATION DESIGN 1.png"
   },
   {
-    firstTitle: "Brochure", secondTitle: "Design",
-    tags: ["Company Profiles", "Marketing Brochures", "Product Catalogs"],
-    url: "/services/brochure-design",
-    image: "/images/home/creative/creative3.png"
+    firstTitle: "Design", secondTitle: "System",
+    tags: ["Component Library", "Style Guide", "Design Standards"],
+    url: "/services/design-system",
+    image: "/images/home/creative/DESIGN SYSTEM 1.png"
+  },
+  {
+    firstTitle: "AI SEO", secondTitle: "(GEO) (AEO) (AIO)",
+    tags: ["AI Optimization", "Geo SEO", "Advanced SEO"],
+    url: "/services/ai-seo-geo-aeo-aio",
+    image: "/images/home/creative/AI SEO (GEO) (AEO) (AIO) 1.png"
+  },
+  {
+    firstTitle: "Email", secondTitle: "Design",
+    tags: ["Responsive Emails", "Newsletter Templates", "HTML Emails"],
+    url: "/services/email-design",
+    image: "/images/home/creative/EMAIL DESIGN 1.png"
+  },
+  {
+    firstTitle: "Illustration", secondTitle: "Design",
+    tags: ["Custom Illustrations", "Digital Art", "Visual Storytelling"],
+    url: "/services/illustration-design",
+    image: "/images/home/creative/ILLUSTRATION DESIGN 1.png"
+  },
+  {
+    firstTitle: "Product", secondTitle: "Design",
+    tags: ["Product Development", "Industrial Design", "Prototyping"],
+    url: "/services/product-design",
+    image: "/images/home/creative/PRODUCT DESIGN 1.png"
+  },
+  {
+    firstTitle: "Sales & Marketing", secondTitle: "Automation",
+    tags: ["Marketing Automation", "CRM Integration", "Workflow Design"],
+    url: "/services/sales-marketing-automation",
+    image: "/images/home/creative/SALES & MARKETING AUTOMATION 1.png"
+  },
+  {
+    firstTitle: "Branding", secondTitle: "Services",
+    tags: ["Logo Design", "Brand Identity", "Visual Identity"],
+    url: "/services/branding-services",
+    image: "/images/home/creative/BRANDING SERVICES 1.png"
+  },
+  {
+    firstTitle: "Copywriting", secondTitle: "",
+    tags: ["Sales Copy", "Marketing Copy", "Content Writing"],
+    url: "/services/copywriting",
+    image: "/images/home/creative/COPYWRITING 1.png"
+  },
+  {
+    firstTitle: "Blog", secondTitle: "Writing",
+    tags: ["SEO Blogs", "Long-Form Content", "Industry Research"],
+    url: "/services/blog-writing",
+    image: "/images/home/creative/BLOG WRITING  1.png"
+  },
+  {
+    firstTitle: "SEO", secondTitle: "Optimize",
+    tags: ["Keyword Research", "On-Page SEO", "Technical SEO"],
+    url: "/services/seo-optimization",
+    image: "/images/home/creative/SEO OPTIMIZE 1.png"
+  },
+  {
+    firstTitle: "Corporate &", secondTitle: "Internals",
+    tags: ["Brand Guidelines", "Internal Communications", "Corporate Identity"],
+    url: "/services/corporate-internals",
+    image: "/images/home/creative/COPERATE & INTERNELS 1.png"
+  },
+  {
+    firstTitle: "Ebook & Digital", secondTitle: "Report",
+    tags: ["Digital Publications", "Interactive Reports", "PDF Design"],
+    url: "/services/ebook-digital-report",
+    image: "/images/home/creative/EBOOK AND DIGITAL REPORT 1.png"
+  },
+  {
+    firstTitle: "Print", secondTitle: "Design",
+    tags: ["Brochures", "Flyers", "Business Cards"],
+    url: "/services/print-design",
+    image: "/images/home/creative/PRINT DESIGN 1.png"
+  },
+  {
+    firstTitle: "Packing &", secondTitle: "Merchandise Design",
+    tags: ["Product Packaging", "Retail Design", "Brand Identity"],
+    url: "/services/packing-merchandise-design",
+    image: "/images/home/creative/PACKING & MERCHANDISE DESIGN 1.png"
   }
 ];
 
@@ -225,7 +291,7 @@ export default function CreativeSection() {
                 {/* Content */}
                 <div className="mt-5 px-1">
                   <h3 className="text-white text-xl sm:text-2xl font-bold leading-tight mb-3">
-                    {item.firstTitle} {item.secondTitle}
+                    {item.firstTitle}{item.secondTitle ? ` ${item.secondTitle}` : ''}
                   </h3>
 
                   <div className="flex flex-wrap gap-2">
