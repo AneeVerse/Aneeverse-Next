@@ -121,18 +121,6 @@ function getStaticUrls() {
       priority: 0.8,
     },
     {
-      url: `${CONFIG.baseUrl}/services/gmb-optimization`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${CONFIG.baseUrl}/services/local-seo`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
       url: `${CONFIG.baseUrl}/services/email-design`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
@@ -170,18 +158,6 @@ function getStaticUrls() {
     },
     {
       url: `${CONFIG.baseUrl}/services/email-campaign`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${CONFIG.baseUrl}/services/google-ads`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${CONFIG.baseUrl}/services/meta-ads`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,

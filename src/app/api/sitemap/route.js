@@ -44,8 +44,8 @@ export async function GET() {
     // Service pages
     const servicePages = [
       'blog-writing', 'brochure-design', 'email-campaign', 'email-design',
-      'ghost-writing', 'gmb-optimization', 'google-ads', 'influencer-marketing',
-      'landing-pages', 'local-seo', 'marketing-strategy', 'meta-ads',
+      'ghost-writing', 'influencer-marketing',
+      'landing-pages', 'marketing-strategy',
       'presentation-design', 'seo-optimization', 'social-media-creatives', 'website-design'
     ].map(service => ({
       url: `/services/${service}`,

@@ -39,8 +39,6 @@ const WebPageSchema = () => {
         '/services': 'Comprehensive digital marketing services including web design, SEO optimization, social media marketing, and creative design solutions.',
         '/services/website-design': 'Professional website design and development services with responsive design and modern UI/UX.',
         '/services/seo-optimization': 'Comprehensive SEO services to improve search engine rankings and organic traffic.',
-        '/services/local-seo': 'Local search optimization to help businesses rank higher in local search results.',
-        '/services/gmb-optimization': 'Google My Business optimization services for improved local visibility.',
         '/services/social-media-creatives': 'Creative design services for social media posts, stories, and advertising campaigns.',
         '/services/brochure-design': 'Professional brochure design services for marketing materials and business collateral.',
         '/services/presentation-design': 'Custom presentation design services for business presentations and pitch decks.',
