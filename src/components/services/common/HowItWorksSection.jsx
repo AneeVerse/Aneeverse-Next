@@ -64,12 +64,8 @@ const HowItWorksSection = ({
             <UiSubheading className="text-secondary-500 mb-6 text-sm tracking-[0.2em] uppercase font-medium">
               {subtitle}
             </UiSubheading>
-            <Heading
-              level="h2"
-              spacing="lg"
-              className="font-normal text-4xl md:text-5xl lg:text-6xl mb-8 text-secondary-500"
-            >
-              {title.includes(titleHighlight) ? (
+            <h2 className="font-normal text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-8 text-secondary-500 leading-[1.1] break-words">
+              {title.includes(titleHighlight) && titleHighlight ? (
                 <>
                   {title.split(titleHighlight)[0]}
                   <span className="italic">{titleHighlight}</span>
@@ -78,7 +74,7 @@ const HowItWorksSection = ({
               ) : (
                 title
               )}
-            </Heading>
+            </h2>
             {description && (
               <p className="text-lg text-secondary-500/80 leading-relaxed">
                 {description}
