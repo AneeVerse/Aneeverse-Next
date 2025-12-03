@@ -4,9 +4,11 @@ import CommonServicesHeroSection from '@/components/services/common/CommonHeroSe
 import DynamicOurWorks from '@/components/home/DynamicOurWorks'
 import DynamicCreativeSection from '@/components/services/common/DynamicCreativeSection'
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
-import DynamicStateSection from '@/components/services/common/DynamicStateSection'
 import AdCreativeFAQSection from '@/components/services/ad-creative/AdCreativeFAQSection'
+import ChannelTailoredSection from '@/components/services/common/ChannelTailoredSection'
+import HowItWorksSection from '@/components/services/common/HowItWorksSection'
 import ServiceSchema from '@/components/seo/ServiceSchema'
+import { FaDesktop, FaMobile, FaPlayCircle, FaImage, FaNewspaper, FaMapMarkerAlt } from "react-icons/fa"
 import React from 'react'
 
 export const metadata = {
@@ -35,67 +37,87 @@ export const metadata = {
 }
 
 const page = () => {
+  // Scrolling services for hero section
+  const scrollServices = [
+    { title: "Static ad design", image: "/images/services/email-design/email-design.avif" },
+    { title: "Motion graphics and animated ads", image: "/images/services/email-design/email-strategy.avif" },
+    { title: "Display advertising", image: "/images/services/email-design/email-html5.avif" },
+    { title: "Video ad production and editing", image: "/images/services/email-design/email-design-templates.avif" },
+    { title: "Ad campaign concepting", image: "/images/services/email-design/email-newsletter-design.avif" },
+    { title: "Multi-format adaptation", image: "/images/services/email-design/email-ui-ux-audits.avif" },
+    { title: "Performance-driven A/B testing variants", image: "/images/services/email-design/email-design.avif" },
+  ];
+
   const items = [
     {
-      name: "Social Media Ads",
-      about: "Creating eye-catching social media ad creatives that capture attention and drive engagement across all platforms.",
+      name: "Static display ads",
+      about: "Scroll-stopping visuals designed for social, digital, programmatic, and print placements that capture attention instantly.",
       image: "/images/services/email-design/email-design.avif",
       bgColor: "bg-secondary-500",
       textColor: "text-primary-500",
     },
     {
-      name: "Display Ad Design",
-      about: "Designing compelling display ads that stand out and convert across various digital platforms and websites.",
+      name: "Motion graphics ads",
+      about: "High-performing animated content optimized for web, social feeds, and mobile devices that bring your message to life.",
       image: "/images/services/email-design/email-strategy.avif",
       bgColor: "bg-[#c0e2ff]",
       textColor: "text-[#0a211f]",
     },
     {
-      name: "Video Ad Creatives",
-      about: "Producing engaging video ad content that tells your brand story and drives action.",
+      name: "Video ad production",
+      about: "Full-service video editing, animation, and production for ads, product launches, and hero campaign moments.",
       image: "/images/services/email-design/email-html5.avif",
       bgColor: "bg-[#f9f9f9]",
       textColor: "text-[#3d3d3d]",
     },
     {
-      name: "Banner Ad Design",
-      about: "Crafting professional banner ads optimized for various sizes and placements.",
+      name: "Campaign concepting",
+      about: "Big, bold ideas and strategic concepts that work seamlessly across multiple ad formats and channels.",
       image: "/images/services/email-design/email-design-templates.avif",
       bgColor: "bg-[#292423]",
       textColor: "text-[#ffafed]",
     },
     {
-      name: "Retargeting Ad Creatives",
-      about: "Designing effective retargeting ads that bring visitors back and convert them into customers.",
+      name: "Multi-format adaptation",
+      about: "One campaign concept scaled effortlessly across dozens of sizes, specs, and platform requirements without losing impact.",
       image: "/images/services/email-design/email-newsletter-design.avif",
       bgColor: "bg-[#d8ff85]",
       textColor: "text-[#1c4437]",
     },
     {
-      name: "Native Ad Design",
-      about: "Creating native ad creatives that seamlessly blend with content while maintaining brand visibility.",
+      name: "A/B testing creative variants",
+      about: "Multiple ad versions designed for performance testing, optimization, and avoiding creative fatigue.",
       image: "/images/services/email-design/email-ui-ux-audits.avif",
       bgColor: "bg-[#edf4ea]",
       textColor: "text-[#1c4437]",
     },
-  ];
-
-  const stats = [
     {
-      value: "500+",
-      description: "Ad campaigns created for clients across various industries.",
+      name: "Retargeting ad creative",
+      about: "Conversion-focused ads specifically designed to re-engage warm audiences and close the loop on customer journeys.",
+      image: "/images/services/email-design/email-design.avif",
+      bgColor: "bg-[#ffd6cc]",
+      textColor: "text-[#4a1c0f]",
     },
     {
-      value: "85%",
-      description: "Average increase in click-through rates with our ad creatives.",
+      name: "Seasonal campaign ads",
+      about: "Time-sensitive creative for holidays, flash sales, product drops, and promotional events that demand urgency.",
+      image: "/images/services/email-design/email-strategy.avif",
+      bgColor: "bg-[#e6f3ff]",
+      textColor: "text-[#003366]",
     },
     {
-      value: "200+",
-      description: "Brands trust us for their advertising creative needs.",
+      name: "Localized ad creative",
+      about: "Culturally adapted designs and messaging for regional campaigns that resonate globally without losing brand consistency.",
+      image: "/images/services/email-design/email-html5.avif",
+      bgColor: "bg-[#fff4e6]",
+      textColor: "text-[#663300]",
     },
     {
-      value: "24/7",
-      description: "Support and campaign optimization to ensure maximum performance.",
+      name: "Landing page design",
+      about: "Conversion-optimized landing pages designed to pair perfectly with your paid campaigns and drive results.",
+      image: "/images/services/email-design/email-design-templates.avif",
+      bgColor: "bg-[#f0e6ff]",
+      textColor: "text-[#330066]",
     },
   ];
 
@@ -131,35 +153,102 @@ const page = () => {
         additionalType="https://schema.org/CreativeWork"
       />
       <CommonServicesHeroSection
-        title="Ad Creative Services"
-        subtitle="Creative Services"
-        description="Create compelling ad creatives that capture attention, drive engagement, and convert. From social media ads to display advertising, we design campaigns that deliver results."
+        title="High-impact ads that stop the scroll and drive conversions"
+        subtitle="Ad Creative Services"
+        description="Whether it's digital, social, display, print, or out-of-home, Aneeverse delivers the ad creative you need fast, flexible, and always on-brand. From concept to final delivery, we're your creative partner for campaigns that perform."
         ctaText="Book a Call"
         ctaLink="/contact"
         backgroundImage="/images/services/email-design/hero-banner.avif"
+        scrollServices={scrollServices}
       />
       <SlidingLogos />
       <DynamicSupportSection
-        subtitle="BUILT FOR MARKETING & CREATIVE TEAMS"
-        title="Ad Creatives That "
-        highlightText="convert & engage"
+        subtitle="Tired of ad fatigue?"
+        title="Your audience is bored. The algorithm knows it. Your ROI feels it."
+        highlightText=""
         imageSrc="/images/services/email-design/about-email.avif"
         imageAlt="Ad Creative Services"
-        description="Stand out in crowded digital spaces with ad creatives that capture attention and drive action. Our team combines strategic thinking with creative excellence to deliver ads that perform."
-        additionalText="From social media campaigns to display advertising, we create visually compelling ads that resonate with your target audience and deliver measurable results."
+        description="Ads lose effectiveness quickly if it's not your audience getting bored, it's the platform penalizing repetitive creative. And that directly impacts your bottom line."
+        additionalText="Tight deadlines, limited resources, and talent gaps make it nearly impossible to keep pace with the demand for fresh, compelling ads. Your in-house team is already stretched thin, and freelancers can't scale with your campaigns. To stay ahead and maintain performance, you need a creative partner built for speed and consistency."
       />
       <DynamicCreativeSection
-        subtitle="Creative Excellence"
-        title="Ad Creative Services"
-        heighlightText="Comprehensive "
+        subtitle="What we deliver"
+        title="Ad creative services that scale with your ambition"
+        heighlightText=""
+        description="From big campaign concepts to video editing and everything in between, we provide the creative firepower to keep your ads fresh, on-brand, and performing across every channel and campaign."
         items={items}
       />
-      <DynamicOurWorks />
-      <DynamicStateSection
-        title="Our Ad Creative Impact"
-        subtitle="PROVEN RESULTS"
-        stats={stats}
+      <ChannelTailoredSection
+        subtitle="Built for every channel"
+        title="Ads that work wherever they are"
+        titleHighlight="wherever"
+        channels={[
+          {
+            title: "Digital",
+            subtitle: "High-performing ads for programmatic, search, display, and video platforms.",
+            icon: <FaDesktop className="w-8 h-8" />,
+          },
+          {
+            title: "Social media",
+            subtitle: "Platform-optimized visuals and video for Meta, TikTok, LinkedIn, and more.",
+            icon: <FaMobile className="w-8 h-8" />,
+          },
+          {
+            title: "Streaming platforms",
+            subtitle: "Short- and long-form video ads tailored for CTV, YouTube, and on-demand viewers.",
+            icon: <FaPlayCircle className="w-8 h-8" />,
+          },
+          {
+            title: "Display banners",
+            subtitle: "Dynamic, static, and rich media banners in all standard sizes that drive awareness and clicks.",
+            icon: <FaImage className="w-8 h-8" />,
+          },
+          {
+            title: "Print advertising",
+            subtitle: "Bold, clear designs for direct mail, magazines, newspaper inserts, flyers, and print collateral.",
+            icon: <FaNewspaper className="w-8 h-8" />,
+          },
+          {
+            title: "Out-of-home (OOH)",
+            subtitle: "Big-impact creative built for billboards, transit advertising, and street-level placements that demand attention.",
+            icon: <FaMapMarkerAlt className="w-8 h-8" />,
+          },
+        ]}
       />
+      <HowItWorksSection
+        subtitle="HOW WE WORK"
+        title="A faster, smarter way to create high-performing ads"
+        titleHighlight="high-performing"
+        description="Our process removes bottlenecks and adds scale, with dedicated creative teams, transparent communication, and delivery built for speed without sacrificing quality."
+        steps={[
+          {
+            number: "1",
+            title: "Smart intake",
+            subtitle: "Start with a clear, collaborative brief using our streamlined platform for kickoff, feedback, and real-time collaboration.",
+          },
+          {
+            number: "2",
+            title: "Always on-brand",
+            subtitle: "Stay visually consistent with brand toolkits, creative systems, and teams trained specifically on your guidelines and voice.",
+          },
+          {
+            number: "3",
+            title: "Speed without sacrifice",
+            subtitle: "Get fast turnarounds with dedicated creative pods that learn your team's goals, preferences, and campaign rhythms.",
+          },
+          {
+            number: "4",
+            title: "Flexible scale",
+            subtitle: "Spin up more output, formats, or entire campaigns in days not weeks with modular resourcing that grows with you.",
+          },
+          {
+            number: "5",
+            title: "Built to test",
+            subtitle: "Receive multiple creative variants quickly so you can experiment, optimize performance, and avoid ad fatigue before it kills your ROI.",
+          },
+        ]}
+      />
+      <DynamicOurWorks />
       <TestimonialSlider />
       <AdCreativeFAQSection />
     </div>

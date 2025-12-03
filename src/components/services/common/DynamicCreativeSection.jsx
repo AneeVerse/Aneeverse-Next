@@ -11,6 +11,7 @@ const DynamicCreativeSection = ({
   title = "",
   subtitle = "",
   heighlightText = "",
+  description = "",
   items = [
     {
       name: "Name Loading",
@@ -61,6 +62,11 @@ const DynamicCreativeSection = ({
             </AccentText>{" "}
             {title}
           </Heading>
+          {description && (
+            <p className="text-lg text-secondary-500 mt-4 max-w-3xl mx-auto">
+              {description}
+            </p>
+          )}
         </div>
 
         <div
