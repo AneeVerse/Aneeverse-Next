@@ -13,19 +13,15 @@ const ChannelTailoredSection = ({
   return (
     <section className="bg-secondary-500 text-primary-500 py-24">
       <Layout>
-        <div className="text-center max-w-3xl mx-auto mb-20">
+        <div className="text-center max-w-4xl mx-auto mb-20">
           <UiSubheading
             align="center"
             className="text-white mb-6 text-sm tracking-[0.2em] uppercase font-medium"
           >
             {subtitle}
           </UiSubheading>
-          <Heading
-            level="h2"
-            spacing="lg"
-            className="font-normal text-5xl md:text-6xl lg:text-7xl tracking-tight text-white"
-          >
-            {title.includes(titleHighlight) ? (
+          <h2 className="font-normal text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-tight text-white leading-[1.1] break-words mb-0">
+            {title.includes(titleHighlight) && titleHighlight ? (
               <>
                 {title.split(titleHighlight)[0]}
                 <span className="italic">{titleHighlight}</span>
@@ -34,7 +30,7 @@ const ChannelTailoredSection = ({
             ) : (
               title
             )}
-          </Heading>
+          </h2>
           {description && (
             <p className="text-lg text-white/90 mt-6">
               {description}

@@ -233,20 +233,18 @@ export default function CreativeSection() {
   return (
     <div className="bg-[#073742] py-20 overflow-hidden">
       <Layout>
-        <div className="mb-12 relative z-10">
-          <h3 className="text-white/70 text-sm tracking-[0.2em] uppercase mb-4 font-medium pl-1">
+        <div className="mb-8 sm:mb-12 relative z-10 max-w-4xl">
+          <h3 className="text-white/70 text-xs sm:text-sm tracking-[0.2em] uppercase mb-3 sm:mb-4 font-medium">
             What We Create
           </h3>
-          <Heading
-            level="h2"
-            className="text-left font-bold text-white leading-[1.1] text-4xl sm:text-5xl md:text-6xl"
-          >
-            Every Type of Creative <br className="hidden sm:block" />
-            Work You'll Ever Need, <br />
-            <span className="text-[#2DC8E6] font-Rock_Salt relative inline-block transform rotate-[-2deg] mt-2 sm:mt-0">
+          <h2 className="text-left font-semibold text-white leading-tight tracking-tight text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+            Every Type of Creative{" "}
+            <br className="hidden sm:block" />
+            Work You'll Ever Need,{" "}
+            <span className="text-[#2DC8E6] font-Rock_Salt font-normal relative inline-block transform rotate-[-2deg] ml-1 sm:ml-2 text-xl sm:text-2xl md:text-3xl lg:text-4xl -top-1 sm:-top-2">
               And More
             </span>
-          </Heading>
+          </h2>
         </div>
       </Layout>
 

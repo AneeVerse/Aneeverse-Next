@@ -42,7 +42,7 @@ export function Heading({
   children,
 }) {
   return (
-    <Component className={headingStyles({ level, color, spacing, className })}>
+    <Component className={headingStyles({ level, color, spacing }, className)}>
       {children}
     </Component>
   );

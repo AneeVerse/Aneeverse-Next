@@ -5,8 +5,11 @@ import DynamicOurWorks from '@/components/home/DynamicOurWorks'
 import DynamicCreativeSection from '@/components/services/common/DynamicCreativeSection'
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
 import SocialMediaFAQSection from '@/components/services/social-media-creatives/SocialMediaFAQSection'
-import SocialMediaStateSection from '@/components/services/social-media-creatives/SocialMediaStateSection'
+import ChannelTailoredSection from '@/components/services/common/ChannelTailoredSection'
+import HowItWorksSection from '@/components/services/common/HowItWorksSection'
 import ServiceSchema from '@/components/seo/ServiceSchema'
+import { FaFacebook, FaLinkedin, FaYoutube, FaTwitter, FaHashtag } from "react-icons/fa"
+import { SiTiktok } from "react-icons/si"
 import React from 'react'
 
 
@@ -37,63 +40,87 @@ export const metadata = {
   },
 }
 const page = () => {
+  // Scrolling services for hero section
+  const scrollServices = [
+    { title: "Organic social content", image: "/images/services/email-design/email-design.avif" },
+    { title: "Paid social advertising", image: "/images/services/email-design/email-strategy.avif" },
+    { title: "Social media video production", image: "/images/services/email-design/email-html5.avif" },
+    { title: "Platform-specific design", image: "/images/services/email-design/email-design-templates.avif" },
+    { title: "Stories and Reels content", image: "/images/services/email-design/email-newsletter-design.avif" },
+    { title: "Social media carousels and graphics", image: "/images/services/email-design/email-ui-ux-audits.avif" },
+    { title: "AR filters and immersive experiences", image: "/images/services/email-design/email-design.avif" },
+  ];
 
   const items = [
     {
-      name: "Social Media Branding",
-      about: "Creating striking visuals and graphics for your brand's social media profiles, ensuring a consistent and engaging presence.",
+      name: "Organic social content",
+      about: "Engage your audience with compelling storytelling from high-impact static posts to educational video series and behind-the-scenes content.",
       image: "/images/services/email-design/email-design.avif",
       bgColor: "bg-secondary-500",
       textColor: "text-primary-500",
     },
     {
-      name: "Ad Creatives for Social Media",
-      about: "Designing high-converting ad creatives that capture attention and drive action across various social media platforms.",
+      name: "Paid social ads",
+      about: "Test new concepts, scale what works, and keep the algorithm satisfied with ads optimized for every size, format, and platform.",
       image: "/images/services/email-design/email-strategy.avif",
       bgColor: "bg-[#c0e2ff]",
       textColor: "text-[#0a211f]",
     },
     {
-      name: "Social Media Posts",
-      about: "Crafting engaging social media posts designed to spark conversations and increase audience engagement.",
+      name: "Social video production",
+      about: "Motion graphic explainers, UGC-style video ads, in-studio testimonials, product demos you name it, we deliver.",
       image: "/images/services/email-design/email-html5.avif",
       bgColor: "bg-[#f9f9f9]",
       textColor: "text-[#3d3d3d]",
     },
     {
-      name: "Animated Social Content",
-      about: "Developing eye-catching animations that boost engagement and improve brand recall across social platforms.",
+      name: "AI-powered production",
+      about: "Fast, scalable content creation with AI-assisted editing, voiceovers, automated translation, and localization for global reach.",
       image: "/images/services/email-design/email-design-templates.avif",
       bgColor: "bg-[#292423]",
       textColor: "text-[#ffafed]",
     },
     {
-      name: "Social Media Campaigns",
-      about: "Managing and creating strategic social media campaigns to enhance brand visibility and drive traffic.",
+      name: "Campaign concepts",
+      about: "Big ideas that connect individual posts into cohesive, high-impact campaigns that amplify your brand message.",
       image: "/images/services/email-design/email-newsletter-design.avif",
       bgColor: "bg-[#d8ff85]",
       textColor: "text-[#1c4437]",
     },
     {
-      name: "Story Designs for Social Platforms",
-      about: "Designing compelling stories that captivate your audience and boost engagement on platforms like Instagram and Facebook.",
+      name: "Immersive AR experiences",
+      about: "Scroll-breaking formats like 3D, AR filters, and interactive content designed for standout storytelling and shareability.",
       image: "/images/services/email-design/email-ui-ux-audits.avif",
       bgColor: "bg-[#edf4ea]",
       textColor: "text-[#1c4437]",
     },
     {
-      name: "Influencer Content Creation",
-      about: "Collaborating with influencers to create content that resonates with their audience and strengthens your brand message.",
-      image: "/images/services/email-design/graphics-and-illustrations.avif",
-      bgColor: "bg-[#e7f9d1]",
-      textColor: "text-[#365314]",
+      name: "Platform-native content",
+      about: "Creative built specifically for how users behave and how algorithms rank on Meta, TikTok, LinkedIn, YouTube, and beyond.",
+      image: "/images/services/email-design/email-design.avif",
+      bgColor: "bg-[#ffd6cc]",
+      textColor: "text-[#4a1c0f]",
     },
     {
-      name: "Content Strategy for Social Media",
-      about: "Developing and executing content strategies to ensure your social media profiles are optimized for engagement and growth.",
-      image: "/images/services/email-design/email-design-systems.avif",
-      bgColor: "bg-[#f6edf9]",
-      textColor: "text-[#4a124f]",
+      name: "Stories and Reels",
+      about: "Vertical video and ephemeral content designed for Instagram and Facebook Stories, Reels, and TikTok trends.",
+      image: "/images/services/email-design/email-strategy.avif",
+      bgColor: "bg-[#e6f3ff]",
+      textColor: "text-[#003366]",
+    },
+    {
+      name: "Carousel graphics",
+      about: "Multi-slide posts optimized for swipe-through engagement on Instagram, LinkedIn, and Facebook feeds.",
+      image: "/images/services/email-design/email-html5.avif",
+      bgColor: "bg-[#fff4e6]",
+      textColor: "text-[#663300]",
+    },
+    {
+      name: "Branded templates and toolkits",
+      about: "Modular design systems that empower your team to create consistent, on-brand social content in-house.",
+      image: "/images/services/email-design/email-design-templates.avif",
+      bgColor: "bg-[#f0e6ff]",
+      textColor: "text-[#330066]",
     },
   ];
   return (
@@ -128,40 +155,105 @@ const page = () => {
         additionalType="https://schema.org/CreativeWork"
       />
       <CommonServicesHeroSection
-        title="Social Media Creatives"
-        subtitle="Engaging Visuals, Maximum Reach"
-        description=" Grab attention with high-impact social media visuals. Our creatives are designed to
-                increase engagement, brand recall, and audience interaction across platforms."
+        title="Scroll-stopping content that keeps your brand ahead of the algorithm"
+        subtitle="Social Media Creative Services"
+        description="Get high-performing social creative across every platform, format, and campaign type. From organic posts to paid ads, video content, and immersive AR experiences Aneeverse delivers on-brand social media design that drives engagement and keeps your content calendar full."
         ctaText="Book a Call"
         ctaLink="/contact"
         backgroundImage="/images/services/google-ads/hero-banner.avif"
-
+        scrollServices={scrollServices}
       />
       <SlidingLogos />
       <DynamicSupportSection
-        subtitle="Creative Social Media Branding"
-        title=" Visuals That "
-        highlightText=" engage & Inspire"
+        subtitle="Fast and scalable is non-negotiable"
+        title="Join a trend late, and the algorithm punishes you"
+        highlightText=""
         imageSrc="/images/services/email-design/about-email.avif"
-        imageAlt="Creative Social Media"
-        description="  Elevate your social media presence with eye-catching visuals. Our
-            creatives are designed to boost engagement, drive brand awareness,
-            and keep your audience hooked."
-        additionalText="From **Instagram posts & Facebook ads** to **animated social media
-            content**, we create impactful designs that align with your brand
-            and maximize online visibility."
+        imageAlt="Social Media Creative Services"
+        description="When you post irregularly, use off-brand assets, or recycle old content, your audience notices and so does the algorithm. Consistency is everything on social."
+        additionalText="Even the best in-house teams struggle to keep up with content fatigue and platform demands. Your designers are stretched thin, freelancers can't match your brand voice, and production bottlenecks kill momentum. To stay ahead without burning out, you need a creative partner who moves at the speed of social."
       />
 
 
       <DynamicCreativeSection
-        subtitle="Enhance Your Brand's Social Media Presence"
-        title=" Services"
-        heighlightText=" Social Media Creatives"
+        subtitle="What we deliver"
+        title="Social media creative built for every platform and goal"
+        heighlightText=""
+        description="From organic storytelling to high-converting paid ads and immersive AR experiences, we deliver creative that drives clicks, shares, and conversions on every platform that matters."
         items={items}
       />
-
-
-       <DynamicOurWorks />      <SocialMediaStateSection />
+      <ChannelTailoredSection
+        subtitle="Platform-native content"
+        title="Creative designed for how each platform actually works"
+        titleHighlight=""
+        description="Whether it's paid or organic, we have platform experts who build social content tailored to user behavior and algorithm preferences so your content performs better, naturally."
+        channels={[
+          {
+            title: "Meta (Facebook & Instagram)",
+            subtitle: "Maximize engagement with visually captivating creative tailored for feed posts, Stories, Reels, and carousel ads.",
+            icon: <FaFacebook className="w-8 h-8" />,
+          },
+          {
+            title: "LinkedIn",
+            subtitle: "Thoughtful, professional content designed for LinkedIn's business-focused community and decision-makers.",
+            icon: <FaLinkedin className="w-8 h-8" />,
+          },
+          {
+            title: "TikTok",
+            subtitle: "Tap into trend-forward, fast-paced content that drives views, shares, and virality on the world's fastest-growing platform.",
+            icon: <SiTiktok className="w-8 h-8" />,
+          },
+          {
+            title: "YouTube",
+            subtitle: "Optimize watch-time and CTR with video ads, pre-roll content, and thumbnails designed for maximum impact.",
+            icon: <FaYoutube className="w-8 h-8" />,
+          },
+          {
+            title: "X (Twitter)",
+            subtitle: "Punchy, conversation-starting visuals optimized for fast-scrolling timelines and real-time engagement.",
+            icon: <FaTwitter className="w-8 h-8" />,
+          },
+          {
+            title: "Emerging platforms",
+            subtitle: "Snapchat, Reddit, Pinterest, Threads whatever platform your audience is on, we've got attention-grabbing content in the right format.",
+            icon: <FaHashtag className="w-8 h-8" />,
+          },
+        ]}
+      />
+      <HowItWorksSection
+        subtitle="HOW WE WORK"
+        title="Scale social output without losing control"
+        titleHighlight=""
+        description="Our creative experts and AI-accelerated workflows help you get social campaigns to market fast without sacrificing brand consistency or creative quality."
+        steps={[
+          {
+            number: "1",
+            title: "Smart briefing",
+            subtitle: "Submit briefs through our streamlined platform and collaborate in real-time with transparent feedback loops and progress tracking.",
+          },
+          {
+            number: "2",
+            title: "Platform expertise",
+            subtitle: "Our creative team is fully versed in the formats, channels, and strategies you need to crush your organic and paid social goals.",
+          },
+          {
+            number: "3",
+            title: "Speed meets quality",
+            subtitle: "Get more variations for testing, faster iterations, and smarter workflows powered by AI-enhanced production without compromising on brand or creativity.",
+          },
+          {
+            number: "4",
+            title: "Flexible capacity",
+            subtitle: "Whether you're planning a major campaign or need to act fast, scale up output on demand or roll over budget when you don't need it.",
+          },
+          {
+            number: "5",
+            title: "Always on-brand",
+            subtitle: "Your Creative Leads ensure every asset aligns with your brand guidelines and strategy even when you need it delivered yesterday.",
+          },
+        ]}
+      />
+      <DynamicOurWorks />
       <TestimonialSlider />
       <SocialMediaFAQSection />
 
