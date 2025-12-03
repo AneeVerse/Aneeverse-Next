@@ -22,8 +22,8 @@ const scrollVariants = {
   },
 };
 
-// ✅ Services Data (for scrolling cards)
-const services = [
+// ✅ Services Data (for scrolling cards) - Default
+const defaultServices = [
   { title: "Webflow Development", image: "/images/services/website/card/webflow-development.avif" },
   { title: "Website Illustrations", image: "/images/services/website/card/website-illustration.avif" },
   { title: "UX UI Audit", image: "/images/services/website/card/ui-ux-audit.avif" },
@@ -42,7 +42,9 @@ export default function CommonServicesHeroSection({
   ctaText,
   ctaLink,
   backgroundImage,
+  scrollServices = null,
 }) {
+  const services = scrollServices || defaultServices;
   return (
     <div className="relative mt-0 text-white overflow-hidden">
       {/* ✅ Hero Section */}
