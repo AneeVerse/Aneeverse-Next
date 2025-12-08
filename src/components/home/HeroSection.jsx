@@ -274,7 +274,7 @@ const HeroSection = () => {
             <div className="flex flex-col justify-center h-full hero-left-content">
               <div className="flex flex-col sm:flex-col">
                 <Heading
-                  level="h2"
+                  level="h1"
                   color="gredient"
                   spacing="lg"
                   className="text-center sm:text-left font-semibold"

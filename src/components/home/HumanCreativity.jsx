@@ -28,14 +28,14 @@ const HumanCreativity = () => {
                     </motion.h2>
                 </div>
 
-                {/* Grid Layout */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                {/* Horizontal Scroll on Mobile, Grid on Desktop */}
+                <div className="flex lg:grid lg:grid-cols-12 gap-6 overflow-x-auto lg:overflow-x-visible snap-x snap-mandatory lg:snap-none scrollbar-hide pb-4 lg:pb-0 -mx-4 px-4 lg:mx-0 lg:px-0">
                     {/* Left Column - Large Card */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
-                        className="lg:col-span-5 bg-[#072d36] rounded-2xl overflow-hidden relative group min-h-[500px] flex flex-col"
+                        className="lg:col-span-5 bg-[#072d36] rounded-2xl overflow-hidden relative group min-h-[500px] flex flex-col flex-shrink-0 w-[85vw] sm:w-[400px] lg:w-auto snap-center"
                     >
                         {/* Image Section */}
                         <div className="flex-grow relative">
@@ -44,9 +44,6 @@ const HumanCreativity = () => {
                                 alt="Creative Professional"
                                 className="w-full h-full object-cover object-top"
                             />
-
-
-
                         </div>
 
                         {/* Text Content */}
@@ -58,38 +55,41 @@ const HumanCreativity = () => {
                         </div>
                     </motion.div>
 
-                    {/* Right Column - 2x2 Grid */}
-                    <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        {/* Card 1 */}
+                    {/* Feature Cards - First Pair (1 column on mobile) */}
+                    <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 flex-shrink-0 w-[85vw] sm:w-[420px] lg:w-auto snap-center">
                         <FeatureCard
-                            icon={<PenTool className="w-6 h-6" />}
+                            icon={<PenTool className="w-8 h-8" />}
                             title="Spin up a creative team fast"
                             description="Low complexity to build from scratch or plug into your current team."
                             delay={0.3}
+                            isInGrid={true}
                         />
 
-                        {/* Card 2 */}
                         <FeatureCard
-                            icon={<Clock className="w-6 h-6" />}
+                            icon={<Clock className="w-8 h-8" />}
                             title="Reliable turnarounds"
                             description="Average 24-hour first drafts, handled with consistency and care."
                             delay={0.4}
+                            isInGrid={true}
                         />
+                    </div>
 
-                        {/* Card 3 */}
+                    {/* Feature Cards - Second Pair (1 column on mobile) */}
+                    <div className="lg:hidden grid grid-cols-1 gap-3 flex-shrink-0 w-[85vw] snap-center">
                         <FeatureCard
-                            icon={<DollarSign className="w-6 h-6" />}
+                            icon={<DollarSign className="w-8 h-8" />}
                             title="Transparent pricing"
                             description="Build a subscription that matches your current demands."
                             delay={0.5}
+                            isInGrid={true}
                         />
 
-                        {/* Card 4 */}
                         <FeatureCard
-                            icon={<Headphones className="w-6 h-6" />}
+                            icon={<Headphones className="w-8 h-8" />}
                             title="Human support, always on"
                             description="Never get stuck on a request. Our support team is here 24/5 to support you and your success."
                             delay={0.6}
+                            isInGrid={true}
                         />
                     </div>
                 </div>
@@ -98,18 +98,19 @@ const HumanCreativity = () => {
     );
 };
 
-const FeatureCard = ({ icon, title, description, delay }) => (
+const FeatureCard = ({ icon, title, description, delay, isInGrid = false }) => (
     <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay }}
-        className="bg-[#072d36] p-8 rounded-2xl flex flex-col items-start hover:bg-[#093540] transition-colors duration-300"
+        className={`bg-[#072d36] rounded-2xl flex flex-col items-start hover:bg-[#093540] transition-colors duration-300 ${isInGrid ? 'w-full min-h-[180px] sm:min-h-[220px] p-4 sm:p-5 lg:p-8' : 'flex-shrink-0 w-[85vw] sm:w-[350px] lg:w-auto snap-center min-h-[280px] p-8'
+            }`}
     >
-        <div className="mb-6 text-white">
+        <div className={`text-white ${isInGrid ? 'mb-4 sm:mb-5' : 'mb-6'}`}>
             {icon}
         </div>
-        <h4 className="text-xl font-bold mb-3">{title}</h4>
-        <p className="text-gray-300 text-sm leading-relaxed">
+        <h4 className={`font-bold mb-3 ${isInGrid ? 'text-base sm:text-lg lg:text-xl' : 'text-base sm:text-lg lg:text-xl sm:mb-3'}`}>{title}</h4>
+        <p className={`text-gray-300 leading-relaxed ${isInGrid ? 'text-sm sm:text-sm lg:text-base' : 'text-xs sm:text-sm'}`}>
             {description}
         </p>
     </motion.div>
