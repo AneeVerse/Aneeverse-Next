@@ -47,29 +47,29 @@ export default function EditBlog() {
   useEffect(() => {
     const fetchBlog = async () => {
       if (!params.slug) return;
-      
+
       try {
         setIsLoading(true);
         setError('');
-        
+
         // First try the API
         const response = await fetch(`/api/blogs/${params.slug}`);
         const data = await response.json();
-        
+
         if (response.ok && data.success) {
           // Use the API data if available
           const blog = data.blog;
-          
+
           // Store the current category for later consistency check
           const currentCategory = blog.category;
-          
+
           setFormData({
             ...blog,
             date: blog.date ? new Date(blog.date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
             content: blog.content || '',
             category: currentCategory // Ensure category is set
           });
-          
+
           console.log('Blog data loaded with category:', currentCategory);
         } else {
           // If API failed, try static data as fallback
@@ -78,14 +78,14 @@ export default function EditBlog() {
             if (staticBlog) {
               // Store the current category
               const currentCategory = staticBlog.category;
-              
+
               setFormData({
                 ...staticBlog,
                 date: staticBlog.date ? new Date(staticBlog.date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
                 content: staticBlog.content || '',
                 category: currentCategory // Ensure category is set
               });
-              
+
               console.log('Static blog data loaded with category:', currentCategory);
             } else {
               setError('Blog not found');
@@ -166,7 +166,7 @@ export default function EditBlog() {
       // Encode the category name for the URL
       const encodedName = encodeURIComponent(categoryName);
       console.log('Deleting category:', categoryName);
-      
+
       const response = await fetch(`/api/categories/${encodedName}`, {
         method: 'DELETE',
       });
@@ -271,10 +271,10 @@ export default function EditBlog() {
 
     try {
       // Ensure thumbnail URL starts with /images if it's a relative path
-      const thumbnailUrl = formData.thumbnail.startsWith('http') 
-        ? formData.thumbnail 
-        : formData.thumbnail.startsWith('/') 
-          ? formData.thumbnail 
+      const thumbnailUrl = formData.thumbnail.startsWith('http')
+        ? formData.thumbnail
+        : formData.thumbnail.startsWith('/')
+          ? formData.thumbnail
           : `/images/${formData.thumbnail}`;
 
       // Ensure author image URL starts with /images if it's a relative path
@@ -354,7 +354,7 @@ export default function EditBlog() {
       <Toaster />
       <div className="max-w-5xl mx-auto py-10 pb-24">
         <div className="flex items-center gap-4 mb-8">
-          <Link 
+          <Link
             href="/admin/blogs"
             className="p-2 hover:bg-gray-100 rounded-full"
           >
@@ -552,7 +552,7 @@ export default function EditBlog() {
                   required
                 />
                 <p className="mt-1 text-sm text-gray-500">
-                  Will be displayed as "{formData.timeToRead || '0'} min read"
+                  Will be displayed as &quot;{formData.timeToRead || '0'} min read&quot;
                 </p>
               </div>
 

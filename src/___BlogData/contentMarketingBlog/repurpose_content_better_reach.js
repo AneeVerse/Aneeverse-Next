@@ -13,18 +13,18 @@ export const repurpose_content_better_reach = {
     shortDescription: "Learn effective strategies to maximize your content's impact by repurposing it across different formats and platforms",
     description: "Discover how to transform your existing content into multiple formats, reaching wider audiences while maintaining quality and consistency in your message.",
     content: <div>
-        <img 
-            src="/images/blog/content-marketing/repurpose-content-hero.jpg" 
-            alt="Content repurposing strategies" 
+        <img
+            src="/images/blog/content-marketing/repurpose-content-hero.jpg"
+            alt="Content repurposing strategies"
             className="w-full h-auto rounded-lg mb-8"
         />
-        
+
         <p className="text-lg font-medium mb-6">
-            In today's digital world, repurposing content is key for businesses. It helps them get more out of their content. By changing how they share it, brands can reach more people and keep their message strong.
+            In today&apos;s digital world, repurposing content is key for businesses. It helps them get more out of their content. By changing how they share it, brands can reach more people and keep their message strong.
         </p>
 
         <p className="mb-8">
-            Repurposing content is more than just reusing it. It's about making your content fit different places and people. This way, marketers can get more value from what they already have. And they can keep their brand's message clear.
+            Repurposing content is more than just reusing it. It&apos;s about making your content fit different places and people. This way, marketers can get more value from what they already have. And they can keep their brand&apos;s message clear.
         </p>
 
         <div className="bg-gray-50 p-6 rounded-lg mb-8">
@@ -55,9 +55,9 @@ export const repurpose_content_better_reach = {
         </div>
 
         <h2 className="text-2xl font-bold mb-4">Content Repurposing, Content Marketing Strategy, SEO: The Perfect Trio</h2>
-        <img 
-            src="/images/blog/content-marketing/repurpose-content-content1.jpg" 
-            alt="Content repurposing and SEO strategy" 
+        <img
+            src="/images/blog/content-marketing/repurpose-content-content1.jpg"
+            alt="Content repurposing and SEO strategy"
             className="w-full h-auto rounded-lg my-8"
         />
         <p className="mb-6">
@@ -66,7 +66,7 @@ export const repurpose_content_better_reach = {
 
         <div className="bg-blue-50 p-6 rounded-lg mb-8">
             <p className="text-blue-800 font-medium italic">
-                "Content is king, but strategy is the kingdom." - Digital Marketing Insight
+                &quot;Content is king, but strategy is the kingdom.&quot; - Digital Marketing Insight
             </p>
         </div>
 
@@ -89,9 +89,9 @@ export const repurpose_content_better_reach = {
         </div>
 
         <h2 className="text-2xl font-bold mb-4">Transforming Blog Posts into Visual Content</h2>
-        <img 
-            src="/images/blog/content-marketing/repurpose-content-content2.jpg" 
-            alt="Visual content transformation strategies" 
+        <img
+            src="/images/blog/content-marketing/repurpose-content-content2.jpg"
+            alt="Visual content transformation strategies"
             className="w-full h-auto rounded-lg my-8"
         />
         <p className="mb-6">
@@ -165,7 +165,7 @@ export const repurpose_content_better_reach = {
 
         <h2 className="text-2xl font-bold mb-4">Measuring Success and ROI of Repurposed Content</h2>
         <p className="mb-6">
-            It's key to track how well repurposed content does. Digital marketers need strong ways to see the real effect of their work. This helps improve content and SEO strategies.
+            It&apos;s key to track how well repurposed content does. Digital marketers need strong ways to see the real effect of their work. This helps improve content and SEO strategies.
         </p>
 
         <div className="bg-gray-50 p-6 rounded-lg mb-8">
@@ -193,7 +193,7 @@ export const repurpose_content_better_reach = {
                 </div>
                 <div>
                     <h3 className="font-bold mb-2">Why should businesses invest time in content repurposing?</h3>
-                    <p>It helps you reach more people and improve your website's ranking. It also makes creating content more efficient. Plus, it boosts engagement and saves money on new content.</p>
+                    <p>It helps you reach more people and improve your website&apos;s ranking. It also makes creating content more efficient. Plus, it boosts engagement and saves money on new content.</p>
                 </div>
                 <div>
                     <h3 className="font-bold mb-2">What are the best formats for content repurposing?</h3>
@@ -201,7 +201,7 @@ export const repurpose_content_better_reach = {
                 </div>
                 <div>
                     <h3 className="font-bold mb-2">How do I track the success of repurposed content?</h3>
-                    <p>Use metrics like engagement, website visits, and social shares. Tools like Google Analytics and social media insights help track your content's success.</p>
+                    <p>Use metrics like engagement, website visits, and social shares. Tools like Google Analytics and social media insights help track your content&apos;s success.</p>
                 </div>
             </div>
         </div>

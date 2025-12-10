@@ -1,4 +1,4 @@
-export const 193b7778 = {
+export const blog_193b7778 = {
   "title": "rdddddddddd",
   "category": "eBay",
   "shortDescription": "ffffffff",

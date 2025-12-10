@@ -25,26 +25,26 @@ import SanityImage from '@/components/common/SanityImage';
 const getBlogPost = async (slug) => {
   try {
     console.log('Attempting to fetch blog post with slug:', slug);
-    
+
     // Check if the slug looks like a UUID (contains dashes and is roughly the right length)
     const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slug);
-    
+
     // First try to fetch from Sanity API
     try {
       // Construct the appropriate API URL
-      const apiUrl = isUuid 
+      const apiUrl = isUuid
         ? `/api/blogs/id/${slug}` // If it's a UUID, use the ID endpoint if you have one
         : `/api/sanity-blogs/${slug}`;
-      
+
       const sanityResponse = await fetch(apiUrl, {
         cache: 'no-store',
         next: { revalidate: 60 }
       });
-      
+
       if (sanityResponse.ok) {
         const sanityData = await sanityResponse.json();
         console.log('Sanity API Response:', sanityData);
-        
+
         if (sanityData.success && sanityData.blog) {
           console.log('Successfully fetched from Sanity');
           // Make sure we have FAQ data if available
@@ -57,17 +57,17 @@ const getBlogPost = async (slug) => {
     } catch (sanityErr) {
       console.error("Error fetching from Sanity:", sanityErr);
     }
-    
+
     // If Sanity fails, try the regular API
     try {
       const response = await fetch(`/api/blogs/${slug}`, {
         cache: 'no-store',
         next: { revalidate: 60 }
       });
-      
+
       const data = await response.json();
       console.log('Regular API Response:', data);
-      
+
       if (response.ok && data.success && data.blog) {
         console.log('Successfully fetched from regular API');
         return data.blog;
@@ -75,7 +75,7 @@ const getBlogPost = async (slug) => {
     } catch (apiErr) {
       console.error("Error fetching from regular API:", apiErr);
     }
-    
+
     // Fall back to static data if both APIs fail
     const staticBlog = blogs.find((blog) => blog.slug === slug || blog.id === slug);
     console.log('Using static blog data:', staticBlog);
@@ -93,14 +93,14 @@ export default function BlogDetailClient({ params, initialPost }) {
   const [error, setError] = useState(null);
   const [thumbnailError, setThumbnailError] = useState(false);
   const [authorImageError, setAuthorImageError] = useState(false);
-  
+
   // Use scroll spy for h2 headings
-  const activeId = useScrollSpy('h2'); 
+  const activeId = useScrollSpy('h2');
 
   // Default images
   const defaultThumbnail = "/images/blog1.avif";
   const defaultAuthorImage = "/images/blog/author/abhi.png";
-  
+
   // (Removed auto URL hash updates to keep clean URLs)
 
   useEffect(() => {
@@ -109,27 +109,27 @@ export default function BlogDetailClient({ params, initialPost }) {
       if (initialPost) {
         setPost(initialPost);
         setIsLoading(false);
-        
+
         // Set the document title
         if (typeof document !== 'undefined') {
           document.title = initialPost.seo?.metaTitle || initialPost.title;
         }
         return;
       }
-      
+
       // Only fetch client-side if we don't have server data
       try {
         setIsLoading(true);
         console.log('Loading blog with slug:', params.slug);
         const blogPost = await getBlogPost(params.slug);
-        
+
         if (!blogPost) {
           setError('Blog not found');
           console.error('Blog not found with slug:', params.slug);
         } else {
           setPost(blogPost);
           console.log('Blog loaded successfully:', blogPost.title);
-          
+
           // Set the document title to use SEO meta title if available
           if (typeof document !== 'undefined') {
             document.title = blogPost.seo?.metaTitle || blogPost.title;
@@ -142,7 +142,7 @@ export default function BlogDetailClient({ params, initialPost }) {
         setIsLoading(false);
       }
     };
-    
+
     loadBlog();
   }, [params.slug, initialPost]);
 
@@ -150,12 +150,12 @@ export default function BlogDetailClient({ params, initialPost }) {
   const processHtmlContent = (htmlContent) => {
     if (!htmlContent || typeof htmlContent !== 'string') return htmlContent;
     if (typeof window === 'undefined') return htmlContent; // Skip on server
-    
+
     try {
       // Create a temporary div to parse and modify HTML content
       const tempDiv = document.createElement('div');
       tempDiv.innerHTML = htmlContent;
-      
+
       // Find Key Takeaways sections and convert text bullets to proper lists
       const paragraphs = tempDiv.querySelectorAll('p');
       paragraphs.forEach(p => {
@@ -165,23 +165,23 @@ export default function BlogDetailClient({ params, initialPost }) {
           // Find all bullet paragraphs that should be in a list
           const bulletItems = [];
           let currentP = p;
-          
+
           // Collect consecutive bullet paragraphs
-          while (currentP && 
-                (currentP.textContent.trim().startsWith('•') || 
-                 currentP.textContent.trim().startsWith('·') || 
-                 currentP.textContent.trim().startsWith('-'))) {
+          while (currentP &&
+            (currentP.textContent.trim().startsWith('•') ||
+              currentP.textContent.trim().startsWith('·') ||
+              currentP.textContent.trim().startsWith('-'))) {
             bulletItems.push(currentP);
             currentP = currentP.nextElementSibling;
           }
-          
+
           if (bulletItems.length > 0) {
             // Create a new list
             const ul = document.createElement('ul');
             ul.className = 'list-disc pl-6 my-4';
             ul.style.listStyleType = 'disc';
             ul.style.paddingLeft = '1.5rem';
-            
+
             // Add each bullet paragraph as a list item
             bulletItems.forEach(item => {
               const li = document.createElement('li');
@@ -190,13 +190,13 @@ export default function BlogDetailClient({ params, initialPost }) {
               li.style.display = 'list-item';
               li.style.listStyleType = 'disc';
               ul.appendChild(li);
-              
+
               // Remove the original paragraph
               if (item.parentNode) {
                 item.parentNode.removeChild(item);
               }
             });
-            
+
             // Insert the list before the next element after the bullet list
             if (p.parentNode) {
               if (currentP) {
@@ -207,7 +207,7 @@ export default function BlogDetailClient({ params, initialPost }) {
             }
           }
         }
-        
+
         // Option 2: For any remaining bullet paragraphs, apply special styling
         if (p.textContent.trim().startsWith('•') || p.textContent.trim().startsWith('·') || p.textContent.trim().startsWith('-')) {
           p.classList.add('bullet-point');
@@ -215,7 +215,7 @@ export default function BlogDetailClient({ params, initialPost }) {
           p.style.position = 'relative';
           p.style.paddingLeft = '1.5rem';
           p.style.display = 'block';
-          
+
           // Add a ::before pseudo-element for the bullet
           const style = document.createElement('style');
           style.textContent = `
@@ -230,27 +230,27 @@ export default function BlogDetailClient({ params, initialPost }) {
           document.head.appendChild(style);
         }
       });
-      
+
       // Add IDs to h2 elements
       const headings = tempDiv.querySelectorAll('h2');
       const usedIds = new Set(); // Track used IDs to prevent duplicates
-      
+
       headings.forEach((heading, index) => {
         // Create URL-friendly ID from heading text
         let id = heading.textContent
           .toLowerCase()
           .replace(/[^a-z0-9]+/g, '-')
           .replace(/(^-|-$)/g, '');
-        
+
         // If this ID is already used, append an index to make it unique
         if (usedIds.has(id)) {
           id = `${id}-${index}`;
         }
-        
+
         usedIds.add(id);
         heading.id = id;
       });
-      
+
       // Ensure all list items have proper styling
       const listItems = tempDiv.querySelectorAll('ul li');
       listItems.forEach(li => {
@@ -259,14 +259,14 @@ export default function BlogDetailClient({ params, initialPost }) {
         li.style.display = 'list-item';
         li.style.listStyleType = 'disc';
         li.style.marginLeft = '1.5rem';
-        
+
         // For Key Takeaways section, add extra emphasis
         const parentHeading = li.parentElement.previousElementSibling;
         if (parentHeading && parentHeading.textContent.includes('Key Takeaways')) {
           li.style.fontWeight = '500';
         }
       });
-      
+
       // Apply direct styling to tables
       const tables = tempDiv.querySelectorAll('table');
       tables.forEach(table => {
@@ -278,10 +278,10 @@ export default function BlogDetailClient({ params, initialPost }) {
         table.style.borderRadius = '8px';
         table.style.overflow = 'hidden';
         table.style.border = '1px solid #E2E8F0';
-        
+
         // Check if table has header cells
         const hasTh = table.querySelector('th') !== null;
-        
+
         // If there are no <th> elements, treat the first row as a header
         if (!hasTh && table.rows.length > 0) {
           const firstRow = table.rows[0];
@@ -292,7 +292,7 @@ export default function BlogDetailClient({ params, initialPost }) {
             cell.style.padding = '12px 16px';
           });
         }
-        
+
         // Style all th elements
         const thElements = table.querySelectorAll('th');
         thElements.forEach(th => {
@@ -303,14 +303,14 @@ export default function BlogDetailClient({ params, initialPost }) {
           th.style.textAlign = 'left';
           th.style.border = '1px solid #E2E8F0';
         });
-        
+
         // Style all td elements
         const tdElements = table.querySelectorAll('td');
         tdElements.forEach((td, index) => {
           td.style.padding = '12px 16px';
           td.style.color = '#475467';
           td.style.border = '1px solid #E2E8F0';
-          
+
           // Apply zebra striping for better readability
           const row = td.parentElement;
           if (row && row.rowIndex > 0 && row.rowIndex % 2 === 0) {
@@ -318,7 +318,7 @@ export default function BlogDetailClient({ params, initialPost }) {
           } else {
             td.style.backgroundColor = 'white';
           }
-          
+
           // Fix any links inside table cells
           const links = td.querySelectorAll('a');
           links.forEach(link => {
@@ -327,7 +327,7 @@ export default function BlogDetailClient({ params, initialPost }) {
           });
         });
       });
-      
+
       return tempDiv.innerHTML;
     } catch (err) {
       console.error('Error processing HTML content:', err);
@@ -338,24 +338,24 @@ export default function BlogDetailClient({ params, initialPost }) {
   // Update the h2Headings extraction logic to work with Portable Text
   const h2Headings = React.useMemo(() => {
     if (!post) return [];
-    
+
     try {
       // For Portable Text content (array)
       if (Array.isArray(post.content)) {
         const uniqueIds = new Set();
         const uniqueHeadings = [];
-        
+
         // Recursively search for h2 blocks in Portable Text
         const findH2Blocks = (blocks) => {
           if (!Array.isArray(blocks)) return;
-          
+
           blocks.forEach((block, index) => {
             if (block._type === 'block' && block.style === 'h2') {
               // Extract text from the block
               const title = block.children
                 .map(child => child.text)
                 .join('');
-              
+
               // Create URL-friendly ID
               let id = title
                 .toLowerCase()
@@ -370,31 +370,31 @@ export default function BlogDetailClient({ params, initialPost }) {
               uniqueIds.add(id);
               uniqueHeadings.push({ id, title });
             }
-            
+
             // Recursively search in nested blocks
             if (block.children) {
               findH2Blocks(block.children);
             }
           });
         };
-        
+
         findH2Blocks(post.content);
         return uniqueHeadings;
       }
-      
+
       // For HTML string content (fallback)
       if (typeof post.content === 'string') {
         if (typeof window === 'undefined') return []; // Skip on server
-        
+
         // Create a temporary div to parse HTML content
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = post.content;
         const headingElements = tempDiv.querySelectorAll('h2');
-        
+
         // Use a Set to track unique IDs
         const uniqueIds = new Set();
         const uniqueHeadings = [];
-        
+
         // Convert to array and extract info
         Array.from(headingElements).forEach((h2, index) => {
           const title = h2.textContent;
@@ -412,16 +412,16 @@ export default function BlogDetailClient({ params, initialPost }) {
           uniqueIds.add(id);
           uniqueHeadings.push({ id, title });
         });
-        
+
         return uniqueHeadings;
       }
-      
+
       // For React element content (fallback)
       if (post.content.props?.children) {
         // Use a Set to track unique IDs
         const uniqueIds = new Set();
         const uniqueHeadings = [];
-        
+
         post.content.props.children
           .filter(child => child && child.type === 'h2')
           .forEach((h2, index) => {
@@ -430,17 +430,17 @@ export default function BlogDetailClient({ params, initialPost }) {
               .toLowerCase()
               .replace(/[^a-z0-9]+/g, '-')
               .replace(/(^-|-$)/g, '');
-            
+
             // Only add if this ID hasn't been seen before
             if (!uniqueIds.has(id)) {
               uniqueIds.add(id);
               uniqueHeadings.push({ id, title });
             }
           });
-        
+
         return uniqueHeadings;
       }
-      
+
       return [];
     } catch (err) {
       console.error('Error extracting h2 headings:', err);
@@ -451,7 +451,7 @@ export default function BlogDetailClient({ params, initialPost }) {
   // Prepare FAQ data for the component
   const faqItems = React.useMemo(() => {
     if (!post || !post.includeFaq || !post.faqSection?.questions) return [];
-    
+
     return post.faqSection.questions.map(item => ({
       question: item.question,
       answer: item.answer
@@ -470,20 +470,20 @@ export default function BlogDetailClient({ params, initialPost }) {
         while ((match = imgRegex.exec(content)) !== null) {
           console.log('Found image URL:', match[1]);
         }
-        
+
         // Process HTML to add IDs to headings
         const processedContent = processHtmlContent(content);
-        
+
         // Debug: log the HTML to see what list elements are being generated
         console.log('Processed HTML content:', processedContent);
-        
+
         return (
-          <div 
-            className="blog-content description prose max-w-none prose-img:rounded-lg prose-img:shadow-lg prose-headings:scroll-mt-24 prose-headings:pt-6 prose-headings:mt-6 prose-headings:border-t prose-headings:border-gray-100 prose-table:border-collapse prose-td:p-3 prose-th:p-3 prose-th:text-left prose-td:text-gray-700 prose-th:text-gray-800 prose-td:border prose-th:border prose-table:my-8 prose-table:w-full prose-ul:list-disc prose-ul:pl-6 prose-ol:list-decimal prose-ol:pl-6 prose-li:text-gray-600 prose-li:my-1 prose-li:marker:text-gray-500" 
+          <div
+            className="blog-content description prose max-w-none prose-img:rounded-lg prose-img:shadow-lg prose-headings:scroll-mt-24 prose-headings:pt-6 prose-headings:mt-6 prose-headings:border-t prose-headings:border-gray-100 prose-table:border-collapse prose-td:p-3 prose-th:p-3 prose-th:text-left prose-td:text-gray-700 prose-th:text-gray-800 prose-td:border prose-th:border prose-table:my-8 prose-table:w-full prose-ul:list-disc prose-ul:pl-6 prose-ol:list-decimal prose-ol:pl-6 prose-li:text-gray-600 prose-li:my-1 prose-li:marker:text-gray-500"
             style={{
               ['--tw-prose-ol-li']: 'list-decimal'
             }}
-            dangerouslySetInnerHTML={{ __html: processedContent }} 
+            dangerouslySetInnerHTML={{ __html: processedContent }}
           />
         );
       }
@@ -594,7 +594,7 @@ export default function BlogDetailClient({ params, initialPost }) {
         <Layout>
           <div className="text-center py-20">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">{error || 'Blog not found'}</h2>
-            <p className="text-gray-600 mb-8">The blog post you're looking for could not be found.</p>
+            <p className="text-gray-600 mb-8">The blog post you&apos;re looking for could not be found.</p>
             <Link href="/blog" className="px-6 py-3 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors">
               Return to Blog
             </Link>
@@ -608,12 +608,12 @@ export default function BlogDetailClient({ params, initialPost }) {
     <div className='bg-[#EBFAFE] py-16'>
       {/* FAQ Schema for blog posts with FAQ sections */}
       {post.includeFaq && faqItems.length > 0 && (
-        <FAQSchema 
-          faqData={faqItems} 
-          pageTitle={`${post.title} - FAQ`} 
+        <FAQSchema
+          faqData={faqItems}
+          pageTitle={`${post.title} - FAQ`}
         />
       )}
-      
+
       <Layout>
         {/* Blog Header - Superside Style */}
         <div className="mb-16">
@@ -628,12 +628,12 @@ export default function BlogDetailClient({ params, initialPost }) {
               }).toUpperCase()}
             </div>
           </div>
-          
+
           {/* Title - improved to handle long titles while maintaining original size */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.75rem] font-normal text-[#101828] leading-tight mb-4 sm:mb-8 text-center mx-auto max-w-[1000px] tracking-tight break-words hyphens-auto px-4">
             {post.title}
           </h1>
-          
+
           {/* Author section - exactly like Superside */}
           <div className="flex items-center justify-center mb-6 sm:mb-8">
             <div className="flex items-center">
@@ -649,8 +649,8 @@ export default function BlogDetailClient({ params, initialPost }) {
               </div>
               <div className="flex items-center flex-wrap">
                 <div className="text-[#475467] mr-2">By</div>
-                <Link 
-                  href="#" 
+                <Link
+                  href="#"
                   className="font-semibold text-[#101828] underline hover:text-secondary-500 mr-2"
                 >
                   {post.author?.name}
@@ -659,34 +659,34 @@ export default function BlogDetailClient({ params, initialPost }) {
               </div>
             </div>
           </div>
-          
+
           {/* Social sharing icons - Superside style */}
           <div className="flex items-center justify-center gap-3 mb-10 sm:mb-20">
-            <Link href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`} 
+            <Link href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
               className="w-12 h-12 rounded-full border border-[#1A5170] bg-transparent flex items-center justify-center hover:bg-[#0A2E3D]/10 transition-colors"
               target="_blank" rel="noopener noreferrer"
               aria-label="Share on LinkedIn"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-[#0A2E3D]">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
               </svg>
             </Link>
-            <Link href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`} 
+            <Link href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
               className="w-12 h-12 rounded-full border border-[#1A5170] bg-transparent flex items-center justify-center hover:bg-[#0A2E3D]/10 transition-colors"
               target="_blank" rel="noopener noreferrer"
               aria-label="Share on Facebook"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-[#0A2E3D]">
-                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
               </svg>
             </Link>
-            <button 
+            <button
               onClick={() => {
                 if (navigator.clipboard) {
                   navigator.clipboard.writeText(typeof window !== 'undefined' ? window.location.href : '');
                   alert('Link copied to clipboard!');
                 }
-              }} 
+              }}
               className="w-12 h-12 rounded-full border border-[#1A5170] bg-transparent flex items-center justify-center hover:bg-[#0A2E3D]/10 transition-colors"
               aria-label="Copy link to clipboard"
             >
@@ -695,8 +695,8 @@ export default function BlogDetailClient({ params, initialPost }) {
                 <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
               </svg>
             </button>
-            <Link 
-              href={`mailto:?subject=${encodeURIComponent(post.title)}&body=${encodeURIComponent(`Check out this article: ${typeof window !== 'undefined' ? window.location.href : ''}`)}`} 
+            <Link
+              href={`mailto:?subject=${encodeURIComponent(post.title)}&body=${encodeURIComponent(`Check out this article: ${typeof window !== 'undefined' ? window.location.href : ''}`)}`}
               className="w-12 h-12 rounded-full border border-[#1A5170] bg-transparent flex items-center justify-center hover:bg-[#0A2E3D]/10 transition-colors"
               aria-label="Share via email"
             >
@@ -714,7 +714,7 @@ export default function BlogDetailClient({ params, initialPost }) {
           <aside className="lg:sticky top-24 self-start hidden lg:block space-y-8 shrink-0 w-[300px]">
             {/* Read Time Animation - Added without changing structure */}
             <ReadTimeProgress timeToRead={post.timeToRead || "5 min read"} />
-            
+
             {/* Table of Contents */}
             <div className="bg-[#0A2E3D] p-4 rounded-lg">
               <h4 className="uppercase text-white text-[13px] font-medium tracking-[0.15em] mb-5">TABLE OF CONTENTS</h4>
@@ -725,11 +725,10 @@ export default function BlogDetailClient({ params, initialPost }) {
                       <li key={index} className="relative">
                         <a
                           href={`#${section.id}`}
-                          className={`flex items-center gap-2 text-[12px] leading-snug pl-3 ${
-                            activeId === section.id
+                          className={`flex items-center gap-2 text-[12px] leading-snug pl-3 ${activeId === section.id
                               ? 'text-white font-medium'
                               : 'text-gray-300 hover:text-white'
-                          }`}
+                            }`}
                           onClick={(e) => {
                             e.preventDefault();
                             const element = document.getElementById(section.id);
@@ -750,28 +749,28 @@ export default function BlogDetailClient({ params, initialPost }) {
                 </div>
               )}
             </div>
-            
+
             {/* Promotional Poster */}
             <div className="relative overflow-hidden rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] mt-8 bg-gradient-to-br from-[#073742] via-[#0A2E3D] to-[#073742]">
               <div className="relative h-[170px] overflow-hidden">
-                <Image 
-                  src="/images/book-left.avif" 
-                  alt="Transform your creative vision" 
-                  width={500} 
-                  height={300} 
+                <Image
+                  src="/images/book-left.avif"
+                  alt="Transform your creative vision"
+                  width={500}
+                  height={300}
                   className="w-full h-full object-cover object-center opacity-100"
                 />
                 <div className="absolute inset"></div>
               </div>
               <div className="relative p-6 py-4 px-4 text-white">
                 <div className="mb-3">
-                
+
                   <h3 className="text-white text-lg font-medium leading-tight bg-gradient-to-r from-white to-[#88D7F0] bg-clip-text text-transparent">
-                  The creative partner of the future
+                    The creative partner of the future
                   </h3>
                 </div>
                 <p className="text-white font-medium text-sm leading-relaxed mb-4 -mt-1">
-                Scale creative and growth
+                  Scale creative and growth
                 </p>
                 <AnimatedButton
                   href="/contact"
@@ -796,11 +795,10 @@ export default function BlogDetailClient({ params, initialPost }) {
                     <li key={index} className="relative">
                       <a
                         href={`#${section.id}`}
-                        className={`flex items-center gap-2 text-xs leading-tight pl-4 ${
-                          activeId === section.id
+                        className={`flex items-center gap-2 text-xs leading-tight pl-4 ${activeId === section.id
                             ? 'text-white font-medium'
                             : 'text-gray-300 hover:text-white'
-                        }`}
+                          }`}
                         onClick={(e) => {
                           e.preventDefault();
                           const element = document.getElementById(section.id);
@@ -839,7 +837,7 @@ export default function BlogDetailClient({ params, initialPost }) {
                   />
                 </div>
               )}
-              
+
               <div className="blog-content description">
                 {memoizedContent}
                 {/* Add direct CSS for bullet points */}
@@ -880,24 +878,24 @@ export default function BlogDetailClient({ params, initialPost }) {
                 `}</style>
               </div>
               <Newsletter />
-              
+
               {/* FAQ Section */}
               {post.includeFaq && faqItems.length > 0 && (
-                <BlogFAQ 
-                  title={post.faqSection?.title || 'Frequently Asked Questions'} 
-                  questions={faqItems} 
+                <BlogFAQ
+                  title={post.faqSection?.title || 'Frequently Asked Questions'}
+                  questions={faqItems}
                 />
               )}
             </article>
-            
+
             {/* Mobile Promotional CTA - Only shown on mobile */}
             <div className="lg:hidden relative overflow-hidden rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] mt-10 mb-6 bg-gradient-to-br from-[#073742] via-[#0A2E3D] to-[#073742]">
               <div className="relative h-[140px] overflow-hidden">
-                <Image 
-                  src="/images/book-left.avif" 
-                  alt="Transform your creative vision" 
-                  width={400} 
-                  height={200} 
+                <Image
+                  src="/images/book-left.avif"
+                  alt="Transform your creative vision"
+                  width={400}
+                  height={200}
                   className="w-full h-full object-cover object-center opacity-90"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#073742]/80 via-transparent to-transparent"></div>
@@ -936,7 +934,7 @@ export default function BlogDetailClient({ params, initialPost }) {
             <div className="text-xs sm:text-sm text-gray-500 mb-2 uppercase tracking-wider">RELATED ARTICLES</div>
             You may also like these
           </h2>
-          
+
           <RelatedBlogs currentPost={post} defaultThumbnail={defaultThumbnail} defaultAuthorImage={defaultAuthorImage} />
         </Layout>
       </section>

@@ -21,14 +21,14 @@ import CustomerStoryMetrics from '@/components/customer-stories/common/CustomerS
 const getCustomerStory = async (slug) => {
   try {
     console.log('Attempting to fetch customer story with slug:', slug);
-    
+
     // Try to fetch from Sanity API
     try {
       const storyData = await client.fetch(
         getCustomerStoryBySlugQuery,
         { slug: slug }
       );
-      
+
       if (storyData) {
         console.log('Successfully fetched from Sanity');
         return storyData;
@@ -36,7 +36,7 @@ const getCustomerStory = async (slug) => {
     } catch (sanityErr) {
       console.error("Error fetching from Sanity:", sanityErr);
     }
-    
+
     return null;
   } catch (err) {
     console.error("Error in customer story fetching process:", err);
@@ -51,14 +51,14 @@ export default function CustomerStoryDetail({ params }) {
   const [error, setError] = useState(null);
   const [thumbnailError, setThumbnailError] = useState(false);
   const [authorImageError, setAuthorImageError] = useState(false);
-  
+
   // Use only one mechanism for scroll spy
-  const activeId = useScrollSpy('h2'); 
+  const activeId = useScrollSpy('h2');
 
   // Default images
   const defaultThumbnail = "/images/blog1.avif";
   const defaultAuthorImage = "/images/blog/author/abhi.png";
-  
+
   // Update URL when active section changes
   useEffect(() => {
     if (activeId && typeof window !== 'undefined') {
@@ -76,14 +76,14 @@ export default function CustomerStoryDetail({ params }) {
         setIsLoading(true);
         console.log('Loading customer story with slug:', resolvedParams.id);
         const storyData = await getCustomerStory(resolvedParams.id);
-        
+
         if (!storyData) {
           setError('Customer story not found');
           console.error('Customer story not found with slug:', resolvedParams.id);
         } else {
           setPost(storyData);
           console.log('Customer story loaded successfully:', storyData.title);
-          
+
           // Debug customer logo
           if (storyData.customerLogo?.asset?._ref) {
             try {
@@ -103,7 +103,7 @@ export default function CustomerStoryDetail({ params }) {
         setIsLoading(false);
       }
     };
-    
+
     loadStory();
   }, [resolvedParams.id]);
 
@@ -111,12 +111,12 @@ export default function CustomerStoryDetail({ params }) {
   const processHtmlContent = (htmlContent) => {
     if (!htmlContent || typeof htmlContent !== 'string') return htmlContent;
     if (typeof window === 'undefined') return htmlContent; // Skip on server
-    
+
     try {
       // Create a temporary div to parse and modify HTML content
       const tempDiv = document.createElement('div');
       tempDiv.innerHTML = htmlContent;
-      
+
       // Find Key Takeaways sections and convert text bullets to proper lists
       const paragraphs = tempDiv.querySelectorAll('p');
       paragraphs.forEach(p => {
@@ -126,23 +126,23 @@ export default function CustomerStoryDetail({ params }) {
           // Find all bullet paragraphs that should be in a list
           const bulletItems = [];
           let currentP = p;
-          
+
           // Collect consecutive bullet paragraphs
-          while (currentP && 
-                (currentP.textContent.trim().startsWith('•') || 
-                 currentP.textContent.trim().startsWith('·') || 
-                 currentP.textContent.trim().startsWith('-'))) {
+          while (currentP &&
+            (currentP.textContent.trim().startsWith('•') ||
+              currentP.textContent.trim().startsWith('·') ||
+              currentP.textContent.trim().startsWith('-'))) {
             bulletItems.push(currentP);
             currentP = currentP.nextElementSibling;
           }
-          
+
           if (bulletItems.length > 0) {
             // Create a new list
             const ul = document.createElement('ul');
             ul.className = 'list-disc pl-6 my-4';
             ul.style.listStyleType = 'disc';
             ul.style.paddingLeft = '1.5rem';
-            
+
             // Add each bullet paragraph as a list item
             bulletItems.forEach(item => {
               const li = document.createElement('li');
@@ -151,13 +151,13 @@ export default function CustomerStoryDetail({ params }) {
               li.style.display = 'list-item';
               li.style.listStyleType = 'disc';
               ul.appendChild(li);
-              
+
               // Remove the original paragraph
               if (item.parentNode) {
                 item.parentNode.removeChild(item);
               }
             });
-            
+
             // Insert the list before the next element after the bullet list
             if (p.parentNode) {
               if (currentP) {
@@ -169,27 +169,27 @@ export default function CustomerStoryDetail({ params }) {
           }
         }
       });
-      
+
       // Add IDs to h2 elements
       const headings = tempDiv.querySelectorAll('h2');
       const usedIds = new Set(); // Track used IDs to prevent duplicates
-      
+
       headings.forEach((heading, index) => {
         // Create URL-friendly ID from heading text
         let id = heading.textContent
           .toLowerCase()
           .replace(/[^a-z0-9]+/g, '-')
           .replace(/(^-|-$)/g, '');
-        
+
         // If this ID is already used, append an index to make it unique
         if (usedIds.has(id)) {
           id = `${id}-${index}`;
         }
-        
+
         usedIds.add(id);
         heading.id = id;
       });
-      
+
       return tempDiv.innerHTML;
     } catch (err) {
       console.error('Error processing HTML content:', err);
@@ -200,7 +200,7 @@ export default function CustomerStoryDetail({ params }) {
   // Extract headings for table of contents
   const h2Headings = React.useMemo(() => {
     if (!post) return [];
-    
+
     try {
       // For PortableText content from Sanity
       if (post.body) {
@@ -213,11 +213,11 @@ export default function CustomerStoryDetail({ params }) {
               .toLowerCase()
               .replace(/[^a-z0-9]+/g, '-')
               .replace(/(^-|-$)/g, '');
-            
+
             return { id, title };
           });
       }
-      
+
       return [];
     } catch (err) {
       console.error('Error extracting h2 headings:', err);
@@ -228,14 +228,14 @@ export default function CustomerStoryDetail({ params }) {
   // Custom PortableText components
   const myPortableTextComponents = {
     block: {
-      h2: ({children, value}) => {
+      h2: ({ children, value }) => {
         // Create URL-friendly ID from heading text
         const text = value.children.map(child => child.text).join('');
         const id = text
           .toLowerCase()
           .replace(/[^a-z0-9]+/g, '-')
           .replace(/(^-|-$)/g, '');
-          
+
         return (
           <h2
             id={id}
@@ -245,22 +245,22 @@ export default function CustomerStoryDetail({ params }) {
           </h2>
         );
       },
-      normal: ({children}) => <p className="mb-6 text-gray-600 leading-relaxed">{children}</p>
+      normal: ({ children }) => <p className="mb-6 text-gray-600 leading-relaxed">{children}</p>
     },
     list: {
-      bullet: ({children}) => (
+      bullet: ({ children }) => (
         <ul className="list-disc pl-6 my-4">{children}</ul>
       ),
-      number: ({children}) => (
+      number: ({ children }) => (
         <ol className="list-decimal pl-6 my-4">{children}</ol>
       ),
     },
     listItem: {
-      bullet: ({children}) => <li className="my-1">{children}</li>,
-      number: ({children}) => <li className="my-1">{children}</li>,
+      bullet: ({ children }) => <li className="my-1">{children}</li>,
+      number: ({ children }) => <li className="my-1">{children}</li>,
     },
     marks: {
-      link: ({value, children}) => {
+      link: ({ value, children }) => {
         const href = value?.href || '#';
         return (
           <a
@@ -275,14 +275,14 @@ export default function CustomerStoryDetail({ params }) {
       },
     },
     types: {
-      image: ({value}) => {
+      image: ({ value }) => {
         if (!value?.asset?._ref) {
           return null;
         }
         // Check if it's a GIF and use raw URL to preserve animation
         const isGif = value.asset._ref?.includes('gif') || value.asset.url?.endsWith('.gif');
         const imgUrl = isGif ? value.asset.url : urlForImage(value).url();
-        
+
         return (
           <figure className="my-8">
             <img
@@ -299,7 +299,7 @@ export default function CustomerStoryDetail({ params }) {
           </figure>
         );
       },
-      customImage: ({value}) => {
+      customImage: ({ value }) => {
         // Handle external image first (takes precedence)
         if (value.externalImage) {
           return (
@@ -317,12 +317,12 @@ export default function CustomerStoryDetail({ params }) {
             </figure>
           );
         }
-        
+
         // Fallback to Sanity image with GIF support
         if (value.sanityImage?.asset) {
           const isGif = value.sanityImage.asset._ref?.includes('gif') || value.sanityImage.asset.url?.endsWith('.gif');
           const imgUrl = isGif ? value.sanityImage.asset.url : urlForImage(value.sanityImage).url();
-          
+
           return (
             <figure className="my-8">
               <img
@@ -337,9 +337,9 @@ export default function CustomerStoryDetail({ params }) {
                 </figcaption>
               )}
             </figure>
-        );
-      }
-        
+          );
+        }
+
         // If no image is provided, return empty
         return null;
       },
@@ -367,7 +367,7 @@ export default function CustomerStoryDetail({ params }) {
         <Layout>
           <div className="text-center py-20">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">{error || 'Customer story not found'}</h2>
-            <p className="text-gray-600 mb-8">The customer story you're looking for could not be found.</p>
+            <p className="text-gray-600 mb-8">The customer story you&apos;re looking for could not be found.</p>
             <Link href="/customer-stories" className="px-6 py-3 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors">
               Return to Customer Stories
             </Link>
@@ -386,34 +386,34 @@ export default function CustomerStoryDetail({ params }) {
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.75rem] font-normal text-[#101828] leading-tight mb-8 sm:mb-12 text-center mx-auto max-w-[1000px] tracking-tight break-words hyphens-auto px-4 mt-24">
             {post.title}
           </h1>
-          
+
           {/* Social sharing icons */}
           <div className="flex items-center justify-center gap-3 mb-10 sm:mb-20">
-            <Link href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`} 
+            <Link href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
               className="w-12 h-12 rounded-full border border-[#1A5170] bg-transparent flex items-center justify-center hover:bg-[#0A2E3D]/10 transition-colors"
               target="_blank" rel="noopener noreferrer"
               aria-label="Share on LinkedIn"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-[#0A2E3D]">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
               </svg>
             </Link>
-            <Link href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`} 
+            <Link href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
               className="w-12 h-12 rounded-full border border-[#1A5170] bg-transparent flex items-center justify-center hover:bg-[#0A2E3D]/10 transition-colors"
               target="_blank" rel="noopener noreferrer"
               aria-label="Share on Facebook"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-[#0A2E3D]">
-                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
               </svg>
             </Link>
-            <button 
+            <button
               onClick={() => {
                 if (navigator.clipboard) {
                   navigator.clipboard.writeText(typeof window !== 'undefined' ? window.location.href : '');
                   alert('Link copied to clipboard!');
                 }
-              }} 
+              }}
               className="w-12 h-12 rounded-full border border-[#1A5170] bg-transparent flex items-center justify-center hover:bg-[#0A2E3D]/10 transition-colors"
               aria-label="Copy link to clipboard"
             >
@@ -422,8 +422,8 @@ export default function CustomerStoryDetail({ params }) {
                 <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
               </svg>
             </button>
-            <Link 
-              href={`mailto:?subject=${encodeURIComponent(post.title)}&body=${encodeURIComponent(`Check out this customer story: ${typeof window !== 'undefined' ? window.location.href : ''}`)}`} 
+            <Link
+              href={`mailto:?subject=${encodeURIComponent(post.title)}&body=${encodeURIComponent(`Check out this customer story: ${typeof window !== 'undefined' ? window.location.href : ''}`)}`}
               className="w-12 h-12 rounded-full border border-[#1A5170] bg-transparent flex items-center justify-center hover:bg-[#0A2E3D]/10 transition-colors"
               aria-label="Share via email"
             >
@@ -441,7 +441,7 @@ export default function CustomerStoryDetail({ params }) {
           <aside className="lg:sticky top-24 self-start hidden lg:block space-y-8 shrink-0">
             {/* Read Time Animation - Added without changing structure */}
             <ReadTimeProgress timeToRead={post.readTime || "5 min read"} />
-            
+
             {/* Table of Contents */}
             <div className="bg-[#0A2E3D] p-4 rounded-lg">
               <h4 className="uppercase text-white text-xs font-semibold tracking-wide mb-3">TABLE OF CONTENTS</h4>
@@ -452,11 +452,10 @@ export default function CustomerStoryDetail({ params }) {
                       <li key={index} className="relative">
                         <a
                           href={`#${section.id}`}
-                          className={`flex items-center gap-2 text-xs leading-tight pl-4 ${
-                            activeId === section.id
+                          className={`flex items-center gap-2 text-xs leading-tight pl-4 ${activeId === section.id
                               ? 'text-white font-medium'
                               : 'text-gray-300 hover:text-white'
-                          }`}
+                            }`}
                           onClick={(e) => {
                             e.preventDefault();
                             const element = document.getElementById(section.id);
@@ -477,23 +476,23 @@ export default function CustomerStoryDetail({ params }) {
                 </div>
               )}
             </div>
-            
+
             {/* Promotional Poster */}
             <div className="relative overflow-hidden rounded-lg shadow-[0_0_15px_rgba(0,0,0,0.2)] mt-8">
               <div className="h-[170px] overflow-hidden bg-[#0A2E3D]">
-                <Image 
-                  src="/blog-poster.avif" 
-                  alt="Get hassle-free service" 
-                  width={500} 
-                  height={300} 
+                <Image
+                  src="/blog-poster.avif"
+                  alt="Get hassle-free service"
+                  width={500}
+                  height={300}
                   className="w-full h-full object-cover object-center"
                 />
               </div>
-              <div className="bg-[#0A2E3D] p-4 text-white" style={{marginTop: "-1px"}}>
+              <div className="bg-[#0A2E3D] p-4 text-white" style={{ marginTop: "-1px" }}>
                 <h3 className="text-white text-lg font-bold leading-tight">Get hassle-free video at scale</h3>
                 <p className="text-gray-300 text-xs my-1.5">See how we can help.</p>
-                <Link 
-                  href="/contact" 
+                <Link
+                  href="/contact"
                   className="block bg-white hover:bg-gray-100 text-[#0A2E3D] text-center py-2.5 w-full rounded-md font-medium transition-colors mt-2.5"
                 >
                   Book a call
@@ -512,11 +511,10 @@ export default function CustomerStoryDetail({ params }) {
                     <li key={index} className="relative">
                       <a
                         href={`#${section.id}`}
-                        className={`flex items-center gap-2 text-xs leading-tight pl-4 ${
-                          activeId === section.id
+                        className={`flex items-center gap-2 text-xs leading-tight pl-4 ${activeId === section.id
                             ? 'text-white font-medium'
                             : 'text-gray-300 hover:text-white'
-                        }`}
+                          }`}
                         onClick={(e) => {
                           e.preventDefault();
                           const element = document.getElementById(section.id);
@@ -560,12 +558,12 @@ export default function CustomerStoryDetail({ params }) {
                   <CustomerStoryMetrics metrics={post.metrics} />
                 </div>
               )}
-              
+
               {/* Content */}
               <div className="blog-content description">
-                <PortableText 
-                  value={post.body} 
-                  components={myPortableTextComponents} 
+                <PortableText
+                  value={post.body}
+                  components={myPortableTextComponents}
                 />
                 {/* Add direct CSS for bullet points */}
                 <style jsx global>{`
@@ -589,7 +587,7 @@ export default function CustomerStoryDetail({ params }) {
                   }
                 `}</style>
               </div>
-              
+
               {/* Newsletter Section */}
               <div className="mt-16 border-t border-gray-200 pt-16">
                 <Newsletter />
