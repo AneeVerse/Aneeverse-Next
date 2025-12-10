@@ -55,7 +55,7 @@ const HumanCreativity = () => {
                         </div>
                     </motion.div>
 
-                    {/* Feature Cards - First Pair (1 column on mobile) */}
+                    {/* Feature Cards - All 4 cards in 2x2 grid on desktop, first 2 cards in mobile scroll */}
                     <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 flex-shrink-0 w-[85vw] sm:w-[420px] lg:w-auto snap-center">
                         <FeatureCard
                             icon={<PenTool className="w-8 h-8" />}
@@ -72,9 +72,28 @@ const HumanCreativity = () => {
                             delay={0.4}
                             isInGrid={true}
                         />
+
+                        {/* These two cards show in grid on desktop, hidden in this container on mobile */}
+                        <FeatureCard
+                            icon={<DollarSign className="w-8 h-8" />}
+                            title="Transparent pricing"
+                            description="Build a subscription that matches your current demands."
+                            delay={0.5}
+                            isInGrid={true}
+                            extraClassName="hidden lg:flex"
+                        />
+
+                        <FeatureCard
+                            icon={<Headphones className="w-8 h-8" />}
+                            title="Human support, always on"
+                            description="Never get stuck on a request. Our support team is here 24/5 to support you and your success."
+                            delay={0.6}
+                            isInGrid={true}
+                            extraClassName="hidden lg:flex"
+                        />
                     </div>
 
-                    {/* Feature Cards - Second Pair (1 column on mobile) */}
+                    {/* Feature Cards - Second Pair (only visible on mobile as separate scroll item) */}
                     <div className="lg:hidden grid grid-cols-1 gap-3 flex-shrink-0 w-[85vw] snap-center">
                         <FeatureCard
                             icon={<DollarSign className="w-8 h-8" />}
@@ -98,13 +117,13 @@ const HumanCreativity = () => {
     );
 };
 
-const FeatureCard = ({ icon, title, description, delay, isInGrid = false }) => (
+const FeatureCard = ({ icon, title, description, delay, isInGrid = false, extraClassName = '' }) => (
     <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay }}
         className={`bg-[#072d36] rounded-2xl flex flex-col items-start hover:bg-[#093540] transition-colors duration-300 ${isInGrid ? 'w-full min-h-[180px] sm:min-h-[220px] p-4 sm:p-5 lg:p-8' : 'flex-shrink-0 w-[85vw] sm:w-[350px] lg:w-auto snap-center min-h-[280px] p-8'
-            }`}
+            } ${extraClassName}`}
     >
         <div className={`text-white ${isInGrid ? 'mb-4 sm:mb-5' : 'mb-6'}`}>
             {icon}
