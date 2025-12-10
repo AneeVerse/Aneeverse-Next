@@ -59,46 +59,46 @@ export default function Home() {
     <div>
       {/* HeroSection loads immediately - above the fold content */}
       <HeroSection />
-      
+
       {/* All other components lazy load when they're about to enter viewport */}
       <LazySection>
         <SlidingLogos />
       </LazySection>
-      
+
       <LazySection>
         <HumanCreativity />
       </LazySection>
-      
+
       <LazySection>
         <CreativeSection />
       </LazySection>
-      
+
       <LazySection>
         <CommandCenter />
       </LazySection>
-      
+
       <LazySection>
         <TableComponent />
       </LazySection>
-      
+
       <LazySection>
         <DynamicOurWorks />
       </LazySection>
-      
+
       <LazySection>
         <TestimonialSlider />
       </LazySection>
-      
+
       <LazySection>
         <WeRecommend />
       </LazySection>
-      
+
       {/* <FeaturesSection /> */}
-      
-      <LazySection>
+
+      {/* <LazySection>
         <DiscoveryCall />
-      </LazySection>
-      
+      </LazySection> */}
+
       {/* <LazySection>
         <BottomAboutSection />
       </LazySection> */}
