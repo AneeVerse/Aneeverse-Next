@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
-import { 
-  FaPaintBrush, FaFacebook, FaSlideshare, FaPalette, 
+import {
+  FaPaintBrush, FaFacebook, FaSlideshare, FaPalette,
   FaTag, FaFilePdf, FaBox, FaDesktop,
   FaCode, FaLayerGroup, FaCog, FaPenFancy, FaSearch, FaBuilding,
   FaRobot, FaBlog, FaChartLine, FaEnvelope, FaEnvelopeOpenText, FaChartPie
@@ -12,14 +12,14 @@ import Link from "next/link";
 import { FaChevronDown } from "react-icons/fa6";
 import Layout from "@/components/common/Layout";
 
-const ServicesMegaMenu = ({color}) => {
+const ServicesMegaMenu = ({ color }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuCategories = [
     {
       title: "Creative Design",
       url: "/services",
-      color: "bg-purple-100 hover:bg-purple-200 text-purple-900", 
+      color: "bg-purple-100 hover:bg-purple-200 text-purple-900",
       items: [
         { name: "Ad Creative", url: "/services/ad-creative", description: "Eye-catching ad creatives that convert.", icon: <FaPaintBrush /> },
         { name: "Social Media Creatives", url: "/services/social-media-creatives", description: "Engaging assets for all platforms.", icon: <FaFacebook /> },
@@ -61,24 +61,24 @@ const ServicesMegaMenu = ({color}) => {
       ],
     },
   ];
-  
+
   return (
     <div
       className=""
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <Link 
-        href={"/services"} 
+      <Link
+        href={"/services"}
         style={{ color: color.text }}
         className="p-2 cursor-pointer flex items-center group"
       >
-        <span 
+        <span
           style={{ backgroundColor: color.text }}
           className={`${isOpen ? "mr-[6px] scale-100" : ""} h-[5px] w-[5px] inline-block transition-all group-hover:mr-[6px] duration-300 scale-0 group-hover:scale-100 rounded-full`}
-        ></span>  
+        ></span>
         <span className="flex items-center gap-2">
-          Services 
+          Services
           <FaChevronDown className={`${isOpen ? "-rotate-180" : ""} group-hover:-rotate-180 duration-300 transition-all self-center text-[10px]`} />
         </span>
       </Link>
@@ -90,47 +90,47 @@ const ServicesMegaMenu = ({color}) => {
           exit={{ opacity: 0, y: -10 }}
         >
           <div className="bg-[#EBFAFE] shadow-lg border py-3 overflow-y-auto h-[calc(100vh-80px)] border-gray-200 ">
-<Layout>
-<div className="grid grid-cols-3 gap-6">
+            <Layout>
+              <div className="grid grid-cols-3 gap-6">
                 {menuCategories.map((category, index) => (
-    <div key={index}>
-                    <Link 
-                      onClick={()=>{setIsOpen(false)}} 
-                      href={category.url} 
+                  <div key={index}>
+                    <Link
+                      onClick={() => { setIsOpen(false) }}
+                      href={category.url}
                       className={`text-lg font-bold group py-2 px-4 rounded-md inline-flex items-center gap-2 ${category.color}`}
                     >
-                      {category.title} 
-                      <div className="relative"> 
-                        <FiArrowUpRight className="z-10 group-hover:translate-x-[80%] group-hover:translate-y-[-80%] group-hover:opacity-0 transition-all duration-300" /> 
+                      {category.title}
+                      <div className="relative">
+                        <FiArrowUpRight className="z-10 group-hover:translate-x-[80%] group-hover:translate-y-[-80%] group-hover:opacity-0 transition-all duration-300" />
                         <FiArrowUpRight className="absolute inset-0 z-10 opacity-0 translate-x-[-80%] translate-y-[80%] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" />
-    </div>
-      </Link>
-        <ul className="mt-4 space-y-2">
-          {category.items.map((item, idx) => (
-                        <Link 
-                          onClick={()=>{setIsOpen(false)}} 
-                          href={item.url} 
-                          key={idx} 
+                      </div>
+                    </Link>
+                    <ul className="mt-4 space-y-2">
+                      {category.items.map((item, idx) => (
+                        <Link
+                          onClick={() => { setIsOpen(false) }}
+                          href={item.url}
+                          key={idx}
                           className="flex group px-3 py-2 border-b items-center justify-between gap-3"
                         >
-              <div className="flex items-center justify-between gap-3">
-                <div>
-                  <h4 className="text-md font-medium text-gray-700 flex items-center">
-                    <span className="h-[5px] w-[5px] bg-secondary-500 inline-block transition-all duration-300 scale-0 group-hover:scale-100 rounded-full"></span>  
-                    <span className="ml-[-5px] group-hover:ml-[6px] transition-all duration-300">{item.name}</span>
-                  </h4>
-                  <p className="text-sm text-gray-500">{item.description}</p>
-                </div>
+                          <div className="flex items-center justify-between gap-3">
+                            <div>
+                              <h4 className="text-sm font-normal text-gray-800 flex items-center">
+                                <span className="h-[5px] w-[5px] bg-secondary-500 inline-block transition-all duration-300 scale-0 group-hover:scale-100 rounded-full"></span>
+                                <span className="ml-[-5px] group-hover:ml-[6px] transition-all duration-300">{item.name}</span>
+                              </h4>
+                              <p className="text-sm text-gray-500">{item.description}</p>
+                            </div>
+                          </div>
+                          <div className="text-gray-400 group-hover:text-gray-600 transition-colors duration-300 text-lg self-center">{item.icon}</div>
+                        </Link>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
               </div>
-              <div className="text-gray-700 text-lg self-center">{item.icon}</div>
-            </Link>
-          ))}
-        </ul>
-      </div>
-    ))}
-</div>
-</Layout>
-</div>
+            </Layout>
+          </div>
         </motion.div>
       )}
     </div>

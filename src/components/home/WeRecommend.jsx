@@ -53,16 +53,16 @@ const WeRecommend = () => {
 
             {/* Cards Grid */}
             <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+                <div className="flex overflow-x-auto pb-4 gap-4 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
                     {cards.map((card) => (
                         <a
                             key={card.id}
                             href="#"
-                            className="group relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+                            className="group relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl flex-shrink-0 w-[85vw] md:w-auto snap-start"
                             style={{ backgroundColor: card.bgColor }}
                         >
                             {/* Card Container */}
-                            <div className="relative flex flex-col h-[480px]">
+                            <div className="relative flex flex-col h-[420px] md:h-[480px]">
                                 {/* Image Section - Takes most of the card */}
                                 <div className="relative flex-1 overflow-hidden">
                                     <Image
