@@ -174,10 +174,10 @@ const HeroSection = () => {
     gsap.registerPlugin(ScrollTrigger);
 
     let rafId;
-    
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       // Determine scroll direction
       if (currentScrollY > lastScrollY.current) {
         scrollDirectionRef.current = 1; // Scrolling down
@@ -188,10 +188,10 @@ const HeroSection = () => {
 
       // Use requestAnimationFrame for smooth updates
       if (rafId) cancelAnimationFrame(rafId);
-      
+
       rafId = requestAnimationFrame(() => {
         const speed = 0.3;
-        
+
         if (leftColumnRef.current && middleColumnRef.current && rightColumnRef.current) {
           // Apply scroll-based transform to outer containers
           if (scrollDirectionRef.current === 1) {
@@ -250,9 +250,9 @@ const HeroSection = () => {
 
     // Initial call
     handleScroll();
-    
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       if (rafId) cancelAnimationFrame(rafId);
@@ -271,16 +271,16 @@ const HeroSection = () => {
         <Layout>
           <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center h-full" style={{ minHeight: 'clamp(600px, 100vh, 1200px)' }}>
             {/* Left Content - Vertically Centered */}
-            <div className="flex flex-col justify-center h-full hero-left-content">
+            <div className="flex flex-col justify-start lg:justify-center h-full hero-left-content">
               <div className="flex flex-col sm:flex-col">
                 <Heading
                   level="h1"
                   color="gredient"
                   spacing="lg"
-                  className="text-center sm:text-left font-semibold"
+                  className="text-center sm:text-left font-semibold hero-heading"
                 >
-                  DESIGN, OPTIMIZE, ADVERTISE{" "}
-                  <AccentText size="xl" className={" block text-orange-500  "}>
+                  <span className="hero-heading-main">DESIGN, OPTIMIZE, ADVERTISE{" "}</span>
+                  <AccentText size="xl" className={" block text-orange-500 hero-accent-text"}>
                     we got you covered.
                   </AccentText>
                 </Heading>
@@ -301,105 +301,49 @@ const HeroSection = () => {
                   GET STARTED
                 </AnimatedButton>
               </div>
-            </div>
-            
-            {/* Mobile View - Cards in same viewport */}
-            <div 
-              className="lg:hidden absolute bottom-0 left-0 w-full flex flex-col justify-end z-10"
-              style={{ 
-                paddingBottom: 'clamp(12px, 3vw, 24px)',
-                paddingLeft: 'clamp(12px, 4vw, 20px)',
-                paddingRight: 'clamp(12px, 4vw, 20px)'
-              }}
-            >
-              <div 
-                className="overflow-hidden"
-                style={{ gap: 'clamp(8px, 2vw, 16px)' }}
-              >
-                {/* First Row - Left Scroll */}
-                <div
-                  ref={scrollRef}
-                  onMouseDown={handleMouseDown}
-                  onMouseMove={handleMouseMove}
-                  onMouseUp={handleMouseUp}
-                  onMouseLeave={handleMouseUp}
-                  onTouchStart={handleMouseDown}
-                  onTouchMove={handleMouseMove}
-                  onTouchEnd={handleMouseUp}
-                  className="overflow-x-auto scrollbar-hide mb-2"
-                >
-                  <div className="flex marquee-horizontal">
-                    {[...images1, ...images1, ...images1].map((img, index) => (
-                      <div
-                        className="relative flex-shrink-0 select-none overflow-hidden cursor-pointer rounded-xl group"
-                        key={index}
-                      >
-                        <div 
-                          className="overflow-hidden relative rounded-xl"
-                          style={{ 
-                            marginLeft: 'clamp(6px, 1.5vw, 12px)',
-                            marginRight: 'clamp(6px, 1.5vw, 12px)'
-                          }}
-                        >
-                          <img
-                            src={img.src}
-                            draggable={false}
-                            alt=""
-                            className="object-cover group-hover:scale-105 transition-all duration-300 rounded-xl shadow-lg"
-                            style={{
-                              width: 'clamp(120px, 28vw, 180px)',
-                              height: 'clamp(140px, 35vw, 200px)'
-                            }}
-                          />
-                          <div className="absolute inset-0 flex items-start justify-center bg-black/10">
-                            <img
-                              src={img.src.replace('.png', '.svg')}
-                              alt=""
-                              className={`${img.src.includes('salesforce')
-                                ? 'w-[25%] h-[25%] mt-1'
-                                : img.src.includes('kins')
-                                  ? 'w-[30%] h-[30%] -mt-3'
-                                  : 'w-[40%] h-[40%] -mt-3'
-                                } object-contain`}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
 
-                {/* Second Row - Right Scroll */}
+              {/* Mobile View - Cards below CTA */}
+              <div
+                className="lg:hidden w-full mt-3"
+                style={{
+                  marginLeft: 'clamp(-16px, -4vw, -24px)',
+                  marginRight: 'clamp(-16px, -4vw, -24px)',
+                  width: 'calc(100% + clamp(32px, 8vw, 48px))'
+                }}
+              >
                 <div
-                  ref={scrollRefRight}
-                  onMouseDown={handleMouseDownRight}
-                  onMouseMove={handleMouseMoveRight}
-                  onMouseUp={handleMouseUp}
-                  onMouseLeave={handleMouseUp}
-                  onTouchStart={handleMouseDownRight}
-                  onTouchMove={handleMouseMoveRight}
-                  onTouchEnd={handleMouseUp}
-                  className="overflow-x-auto scrollbar-hide"
+                  className="overflow-hidden"
+                  style={{ gap: 'clamp(8px, 2vw, 16px)' }}
                 >
-                  <div className="flex marquee-horizontal-reverse">
-                    {[...images2, ...images2, ...images2]
-                      .reverse()
-                      .map((img, index) => (
+                  {/* First Row - Left Scroll */}
+                  <div
+                    ref={scrollRef}
+                    onMouseDown={handleMouseDown}
+                    onMouseMove={handleMouseMove}
+                    onMouseUp={handleMouseUp}
+                    onMouseLeave={handleMouseUp}
+                    onTouchStart={handleMouseDown}
+                    onTouchMove={handleMouseMove}
+                    onTouchEnd={handleMouseUp}
+                    className="overflow-x-auto scrollbar-hide mb-2"
+                  >
+                    <div className="flex marquee-horizontal">
+                      {[...images1, ...images1, ...images1].map((img, index) => (
                         <div
                           className="relative flex-shrink-0 select-none overflow-hidden cursor-pointer rounded-xl group"
                           key={index}
                         >
-                          <div 
+                          <div
                             className="overflow-hidden relative rounded-xl"
-                            style={{ 
+                            style={{
                               marginLeft: 'clamp(6px, 1.5vw, 12px)',
                               marginRight: 'clamp(6px, 1.5vw, 12px)'
                             }}
                           >
                             <img
                               src={img.src}
-                              alt=""
                               draggable={false}
+                              alt=""
                               className="object-cover group-hover:scale-105 transition-all duration-300 rounded-xl shadow-lg"
                               style={{
                                 width: 'clamp(120px, 28vw, 180px)',
@@ -421,10 +365,68 @@ const HeroSection = () => {
                           </div>
                         </div>
                       ))}
+                    </div>
+                  </div>
+
+                  {/* Second Row - Right Scroll */}
+                  <div
+                    ref={scrollRefRight}
+                    onMouseDown={handleMouseDownRight}
+                    onMouseMove={handleMouseMoveRight}
+                    onMouseUp={handleMouseUp}
+                    onMouseLeave={handleMouseUp}
+                    onTouchStart={handleMouseDownRight}
+                    onTouchMove={handleMouseMoveRight}
+                    onTouchEnd={handleMouseUp}
+                    className="overflow-x-auto scrollbar-hide"
+                  >
+                    <div className="flex marquee-horizontal-reverse">
+                      {[...images2, ...images2, ...images2]
+                        .reverse()
+                        .map((img, index) => (
+                          <div
+                            className="relative flex-shrink-0 select-none overflow-hidden cursor-pointer rounded-xl group"
+                            key={index}
+                          >
+                            <div
+                              className="overflow-hidden relative rounded-xl"
+                              style={{
+                                marginLeft: 'clamp(6px, 1.5vw, 12px)',
+                                marginRight: 'clamp(6px, 1.5vw, 12px)'
+                              }}
+                            >
+                              <img
+                                src={img.src}
+                                alt=""
+                                draggable={false}
+                                className="object-cover group-hover:scale-105 transition-all duration-300 rounded-xl shadow-lg"
+                                style={{
+                                  width: 'clamp(120px, 28vw, 180px)',
+                                  height: 'clamp(140px, 35vw, 200px)'
+                                }}
+                              />
+                              <div className="absolute inset-0 flex items-start justify-center bg-black/10">
+                                <img
+                                  src={img.src.replace('.png', '.svg')}
+                                  alt=""
+                                  className={`${img.src.includes('salesforce')
+                                    ? 'w-[25%] h-[25%] mt-1'
+                                    : img.src.includes('kins')
+                                      ? 'w-[30%] h-[30%] -mt-3'
+                                      : 'w-[40%] h-[40%] -mt-3'
+                                    } object-contain`}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
+
           </div>
         </Layout>
 
@@ -432,7 +434,7 @@ const HeroSection = () => {
         <div className="hidden lg:block absolute right-[1%] top-0 w-[42%] lg:w-[45%] xl:w-[42%] 2xl:w-[40%] h-full pb-8 overflow-hidden" style={{ height: 'clamp(600px, 100vh, 1200px)' }}>
           {/* Desktop View - Vertical Scroll */}
           <div className="flex gap-3 h-full overflow-hidden" style={{ height: 'clamp(600px, 100vh, 1200px)' }}>
-            <div 
+            <div
               ref={leftColumnRef}
               className="w-1/3"
               style={{ willChange: 'transform' }}
@@ -465,7 +467,7 @@ const HeroSection = () => {
               </div>
             </div>
 
-            <div 
+            <div
               ref={middleColumnRef}
               className="w-1/3"
               style={{ willChange: 'transform' }}
@@ -498,7 +500,7 @@ const HeroSection = () => {
               </div>
             </div>
 
-            <div 
+            <div
               ref={rightColumnRef}
               className="w-1/3"
               style={{ willChange: 'transform' }}
@@ -538,8 +540,8 @@ const HeroSection = () => {
       <style jsx global>{`
         /* Hero Left Content - Responsive Padding */
         .hero-left-content {
-          padding-top: clamp(24px, 6vw, 48px);
-          padding-bottom: clamp(200px, 50vw, 280px);
+          padding-top: clamp(60px, 12vh, 80px);
+          padding-bottom: clamp(20px, 4vw, 40px);
           padding-left: clamp(16px, 4vw, 24px);
           padding-right: clamp(16px, 4vw, 24px);
         }
@@ -576,11 +578,13 @@ const HeroSection = () => {
         /* Hero CTA Container - Responsive Gap */
         .hero-cta-container {
           gap: clamp(12px, 3vw, 16px);
+          margin-bottom: clamp(12px, 3vw, 16px);
         }
 
         @media (min-width: 1024px) {
           .hero-cta-container {
             gap: 1rem;
+            margin-bottom: 0;
           }
         }
 
@@ -685,6 +689,36 @@ const HeroSection = () => {
         .custom-scrollbar::-webkit-scrollbar-thumb {
           background: #88d7f0;
           border-radius: 10px;
+        }
+
+        /* Hero Heading - Make single line on mobile */
+        .hero-heading-main {
+          display: block;
+          font-size: clamp(20px, 5.5vw, 32px);
+          white-space: nowrap;
+          text-align: center;
+          width: 100%;
+        }
+
+        @media (min-width: 640px) {
+          .hero-heading-main {
+            white-space: normal;
+            display: inline;
+            text-align: left;
+            width: auto;
+          }
+        }
+
+        /* Hero Accent Text - Center on mobile */
+        .hero-accent-text {
+          text-align: center;
+          width: 100%;
+        }
+
+        @media (min-width: 640px) {
+          .hero-accent-text {
+            text-align: left;
+          }
         }
       `}</style>
     </div>
