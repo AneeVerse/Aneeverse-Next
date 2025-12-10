@@ -90,7 +90,7 @@ export default function NewBlog() {
       // Encode the category name for the URL
       const encodedName = encodeURIComponent(categoryName);
       console.log('Deleting category:', categoryName);
-      
+
       const response = await fetch(`/api/categories/${encodedName}`, {
         method: 'DELETE',
       });
@@ -213,26 +213,26 @@ export default function NewBlog() {
     const handlePaste = (e) => {
       // Prevent the default paste behavior
       e.preventDefault();
-      
+
       // Get the clipboard data
       const clipboardData = e.clipboardData || window.clipboardData;
       let pastedData;
-      
+
       // Try to get HTML content first (this preserves formatting)
       if (clipboardData.types.includes('text/html')) {
         pastedData = clipboardData.getData('text/html');
-        
+
         // Clean the HTML: remove head, scripts, styles, etc.
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = pastedData;
-        
+
         // Remove unwanted elements
         const elementsToRemove = ['head', 'script', 'style', 'meta', 'link'];
         elementsToRemove.forEach(tag => {
           const elements = tempDiv.getElementsByTagName(tag);
           while (elements[0]) elements[0].parentNode.removeChild(elements[0]);
         });
-        
+
         // Process Word-specific markup
         // Convert Word list items
         const wordListItems = tempDiv.querySelectorAll('p.MsoListParagraph, p[style*="mso-list"]');
@@ -241,7 +241,7 @@ export default function NewBlog() {
           newLi.innerHTML = item.innerHTML;
           item.parentNode.replaceChild(newLi, item);
         });
-        
+
         // Wrap consecutive list items in ul
         let currentUl = null;
         Array.from(tempDiv.children).forEach(child => {
@@ -255,12 +255,12 @@ export default function NewBlog() {
             currentUl = null;
           }
         });
-        
+
         // Convert Word's specific span styles to standard HTML
         const spans = tempDiv.querySelectorAll('span');
         spans.forEach(span => {
           const style = span.getAttribute('style') || '';
-          
+
           // Bold
           if (style.includes('font-weight:bold') || style.includes('font-weight: bold')) {
             const b = document.createElement('b');
@@ -274,34 +274,34 @@ export default function NewBlog() {
             span.parentNode.replaceChild(i, span);
           }
         });
-        
+
         // Get the cleaned HTML
         pastedData = tempDiv.innerHTML;
       } else {
         // Fallback to plain text
         pastedData = clipboardData.getData('text/plain');
       }
-      
+
       // Get cursor position
       const start = textarea.selectionStart;
       const end = textarea.selectionEnd;
-      
+
       // Insert the pasted content at cursor position
-      const newContent = 
-        formData.content.substring(0, start) + 
-        pastedData + 
+      const newContent =
+        formData.content.substring(0, start) +
+        pastedData +
         formData.content.substring(end);
-      
+
       // Update the form data
       setFormData(prev => ({
         ...prev,
         content: newContent
       }));
     };
-    
+
     // Add the paste event listener
     textarea.addEventListener('paste', handlePaste);
-    
+
     // Clean up
     return () => {
       textarea.removeEventListener('paste', handlePaste);
@@ -346,8 +346,8 @@ export default function NewBlog() {
     const start = contentTextarea.selectionStart;
     const end = contentTextarea.selectionEnd;
 
-    const newContent = 
-      formData.content.substring(0, start) + 
+    const newContent =
+      formData.content.substring(0, start) +
       template +
       formData.content.substring(end);
 
@@ -375,7 +375,7 @@ export default function NewBlog() {
 
   const insertYouTube = () => {
     const videoId = prompt('Enter YouTube video ID or full URL:', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
-    
+
     if (videoId) {
       // Extract ID from URL if needed
       let youtubeId = videoId;
@@ -385,7 +385,7 @@ export default function NewBlog() {
       } else if (videoId.includes('youtu.be/')) {
         youtubeId = videoId.split('youtu.be/')[1];
       }
-      
+
       if (youtubeId) {
         const youtubeTemplate = `
 <div class="my-8 flex justify-center">
@@ -413,10 +413,10 @@ export default function NewBlog() {
 
     try {
       // Ensure thumbnail URL starts with /images if it's a relative path
-      const thumbnailUrl = formData.thumbnail.startsWith('http') 
-        ? formData.thumbnail 
-        : formData.thumbnail.startsWith('/') 
-          ? formData.thumbnail 
+      const thumbnailUrl = formData.thumbnail.startsWith('http')
+        ? formData.thumbnail
+        : formData.thumbnail.startsWith('/')
+          ? formData.thumbnail
           : `/images/${formData.thumbnail}`;
 
       // Ensure author image URL starts with /images if it's a relative path
@@ -465,13 +465,13 @@ export default function NewBlog() {
       <Toaster />
       <div className="max-w-5xl mx-auto py-10">
         <h1 className="text-3xl font-bold mb-6">Create New Blog</h1>
-        
+
         {errorMessage && (
           <div className="bg-red-50 text-red-700 p-4 rounded-md mb-6">
             {errorMessage}
           </div>
         )}
-        
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -488,7 +488,7 @@ export default function NewBlog() {
                 disabled={isSubmitting}
               />
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 URL Slug*
@@ -650,10 +650,10 @@ export default function NewBlog() {
                 required
               />
               <p className="mt-1 text-sm text-gray-500">
-                Will be displayed as "{formData.timeToRead || '0'} min read"
+                Will be displayed as &quot;{formData.timeToRead || '0'} min read&quot;
               </p>
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Publication Date*
@@ -764,7 +764,7 @@ export default function NewBlog() {
               disabled={isSubmitting}
             ></textarea>
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Content*
@@ -780,7 +780,7 @@ export default function NewBlog() {
               disabled={isSubmitting}
             />
           </div>
-          
+
           <div className="flex justify-end gap-3">
             <button
               type="button"

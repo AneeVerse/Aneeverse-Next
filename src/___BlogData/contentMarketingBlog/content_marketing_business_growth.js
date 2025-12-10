@@ -13,18 +13,18 @@ export const content_marketing_business_growth = {
     shortDescription: "Discover how strategic content marketing can drive business growth, build brand authority, and create lasting customer relationships",
     description: "Learn how content marketing can transform your business by attracting and retaining customers through valuable, engaging content that establishes your brand as an industry leader.",
     content: <div>
-        <img 
-            src="/images/blog/content-marketing/content-marketing-business-growth-1.jpg" 
-            alt="Content marketing strategies for business growth" 
+        <img
+            src="/images/blog/content-marketing/content-marketing-business-growth-1.jpg"
+            alt="Content marketing strategies for business growth"
             className="w-full h-auto rounded-lg mb-8"
         />
-        
+
         <p className="text-lg font-medium mb-6">
-            In today's digital world, <strong>content marketing</strong> is key for business growth. Savvy entrepreneurs know that smart <strong>blog writing</strong> and SEO can change how companies meet customers. By sharing valuable info, businesses can draw in, keep, and engage audiences better than ads.
+            In today&apos;s digital world, <strong>content marketing</strong> is key for business growth. Savvy entrepreneurs know that smart <strong>blog writing</strong> and SEO can change how companies meet customers. By sharing valuable info, businesses can draw in, keep, and engage audiences better than ads.
         </p>
 
         <p className="mb-8">
-            <strong>Content marketing</strong> is more than just promoting. It's about making real connections with your audience by offering real value. With well-made content, companies can show they're experts, build trust, and solve problems for their customers.
+            <strong>Content marketing</strong> is more than just promoting. It&apos;s about making real connections with your audience by offering real value. With well-made content, companies can show they&apos;re experts, build trust, and solve problems for their customers.
         </p>
 
         <div className="bg-gray-50 p-6 rounded-lg mb-8">
@@ -39,9 +39,9 @@ export const content_marketing_business_growth = {
         </div>
 
         <h2 className="text-2xl font-bold mb-4">Understanding the Fundamentals of Content Marketing Strategy</h2>
-        <img 
-            src="/images/blog/content-marketing/content-marketing-business-growth-2.jpg" 
-            alt="Content marketing strategy fundamentals" 
+        <img
+            src="/images/blog/content-marketing/content-marketing-business-growth-2.jpg"
+            alt="Content marketing strategy fundamentals"
             className="w-full h-auto rounded-lg my-8"
         />
         <p className="mb-6">
@@ -62,7 +62,7 @@ export const content_marketing_business_growth = {
 
         <div className="bg-blue-50 p-6 rounded-lg mb-8">
             <p className="text-blue-800 font-medium italic">
-                "Planning is bringing the future into the present so you can do something about it now." - Michael Vance
+                &quot;Planning is bringing the future into the present so you can do something about it now.&quot; - Michael Vance
             </p>
         </div>
 
@@ -90,9 +90,9 @@ export const content_marketing_business_growth = {
         </div>
 
         <h2 className="text-2xl font-bold mb-4">Building Brand Authority Through Quality Content</h2>
-        <img 
-            src="/images/blog/content-marketing/content-marketing-business-growth-3.jpg" 
-            alt="Building brand authority through content" 
+        <img
+            src="/images/blog/content-marketing/content-marketing-business-growth-3.jpg"
+            alt="Building brand authority through content"
             className="w-full h-auto rounded-lg my-8"
         />
         <p className="mb-6">
@@ -101,13 +101,13 @@ export const content_marketing_business_growth = {
 
         <div className="bg-blue-50 p-6 rounded-lg mb-8">
             <p className="text-blue-800 font-medium italic">
-                "Content builds relationships. Relationships build trust. Trust drives revenue." - Andrew Davis
+                &quot;Content builds relationships. Relationships build trust. Trust drives revenue.&quot; - Andrew Davis
             </p>
         </div>
 
         <h2 className="text-2xl font-bold mb-4">Driving Organic Traffic Through SEO-Optimized Content</h2>
         <p className="mb-6">
-            To attract organic traffic, you need a solid SEO content plan. It's not just about adding keywords. It's about creating content that truly engages readers and search engines.
+            To attract organic traffic, you need a solid SEO content plan. It&apos;s not just about adding keywords. It&apos;s about creating content that truly engages readers and search engines.
         </p>
 
         <div className="bg-gray-50 p-6 rounded-lg mb-8">
@@ -123,7 +123,7 @@ export const content_marketing_business_growth = {
 
         <h2 className="text-2xl font-bold mb-4">Converting Readers into Loyal Customers</h2>
         <p className="mb-6">
-            Content marketing turns casual readers into loyal customers through strategic engagement. Blog writing is more than just interesting articles. It's about building meaningful connections that guide potential clients through their purchasing journey.
+            Content marketing turns casual readers into loyal customers through strategic engagement. Blog writing is more than just interesting articles. It&apos;s about building meaningful connections that guide potential clients through their purchasing journey.
         </p>
 
         <div className="bg-gray-50 p-6 rounded-lg mb-8">
@@ -177,7 +177,7 @@ export const content_marketing_business_growth = {
                 </div>
                 <div>
                     <h3 className="font-bold mb-2">How do I know if my content marketing is working?</h3>
-                    <p>Look at website traffic, engagement, social shares, and lead generation. Google Analytics can help track your content's impact. This shows what's working and what needs improvement.</p>
+                    <p>Look at website traffic, engagement, social shares, and lead generation. Google Analytics can help track your content&apos;s impact. This shows what&apos;s working and what needs improvement.</p>
                 </div>
             </div>
         </div>
