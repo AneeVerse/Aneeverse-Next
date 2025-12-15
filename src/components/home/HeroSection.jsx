@@ -10,109 +10,39 @@ import AnimatedButton from "../common/AnimatedButton";
 import { Heading } from "../common/typography/Heading";
 import { AccentText } from "../common/typography/AccentText";
 
+// Column 1 - First 8 creative images
 const images1 = [
-  {
-    src: "/hero-logos/shopify.png",
-    logo: "/hero-logos/shopify.png",
-  },
-  {
-    src: "/hero-logos/reddit.png",
-    logo: "/hero-logos/reddit.png",
-  },
-  {
-    src: "/hero-logos/salesforce.png",
-    logo: "/hero-logos/salesforce.png",
-  },
-  {
-    src: "/hero-logos/pharmacy.png",
-    logo: "/hero-logos/pharmacy.png",
-  },
-  {
-    src: "/hero-logos/shopify.png",
-    logo: "/hero-logos/shopify.png",
-  },
-  {
-    src: "/hero-logos/reddit.png",
-    logo: "/hero-logos/reddit.png",
-  },
-  {
-    src: "/hero-logos/salesforce.png",
-    logo: "/hero-logos/salesforce.png",
-  },
-  {
-    src: "/hero-logos/pharmacy.png",
-    logo: "/hero-logos/pharmacy.png",
-  },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/AD%20CREATIVE%202.webp?updatedAt=1765350361052" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/PLATFORM%20DEVLOPMENT%202.webp?updatedAt=1765350362851" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/AI%20POWERED%20CREATIVES%201.webp?updatedAt=1765350360954" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/MARKETING%20STRATEGY%201.webp?updatedAt=1765350363109" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/SOCIAL%20MEDIA%20CREATIVES%201.webp?updatedAt=1765350362918" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/UI,%20UX%20&%20WEB%20DEVLOPMENT%202.webp?updatedAt=1765350363457" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/AI%20BLOG%20WRITING%202.webp?updatedAt=1765350361070" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/EMAIL%20CAMPAIGN%201.webp?updatedAt=1765350362742" },
 ];
 
+// Column 2 - Next 8 creative images
 const images2 = [
-  {
-    src: "/hero-logos/opa.png",
-    logo: "/hero-logos/opa.png",
-  },
-  {
-    src: "/hero-logos/oyster.png",
-    logo: "/hero-logos/oyster.png",
-  },
-  {
-    src: "/hero-logos/pernod ricard.png",
-    logo: "/hero-logos/pernod ricard.png",
-  },
-  {
-    src: "/hero-logos/_zaphier.png",
-    logo: "/hero-logos/_zaphier.png",
-  },
-  {
-    src: "/hero-logos/opa.png",
-    logo: "/hero-logos/opa.png",
-  },
-  {
-    src: "/hero-logos/oyster.png",
-    logo: "/hero-logos/oyster.png",
-  },
-  {
-    src: "/hero-logos/pernod ricard.png",
-    logo: "/hero-logos/pernod ricard.png",
-  },
-  {
-    src: "/hero-logos/_zaphier.png",
-    logo: "/hero-logos/_zaphier.png",
-  },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/PRESENTATION%20DESIGN%201.webp?updatedAt=1765350362921" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/DESIGN%20SYSTEM%201.webp?updatedAt=1765350363997" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/AI%20SEO%20(GEO)%20(AEO)%20(AIO)%201.webp?updatedAt=1765350361413" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/EMAIL%20DESIGN%201.webp?updatedAt=1765350362829" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/ILLUSTRATION%20DESIGN%201.webp?updatedAt=1765350362443" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/PRODUCT%20DESIGN%201.webp?updatedAt=1765350363546" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/SALES%20&%20MARKETING%20AUTOMATION%201.webp?updatedAt=1765350362822" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/BRANDING%20SERVICES%201.webp?updatedAt=1765350361962" },
 ];
 
+// Column 3 - Last 7 creative images
 const images3 = [
-  {
-    src: "/hero-logos/vimeo.png",
-    logo: "/hero-logos/vimeo.png",
-  },
-  {
-    src: "/hero-logos/gohenry.png",
-    logo: "/hero-logos/gohenry.png",
-  },
-  {
-    src: "/hero-logos/roland.png",
-    logo: "/hero-logos/roland.png",
-  },
-  {
-    src: "/hero-logos/kins.png",
-    logo: "/hero-logos/kins.png",
-  },
-  {
-    src: "/hero-logos/vimeo.png",
-    logo: "/hero-logos/vimeo.png",
-  },
-  {
-    src: "/hero-logos/gohenry.png",
-    logo: "/hero-logos/gohenry.png",
-  },
-  {
-    src: "/hero-logos/roland.png",
-    logo: "/hero-logos/roland.png",
-  },
-  {
-    src: "/hero-logos/kins.png",
-    logo: "/hero-logos/kins.png",
-  },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/COPYWRITING%201.webp?updatedAt=1765350362521" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/BLOG%20WRITING%20%201.webp?updatedAt=1765350361275" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/SEO%20OPTIMIZE%201.webp?updatedAt=1765350362673" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/COPERATE%20&%20INTERNELS%201.webp?updatedAt=1765350362598" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/EBOOK%20AND%20DIGITAL%20REPORT%201.webp?updatedAt=1765350362500" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/PRINT%20DESIGN%201.webp?updatedAt=1765350362624" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/PACKING%20&%20MERCHANDISE%20DESIGN%201.webp?updatedAt=1765350363321" },
 ];
 
 const HeroSection = () => {
@@ -306,9 +236,12 @@ const HeroSection = () => {
               <div
                 className="lg:hidden w-full mt-3"
                 style={{
-                  marginLeft: 'clamp(-16px, -4vw, -24px)',
-                  marginRight: 'clamp(-16px, -4vw, -24px)',
-                  width: 'calc(100% + clamp(32px, 8vw, 48px))'
+                  width: '120vw',
+                  marginLeft: 'calc(50% - 60vw)',
+                  marginRight: 'calc(50% - 60vw)',
+                  position: 'relative',
+                  left: '60%',
+                  transform: 'translateX(-50%)'
                 }}
               >
                 <div
@@ -343,25 +276,13 @@ const HeroSection = () => {
                             <img
                               src={img.src}
                               draggable={false}
-                              alt=""
+                              alt="Creative work"
                               className="object-cover group-hover:scale-105 transition-all duration-300 rounded-xl shadow-lg"
                               style={{
-                                width: 'clamp(120px, 28vw, 180px)',
-                                height: 'clamp(140px, 35vw, 200px)'
+                                width: 'clamp(150px, 35vw, 180px)',
+                                height: 'clamp(170px, 40vw, 200px)'
                               }}
                             />
-                            <div className="absolute inset-0 flex items-start justify-center bg-black/10">
-                              <img
-                                src={img.src.replace('.png', '.svg')}
-                                alt=""
-                                className={`${img.src.includes('salesforce')
-                                  ? 'w-[25%] h-[25%] mt-1'
-                                  : img.src.includes('kins')
-                                    ? 'w-[30%] h-[30%] -mt-3'
-                                    : 'w-[40%] h-[40%] -mt-3'
-                                  } object-contain`}
-                              />
-                            </div>
                           </div>
                         </div>
                       ))}
@@ -397,26 +318,14 @@ const HeroSection = () => {
                             >
                               <img
                                 src={img.src}
-                                alt=""
+                                alt="Creative work"
                                 draggable={false}
                                 className="object-cover group-hover:scale-105 transition-all duration-300 rounded-xl shadow-lg"
                                 style={{
-                                  width: 'clamp(120px, 28vw, 180px)',
-                                  height: 'clamp(140px, 35vw, 200px)'
+                                  width: 'clamp(150px, 35vw, 180px)',
+                                  height: 'clamp(170px, 40vw, 200px)'
                                 }}
                               />
-                              <div className="absolute inset-0 flex items-start justify-center bg-black/10">
-                                <img
-                                  src={img.src.replace('.png', '.svg')}
-                                  alt=""
-                                  className={`${img.src.includes('salesforce')
-                                    ? 'w-[25%] h-[25%] mt-1'
-                                    : img.src.includes('kins')
-                                      ? 'w-[30%] h-[30%] -mt-3'
-                                      : 'w-[40%] h-[40%] -mt-3'
-                                    } object-contain`}
-                                />
-                              </div>
                             </div>
                           </div>
                         ))}
@@ -431,12 +340,12 @@ const HeroSection = () => {
         </Layout>
 
         {/* Right Image Section - Positioned absolutely to reach screen edge */}
-        <div className="hidden lg:block absolute right-[1%] top-0 w-[42%] lg:w-[45%] xl:w-[42%] 2xl:w-[40%] h-full pb-8 overflow-hidden" style={{ height: 'clamp(600px, 100vh, 1200px)' }}>
+        <div className="hidden lg:block absolute right-[-2%] top-0 w-[42%] lg:w-[45%] xl:w-[42%] 2xl:w-[40%] h-full pb-8 overflow-hidden" style={{ height: 'clamp(600px, 100vh, 1200px)' }}>
           {/* Desktop View - Vertical Scroll */}
-          <div className="flex gap-3 h-full overflow-hidden" style={{ height: 'clamp(600px, 100vh, 1200px)' }}>
+          <div className="flex gap-3 h-full overflow-hidden marquee-wrapper" style={{ height: 'clamp(600px, 100vh, 1200px)' }}>
             <div
               ref={leftColumnRef}
-              className="w-1/3"
+              className="w-[30%] marquee-column"
               style={{ willChange: 'transform' }}
             >
               <div ref={leftInnerRef} className="marquee-vertical marquee-vertical-content space-y-4">
@@ -447,21 +356,9 @@ const HeroSection = () => {
                   >
                     <img
                       src={img.src}
-                      alt=""
-                      className="w-full h-[280px] object-cover rounded-xl group-hover:scale-105 transition-all duration-300 shadow-xl"
+                      alt="Creative work"
+                      className="w-full h-[240px] object-cover rounded-xl transition-all duration-300 shadow-xl"
                     />
-                    <div className="absolute inset-0 flex items-start justify-center bg-black/10">
-                      <img
-                        src={img.src.replace('.png', '.svg')}
-                        alt=""
-                        className={`${img.src.includes('salesforce')
-                          ? 'w-[25%] h-[25%] mt-1'
-                          : img.src.includes('kins')
-                            ? 'w-[30%] h-[30%] -mt-3'
-                            : 'w-[40%] h-[40%] -mt-3'
-                          } object-contain`}
-                      />
-                    </div>
                   </div>
                 ))}
               </div>
@@ -469,7 +366,7 @@ const HeroSection = () => {
 
             <div
               ref={middleColumnRef}
-              className="w-1/3"
+              className="w-[30%] marquee-column"
               style={{ willChange: 'transform' }}
             >
               <div ref={middleInnerRef} className="marquee-vertical-reverse marquee-vertical-content space-y-4">
@@ -480,21 +377,9 @@ const HeroSection = () => {
                   >
                     <img
                       src={img.src}
-                      alt=""
-                      className={`w-full ${index % 2 === 0 ? 'h-[300px]' : 'h-[240px]'} object-cover rounded-xl group-hover:scale-105 transition-all duration-300 shadow-2xl`}
+                      alt="Creative work"
+                      className={`w-full ${index % 2 === 0 ? 'h-[260px]' : 'h-[210px]'} object-cover rounded-xl transition-all duration-300 shadow-2xl`}
                     />
-                    <div className="absolute inset-0 flex items-start justify-center bg-black/10">
-                      <img
-                        src={img.src.replace('.png', '.svg')}
-                        alt=""
-                        className={`${img.src.includes('salesforce')
-                          ? 'w-[25%] h-[25%] mt-1'
-                          : img.src.includes('kins')
-                            ? 'w-[30%] h-[30%] -mt-3'
-                            : 'w-[40%] h-[40%] -mt-3'
-                          } object-contain`}
-                      />
-                    </div>
                   </div>
                 ))}
               </div>
@@ -502,7 +387,7 @@ const HeroSection = () => {
 
             <div
               ref={rightColumnRef}
-              className="w-1/3"
+              className="w-[30%] marquee-column"
               style={{ willChange: 'transform' }}
             >
               <div ref={rightInnerRef} className="marquee-vertical marquee-vertical-content space-y-4">
@@ -513,21 +398,9 @@ const HeroSection = () => {
                   >
                     <img
                       src={img.src}
-                      alt=""
-                      className="w-full h-[260px] object-cover rounded-xl group-hover:scale-105 transition-all duration-300 shadow-2xl"
+                      alt="Creative work"
+                      className="w-full h-[230px] object-cover rounded-xl transition-all duration-300 shadow-2xl"
                     />
-                    <div className="absolute inset-0 flex items-start justify-center bg-black/10">
-                      <img
-                        src={img.src.replace('.png', '.svg')}
-                        alt=""
-                        className={`${img.src.includes('salesforce')
-                          ? 'w-[25%] h-[25%] mt-1'
-                          : img.src.includes('kins')
-                            ? 'w-[30%] h-[30%] -mt-3'
-                            : 'w-[40%] h-[40%] -mt-3'
-                          } object-contain`}
-                      />
-                    </div>
                   </div>
                 ))}
               </div>
@@ -540,7 +413,7 @@ const HeroSection = () => {
       <style jsx global>{`
         /* Hero Left Content - Responsive Padding */
         .hero-left-content {
-          padding-top: clamp(60px, 12vh, 80px);
+          padding-top: clamp(100px, 15vh, 120px);
           padding-bottom: clamp(20px, 4vw, 40px);
           padding-left: clamp(16px, 4vw, 24px);
           padding-right: clamp(16px, 4vw, 24px);
@@ -564,7 +437,7 @@ const HeroSection = () => {
 
         /* Hero Paragraph - Responsive Text */
         .hero-paragraph {
-          font-size: clamp(12px, 3vw, 16px);
+          font-size: clamp(14px, 3vw, 16px);
           line-height: clamp(18px, 4.5vw, 24px);
         }
 
@@ -572,6 +445,7 @@ const HeroSection = () => {
           .hero-paragraph {
             font-size: 16px;
             line-height: 24px;
+            max-width: 540px;
           }
         }
 
@@ -629,13 +503,15 @@ const HeroSection = () => {
         }
 
         .marquee-vertical {
-          animation: marqueeVertical 50s linear infinite;
+          animation: marqueeVertical 80s linear infinite;
           transform-style: preserve-3d;
+          transition: none;
         }
 
         .marquee-vertical-reverse {
-          animation: marqueeVerticalReverse 50s linear infinite;
+          animation: marqueeVerticalReverse 80s linear infinite;
           transform-style: preserve-3d;
+          transition: none;
         }
 
         /* Horizontal Marquee Animation */
@@ -665,10 +541,14 @@ const HeroSection = () => {
           animation: marqueeHorizontalReverse 30s linear infinite;
         }
 
-        /* Pause animation on hover */
-        .marquee-vertical:hover,
-        .marquee-vertical-reverse:hover {
-          animation-play-state: paused;
+
+        
+        /* Prevent image glitch on hover */
+        .marquee-vertical-content img {
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+          transform: translateZ(0);
+          -webkit-transform: translateZ(0);
         }
 
         /* Hide Scrollbar */
@@ -694,15 +574,15 @@ const HeroSection = () => {
         /* Hero Heading - Make single line on mobile */
         .hero-heading-main {
           display: block;
-          font-size: clamp(20px, 5.5vw, 32px);
-          white-space: nowrap;
+          font-size: clamp(28px, 4.5vw, 42px);
+          white-space: normal;
           text-align: center;
           width: 100%;
         }
 
         @media (min-width: 640px) {
           .hero-heading-main {
-            white-space: normal;
+            white-space: nowrap;
             display: inline;
             text-align: left;
             width: auto;

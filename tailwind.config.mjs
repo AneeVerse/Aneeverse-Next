@@ -39,7 +39,7 @@ export default {
         xl: '32px'
       },
       maxWidth: {
-        container: '1536px',
+        container: '1300px',
         card: '300px'
       },
       colors: {
