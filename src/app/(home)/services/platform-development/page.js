@@ -5,8 +5,11 @@ import DynamicOurWorks from '@/components/home/DynamicOurWorks'
 import DynamicCreativeSection from '@/components/services/common/DynamicCreativeSection'
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
 import DynamicStateSection from '@/components/services/common/DynamicStateSection'
+import ChannelTailoredSection from '@/components/services/common/ChannelTailoredSection'
+import HowItWorksSection from '@/components/services/common/HowItWorksSection'
 import PlatformDevelopmentFAQSection from '@/components/services/platform-development/PlatformDevelopmentFAQSection'
 import ServiceSchema from '@/components/seo/ServiceSchema'
+import { FaCode, FaServer, FaCloud, FaMobile, FaDatabase, FaShieldAlt } from "react-icons/fa"
 import React from 'react'
 
 export const metadata = {
@@ -153,6 +156,77 @@ const page = () => {
         title="Platform Development Services"
         heighlightText="Comprehensive "
         items={items}
+      />
+      <ChannelTailoredSection
+        subtitle="Built for every platform"
+        title="Platforms that work wherever you need them"
+        titleHighlight="wherever"
+        description="From web applications to mobile platforms, we build solutions that scale across all environments and devices."
+        channels={[
+          {
+            title: "Web Platforms",
+            subtitle: "Scalable web applications built with modern frameworks and best practices for performance and reliability.",
+            icon: <FaCode className="w-8 h-8" />,
+          },
+          {
+            title: "Backend Services",
+            subtitle: "Robust server infrastructure and APIs that power your applications with scalability and security.",
+            icon: <FaServer className="w-8 h-8" />,
+          },
+          {
+            title: "Cloud Deployment",
+            subtitle: "Deploy and manage platforms on cloud infrastructure for maximum scalability and uptime.",
+            icon: <FaCloud className="w-8 h-8" />,
+          },
+          {
+            title: "Mobile Platforms",
+            subtitle: "Cross-platform mobile applications that deliver consistent experiences across iOS and Android.",
+            icon: <FaMobile className="w-8 h-8" />,
+          },
+          {
+            title: "Database Solutions",
+            subtitle: "Optimized database architectures that handle growth and ensure data integrity and performance.",
+            icon: <FaDatabase className="w-8 h-8" />,
+          },
+          {
+            title: "Security & Compliance",
+            subtitle: "Enterprise-grade security implementations and compliance measures to protect your platform and users.",
+            icon: <FaShieldAlt className="w-8 h-8" />,
+          },
+        ]}
+      />
+      <HowItWorksSection
+        subtitle="HOW WE WORK"
+        title="From concept to deployment without the complexity"
+        titleHighlight="complexity"
+        description="Our streamlined development process ensures your platform is built efficiently, tested thoroughly, and deployed smoothly."
+        steps={[
+          {
+            number: "1",
+            title: "Discovery & Planning",
+            subtitle: "We start by understanding your business needs, technical requirements, and goals to create a comprehensive development plan.",
+          },
+          {
+            number: "2",
+            title: "Architecture Design",
+            subtitle: "Our team designs scalable architecture and technical specifications that align with your long-term growth objectives.",
+          },
+          {
+            number: "3",
+            title: "Development & Testing",
+            subtitle: "We build your platform using best practices, with continuous testing to ensure quality and performance at every stage.",
+          },
+          {
+            number: "4",
+            title: "Deployment & Integration",
+            subtitle: "We deploy your platform to production and integrate with your existing systems, ensuring seamless operation.",
+          },
+          {
+            number: "5",
+            title: "Support & Maintenance",
+            subtitle: "Ongoing support, monitoring, and updates keep your platform running smoothly and adapting to your evolving needs.",
+          },
+        ]}
       />
       <DynamicOurWorks />
       <DynamicStateSection

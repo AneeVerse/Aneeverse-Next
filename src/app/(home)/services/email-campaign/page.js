@@ -4,9 +4,12 @@ import CommonServicesHeroSection from '@/components/services/common/CommonHeroSe
 import DynamicOurWorks from '@/components/home/DynamicOurWorks'
 import DynamicCreativeSection from '@/components/services/common/DynamicCreativeSection'
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
+import ChannelTailoredSection from '@/components/services/common/ChannelTailoredSection'
+import HowItWorksSection from '@/components/services/common/HowItWorksSection'
 import EmailCampaignFAQSection from '@/components/services/email-campaign/EmailCampaignFAQSection'
 import EmailCampaignStateSection from '@/components/services/email-campaign/EmailCampaignStateSection'
 import ServiceSchema from '@/components/seo/ServiceSchema'
+import { FaEnvelope, FaUsers, FaChartBar, FaRocket, FaBullseye, FaSync } from "react-icons/fa"
 import React from 'react'
 
 
@@ -157,6 +160,77 @@ const page = () => {
         title="That Drive Engagement"
         heighlightText="Effective Email Campaigns "
         items={items}
+      />
+      <ChannelTailoredSection
+        subtitle="Campaigns for every goal"
+        title="Email campaigns that work for your business"
+        titleHighlight="your business"
+        description="From lead nurturing to customer retention, we create email campaigns tailored to your specific goals and audience."
+        channels={[
+          {
+            title: "Welcome Series",
+            subtitle: "Engage new subscribers with automated welcome sequences that introduce your brand and build relationships.",
+            icon: <FaEnvelope className="w-8 h-8" />,
+          },
+          {
+            title: "Lead Nurturing",
+            subtitle: "Nurture leads through the sales funnel with targeted content and personalized messaging.",
+            icon: <FaUsers className="w-8 h-8" />,
+          },
+          {
+            title: "Product Launches",
+            subtitle: "Build excitement and drive sales with strategic email campaigns for new product launches.",
+            icon: <FaRocket className="w-8 h-8" />,
+          },
+          {
+            title: "Re-engagement",
+            subtitle: "Win back inactive subscribers with targeted re-engagement campaigns that reignite interest.",
+            icon: <FaSync className="w-8 h-8" />,
+          },
+          {
+            title: "Segmented Campaigns",
+            subtitle: "Send targeted messages to specific audience segments for higher engagement and conversions.",
+            icon: <FaBullseye className="w-8 h-8" />,
+          },
+          {
+            title: "Analytics & Optimization",
+            subtitle: "Track performance and optimize campaigns with detailed analytics and A/B testing insights.",
+            icon: <FaChartBar className="w-8 h-8" />,
+          },
+        ]}
+      />
+      <HowItWorksSection
+        subtitle="HOW WE WORK"
+        title="From strategy to results without the complexity"
+        titleHighlight="complexity"
+        description="Our email campaign process ensures your messages reach the right audience at the right time with the right content."
+        steps={[
+          {
+            number: "1",
+            title: "Strategy & Planning",
+            subtitle: "We analyze your goals, audience, and current email performance to develop a comprehensive campaign strategy.",
+          },
+          {
+            number: "2",
+            title: "Content Creation",
+            subtitle: "We create compelling email content, subject lines, and designs that engage and convert your audience.",
+          },
+          {
+            number: "3",
+            title: "Automation Setup",
+            subtitle: "We configure automated sequences, triggers, and workflows to deliver personalized experiences at scale.",
+          },
+          {
+            number: "4",
+            title: "Testing & Launch",
+            subtitle: "We test campaigns across devices and email clients, then launch with monitoring and optimization.",
+          },
+          {
+            number: "5",
+            title: "Analysis & Optimization",
+            subtitle: "We analyze performance data and continuously optimize campaigns to improve open rates, clicks, and conversions.",
+          },
+        ]}
       />
          <DynamicOurWorks />        <EmailCampaignStateSection />
         <TestimonialSlider />

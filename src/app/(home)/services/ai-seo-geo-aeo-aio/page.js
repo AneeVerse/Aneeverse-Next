@@ -5,8 +5,11 @@ import DynamicOurWorks from '@/components/home/DynamicOurWorks'
 import DynamicCreativeSection from '@/components/services/common/DynamicCreativeSection'
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
 import DynamicStateSection from '@/components/services/common/DynamicStateSection'
+import ChannelTailoredSection from '@/components/services/common/ChannelTailoredSection'
+import HowItWorksSection from '@/components/services/common/HowItWorksSection'
 import AISEOGeoAEOAIOFAQSection from '@/components/services/ai-seo-geo-aeo-aio/AISEOGeoAEOAIOFAQSection'
 import ServiceSchema from '@/components/seo/ServiceSchema'
+import { FaRobot, FaGlobe, FaMicrophone, FaSearch, FaBrain, FaChartLine } from "react-icons/fa"
 import React from 'react'
 
 export const metadata = {
@@ -51,6 +54,77 @@ const page = () => {
       <SlidingLogos />
       <DynamicSupportSection subtitle="BUILT FOR MODERN SEO" title="SEO That " highlightText="adapts & performs" imageSrc="/images/services/email-design/about-email.avif" imageAlt="AI SEO Services" description="Optimize for the future of search with AI-powered SEO strategies. Our advanced approach ensures your content performs in traditional search, voice search, and AI-powered answer engines." additionalText="From geographic optimization to answer engine optimization, we help you stay ahead of search trends and maximize your visibility across all search platforms." />
       <DynamicCreativeSection subtitle="Advanced SEO" title="AI SEO Services" heighlightText="Next-Generation " items={items} />
+      <ChannelTailoredSection
+        subtitle="SEO for the future of search"
+        title="AI-powered SEO that works across all search platforms"
+        titleHighlight="all search platforms"
+        description="From traditional search to AI-powered answer engines, we optimize your content for the future of search."
+        channels={[
+          {
+            title: "AI SEO",
+            subtitle: "Optimize content for AI search engines and modern search behavior with AI-powered strategies.",
+            icon: <FaRobot className="w-8 h-8" />,
+          },
+          {
+            title: "Geo-Targeted SEO",
+            subtitle: "Optimize for specific geographic locations to improve local search visibility and rankings.",
+            icon: <FaGlobe className="w-8 h-8" />,
+          },
+          {
+            title: "Answer Engine Optimization",
+            subtitle: "Optimize content to appear in AI-powered answer engines and voice search results.",
+            icon: <FaMicrophone className="w-8 h-8" />,
+          },
+          {
+            title: "Voice Search",
+            subtitle: "Optimize content for voice search queries and conversational AI interactions.",
+            icon: <FaSearch className="w-8 h-8" />,
+          },
+          {
+            title: "AI Content Strategy",
+            subtitle: "Develop content strategies optimized for AI search engines and modern search behavior.",
+            icon: <FaBrain className="w-8 h-8" />,
+          },
+          {
+            title: "Performance Tracking",
+            subtitle: "Monitor rankings across traditional and AI search platforms with comprehensive analytics.",
+            icon: <FaChartLine className="w-8 h-8" />,
+          },
+        ]}
+      />
+      <HowItWorksSection
+        subtitle="HOW WE WORK"
+        title="From traditional to AI search without the complexity"
+        titleHighlight="complexity"
+        description="Our AI SEO process ensures your content performs across traditional search, voice search, and AI-powered answer engines."
+        steps={[
+          {
+            number: "1",
+            title: "SEO Audit & Analysis",
+            subtitle: "We audit your current SEO performance and analyze opportunities for AI and traditional search optimization.",
+          },
+          {
+            number: "2",
+            title: "AI SEO Strategy",
+            subtitle: "We develop comprehensive strategies for AI search, voice search, and answer engine optimization.",
+          },
+          {
+            number: "3",
+            title: "Content Optimization",
+            subtitle: "We optimize existing content and create new content optimized for AI and traditional search engines.",
+          },
+          {
+            number: "4",
+            title: "Technical Implementation",
+            subtitle: "We implement technical SEO improvements and AI-specific optimizations to improve visibility.",
+          },
+          {
+            number: "5",
+            title: "Monitoring & Optimization",
+            subtitle: "We monitor performance across all search platforms and continuously optimize for better results.",
+          },
+        ]}
+      />
       <DynamicOurWorks />
       <DynamicStateSection title="Our SEO Impact" subtitle="PROVEN RESULTS" stats={stats} />
       <TestimonialSlider />

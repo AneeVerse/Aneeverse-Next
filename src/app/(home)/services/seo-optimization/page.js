@@ -4,9 +4,12 @@ import CommonServicesHeroSection from '@/components/services/common/CommonHeroSe
 import DynamicOurWorks from '@/components/home/DynamicOurWorks'
 import DynamicCreativeSection from '@/components/services/common/DynamicCreativeSection'
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
+import ChannelTailoredSection from '@/components/services/common/ChannelTailoredSection'
+import HowItWorksSection from '@/components/services/common/HowItWorksSection'
 import SeoFAQSection from '@/components/services/seo-optimization/SeoFAQSection'
 import SeoStateSection from '@/components/services/seo-optimization/SeoStateSection'
 import ServiceSchema from '@/components/seo/ServiceSchema'
+import { FaSearch, FaGlobe, FaMobile, FaChartLine, FaLink, FaFileAlt } from "react-icons/fa"
 import React from 'react'
 
 
@@ -157,6 +160,77 @@ const page = () => {
         title=" Services"
         heighlightText=" seo-optimized"
         items={items}
+      />
+      <ChannelTailoredSection
+        subtitle="SEO for every business type"
+        title="SEO strategies that work for your business"
+        titleHighlight="your business"
+        description="From local businesses to e-commerce, we optimize websites for search engines to drive organic traffic and growth."
+        channels={[
+          {
+            title: "Local SEO",
+            subtitle: "Optimize for local search results to attract customers in your geographic area.",
+            icon: <FaGlobe className="w-8 h-8" />,
+          },
+          {
+            title: "E-commerce SEO",
+            subtitle: "Product page optimization and technical SEO to improve visibility and sales for online stores.",
+            icon: <FaMobile className="w-8 h-8" />,
+          },
+          {
+            title: "Technical SEO",
+            subtitle: "Fix technical issues, improve site speed, and optimize site structure for better rankings.",
+            icon: <FaSearch className="w-8 h-8" />,
+          },
+          {
+            title: "Content Optimization",
+            subtitle: "Optimize existing content and create SEO-friendly content that ranks and converts.",
+            icon: <FaFileAlt className="w-8 h-8" />,
+          },
+          {
+            title: "Link Building",
+            subtitle: "Build quality backlinks and improve domain authority to boost search rankings.",
+            icon: <FaLink className="w-8 h-8" />,
+          },
+          {
+            title: "Performance Tracking",
+            subtitle: "Monitor rankings, traffic, and conversions with comprehensive SEO analytics and reporting.",
+            icon: <FaChartLine className="w-8 h-8" />,
+          },
+        ]}
+      />
+      <HowItWorksSection
+        subtitle="HOW WE WORK"
+        title="From audit to rankings without the guesswork"
+        titleHighlight="guesswork"
+        description="Our SEO process combines technical expertise with strategic content optimization to improve your search visibility."
+        steps={[
+          {
+            number: "1",
+            title: "SEO Audit & Analysis",
+            subtitle: "We conduct comprehensive audits to identify opportunities, issues, and areas for improvement.",
+          },
+          {
+            number: "2",
+            title: "Keyword Research & Strategy",
+            subtitle: "We research keywords, analyze competition, and develop a strategic SEO plan aligned with your goals.",
+          },
+          {
+            number: "3",
+            title: "On-Page Optimization",
+            subtitle: "We optimize content, meta tags, headings, and site structure to improve search visibility.",
+          },
+          {
+            number: "4",
+            title: "Technical & Off-Page SEO",
+            subtitle: "We fix technical issues, improve site speed, and build quality backlinks to boost rankings.",
+          },
+          {
+            number: "5",
+            title: "Monitoring & Optimization",
+            subtitle: "We track performance, analyze results, and continuously optimize to maintain and improve rankings.",
+          },
+        ]}
       />
        <DynamicOurWorks />      <SeoStateSection />
       <TestimonialSlider />

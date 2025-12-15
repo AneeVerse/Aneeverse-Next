@@ -5,8 +5,11 @@ import DynamicOurWorks from '@/components/home/DynamicOurWorks'
 import DynamicCreativeSection from '@/components/services/common/DynamicCreativeSection'
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
 import DynamicStateSection from '@/components/services/common/DynamicStateSection'
+import ChannelTailoredSection from '@/components/services/common/ChannelTailoredSection'
+import HowItWorksSection from '@/components/services/common/HowItWorksSection'
 import SalesMarketingAutomationFAQSection from '@/components/services/sales-marketing-automation/SalesMarketingAutomationFAQSection'
 import ServiceSchema from '@/components/seo/ServiceSchema'
+import { FaCog, FaUsers, FaEnvelope, FaChartBar, FaSync, FaRocket } from "react-icons/fa"
 import React from 'react'
 
 export const metadata = {
@@ -51,6 +54,77 @@ const page = () => {
       <SlidingLogos />
       <DynamicSupportSection subtitle="BUILT FOR SALES & MARKETING TEAMS" title="Automation That " highlightText="scales & converts" imageSrc="/images/services/email-design/about-email.avif" imageAlt="Sales Marketing Automation" description="Transform your sales and marketing operations with intelligent automation. Our solutions streamline processes, nurture leads, and drive conversions." additionalText="From workflow design to CRM integration, we set up automation systems that save time, improve efficiency, and deliver measurable results for your business." />
       <DynamicCreativeSection subtitle="Automation Excellence" title="Sales & Marketing Automation Services" heighlightText="Intelligent " items={items} />
+      <ChannelTailoredSection
+        subtitle="Automation for every process"
+        title="Automation that works for your sales and marketing"
+        titleHighlight="your sales and marketing"
+        description="From lead nurturing to CRM integration, we automate processes that save time and drive conversions."
+        channels={[
+          {
+            title: "Marketing Automation",
+            subtitle: "Automate marketing workflows to nurture leads, send targeted campaigns, and drive conversions.",
+            icon: <FaCog className="w-8 h-8" />,
+          },
+          {
+            title: "Lead Nurturing",
+            subtitle: "Automated sequences that nurture leads through the sales funnel with personalized content.",
+            icon: <FaUsers className="w-8 h-8" />,
+          },
+          {
+            title: "Email Automation",
+            subtitle: "Automated email campaigns that engage customers at the right time with relevant content.",
+            icon: <FaEnvelope className="w-8 h-8" />,
+          },
+          {
+            title: "CRM Integration",
+            subtitle: "Seamlessly integrate automation tools with your CRM to streamline sales and marketing processes.",
+            icon: <FaSync className="w-8 h-8" />,
+          },
+          {
+            title: "Workflow Design",
+            subtitle: "Design automated workflows that save time, improve efficiency, and scale with your business.",
+            icon: <FaRocket className="w-8 h-8" />,
+          },
+          {
+            title: "Analytics & Reporting",
+            subtitle: "Track automation performance and ROI with comprehensive analytics and reporting dashboards.",
+            icon: <FaChartBar className="w-8 h-8" />,
+          },
+        ]}
+      />
+      <HowItWorksSection
+        subtitle="HOW WE WORK"
+        title="From manual to automated without the disruption"
+        titleHighlight="disruption"
+        description="Our automation process ensures smooth implementation and optimization of automated workflows that drive results."
+        steps={[
+          {
+            number: "1",
+            title: "Process Analysis",
+            subtitle: "We analyze your current processes, identify automation opportunities, and map workflows.",
+          },
+          {
+            number: "2",
+            title: "Automation Design",
+            subtitle: "We design automated workflows, triggers, and sequences tailored to your business needs.",
+          },
+          {
+            number: "3",
+            title: "Integration & Setup",
+            subtitle: "We integrate automation tools with your CRM and systems, then configure workflows and triggers.",
+          },
+          {
+            number: "4",
+            title: "Testing & Launch",
+            subtitle: "We test automation workflows thoroughly, then launch with monitoring and optimization.",
+          },
+          {
+            number: "5",
+            title: "Optimization & Support",
+            subtitle: "We monitor performance, optimize workflows, and provide ongoing support to ensure success.",
+          },
+        ]}
+      />
       <DynamicOurWorks />
       <DynamicStateSection title="Our Automation Impact" subtitle="PROVEN RESULTS" stats={stats} />
       <TestimonialSlider />
