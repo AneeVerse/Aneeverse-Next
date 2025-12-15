@@ -52,36 +52,167 @@ const HeroSection = () => {
   const [isDragging, setIsDragging] = useState(false);
   const startX = useRef(0);
   const scrollLeft = useRef(0);
+  const animationFrameId = useRef(null);
+  const animationFrameIdRight = useRef(null);
+  const userScrollTimeout = useRef(null);
+
+  // Infinite scroll for first row with bidirectional loop
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+
+    let lastScrollLeft = scrollContainer.scrollLeft;
+
+    const scroll = () => {
+      if (!isDragging && scrollContainer) {
+        scrollContainer.scrollLeft += 0.5;
+        lastScrollLeft = scrollContainer.scrollLeft;
+        
+        // Check if we've scrolled past 2/3 point (near the end)
+        const maxScroll = scrollContainer.scrollWidth / 3;
+        if (scrollContainer.scrollLeft >= maxScroll * 2) {
+          scrollContainer.scrollLeft = maxScroll;
+        }
+        // Check if scrolled to beginning
+        if (scrollContainer.scrollLeft <= 1) {
+          scrollContainer.scrollLeft = maxScroll;
+        }
+      }
+      animationFrameId.current = requestAnimationFrame(scroll);
+    };
+
+    // Handle manual scroll in both directions
+    const handleScroll = () => {
+      if (isDragging) {
+        const currentScroll = scrollContainer.scrollLeft;
+        const maxScroll = scrollContainer.scrollWidth / 3;
+        
+        // Scrolling forward (right) - near end
+        if (currentScroll >= maxScroll * 2.5) {
+          scrollContainer.scrollLeft = maxScroll + (currentScroll - maxScroll * 2.5);
+        }
+        // Scrolling backward (left) - near start
+        else if (currentScroll <= maxScroll * 0.5) {
+          scrollContainer.scrollLeft = maxScroll * 1.5 + currentScroll;
+        }
+        
+        lastScrollLeft = currentScroll;
+      }
+    };
+
+    scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
+    animationFrameId.current = requestAnimationFrame(scroll);
+
+    return () => {
+      scrollContainer.removeEventListener('scroll', handleScroll);
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
+    };
+  }, [isDragging]);
+
+  // Infinite scroll for second row (reverse) with bidirectional loop
+  useEffect(() => {
+    const scrollContainer = scrollRefRight.current;
+    if (!scrollContainer) return;
+
+    // Set initial position to middle third
+    const maxScroll = scrollContainer.scrollWidth / 3;
+    if (scrollContainer.scrollLeft === 0) {
+      scrollContainer.scrollLeft = maxScroll * 1.5;
+    }
+
+    let lastScrollLeft = scrollContainer.scrollLeft;
+
+    const scroll = () => {
+      if (!isDragging && scrollContainer) {
+        scrollContainer.scrollLeft -= 0.5;
+        lastScrollLeft = scrollContainer.scrollLeft;
+        
+        // Check if scrolled to beginning
+        if (scrollContainer.scrollLeft <= maxScroll * 0.5) {
+          scrollContainer.scrollLeft = maxScroll * 1.5;
+        }
+        // Check if scrolled near end
+        if (scrollContainer.scrollLeft >= maxScroll * 2.5) {
+          scrollContainer.scrollLeft = maxScroll * 1.5;
+        }
+      }
+      animationFrameIdRight.current = requestAnimationFrame(scroll);
+    };
+
+    // Handle manual scroll in both directions
+    const handleScroll = () => {
+      if (isDragging) {
+        const currentScroll = scrollContainer.scrollLeft;
+        
+        // Scrolling forward (right) - near end
+        if (currentScroll >= maxScroll * 2.5) {
+          scrollContainer.scrollLeft = maxScroll + (currentScroll - maxScroll * 2.5);
+        }
+        // Scrolling backward (left) - near start
+        else if (currentScroll <= maxScroll * 0.5) {
+          scrollContainer.scrollLeft = maxScroll * 1.5 + currentScroll;
+        }
+        
+        lastScrollLeft = currentScroll;
+      }
+    };
+
+    scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
+    animationFrameIdRight.current = requestAnimationFrame(scroll);
+
+    return () => {
+      scrollContainer.removeEventListener('scroll', handleScroll);
+      if (animationFrameIdRight.current) {
+        cancelAnimationFrame(animationFrameIdRight.current);
+      }
+    };
+  }, [isDragging]);
+
   // ✅ Start Dragging
   const handleMouseDown = (e) => {
     setIsDragging(true);
-    startX.current = e.pageX || e.touches[0].pageX;
-    scrollLeft.current = scrollRef.current.scrollLeft;
+    startX.current = e.pageX || e.touches?.[0]?.pageX || 0;
+    scrollLeft.current = scrollRef.current?.scrollLeft || 0;
+    
+    // Clear any pending timeout
+    if (userScrollTimeout.current) {
+      clearTimeout(userScrollTimeout.current);
+    }
   };
+
   // ✅ Scroll with Drag
   const handleMouseMove = (e) => {
-    if (!isDragging) return;
-    const x = e.pageX || e.touches[0].pageX;
-    const walk = (x - startX.current) * 1.5; // Adjust speed
+    if (!isDragging || !scrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX || e.touches?.[0]?.pageX || 0;
+    const walk = (x - startX.current) * 1.5;
     scrollRef.current.scrollLeft = scrollLeft.current - walk;
   };
 
   const startXRight = useRef(0);
   const scrollLeftRight = useRef(0);
 
-  // ✅ Start Dragging
+  // ✅ Start Dragging Right
   const handleMouseDownRight = (e) => {
     setIsDragging(true);
-    startXRight.current = e.pageX || e.touches[0].pageX;
-    scrollLeftRight.current = scrollRefRight.current.scrollLeftRight;
+    startXRight.current = e.pageX || e.touches?.[0]?.pageX || 0;
+    scrollLeftRight.current = scrollRefRight.current?.scrollLeft || 0;
+    
+    // Clear any pending timeout
+    if (userScrollTimeout.current) {
+      clearTimeout(userScrollTimeout.current);
+    }
   };
 
   // ✅ Scroll Right with Drag
   const handleMouseMoveRight = (e) => {
-    if (!isDragging) return;
-    const x = e.pageX || e.touches[0].pageX;
-    const walk = (x - startX.current) * 1.5; // Adjust speed
-    scrollRefRight.current.scrollLeftRight = scrollLeftRight.current - walk;
+    if (!isDragging || !scrollRefRight.current) return;
+    e.preventDefault();
+    const x = e.pageX || e.touches?.[0]?.pageX || 0;
+    const walk = (x - startXRight.current) * 1.5;
+    scrollRefRight.current.scrollLeft = scrollLeftRight.current - walk;
   };
 
   // ✅ Stop Dragging
@@ -245,7 +376,7 @@ const HeroSection = () => {
                 }}
               >
                 <div
-                  className="overflow-hidden"
+                  className="overflow-hidden mobile-scroll-wrapper"
                   style={{ gap: 'clamp(8px, 2vw, 16px)' }}
                 >
                   {/* First Row - Left Scroll */}
@@ -258,9 +389,14 @@ const HeroSection = () => {
                     onTouchStart={handleMouseDown}
                     onTouchMove={handleMouseMove}
                     onTouchEnd={handleMouseUp}
-                    className="overflow-x-auto scrollbar-hide mb-2"
+                    className="overflow-x-scroll scrollbar-hide mb-2 mobile-scroll-smooth"
+                    style={{
+                      WebkitOverflowScrolling: 'touch',
+                      overscrollBehavior: 'none',
+                      scrollSnapType: 'none'
+                    }}
                   >
-                    <div className="flex marquee-horizontal">
+                    <div className="flex" style={{ width: 'max-content' }}>
                       {[...images1, ...images1, ...images1].map((img, index) => (
                         <div
                           className="relative flex-shrink-0 select-none overflow-hidden cursor-pointer rounded-xl group"
@@ -277,10 +413,11 @@ const HeroSection = () => {
                               src={img.src}
                               draggable={false}
                               alt="Creative work"
-                              className="object-cover group-hover:scale-105 transition-all duration-300 rounded-xl shadow-lg"
+                              className="object-cover rounded-xl shadow-lg"
                               style={{
                                 width: 'clamp(150px, 35vw, 180px)',
-                                height: 'clamp(170px, 40vw, 200px)'
+                                height: 'clamp(185px, 43vw, 215px)',
+                                pointerEvents: 'none'
                               }}
                             />
                           </div>
@@ -299,9 +436,14 @@ const HeroSection = () => {
                     onTouchStart={handleMouseDownRight}
                     onTouchMove={handleMouseMoveRight}
                     onTouchEnd={handleMouseUp}
-                    className="overflow-x-auto scrollbar-hide"
+                    className="overflow-x-scroll scrollbar-hide mobile-scroll-smooth"
+                    style={{
+                      WebkitOverflowScrolling: 'touch',
+                      overscrollBehavior: 'none',
+                      scrollSnapType: 'none'
+                    }}
                   >
-                    <div className="flex marquee-horizontal-reverse">
+                    <div className="flex" style={{ width: 'max-content' }}>
                       {[...images2, ...images2, ...images2]
                         .reverse()
                         .map((img, index) => (
@@ -320,10 +462,11 @@ const HeroSection = () => {
                                 src={img.src}
                                 alt="Creative work"
                                 draggable={false}
-                                className="object-cover group-hover:scale-105 transition-all duration-300 rounded-xl shadow-lg"
+                                className="object-cover rounded-xl shadow-lg"
                                 style={{
                                   width: 'clamp(150px, 35vw, 180px)',
-                                  height: 'clamp(170px, 40vw, 200px)'
+                                  height: 'clamp(185px, 43vw, 215px)',
+                                  pointerEvents: 'none'
                                 }}
                               />
                             </div>
@@ -541,6 +684,31 @@ const HeroSection = () => {
           animation: marqueeHorizontalReverse 30s linear infinite;
         }
 
+        /* Mobile smooth scrolling */
+        .mobile-scroll-smooth {
+          -webkit-overflow-scrolling: touch;
+          scroll-padding: 0;
+          cursor: grab;
+          user-select: none;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+        }
+
+        .mobile-scroll-smooth:active {
+          cursor: grabbing;
+        }
+
+        .mobile-scroll-smooth * {
+          pointer-events: auto;
+        }
+
+        .mobile-scroll-wrapper {
+          touch-action: pan-x;
+          -webkit-user-select: none;
+          user-select: none;
+        }
+
 
         
         /* Prevent image glitch on hover */
@@ -552,6 +720,14 @@ const HeroSection = () => {
         }
 
         /* Hide Scrollbar */
+        .scrollbar-hide {
+          -ms-overflow-style: none; /* IE and Edge */
+          scrollbar-width: none; /* Firefox */
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        
         .md\:hidden {
           -ms-overflow-style: none; /* IE and Edge */
           scrollbar-width: none; /* Firefox */

@@ -5,8 +5,11 @@ import DynamicOurWorks from '@/components/home/DynamicOurWorks'
 import DynamicCreativeSection from '@/components/services/common/DynamicCreativeSection'
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
 import DynamicStateSection from '@/components/services/common/DynamicStateSection'
+import ChannelTailoredSection from '@/components/services/common/ChannelTailoredSection'
+import HowItWorksSection from '@/components/services/common/HowItWorksSection'
 import BrandingServicesFAQSection from '@/components/services/branding-services/BrandingServicesFAQSection'
 import ServiceSchema from '@/components/seo/ServiceSchema'
+import { FaPalette, FaFileAlt, FaBullseye, FaRocket, FaGlobe, FaShieldAlt } from "react-icons/fa"
 import React from 'react'
 
 export const metadata = {
@@ -51,6 +54,77 @@ const page = () => {
       <SlidingLogos />
       <DynamicSupportSection subtitle="BUILT FOR BRANDS" title="Brand Identities That " highlightText="resonate & inspire" imageSrc="/images/services/email-design/about-email.avif" imageAlt="Branding Services" description="Create a brand that truly represents your business and connects with your audience. Our comprehensive branding services cover everything from logo design to brand strategy." additionalText="From initial concept to final implementation, we develop brand identities that are memorable, consistent, and aligned with your business goals." />
       <DynamicCreativeSection subtitle="Brand Excellence" title="Branding Services" heighlightText="Comprehensive " items={items} />
+      <ChannelTailoredSection
+        subtitle="Branding for every touchpoint"
+        title="Brand identities that work everywhere"
+        titleHighlight="everywhere"
+        description="From logos to brand guidelines, we create comprehensive brand identities that maintain consistency across all applications."
+        channels={[
+          {
+            title: "Logo Design",
+            subtitle: "Memorable logos that represent your brand identity and make a lasting impression.",
+            icon: <FaPalette className="w-8 h-8" />,
+          },
+          {
+            title: "Brand Guidelines",
+            subtitle: "Comprehensive brand guidelines that ensure consistent application across all touchpoints.",
+            icon: <FaFileAlt className="w-8 h-8" />,
+          },
+          {
+            title: "Brand Strategy",
+            subtitle: "Strategic brand positioning that differentiates you and resonates with your target audience.",
+            icon: <FaBullseye className="w-8 h-8" />,
+          },
+          {
+            title: "Visual Identity",
+            subtitle: "Complete visual systems including colors, typography, and imagery that define your brand.",
+            icon: <FaRocket className="w-8 h-8" />,
+          },
+          {
+            title: "Brand Implementation",
+            subtitle: "Support for implementing your brand across websites, marketing materials, and digital platforms.",
+            icon: <FaGlobe className="w-8 h-8" />,
+          },
+          {
+            title: "Brand Protection",
+            subtitle: "Guidelines and standards to protect your brand integrity and ensure consistent usage.",
+            icon: <FaShieldAlt className="w-8 h-8" />,
+          },
+        ]}
+      />
+      <HowItWorksSection
+        subtitle="HOW WE WORK"
+        title="From concept to complete brand without the complexity"
+        titleHighlight="complexity"
+        description="Our branding process ensures you get a cohesive brand identity that resonates with your audience and scales with your business."
+        steps={[
+          {
+            number: "1",
+            title: "Discovery & Research",
+            subtitle: "We research your business, audience, competitors, and market to inform brand strategy and design.",
+          },
+          {
+            number: "2",
+            title: "Brand Strategy",
+            subtitle: "We develop brand positioning, messaging, and strategy that differentiates you in the market.",
+          },
+          {
+            number: "3",
+            title: "Design Development",
+            subtitle: "We create logo concepts, visual identity systems, and brand elements for your review and feedback.",
+          },
+          {
+            number: "4",
+            title: "Brand Guidelines",
+            subtitle: "We develop comprehensive brand guidelines that ensure consistent application across all touchpoints.",
+          },
+          {
+            number: "5",
+            title: "Implementation Support",
+            subtitle: "We support brand implementation and provide ongoing guidance to maintain brand consistency.",
+          },
+        ]}
+      />
       <DynamicOurWorks />
       <DynamicStateSection title="Our Branding Impact" subtitle="PROVEN RESULTS" stats={stats} />
       <TestimonialSlider />

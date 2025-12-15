@@ -4,6 +4,7 @@ import CommonServicesHeroSection from '@/components/services/common/CommonHeroSe
 import DynamicOurWorks from '@/components/home/DynamicOurWorks'
 import DynamicCreativeSection from '@/components/services/common/DynamicCreativeSection'
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
+import DynamicStateSection from '@/components/services/common/DynamicStateSection'
 import AdCreativeFAQSection from '@/components/services/ad-creative/AdCreativeFAQSection'
 import ChannelTailoredSection from '@/components/services/common/ChannelTailoredSection'
 import HowItWorksSection from '@/components/services/common/HowItWorksSection'
@@ -245,6 +246,28 @@ const page = () => {
             number: "5",
             title: "Built to test",
             subtitle: "Receive multiple creative variants quickly so you can experiment, optimize performance, and avoid ad fatigue before it kills your ROI.",
+          },
+        ]}
+      />
+      <DynamicStateSection
+        title="Our Ad Creative Impact"
+        subtitle="PROVEN RESULTS"
+        stats={[
+          {
+            value: "500+",
+            description: "Ad campaigns created and optimized for clients.",
+          },
+          {
+            value: "35%",
+            description: "Average increase in click-through rates.",
+          },
+          {
+            value: "50%",
+            description: "Average improvement in conversion rates.",
+          },
+          {
+            value: "24/7",
+            description: "Creative support and campaign management.",
           },
         ]}
       />

@@ -5,8 +5,11 @@ import DynamicOurWorks from '@/components/home/DynamicOurWorks'
 import DynamicCreativeSection from '@/components/services/common/DynamicCreativeSection'
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
 import DynamicStateSection from '@/components/services/common/DynamicStateSection'
+import ChannelTailoredSection from '@/components/services/common/ChannelTailoredSection'
+import HowItWorksSection from '@/components/services/common/HowItWorksSection'
 import CopywritingFAQSection from '@/components/services/copywriting/CopywritingFAQSection'
 import ServiceSchema from '@/components/seo/ServiceSchema'
+import { FaPen, FaShoppingCart, FaEnvelope, FaBullseye, FaGlobe, FaFileAlt } from "react-icons/fa"
 import React from 'react'
 
 export const metadata = {
@@ -51,6 +54,77 @@ const page = () => {
       <SlidingLogos />
       <DynamicSupportSection subtitle="BUILT FOR MARKETING TEAMS" title="Copy That " highlightText="converts & engages" imageSrc="/images/services/email-design/about-email.avif" imageAlt="Copywriting Services" description="Transform your messaging with copywriting that connects with your audience and drives action. Our expert writers craft compelling copy for all channels." additionalText="From website copy to ad campaigns, we write copy that communicates your value, engages your audience, and drives measurable results for your business." />
       <DynamicCreativeSection subtitle="Writing Excellence" title="Copywriting Services" heighlightText="Professional " items={items} />
+      <ChannelTailoredSection
+        subtitle="Copy for every channel"
+        title="Copywriting that works wherever you need it"
+        titleHighlight="wherever"
+        description="From websites to ads, we write compelling copy that engages audiences and drives action across all channels."
+        channels={[
+          {
+            title: "Website Copy",
+            subtitle: "Clear, compelling website copy that communicates your value and converts visitors into customers.",
+            icon: <FaGlobe className="w-8 h-8" />,
+          },
+          {
+            title: "Sales Copy",
+            subtitle: "Persuasive sales copy that highlights benefits, addresses objections, and closes deals.",
+            icon: <FaShoppingCart className="w-8 h-8" />,
+          },
+          {
+            title: "Email Copy",
+            subtitle: "Engaging email copy that opens, clicks, and converts subscribers into customers.",
+            icon: <FaEnvelope className="w-8 h-8" />,
+          },
+          {
+            title: "Ad Copy",
+            subtitle: "Attention-grabbing ad copy that captures interest and drives clicks and conversions.",
+            icon: <FaBullseye className="w-8 h-8" />,
+          },
+          {
+            title: "Content Writing",
+            subtitle: "Informative, engaging content that educates, entertains, and builds trust with your audience.",
+            icon: <FaFileAlt className="w-8 h-8" />,
+          },
+          {
+            title: "Brand Messaging",
+            subtitle: "Consistent brand voice and messaging that resonates with your audience across all touchpoints.",
+            icon: <FaPen className="w-8 h-8" />,
+          },
+        ]}
+      />
+      <HowItWorksSection
+        subtitle="HOW WE WORK"
+        title="From brief to final copy without the back-and-forth"
+        titleHighlight="back-and-forth"
+        description="Our streamlined copywriting process ensures you get compelling copy that aligns with your brand and drives results."
+        steps={[
+          {
+            number: "1",
+            title: "Brief & Research",
+            subtitle: "We review your brief, research your audience and competitors, and understand your brand voice and goals.",
+          },
+          {
+            number: "2",
+            title: "Copy Creation",
+            subtitle: "We write compelling copy that aligns with your brand, engages your audience, and drives action.",
+          },
+          {
+            number: "3",
+            title: "Review & Refinement",
+            subtitle: "We refine copy based on your feedback, ensuring it meets your standards and objectives.",
+          },
+          {
+            number: "4",
+            title: "Final Delivery",
+            subtitle: "We deliver polished, ready-to-use copy in your preferred format with all necessary variations.",
+          },
+          {
+            number: "5",
+            title: "Ongoing Support",
+            subtitle: "We provide revisions and updates to keep your copy fresh and aligned with your evolving needs.",
+          },
+        ]}
+      />
       <DynamicOurWorks />
       <DynamicStateSection title="Our Copywriting Impact" subtitle="PROVEN RESULTS" stats={stats} />
       <TestimonialSlider />

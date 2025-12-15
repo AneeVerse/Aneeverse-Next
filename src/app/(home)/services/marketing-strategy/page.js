@@ -3,10 +3,13 @@ import CommonServicesHeroSection from '@/components/services/common/CommonHeroSe
 import DynamicOurWorks from '@/components/home/DynamicOurWorks'
 import DynamicCreativeSection from '@/components/services/common/DynamicCreativeSection'
 import DynamicSupportSection from '@/components/services/common/DynamicSupportSection'
+import ChannelTailoredSection from '@/components/services/common/ChannelTailoredSection'
+import HowItWorksSection from '@/components/services/common/HowItWorksSection'
 import MarketingStrategyFAQSection from '@/components/services/marketing-strategy/MarketingStrategyFAQSection'
 import MarketingStrategyFeatureSection from '@/components/services/marketing-strategy/MarketingStrategyFeatureSection'
 import MarketingStrategyStateSection from '@/components/services/marketing-strategy/MarketingStrategyStateSection'
 import ServiceSchema from '@/components/seo/ServiceSchema'
+import { FaChartLine, FaUsers, FaBullseye, FaRocket, FaSearch, FaLightbulb } from "react-icons/fa"
 import React from 'react'
 
 
@@ -99,7 +102,7 @@ const page = () => {
       <CommonServicesHeroSection
         title="Marketing Strategy Services"
         subtitle="Creative Services"
-        description=" Empower your business with data-driven marketing initiatives, plans, and exceptional insights from our team of expert consultants. Leverage Superside's marketing strategy services for an on-demand marketing team extension."
+        description=" Empower your business with data-driven marketing initiatives, plans, and exceptional insights from our team of expert consultants. Leverage Aneeverse's marketing strategy services for an on-demand marketing team extension."
         ctaText="Book a Call"
         ctaLink="/contact"
         backgroundImage="/images/services/marketing-strategy/hero-banner.avif"
@@ -126,7 +129,77 @@ const page = () => {
         heighlightText=" Full scale"
         items={items}
       />
-
+      <ChannelTailoredSection
+        subtitle="Strategies for every business need"
+        title="Marketing strategies that work for your business"
+        titleHighlight="your business"
+        description="From brand positioning to campaign planning, we develop strategies tailored to your industry, audience, and goals."
+        channels={[
+          {
+            title: "Brand Strategy",
+            subtitle: "Develop compelling brand positioning and messaging that differentiates you in the market.",
+            icon: <FaBullseye className="w-8 h-8" />,
+          },
+          {
+            title: "Market Research",
+            subtitle: "Deep insights into your audience, competitors, and market opportunities to inform strategy.",
+            icon: <FaSearch className="w-8 h-8" />,
+          },
+          {
+            title: "Campaign Planning",
+            subtitle: "Strategic campaign plans that align with business objectives and drive measurable results.",
+            icon: <FaRocket className="w-8 h-8" />,
+          },
+          {
+            title: "Audience Segmentation",
+            subtitle: "Identify and understand your target audiences to create more effective marketing strategies.",
+            icon: <FaUsers className="w-8 h-8" />,
+          },
+          {
+            title: "Performance Analytics",
+            subtitle: "Set up metrics and analytics to track strategy effectiveness and optimize performance.",
+            icon: <FaChartLine className="w-8 h-8" />,
+          },
+          {
+            title: "Strategic Innovation",
+            subtitle: "Creative strategies and innovative approaches that help you stand out and capture attention.",
+            icon: <FaLightbulb className="w-8 h-8" />,
+          },
+        ]}
+      />
+      <HowItWorksSection
+        subtitle="HOW WE WORK"
+        title="From insights to action without the guesswork"
+        titleHighlight="guesswork"
+        description="Our strategic process combines data analysis, market research, and creative thinking to deliver actionable marketing strategies."
+        steps={[
+          {
+            number: "1",
+            title: "Discovery & Analysis",
+            subtitle: "We analyze your business, market position, competitors, and audience to identify opportunities and challenges.",
+          },
+          {
+            number: "2",
+            title: "Strategic Planning",
+            subtitle: "We develop comprehensive marketing strategies with clear objectives, tactics, and success metrics.",
+          },
+          {
+            number: "3",
+            title: "Strategy Review",
+            subtitle: "We present strategies for your review and refinement, ensuring alignment with your business goals.",
+          },
+          {
+            number: "4",
+            title: "Implementation Roadmap",
+            subtitle: "We create detailed implementation plans with timelines, resources, and milestones for execution.",
+          },
+          {
+            number: "5",
+            title: "Ongoing Optimization",
+            subtitle: "We monitor performance, analyze results, and refine strategies to continuously improve outcomes.",
+          },
+        ]}
+      />
        <DynamicOurWorks />      <MarketingStrategyFeatureSection />
       <MarketingStrategyStateSection />
       <MarketingStrategyFAQSection />
