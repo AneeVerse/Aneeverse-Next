@@ -22,13 +22,14 @@ const ServicesMegaMenu = ({ color }) => {
       color: "bg-purple-100 hover:bg-purple-200 text-purple-900",
       items: [
         { name: "Ad Creative", url: "/services/ad-creative", description: "Eye-catching ad creatives that convert.", icon: <FaPaintBrush /> },
-        { name: "Social Media Creatives", url: "/services/social-media-creatives", description: "Engaging assets for all platforms.", icon: <FaFacebook /> },
+        // { name: "Social Media Creatives", url: "/services/social-media-creatives", description: "Engaging assets for all platforms.", icon: <FaFacebook /> },
         { name: "Presentation Design", url: "/services/presentation-design", description: "Pitch-perfect presentations.", icon: <FaSlideshare /> },
-        { name: "Illustration Design", url: "/services/illustration-design", description: "Custom illustrations that captivate.", icon: <FaPalette /> },
-        { name: "Branding Services", url: "/services/branding-services", description: "Complete brand identity solutions.", icon: <FaTag /> },
-        { name: "Ebook & Digital Report", url: "/services/ebook-digital-report", description: "Professional digital publications.", icon: <FaFilePdf /> },
-        { name: "Print Design", url: "/services/print-design", description: "Stunning print materials.", icon: <FaFilePdf /> },
-        { name: "Packing & Merchandise Design", url: "/services/packing-merchandise-design", description: "Product packaging that sells.", icon: <FaBox /> },
+        // { name: "Illustration Design", url: "/services/illustration-design", description: "Custom illustrations that captivate.", icon: <FaPalette /> },
+        { name: "Branding System & Merchandise", url: "/services/branding-services", description: "Complete brand identity solutions.", icon: <FaTag /> },
+        { name: "Ebook, Report & Print Design", url: "/services/ebook-digital-report", description: "Professional digital publications.", icon: <FaFilePdf /> },
+        // { name: "Print Design", url: "/services/print-design", description: "Stunning print materials.", icon: <FaFilePdf /> },
+        // { name: "Packing & Merchandise Design", url: "/services/packing-merchandise-design", description: "Product packaging that sells.", icon: <FaBox /> },
+
       ],
     },
     {
@@ -38,12 +39,13 @@ const ServicesMegaMenu = ({ color }) => {
       items: [
         { name: "Platform Development", url: "/services/platform-development", description: "Scalable web platforms.", icon: <FaCode /> },
         { name: "UI, UX & Web Development", url: "/services/ui-ux-web-development", description: "Exceptional digital experiences.", icon: <FaDesktop /> },
-        { name: "Design System", url: "/services/design-system", description: "Comprehensive design systems.", icon: <FaLayerGroup /> },
-        { name: "Product Design", url: "/services/product-design", description: "Market-ready product designs.", icon: <FaCog /> },
+        // { name: "Design System", url: "/services/design-system", description: "Comprehensive design systems.", icon: <FaLayerGroup /> },
+        // { name: "Product Design", url: "/services/product-design", description: "Market-ready product designs.", icon: <FaCog /> },
         { name: "Copywriting", url: "/services/copywriting", description: "Copy that converts.", icon: <FaPenFancy /> },
-        { name: "Blog Writing", url: "/services/blog-writing", description: "SEO-friendly blog content.", icon: <FaPenFancy /> },
-        { name: "SEO Optimize", url: "/services/seo-optimization", description: "Boost search rankings.", icon: <FaSearch /> },
-        { name: "Corporate & Internals", url: "/services/corporate-internals", description: "Internal branding solutions.", icon: <FaBuilding /> },
+        // { name: "Blog Writing", url: "/services/blog-writing", description: "SEO-friendly blog content.", icon: <FaPenFancy /> },
+        { name: "SEO & Blog Writing", url: "/services/seo-optimization", description: "Boost search rankings.", icon: <FaSearch /> },
+        // { name: "Corporate & Internals", url: "/services/corporate-internals", description: "Internal branding solutions.", icon: <FaBuilding /> },
+
       ],
     },
     {
@@ -51,14 +53,16 @@ const ServicesMegaMenu = ({ color }) => {
       url: "/services",
       color: "bg-emerald-100 hover:bg-emerald-200 text-emerald-900",
       items: [
-        { name: "AI Powered Creatives", url: "/services/ai-powered-creatives", description: "AI-enhanced creative solutions.", icon: <FaRobot /> },
-        { name: "AI Blog Writing", url: "/services/ai-blog-writing", description: "AI-powered content creation.", icon: <FaBlog /> },
+        // { name: "AI Powered Creatives", url: "/services/ai-powered-creatives", description: "AI-enhanced creative solutions.", icon: <FaRobot /> },
+        // { name: "AI Blog Writing", url: "/services/ai-blog-writing", description: "AI-powered content creation.", icon: <FaBlog /> },
         { name: "AI SEO (GEO) (AEO) (AIO)", url: "/services/ai-seo-geo-aeo-aio", description: "Next-generation SEO optimization.", icon: <FaChartLine /> },
+        { name: "n8n Workflows", url: "/services/n8n-workflows", description: "Workflow Automation & Integrations.", icon: <FaRobot /> },
         { name: "Sales & Marketing Automation", url: "/services/sales-marketing-automation", description: "Streamline your workflows.", icon: <FaChartPie /> },
         { type: "category", name: "Marketing", color: "bg-orange-100 text-orange-900" },
         { name: "Marketing Strategy", url: "/services/marketing-strategy", description: "Data-driven marketing plans.", icon: <FaChartPie /> },
-        { name: "Email Campaign", url: "/services/email-campaign", description: "Automated email campaigns.", icon: <FaEnvelope /> },
-        { name: "Email Design", url: "/services/email-design", description: "Engaging email templates.", icon: <FaEnvelopeOpenText /> },
+        { name: "Email Design & Campaign", url: "/services/email-campaign", description: "Automated email campaigns.", icon: <FaEnvelope /> },
+        // { name: "Email Design", url: "/services/email-design", description: "Engaging email templates.", icon: <FaEnvelopeOpenText /> },
+
       ],
     },
   ];
