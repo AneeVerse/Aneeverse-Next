@@ -55,6 +55,7 @@ const ServicesMegaMenu = ({ color }) => {
         { name: "AI Blog Writing", url: "/services/ai-blog-writing", description: "AI-powered content creation.", icon: <FaBlog /> },
         { name: "AI SEO (GEO) (AEO) (AIO)", url: "/services/ai-seo-geo-aeo-aio", description: "Next-generation SEO optimization.", icon: <FaChartLine /> },
         { name: "Sales & Marketing Automation", url: "/services/sales-marketing-automation", description: "Streamline your workflows.", icon: <FaChartPie /> },
+        { type: "category", name: "Marketing", color: "bg-orange-100 text-orange-900" },
         { name: "Marketing Strategy", url: "/services/marketing-strategy", description: "Data-driven marketing plans.", icon: <FaChartPie /> },
         { name: "Email Campaign", url: "/services/email-campaign", description: "Automated email campaigns.", icon: <FaEnvelope /> },
         { name: "Email Design", url: "/services/email-design", description: "Engaging email templates.", icon: <FaEnvelopeOpenText /> },
@@ -107,23 +108,32 @@ const ServicesMegaMenu = ({ color }) => {
                     </Link>
                     <ul className="mt-4 space-y-2">
                       {category.items.map((item, idx) => (
-                        <Link
-                          onClick={() => { setIsOpen(false) }}
-                          href={item.url}
-                          key={idx}
-                          className="flex group px-3 py-2 border-b items-center justify-between gap-3"
-                        >
-                          <div className="flex items-center justify-between gap-3">
-                            <div>
-                              <h4 className="text-sm font-normal text-gray-800 flex items-center">
-                                <span className="h-[5px] w-[5px] bg-secondary-500 inline-block transition-all duration-300 scale-0 group-hover:scale-100 rounded-full"></span>
-                                <span className="ml-[-5px] group-hover:ml-[6px] transition-all duration-300">{item.name}</span>
-                              </h4>
-                              <p className="text-sm text-gray-500">{item.description}</p>
+                        item.type === "category" ? (
+                          <div key={idx} className="px-3 pt-2 pb-3 mb-2">
+                            <div className={`text-base font-bold py-1.5 px-3 rounded-md inline-flex items-center gap-2 ${item.color}`}>
+                              {item.name}
+                              <FiArrowUpRight className="text-xs" />
                             </div>
                           </div>
-                          <div className="text-gray-400 group-hover:text-gray-600 transition-colors duration-300 text-lg self-center">{item.icon}</div>
-                        </Link>
+                        ) : (
+                          <Link
+                            onClick={() => { setIsOpen(false) }}
+                            href={item.url}
+                            key={idx}
+                            className="flex group px-3 py-2 border-b items-center justify-between gap-3"
+                          >
+                            <div className="flex items-center justify-between gap-3">
+                              <div>
+                                <h4 className="text-sm font-normal text-gray-800 flex items-center">
+                                  <span className="h-[5px] w-[5px] bg-secondary-500 inline-block transition-all duration-300 scale-0 group-hover:scale-100 rounded-full"></span>
+                                  <span className="ml-[-5px] group-hover:ml-[6px] transition-all duration-300">{item.name}</span>
+                                </h4>
+                                <p className="text-sm text-gray-500">{item.description}</p>
+                              </div>
+                            </div>
+                            <div className="text-gray-400 group-hover:text-gray-600 transition-colors duration-300 text-lg self-center">{item.icon}</div>
+                          </Link>
+                        )
                       ))}
                     </ul>
                   </div>
