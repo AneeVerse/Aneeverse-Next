@@ -10,6 +10,9 @@ import AnimatedButton from "../common/AnimatedButton";
 import { Heading } from "../common/typography/Heading";
 import { AccentText } from "../common/typography/AccentText";
 
+// Touch direction detection threshold
+const TOUCH_DIRECTION_THRESHOLD = 5;
+
 // Column 1 - First 8 creative images
 const images1 = [
   { src: "https://ik.imagekit.io/aghmftdmm/creative/AD%20CREATIVE%202.webp?updatedAt=1765350361052" },
@@ -51,10 +54,12 @@ const HeroSection = () => {
   const heroSectionRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const startX = useRef(0);
+  const startY = useRef(0);
   const scrollLeft = useRef(0);
   const animationFrameId = useRef(null);
   const animationFrameIdRight = useRef(null);
   const userScrollTimeout = useRef(null);
+  const touchDirection = useRef(null); // 'horizontal' or 'vertical' or null
 
   // Infinite scroll for first row with bidirectional loop
   useEffect(() => {
@@ -172,52 +177,158 @@ const HeroSection = () => {
 
   // ✅ Start Dragging
   const handleMouseDown = (e) => {
-    setIsDragging(true);
-    startX.current = e.pageX || e.touches?.[0]?.pageX || 0;
-    scrollLeft.current = scrollRef.current?.scrollLeft || 0;
+    // Only handle mouse events, not touch
+    if (e.type.includes('touch')) return;
     
-    // Clear any pending timeout
+    setIsDragging(true);
+    startX.current = e.pageX;
+    startY.current = e.pageY;
+    scrollLeft.current = scrollRef.current?.scrollLeft || 0;
+    touchDirection.current = null;
+    
     if (userScrollTimeout.current) {
       clearTimeout(userScrollTimeout.current);
     }
+  };
+
+  // ✅ Handle Touch Start
+  const handleTouchStart = (e) => {
+    const touch = e.touches[0];
+    startX.current = touch.pageX;
+    startY.current = touch.pageY;
+    scrollLeft.current = scrollRef.current?.scrollLeft || 0;
+    touchDirection.current = null;
+    setIsDragging(true);
   };
 
   // ✅ Scroll with Drag
   const handleMouseMove = (e) => {
     if (!isDragging || !scrollRef.current) return;
-    e.preventDefault();
-    const x = e.pageX || e.touches?.[0]?.pageX || 0;
-    const walk = (x - startX.current) * 1.5;
-    scrollRef.current.scrollLeft = scrollLeft.current - walk;
+    
+    // Handle mouse events
+    if (e.type === 'mousemove') {
+      e.preventDefault();
+      const walk = (e.pageX - startX.current) * 1.5;
+      scrollRef.current.scrollLeft = scrollLeft.current - walk;
+      return;
+    }
+  };
+
+  // ✅ Handle Touch Move
+  const handleTouchMove = (e) => {
+    if (!isDragging || !scrollRef.current) return;
+    
+    const touch = e.touches[0];
+    const x = touch.pageX;
+    const y = touch.pageY;
+    const deltaX = Math.abs(x - startX.current);
+    const deltaY = Math.abs(y - startY.current);
+    
+    // Determine scroll direction on first significant movement
+    if (!touchDirection.current) {
+      if (deltaX > TOUCH_DIRECTION_THRESHOLD || deltaY > TOUCH_DIRECTION_THRESHOLD) {
+        touchDirection.current = deltaX > deltaY ? 'horizontal' : 'vertical';
+      } else {
+        return; // Not enough movement yet
+      }
+    }
+    
+    // If vertical scrolling, stop dragging and allow default
+    if (touchDirection.current === 'vertical') {
+      setIsDragging(false);
+      return;
+    }
+    
+    // Only handle horizontal scrolling
+    if (touchDirection.current === 'horizontal') {
+      e.preventDefault();
+      const walk = (x - startX.current) * 1.5;
+      scrollRef.current.scrollLeft = scrollLeft.current - walk;
+    }
   };
 
   const startXRight = useRef(0);
+  const startYRight = useRef(0);
   const scrollLeftRight = useRef(0);
+  const touchDirectionRight = useRef(null);
 
   // ✅ Start Dragging Right
   const handleMouseDownRight = (e) => {
-    setIsDragging(true);
-    startXRight.current = e.pageX || e.touches?.[0]?.pageX || 0;
-    scrollLeftRight.current = scrollRefRight.current?.scrollLeft || 0;
+    // Only handle mouse events, not touch
+    if (e.type.includes('touch')) return;
     
-    // Clear any pending timeout
+    setIsDragging(true);
+    startXRight.current = e.pageX;
+    startYRight.current = e.pageY;
+    scrollLeftRight.current = scrollRefRight.current?.scrollLeft || 0;
+    touchDirectionRight.current = null;
+    
     if (userScrollTimeout.current) {
       clearTimeout(userScrollTimeout.current);
     }
   };
 
+  // ✅ Handle Touch Start Right
+  const handleTouchStartRight = (e) => {
+    const touch = e.touches[0];
+    startXRight.current = touch.pageX;
+    startYRight.current = touch.pageY;
+    scrollLeftRight.current = scrollRefRight.current?.scrollLeft || 0;
+    touchDirectionRight.current = null;
+    setIsDragging(true);
+  };
+
   // ✅ Scroll Right with Drag
   const handleMouseMoveRight = (e) => {
     if (!isDragging || !scrollRefRight.current) return;
-    e.preventDefault();
-    const x = e.pageX || e.touches?.[0]?.pageX || 0;
-    const walk = (x - startXRight.current) * 1.5;
-    scrollRefRight.current.scrollLeft = scrollLeftRight.current - walk;
+    
+    // Handle mouse events
+    if (e.type === 'mousemove') {
+      e.preventDefault();
+      const walk = (e.pageX - startXRight.current) * 1.5;
+      scrollRefRight.current.scrollLeft = scrollLeftRight.current - walk;
+      return;
+    }
+  };
+
+  // ✅ Handle Touch Move Right
+  const handleTouchMoveRight = (e) => {
+    if (!isDragging || !scrollRefRight.current) return;
+    
+    const touch = e.touches[0];
+    const x = touch.pageX;
+    const y = touch.pageY;
+    const deltaX = Math.abs(x - startXRight.current);
+    const deltaY = Math.abs(y - startYRight.current);
+    
+    // Determine scroll direction on first significant movement
+    if (!touchDirectionRight.current) {
+      if (deltaX > TOUCH_DIRECTION_THRESHOLD || deltaY > TOUCH_DIRECTION_THRESHOLD) {
+        touchDirectionRight.current = deltaX > deltaY ? 'horizontal' : 'vertical';
+      } else {
+        return; // Not enough movement yet
+      }
+    }
+    
+    // If vertical scrolling, stop dragging and allow default
+    if (touchDirectionRight.current === 'vertical') {
+      setIsDragging(false);
+      return;
+    }
+    
+    // Only handle horizontal scrolling
+    if (touchDirectionRight.current === 'horizontal') {
+      e.preventDefault();
+      const walk = (x - startXRight.current) * 1.5;
+      scrollRefRight.current.scrollLeft = scrollLeftRight.current - walk;
+    }
   };
 
   // ✅ Stop Dragging
   const handleMouseUp = () => {
     setIsDragging(false);
+    touchDirection.current = null;
+    touchDirectionRight.current = null;
   };
 
   // ✅ Scroll-based parallax using GSAP
@@ -386,13 +497,9 @@ const HeroSection = () => {
                     onMouseMove={handleMouseMove}
                     onMouseUp={handleMouseUp}
                     onMouseLeave={handleMouseUp}
-                    onTouchStart={handleMouseDown}
-                    onTouchMove={handleMouseMove}
-                    onTouchEnd={handleMouseUp}
                     className="overflow-x-scroll scrollbar-hide mb-2 mobile-scroll-smooth"
                     style={{
                       WebkitOverflowScrolling: 'touch',
-                      overscrollBehavior: 'none',
                       scrollSnapType: 'none'
                     }}
                   >
@@ -433,13 +540,9 @@ const HeroSection = () => {
                     onMouseMove={handleMouseMoveRight}
                     onMouseUp={handleMouseUp}
                     onMouseLeave={handleMouseUp}
-                    onTouchStart={handleMouseDownRight}
-                    onTouchMove={handleMouseMoveRight}
-                    onTouchEnd={handleMouseUp}
                     className="overflow-x-scroll scrollbar-hide mobile-scroll-smooth"
                     style={{
                       WebkitOverflowScrolling: 'touch',
-                      overscrollBehavior: 'none',
                       scrollSnapType: 'none'
                     }}
                   >
@@ -688,23 +791,25 @@ const HeroSection = () => {
         .mobile-scroll-smooth {
           -webkit-overflow-scrolling: touch;
           scroll-padding: 0;
-          cursor: grab;
-          user-select: none;
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          -ms-user-select: none;
+          touch-action: pan-x pan-y;
         }
 
-        .mobile-scroll-smooth:active {
-          cursor: grabbing;
-        }
+        @media (min-width: 1024px) {
+          .mobile-scroll-smooth {
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+          }
 
-        .mobile-scroll-smooth * {
-          pointer-events: auto;
+          .mobile-scroll-smooth:active {
+            cursor: grabbing;
+          }
         }
 
         .mobile-scroll-wrapper {
-          touch-action: pan-x;
+          touch-action: auto;
           -webkit-user-select: none;
           user-select: none;
         }
