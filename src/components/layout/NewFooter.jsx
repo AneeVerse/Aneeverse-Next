@@ -18,48 +18,36 @@ export default function NewFooter() {
       heading: "Services",
       items: [
         {
-          title: "Website Services",
+          title: "Creative Design",
           links: [
-            { title: "Website Design", link: "/services/website-design" },
-            { title: "Landing Pages", link: "/services/landing-pages" },
-            { title: "SEO Optimization", link: "/services/seo-optimization" },
-            // { title: "GMB Optimization", link: "/services/gmb-optimization" },
-            // { title: "Local SEO", link: "/services/local-seo" },
-            { title: "Email Design", link: "/services/email-design" },
+            { title: "Ad Creative", link: "/services/ad-creative" },
+            { title: "Presentation Design", link: "/services/presentation-design" },
+            { title: "Branding System & Merchandise", link: "/services/branding-services" },
+            { title: "Ebook, Report & Print Design", link: "/services/ebook-digital-report" },
           ],
         },
         {
-          title: "Marketing Services",
+          title: "Specialized Solutions",
           links: [
-            {
-              title: "Marketing Strategy",
-              link: "/services/marketing-strategy",
-            },
-            { title: "Email Campaigns", link: "/services/email-campaign" },
-            // { title: "Google Ads", link: "/services/google-ads" },
-            // { title: "Meta Ads", link: "/services/meta-ads" },
-            
+            { title: "Platform Development", link: "/services/platform-development" },
+            { title: "UI, UX & Web Development", link: "/services/ui-ux-web-development" },
+            { title: "Copywriting", link: "/services/copywriting" },
+            { title: "SEO & Blog Writing", link: "/services/seo-optimization" },
           ],
         },
         {
-          title: "Content Writing",
+          title: "AI & Automation",
           links: [
-            { title: "Blog Writing", link: "/services/blog-writing" },
-            { title: "Ghost Writing", link: "/services/ghost-writing" },
+            { title: "AI SEO (GEO) (AEO) (AIO)", link: "/services/ai-seo-geo-aeo-aio" },
+            { title: "n8n Workflows", link: "/services/n8n-workflows" },
+            { title: "Sales & Marketing Automation", link: "/services/sales-marketing-automation" },
           ],
         },
         {
-          title: "Creative Design Services",
+          title: "Marketing",
           links: [
-            {
-              title: "Social Media Creatives",
-              link: "/services/social-media-creatives",
-            },
-            {
-              title: "Presentation Design",
-              link: "/services/presentation-design",
-            },
-            { title: "Brochure Design", link: "/services/brochure-design" },
+            { title: "Marketing Strategy", link: "/services/marketing-strategy" },
+            { title: "Email Design & Campaign", link: "/services/email-campaign" },
           ],
         },
       ],
@@ -136,7 +124,7 @@ export default function NewFooter() {
                 <h3 className="text-lg border-b pb-1 border-gray-200 font-semibold mb-4">
                   {footerData.services.heading}
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
                   {footerData.services.items.map((item, index) => (
                     <div key={index}>
                       <Link href={item.links} className="font-medium mb-2 block">
