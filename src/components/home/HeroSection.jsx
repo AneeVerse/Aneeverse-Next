@@ -1,8 +1,7 @@
 "use client";
 import React, { useRef, useEffect, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import Layout from "../common/Layout";
 import Link from "next/link";
 import Button from "../common/Button";
@@ -72,7 +71,7 @@ const HeroSection = () => {
       if (!isDragging && scrollContainer) {
         scrollContainer.scrollLeft += 0.5;
         lastScrollLeft = scrollContainer.scrollLeft;
-        
+
         // Check if we've scrolled past 2/3 point (near the end)
         const maxScroll = scrollContainer.scrollWidth / 3;
         if (scrollContainer.scrollLeft >= maxScroll * 2) {
@@ -91,7 +90,7 @@ const HeroSection = () => {
       if (isDragging) {
         const currentScroll = scrollContainer.scrollLeft;
         const maxScroll = scrollContainer.scrollWidth / 3;
-        
+
         // Scrolling forward (right) - near end
         if (currentScroll >= maxScroll * 2.5) {
           scrollContainer.scrollLeft = maxScroll + (currentScroll - maxScroll * 2.5);
@@ -100,7 +99,7 @@ const HeroSection = () => {
         else if (currentScroll <= maxScroll * 0.5) {
           scrollContainer.scrollLeft = maxScroll * 1.5 + currentScroll;
         }
-        
+
         lastScrollLeft = currentScroll;
       }
     };
@@ -133,7 +132,7 @@ const HeroSection = () => {
       if (!isDragging && scrollContainer) {
         scrollContainer.scrollLeft -= 0.5;
         lastScrollLeft = scrollContainer.scrollLeft;
-        
+
         // Check if scrolled to beginning
         if (scrollContainer.scrollLeft <= maxScroll * 0.5) {
           scrollContainer.scrollLeft = maxScroll * 1.5;
@@ -150,7 +149,7 @@ const HeroSection = () => {
     const handleScroll = () => {
       if (isDragging) {
         const currentScroll = scrollContainer.scrollLeft;
-        
+
         // Scrolling forward (right) - near end
         if (currentScroll >= maxScroll * 2.5) {
           scrollContainer.scrollLeft = maxScroll + (currentScroll - maxScroll * 2.5);
@@ -159,7 +158,7 @@ const HeroSection = () => {
         else if (currentScroll <= maxScroll * 0.5) {
           scrollContainer.scrollLeft = maxScroll * 1.5 + currentScroll;
         }
-        
+
         lastScrollLeft = currentScroll;
       }
     };
@@ -179,13 +178,13 @@ const HeroSection = () => {
   const handleMouseDown = (e) => {
     // Only handle mouse events, not touch
     if (e.type.includes('touch')) return;
-    
+
     setIsDragging(true);
     startX.current = e.pageX;
     startY.current = e.pageY;
     scrollLeft.current = scrollRef.current?.scrollLeft || 0;
     touchDirection.current = null;
-    
+
     if (userScrollTimeout.current) {
       clearTimeout(userScrollTimeout.current);
     }
@@ -204,7 +203,7 @@ const HeroSection = () => {
   // ✅ Scroll with Drag
   const handleMouseMove = (e) => {
     if (!isDragging || !scrollRef.current) return;
-    
+
     // Handle mouse events
     if (e.type === 'mousemove') {
       e.preventDefault();
@@ -217,13 +216,13 @@ const HeroSection = () => {
   // ✅ Handle Touch Move
   const handleTouchMove = (e) => {
     if (!isDragging || !scrollRef.current) return;
-    
+
     const touch = e.touches[0];
     const x = touch.pageX;
     const y = touch.pageY;
     const deltaX = Math.abs(x - startX.current);
     const deltaY = Math.abs(y - startY.current);
-    
+
     // Determine scroll direction on first significant movement
     if (!touchDirection.current) {
       if (deltaX > TOUCH_DIRECTION_THRESHOLD || deltaY > TOUCH_DIRECTION_THRESHOLD) {
@@ -232,13 +231,13 @@ const HeroSection = () => {
         return; // Not enough movement yet
       }
     }
-    
+
     // If vertical scrolling, stop dragging and allow default
     if (touchDirection.current === 'vertical') {
       setIsDragging(false);
       return;
     }
-    
+
     // Only handle horizontal scrolling
     if (touchDirection.current === 'horizontal') {
       e.preventDefault();
@@ -256,13 +255,13 @@ const HeroSection = () => {
   const handleMouseDownRight = (e) => {
     // Only handle mouse events, not touch
     if (e.type.includes('touch')) return;
-    
+
     setIsDragging(true);
     startXRight.current = e.pageX;
     startYRight.current = e.pageY;
     scrollLeftRight.current = scrollRefRight.current?.scrollLeft || 0;
     touchDirectionRight.current = null;
-    
+
     if (userScrollTimeout.current) {
       clearTimeout(userScrollTimeout.current);
     }
@@ -281,7 +280,7 @@ const HeroSection = () => {
   // ✅ Scroll Right with Drag
   const handleMouseMoveRight = (e) => {
     if (!isDragging || !scrollRefRight.current) return;
-    
+
     // Handle mouse events
     if (e.type === 'mousemove') {
       e.preventDefault();
@@ -294,13 +293,13 @@ const HeroSection = () => {
   // ✅ Handle Touch Move Right
   const handleTouchMoveRight = (e) => {
     if (!isDragging || !scrollRefRight.current) return;
-    
+
     const touch = e.touches[0];
     const x = touch.pageX;
     const y = touch.pageY;
     const deltaX = Math.abs(x - startXRight.current);
     const deltaY = Math.abs(y - startYRight.current);
-    
+
     // Determine scroll direction on first significant movement
     if (!touchDirectionRight.current) {
       if (deltaX > TOUCH_DIRECTION_THRESHOLD || deltaY > TOUCH_DIRECTION_THRESHOLD) {
@@ -309,13 +308,13 @@ const HeroSection = () => {
         return; // Not enough movement yet
       }
     }
-    
+
     // If vertical scrolling, stop dragging and allow default
     if (touchDirectionRight.current === 'vertical') {
       setIsDragging(false);
       return;
     }
-    
+
     // Only handle horizontal scrolling
     if (touchDirectionRight.current === 'horizontal') {
       e.preventDefault();
@@ -331,106 +330,7 @@ const HeroSection = () => {
     touchDirectionRight.current = null;
   };
 
-  // ✅ Scroll-based parallax using GSAP
-  const leftColumnRef = useRef(null);
-  const middleColumnRef = useRef(null);
-  const rightColumnRef = useRef(null);
-  const leftInnerRef = useRef(null);
-  const middleInnerRef = useRef(null);
-  const rightInnerRef = useRef(null);
-  const scrollDirectionRef = useRef(1);
-  const lastScrollY = useRef(0);
 
-  useEffect(() => {
-    // Register ScrollTrigger plugin
-    gsap.registerPlugin(ScrollTrigger);
-
-    let rafId;
-
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      // Determine scroll direction
-      if (currentScrollY > lastScrollY.current) {
-        scrollDirectionRef.current = 1; // Scrolling down
-      } else if (currentScrollY < lastScrollY.current) {
-        scrollDirectionRef.current = -1; // Scrolling up
-      }
-      lastScrollY.current = currentScrollY;
-
-      // Use requestAnimationFrame for smooth updates
-      if (rafId) cancelAnimationFrame(rafId);
-
-      rafId = requestAnimationFrame(() => {
-        const speed = 0.3;
-
-        if (leftColumnRef.current && middleColumnRef.current && rightColumnRef.current) {
-          // Apply scroll-based transform to outer containers
-          if (scrollDirectionRef.current === 1) {
-            // Scrolling down: left/right go DOWN (positive), middle goes UP (negative)
-            gsap.set(leftColumnRef.current, {
-              y: currentScrollY * speed,
-              force3D: true,
-              immediateRender: true
-            });
-            gsap.set(middleColumnRef.current, {
-              y: -currentScrollY * speed, // Negative = goes UP when scrolling down
-              force3D: true,
-              immediateRender: true
-            });
-            gsap.set(rightColumnRef.current, {
-              y: currentScrollY * speed,
-              force3D: true,
-              immediateRender: true
-            });
-          } else {
-            // Scrolling up: left/right go UP (negative), middle goes DOWN (positive)
-            gsap.set(leftColumnRef.current, {
-              y: -currentScrollY * speed,
-              force3D: true,
-              immediateRender: true
-            });
-            gsap.set(middleColumnRef.current, {
-              y: currentScrollY * speed, // Positive = goes DOWN when scrolling up
-              force3D: true,
-              immediateRender: true
-            });
-            gsap.set(rightColumnRef.current, {
-              y: -currentScrollY * speed,
-              force3D: true,
-              immediateRender: true
-            });
-          }
-
-          // Change animation direction based on scroll direction
-          if (leftInnerRef.current && middleInnerRef.current && rightInnerRef.current) {
-            if (scrollDirectionRef.current === 1) {
-              // Scrolling down: normal direction
-              leftInnerRef.current.className = 'marquee-vertical marquee-vertical-content space-y-4';
-              middleInnerRef.current.className = 'marquee-vertical-reverse marquee-vertical-content space-y-4';
-              rightInnerRef.current.className = 'marquee-vertical marquee-vertical-content space-y-4';
-            } else {
-              // Scrolling up: reverse all directions
-              leftInnerRef.current.className = 'marquee-vertical-reverse marquee-vertical-content space-y-4';
-              middleInnerRef.current.className = 'marquee-vertical marquee-vertical-content space-y-4';
-              rightInnerRef.current.className = 'marquee-vertical-reverse marquee-vertical-content space-y-4';
-            }
-          }
-        }
-      });
-    };
-
-    // Initial call
-    handleScroll();
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (rafId) cancelAnimationFrame(rafId);
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, []);
 
 
   return (
@@ -590,11 +490,9 @@ const HeroSection = () => {
           {/* Desktop View - Vertical Scroll */}
           <div className="flex gap-3 h-full overflow-hidden marquee-wrapper" style={{ height: 'clamp(600px, 100vh, 1200px)' }}>
             <div
-              ref={leftColumnRef}
               className="w-[30%] marquee-column"
-              style={{ willChange: 'transform' }}
             >
-              <div ref={leftInnerRef} className="marquee-vertical marquee-vertical-content space-y-4">
+              <div className="marquee-vertical marquee-vertical-content space-y-4">
                 {[...images1, ...images1].map((img, index) => (
                   <div
                     key={index}
@@ -611,11 +509,9 @@ const HeroSection = () => {
             </div>
 
             <div
-              ref={middleColumnRef}
               className="w-[30%] marquee-column"
-              style={{ willChange: 'transform' }}
             >
-              <div ref={middleInnerRef} className="marquee-vertical-reverse marquee-vertical-content space-y-4">
+              <div className="marquee-vertical-reverse marquee-vertical-content space-y-4">
                 {[...images2, ...images2].map((img, index) => (
                   <div
                     key={index}
@@ -632,11 +528,9 @@ const HeroSection = () => {
             </div>
 
             <div
-              ref={rightColumnRef}
               className="w-[30%] marquee-column"
-              style={{ willChange: 'transform' }}
             >
-              <div ref={rightInnerRef} className="marquee-vertical marquee-vertical-content space-y-4">
+              <div className="marquee-vertical marquee-vertical-content space-y-4">
                 {[...images3, ...images3].map((img, index) => (
                   <div
                     key={index}

@@ -102,7 +102,7 @@ const ServicesMegaMenu = ({ color }) => {
                     <Link
                       onClick={() => { setIsOpen(false) }}
                       href={category.url}
-                      className={`text-lg font-bold group py-2 px-4 rounded-md inline-flex items-center gap-2 ${category.color}`}
+                      className={`mt-6 text-lg font-bold group py-2 px-4 rounded-md inline-flex items-center gap-2 ${category.color}`}
                     >
                       {category.title}
                       <div className="relative">
@@ -113,7 +113,7 @@ const ServicesMegaMenu = ({ color }) => {
                     <ul className="mt-4 space-y-2">
                       {category.items.map((item, idx) => (
                         item.type === "category" ? (
-                          <div key={idx} className="px-3 pt-2 pb-3 mb-2">
+                          <div key={idx} className="px-3 pt-2 mt-5 pb-3 mb-2">
                             <div className={`text-base font-bold py-1.5 px-3 rounded-md inline-flex items-center gap-2 ${item.color}`}>
                               {item.name}
                               <FiArrowUpRight className="text-xs" />
