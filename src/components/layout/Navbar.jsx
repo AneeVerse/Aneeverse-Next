@@ -65,7 +65,7 @@ const Navbar = () => {
           ? (pathName.includes('/customer-stories') ? '#EBFAFE' : color.bg)
           : (pathName === '/' ? 'rgba(7, 55, 66, 0)' : (pathName.includes('/customer-stories') ? '#EBFAFE' : color.bg))
       }}
-      className="fixed top-0 w-full h-[70px] sm:h-[80px] flex items-center z-30 transition-all duration-300"
+      className="fixed top-0 w-full h-[70px] sm:h-[80px] flex items-center z-50 transition-all duration-300"
     >
       <Layout className="flex w-full justify-between items-center">
         {/* Logo */}
