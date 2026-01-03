@@ -7,7 +7,7 @@ import { HiOutlineBookOpen, HiOutlinePlay, HiOutlineClipboardList, HiOutlinePenc
 import { FaDesktop, FaPager, FaSearch, FaMapMarkerAlt, FaLocationArrow } from "react-icons/fa";
 import { FaPenFancy, FaGhost, FaFileAlt, FaTags } from "react-icons/fa";
 import { FaChartPie, FaEnvelope, FaGoogle, FaFacebook, FaUserFriends } from "react-icons/fa";
-import { FaEnvelopeOpenText, FaSlideshare, FaPaintBrush, FaFilePdf } from "react-icons/fa";
+import { FaEnvelopeOpenText, FaSlideshare, FaPaintBrush, FaFilePdf, FaCode, FaTag, FaRobot, FaChartLine } from "react-icons/fa";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa6";
 
@@ -20,46 +20,38 @@ let isStoriesFetched = false;
 // Menu Categories Data
 const menuCategories = [
   {
-    title: "Website Services",
-    link: "/services#website-services",
-    color: "bg-blue-200 text-blue-900",
+    title: "Creative Design",
+    link: "/services",
+    color: "bg-purple-100 text-purple-900",
     items: [
-      { name: "Website Design", description: "Stunning websites built to engage.", icon: <FaDesktop />, link: "/services/website-design" },
-      { name: "Landing Pages", description: "High-converting pages for your campaigns.", icon: <FaPager />, link: "/services/landing-pages" },
-      { name: "SEO Optimization", description: "Boost your search rankings with expert SEO.", icon: <FaSearch />, link: "/services/seo-optimization" },
-      // { name: "GMB Optimization", description: "Dominate local searches with GMB excellence.", icon: <FaMapMarkerAlt />, link: "/services/gmb-optimization" },
-      // { name: "Local SEO", description: "Reach your audience with targeted local SEO strategies.", icon: <FaLocationArrow />, link: "/services/local-seo" },
-      { name: "Email Design", description: "Engaging email templates that convert.", icon: <FaEnvelopeOpenText />, link: "/services/email-design" },
+      { name: "Ad Creative", description: "Eye-catching ad creatives that convert.", icon: <FaPaintBrush />, link: "/services/ad-creative" },
+      { name: "Presentation Design", description: "Pitch-perfect presentations.", icon: <FaSlideshare />, link: "/services/presentation-design" },
+      { name: "Branding System & Merchandise", description: "Complete brand identity solutions.", icon: <FaTag />, link: "/services/branding-services" },
+      { name: "Ebook, Report & Print Design", description: "Professional digital publications.", icon: <FaFilePdf />, link: "/services/ebook-digital-report" },
     ],
   },
   {
-    title: "Marketing Services",
-    link: "/services#marketing-services",
-    color: "bg-yellow-200 text-blue-900",
+    title: "Specialized Solutions",
+    link: "/services",
+    color: "bg-blue-100 text-blue-900",
     items: [
-      { name: "Marketing Strategy", description: "Grow your brand with expert consultants.", icon: <FaChartPie />, link: "/services/marketing-strategy" },
-      { name: "Email Campaign", description: "Personalized email campaigns that convert.", icon: <FaEnvelope />, link: "/services/email-campaign" },
-      // { name: "Google Ads", description: "Targeted ads to maximize ROI.", icon: <FaGoogle />, link: "/services/google-ads" },
-      // { name: "Meta Ads", description: "Creative campaigns that get noticed.", icon: <FaFacebook />, link: "/services/meta-ads" },
+      { name: "Platform Development", description: "Scalable web platforms.", icon: <FaCode />, link: "/services/platform-development" },
+      { name: "UI, UX & Web Development", description: "Exceptional digital experiences.", icon: <FaDesktop />, link: "/services/ui-ux-web-development" },
+      { name: "Copywriting", description: "Copy that converts.", icon: <FaPenFancy />, link: "/services/copywriting" },
+      { name: "SEO & Blog Writing", description: "Boost search rankings.", icon: <FaSearch />, link: "/services/seo-optimization" },
     ],
   },
   {
-    title: "Content Writing",
-    link: "/services#content-writing",
-    color: "bg-green-200 text-green-900",
+    title: "AI & Automation",
+    link: "/services",
+    color: "bg-emerald-100 text-emerald-900",
     items: [
-      { name: "Blog Writing", description: "SEO-friendly blogs tailored to your niche.", icon: <FaPenFancy />, link: "/services/blog-writing" },
-      { name: "Ghost Writing", description: "Captivating content under your brand's name.", icon: <FaGhost />, link: "/services/ghost-writing" },
-    ],
-  },
-  {
-    title: "Creative Design Services",
-    link: "/services#creative-design-services",
-    color: "bg-lime-200 text-lime-900",
-    items: [
-      { name: "Social Media Creatives", description: "Engaging assets for all platforms.", icon: <FaFacebook />, link: "/services/social-media-creatives" },
-      { name: "Presentation Design", description: "Pitch-perfect presentations for your business needs.", icon: <FaSlideshare />, link: "/services/presentation-design" },
-      { name: "Brochure Design", description: "Informative and visually stunning brochures.", icon: <FaFilePdf />, link: "/services/brochure-design" },
+      { name: "AI SEO (GEO) (AEO) (AIO)", description: "Next-generation SEO optimization.", icon: <FaChartLine />, link: "/services/ai-seo-geo-aeo-aio" },
+      { name: "n8n Workflows", description: "Workflow Automation & Integrations.", icon: <FaRobot />, link: "/services/n8n-workflows" },
+      { name: "Sales & Marketing Automation", description: "Streamline your workflows.", icon: <FaChartPie />, link: "/services/sales-marketing-automation" },
+      { type: "category", name: "Marketing", color: "bg-orange-100 text-orange-900" },
+      { name: "Marketing Strategy", description: "Data-driven marketing plans.", icon: <FaChartPie />, link: "/services/marketing-strategy" },
+      { name: "Email Design & Campaign", description: "Automated email campaigns.", icon: <FaEnvelope />, link: "/services/email-campaign" },
     ],
   },
 ];
@@ -239,20 +231,29 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                     </Link>
                     <ul className="mt-4 space-y-2">
                       {category.items.map((item, idx) => (
-                        <Link
-                          href={item.link}
-                          key={idx}
-                          className="flex group px-2 py-2 border-b items-center justify-between gap-3"
-                          onClick={toggleSidebar}
-                        >
-                          <div className="flex items-center gap-3">
-                            <div>
-                              <h4 className="text-md font-medium text-gray-700">{item.name}</h4>
-                              <p className="text-sm text-gray-500">{item.description}</p>
+                        item.type === "category" ? (
+                          <div key={idx} className="px-3 pt-2 mt-5 pb-3 mb-2">
+                            <div className={`text-base font-bold py-1.5 px-3 rounded-md inline-flex items-center gap-2 ${item.color}`}>
+                              {item.name}
+                              <FiArrowUpRight className="text-xs" />
                             </div>
                           </div>
-                          <div className="text-gray-700 text-lg self-center">{item.icon}</div>
-                        </Link>
+                        ) : (
+                          <Link
+                            href={item.link}
+                            key={idx}
+                            className="flex group px-2 py-2 border-b items-center justify-between gap-3"
+                            onClick={toggleSidebar}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div>
+                                <h4 className="text-md font-medium text-gray-700">{item.name}</h4>
+                                <p className="text-sm text-gray-500">{item.description}</p>
+                              </div>
+                            </div>
+                            <div className="text-gray-700 text-lg self-center">{item.icon}</div>
+                          </Link>
+                        )
                       ))}
                     </ul>
                   </div>
