@@ -6,7 +6,7 @@ import { AccentText } from "../common/typography/AccentText";
 import { Heading } from "../common/typography/Heading";
 import { GoPersonAdd } from "react-icons/go";
 import { AiOutlineTeam } from "react-icons/ai";
-import { PiPaintBrushDuotone,PiToolbox } from "react-icons/pi";
+import { PiPaintBrushDuotone, PiToolbox } from "react-icons/pi";
 const data = [
   {
     title: "Aneeverse",
@@ -58,29 +58,29 @@ const TableComponent = () => {
       <Layout>
         {/* ✅ Title Section */}
         <div className="text-center mb-6 sm:mb-8 md:mb-12 max-w-md  md:max-w-lg mx-auto">
-            <Heading
-                    level="h2"
-                    color="light"
-                    spacing="lg"
-                    className="text-center font-semibold"
-                  >
-                     Hiring or traditional outsourcing?{' '}
-                    <AccentText 
-                      size="lg" 
-                      className={"text-[#FC83E1] "}
-                    >
-                      neither
-                    </AccentText>
-                  </Heading>
-         
+          <Heading
+            level="h2"
+            color="light"
+            spacing="lg"
+            className="text-center font-semibold"
+          >
+            Hiring or traditional outsourcing?{' '}
+            <AccentText
+              size="lg"
+              className={"text-[#FC83E1] "}
+            >
+              neither
+            </AccentText>
+          </Heading>
+
         </div>
 
         {/* ✅ Table Section - First Column Fixed */}
         <div className="overflow-x-auto scrollbar-hide rounded-lg">
           <div className="min-w-[650px]">
             {/* ✅ Headers */}
-            <div className="grid grid-cols-7 sm:grid-cols-8 items-center text-sm font-semibold">
-              <div className="p-3 sm:p-4 col-span-2 sm:col-span-3 sticky left-0 z-30 bg-secondary-500"></div>
+            <div className="grid grid-cols-7 sm:grid-cols-8 items-center text-sm font-semibold bg-secondary-500">
+              <div className="p-3 sm:p-10 col-span-2 sm:col-span-3 sticky left-0 z-20 bg-secondary-500"></div>
               {headers.map((header, index) => (
                 <div key={index} className="p-3 sm:p-4 text-center">
                   {header}
@@ -92,12 +92,11 @@ const TableComponent = () => {
             {data.map((item, index) => (
               <div
                 key={index}
-                className={`grid grid-cols-7 sm:grid-cols-8 my-2 items-center ${
-                  item.highlight ? "bg-[#88D7F0]  rounded-full text-secondary-500" : ""
-                } ${index !== data.length - 1 ? "border-b border-gray-700" : ""}`}
+                className={`grid grid-cols-7 sm:grid-cols-8 my-2 items-center ${item.highlight ? "bg-[#88D7F0]  rounded-full text-secondary-500" : ""
+                  } ${index !== data.length - 1 ? "border-b border-gray-700" : ""}`}
               >
                 {/* ✅ Fixed First Column */}
-                <div className={`${index === 0 ? " bg-[#88D7F0] rounded-l-full " : " bg-secondary-500 " } p-3 sm:p-10 col-span-2 sm:col-span-3 flex gap-4 items-center sticky left-0 z-10 `}>
+                <div className={`${index === 0 ? " bg-[#88D7F0] rounded-l-full " : " bg-secondary-500 "} p-3 sm:p-10 col-span-2 sm:col-span-3 flex gap-4 items-center sticky left-0 z-10 `}>
                   {item.icon}
                   <div>
                     <h3 className="font-semibold sm:font-bold text-md sm:text-lg md:text-xl lg:text-2xl ">{item.title}</h3>
@@ -109,9 +108,8 @@ const TableComponent = () => {
                 {item.features.map((feature, idx) => (
                   <div
                     key={idx}
-                    className={`p-3 sm:p-4 text-center flex justify-center items-center ${
-                      index === 0 ? "text-secondary-500" : "text-primary-500"
-                    }`}
+                    className={`p-3 sm:p-4 text-center flex justify-center items-center ${index === 0 ? "text-secondary-500" : "text-primary-500"
+                      }`}
                   >
                     {feature ? <FaCheck className="text-lg sm:text-2xl" /> : <FaTimes className="text-lg sm:text-2xl" />}
                   </div>

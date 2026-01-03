@@ -86,33 +86,35 @@ const HowItWorksSection = ({
           <div className="relative">
             <div className="relative flex flex-col gap-12">
               {/* Background vertical line */}
-              <div className="absolute left-7 top-0 bottom-0 w-px bg-secondary-500/20"></div>
+              <div className="absolute left-7 top-0 bottom-0 w-px bg-secondary-500/20 z-0"></div>
 
               {/* Animated progress line */}
               <div
                 ref={progressLineRef}
-                className="absolute left-7 top-0 w-px bg-secondary-500"
+                className="absolute left-7 top-0 w-px bg-secondary-500 z-10"
                 style={{ height: "0%" }}
               ></div>
 
               {steps.map((step, index) => (
                 <div
                   key={index}
-                  className={`relative flex items-start gap-6 transition-all duration-500 ${index <= activeStep ? "opacity-100" : "opacity-50"
-                    }`}
+                  className="relative flex items-start gap-6 transition-all duration-500"
                 >
-                  {/* Number Circle */}
-                  <div className="relative z-10 flex-shrink-0">
+                  {/* Spacer to maintain flex layout */}
+                  <div className="w-14 flex-shrink-0"></div>
+                  
+                  {/* Number Circle - Positioned absolutely to cover the line */}
+                  <div className="absolute left-7 z-30" style={{ transform: 'translateX(-50%)' }}>
                     <div
                       className={`w-14 h-14 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${index <= activeStep
-                          ? "bg-secondary-500 border-secondary-500"
-                          : "bg-transparent border-secondary-500/40"
+                        ? "bg-secondary-500 border-secondary-500"
+                        : "bg-primary-500 border-secondary-500/40"
                         }`}
                     >
                       <span
                         className={`text-xl font-medium transition-all duration-500 ${index <= activeStep
-                            ? "text-primary-500"
-                            : "text-secondary-500/60"
+                          ? "text-primary-500"
+                          : "text-secondary-500/60"
                           }`}
                       >
                         {step.number}
@@ -121,7 +123,7 @@ const HowItWorksSection = ({
                   </div>
 
                   {/* Content */}
-                  <div className="flex-1 pt-2">
+                  <div className={`flex-1 pt-2 transition-all duration-500 ${index <= activeStep ? "opacity-100" : "opacity-50"}`}>
                     <h3 className="text-2xl font-medium text-secondary-500 mb-3">
                       {step.title}
                     </h3>

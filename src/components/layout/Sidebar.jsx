@@ -86,7 +86,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
       try {
         setIsLoadingBlogs(true);
-        const response = await fetch('/api/sanity-blogs?limit=2', { 
+        const response = await fetch('/api/sanity-blogs?limit=2', {
           cache: 'no-store',
           next: { revalidate: 300 }
         });
@@ -119,7 +119,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
       try {
         setIsLoadingStories(true);
-        const response = await fetch('/api/sanity-customer-stories?limit=2', { 
+        const response = await fetch('/api/sanity-customer-stories?limit=2', {
           cache: 'no-store',
           next: { revalidate: 300 }
         });
@@ -142,50 +142,50 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   }, []);
 
   // Dynamic resources data
-const resources = [
-  {
-    title: "",
-    link: "#",
-    items: [
-      {
-               name: "Blog",
-               link: "/blog",
-               description: "Latest articles and insights",
-               icon: <HiOutlinePencilAlt />,
-             },
-             {
-               name: "Customer Stories",
-               link: "/customer-stories",
-               description: "Success stories from our clients",
-               icon: <HiOutlineUserGroup />,
-             },
-             {
-               name: "Guides & Quizzes",
-               link: "/blog",
-               description: "Insights from marketing leaders",
-               icon: <HiOutlineBookOpen />,
-             },
-             {
-               name: "Video Library",
-               link: "/video-library",
-               description: "Aneeverse's latest videos",
-               icon: <HiOutlinePlay />,
-             }
-    ],
-  },
-  {
-    title: "Blog",
-    link: "/blog",
+  const resources = [
+    {
+      title: "",
+      link: "#",
+      items: [
+        {
+          name: "Blog",
+          link: "/blog",
+          description: "Latest articles and insights",
+          icon: <HiOutlinePencilAlt />,
+        },
+        {
+          name: "Customer Stories",
+          link: "/customer-stories",
+          description: "Success stories from our clients",
+          icon: <HiOutlineUserGroup />,
+        },
+        {
+          name: "Guides & Quizzes",
+          link: "/blog",
+          description: "Insights from marketing leaders",
+          icon: <HiOutlineBookOpen />,
+        },
+        {
+          name: "Video Library",
+          link: "/video-library",
+          description: "Aneeverse's latest videos",
+          icon: <HiOutlinePlay />,
+        }
+      ],
+    },
+    {
+      title: "Blog",
+      link: "/blog",
       cards: blogs,
       isLoading: isLoadingBlogs,
-  },
-  {
-    title: "Customer Stories",
-    link: "/customer-stories",
+    },
+    {
+      title: "Customer Stories",
+      link: "/customer-stories",
       cards: customerStories,
       isLoading: isLoadingStories,
-  },
-];
+    },
+  ];
 
   return (
     <motion.div
@@ -193,7 +193,7 @@ const resources = [
       animate={{ maxHeight: "100vh" }}
       transition={{ duration: 0.3 }}
       exit={{ maxHeight: "0px" }}
-      className="fixed h-[100vh] overflow-y-auto inset-0 pb-24 bg-primary-500 w-full z-50 shadow-lg"
+      className="fixed h-[100vh] overflow-y-auto inset-0 pb-24 bg-primary-500 w-full z-[100] shadow-lg"
     >
       {/* Header Section */}
       <motion.div
@@ -233,10 +233,10 @@ const resources = [
               <div className="max-w-6xl mx-auto py-2 grid grid-cols-1 gap-6">
                 {menuCategories.map((category, index) => (
                   <div key={index}>
-                   
-                      <Link href={`${category.link}`} className={`text-lg font-bold py-2 px-4 min-w-fit rounded-md inline-flex items-center gap-2 ${category.color}`} onClick={toggleSidebar}>
-                       <span>{category.title} </span> <FiArrowUpRight />
-                      </Link>
+
+                    <Link href={`${category.link}`} className={`text-lg font-bold py-2 px-4 min-w-fit rounded-md inline-flex items-center gap-2 ${category.color}`} onClick={toggleSidebar}>
+                      <span>{category.title} </span> <FiArrowUpRight />
+                    </Link>
                     <ul className="mt-4 space-y-2">
                       {category.items.map((item, idx) => (
                         <Link
@@ -340,56 +340,56 @@ const resources = [
                             <div className="text-gray-700 text-xl">{item.icon}</div>
                           </Link>
                         ))}
-                      
+
                       {/* Dynamic Cards Section */}
                       {resource.cards !== undefined && (
                         <div className="space-y-3">
                           {resource.isLoading ? (
-                                                         // Loading state - skeleton cards
-                             <>
-                               <div className="flex flex-row gap-3 animate-pulse">
-                                 <div className="w-[120px] h-[70px] bg-gray-300 rounded-md"></div>
-                                 <div className="flex-1">
-                                   <div className="h-4 bg-gray-300 rounded mb-2"></div>
-                                   <div className="h-3 bg-gray-200 rounded w-3/4"></div>
-                                 </div>
-                               </div>
-                               <div className="flex flex-row gap-3 animate-pulse">
-                                 <div className="w-[120px] h-[70px] bg-gray-300 rounded-md"></div>
-                                 <div className="flex-1">
-                                   <div className="h-4 bg-gray-300 rounded mb-2"></div>
-                                   <div className="h-3 bg-gray-200 rounded w-2/3"></div>
-                                 </div>
-                               </div>
-                             </>
+                            // Loading state - skeleton cards
+                            <>
+                              <div className="flex flex-row gap-3 animate-pulse">
+                                <div className="w-[120px] h-[70px] bg-gray-300 rounded-md"></div>
+                                <div className="flex-1">
+                                  <div className="h-4 bg-gray-300 rounded mb-2"></div>
+                                  <div className="h-3 bg-gray-200 rounded w-3/4"></div>
+                                </div>
+                              </div>
+                              <div className="flex flex-row gap-3 animate-pulse">
+                                <div className="w-[120px] h-[70px] bg-gray-300 rounded-md"></div>
+                                <div className="flex-1">
+                                  <div className="h-4 bg-gray-300 rounded mb-2"></div>
+                                  <div className="h-3 bg-gray-200 rounded w-2/3"></div>
+                                </div>
+                              </div>
+                            </>
                           ) : resource.cards && resource.cards.length > 0 ? (
-                                                         // Actual dynamic cards
-                        resource.cards.map((card, idx) => (
-                               <Link 
-                                 href={`/${resource.title === "Blog" ? "blog" : "customer-stories"}/${card.slug}`} 
-                                 onClick={toggleSidebar} 
-                                 key={idx} 
-                                 className="flex flex-row gap-3 hover:bg-gray-50 rounded-lg p-2 -m-2 transition-colors"
-                               >
-                                 <div className="relative overflow-hidden rounded-md flex-shrink-0">
-                            <img
-                              src={card.thumbnail}
-                              alt={card.title}
-                                     className="w-[120px] h-[70px] object-cover"
-                            />
-                                 </div>
-                                 <div className="flex-1 min-w-0 flex flex-col justify-center">
-                                   <p className="text-sm font-medium text-gray-700 line-clamp-2 leading-snug mt-1">
-                                     {card.title}
-                                   </p>
-                                   {card.excerpt && (
-                                     <p className="text-xs text-gray-500 mt-1 line-clamp-1">
-                                       {card.excerpt}
-                                     </p>
-                                   )}
-                                 </div>
-                          </Link>
-                             ))
+                            // Actual dynamic cards
+                            resource.cards.map((card, idx) => (
+                              <Link
+                                href={`/${resource.title === "Blog" ? "blog" : "customer-stories"}/${card.slug}`}
+                                onClick={toggleSidebar}
+                                key={idx}
+                                className="flex flex-row gap-3 hover:bg-gray-50 rounded-lg p-2 -m-2 transition-colors"
+                              >
+                                <div className="relative overflow-hidden rounded-md flex-shrink-0">
+                                  <img
+                                    src={card.thumbnail}
+                                    alt={card.title}
+                                    className="w-[120px] h-[70px] object-cover"
+                                  />
+                                </div>
+                                <div className="flex-1 min-w-0 flex flex-col justify-center">
+                                  <p className="text-sm font-medium text-gray-700 line-clamp-2 leading-snug mt-1">
+                                    {card.title}
+                                  </p>
+                                  {card.excerpt && (
+                                    <p className="text-xs text-gray-500 mt-1 line-clamp-1">
+                                      {card.excerpt}
+                                    </p>
+                                  )}
+                                </div>
+                              </Link>
+                            ))
                           ) : (
                             // No content available
                             <div className="text-center py-4 px-2">
