@@ -36,7 +36,7 @@ const HumanCreativity = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         whileHover={{ scale: 1.02, zIndex: 20, transition: { duration: 0.3 } }}
                         transition={{ duration: 0.5, delay: 0.2 }}
-                        className="lg:col-span-4 bg-[#072d36] rounded-xl overflow-hidden relative group min-h-[380px] lg:min-h-[420px] flex flex-col flex-shrink-0 w-[80vw] sm:w-[340px] lg:w-auto snap-center"
+                        className="lg:col-span-4 bg-[#072d36] rounded-xl overflow-hidden relative group min-h-[420px] lg:min-h-[420px] flex flex-col flex-shrink-0 w-[80vw] sm:w-[340px] lg:w-auto snap-center"
                     >
                         <div className="absolute left-0 top-[85%] w-[2px] h-[80px] bg-gradient-to-b from-transparent via-[#88d7f0] to-transparent opacity-0 group-hover:opacity-100 group-hover:top-[10%] transition-all duration-1000 ease-in-out z-10" />
                         {/* Image Section */}
@@ -58,7 +58,7 @@ const HumanCreativity = () => {
                     </motion.div>
 
                     {/* Feature Cards - All 4 cards in 2x2 grid on desktop, first 2 cards in mobile scroll */}
-                    <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-5 flex-shrink-0 w-[80vw] sm:w-[380px] lg:w-auto snap-center">
+                    <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-5 flex-shrink-0 w-[80vw] sm:w-[380px] lg:w-auto snap-center items-stretch">
                         <FeatureCard
                             icon={<PenTool className="w-8 h-8" />}
                             title="Spin up a creative team fast"
@@ -96,7 +96,7 @@ const HumanCreativity = () => {
                     </div>
 
                     {/* Feature Cards - Second Pair (only visible on mobile as separate scroll item) */}
-                    <div className="lg:hidden grid grid-cols-1 gap-3 flex-shrink-0 w-[80vw] snap-center">
+                    <div className="lg:hidden grid grid-cols-1 gap-5 flex-shrink-0 w-[80vw] snap-center items-stretch">
                         <FeatureCard
                             icon={<DollarSign className="w-8 h-8" />}
                             title="Transparent pricing"
@@ -125,7 +125,7 @@ const FeatureCard = ({ icon, title, description, delay, isInGrid = false, extraC
         whileInView={{ opacity: 1, y: 0 }}
         whileHover={{ scale: 1.02, zIndex: 20, transition: { duration: 0.3 } }}
         transition={{ duration: 0.5, delay }}
-        className={`bg-[#072d36] rounded-xl flex flex-col items-start hover:bg-[#093540] transition-colors duration-300 group relative overflow-hidden ${isInGrid ? 'w-full min-h-[160px] sm:min-h-[200px] lg:min-h-[220px] p-6 sm:p-8' : 'flex-shrink-0 w-[80vw] sm:w-[320px] lg:w-auto snap-center min-h-[220px] p-8'
+        className={`bg-[#072d36] rounded-xl flex flex-col items-start hover:bg-[#093540] transition-colors duration-300 group relative overflow-hidden ${isInGrid ? 'w-full h-full min-h-[200px] sm:min-h-[200px] lg:min-h-[220px] p-6 sm:p-8' : 'flex-shrink-0 w-[80vw] sm:w-[320px] lg:w-auto snap-center min-h-[220px] p-8'
             } ${extraClassName}`}
     >
         <div className="absolute left-0 top-[85%] w-[2px] h-[80px] bg-gradient-to-b from-transparent via-[#88d7f0] to-transparent opacity-0 group-hover:opacity-100 group-hover:top-[10%] transition-all duration-1000 ease-in-out z-10" />
