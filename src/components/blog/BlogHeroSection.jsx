@@ -9,7 +9,7 @@ import AnimatedButton from "../common/AnimatedButton";
 const BlogHeroSection = ({ blogData }) => {
   // Extract blogs from the provided blog data
   const { blogs = [], isLoading = false } = blogData || {};
-  
+
   // If no blogs exist or still loading, render a simplified version
   if (isLoading || blogs.length === 0) {
     return (
@@ -27,7 +27,7 @@ const BlogHeroSection = ({ blogData }) => {
               </p>
             </div>
           </div>
-          
+
           {/* Loading state or empty blogs */}
           <div className="grid md:grid-cols-3 gap-8 w-full">
             <div className="md:col-span-2 bg-gray-100 rounded-xl p-12 flex items-center justify-center min-h-[400px]">
@@ -37,7 +37,7 @@ const BlogHeroSection = ({ blogData }) => {
                 <p className="text-secondary-500">No featured blog posts available yet.</p>
               )}
             </div>
-            
+
             {/* Subscription Box */}
             <div className="bg-[#073742] rounded-xl p-8 flex flex-col justify-between shadow-sm">
               <div>
@@ -76,10 +76,10 @@ const BlogHeroSection = ({ blogData }) => {
       </section>
     );
   }
-  
+
   // Get the first blog as featured
   const featuredBlog = blogs[0];
-  
+
   return (
     <section className="pb-16 pt-[100px] mt-[-20px] bg-[#EBFAFE]">
       <Layout>
@@ -116,8 +116,8 @@ const BlogHeroSection = ({ blogData }) => {
                   <p className="text-md uppercase tracking-wide text-white font-['Inter',sans-serif] mb-[10px]">
                     {featuredBlog.category || "BLOG"} • <span className="normal-case">{featuredBlog.timeToRead ? `${featuredBlog.timeToRead} min read` : '5 min read'}</span>
                   </p>
-                  <h3 className="text-3xl sm:text-4xl md:text-5xl max-w-md sm:max-w-xl overflow-hidden font-normal leading-[1.2] line-clamp-3 h-[calc(3*1.2*1em)] font-['Inter',sans-serif]" style={{ '--underline-height': '3px', '--underline-speed': '500ms' }}>
-                    <span className="bg-[linear-gradient(currentColor,currentColor)] bg-left-bottom bg-no-repeat transition-[background] duration-[var(--underline-speed)] bg-[length:0%_var(--underline-height)] hover:bg-[length:100%_var(--underline-height)] group-hover:bg-[length:100%_var(--underline-height)]">
+                  <h3 className="text-3xl sm:text-4xl md:text-5xl max-w-md sm:max-w-xl font-normal leading-[1.3] pb-2 font-['Inter',sans-serif]" style={{ '--underline-height': '3px', '--underline-speed': '500ms' }}>
+                    <span className="pb-1 bg-[linear-gradient(currentColor,currentColor)] bg-left-bottom bg-no-repeat transition-[background] duration-[var(--underline-speed)] bg-[length:0%_var(--underline-height)] hover:bg-[length:100%_var(--underline-height)] group-hover:bg-[length:100%_var(--underline-height)]" style={{ paddingBottom: '4px' }}>
                       {featuredBlog.title}
                     </span>
                   </h3>
@@ -126,7 +126,7 @@ const BlogHeroSection = ({ blogData }) => {
                   <div className="font-['Inter',sans-serif]">
                     <p className="text-base text-white font-bold">Published</p>
                     <p className="text-lg font-medium">
-                      {new Date(featuredBlog.date).toLocaleDateString('en-US', {month: 'short', day: 'numeric'})}
+                      {new Date(featuredBlog.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                     </p>
                   </div>
                 </div>
