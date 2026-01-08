@@ -3,33 +3,58 @@ const path = require('path');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      'images.unsplash.com', 
-      'res.cloudinary.com',
-      'www.aneeverse.com',
-      'blog.aneeverse.com',
-      'localhost',
-      'localhost:3000',
-      'localhost:3001',
-      'images.pexels.com',
-      'images.unsplash.com',
-      'i.imgur.com',
-      'drive.google.com',
-      'lh3.googleusercontent.com',
-      'docs.google.com'
-    ],
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**',
+        hostname: 'ik.imagekit.io',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.aneeverse.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'blog.aneeverse.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.imgur.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
       },
       {
         protocol: 'http',
-        hostname: '**',
-      }
+        hostname: 'localhost',
+        port: '',
+        pathname: '/**',
+      },
     ],
-    unoptimized: true,
-    minimumCacheTTL: 60,
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 3600,
+    formats: ['image/avif', 'image/webp'],
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   async rewrites() {
     return [

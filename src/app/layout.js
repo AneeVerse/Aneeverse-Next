@@ -1,24 +1,34 @@
-'use client';
-
 import "./globals.css";
-import Navbar from '@/components/layout/Navbar';
-import NewFooter from '@/components/layout/NewFooter';
-import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
-import OrganizationSchema from '@/components/seo/OrganizationSchema';
-import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema';
-import WebPageSchema from '@/components/seo/WebPageSchema';
-import HomeSchema from '@/components/seo/HomeSchema';
-import NextTopLoader from 'nextjs-toploader';
-import { usePathname } from 'next/navigation';
 import Script from 'next/script';
+import { Poppins, Rock_Salt } from 'next/font/google';
+import ClientLayoutWrapper from '@/components/layout/ClientLayoutWrapper';
+
+// Configure fonts with next/font/google
+const poppins = Poppins({
+  weight: ['400', '600', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+  variable: '--font-poppins',
+});
+
+const rockSalt = Rock_Salt({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+  variable: '--font-rock-salt',
+});
+
+export const metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://aneeverse.com'),
+  title: 'Aneeverse - Your Dedicated Creative & Digital Marketing Team',
+  description: 'Your dedicated, on-call creative & digital marketing team. Design, optimise and advertise your brand—ship campaigns faster, more reliably and at scale.',
+};
 
 export default function RootLayout({ children }) {
-  const pathname = usePathname();
-  const isStudio = pathname.startsWith('/studio');
-  const isAuth = pathname === '/register' || pathname === '/login';
-
   return (
-    <html lang="en">
+    <html lang="en" className={`${poppins.variable} ${rockSalt.variable}`}>
       <head>
         {/* Google Search Console Verification */}
         <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
@@ -53,7 +63,6 @@ export default function RootLayout({ children }) {
           `}
         </Script>
 
-
         {/* Google Analytics gtag.js */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-0D1BWK4QQF"
@@ -67,15 +76,8 @@ export default function RootLayout({ children }) {
             gtag('config', 'G-0D1BWK4QQF');
           `}
         </Script>
-
-          
-        
-
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
       </head>
-      <body>
+      <body className={poppins.className}>
         {/* GTM noscript fallback */}
         <noscript>
           <iframe
@@ -86,40 +88,9 @@ export default function RootLayout({ children }) {
           ></iframe>
         </noscript>
 
-        {/* Top Loader */}
-        <NextTopLoader
-          color="#0e2f50"
-          initialPosition={0.08}
-          height={3}
-          showSpinner={false}
-          easing="ease"
-          speed={500}
-          shadow="0 0 10px #2299DD,0 0 5px #2299DD"
-        />
-
-        {/* Navbar for all non-studio, non-auth pages */}
-        {!isStudio && !isAuth && <Navbar />}
-
-        {/* Global Organization Schema */}
-        {!isStudio && !isAuth && <OrganizationSchema />}
-
-        {/* Global LocalBusiness Schema */}
-        {!isStudio && !isAuth && <LocalBusinessSchema />}
-
-        {/* Global WebPage Schema */}
-        {!isStudio && !isAuth && <WebPageSchema />}
-
-        {/* Home Schema for homepage */}
-        {!isStudio && !isAuth && pathname === '/' && <HomeSchema />}
-
-        {/* Breadcrumb Schema for all non-studio, non-auth pages */}
-        {!isStudio && !isAuth && <BreadcrumbSchema />}
-
-        {/* Page content */}
-        {children}
-
-        {/* Footer for all non-studio, non-auth pages */}
-        {!isStudio && !isAuth && <NewFooter />}
+        <ClientLayoutWrapper>
+          {children}
+        </ClientLayoutWrapper>
       </body>
     </html>
   );

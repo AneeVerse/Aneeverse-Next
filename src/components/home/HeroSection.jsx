@@ -1,5 +1,6 @@
 "use client";
 import React, { useRef, useEffect, useState } from "react";
+import Image from "next/image";
 import { FaCheckCircle } from "react-icons/fa";
 
 import Layout from "../common/Layout";
@@ -59,6 +60,45 @@ const HeroSection = () => {
   const animationFrameIdRight = useRef(null);
   const userScrollTimeout = useRef(null);
   const touchDirection = useRef(null); // 'horizontal' or 'vertical' or null
+  const isVisibleRef = useRef(true); // Track visibility without causing re-renders
+  const hasInitializedRef = useRef(false); // Track if initially loaded
+
+  // Intersection Observer to pause/resume animations when off-screen
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisibleRef.current = entry.isIntersecting;
+
+          if (!entry.isIntersecting) {
+            // Pause animations when off-screen (for performance)
+            if (animationFrameId.current) {
+              cancelAnimationFrame(animationFrameId.current);
+              animationFrameId.current = null;
+            }
+            if (animationFrameIdRight.current) {
+              cancelAnimationFrame(animationFrameIdRight.current);
+              animationFrameIdRight.current = null;
+            }
+          } else {
+            // Mark as initialized on first view
+            hasInitializedRef.current = true;
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "100px" }
+    );
+
+    if (heroSectionRef.current) {
+      observer.observe(heroSectionRef.current);
+    }
+
+    return () => {
+      if (heroSectionRef.current) {
+        observer.unobserve(heroSectionRef.current);
+      }
+    };
+  }, []);
 
   // Infinite scroll for first row with bidirectional loop
   useEffect(() => {
@@ -68,7 +108,8 @@ const HeroSection = () => {
     let lastScrollLeft = scrollContainer.scrollLeft;
 
     const scroll = () => {
-      if (!isDragging && scrollContainer) {
+      // Use the ref for visibility check (updated by IntersectionObserver)
+      if (!isDragging && scrollContainer && isVisibleRef.current) {
         scrollContainer.scrollLeft += 0.5;
         lastScrollLeft = scrollContainer.scrollLeft;
 
@@ -82,7 +123,13 @@ const HeroSection = () => {
           scrollContainer.scrollLeft = maxScroll;
         }
       }
-      animationFrameId.current = requestAnimationFrame(scroll);
+
+      // Continue animation loop if visible
+      if (isVisibleRef.current) {
+        animationFrameId.current = requestAnimationFrame(scroll);
+      } else {
+        animationFrameId.current = null;
+      }
     };
 
     // Handle manual scroll in both directions
@@ -104,11 +151,24 @@ const HeroSection = () => {
       }
     };
 
+    // Re-start animation when visible changes (handled by polling)
+    const checkAndRestartAnimation = () => {
+      if (isVisibleRef.current && !animationFrameId.current && !isDragging) {
+        animationFrameId.current = requestAnimationFrame(scroll);
+      }
+    };
+
     scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Start the animation
     animationFrameId.current = requestAnimationFrame(scroll);
+
+    // Poll for visibility changes to restart animation
+    const visibilityInterval = setInterval(checkAndRestartAnimation, 100);
 
     return () => {
       scrollContainer.removeEventListener('scroll', handleScroll);
+      clearInterval(visibilityInterval);
       if (animationFrameId.current) {
         cancelAnimationFrame(animationFrameId.current);
       }
@@ -129,7 +189,8 @@ const HeroSection = () => {
     let lastScrollLeft = scrollContainer.scrollLeft;
 
     const scroll = () => {
-      if (!isDragging && scrollContainer) {
+      // Use the ref for visibility check (updated by IntersectionObserver)
+      if (!isDragging && scrollContainer && isVisibleRef.current) {
         scrollContainer.scrollLeft -= 0.5;
         lastScrollLeft = scrollContainer.scrollLeft;
 
@@ -142,7 +203,13 @@ const HeroSection = () => {
           scrollContainer.scrollLeft = maxScroll * 1.5;
         }
       }
-      animationFrameIdRight.current = requestAnimationFrame(scroll);
+
+      // Continue animation loop if visible
+      if (isVisibleRef.current) {
+        animationFrameIdRight.current = requestAnimationFrame(scroll);
+      } else {
+        animationFrameIdRight.current = null;
+      }
     };
 
     // Handle manual scroll in both directions
@@ -163,11 +230,24 @@ const HeroSection = () => {
       }
     };
 
+    // Re-start animation when visible changes (handled by polling)
+    const checkAndRestartAnimation = () => {
+      if (isVisibleRef.current && !animationFrameIdRight.current && !isDragging) {
+        animationFrameIdRight.current = requestAnimationFrame(scroll);
+      }
+    };
+
     scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Start the animation
     animationFrameIdRight.current = requestAnimationFrame(scroll);
+
+    // Poll for visibility changes to restart animation
+    const visibilityInterval = setInterval(checkAndRestartAnimation, 100);
 
     return () => {
       scrollContainer.removeEventListener('scroll', handleScroll);
+      clearInterval(visibilityInterval);
       if (animationFrameIdRight.current) {
         cancelAnimationFrame(animationFrameIdRight.current);
       }
@@ -416,15 +496,21 @@ const HeroSection = () => {
                               marginRight: 'clamp(6px, 1.5vw, 12px)'
                             }}
                           >
-                            <img
+                            <Image
                               src={img.src}
-                              draggable={false}
                               alt="Creative work"
-                              className="object-cover rounded-xl shadow-lg"
+                              width={180}
+                              height={215}
+                              className="object-cover rounded-xl shadow-lg pointer-events-none"
                               style={{
                                 width: 'clamp(150px, 35vw, 180px)',
                                 height: 'clamp(185px, 43vw, 215px)',
-                                pointerEvents: 'none'
+                              }}
+                              loading="lazy"
+                              sizes="(max-width: 640px) 150px, 180px"
+                              unoptimized={img.src?.includes('ik.imagekit.io')}
+                              onError={(e) => {
+                                console.error('Image failed to load:', img.src);
                               }}
                             />
                           </div>
@@ -461,15 +547,21 @@ const HeroSection = () => {
                                 marginRight: 'clamp(6px, 1.5vw, 12px)'
                               }}
                             >
-                              <img
+                              <Image
                                 src={img.src}
                                 alt="Creative work"
-                                draggable={false}
-                                className="object-cover rounded-xl shadow-lg"
+                                width={180}
+                                height={215}
+                                className="object-cover rounded-xl shadow-lg pointer-events-none"
                                 style={{
                                   width: 'clamp(150px, 35vw, 180px)',
                                   height: 'clamp(185px, 43vw, 215px)',
-                                  pointerEvents: 'none'
+                                }}
+                                loading="lazy"
+                                sizes="(max-width: 640px) 150px, 180px"
+                                unoptimized={img.src?.includes('ik.imagekit.io')}
+                                onError={(e) => {
+                                  console.error('Image failed to load:', img.src);
                                 }}
                               />
                             </div>
@@ -498,10 +590,18 @@ const HeroSection = () => {
                     key={index}
                     className="relative overflow-hidden cursor-pointer rounded-xl group"
                   >
-                    <img
+                    <Image
                       src={img.src}
                       alt="Creative work"
+                      width={400}
+                      height={240}
                       className="w-full h-[240px] object-cover rounded-xl transition-all duration-300 shadow-xl"
+                      loading="lazy"
+                      sizes="(max-width: 1024px) 0vw, 14vw"
+                      unoptimized={img.src?.includes('ik.imagekit.io')}
+                      onError={(e) => {
+                        console.error('Image failed to load:', img.src);
+                      }}
                     />
                   </div>
                 ))}
@@ -517,10 +617,18 @@ const HeroSection = () => {
                     key={index}
                     className="relative overflow-hidden cursor-pointer rounded-xl group"
                   >
-                    <img
+                    <Image
                       src={img.src}
                       alt="Creative work"
+                      width={400}
+                      height={260}
                       className={`w-full ${index % 2 === 0 ? 'h-[260px]' : 'h-[210px]'} object-cover rounded-xl transition-all duration-300 shadow-2xl`}
+                      loading="lazy"
+                      sizes="(max-width: 1024px) 0vw, 14vw"
+                      unoptimized={img.src?.includes('ik.imagekit.io')}
+                      onError={(e) => {
+                        console.error('Image failed to load:', img.src);
+                      }}
                     />
                   </div>
                 ))}
@@ -536,10 +644,18 @@ const HeroSection = () => {
                     key={index}
                     className="relative overflow-hidden cursor-pointer rounded-xl group"
                   >
-                    <img
+                    <Image
                       src={img.src}
                       alt="Creative work"
+                      width={400}
+                      height={230}
                       className="w-full h-[230px] object-cover rounded-xl transition-all duration-300 shadow-2xl"
+                      loading="lazy"
+                      sizes="(max-width: 1024px) 0vw, 14vw"
+                      unoptimized={img.src?.includes('ik.imagekit.io')}
+                      onError={(e) => {
+                        console.error('Image failed to load:', img.src);
+                      }}
                     />
                   </div>
                 ))}
@@ -711,11 +827,17 @@ const HeroSection = () => {
 
         
         /* Prevent image glitch on hover */
-        .marquee-vertical-content img {
+        .marquee-vertical-content img,
+        .marquee-vertical-content [data-next-image] {
           backface-visibility: hidden;
           -webkit-backface-visibility: hidden;
           transform: translateZ(0);
           -webkit-transform: translateZ(0);
+          will-change: transform;
+        }
+        
+        .marquee-column {
+          will-change: transform;
         }
 
         /* Hide Scrollbar */

@@ -25,21 +25,30 @@ const Navbar = () => {
     bg: "transparent",
   });
 
-  // Update color dynamically on scroll
+  // Update color dynamically on scroll with debouncing
   useEffect(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true);
-        setColor({ text: "#073742", bg: "#EBFAFE" });
-      } else {
-        setScrolled(false);
-        setColor({
-          text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/") || pathName === "/customer-stories" || pathName.includes("/customer-stories/") || pathName === "/about-us") ? "#EBFAFE" : "#073742",
-          bg: "transparent",
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (window.scrollY > 10) {
+            setScrolled(true);
+            setColor({ text: "#073742", bg: "#EBFAFE" });
+          } else {
+            setScrolled(false);
+            setColor({
+              text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/") || pathName === "/customer-stories" || pathName.includes("/customer-stories/") || pathName === "/about-us") ? "#EBFAFE" : "#073742",
+              bg: "transparent",
+            });
+          }
+          ticking = false;
         });
+        ticking = true;
       }
     };
-    window.addEventListener("scroll", handleScroll);
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pathName]);
 

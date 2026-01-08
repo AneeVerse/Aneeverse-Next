@@ -1,10 +1,19 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import dynamic from "next/dynamic";
 import Layout from "../../common/Layout";
 import { UiSubheading } from "@/components/common/typography/UiSubheading";
 import { Heading } from "@/components/common/typography/Heading";
+
+// Lazy load GSAP only when needed
+const loadGSAP = async () => {
+  const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+    import("gsap"),
+    import("gsap/ScrollTrigger")
+  ]);
+  gsap.registerPlugin(ScrollTrigger);
+  return { gsap, ScrollTrigger };
+};
 
 const HowItWorksSection = ({
   subtitle = "HOW WE WORK",
@@ -16,44 +25,84 @@ const HowItWorksSection = ({
   const sectionRef = useRef(null);
   const progressLineRef = useRef(null);
   const [activeStep, setActiveStep] = useState(0);
+  const [gsapLoaded, setGsapLoaded] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined" || steps.length === 0) return;
 
-    gsap.registerPlugin(ScrollTrigger);
+    let gsapInstance = null;
+    let ScrollTriggerInstance = null;
+    let scrollTrigger = null;
+    let observer = null;
 
-    const section = sectionRef.current;
-    const progressLine = progressLineRef.current;
+    // Lazy load GSAP when section is about to enter viewport
+    observer = new IntersectionObserver(
+      async (entries) => {
+        if (entries[0].isIntersecting && !gsapLoaded) {
+          try {
+            const { gsap: gsapModule, ScrollTrigger: ST } = await loadGSAP();
+            gsapInstance = gsapModule;
+            ScrollTriggerInstance = ST;
+            setGsapLoaded(true);
 
-    // Animate progress line based on scroll
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top center",
-        end: "bottom center",
-        scrub: 1,
-        onUpdate: (self) => {
-          // Calculate which step should be active based on progress
-          const progress = self.progress;
-          const stepIndex = Math.min(
-            Math.floor(progress * steps.length),
-            steps.length - 1
-          );
-          setActiveStep(stepIndex);
-        },
+            const section = sectionRef.current;
+            const progressLine = progressLineRef.current;
+            if (!section || !progressLine) return;
+
+            // Use requestAnimationFrame to ensure DOM is ready
+            requestAnimationFrame(() => {
+              // Animate progress line based on scroll
+              const tl = gsapInstance.timeline({
+                scrollTrigger: {
+                  trigger: section,
+                  start: "top center",
+                  end: "bottom center",
+                  scrub: 1,
+                  onUpdate: (self) => {
+                    // Calculate which step should be active based on progress
+                    const progress = self.progress;
+                    const stepIndex = Math.min(
+                      Math.floor(progress * steps.length),
+                      steps.length - 1
+                    );
+                    setActiveStep(stepIndex);
+                  },
+                },
+              });
+
+              scrollTrigger = tl.fromTo(
+                progressLine,
+                { height: "0%" },
+                { height: "100%", ease: "none" }
+              );
+
+              // Refresh ScrollTrigger after setup to ensure proper initialization
+              ScrollTriggerInstance.refresh();
+            });
+          } catch (error) {
+            console.error("Error loading GSAP:", error);
+          }
+        }
       },
-    });
-
-    tl.fromTo(
-      progressLine,
-      { height: "0%" },
-      { height: "100%", ease: "none" }
+      { threshold: 0.1, rootMargin: "100px" }
     );
 
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      if (observer) {
+        observer.disconnect();
+      }
+      if (ScrollTriggerInstance) {
+        ScrollTriggerInstance.getAll().forEach((trigger) => trigger.kill());
+      }
+      if (scrollTrigger && scrollTrigger.scrollTrigger) {
+        scrollTrigger.scrollTrigger.kill();
+      }
     };
-  }, [steps.length]);
+  }, [steps.length, gsapLoaded]);
 
   return (
     <section ref={sectionRef} className="bg-primary-500 text-secondary-500 py-24">

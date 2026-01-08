@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { FiArrowUpRight, FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { motion } from "framer-motion";
@@ -90,7 +91,15 @@ export default function NewFooter() {
       {/* Desktop version */}
       <div className="hidden md:block pt-16 pb-6">
         {/* overlap image bg */}
-        <img src="/footer2.jpg" className="absolute inset-0 -z-0 w-full h-[400px] md:h-full object-cover" />
+        <Image 
+          src="/footer2.jpg" 
+          alt="Footer background" 
+          fill
+          className="object-cover -z-0"
+          quality={75}
+          priority={false}
+          sizes="100vw"
+        />
         <div className="absolute inset-0 bg-secondary-500 opacity-50 z-0"></div>
         <Layout className="relative z-10">
           {/* Top Sections */}
@@ -234,7 +243,15 @@ export default function NewFooter() {
         {/* Hero Section for Mobile - with background image */}
         <div className="relative bg-secondary-500">
           {/* overlap image bg for mobile hero only */}
-          <img src="/footer2.jpg" className="absolute inset-0 -z-0 w-full h-full object-cover" />
+          <Image 
+            src="/footer2.jpg" 
+            alt="Footer background" 
+            fill
+            className="object-cover -z-0"
+            quality={75}
+            priority={false}
+            sizes="100vw"
+          />
           <div className="absolute inset-0 bg-secondary-500 opacity-50 z-0"></div>
           <div className="max-w-7xl mx-auto px-4 py-8 relative z-10">
             <div className="text-center">

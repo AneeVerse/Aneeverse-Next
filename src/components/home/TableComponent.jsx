@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import { FaCheck, FaTimes, FaUsers, FaPaintBrush, FaUserTie, FaToolbox } from "react-icons/fa";
 import Layout from "../common/Layout";

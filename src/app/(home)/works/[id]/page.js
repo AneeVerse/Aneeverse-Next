@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import Layout from '@/components/common/Layout';
 import { Heading } from '@/components/common/typography/Heading';
 import { projects } from '@/data/projects';
@@ -112,10 +112,14 @@ const portableTextComponents = {
       if (value.externalImage) {
         return (
           <figure className="my-8">
-            <img
+            <Image
               src={value.externalImage}
               alt={value.alt || 'Project image'}
+              width={1200}
+              height={800}
               className="w-full h-auto rounded-lg"
+              loading="lazy"
+              sizes="100vw"
             />
             {value.caption && (
               <figcaption className="text-gray-500 text-sm mt-2 text-center">
@@ -148,10 +152,18 @@ const portableTextComponents = {
         
         return (
           <figure className="my-8">
-            <img
+            <Image
               src={imgUrl}
               alt={value.alt || 'Project image'}
-              className="w-full h-auto rounded-lg "
+              width={1200}
+              height={800}
+              className="w-full h-auto rounded-lg"
+              loading="lazy"
+              sizes="100vw"
+              unoptimized={isGif || imgUrl?.includes('cdn.sanity.io')}
+              onError={(e) => {
+                console.error('Sanity image failed to load:', imgUrl);
+              }}
             />
             {value.caption && (
               <figcaption className="text-gray-500 text-sm mt-2 text-center">
@@ -169,6 +181,9 @@ const portableTextComponents = {
 };
 
 export default function ProjectPage({ params }) {
+  // Unwrap params Promise for Next.js 15
+  const { id } = use(params);
+  
   const [project, setProject] = useState(null);
   const [relatedProjects, setRelatedProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -183,7 +198,7 @@ export default function ProjectPage({ params }) {
         
         // Fetch the current project
         const projectData = await client.fetch(getPortfolioWorkBySlugQuery, {
-          slug: params.id,
+          slug: id,
         });
         
         if (projectData) {
@@ -195,7 +210,7 @@ export default function ProjectPage({ params }) {
           
           if (allProjects && allProjects.length > 0) {
             // Find the current project index
-            const currentIndex = allProjects.findIndex(p => p.slug.current === params.id);
+            const currentIndex = allProjects.findIndex(p => p.slug.current === id);
             
             // Set previous and next project
             if (currentIndex > 0) {
@@ -208,7 +223,7 @@ export default function ProjectPage({ params }) {
             
             // Get related projects (excluding the current one)
             const related = allProjects
-              .filter(p => p.slug.current !== params.id)
+              .filter(p => p.slug.current !== id)
               .slice(0, 3);
             
             setRelatedProjects(related);
@@ -221,13 +236,13 @@ export default function ProjectPage({ params }) {
       }
     }
     
-    if (params.id) {
+    if (id) {
       fetchData();
     }
-  }, [params.id]);
+  }, [id]);
 
   // Fallback to static data if Sanity data is not available
-  const staticProject = projects.find(p => p.slug === params.id);
+  const staticProject = projects.find(p => p.slug === id);
   
   if (isLoading) {
     return (
@@ -246,7 +261,7 @@ export default function ProjectPage({ params }) {
   const displayProject = project || staticProject;
   const displayRelated = relatedProjects.length > 0 
     ? relatedProjects 
-    : projects.filter(p => p.slug !== params.id).slice(0, 3);
+    : projects.filter(p => p.slug !== id).slice(0, 3);
 
   return (
     <div className="max-w-xl mx-auto lg:max-w-none">
@@ -352,8 +367,15 @@ export default function ProjectPage({ params }) {
                 {section.type === 'image-grid' && (
                   <div className="grid grid-cols-1 md:grid-cols-2">
                     {section.images.map((img, i) => (
-                      <div key={i} className="relative p-5 overflow-hidden">
-                        <img src={img} alt="" className="w-full h-full object-contain" />
+                      <div key={i} className="relative p-5 overflow-hidden aspect-video">
+                        <Image 
+                          src={img} 
+                          alt={`Gallery image ${i + 1}`} 
+                          fill
+                          className="object-contain"
+                          loading="lazy"
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                        />
                       </div>
                     ))}
                   </div>
@@ -366,11 +388,14 @@ export default function ProjectPage({ params }) {
                     </p>
                     <div className="grid grid-cols-1 mt-12 gap-6">
                       {section.images.map((img, index) => (
-                        <div key={index} className="relative rounded-xl overflow-hidden shadow-lg">
-                          <img
+                        <div key={index} className="relative rounded-xl overflow-hidden shadow-lg aspect-video">
+                          <Image
                             src={img}
                             alt={`Gallery ${index + 1}`}
-                            className="w-full h-auto object-cover"
+                            fill
+                            className="object-cover"
+                            loading="lazy"
+                            sizes="100vw"
                           />
                         </div>
                       ))}

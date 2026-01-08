@@ -7,6 +7,8 @@ import { Heading } from "../common/typography/Heading";
 import { AccentText } from "../common/typography/AccentText";
 import { UiSubheading } from "../common/typography/UiSubheading";
 
+// Track if section has been seen at least once (persists across re-renders)
+
 const data = [
   {
     firstTitle: "Ad", secondTitle: "Creative",
@@ -189,6 +191,8 @@ export default function CreativeSection() {
   const rafId = useRef(null);
   const scrollSpeed = 0.3;
   const isTouchDevice = useRef(false);
+  const hasInitialized = useRef(false); // Track if carousel has been seen once
+  const isVisible = useRef(true); // Track visibility for animation loop
 
   const calculateWidth = useCallback(() => {
     if (containerRef.current) {
@@ -216,6 +220,61 @@ export default function CreativeSection() {
     }
   }, []);
 
+  // Intersection Observer to pause animations when off-screen (using ref to avoid re-renders)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisible.current = entry.isIntersecting;
+
+          if (entry.isIntersecting) {
+            // Mark as initialized on first view
+            if (!hasInitialized.current) {
+              hasInitialized.current = true;
+            }
+            // Resume animation loop if not dragging
+            if (!isDragging.current && !animationRef.current) {
+              animationRef.current = requestAnimationFrame(animateContinuous);
+            }
+          } else {
+            // Cancel animation when off-screen (for performance)
+            if (animationRef.current) {
+              cancelAnimationFrame(animationRef.current);
+              animationRef.current = null;
+            }
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "100px" }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
+
+  // Continuous animation function using refs (no state dependency = no re-renders)
+  const animateContinuous = useCallback(() => {
+    if (isVisible.current && !isDragging.current && containerRef.current) {
+      translateX.current -= scrollSpeed;
+      normalizePosition();
+      updateTransform();
+    }
+
+    // Only continue if visible
+    if (isVisible.current && !isPaused) {
+      animationRef.current = requestAnimationFrame(animateContinuous);
+    } else {
+      animationRef.current = null;
+    }
+  }, [isPaused, normalizePosition, updateTransform]);
+
   const animate = useCallback(() => {
     if (!isPaused && !isDragging.current && containerRef.current) {
       translateX.current -= scrollSpeed;
@@ -223,7 +282,9 @@ export default function CreativeSection() {
       updateTransform();
     }
 
-    animationRef.current = requestAnimationFrame(animate);
+    if (!isPaused && isVisible.current) {
+      animationRef.current = requestAnimationFrame(animate);
+    }
   }, [isPaused, normalizePosition, updateTransform]);
 
   // Cubic easing out for more natural deceleration
@@ -459,8 +520,8 @@ export default function CreativeSection() {
                 {/* Image Container - Locked dimensions */}
                 <div
                   className={`relative overflow-hidden rounded-2xl shadow-2xl w-full ${isSquare
-                      ? '!h-[240px] !min-h-[240px] !max-h-[240px] sm:!h-[350px] sm:!min-h-[350px] sm:!max-h-[350px]'
-                      : '!h-[293px] !min-h-[293px] !max-h-[293px] sm:!h-[427px] sm:!min-h-[427px] sm:!max-h-[427px]'
+                    ? '!h-[240px] !min-h-[240px] !max-h-[240px] sm:!h-[350px] sm:!min-h-[350px] sm:!max-h-[350px]'
+                    : '!h-[293px] !min-h-[293px] !max-h-[293px] sm:!h-[427px] sm:!min-h-[427px] sm:!max-h-[427px]'
                     }`}
                   style={{
                     flexShrink: 0,
@@ -478,6 +539,10 @@ export default function CreativeSection() {
                     priority={index < 6}
                     quality={85}
                     style={{ backfaceVisibility: 'hidden' }}
+                    unoptimized={item.image?.includes('ik.imagekit.io')}
+                    onError={(e) => {
+                      console.error('ImageKit image failed to load:', item.image);
+                    }}
                   />
                 </div>
 

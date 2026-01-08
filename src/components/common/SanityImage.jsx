@@ -19,7 +19,6 @@ export default function SanityImage({
   onError,
   ...props
 }) {
-  console.log('SanityImage input:', image); // Debug log
   const [error, setError] = useState(false);
 
   // Handle both Sanity and ImageKit images
@@ -36,14 +35,14 @@ export default function SanityImage({
       return image.externalImage;
     }
 
-    // If it's a new Sanity image object
+    // If it's a new Sanity image object - use maxWidth to prevent timeout
     if (image.sanityImage?.asset?._ref) {
-      return urlForImage(image.sanityImage).url();
+      return urlForImage(image.sanityImage, width || 1920).url();
     }
 
-    // If it's a legacy Sanity image object (old posts)
+    // If it's a legacy Sanity image object (old posts) - use maxWidth
     if (image.asset?._ref) {
-      return urlForImage(image).url();
+      return urlForImage(image, width || 1920).url();
     }
 
     // If it's a legacy Sanity image object with direct URL (API response)
@@ -78,6 +77,11 @@ export default function SanityImage({
     if (onError) onError(e);
   };
 
+  // Use Sanity's built-in optimization instead of Next.js optimization for large images
+  // This prevents timeout errors with very large Sanity images
+  const isSanityImage = imageUrl?.includes('cdn.sanity.io');
+  const shouldOptimize = !isSanityImage; // Let Sanity handle its own optimization
+  
   return (
     <Image
       src={imageUrl}
@@ -92,6 +96,7 @@ export default function SanityImage({
       placeholder={placeholder}
       blurDataURL={blurDataURL}
       onError={handleError}
+      unoptimized={isSanityImage || (imageUrl?.includes('cdn.sanity.io') && imageUrl?.includes('.gif'))}
       {...props}
     />
   );
