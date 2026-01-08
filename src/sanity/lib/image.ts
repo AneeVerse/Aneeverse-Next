@@ -6,7 +6,7 @@ const imageBuilder = createImageUrlBuilder({
   dataset: dataset || '',
 })
 
-export const urlForImage = (source: any) => {
+export const urlForImage = (source: any, maxWidth: number = 1920) => {
   // Check if the source exists and has the required asset reference
   if (!source || !source.asset || !source.asset._ref) {
     console.warn('Invalid image source provided to urlForImage', source);
@@ -20,7 +20,12 @@ export const urlForImage = (source: any) => {
   }
   
   try {
-    return imageBuilder.image(source)
+    // Use Sanity's built-in optimization with max width to prevent timeout
+    return imageBuilder
+      .image(source)
+      .width(maxWidth)
+      .quality(85)
+      .auto('format')
   } catch (error) {
     console.error('Error creating image URL:', error);
     return {

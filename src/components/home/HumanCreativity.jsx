@@ -1,10 +1,11 @@
 "use client";
 import React from "react";
 import Layout from "../common/Layout";
+import Image from "next/image";
 import { PenTool, Clock, DollarSign, Headphones } from "lucide-react";
 import { motion } from "framer-motion";
 
-const HumanCreativity = () => {
+const HumanCreativity = React.memo(() => {
     return (
         <div className="bg-[#03151a] py-12 sm:py-16 text-white">
             <Layout>
@@ -13,6 +14,7 @@ const HumanCreativity = () => {
                     <motion.h3
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                         className="text-xs sm:text-sm font-bold tracking-[0.2em] uppercase text-gray-400 mb-3"
                     >
@@ -21,6 +23,7 @@ const HumanCreativity = () => {
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.1 }}
                         className="font-bw-gradual text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase leading-tight max-w-3xl mx-auto"
                     >
@@ -34,6 +37,7 @@ const HumanCreativity = () => {
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
                         whileHover={{ scale: 1.02, zIndex: 20, transition: { duration: 0.3 } }}
                         transition={{ duration: 0.5, delay: 0.2 }}
                         className="lg:col-span-4 bg-[#072d36] rounded-xl overflow-hidden relative group min-h-[420px] lg:min-h-[420px] flex flex-col flex-shrink-0 w-[80vw] sm:w-[340px] lg:w-auto snap-center"
@@ -41,10 +45,13 @@ const HumanCreativity = () => {
                         <div className="absolute left-0 top-[85%] w-[2px] h-[80px] bg-gradient-to-b from-transparent via-[#88d7f0] to-transparent opacity-0 group-hover:opacity-100 group-hover:top-[10%] transition-all duration-1000 ease-in-out z-10" />
                         {/* Image Section */}
                         <div className="flex-grow relative h-[200px] lg:h-auto">
-                            <img
+                            <Image
                                 src="/images/home/human creativity/7dee15b1aae6aab33f6f2c6e02ee72aab8f21a2d.png"
                                 alt="Creative Professional"
-                                className="w-full h-full object-cover object-top"
+                                fill
+                                className="object-cover object-top"
+                                loading="lazy"
+                                sizes="(max-width: 1024px) 100vw, 33vw"
                             />
                         </div>
 
@@ -117,12 +124,13 @@ const HumanCreativity = () => {
             </Layout>
         </div>
     );
-};
+});
 
 const FeatureCard = ({ icon, title, description, delay, isInGrid = false, extraClassName = '' }) => (
     <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         whileHover={{ scale: 1.02, zIndex: 20, transition: { duration: 0.3 } }}
         transition={{ duration: 0.5, delay }}
         className={`bg-[#072d36] rounded-xl flex flex-col items-start hover:bg-[#093540] transition-colors duration-300 group relative overflow-hidden ${isInGrid ? 'w-full h-full min-h-[200px] sm:min-h-[200px] lg:min-h-[220px] p-6 sm:p-8' : 'flex-shrink-0 w-[80vw] sm:w-[320px] lg:w-auto snap-center min-h-[220px] p-8'
@@ -138,5 +146,7 @@ const FeatureCard = ({ icon, title, description, delay, isInGrid = false, extraC
         </p>
     </motion.div>
 );
+
+HumanCreativity.displayName = 'HumanCreativity';
 
 export default HumanCreativity;

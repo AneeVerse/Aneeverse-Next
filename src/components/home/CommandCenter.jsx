@@ -1,7 +1,5 @@
-"use client";
-import React from "react";
 import Layout from "../common/Layout";
-import { Heading } from "../common/typography/Heading";
+import Image from "next/image";
 
 export default function CommandCenter() {
     return (
@@ -9,12 +7,9 @@ export default function CommandCenter() {
             <Layout>
                 {/* Header */}
                 <div className="text-center mb-16">
-                    <Heading
-                        level="h2"
-                        className="text-white font-bold text-4xl sm:text-5xl md:text-6xl mb-6 tracking-tight"
-                    >
+                    <h2 className="text-white font-bold text-2xl sm:text-3xl md:text-4xl mb-6 tracking-tight">
                         COMMAND CENTER
-                    </Heading>
+                    </h2>
                     <button className="bg-[#DFFF00] text-black font-bold px-8 py-3 rounded-full text-sm hover:bg-[#CFEF00] transition-all duration-300 hover:scale-105">
                         Get Started
                     </button>
@@ -27,12 +22,14 @@ export default function CommandCenter() {
 
                         {/* Card 1 */}
                         <div className="bg-[#0D2E3E] rounded-2xl p-6 border border-[#1A4458] hover:border-[#2DC8E6]/50 transition-all duration-300">
-                            <div className="mb-4 rounded-xl overflow-hidden bg-[#0A1F2E] border border-[#1A4458]">
-                                <img
+                            <div className="mb-4 rounded-xl overflow-hidden bg-[#0A1F2E] border border-[#1A4458] relative w-full h-[200px]">
+                                <Image
                                     src="/images/home/command center/1card.png"
                                     alt="Submit your idea"
-                                    className="w-full h-auto object-cover"
-                                    draggable={false}
+                                    fill
+                                    className="object-cover"
+                                    loading="lazy"
+                                    sizes="(max-width: 768px) 100vw, 33vw"
                                 />
                             </div>
                             <h3 className="text-white text-xl font-bold mb-2">
@@ -46,12 +43,14 @@ export default function CommandCenter() {
 
                         {/* Card 2 */}
                         <div className="bg-[#0D2E3E] rounded-2xl p-6 border border-[#1A4458] hover:border-[#2DC8E6]/50 transition-all duration-300">
-                            <div className="mb-4 rounded-xl overflow-hidden bg-[#0A1F2E] border border-[#1A4458]">
-                                <img
+                            <div className="mb-4 rounded-xl overflow-hidden bg-[#0A1F2E] border border-[#1A4458] relative w-full h-[200px]">
+                                <Image
                                     src="/images/home/command center/2card.png"
                                     alt="Track in real-time"
-                                    className="w-full h-auto object-cover"
-                                    draggable={false}
+                                    fill
+                                    className="object-cover"
+                                    loading="lazy"
+                                    sizes="(max-width: 768px) 100vw, 33vw"
                                 />
                             </div>
                             <h3 className="text-white text-xl font-bold mb-2">
@@ -65,12 +64,14 @@ export default function CommandCenter() {
 
                         {/* Card 3 */}
                         <div className="bg-[#0D2E3E] rounded-2xl p-6 border border-[#1A4458] hover:border-[#2DC8E6]/50 transition-all duration-300">
-                            <div className="mb-4 rounded-xl overflow-hidden bg-[#0A1F2E] border border-[#1A4458]">
-                                <img
+                            <div className="mb-4 rounded-xl overflow-hidden bg-[#0A1F2E] border border-[#1A4458] relative w-full h-[200px]">
+                                <Image
                                     src="/images/home/command center/3card.png"
                                     alt="Collaborate & review"
-                                    className="w-full h-auto object-cover"
-                                    draggable={false}
+                                    fill
+                                    className="object-cover"
+                                    loading="lazy"
+                                    sizes="(max-width: 768px) 100vw, 33vw"
                                 />
                             </div>
                             <h3 className="text-white text-xl font-bold mb-2">
@@ -99,12 +100,14 @@ export default function CommandCenter() {
 
                         {/* Card 5 - WITH IMAGE (image already has design tool icons) */}
                         <div className="bg-[#0D2E3E] rounded-2xl p-6 border border-[#1A4458] hover:border-[#2DC8E6]/50 transition-all duration-300">
-                            <div className="rounded-xl overflow-hidden bg-[#0A1F2E] border border-[#1A4458]">
-                                <img
+                            <div className="rounded-xl overflow-hidden bg-[#0A1F2E] border border-[#1A4458] relative w-full h-[200px]">
+                                <Image
                                     src="/images/home/command center/5card.png"
                                     alt="Design tools integration"
-                                    className="w-full h-auto object-cover"
-                                    draggable={false}
+                                    fill
+                                    className="object-cover"
+                                    loading="lazy"
+                                    sizes="(max-width: 768px) 100vw, 50vw"
                                 />
                             </div>
                         </div>

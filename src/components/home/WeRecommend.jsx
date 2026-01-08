@@ -1,10 +1,6 @@
-"use client";
-
-import React from "react";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
 
-const WeRecommend = () => {
+export default function WeRecommend() {
     const cards = [
         {
             id: 1,
@@ -107,6 +103,4 @@ const WeRecommend = () => {
             </div>
         </section>
     );
-};
-
-export default WeRecommend;
+}
