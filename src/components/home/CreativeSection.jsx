@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Heading } from "../common/typography/Heading";
 import { AccentText } from "../common/typography/AccentText";
 import { UiSubheading } from "../common/typography/UiSubheading";
+import AnimatedButton from "../common/AnimatedButton";
 
 // Track if section has been seen at least once (persists across re-renders)
 
@@ -468,18 +469,28 @@ export default function CreativeSection() {
   return (
     <div className="bg-[#073742] py-20 overflow-hidden">
       <Layout>
-        <div className="mb-8 sm:mb-12 relative z-10 max-w-4xl">
-          <h3 className="text-white/70 text-xs sm:text-sm tracking-[0.2em] uppercase mb-3 sm:mb-4 font-medium">
-            What We Create
-          </h3>
-          <h2 className="text-left font-semibold text-white leading-tight tracking-tight text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
-            Every Type of Creative{" "}
-            <br className="hidden sm:block" />
-            Work You'll Ever Need,{" "}
-            <span className="text-[#2DC8E6] font-Rock_Salt font-normal relative inline-block transform rotate-[-2deg] ml-1 sm:ml-2 text-xl sm:text-2xl md:text-3xl lg:text-4xl -top-1 sm:-top-2">
-              And More
-            </span>
-          </h2>
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12 sm:mb-20 relative z-10">
+          <div className="max-w-4xl">
+            <h3 className="text-white text-xs sm:text-sm tracking-[0.2em] uppercase mb-4 sm:mb-6 font-bold">
+              What We Create
+            </h3>
+            <h2 className="text-left font-bw-gradual font-bold text-white leading-[1.05] tracking-tighter text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase">
+              Everything You Need,<br />
+              In One <span className="font-Rock_Salt text-[#2DC8E6] text-[0.6em] sm:text-[0.65em] normal-case relative -top-3 sm:-top-5 inline-block transform -rotate-3 ml-1 sm:ml-2">Creative</span><br />
+              Platform
+            </h2>
+          </div>
+          <div className="flex-shrink-0">
+            <AnimatedButton
+              href="/pricing"
+              className="px-8 py-3 rounded-full font-medium text-[#073742] bg-[#88D7F0] border border-[#88D7F0] hover:bg-secondary-500 hover:text-[#88D7F0] transition-colors"
+              mainTextSlide="-140%"
+              duplicateTextStart="40%"
+              duplicateTextEnd="-100%"
+            >
+              GET STARTED
+            </AnimatedButton>
+          </div>
         </div>
       </Layout>
 
