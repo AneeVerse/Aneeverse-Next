@@ -115,7 +115,7 @@ export default async function WeRecommend() {
 
             {/* Cards Grid */}
             <div className="max-w-7xl mx-auto">
-                <div className="flex overflow-x-auto pb-4 gap-4 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
+                <div className="flex overflow-x-auto pb-4 gap-4 snap-x snap-mandatory scrollbar-hide px-4 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0 md:px-0">
                     {finalCards.map((card) => (
                         <Link
                             key={card.id}

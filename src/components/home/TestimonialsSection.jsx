@@ -54,6 +54,14 @@ const TestimonialsSection = () => {
   const scrollY = useMotionValue(0);
   const [centerIndex, setCenterIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const unsub = scrollY.on("change", (latest) => {
@@ -68,17 +76,19 @@ const TestimonialsSection = () => {
   };
 
   const onPan = (e, info) => {
-    scrollY.set(scrollY.get() + info.delta.y * 1.5);
+    const delta = isMobile ? info.delta.x : info.delta.y;
+    scrollY.set(scrollY.get() + delta * 1.5);
   };
 
   const onPanEnd = (e, info) => {
     setIsDragging(false);
-    const currentY = scrollY.get();
-    const predictedY = currentY + info.velocity.y * 0.2;
-    const targetIndex = Math.round(-predictedY / ITEM_SIZE);
-    const targetY = -targetIndex * ITEM_SIZE;
+    const currentVal = scrollY.get();
+    const velocity = isMobile ? info.velocity.x : info.velocity.y;
+    const predictedVal = currentVal + velocity * 0.2;
+    const targetIndex = Math.round(-predictedVal / ITEM_SIZE);
+    const targetVal = -targetIndex * ITEM_SIZE;
 
-    animate(scrollY, targetY, {
+    animate(scrollY, targetVal, {
       type: "spring",
       stiffness: 200,
       damping: 30
@@ -120,7 +130,7 @@ const TestimonialsSection = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-16 relative w-full">
 
           {/* ✅ Left Column: Infinite Wheel */}
-          <div className="relative h-[600px] w-64 flex-shrink-0 flex flex-col items-center justify-center select-none touch-none mt-10">
+          <div className="relative w-[100vw] ml-[calc(-50vw+50%)] md:ml-0 h-48 md:h-[600px] md:w-64 flex-shrink-0 flex md:flex-col items-center justify-center select-none touch-none mt-0 md:mt-10 mb-8 md:mb-0">
 
             {/* Interaction Overlay */}
             <motion.div
@@ -140,13 +150,23 @@ const TestimonialsSection = () => {
                   item={item}
                   index={i}
                   scrollY={scrollY}
+                  isMobile={isMobile}
                 />
               );
             })}
 
             {/* Gradients */}
-            <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#073742] to-transparent z-40 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#073742] to-transparent z-40 pointer-events-none" />
+            {isMobile ? (
+              <>
+                <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-[#073742] via-[#073742]/10 to-transparent z-40 pointer-events-none" />
+                <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#073742] via-[#073742]/10 to-transparent z-40 pointer-events-none" />
+              </>
+            ) : (
+              <>
+                <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#073742] to-transparent z-40 pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#073742] to-transparent z-40 pointer-events-none" />
+              </>
+            )}
           </div>
 
           {/* ✅ Center Column: Dynamic Content */}
@@ -181,19 +201,20 @@ const TestimonialsSection = () => {
   );
 };
 
-const SlotItem = ({ item, index, scrollY }) => {
-  const y = useTransform(scrollY, (currentScroll) => index * ITEM_SIZE + currentScroll);
+const SlotItem = ({ item, index, scrollY, isMobile }) => {
+  const val = useTransform(scrollY, (currentScroll) => index * ITEM_SIZE + currentScroll);
 
   const inputRange = [-320, -160, 0, 160, 320];
-  const scale = useTransform(y, inputRange, [0.6, 0.85, 1.35, 0.85, 0.6]);
-  const opacity = useTransform(y, inputRange, [0, 0.4, 1, 0.4, 0]);
-  const blur = useTransform(y, inputRange, ["5px", "2px", "0px", "2px", "5px"]);
-  const overlayOpacity = useTransform(y, inputRange, [0.8, 0.6, 0, 0.6, 0.8]);
+  const scale = useTransform(val, inputRange, [0.5, 0.75, 1.35, 0.75, 0.5]);
+  const opacity = useTransform(val, inputRange, [0, 0.4, 1, 0.4, 0]);
+  const blur = useTransform(val, inputRange, ["5px", "2px", "0px", "2px", "5px"]);
+  const overlayOpacity = useTransform(val, inputRange, [0.8, 0.6, 0, 0.6, 0.8]);
 
   return (
     <motion.div
       style={{
-        y,
+        x: isMobile ? val : 0,
+        y: isMobile ? 0 : val,
         scale,
         opacity,
         filter: blur,
