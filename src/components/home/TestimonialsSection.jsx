@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { motion, useMotionValue, useTransform, animate, useSpring } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { HiArrowNarrowUp, HiArrowNarrowDown } from "react-icons/hi";
 import Image from "next/image";
 import Layout from "../common/Layout";
@@ -51,35 +51,30 @@ const testimonials = [
 const ITEM_SIZE = 160;
 
 const TestimonialsSection = () => {
-  // scrollY tracks the absolute vertical pixel offset of the "reel"
-  // 0 = first item centered. -120 = second item centered.
   const scrollY = useMotionValue(0);
-
-  // We mirror the motion value into React state to drive the content rendering (Text)
-  // and to determine which "slots" are currently on screen.
   const [centerIndex, setCenterIndex] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
     const unsub = scrollY.on("change", (latest) => {
-      // Calculate which index is visually closest to the center
       const rawIndex = Math.round(-latest / ITEM_SIZE);
       setCenterIndex(rawIndex);
     });
     return () => unsub();
   }, [scrollY]);
 
-  // Handle Drag/Pan logic manually for perfect infinite physics
+  const onPanStart = () => {
+    setIsDragging(true);
+  };
+
   const onPan = (e, info) => {
-    // 1.5 multiplier makes it feel impactful
     scrollY.set(scrollY.get() + info.delta.y * 1.5);
   };
 
   const onPanEnd = (e, info) => {
+    setIsDragging(false);
     const currentY = scrollY.get();
-    // Add some inertia based on velocity
     const predictedY = currentY + info.velocity.y * 0.2;
-
-    // Snap to nearest item
     const targetIndex = Math.round(-predictedY / ITEM_SIZE);
     const targetY = -targetIndex * ITEM_SIZE;
 
@@ -88,23 +83,6 @@ const TestimonialsSection = () => {
       stiffness: 200,
       damping: 30
     });
-  };
-
-  const cycleTo = (idx) => {
-    // Find the nearest equivalent index in our infinite space
-    // Current center index (could be 100 or -50)
-    const current = centerIndex;
-    const len = testimonials.length;
-
-    // We want to go to a state where (index % len) === idx
-    // but minimize travel distance.
-    const remainder = ((current % len) + len) % len;
-    const diff = idx - remainder;
-
-    // Adjust diff to be shortest path? (optional, dragging usually implies direction)
-    // For simple buttons, just moving to the next logically is fine.
-    // Actually, buttons usually imply +1 or -1 direction.
-    // Let's keep it simple: just target the current center +/- 1
   };
 
   const handleNext = () => {
@@ -116,6 +94,17 @@ const TestimonialsSection = () => {
     const target = (centerIndex - 1) * -ITEM_SIZE;
     animate(scrollY, target, { type: "spring", stiffness: 200, damping: 30 });
   };
+
+  // ✅ Auto-scroll Logic
+  useEffect(() => {
+    if (isDragging) return;
+
+    const timer = setInterval(() => {
+      handleNext();
+    }, 3500); // 3.5 seconds for a balanced read time
+
+    return () => clearInterval(timer);
+  }, [isDragging, centerIndex]); // Reset timer when index changes or dragging starts
 
   // Safe wrap for data access
   const getData = (i) => {
@@ -136,6 +125,7 @@ const TestimonialsSection = () => {
             {/* Interaction Overlay */}
             <motion.div
               className="absolute inset-0 z-50 cursor-grab active:cursor-grabbing"
+              onPanStart={onPanStart}
               onPan={onPan}
               onPanEnd={onPanEnd}
             />
@@ -146,7 +136,7 @@ const TestimonialsSection = () => {
               const item = getData(i);
               return (
                 <SlotItem
-                  key={i} // Use absolute index as key to maintain identity during slide
+                  key={i}
                   item={item}
                   index={i}
                   scrollY={scrollY}
@@ -163,7 +153,7 @@ const TestimonialsSection = () => {
           <div className="flex-1 flex flex-col items-start text-left order-1 md:order-2 relative min-h-[400px]">
             {/* We use a transition group here to fade content */}
             <motion.div
-              key={centerIndex} // Remount on index change to trigger animation
+              key={centerIndex}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
@@ -192,7 +182,6 @@ const TestimonialsSection = () => {
 };
 
 const SlotItem = ({ item, index, scrollY }) => {
-  // Calculate precise visual Y based on absolute index and global scrollY
   const y = useTransform(scrollY, (currentScroll) => index * ITEM_SIZE + currentScroll);
 
   const inputRange = [-320, -160, 0, 160, 320];
