@@ -48,7 +48,7 @@ const testimonials = [
   }
 ];
 
-const ITEM_SIZE = 120;
+const ITEM_SIZE = 160;
 
 const TestimonialsSection = () => {
   // scrollY tracks the absolute vertical pixel offset of the "reel"
@@ -131,7 +131,7 @@ const TestimonialsSection = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-16 relative w-full">
 
           {/* ✅ Left Column: Infinite Wheel */}
-          <div className="relative h-[400px] w-64 flex-shrink-0 flex flex-col items-center justify-center select-none touch-none">
+          <div className="relative h-[600px] w-64 flex-shrink-0 flex flex-col items-center justify-center select-none touch-none mt-10">
 
             {/* Interaction Overlay */}
             <motion.div
@@ -155,8 +155,8 @@ const TestimonialsSection = () => {
             })}
 
             {/* Gradients */}
-            <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-[#073742] to-transparent z-40 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#073742] to-transparent z-40 pointer-events-none" />
+            <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#073742] to-transparent z-40 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#073742] to-transparent z-40 pointer-events-none" />
           </div>
 
           {/* ✅ Center Column: Dynamic Content */}
@@ -193,11 +193,9 @@ const TestimonialsSection = () => {
 
 const SlotItem = ({ item, index, scrollY }) => {
   // Calculate precise visual Y based on absolute index and global scrollY
-  // If index is 0 and scrollY is 0 -> dist is 0.
-  // If index is 1 (below) and scrollY is 0 -> dist is 120.
   const y = useTransform(scrollY, (currentScroll) => index * ITEM_SIZE + currentScroll);
 
-  const inputRange = [-240, -120, 0, 120, 240];
+  const inputRange = [-320, -160, 0, 160, 320];
   const scale = useTransform(y, inputRange, [0.6, 0.85, 1.35, 0.85, 0.6]);
   const opacity = useTransform(y, inputRange, [0, 0.4, 1, 0.4, 0]);
   const blur = useTransform(y, inputRange, ["5px", "2px", "0px", "2px", "5px"]);
@@ -211,13 +209,9 @@ const SlotItem = ({ item, index, scrollY }) => {
         opacity,
         filter: blur,
         position: 'absolute',
-        zIndex: 10 // Dynamic Z not strictly needed if opacity handles overlap nicely, but we can't interpolate z-index.
-        // Since they don't overlap much, uniform Z is okay, or we can use:
-        // zIndex: Math.abs(index - center) ... hard to do inside component efficiently without prop.
-        // Actually, center item naturally on top due to opacity? No.
-        // Let's just trust absolute position order.
+        zIndex: 10
       }}
-      className="w-24 h-24 rounded-full border-2 border-white/10 overflow-hidden shadow-2xl bg-black"
+      className="w-32 h-32 rounded-full border-2 border-white/10 overflow-hidden shadow-2xl bg-black"
     >
       <Image
         src={item.avatar}
@@ -238,7 +232,7 @@ const ContentBlock = ({ testimonial }) => (
   <>
     <div className="mb-8 min-h-[40px] relative flex items-center">
       {testimonial.logo ? (
-        <div className="relative w-40 h-10 filter brightness-0 invert opacity-90">
+        <div className={`relative filter brightness-0 invert opacity-90 ${testimonial.company === "JM Visa Services" ? "w-72 h-32 -ml-6" : "w-40 h-10"}`}>
           <Image src={testimonial.logo} alt={testimonial.company} fill className="object-contain object-left" draggable={false} />
         </div>
       ) : (
