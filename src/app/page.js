@@ -20,7 +20,7 @@ const TableComponent = dynamic(() => import("@/components/home/TableComponent"))
 
 const DynamicOurWorks = dynamic(() => import("@/components/home/DynamicOurWorks"));
 
-const TestimonialSlider = dynamic(() => import("@/components/about/TestimonialSlider"));
+const TestimonialsSection = dynamic(() => import("@/components/home/TestimonialsSection"));
 
 const WeRecommend = dynamic(() => import("@/components/home/WeRecommend"));
 
@@ -136,7 +136,7 @@ export default async function Home() {
       </LazySection>
 
       <LazySection sectionId="testimonial-slider">
-        <TestimonialSlider />
+        <TestimonialsSection />
       </LazySection>
 
       <LazySection sectionId="we-recommend">
