@@ -483,7 +483,11 @@ export default function CreativeSection() {
           <div className="flex-shrink-0">
             <AnimatedButton
               href="/pricing"
-              className="px-8 py-3 rounded-full font-medium text-[#073742] bg-[#88D7F0] border border-[#88D7F0] hover:bg-secondary-500 hover:text-[#88D7F0] transition-colors"
+              className="px-10 py-4 rounded-full font-bold text-base shadow-[0_0_20px_rgba(136,215,240,0.1)]"
+              style={{
+                backgroundColor: "#88D7F0",
+                color: "#073742"
+              }}
               mainTextSlide="-140%"
               duplicateTextStart="40%"
               duplicateTextEnd="-100%"

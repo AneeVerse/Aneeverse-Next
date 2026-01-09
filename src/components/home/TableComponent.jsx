@@ -6,6 +6,10 @@ import { Heading } from "../common/typography/Heading";
 import { GoPersonAdd } from "react-icons/go";
 import { AiOutlineTeam } from "react-icons/ai";
 import { PiPaintBrushDuotone, PiToolbox } from "react-icons/pi";
+import AnimatedButton from "../common/AnimatedButton";
+import Link from "next/link";
+import Image from "next/image";
+import { IoCheckmarkCircleOutline, IoCloseCircleOutline } from "react-icons/io5";
 const data = [
   {
     title: "Aneeverse",
@@ -53,68 +57,102 @@ const headers = ["Speed", "Flexibility", "Quality", "Scalability", "Cost-effecti
 
 const TableComponent = () => {
   return (
-    <div className="bg-secondary-500 text-white py-16">
+    <div className="bg-[#03151a] text-white py-20">
       <Layout>
-        {/* ✅ Title Section */}
-        <div className="text-center mb-6 sm:mb-8 md:mb-12 max-w-md  md:max-w-lg mx-auto">
-          <Heading
-            level="h2"
-            color="light"
-            spacing="lg"
-            className="text-center font-semibold"
+        {/* ✅ Title Section - Layout from Image 2 */}
+        <div className="flex flex-col items-center text-center mb-16 px-4">
+          <h3 className="text-gray-400 text-xs sm:text-sm tracking-[0.2em] uppercase mb-4 font-bold">
+            Built For You
+          </h3>
+          <h2 className="text-white font-bw-gradual font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-7xl mb-10 tracking-tighter uppercase leading-[1.1] max-w-5xl">
+            Hiring or traditional <br className="hidden md:block" /> outsourcing?{' '}
+            <span className="font-Rock_Salt text-[#FC83E1] normal-case text-[0.55em] relative -top-3 md:-top-5 inline-block transform -rotate-3 mx-2">
+              Neither
+            </span>
+          </h2>
+          <AnimatedButton
+            href="/pricing"
+            className="px-10 py-4 rounded-full font-bold text-base shadow-[0_0_20px_rgba(136,215,240,0.1)]"
+            style={{
+              backgroundColor: "#88D7F0",
+              color: "#073742"
+            }}
+            mainTextSlide="-140%"
+            duplicateTextStart="40%"
+            duplicateTextEnd="-100%"
           >
-            Hiring or traditional outsourcing?{' '}
-            <AccentText
-              size="lg"
-              className={"text-[#FC83E1] "}
-            >
-              neither
-            </AccentText>
-          </Heading>
-
+            GET STARTED
+          </AnimatedButton>
         </div>
 
-        {/* ✅ Table Section - First Column Fixed */}
-        <div className="overflow-x-auto scrollbar-hide rounded-lg">
-          <div className="min-w-[650px]">
-            {/* ✅ Headers */}
-            <div className="grid grid-cols-7 sm:grid-cols-8 items-center text-sm font-semibold bg-secondary-500">
-              <div className="p-3 sm:p-10 col-span-2 sm:col-span-3 sticky left-0 z-20 bg-secondary-500"></div>
-              {headers.map((header, index) => (
-                <div key={index} className="p-3 sm:p-4 text-center">
-                  {header}
+        {/* ✅ Table Container */}
+        <div className="max-w-7xl mx-auto overflow-hidden rounded-[2rem] border border-gray-800 shadow-2xl">
+          <div className="overflow-x-auto scrollbar-hide">
+            <div className="min-w-[900px]">
+
+              {/* ✅ Sticky Table Header (Black) */}
+              <div className="bg-black py-6 px-10 flex items-center border-b border-gray-800">
+                <div className="w-[35%] flex items-center">
+                  <Image
+                    src="/images/aneeverse-logo.svg"
+                    alt="Aneeverse Logo"
+                    width={180}
+                    height={40}
+                    className="h-10 w-auto object-contain brightness-200 transform translate-y-1"
+                  />
+                </div>
+                <div className="flex-1 grid grid-cols-5 gap-4 items-center">
+                  {headers.map((header, index) => (
+                    <div key={index} className="text-center text-[10px] md:text-xs uppercase tracking-[0.15em] font-black text-gray-400">
+                      {header}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* ✅ Data Rows */}
+              {data.map((item, index) => (
+                <div
+                  key={index}
+                  className={`flex items-stretch transition-colors duration-300 ${item.highlight
+                    ? "bg-[#88D7F0] text-[#073742]"
+                    : "bg-[#07242e] text-white border-b border-gray-800 last:border-0"
+                    }`}
+                >
+                  {/* Left content (Platform/Icon/Description) */}
+                  <div className={`w-[35%] p-8 flex items-center gap-6 border-r ${item.highlight ? 'border-[#073742]/10' : 'border-gray-800'}`}>
+                    <div className={`${item.highlight ? 'opacity-100' : 'opacity-80'}`}>
+                      {item.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-xl md:text-2xl font-bold leading-tight mb-2">
+                        {item.title}
+                      </h3>
+                      <p className={`text-xs md:text-sm leading-relaxed ${item.highlight ? 'text-[#073742]/80 font-medium' : 'text-gray-400'}`}>
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Feature columns with vertical separators */}
+                  <div className="flex-1 grid grid-cols-5 items-stretch">
+                    {item.features.map((feature, featureIdx) => (
+                      <div
+                        key={featureIdx}
+                        className={`flex items-center justify-center border-r last:border-0 ${item.highlight ? 'border-[#073742]/10' : 'border-gray-800'
+                          }`}
+                      >
+                        {feature ? (
+                          <IoCheckmarkCircleOutline className={`text-3xl md:text-4xl ${item.highlight ? 'text-[#073742]' : 'text-[#88D7F0]'}`} />
+                        ) : (
+                          <IoCloseCircleOutline className={`text-3xl md:text-4xl ${item.highlight ? 'text-[#073742]/40' : 'text-gray-600'}`} />
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
-
-            {/* ✅ Data Rows */}
-            {data.map((item, index) => (
-              <div
-                key={index}
-                className={`grid grid-cols-7 sm:grid-cols-8 my-2 items-center ${item.highlight ? "bg-[#88D7F0]  rounded-full text-secondary-500" : ""
-                  } ${index !== data.length - 1 ? "border-b border-gray-700" : ""}`}
-              >
-                {/* ✅ Fixed First Column */}
-                <div className={`${index === 0 ? " bg-[#88D7F0] rounded-l-full " : " bg-secondary-500 "} p-3 sm:p-10 col-span-2 sm:col-span-3 flex gap-4 items-center sticky left-0 z-10 `}>
-                  {item.icon}
-                  <div>
-                    <h3 className="font-semibold sm:font-bold text-md sm:text-lg md:text-xl lg:text-2xl ">{item.title}</h3>
-                    <p className="text-sm hidden md:block mt-1">{item.description}</p>
-                  </div>
-                </div>
-
-                {/* ✅ Features - Scrollable */}
-                {item.features.map((feature, idx) => (
-                  <div
-                    key={idx}
-                    className={`p-3 sm:p-4 text-center flex justify-center items-center ${index === 0 ? "text-secondary-500" : "text-primary-500"
-                      }`}
-                  >
-                    {feature ? <FaCheck className="text-lg sm:text-2xl" /> : <FaTimes className="text-lg sm:text-2xl" />}
-                  </div>
-                ))}
-              </div>
-            ))}
           </div>
         </div>
       </Layout>

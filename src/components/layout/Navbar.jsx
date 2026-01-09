@@ -28,7 +28,7 @@ const Navbar = () => {
   // Update color dynamically on scroll with debouncing
   useEffect(() => {
     let ticking = false;
-    
+
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
@@ -47,7 +47,7 @@ const Navbar = () => {
         ticking = true;
       }
     };
-    
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pathName]);
@@ -79,7 +79,9 @@ const Navbar = () => {
       <Layout className="flex w-full justify-between items-center">
         {/* Logo */}
         <Link href="/" className="text-3xl ml-2 sm:ml-0 tracking-wide font-bold flex items-center">
-          <span style={{ color: pathName.includes('/customer-stories') ? '#073742' : color.text }}>aneeverse</span>
+          <span style={{ color: pathName.includes('/customer-stories') ? '#073742' : color.text }}>
+            <span className="text-4xl">A</span>neeverse
+          </span>
         </Link>
 
         {/* Large Screen Menu */}
