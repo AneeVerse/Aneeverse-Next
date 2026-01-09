@@ -414,7 +414,7 @@ const HeroSection = () => {
 
 
   return (
-    <div ref={heroSectionRef} className="bg-[#073742] relative text-[#EBFAFE] overflow-x-hidden" style={{ minHeight: 'clamp(600px, 100vh, 1200px)' }}>
+    <div ref={heroSectionRef} className="bg-[#073742] relative text-[#EBFAFE] overflow-hidden" style={{ minHeight: 'clamp(600px, 100vh, 1200px)' }}>
       {/* Overlap */}
       <div className="absolute -top-[4px] left-0 w-full h-[140px] bg-gradient-to-b z-20 blur-sm from-secondary-500 via-secondary-300 to-secondary-300 opacity-92"></div>
       <div className="absolute hidden lg:block bottom-[0px] left-0 w-full h-[110px] bg-gradient-to-t z-20 from-secondary-500 to-transparent"></div>
@@ -460,15 +460,7 @@ const HeroSection = () => {
 
               {/* Mobile View - Cards below CTA */}
               <div
-                className="lg:hidden w-full mt-3"
-                style={{
-                  width: '120vw',
-                  marginLeft: 'calc(50% - 60vw)',
-                  marginRight: 'calc(50% - 60vw)',
-                  position: 'relative',
-                  left: '60%',
-                  transform: 'translateX(-50%)'
-                }}
+                className="lg:hidden w-screen mt-3 ml-[calc(-50vw+50%)] relative overflow-hidden"
               >
                 <div
                   className="overflow-hidden mobile-scroll-wrapper"

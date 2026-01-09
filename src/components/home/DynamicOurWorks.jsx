@@ -40,10 +40,10 @@ const DynamicOurWorks = React.memo(({ projects = [] }) => {
   };
 
   return (
-    <div className="bg-[#03151a] py-16">
+    <div className="bg-[#03151a] py-16 overflow-hidden">
       <Layout>
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
           <div className="max-w-3xl">
             <h3 className="text-gray-400 text-xs sm:text-sm tracking-[0.2em] uppercase mb-4 font-bold">
               Our Works
@@ -69,12 +69,12 @@ const DynamicOurWorks = React.memo(({ projects = [] }) => {
 
         {/* Projects Grid */}
         {displayedProjects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="flex overflow-x-auto pb-4 gap-4 snap-x snap-mandatory scrollbar-hide px-6 md:grid md:grid-cols-4 md:gap-6 md:px-0 md:overflow-visible md:pb-0">
             {displayedProjects.map((project, index) => (
               <Link
                 href={project.url}
                 key={index}
-                className={`group cursor-pointer relative flex flex-col gap-4 ${getGridSpan(index) === 2 ? "md:col-span-2" : "md:col-span-1"}`}
+                className={`group cursor-pointer relative flex flex-col gap-4 flex-shrink-0 w-[85vw] snap-start md:w-auto ${getGridSpan(index) === 2 ? "md:col-span-2" : "md:col-span-1"}`}
               >
                 {/* Image */}
                 <div className="relative rounded-2xl overflow-hidden w-full h-[300px] md:h-[350px]">
