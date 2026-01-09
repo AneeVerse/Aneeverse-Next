@@ -80,7 +80,7 @@ const Navbar = () => {
         {/* Logo */}
         <Link href="/" className="text-3xl ml-2 sm:ml-0 tracking-wide font-bold flex items-center">
           <span style={{ color: pathName.includes('/customer-stories') ? '#073742' : color.text }}>
-            <span className="text-4xl">A</span>neeverse
+            aneeverse
           </span>
         </Link>
 
