@@ -445,7 +445,11 @@ const HeroSection = () => {
               <div className="flex w-full flex-col lg:flex-row items-center hero-cta-container mt-4">
                 <AnimatedButton
                   href="/contact"
-                  className="block text-center md:w-auto mx-auto md:mx-0 rounded-full font-medium text-secondary-500 bg-[#88D7F0] border border-[#88D7F0] hover:bg-secondary-500 hover:text-[#88D7F0] transition-colors hero-button"
+                  className="block text-center md:w-auto mx-auto md:mx-0 rounded-full font-bold text-base shadow-[0_0_20px_rgba(136,215,240,0.1)] hero-button"
+                  style={{
+                    backgroundColor: "#88D7F0",
+                    color: "#073742"
+                  }}
                   mainTextSlide="-140%"
                   duplicateTextStart="40%"
                   duplicateTextEnd="-100%"
