@@ -117,3 +117,21 @@ export const getPortfolioWorkBySlugQuery = groq`
     publishedAt
   }
 `
+
+// Query to get recommended posts for homepage
+export const getRecommendedPostsQuery = groq`
+  *[_type == "post"] | order(publishedAt desc)[0...10] {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    mainImage {
+      sanityImage,
+      externalImage,
+      alt
+    },
+    categories[]->{
+      title
+    }
+  }
+`
