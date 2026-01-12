@@ -16,7 +16,7 @@ const HumanCreativity = React.memo(() => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
-                        className="text-xs sm:text-sm font-bold tracking-[0.2em] uppercase text-gray-400 mb-3"
+                        className="text-xs sm:text-sm font-medium tracking-tight uppercase text-[#88d7f0] mb-3"
                     >
                         Human Creativity Supported by AI
                     </motion.h3>
@@ -25,7 +25,7 @@ const HumanCreativity = React.memo(() => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.1 }}
-                        className="font-bw-gradual text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase leading-tight max-w-3xl mx-auto"
+                        className="font-bw-gradual text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-tight max-w-3xl mx-auto"
                     >
                         Real Minds, Smart <br className="hidden sm:block" /> Tools, Exceptional <br className="hidden sm:block" /> Design
                     </motion.h2>
