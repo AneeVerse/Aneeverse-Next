@@ -574,7 +574,7 @@ const HeroSection = () => {
         </Layout>
 
         {/* Right Image Section - Positioned absolutely to reach screen edge */}
-        <div className="hidden lg:block absolute right-[-1%] top-0 w-[41%] lg:w-[43%] xl:w-[41%] 2xl:w-[38%] h-full pb-8 overflow-hidden" style={{ height: 'clamp(600px, 100vh, 1200px)' }}>
+        <div className="hidden lg:block absolute right-2 top-0 w-[41%] lg:w-[43%] xl:w-[41%] 2xl:w-[38%] h-full pb-8 overflow-hidden" style={{ height: 'clamp(600px, 100vh, 1200px)' }}>
           {/* Desktop View - Vertical Scroll */}
           <div className="flex gap-4 h-full overflow-hidden marquee-wrapper" style={{ height: 'clamp(600px, 100vh, 1200px)' }}>
             <div
