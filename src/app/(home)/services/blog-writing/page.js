@@ -1,4 +1,4 @@
-import TestimonialSlider from '@/components/about/TestimonialSlider'
+import TestimonialsSection from '@/components/home/TestimonialsSection'
 import SlidingLogos from '@/components/home/SlidingLogos'
 import BlogWritingFAQSection from '@/components/services/blog-writing/BlogWritingFAQSection'
 import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
@@ -301,7 +301,7 @@ const page = async () => {
         subtitle="RESULTS THAT MATTER"
         stats={statsData}
       />
-      <TestimonialSlider />
+      <TestimonialsSection />
       <BlogWritingFAQSection />
 
     </div>

@@ -1,4 +1,4 @@
-import TestimonialSlider from '@/components/about/TestimonialSlider'
+import TestimonialsSection from '@/components/home/TestimonialsSection'
 import SlidingLogos from '@/components/home/SlidingLogos'
 import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
 import DynamicOurWorks from '@/components/home/DynamicOurWorks'
@@ -53,7 +53,7 @@ const page = () => {
       <DynamicCreativeSection subtitle="Packaging Excellence" title="Packing & Merchandise Design Services" heighlightText="Professional " items={items} />
       <DynamicOurWorks />
       <DynamicStateSection title="Our Packaging Impact" subtitle="PROVEN RESULTS" stats={stats} />
-      <TestimonialSlider />
+      <TestimonialsSection />
       <PackingMerchandiseDesignFAQSection />
     </div>
   )

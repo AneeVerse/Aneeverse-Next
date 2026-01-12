@@ -1,4 +1,4 @@
-import TestimonialSlider from '@/components/about/TestimonialSlider'
+import TestimonialsSection from '@/components/home/TestimonialsSection'
 import SlidingLogos from '@/components/home/SlidingLogos'
 import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
 import DynamicOurWorks from '@/components/home/DynamicOurWorks'
@@ -53,7 +53,7 @@ const page = () => {
       <DynamicCreativeSection subtitle="System Excellence" title="Design System Services" heighlightText="Comprehensive " items={items} />
       <DynamicOurWorks />
       <DynamicStateSection title="Our Design System Impact" subtitle="PROVEN RESULTS" stats={stats} />
-      <TestimonialSlider />
+      <TestimonialsSection />
       <DesignSystemFAQSection />
     </div>
   )

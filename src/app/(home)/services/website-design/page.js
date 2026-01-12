@@ -1,4 +1,4 @@
-import TestimonialSlider from '@/components/about/TestimonialSlider'
+import TestimonialsSection from '@/components/home/TestimonialsSection'
 import SlidingLogos from '@/components/home/SlidingLogos'
 import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
 import DynamicOurWorks from '@/components/home/DynamicOurWorks'
@@ -40,69 +40,69 @@ const page = () => {
 
   const items = [
     {
-        name: "Website Strategy",
-        about: "Our marketing consulting team can help you craft channel and campaign plans that drive traffic to your website.",
-        image: "/images/services/website/website-strategy.avif",
-        bgColor: "bg-secondary-500",
-        textColor: "text-primary-500",
+      name: "Website Strategy",
+      about: "Our marketing consulting team can help you craft channel and campaign plans that drive traffic to your website.",
+      image: "/images/services/website/website-strategy.avif",
+      bgColor: "bg-secondary-500",
+      textColor: "text-primary-500",
     },
     {
-        name: "Website Design",
-        about: "Superside creates conversion-focused websites and landing pages that are tailored to your campaign goals",
-        image: "/images/services/website/website-design.avif",
-        bgColor: "bg-[#c0e2ff]",
-        textColor: "text-[#0a211f]",
+      name: "Website Design",
+      about: "Superside creates conversion-focused websites and landing pages that are tailored to your campaign goals",
+      image: "/images/services/website/website-design.avif",
+      bgColor: "bg-[#c0e2ff]",
+      textColor: "text-[#0a211f]",
     },
     {
-        name: "Landing Page Design",
-        about: "Our team of designers can create high-converting landing pages that are optimized for your campaign goals.",
-        image: "/images/services/website/landing-page-design.avif",
-        bgColor: "bg-[#f9f9f9]",
-        textColor: "text-[#3d3d3d]",
+      name: "Landing Page Design",
+      about: "Our team of designers can create high-converting landing pages that are optimized for your campaign goals.",
+      image: "/images/services/website/landing-page-design.avif",
+      bgColor: "bg-[#f9f9f9]",
+      textColor: "text-[#3d3d3d]",
     },
     {
-        name: "Illustration Design",
-        about: "Our team of illustrators can create custom illustrations that bring your brand to life.",
-        image: "/images/services/website/website-illustrations.avif",
-        bgColor: "bg-[#292423]",
-        textColor: "text-[#ffafed]",
+      name: "Illustration Design",
+      about: "Our team of illustrators can create custom illustrations that bring your brand to life.",
+      image: "/images/services/website/website-illustrations.avif",
+      bgColor: "bg-[#292423]",
+      textColor: "text-[#ffafed]",
     },
-    
+
     {
-        name: "Webflow Development",
-        about: "Our team of developers can build custom websites using Webflow that are tailored to your campaign goals.",
-        image: "/images/services/website/webflow-development.avif",
-        bgColor: "bg-[#d8ff85]",
-        textColor: "text-[#1c4437]",
-    },
-    {
-        name: "UX UI Audit",
-        about: "Our team of designers can audit your website and provide recommendations to improve user experience and user interface.",
-        image: "/images/services/website/ux-ui-audit.avif",
-        bgColor: "bg-[#edf4ea]",
-        textColor: "text-[#1c4437]",
+      name: "Webflow Development",
+      about: "Our team of developers can build custom websites using Webflow that are tailored to your campaign goals.",
+      image: "/images/services/website/webflow-development.avif",
+      bgColor: "bg-[#d8ff85]",
+      textColor: "text-[#1c4437]",
     },
     {
-        name: "Design Systems",
-        about: "Our team of designers can create design systems that help maintain brand consistency across all marketing materials.",
-        image: "/images/services/website/design-systems.avif",
-        bgColor: "bg-[#e7f9d1]",
-        textColor: "text-[#365314]",
+      name: "UX UI Audit",
+      about: "Our team of designers can audit your website and provide recommendations to improve user experience and user interface.",
+      image: "/images/services/website/ux-ui-audit.avif",
+      bgColor: "bg-[#edf4ea]",
+      textColor: "text-[#1c4437]",
     },
     {
-        name: "Content Development",
-        about: "Our team of copywriters can create compelling content that resonates with your target audience.",
-        image: "/images/services/website/content-development.avif",
-        bgColor: "bg-[#f6edf9]",
-        textColor: "text-[#4a124f]",
+      name: "Design Systems",
+      about: "Our team of designers can create design systems that help maintain brand consistency across all marketing materials.",
+      image: "/images/services/website/design-systems.avif",
+      bgColor: "bg-[#e7f9d1]",
+      textColor: "text-[#365314]",
+    },
+    {
+      name: "Content Development",
+      about: "Our team of copywriters can create compelling content that resonates with your target audience.",
+      image: "/images/services/website/content-development.avif",
+      bgColor: "bg-[#f6edf9]",
+      textColor: "text-[#4a124f]",
     }
-  
-    
-];
+
+
+  ];
 
   return (
     <div>
-      <ServiceSchema 
+      <ServiceSchema
         serviceName="Website Design"
         serviceType="ProfessionalService"
         description="Professional website design and development services that create conversion-focused, user-centric websites tailored to your business goals and brand identity."
@@ -165,8 +165,8 @@ const page = () => {
       />
 
 
-       <DynamicOurWorks />      <WebsiteDesignStateSections />
-      <TestimonialSlider />
+      <DynamicOurWorks />      <WebsiteDesignStateSections />
+      <TestimonialsSection />
       <WebsiteDesignFAQSection />
     </div>
   )
