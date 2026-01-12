@@ -5,13 +5,16 @@ import { ChevronDown } from "lucide-react";
 import Layout from "../../common/Layout";
 
 const faqs = [
-  { question: "What formats do you create ebooks in?", answer: "We create ebooks in PDF, EPUB, and HTML formats optimized for various devices and reading platforms." },
-  { question: "Can you create interactive reports?", answer: "Yes, we design interactive reports with clickable elements, embedded media, and dynamic content." },
-  { question: "How long does ebook design take?", answer: "Typically 2-4 weeks depending on length and complexity of the content." },
-  { question: "Do you handle data visualization?", answer: "Yes, we create charts, graphs, and infographics to visualize data in reports and publications." },
-  { question: "Can you design for mobile devices?", answer: "Absolutely! All our digital publications are optimized for mobile, tablet, and desktop viewing." },
-  { question: "Do you provide editable files?", answer: "Yes, we provide source files and editable versions for future updates." },
-  { question: "Can you help with content organization?", answer: "Yes, we can help structure and organize content for better readability and engagement." },
+  { question: "What is ebook design?", answer: "Ebook design is the process of formatting and designing digital publications so they’re visually appealing, easy to read, and optimized for viewing on computers, tablets, and other devices. It includes typography, layout, graphics, and consistent branding throughout." },
+  { question: "What is digital report design?", answer: "Digital report design focuses on creating engaging reports that present information clearly and attractively on screens, using charts, visuals, imagery, and layout choices that help readers absorb content effectively." },
+  { question: "What types of print design do you offer?", answer: "We provide comprehensive print design services including brochures, booklets, manuals, posters, annual reports, and other physical collateral designed to communicate your message with crisp visuals and strong branding." },
+  { question: "Why does good ebook or report design matter?", answer: "Well-designed ebooks and reports enhance readability, make complex information easier to understand, and help maintain your audience’s attention. They also reinforce professionalism and strengthen your brand’s credibility." },
+  { question: "Can you design both digital and print versions of the same document?", answer: "Yes - we can design documents that work beautifully as digital ebooks/reports and as high-quality printed materials, ensuring visual consistency and optimal formatting for each medium." },
+  { question: "What formats will my final ebook or report be delivered in?", answer: "Final deliverables can include PDF for print, interactive digital versions optimized for web viewing, and other formats based on your needs (e.g., flipbook, fixed layout)." },
+  { question: "Do you help with data visualization and charts?", answer: "Yes - we transform complex data into clear, compelling charts, infographics, and visual elements that make insights easy to understand and visually engaging." },
+  { question: "What makes your ebook and report design different?", answer: "Our approach prioritizes both storytelling and visual experience - combining strategic layout, branded graphics, and logical flow so readers engage with your content rather than skim past it." },
+  { question: "How do I get started with a print or ebook design project?", answer: "Start by sharing your content, goals, audience info, and branding guidelines. From there, we’ll work with you to define structure, design direction, and timelines." },
+  { question: "Can you create custom templates for ongoing ebook or report needs?", answer: "Yes - we can build reusable templates that maintain brand consistency and make future documents faster and easier to produce." },
 ];
 
 export default function EbookDigitalReportFAQSection() {

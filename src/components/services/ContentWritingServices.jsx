@@ -7,17 +7,24 @@ import { AccentText } from "../common/typography/AccentText";
 export default function ContentWritingServices() {
   const creativeServices = [
     {
-      title: "Blog Writing",
+      title: "SEO & Blog Writing",
       description:
-        "SEO-friendly blogs tailored to your niche. Engage your audience with informative and engaging content.",
-      imgUrl: "/images/services/creative/borchore.png",
+        "Content that ranks, engages, and converts. We create SEO-optimized blogs that attract organic traffic and build authority.",
+      imgUrl: "/images/services/website/seo-optimization.png",
       pageUrl: "/services/blog-writing",
+    },
+    {
+      title: "Copywriting",
+      description:
+        "Strategic, audience-first copywriting that connects, persuades, and converts your brand messages into results.",
+      imgUrl: "/images/services/creative/presentation-design.png",
+      pageUrl: "/services/copywriting",
     },
     {
       title: "Ghost Writing",
       description:
         "Captivating content under your brand's name. Let our expert writers craft compelling content for your brand.",
-      imgUrl: "/images/services/creative/presentation-design.png",
+      imgUrl: "/images/services/creative/borchore.png",
       pageUrl: "/services/ghost-writing",
     },
   ];

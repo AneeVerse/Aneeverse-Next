@@ -9,175 +9,230 @@ import ChannelTailoredSection from '@/components/services/common/ChannelTailored
 import HowItWorksSection from '@/components/services/common/HowItWorksSection'
 import N8nWorkflowsFAQSection from '@/components/services/n8n-workflows/N8nWorkflowsFAQSection'
 import ServiceSchema from '@/components/seo/ServiceSchema'
-import { FaRobot, FaSync, FaPlug, FaDatabase, FaChartLine, FaShieldAlt } from "react-icons/fa"
+import { FaExchangeAlt, FaFilter, FaHeadset, FaFileInvoiceDollar, FaUserCheck, FaProjectDiagram } from "react-icons/fa"
+import { client } from "@/sanity/lib/client"
+import { getPortfolioWorksQuery, getCustomerStoriesQuery } from "@/sanity/lib/queries"
+import { urlForImage } from "@/sanity/lib/image"
 import React from 'react'
 
+const getSanityImageUrl = (source, width = 800) => {
+  if (!source) return "";
+  try {
+    return urlForImage(source).width(width).url();
+  } catch (error) {
+    return "";
+  }
+};
+
 export const metadata = {
-  title: "n8n Workflows | Aneeverse",
-  description: "Automate your business processes with n8n workflow automation. Connect apps, automate tasks, and streamline operations with powerful workflow integrations.",
+  title: "n8n Workflow Automation Services | Aneeverse",
+  description: "Automate your business, reduce manual work, and scale faster. We build intelligent n8n workflow automation tailored to your business operations.",
   openGraph: {
-    title: "n8n Workflows | Aneeverse",
-    description: "Automate your business processes with n8n workflow automation. Connect apps, automate tasks, and streamline operations with powerful workflow integrations.",
+    title: "n8n Workflow Automation Services | Aneeverse",
+    description: "Automate your business, reduce manual work, and scale faster. We build intelligent n8n workflow automation tailored to your business operations.",
     url: `https://aneeverse.com/services/n8n-workflows`,
-    images: [{ url: "/images/meta/phone.avif", width: 1200, height: 630, alt: "n8n Workflows | Aneeverse" }],
+    images: [{ url: "/images/meta/phone.avif", width: 1200, height: 630, alt: "n8n Workflow Automation Services | Aneeverse" }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "n8n Workflows | Aneeverse",
-    description: "Automate your business processes with n8n workflow automation. Connect apps, automate tasks, and streamline operations with powerful workflow integrations.",
+    title: "n8n Workflow Automation Services | Aneeverse",
+    description: "Automate your business, reduce manual work, and scale faster. We build intelligent n8n workflow automation tailored to your business operations.",
     image: "/images/meta/phone.avif",
   },
 }
 
-const page = () => {
+const page = async () => {
+  // Fetch projects for DynamicOurWorks
+  let projects = [];
+  try {
+    const [works, stories] = await Promise.all([
+      client.fetch(getPortfolioWorksQuery),
+      client.fetch(getCustomerStoriesQuery)
+    ]);
+
+    const mappedWorks = works.map((item) => ({
+      image: getSanityImageUrl(item.thumbnailImage || item.mainImage, 1200),
+      title: item.title,
+      url: `/works/${item.slug.current}`,
+      description: item.servicesProvided?.join(", ") || item.shortDescription || "",
+    }));
+
+    const mappedStories = stories.map((story) => ({
+      image: getSanityImageUrl(story.mainImage, 1200),
+      title: story.projectTitle || story.title,
+      url: `/customer-stories/${story.slug.current}`,
+      description: story.servicesProvided?.join(", ") || story.shortDescription || "",
+    }));
+
+    projects = [...mappedWorks, ...mappedStories];
+  } catch (error) {
+    console.error('Error fetching projects for n8n workflows page:', error);
+  }
+
+  // Scrolling services for hero section
+  const scrollServices = [
+    { title: "Workflow automation consulting", image: "/images/services/website/website-strategy.avif" },
+    { title: "Custom n8n workflow creation", image: "/images/services/website/ux-ui-audit.avif" },
+    { title: "App integrations & connectors", image: "/images/services/website/content-development.avif" },
+    { title: "AI-augmented automations", image: "/images/services/website/website-illustrations.avif" },
+    { title: "Data syncing & systems integration", image: "/images/services/website/webflow-development.avif" },
+    { title: "Monitoring & maintenance", image: "/images/services/website/website-design.avif" },
+    { title: "Training & support", image: "/images/services/website/landing-page-design.avif" },
+  ];
+
   const items = [
-    { name: "Workflow Automation", about: "Design and implement automated workflows that connect your apps and streamline business processes.", image: "/images/services/email-design/email-design.avif", bgColor: "bg-secondary-500", textColor: "text-primary-500" },
-    { name: "App Integrations", about: "Connect hundreds of apps and services to create seamless data flows and automated processes.", image: "/images/services/email-design/email-strategy.avif", bgColor: "bg-[#c0e2ff]", textColor: "text-[#0a211f]" },
-    { name: "Data Synchronization", about: "Keep your data synchronized across platforms with automated workflows that ensure consistency.", image: "/images/services/email-design/email-html5.avif", bgColor: "bg-[#f9f9f9]", textColor: "text-[#3d3d3d]" },
-    { name: "Process Optimization", about: "Identify and automate repetitive tasks to save time and reduce manual errors in your workflows.", image: "/images/services/email-design/email-design-templates.avif", bgColor: "bg-[#292423]", textColor: "text-[#ffafed]" },
-    { name: "Custom Workflows", about: "Build custom n8n workflows tailored to your specific business needs and operational requirements.", image: "/images/services/email-design/email-newsletter-design.avif", bgColor: "bg-[#d8ff85]", textColor: "text-[#1c4437]" },
-    { name: "Workflow Monitoring", about: "Monitor and optimize your workflows with analytics and reporting to ensure peak performance.", image: "/images/services/email-design/email-ui-ux-audits.avif", bgColor: "bg-[#edf4ea]", textColor: "text-[#1c4437]" },
+    { name: "Workflow automation consulting", about: "Strategic analysis and planning to define where automation adds the most impact.", image: "/images/services/website/website-strategy.avif", bgColor: "bg-secondary-500", textColor: "text-primary-500" },
+    { name: "Custom workflow builds", about: "End-to-end automation sequences designed to your business logic.", image: "/images/services/website/ux-ui-audit.avif", bgColor: "bg-[#c0e2ff]", textColor: "text-[#0a211f]" },
+    { name: "App integrations & connectors", about: "Seamlessly connect your CRM, calendar, tickets, and productivity tools.", image: "/images/services/website/content-development.avif", bgColor: "bg-[#f9f9f9]", textColor: "text-[#3d3d3d]" },
+    { name: "AI-augmented automations", about: "Embed AI logic into workflows for smarter triggers and decisions.", image: "/images/services/website/design-systems.avif", bgColor: "bg-[#292423]", textColor: "text-[#ffafed]" },
+    { name: "Data sync automations", about: "Keep customer, sales, and operations data aligned in real time.", image: "/images/services/website/webflow-development.avif", bgColor: "bg-[#d8ff85]", textColor: "text-[#1c4437]" },
+    { name: "Trigger-based task workflows", about: "Automate actions based on user behavior, time schedules, or external events.", image: "/images/services/website/website-design.avif", bgColor: "bg-[#edf4ea]", textColor: "text-[#1c4437]" },
+    { name: "Error handling & alerts", about: "Robust workflows that notify, retry, or branch on failure.", image: "/images/services/website/landing-page-design.avif", bgColor: "bg-[#e7f9d1]", textColor: "text-[#365314]" },
+    { name: "System modernization automations", about: "Replace legacy manual processes with scalable automated pipelines.", image: "/images/services/website/website-illustrations.avif", bgColor: "bg-[#f6edf9]", textColor: "text-[#4a124f]" },
+    { name: "Monitoring & performance reporting", about: "Real-time oversight of workflow execution and performance.", image: "/images/services/website/local-seo.png", bgColor: "bg-[#ffd6cc]", textColor: "text-[#4a1c0f]" },
+    { name: "Training & support packages", about: "Enable your team to own, manage, and extend workflows confidently.", image: "/images/services/website/seo-optimization.png", bgColor: "bg-[#e6f3ff]", textColor: "text-[#003366]" },
   ];
 
   const stats = [
-    { value: "200+", description: "n8n workflows implemented for clients." },
-    { value: "60%", description: "Average time saved through workflow automation." },
-    { value: "500+", description: "App integrations configured and maintained." },
-    { value: "24/7", description: "Automated workflows running continuously." },
+    { value: "500+", description: "Automated workflows deployed." },
+    { value: "10k+", description: "Hours of manual work saved annually." },
+    { value: "100%", description: "Focus on reliable, scalable solutions." },
+    { value: "24/7", description: "Continuous system monitoring." },
   ];
 
   return (
     <div>
-      <ServiceSchema 
-        serviceName="n8n Workflow Automation Services" 
-        serviceType="ProfessionalService" 
-        description="Automate your business processes with n8n workflow automation. Connect apps, automate tasks, and streamline operations with powerful workflow integrations." 
-        slug="n8n-workflows" 
-        priceRange="$1500-$10000" 
-        category="Automation Services" 
+      <ServiceSchema
+        serviceName="n8n Workflow Automation Services"
+        serviceType="ProfessionalService"
+        description="Aneeverse builds intelligent n8n workflow automation tailored to your business operations, connecting apps and data while eliminating repetitive tasks."
+        slug="n8n-workflows"
+        priceRange="$1500-$10000"
+        category="Automation Services"
         features={[
-          "Workflow Automation",
-          "App Integrations",
-          "Data Synchronization",
-          "Process Optimization",
-          "Custom Workflows",
-          "Workflow Monitoring",
-          "API Connections",
-          "Error Handling & Recovery"
-        ]} 
+          "Workflow Automation Consulting",
+          "Custom n8n Workflow Creation",
+          "App Integrations & Connectors",
+          "AI-augmented Automations",
+          "Data Syncing & Systems Integration",
+          "Monitoring & Maintenance",
+          "Training & Support"
+        ]}
         benefits={[
-          "Time Savings",
-          "Reduced Manual Errors",
-          "Improved Efficiency",
-          "Better Data Consistency",
-          "Scalable Automation",
-          "Cost Reduction"
-        ]} 
-        serviceOutput="Fully automated workflows with integrations, monitoring, and support." 
-        audience="Businesses looking to automate processes, integrate apps, and streamline operations." 
-        additionalType="https://schema.org/ProfessionalService" 
+          "Reduce Manual Work",
+          "Scale Faster",
+          "Eliminate Repetitive Tasks",
+          "Boost Productivity",
+          "Operational Efficiency",
+          "Save Costs"
+        ]}
+        serviceOutput="Intelligent automated workflows, app integrations, and operational efficiency."
+        audience="Businesses looking to automate repetitive tasks and connect multiple systems."
+        additionalType="https://schema.org/ProfessionalService"
       />
-      <CommonServicesHeroSection 
-        title="n8n Workflow Automation" 
-        subtitle="Automation Services" 
-        description="Automate your business processes with n8n workflow automation. Connect apps, automate tasks, and streamline operations with powerful workflow integrations." 
-        ctaText="Book a Call" 
-        ctaLink="/contact" 
-        backgroundImage="/images/services/email-design/hero-banner.avif" 
+      <CommonServicesHeroSection
+        title="Automate your business, reduce manual work, and scale faster"
+        subtitle="N8N WORKFLOW AUTOMATION SERVICES"
+        description="Aneeverse builds intelligent n8n workflow automation tailored to your business operations, connecting apps and data while eliminating repetitive tasks. Whether you need automation strategy, custom workflow builds, or end-to-end deployment, we help you streamline processes, boost productivity, and accelerate growth."
+        ctaText="Book a Call"
+        ctaLink="/contact"
+        backgroundImage="/images/services/website/hero-banner.avif"
+        scrollServices={scrollServices}
       />
       <SlidingLogos />
-      <DynamicSupportSection 
-        subtitle="BUILT FOR MODERN BUSINESSES" 
-        title="Workflows That " 
-        highlightText="automate & integrate" 
-        imageSrc="/images/services/email-design/about-email.avif" 
-        imageAlt="n8n Workflow Automation" 
-        description="Transform your business operations with intelligent workflow automation. Our n8n experts build custom workflows that connect your apps and automate repetitive tasks." 
-        additionalText="From simple data transfers to complex multi-step processes, we create workflows that save time, reduce errors, and improve efficiency across your entire organization." 
+      <DynamicSupportSection
+        subtitle="Automate without limits"
+        title="Get time back and let "
+        highlightText="systems do the work"
+        imageSrc="/images/services/website/about-web.avif"
+        imageAlt="n8n Workflow Automation"
+        description="Manual tasks, disconnected tools, and repetitive data handling slow your growth and strain your team. Without automation, businesses waste valuable time and risk errors in core processes."
+        additionalText="n8n’s visual, node-based automation platform lets you connect systems and automate processes without heavy coding - and with expert guidance, your workflows become reliable engines that save costs, boost output, and power operational efficiency."
       />
-      <DynamicCreativeSection 
-        subtitle="Automation Excellence" 
-        title="n8n Workflow Services" 
-        heighlightText="Comprehensive " 
-        items={items} 
+      <DynamicCreativeSection
+        subtitle="What we deliver"
+        title="Tailored n8n automations that transform work"
+        heighlightText=""
+        description="From initial strategy to final deployment, we build custom automations that eliminate busywork, sync systems, and enable your team to focus on what matters most."
+        items={items}
       />
       <ChannelTailoredSection
-        subtitle="Automation for every process"
+        subtitle="Built for every business workflow need"
         title="Workflows that work for your business"
         titleHighlight="your business"
-        description="From app integrations to data synchronization, we automate processes that save time and improve efficiency."
+        description="Whether you’re automating marketing tasks, operational flows, data updates, or backend processes, our n8n workflows are engineered to reduce manual errors and increase throughput."
         channels={[
           {
-            title: "Workflow Design",
-            subtitle: "Design custom n8n workflows that automate your business processes and connect your apps seamlessly.",
-            icon: <FaRobot className="w-8 h-8" />,
+            title: "Sales & CRM sync",
+            subtitle: "Automatically sync leads, deals, and contacts between systems.",
+            icon: <FaExchangeAlt className="w-8 h-8" />,
           },
           {
-            title: "App Integrations",
-            subtitle: "Connect hundreds of apps and services including CRMs, databases, APIs, and cloud platforms.",
-            icon: <FaPlug className="w-8 h-8" />,
+            title: "Marketing automations",
+            subtitle: "Automate campaigns, follow-ups, and audience nurturing.",
+            icon: <FaFilter className="w-8 h-8" />,
           },
           {
-            title: "Data Synchronization",
-            subtitle: "Keep your data synchronized across platforms with automated workflows that ensure consistency and accuracy.",
-            icon: <FaSync className="w-8 h-8" />,
+            title: "Support & ticket workflows",
+            subtitle: "Automate ticket routing, escalation, and notifications.",
+            icon: <FaHeadset className="w-8 h-8" />,
           },
           {
-            title: "Process Automation",
-            subtitle: "Automate repetitive tasks and processes to save time, reduce errors, and improve operational efficiency.",
-            icon: <FaChartLine className="w-8 h-8" />,
+            title: "Finance & billing automations",
+            subtitle: "Trigger actions for invoicing, reminders, and payment checks.",
+            icon: <FaFileInvoiceDollar className="w-8 h-8" />,
           },
           {
-            title: "Database Integration",
-            subtitle: "Connect and automate database operations, data transfers, and synchronization across systems.",
-            icon: <FaDatabase className="w-8 h-8" />,
+            title: "HR & onboarding workflows",
+            subtitle: "Automate employee onboarding, offboarding, and data updates.",
+            icon: <FaUserCheck className="w-8 h-8" />,
           },
           {
-            title: "Security & Monitoring",
-            subtitle: "Implement secure workflows with error handling, monitoring, and recovery mechanisms for reliability.",
-            icon: <FaShieldAlt className="w-8 h-8" />,
+            title: "Custom integrations",
+            subtitle: "Connect legacy systems or proprietary tools into seamless workflows.",
+            icon: <FaProjectDiagram className="w-8 h-8" />,
           },
         ]}
       />
       <HowItWorksSection
-        subtitle="HOW WE WORK"
-        title="From manual processes to automated workflows without the complexity"
-        titleHighlight="complexity"
-        description="Our n8n workflow implementation process ensures smooth automation setup and optimization of workflows that drive efficiency."
+        subtitle="how we work"
+        title="From concept to automation that "
+        titleHighlight="runs itself"
+        description="Our n8n workflow process blends strategy, design, and technical delivery so your automation solutions are reliable, maintainable, and aligned to business goals."
         steps={[
           {
             number: "1",
-            title: "Process Analysis",
-            subtitle: "We analyze your current processes, identify automation opportunities, and map workflow requirements.",
+            title: "Workflow discovery",
+            subtitle: "Analyze your current processes and identify automation opportunities.",
           },
           {
             number: "2",
-            title: "Workflow Design",
-            subtitle: "We design custom n8n workflows, define triggers, actions, and data flows tailored to your needs.",
+            title: "Strategy & roadmap",
+            subtitle: "Define automation priorities, scope, and execution plan.",
           },
           {
             number: "3",
-            title: "Integration & Setup",
-            subtitle: "We connect your apps and services, configure workflows, and set up authentication and permissions.",
+            title: "Build & integrate",
+            subtitle: "Develop custom n8n workflows and integrate with your tools.",
           },
           {
             number: "4",
-            title: "Testing & Deployment",
-            subtitle: "We thoroughly test workflows, handle edge cases, then deploy with monitoring and error handling.",
+            title: "Test & refine",
+            subtitle: "Thorough QA to ensure stability, accuracy, and desired outcomes.",
           },
           {
             number: "5",
-            title: "Optimization & Support",
-            subtitle: "We monitor workflow performance, optimize for efficiency, and provide ongoing support and updates.",
+            title: "Launch & optimize",
+            subtitle: "Deploy workflows, monitor performance, and refine for improvement.",
           },
         ]}
       />
-      <DynamicOurWorks />
-      <DynamicStateSection 
-        title="Our n8n Automation Impact" 
-        subtitle="PROVEN RESULTS" 
-        stats={stats} 
+      <DynamicOurWorks projects={projects} />
+      <DynamicStateSection
+        title="Our n8n Automation Impact"
+        subtitle="PROVEN RESULTS"
+        stats={stats}
       />
       <TestimonialSlider />
       <N8nWorkflowsFAQSection />
@@ -186,4 +241,3 @@ const page = () => {
 }
 
 export default page
-

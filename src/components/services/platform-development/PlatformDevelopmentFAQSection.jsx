@@ -5,13 +5,16 @@ import { ChevronDown } from "lucide-react";
 import Layout from "../../common/Layout";
 
 const faqs = [
-  { question: "What technologies do you use for platform development?", answer: "We work with modern technologies including React, Node.js, Python, PHP, and cloud platforms like AWS, Azure, and Google Cloud." },
-  { question: "How long does platform development take?", answer: "Development timelines vary based on complexity, typically ranging from 3-6 months for custom platforms." },
-  { question: "Do you provide ongoing maintenance?", answer: "Yes, we offer comprehensive maintenance and support packages to keep your platform running smoothly." },
-  { question: "Can you integrate with existing systems?", answer: "Absolutely! We specialize in integrating new platforms with your existing infrastructure and third-party services." },
-  { question: "What is included in platform development?", answer: "We handle everything from planning and design to development, testing, deployment, and ongoing support." },
-  { question: "Do you offer cloud hosting solutions?", answer: "Yes, we can deploy your platform on cloud infrastructure and manage hosting for optimal performance." },
-  { question: "How do you ensure platform security?", answer: "We implement industry-standard security practices including encryption, authentication, and regular security audits." },
+  { question: "What exactly is platform development?", answer: "Platform development is the process of designing, building, and deploying scalable software solutions - typically cloud-based applications like SaaS products - that solve business problems and support users through a web interface or app." },
+  { question: "What services are included in SaaS platform development?", answer: "SaaS platform development typically includes strategy consulting, UI/UX design, custom coding, API and third-party integrations, QA/testing, cloud deployment, and long-term support and maintenance." },
+  { question: "How long does it take to build a SaaS platform?", answer: "Development time varies based on complexity and features, but building a minimum viable product (MVP) often takes a few months, while fully featured platforms can take longer depending on scope and integrations needed." },
+  { question: "What technologies are commonly used in platform development?", answer: "Platforms often use modern frontend and backend frameworks, cloud infrastructure, databases, API services, and security tools - chosen based on performance needs, scalability, and your product goals." },
+  { question: "Do I need my own development team to build a SaaS platform?", answer: "No - you can partner with expert platform developers who provide a full team of strategists, designers, and engineers to handle development, saving you from building an in-house team." },
+  { question: "What’s the difference between an MVP and a full-scale platform?", answer: "An MVP (Minimum Viable Product) includes just the core features needed to get early user feedback quickly. A full-scale platform adds more advanced features, integrations, security layers, and scalability for broader audiences." },
+  { question: "Can you integrate existing tools into my platform (like CRM, payment systems, or analytics)?", answer: "Yes - modern platforms are often built with API integrations so your system can connect with CRMs, payment processors, analytics services, and other business tools seamlessly." },
+  { question: "How do you ensure my platform is secure and scalable?", answer: "Development includes architecture planning, data encryption, compliance standards, and cloud infrastructure design so the platform can securely handle growth, user load, and future enhancements." },
+  { question: "What happens after the platform is launched?", answer: "After launch, teams usually offer ongoing support, maintenance, performance monitoring, security updates, and new feature development to keep the platform running smoothly and evolving with user needs." },
+  { question: "How much does platform development typically cost?", answer: "Costs vary widely depending on complexity, feature set, technology choices, and integrations required. A provider will assess your goals to offer a custom estimate that fits your budget." },
 ];
 
 export default function PlatformDevelopmentFAQSection() {

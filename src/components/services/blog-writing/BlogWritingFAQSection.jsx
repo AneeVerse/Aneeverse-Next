@@ -5,13 +5,16 @@ import { ChevronDown } from "lucide-react";
 import Layout from "../../common/Layout";
 
 const faqs = [
-  { question: "What makes aneeverse's design services different?", answer: "We deliver speedy, high-quality graphic design services through a transparent subscription model." },
-  { question: "How does a design subscription work?", answer: "A subscription provides you access to dedicated design resources on a recurring basis." },
-  { question: "What is graphic design?", answer: "Graphic design is the art of creating visual content to communicate messages." },
-  { question: "What do graphic designers do?", answer: "Graphic designers create visuals that inspire, inform, and captivate audiences." },
-  { question: "Who needs graphic design services?", answer: "Anyone looking to enhance their brand's visual identity needs graphic design services." },
-  { question: "Do you do custom plans?", answer: "Yes, we offer tailored solutions to meet unique design needs." },
-  { question: "What billing options do you offer?", answer: "We offer flexible billing options, including monthly and annual subscriptions." },
+  { question: "What exactly are SEO blog writing services?", answer: "SEO blog writing services create well-written, search-optimized blog posts that help your site rank higher on search engines, attract organic traffic, and educate or engage your target audience." },
+  { question: "How can blog writing improve my website’s SEO?", answer: "Regular, relevant blog content helps search engines understand your topics better, increases keyword visibility, and gives you more opportunities to rank for questions your audience is searching for." },
+  { question: "Do you handle keyword research and SEO optimization?", answer: "Yes - professional blog writing includes keyword research, SEO-friendly structure, natural keyword placement, and on-page optimization so each post is primed to perform in search engines." },
+  { question: "What types of blog content can you create?", answer: "We can write how-to articles, list posts, thought leadership content, industry analysis, case studies, and long-form resources - all tailored to your audience and SEO goals." },
+  { question: "How do you ensure content resonates with my audience?", answer: "Our process begins with understanding your brand, target audience needs, and search intent so the content answers real questions and keeps readers engaged." },
+  { question: "Can blog writing services help with traffic and lead generation?", answer: "Yes - strategic, SEO-focused blogging attracts relevant visitors over time and can convert them into leads by building trust and addressing their needs." },
+  { question: "How long does it take to get blog posts written?", answer: "Turnaround depends on scope and volume. Some services can deliver high-quality blog posts in a few days, with larger content calendars delivered on a monthly schedule." },
+  { question: "Will you revise content if I need changes?", answer: "Yes - most professional blog writing plans include revision rounds so the final content reflects your voice, goals, and feedback." },
+  { question: "Do you provide content calendars or topic planning?", answer: "Yes - many services offer editorial planning so you have a strategic schedule of blog topics aligned with your SEO and business objectives." },
+  { question: "Is this service suitable for any industry?", answer: "Yes - professional SEO blog writing can be customized to any niche or industry, from tech and B2B to health, ecommerce, and beyond, with expert writers adapting tone and research accordingly." },
 ];
 
 export default function BlogWritingFAQSection() {

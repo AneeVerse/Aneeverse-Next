@@ -5,13 +5,16 @@ import { ChevronDown } from "lucide-react";
 import Layout from "../../common/Layout";
 
 const faqs = [
-  { question: "What makes aneeverse's design services different?", answer: "We deliver speedy, high-quality graphic design services through a transparent subscription model." },
-  { question: "How does a design subscription work?", answer: "A subscription provides you access to dedicated design resources on a recurring basis." },
-  { question: "What is graphic design?", answer: "Graphic design is the art of creating visual content to communicate messages." },
-  { question: "What do graphic designers do?", answer: "Graphic designers create visuals that inspire, inform, and captivate audiences." },
-  { question: "Who needs graphic design services?", answer: "Anyone looking to enhance their brand's visual identity needs graphic design services." },
-  { question: "Do you do custom plans?", answer: "Yes, we offer tailored solutions to meet unique design needs." },
-  { question: "What billing options do you offer?", answer: "We offer flexible billing options, including monthly and annual subscriptions." },
+  { question: "What are email design services?", answer: "Email design services help you create visually appealing, on-brand, and strategically structured email templates and layouts that increase engagement and guide readers toward key actions." },
+  { question: "Why does good email design matter?", answer: "Well-designed emails stand out in crowded inboxes, improve readability and engagement, and support your campaign goals - whether that’s driving clicks, sales, or retention." },
+  { question: "What is included in an email campaign service?", answer: "Campaign services typically include template design, content layout, audience segmentation, delivery setup, testing, and performance tracking to ensure your messages reach the right people at the right time." },
+  { question: "Can you design emails that work across all devices?", answer: "Yes - responsive email design ensures your messages display correctly on mobile phones, tablets, and desktops, enhancing user experience and campaign effectiveness." },
+  { question: "What tools do you use for designing and sending email campaigns?", answer: "We work with modern email campaign platforms and tools that support design, automation, list management, and performance analytics - from drag-and-drop editors to more customizable systems like Listmonk." },
+  { question: "Do you help with campaign strategy and audience targeting?", answer: "Yes - part of our service includes planning the campaign flow, selecting segments of your audience, and timing sends to align with your marketing goals." },
+  { question: "Can you manage large subscriber lists?", answer: "Absolutely - whether you have a small audience or millions of subscribers, list management tools can handle segmentation, custom fields, and performance tracking to support scalable campaigns." },
+  { question: "What kinds of email campaigns can you create?", answer: "We can design newsletters, promotional campaigns, onboarding sequences, lifecycle messaging, automated drip campaigns, and event-driven campaigns (like launches or seasonal promotions)." },
+  { question: "How do you measure email campaign success?", answer: "We monitor key metrics such as open rates, click-through rates, conversions, bounce rates, and engagement trends to help you understand performance and optimize future sends." },
+  { question: "Can you help with automating email workflows (like welcome series)?", answer: "Yes - we create automated sequences (such as welcome emails, drip campaigns, and triggered replies) that send based on user behavior or specific actions to nurture your audience without manual effort." },
 ];
 
 export default function EmailCampaignFAQSection() {

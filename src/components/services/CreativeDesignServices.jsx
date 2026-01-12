@@ -7,11 +7,11 @@ import { AccentText } from "../common/typography/AccentText";
 export default function CreativeDesignServices() {
   const creativeServices = [
     {
-      title: "Social Media Creatives",
+      title: "Ad Creative",
       description:
-        "Engage your audience with visually striking social media posts and short videos tailored to your brand.",
+        "Eye-catching ad creatives that convert. High-performance visual assets for your paid campaigns.",
       imgUrl: "/images/services/creative/social-media-creative.png",
-      pageUrl: "/services/social-media-creatives",
+      pageUrl: "/services/ad-creative",
     },
     {
       title: "Presentation Design",
@@ -21,11 +21,18 @@ export default function CreativeDesignServices() {
       pageUrl: "/services/presentation-design",
     },
     {
-      title: "Brochure Design",
+      title: "Branding System & Merchandise",
       description:
-        "Create compelling brochures that showcase your offerings in a polished and eye-catching format.",
+        "Complete brand identity solutions. Logos, guidelines, and branded materials that stand out.",
       imgUrl: "/images/services/creative/borchore.png",
-      pageUrl: "/services/brochure-design",
+      pageUrl: "/services/branding-services",
+    },
+    {
+      title: "Ebook, Report & Print Design",
+      description:
+        "Professional digital publications. High-converting ebooks, reports, and polished print materials.",
+      imgUrl: "/images/services/creative/social-media-creative.png",
+      pageUrl: "/services/ebook-digital-report",
     },
   ];
 

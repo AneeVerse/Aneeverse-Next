@@ -9,123 +9,225 @@ import ChannelTailoredSection from '@/components/services/common/ChannelTailored
 import HowItWorksSection from '@/components/services/common/HowItWorksSection'
 import SalesMarketingAutomationFAQSection from '@/components/services/sales-marketing-automation/SalesMarketingAutomationFAQSection'
 import ServiceSchema from '@/components/seo/ServiceSchema'
-import { FaCog, FaUsers, FaEnvelope, FaChartBar, FaSync, FaRocket } from "react-icons/fa"
+import { FaMagnet, FaBolt, FaProjectDiagram, FaTags, FaCogs, FaChartArea } from "react-icons/fa"
+import { client } from "@/sanity/lib/client"
+import { getPortfolioWorksQuery, getCustomerStoriesQuery } from "@/sanity/lib/queries"
+import { urlForImage } from "@/sanity/lib/image"
 import React from 'react'
 
+const getSanityImageUrl = (source, width = 800) => {
+  if (!source) return "";
+  try {
+    return urlForImage(source).width(width).url();
+  } catch (error) {
+    return "";
+  }
+};
+
 export const metadata = {
-  title: "Sales & Marketing Automation | Aneeverse",
-  description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+  title: "Sales & Marketing Automation Services | Aneeverse",
+  description: "Automate your revenue engine for growth and efficiency. We build intelligent sales and marketing automation systems that eliminate manual tasks and streamline engagement.",
   openGraph: {
-    title: "Sales & Marketing Automation | Aneeverse",
-    description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+    title: "Sales & Marketing Automation Services | Aneeverse",
+    description: "Automate your revenue engine for growth and efficiency. We build intelligent sales and marketing automation systems that eliminate manual tasks and streamline engagement.",
     url: `https://aneeverse.com/services/sales-marketing-automation`,
-    images: [{ url: "/images/meta/phone.avif", width: 1200, height: 630, alt: "Sales & Marketing Automation | Aneeverse" }],
+    images: [{ url: "/images/meta/phone.avif", width: 1200, height: 630, alt: "Sales & Marketing Automation Services | Aneeverse" }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sales & Marketing Automation | Aneeverse",
-    description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+    title: "Sales & Marketing Automation Services | Aneeverse",
+    description: "Automate your revenue engine for growth and efficiency. We build intelligent sales and marketing automation systems that eliminate manual tasks and streamline engagement.",
     image: "/images/meta/phone.avif",
   },
 }
 
-const page = () => {
+const page = async () => {
+  // Fetch projects for DynamicOurWorks
+  let projects = [];
+  try {
+    const [works, stories] = await Promise.all([
+      client.fetch(getPortfolioWorksQuery),
+      client.fetch(getCustomerStoriesQuery)
+    ]);
+
+    const mappedWorks = works.map((item) => ({
+      image: getSanityImageUrl(item.thumbnailImage || item.mainImage, 1200),
+      title: item.title,
+      url: `/works/${item.slug.current}`,
+      description: item.servicesProvided?.join(", ") || item.shortDescription || "",
+    }));
+
+    const mappedStories = stories.map((story) => ({
+      image: getSanityImageUrl(story.mainImage, 1200),
+      title: story.projectTitle || story.title,
+      url: `/customer-stories/${story.slug.current}`,
+      description: story.servicesProvided?.join(", ") || story.shortDescription || "",
+    }));
+
+    projects = [...mappedWorks, ...mappedStories];
+  } catch (error) {
+    console.error('Error fetching projects for automation page:', error);
+  }
+
+  const scrollServices = [
+    { title: "Automated lead nurturing", image: "/images/services/website/website-strategy.avif" },
+    { title: "CRM integration & workflows", image: "/images/services/website/ux-ui-audit.avif" },
+    { title: "Drip campaign automation", image: "/images/services/website/content-development.avif" },
+    { title: "Multi-channel campaign orchestration", image: "/images/services/website/website-illustrations.avif" },
+    { title: "Behavioral segmentation & personalization", image: "/images/services/website/webflow-development.avif" },
+    { title: "Sales process automation", image: "/images/services/website/website-design.avif" },
+    { title: "Performance analytics & reporting", image: "/images/services/website/landing-page-design.avif" },
+  ];
+
   const items = [
-    { name: "Marketing Automation", about: "Automating marketing workflows to nurture leads and drive conversions efficiently.", image: "/images/services/email-design/email-design.avif", bgColor: "bg-secondary-500", textColor: "text-primary-500" },
-    { name: "CRM Integration", about: "Integrating automation tools with your CRM to streamline sales and marketing processes.", image: "/images/services/email-design/email-strategy.avif", bgColor: "bg-[#c0e2ff]", textColor: "text-[#0a211f]" },
-    { name: "Workflow Design", about: "Designing automated workflows that save time and improve efficiency.", image: "/images/services/email-design/email-html5.avif", bgColor: "bg-[#f9f9f9]", textColor: "text-[#3d3d3d]" },
-    { name: "Lead Nurturing Automation", about: "Setting up automated sequences to nurture leads through the sales funnel.", image: "/images/services/email-design/email-design-templates.avif", bgColor: "bg-[#292423]", textColor: "text-[#ffafed]" },
-    { name: "Email Automation", about: "Creating automated email campaigns that engage customers at the right time.", image: "/images/services/email-design/email-newsletter-design.avif", bgColor: "bg-[#d8ff85]", textColor: "text-[#1c4437]" },
-    { name: "Analytics & Reporting", about: "Setting up analytics and reporting to track automation performance and ROI.", image: "/images/services/email-design/email-ui-ux-audits.avif", bgColor: "bg-[#edf4ea]", textColor: "text-[#1c4437]" },
+    { name: "Lead capture automation", about: "Trigger workflows the moment a new lead enters your ecosystem.", image: "/images/services/website/website-strategy.avif", bgColor: "bg-secondary-500", textColor: "text-primary-500" },
+    { name: "Drip campaign setup", about: "Automated sequences that nurture prospects through the buyer’s journey.", image: "/images/services/website/ux-ui-audit.avif", bgColor: "bg-[#c0e2ff]", textColor: "text-[#0a211f]" },
+    { name: "CRM workflow integration", about: "Seamlessly connect systems to automate data syncs and task assignments.", image: "/images/services/website/content-development.avif", bgColor: "bg-[#f9f9f9]", textColor: "text-[#3d3d3d]" },
+    { name: "Sales follow-up triggers", about: "Automated reminders and actions to keep engagement timely and consistent.", image: "/images/services/website/design-systems.avif", bgColor: "bg-[#292423]", textColor: "text-[#ffafed]" },
+    { name: "Behavioral segmentation", about: "Group audiences based on actions and preferences for targeted campaigns.", image: "/images/services/website/webflow-development.avif", bgColor: "bg-[#d8ff85]", textColor: "text-[#1c4437]" },
+    { name: "Multi-channel orchestration", about: "Coordinate email, SMS, social, and digital ads with intelligent automation.", image: "/images/services/website/website-design.avif", bgColor: "bg-[#edf4ea]", textColor: "text-[#1c4437]" },
+    { name: "Personalized messaging", about: "Dynamic content that adapts to user behavior and lifecycle stage.", image: "/images/services/website/landing-page-design.avif", bgColor: "bg-[#e7f9d1]", textColor: "text-[#365314]" },
+    { name: "Lead scoring & grading", about: "Prioritize high-value prospects and automatically route them to sales.", image: "/images/services/website/website-illustrations.avif", bgColor: "bg-[#f6edf9]", textColor: "text-[#4a124f]" },
+    { name: "Performance analytics dashboards", about: "Real-time insights to measure campaign ROI and automation impact.", image: "/images/services/website/local-seo.png", bgColor: "bg-[#ffd6cc]", textColor: "text-[#4a1c0f]" },
+    { name: "Closed-loop reporting", about: "Tie revenue outcomes back to specific campaigns and workflows.", image: "/images/services/website/seo-optimization.png", bgColor: "bg-[#e6f3ff]", textColor: "text-[#003366]" },
   ];
 
   const stats = [
-    { value: "300+", description: "Automation workflows implemented for clients." },
-    { value: "50%", description: "Average time saved through automation." },
-    { value: "35%", description: "Average increase in conversion rates." },
-    { value: "24/7", description: "Automated marketing and sales processes running." },
+    { value: "300+", description: "Automation workflows implemented." },
+    { value: "50%", description: "Average increase in sales efficiency." },
+    { value: "35%", description: "Average boost in lead conversion rates." },
+    { value: "24/7", description: "Continuously running revenue engines." },
   ];
 
   return (
     <div>
-      <ServiceSchema serviceName="Sales & Marketing Automation Services" serviceType="ProfessionalService" description="Streamline your sales and marketing processes with intelligent automation. From lead nurturing to CRM integration, we optimize your workflows." slug="sales-marketing-automation" priceRange="$2000-$15000" category="Marketing Services" features={["Marketing Automation", "CRM Integration", "Workflow Design", "Lead Nurturing", "Email Automation", "Analytics", "Campaign Management", "Performance Optimization"]} benefits={["Time Savings", "Higher Conversions", "Better Lead Quality", "Improved Efficiency", "Scalable Processes", "Data-Driven Insights"]} serviceOutput="Complete automation setup with workflows, integrations, and analytics." audience="Sales teams, marketing teams, and businesses looking to automate processes." additionalType="https://schema.org/ProfessionalService" />
-      <CommonServicesHeroSection title="Sales & Marketing Automation" subtitle="Marketing Services" description="Streamline your sales and marketing processes with intelligent automation. From lead nurturing to CRM integration, we optimize your workflows." ctaText="Book a Call" ctaLink="/contact" backgroundImage="/images/services/email-design/hero-banner.avif" />
+      <ServiceSchema
+        serviceName="Sales & Marketing Automation Services"
+        serviceType="ProfessionalService"
+        description="Aneeverse builds intelligent sales and marketing automation systems that eliminate manual tasks, streamline engagement, and power data-driven growth."
+        slug="sales-marketing-automation"
+        priceRange="$2000-$15000"
+        category="Marketing Services"
+        features={[
+          "Automated Lead Nurturing",
+          "CRM Integration & Workflows",
+          "Drip Campaign Automation",
+          "Multi-channel Campaign Orchestration",
+          "Behavioral Segmentation & Personalization",
+          "Sales Process Automation",
+          "Performance Analytics & Reporting"
+        ]}
+        benefits={[
+          "Eliminate Manual Tasks",
+          "Streamline Engagement",
+          "Power Data-Driven Growth",
+          "Align Sales & Marketing",
+          "Increase Pipeline Velocity",
+          "Improve Revenue Outcomes"
+        ]}
+        serviceOutput="Intelligent automation systems, CRM integrations, and personalized customer journeys."
+        audience="Businesses looking to automate revenue engines and improve team efficiency."
+        additionalType="https://schema.org/ProfessionalService"
+      />
+      <CommonServicesHeroSection
+        title="Automate your revenue engine for growth and efficiency"
+        subtitle="SALES & MARKETING AUTOMATION SERVICES"
+        description="Aneeverse builds intelligent sales and marketing automation systems that eliminate manual tasks, streamline engagement, and power data-driven growth. From lead capture and nurturing to personalized campaigns and closed-loop reporting, we help businesses automate processes end-to-end so your teams can focus on strategy, not repetitive work."
+        ctaText="Book a Call"
+        ctaLink="/contact"
+        backgroundImage="/images/services/website/hero-banner.avif"
+        scrollServices={scrollServices}
+      />
       <SlidingLogos />
-      <DynamicSupportSection subtitle="BUILT FOR SALES & MARKETING TEAMS" title="Automation That " highlightText="scales & converts" imageSrc="/images/services/email-design/about-email.avif" imageAlt="Sales Marketing Automation" description="Transform your sales and marketing operations with intelligent automation. Our solutions streamline processes, nurture leads, and drive conversions." additionalText="From workflow design to CRM integration, we set up automation systems that save time, improve efficiency, and deliver measurable results for your business." />
-      <DynamicCreativeSection subtitle="Automation Excellence" title="Sales & Marketing Automation Services" heighlightText="Intelligent " items={items} />
+      <DynamicSupportSection
+        subtitle="Automation that drives growth"
+        title="Sales and marketing shouldn’t "
+        highlightText="operate in silos"
+        imageSrc="/images/services/website/about-web.avif"
+        imageAlt="Sales & Marketing Automation"
+        description="Manual data entry, disconnected tools, and repetitive tasks slow your teams and fragment customer experiences. Without automation, leads fall through the cracks, prospects go cold, and your revenue engine loses momentum."
+        additionalText="With the right strategy and systems in place, you can automate engagement across channels, nurture leads intelligently, and align sales with marketing for consistent pipeline velocity. Aneeverse combines automation tech with business logic so your revenue teams work smarter and revenue outcomes improve."
+      />
+      <DynamicCreativeSection
+        subtitle="What we deliver"
+        title="Intelligent automation for every stage of the funnel"
+        heighlightText=""
+        description="From lead capture to deal close, we implement automation that removes bottlenecks, personalizes customer journeys, and drives measurable results."
+        items={items}
+      />
       <ChannelTailoredSection
-        subtitle="Automation for every process"
-        title="Automation that works for your sales and marketing"
-        titleHighlight="your sales and marketing"
-        description="From lead nurturing to CRM integration, we automate processes that save time and drive conversions."
+        subtitle="Built for real revenue acceleration"
+        title="Automations that unify teams and amplify impact"
+        titleHighlight="amplify impact"
+        description="Effective automation doesn’t just run tasks - it strengthens sales-marketing alignment, accelerates pipeline progression, and delivers measurable ROI."
         channels={[
           {
-            title: "Marketing Automation",
-            subtitle: "Automate marketing workflows to nurture leads, send targeted campaigns, and drive conversions.",
-            icon: <FaCog className="w-8 h-8" />,
+            title: "Lead generation automation",
+            subtitle: "Capture and qualify leads automatically through forms, landing pages, and triggers.",
+            icon: <FaMagnet className="w-8 h-8" />,
           },
           {
-            title: "Lead Nurturing",
-            subtitle: "Automated sequences that nurture leads through the sales funnel with personalized content.",
-            icon: <FaUsers className="w-8 h-8" />,
+            title: "Sales engagement automation",
+            subtitle: "Trigger follow-ups, reminders, and tasks that keep deals moving forward.",
+            icon: <FaBolt className="w-8 h-8" />,
           },
           {
-            title: "Email Automation",
-            subtitle: "Automated email campaigns that engage customers at the right time with relevant content.",
-            icon: <FaEnvelope className="w-8 h-8" />,
+            title: "Nurture campaign automation",
+            subtitle: "Automated drip sequences that educate and warm prospects.",
+            icon: <FaProjectDiagram className="w-8 h-8" />,
           },
           {
-            title: "CRM Integration",
-            subtitle: "Seamlessly integrate automation tools with your CRM to streamline sales and marketing processes.",
-            icon: <FaSync className="w-8 h-8" />,
+            title: "Personalization at scale",
+            subtitle: "Customize messaging based on behavior, preferences, and lifecycle.",
+            icon: <FaTags className="w-8 h-8" />,
           },
           {
-            title: "Workflow Design",
-            subtitle: "Design automated workflows that save time, improve efficiency, and scale with your business.",
-            icon: <FaRocket className="w-8 h-8" />,
+            title: "CRM & tool sync",
+            subtitle: "Keep your sales and marketing systems in perfect harmony.",
+            icon: <FaCogs className="w-8 h-8" />,
           },
           {
-            title: "Analytics & Reporting",
-            subtitle: "Track automation performance and ROI with comprehensive analytics and reporting dashboards.",
-            icon: <FaChartBar className="w-8 h-8" />,
+            title: "Analytics & ROI reporting",
+            subtitle: "Track performance, optimize campaigns, and understand what’s working.",
+            icon: <FaChartArea className="w-8 h-8" />,
           },
         ]}
       />
       <HowItWorksSection
-        subtitle="HOW WE WORK"
-        title="From manual to automated without the disruption"
-        titleHighlight="disruption"
-        description="Our automation process ensures smooth implementation and optimization of automated workflows that drive results."
+        subtitle="how we work"
+        title="Seamless automation from strategy to "
+        titleHighlight="execution"
+        description="Our process turns your business logic into efficient systems that run in the background and drive scalable results."
         steps={[
           {
             number: "1",
-            title: "Process Analysis",
-            subtitle: "We analyze your current processes, identify automation opportunities, and map workflows.",
+            title: "Discovery & goal alignment",
+            subtitle: "Align automation opportunities with business priorities and KPIs.",
           },
           {
             number: "2",
-            title: "Automation Design",
-            subtitle: "We design automated workflows, triggers, and sequences tailored to your business needs.",
+            title: "System audit & design",
+            subtitle: "Evaluate current tools, workflows, and data flows to design an optimized plan.",
           },
           {
             number: "3",
-            title: "Integration & Setup",
-            subtitle: "We integrate automation tools with your CRM and systems, then configure workflows and triggers.",
+            title: "Build & integrate",
+            subtitle: "Implement automated sequences, CRM integrations, and cross-channel triggers.",
           },
           {
             number: "4",
-            title: "Testing & Launch",
-            subtitle: "We test automation workflows thoroughly, then launch with monitoring and optimization.",
+            title: "QA & refinement",
+            subtitle: "Test workflows end-to-end for stability, accuracy, and performance.",
           },
           {
             number: "5",
-            title: "Optimization & Support",
-            subtitle: "We monitor performance, optimize workflows, and provide ongoing support to ensure success.",
+            title: "Monitor & optimize",
+            subtitle: "Track results and fine-tune automation for continuous growth.",
           },
         ]}
       />
-      <DynamicOurWorks />
+      <DynamicOurWorks projects={projects} />
       <DynamicStateSection title="Our Automation Impact" subtitle="PROVEN RESULTS" stats={stats} />
       <TestimonialSlider />
       <SalesMarketingAutomationFAQSection />
@@ -134,4 +236,3 @@ const page = () => {
 }
 
 export default page
-

@@ -43,7 +43,7 @@ const ServicesMegaMenu = ({ color }) => {
         // { name: "Product Design", url: "/services/product-design", description: "Market-ready product designs.", icon: <FaCog /> },
         { name: "Copywriting", url: "/services/copywriting", description: "Copy that converts.", icon: <FaPenFancy /> },
         // { name: "Blog Writing", url: "/services/blog-writing", description: "SEO-friendly blog content.", icon: <FaPenFancy /> },
-        { name: "SEO & Blog Writing", url: "/services/seo-optimization", description: "Boost search rankings.", icon: <FaSearch /> },
+        { name: "SEO & Blog Writing", url: "/services/blog-writing", description: "Content that ranks & converts.", icon: <FaSearch /> },
         // { name: "Corporate & Internals", url: "/services/corporate-internals", description: "Internal branding solutions.", icon: <FaBuilding /> },
 
       ],
