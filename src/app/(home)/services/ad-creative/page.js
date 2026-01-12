@@ -10,34 +10,75 @@ import ChannelTailoredSection from '@/components/services/common/ChannelTailored
 import HowItWorksSection from '@/components/services/common/HowItWorksSection'
 import ServiceSchema from '@/components/seo/ServiceSchema'
 import { FaDesktop, FaMobile, FaPlayCircle, FaImage, FaNewspaper, FaMapMarkerAlt } from "react-icons/fa"
+import { client } from "@/sanity/lib/client"
+import { getPortfolioWorksQuery, getCustomerStoriesQuery } from "@/sanity/lib/queries"
+import { urlForImage } from "@/sanity/lib/image"
 import React from 'react'
 
+// Helper to get optimized Sanity image URL
+const getSanityImageUrl = (image, maxWidth = 1200) => {
+  if (!image) return "/images/home/works-ban-1.avif";
+  try {
+    return urlForImage(image, maxWidth).url();
+  } catch (error) {
+    console.error('Error generating Sanity image URL:', error);
+    return "/images/home/works-ban-1.avif";
+  }
+};
+
 export const metadata = {
-  title: "Ad Creative | Aneeverse",
-  description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+  title: "Ad Creative Services | Aneeverse",
+  description: "High impact ads that stop the scroll and drive conversions. Aneeverse delivers fast, flexible, and always on-brand ad creative across digital, social, display, and print channels.",
   openGraph: {
-    title: "Ad Creative | Aneeverse",
-    description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+    title: "Ad Creative Services | Aneeverse",
+    description: "High impact ads that stop the scroll and drive conversions. Aneeverse delivers fast, flexible, and always on-brand ad creative across digital, social, display, and print channels.",
     url: `https://aneeverse.com/services/ad-creative`,
     images: [
       {
         url: "/images/meta/phone.avif",
         width: 1200,
         height: 630,
-        alt: "Ad Creative | Aneeverse",
+        alt: "Ad Creative Services | Aneeverse",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ad Creative | Aneeverse",
-    description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+    title: "Ad Creative Services | Aneeverse",
+    description: "High impact ads that stop the scroll and drive conversions. Aneeverse delivers fast, flexible, and always on-brand ad creative across digital, social, display, and print channels.",
     image: "/images/meta/phone.avif",
   },
 }
 
-const page = () => {
+const page = async () => {
+  // Fetch projects for DynamicOurWorks
+  let projects = [];
+  try {
+    const [works, stories] = await Promise.all([
+      client.fetch(getPortfolioWorksQuery),
+      client.fetch(getCustomerStoriesQuery)
+    ]);
+
+    const mappedWorks = works.map((item, index) => ({
+      image: getSanityImageUrl(item.thumbnailImage || item.mainImage, 1200),
+      title: item.title,
+      url: `/works/${item.slug.current}`,
+      description: item.servicesProvided?.join(", ") || item.shortDescription || "",
+    }));
+
+    const mappedStories = stories.map((story) => ({
+      image: getSanityImageUrl(story.mainImage, 1200),
+      title: story.projectTitle || story.title,
+      url: `/customer-stories/${story.slug.current}`,
+      description: story.servicesProvided?.join(", ") || story.shortDescription || "",
+    }));
+
+    projects = [...mappedWorks, ...mappedStories];
+  } catch (error) {
+    console.error('Error fetching projects for ad-creative page:', error);
+  }
+
   // Scrolling services for hero section
   const scrollServices = [
     { title: "Static ad design", image: "/images/services/email-design/email-design.avif" },
@@ -127,19 +168,18 @@ const page = () => {
       <ServiceSchema
         serviceName="Ad Creative Services"
         serviceType="ProfessionalService"
-        description="Create compelling ad creatives that capture attention, drive engagement, and convert. From social media ads to display advertising, we design campaigns that deliver results."
+        description="Whether it's digital, social, display, print, or out-of-home, Aneeverse delivers the ad creative you need fast, flexible, and always on brand. From concept to final delivery, we are your creative partner for campaigns that perform."
         slug="ad-creative"
         priceRange="$500-$3000"
         category="Digital Advertising"
         features={[
-          "Social Media Ad Design",
-          "Display Ad Creation",
-          "Video Ad Production",
-          "Banner Ad Design",
-          "Retargeting Ad Creatives",
-          "Native Ad Design",
-          "A/B Testing",
-          "Performance Optimization"
+          "Static ad design",
+          "Motion graphics and animated ads",
+          "Display advertising",
+          "Video ad production and editing",
+          "Ad campaign concepting",
+          "Multi-format adaptation",
+          "Performance-driven A/B testing variants"
         ]}
         benefits={[
           "Higher Click-Through Rates",
@@ -154,9 +194,9 @@ const page = () => {
         additionalType="https://schema.org/CreativeWork"
       />
       <CommonServicesHeroSection
-        title="High-impact ads that stop the scroll and drive conversions"
+        title="High impact ads that stop the scroll and drive conversions"
         subtitle="Ad Creative Services"
-        description="Whether it's digital, social, display, print, or out-of-home, Aneeverse delivers the ad creative you need fast, flexible, and always on-brand. From concept to final delivery, we're your creative partner for campaigns that perform."
+        description="Whether it's digital, social, display, print, or out-of-home, Aneeverse delivers the ad creative you need fast, flexible, and always on brand. From concept to final delivery, we are your creative partner for campaigns that perform."
         ctaText="Book a Call"
         ctaLink="/contact"
         backgroundImage="/images/services/email-design/hero-banner.avif"
@@ -181,22 +221,23 @@ const page = () => {
       />
       <ChannelTailoredSection
         subtitle="Built for every channel"
-        title="Ads that work wherever they are"
+        title="Ads that work wherever your audience is"
         titleHighlight="wherever"
+        description="We design with platform specs, audience behavior, and conversion goals in mind so your ads look native, feel authentic, and deliver measurable results."
         channels={[
           {
-            title: "Digital",
-            subtitle: "High-performing ads for programmatic, search, display, and video platforms.",
+            title: "Digital advertising",
+            subtitle: "High-performing ads for programmatic platforms, search engines, display networks, and video platforms.",
             icon: <FaDesktop className="w-8 h-8" />,
           },
           {
-            title: "Social media",
-            subtitle: "Platform-optimized visuals and video for Meta, TikTok, LinkedIn, and more.",
+            title: "Social media ads",
+            subtitle: "Platform-optimized visuals and video for Meta, Instagram, TikTok, LinkedIn, and emerging social platforms.",
             icon: <FaMobile className="w-8 h-8" />,
           },
           {
             title: "Streaming platforms",
-            subtitle: "Short- and long-form video ads tailored for CTV, YouTube, and on-demand viewers.",
+            subtitle: "Short- and long-form video ads tailored for CTV, YouTube, OTT, and on-demand viewers.",
             icon: <FaPlayCircle className="w-8 h-8" />,
           },
           {
@@ -271,7 +312,7 @@ const page = () => {
           },
         ]}
       />
-      <DynamicOurWorks />
+      <DynamicOurWorks projects={projects} />
       <TestimonialSlider />
       <AdCreativeFAQSection />
     </div>

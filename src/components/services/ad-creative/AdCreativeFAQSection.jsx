@@ -5,13 +5,16 @@ import { ChevronDown } from "lucide-react";
 import Layout from "../../common/Layout";
 
 const faqs = [
-  { question: "What types of ad creatives do you design?", answer: "We design social media ads, display ads, video ads, banner ads, retargeting ads, and native ads for all major platforms." },
-  { question: "How long does it take to create ad creatives?", answer: "Typically 2-5 business days depending on the complexity and number of variations needed." },
-  { question: "Do you optimize ads for different platforms?", answer: "Yes, we create platform-specific optimizations for Facebook, Instagram, Google Ads, LinkedIn, and more." },
-  { question: "Can you help with A/B testing?", answer: "Absolutely! We design multiple variations and help you test which creatives perform best." },
-  { question: "What file formats do you provide?", answer: "We provide all standard formats including JPG, PNG, MP4, and platform-specific formats as needed." },
-  { question: "Do you create video ad content?", answer: "Yes, we produce engaging video ad content including motion graphics and animated ads." },
-  { question: "How do you ensure ad creatives convert?", answer: "We combine data-driven insights with creative best practices to design ads that drive action and conversions." },
+  { question: "What kinds of ad creative services do you offer?", answer: "We provide a full range of ad creative services including static and animated ads, display advertising, video production, campaign concepting, multi-format adaptation, and performance-driven creative variants tailored to your goals and platforms." },
+  { question: "How does your ad creative process work?", answer: "Our workflow starts with a discovery brief, moves into concept and design, then adapts assets for all formats you need. Finally, we deliver multi-version variants ready for testing and optimization." },
+  { question: "Can you make ads that work across multiple platforms (social, display, video, etc.)?", answer: "Yes - all our ad creative is designed with platform specifications in mind so your campaign looks native and performs well on each channel, from social feeds to programmatic display and streaming platforms." },
+  { question: "What do you need from us to get started?", answer: "You’ll start by sharing your goals, target audience, brand guidelines, and any existing assets. The more context you provide, the better we can tailor creative to your needs." },
+  { question: "How long does it take to create ad creative?", answer: "Timelines vary based on the scope and formats required, but our streamlined creative process is built for fast, consistent delivery - even across large campaigns that need many versions." },
+  { question: "Do you provide multiple versions so we can A/B test creative?", answer: "Yes. Part of our service includes performance-driven A/B testing variants to help you evaluate what works best and avoid creative fatigue over time." },
+  { question: "Will my ads stay consistent with our branding?", answer: "Absolutely - we use your brand toolkit and guidelines to ensure visual and messaging consistency across all ad formats and campaign variants." },
+  { question: "Can you help improve underperforming ads?", answer: "Yes - we review existing creative, identify performance issues, and redesign assets or concepts to better align with your audience and goals." },
+  { question: "Do you include strategy in your ad creative service?", answer: "Our creative includes strategic concepting and messaging so that ads are not only visually strong but also aligned with your campaign objectives and audience insights." },
+  { question: "How are your services priced?", answer: "Pricing depends on scope, volume, formats, and whether you need one-off work or ongoing creative support. Contact us for a custom quote and scope based on your needs." },
 ];
 
 export default function AdCreativeFAQSection() {
