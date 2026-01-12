@@ -59,9 +59,9 @@ const DynamicOurWorks = React.memo(({ projects = [] }) => {
               backgroundColor: "#88D7F0",
               color: "#073742"
             }}
-            mainTextSlide="-140%"
-            duplicateTextStart="40%"
-            duplicateTextEnd="-100%"
+            mainTextSlide="-200%"
+            duplicateTextStart="200%"
+            duplicateTextEnd="-115%"
           >
             Explore all our works
           </AnimatedButton>
