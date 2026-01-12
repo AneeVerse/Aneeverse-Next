@@ -416,7 +416,7 @@ const HeroSection = () => {
   return (
     <div ref={heroSectionRef} className="bg-[#073742] relative text-[#EBFAFE] overflow-hidden" style={{ minHeight: 'clamp(600px, 100vh, 1200px)' }}>
       {/* Overlap */}
-      <div className="absolute -top-[4px] left-0 w-full h-[140px] bg-gradient-to-b z-20 blur-sm from-secondary-500 via-secondary-300 to-secondary-300 opacity-92"></div>
+      <div className="absolute -top-[20px] left-0 w-full h-[220px] bg-gradient-to-b z-20 from-[#021115] via-[#073742]/80 to-transparent"></div>
       <div className="absolute hidden lg:block bottom-[0px] left-0 w-full h-[110px] bg-gradient-to-t z-20 from-secondary-500 to-transparent"></div>
 
       <div className="relative h-full" style={{ minHeight: 'clamp(600px, 100vh, 1200px)' }}>
@@ -574,11 +574,11 @@ const HeroSection = () => {
         </Layout>
 
         {/* Right Image Section - Positioned absolutely to reach screen edge */}
-        <div className="hidden lg:block absolute right-[-2%] top-0 w-[42%] lg:w-[45%] xl:w-[42%] 2xl:w-[40%] h-full pb-8 overflow-hidden" style={{ height: 'clamp(600px, 100vh, 1200px)' }}>
+        <div className="hidden lg:block absolute right-[-1%] top-0 w-[41%] lg:w-[43%] xl:w-[41%] 2xl:w-[38%] h-full pb-8 overflow-hidden" style={{ height: 'clamp(600px, 100vh, 1200px)' }}>
           {/* Desktop View - Vertical Scroll */}
-          <div className="flex gap-3 h-full overflow-hidden marquee-wrapper" style={{ height: 'clamp(600px, 100vh, 1200px)' }}>
+          <div className="flex gap-4 h-full overflow-hidden marquee-wrapper" style={{ height: 'clamp(600px, 100vh, 1200px)' }}>
             <div
-              className="w-[30%] marquee-column"
+              className="w-[31%] marquee-column"
             >
               <div className="marquee-vertical marquee-vertical-content space-y-4">
                 {[...images1, ...images1].map((img, index) => (
@@ -590,10 +590,10 @@ const HeroSection = () => {
                       src={img.src}
                       alt="Creative work"
                       width={400}
-                      height={240}
-                      className="w-full h-[240px] object-cover rounded-xl transition-all duration-300 shadow-xl"
+                      height={index % 2 === 0 ? 280 : 200}
+                      className={`w-full ${index % 2 === 0 ? 'h-[280px]' : 'h-[200px]'} object-cover rounded-xl transition-all duration-300 shadow-xl`}
                       loading="lazy"
-                      sizes="(max-width: 1024px) 0vw, 14vw"
+                      sizes="(max-width: 1024px) 0vw, 12vw"
                       unoptimized={img.src?.includes('ik.imagekit.io')}
                       onError={(e) => {
                         console.error('Image failed to load:', img.src);
@@ -605,7 +605,7 @@ const HeroSection = () => {
             </div>
 
             <div
-              className="w-[30%] marquee-column"
+              className="w-[31%] marquee-column"
             >
               <div className="marquee-vertical-reverse marquee-vertical-content space-y-4">
                 {[...images2, ...images2].map((img, index) => (
@@ -617,10 +617,10 @@ const HeroSection = () => {
                       src={img.src}
                       alt="Creative work"
                       width={400}
-                      height={260}
-                      className={`w-full ${index % 2 === 0 ? 'h-[260px]' : 'h-[210px]'} object-cover rounded-xl transition-all duration-300 shadow-2xl`}
+                      height={index % 2 === 0 ? 200 : 280}
+                      className={`w-full ${index % 2 === 0 ? 'h-[200px]' : 'h-[280px]'} object-cover rounded-xl transition-all duration-300 shadow-2xl`}
                       loading="lazy"
-                      sizes="(max-width: 1024px) 0vw, 14vw"
+                      sizes="(max-width: 1024px) 0vw, 12vw"
                       unoptimized={img.src?.includes('ik.imagekit.io')}
                       onError={(e) => {
                         console.error('Image failed to load:', img.src);
@@ -632,7 +632,7 @@ const HeroSection = () => {
             </div>
 
             <div
-              className="w-[30%] marquee-column"
+              className="w-[31%] marquee-column"
             >
               <div className="marquee-vertical marquee-vertical-content space-y-4">
                 {[...images3, ...images3].map((img, index) => (
@@ -644,10 +644,10 @@ const HeroSection = () => {
                       src={img.src}
                       alt="Creative work"
                       width={400}
-                      height={230}
-                      className="w-full h-[230px] object-cover rounded-xl transition-all duration-300 shadow-2xl"
+                      height={index % 2 === 0 ? 280 : 200}
+                      className={`w-full ${index % 2 === 0 ? 'h-[280px]' : 'h-[200px]'} object-cover rounded-xl transition-all duration-300 shadow-2xl`}
                       loading="lazy"
-                      sizes="(max-width: 1024px) 0vw, 14vw"
+                      sizes="(max-width: 1024px) 0vw, 12vw"
                       unoptimized={img.src?.includes('ik.imagekit.io')}
                       onError={(e) => {
                         console.error('Image failed to load:', img.src);
