@@ -134,7 +134,7 @@ const TestimonialsSection = () => {
 
             {/* Interaction Overlay */}
             <motion.div
-              className="absolute inset-0 z-50 cursor-grab active:cursor-grabbing"
+              className="absolute inset-0 z-20 cursor-grab active:cursor-grabbing"
               onPanStart={onPanStart}
               onPan={onPan}
               onPanEnd={onPanEnd}
@@ -158,13 +158,13 @@ const TestimonialsSection = () => {
             {/* Gradients */}
             {isMobile ? (
               <>
-                <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-[#073742] via-[#073742]/10 to-transparent z-40 pointer-events-none" />
-                <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#073742] via-[#073742]/10 to-transparent z-40 pointer-events-none" />
+                <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-[#073742] via-[#073742]/10 to-transparent z-15 pointer-events-none" />
+                <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#073742] via-[#073742]/10 to-transparent z-15 pointer-events-none" />
               </>
             ) : (
               <>
-                <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#073742] to-transparent z-40 pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#073742] to-transparent z-40 pointer-events-none" />
+                <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#073742] to-transparent z-15 pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#073742] to-transparent z-15 pointer-events-none" />
               </>
             )}
           </div>
@@ -185,7 +185,7 @@ const TestimonialsSection = () => {
           </div>
 
           {/* ✅ Right Column: Buttons */}
-          <div className="hidden lg:flex flex-col gap-6 order-3 items-center z-50">
+          <div className="hidden lg:flex flex-col gap-6 order-3 items-center z-20">
             <button onClick={handlePrev} className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:bg-white/10 hover:text-white transition-all shadow-xl backdrop-blur-sm">
               <HiArrowNarrowUp size={28} />
             </button>

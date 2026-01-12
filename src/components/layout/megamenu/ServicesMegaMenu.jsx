@@ -89,7 +89,7 @@ const ServicesMegaMenu = ({ color }) => {
       </Link>
       {isOpen && (
         <motion.div
-          className="absolute left-0 top-[60px] pt-[20px] w-full z-40"
+          className="absolute left-0 top-[60px] pt-[20px] w-full z-[90]"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
