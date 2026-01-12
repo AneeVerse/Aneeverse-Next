@@ -5,13 +5,16 @@ import { ChevronDown } from "lucide-react";
 import Layout from "../../common/Layout";
 
 const faqs = [
-  { question: "What is marketing automation?", answer: "Marketing automation uses software to automate repetitive marketing tasks like email campaigns, social media posting, and lead nurturing." },
-  { question: "Which platforms do you integrate with?", answer: "We integrate with popular CRMs like Salesforce, HubSpot, and marketing platforms like Mailchimp, Marketo, and more." },
-  { question: "How long does automation setup take?", answer: "Setup typically takes 2-4 weeks depending on complexity and integrations needed." },
-  { question: "Can you automate lead scoring?", answer: "Yes, we can set up automated lead scoring systems that prioritize leads based on behavior and engagement." },
-  { question: "Do you provide training?", answer: "Yes, we provide comprehensive training to help your team use and manage automation systems effectively." },
-  { question: "How do you measure automation success?", answer: "We track metrics like conversion rates, time savings, lead quality, and ROI to measure automation effectiveness." },
-  { question: "Can automation work with existing systems?", answer: "Yes, we integrate automation with your existing CRM, email platforms, and other marketing tools." },
+  { question: "What is sales and marketing automation?", answer: "Sales and marketing automation uses software to automatically handle repetitive tasks - like email campaigns, lead nurturing, data updates, and campaign workflows - so your teams focus on strategy and high-value work." },
+  { question: "How does automation help my business grow?", answer: "Automation increases efficiency by reducing manual work, improving lead management, speeding follow-ups, and allowing personalized outreach at scale - which can boost productivity and ROI." },
+  { question: "What tasks can be automated?", answer: "Common automations include email workflows, lead scoring, segmentation, follow-up reminders, social posting, CRM updates, and campaign performance tracking." },
+  { question: "What’s the difference between sales automation and marketing automation?", answer: "Marketing automation focuses on attracting and nurturing leads (like email campaigns and content delivery), while sales automation focuses on converting and managing leads through the sales pipeline (like task reminders and lead follow-ups)." },
+  { question: "Do I need a CRM to use marketing automation?", answer: "A CRM isn’t required but highly recommended - integrating automation with a CRM ensures data flows seamlessly between sales and marketing, improving lead handoffs and tracking." },
+  { question: "How do automated workflows work?", answer: "Workflows trigger actions based on predefined rules - for example, when a lead fills a form, an automated welcome email may be sent and the lead scored for follow-up." },
+  { question: "Can small businesses benefit from automation too?", answer: "Yes - even small teams can save time and improve customer experiences by automating routine tasks like welcome emails or lead follow-ups." },
+  { question: "Will automation replace my sales or marketing team?", answer: "No - automation handles repetitive tasks, freeing your team to focus on creative, strategic, and relationship-driven activities. It enhances team effectiveness, not replaces it." },
+  { question: "How long before we see results?", answer: "It depends on your workflows and data, but many businesses see improvements in engagement and efficiency within weeks as automated campaigns and handoffs begin working in the background." },
+  { question: "Is automation difficult to set up?", answer: "Modern automation tools offer visual workflow builders and templates that make setup easy, even without coding - and integration with CRM platforms streamlines the process further." },
 ];
 
 export default function SalesMarketingAutomationFAQSection() {

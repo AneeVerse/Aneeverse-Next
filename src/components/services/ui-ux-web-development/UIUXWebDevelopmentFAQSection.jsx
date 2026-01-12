@@ -5,13 +5,16 @@ import { ChevronDown } from "lucide-react";
 import Layout from "../../common/Layout";
 
 const faqs = [
-  { question: "What's the difference between UI and UX design?", answer: "UI (User Interface) focuses on visual design and aesthetics, while UX (User Experience) focuses on user journey, usability, and overall experience." },
-  { question: "What technologies do you use for web development?", answer: "We use modern frameworks like React, Next.js, Vue.js for frontend, and Node.js, Python, PHP for backend development." },
-  { question: "How long does a web development project take?", answer: "Timelines vary based on complexity, typically 4-12 weeks for custom web applications." },
-  { question: "Do you provide mobile-responsive designs?", answer: "Yes, all our designs are mobile-first and fully responsive across all devices." },
-  { question: "Can you redesign existing websites?", answer: "Absolutely! We can redesign and improve existing websites while maintaining functionality." },
-  { question: "Do you offer ongoing maintenance?", answer: "Yes, we provide maintenance packages to keep your site updated, secure, and performing optimally." },
-  { question: "What is included in UX research?", answer: "UX research includes user interviews, usability testing, persona development, and journey mapping." },
+  { question: "What is UI, UX & Web Development?", answer: "UI (User Interface) design focuses on how your website looks, while UX (User Experience) ensures it feels intuitive and easy to use. Web development turns design into a functional, responsive site that works across screens and devices." },
+  { question: "Why is UX design important for my website?", answer: "Good UX improves how easily visitors find information, complete tasks, and navigate your site - which increases engagement, conversions, and customer satisfaction." },
+  { question: "How do you approach the UI/UX and web design process?", answer: "We start with discovery and research, create wireframes and interactive prototypes, refine visual UI design, and then build the final responsive site with testing to ensure usability." },
+  { question: "Will my site work on mobile devices?", answer: "Yes - responsive design is a standard part of our process, ensuring your website adapts and performs well on phones, tablets, and desktops." },
+  { question: "Do you handle both design and development?", answer: "Yes - we offer end-to-end service from visual UI/UX design to frontend web development so your project is seamless and cohesive from concept to launch." },
+  { question: "What tools do you use for design and prototyping?", answer: "Design tools often include industry standards like Figma, Adobe XD, and interactive prototyping tools to visualize layouts and flows before development." },
+  { question: "How long does a typical web design project take?", answer: "Timelines depend on scope, complexity, and features, but most projects take several weeks to a few months from planning through development and launch." },
+  { question: "Can you redesign an existing website?", answer: "Yes - we can assess your current site’s usability and visual design, then rebuild it to improve performance, engagement, and conversions." },
+  { question: "How do you ensure the design is aligned with our brand?", answer: "We incorporate your brand guidelines - including colors, fonts, imagery, and messaging - so the UI design reflects your identity consistently across the site." },
+  { question: "Do you support websites after launch?", answer: "Yes - we offer post-launch support including maintenance, updates, performance monitoring, and further UX optimization as your business evolves." },
 ];
 
 export default function UIUXWebDevelopmentFAQSection() {

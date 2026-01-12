@@ -8,38 +8,79 @@ import PresentationiDesignFAQSection from '@/components/services/presentation-de
 import ChannelTailoredSection from '@/components/services/common/ChannelTailoredSection'
 import HowItWorksSection from '@/components/services/common/HowItWorksSection'
 import ServiceSchema from '@/components/seo/ServiceSchema'
-import { FaHandshake, FaUsers, FaBullseye, FaMicrophone, FaBriefcase, FaGraduationCap, FaChartLine } from "react-icons/fa"
+import { FaHandshake, FaUsers, FaBullseye, FaMicrophone, FaBriefcase, FaGraduationCap } from "react-icons/fa"
+import { client } from "@/sanity/lib/client"
+import { getPortfolioWorksQuery, getCustomerStoriesQuery } from "@/sanity/lib/queries"
+import { urlForImage } from "@/sanity/lib/image"
 import React from 'react'
+
+// Helper to get optimized Sanity image URL
+const getSanityImageUrl = (image, maxWidth = 1200) => {
+  if (!image) return "/images/home/works-ban-1.avif";
+  try {
+    return urlForImage(image, maxWidth).url();
+  } catch (error) {
+    console.error('Error generating Sanity image URL:', error);
+    return "/images/home/works-ban-1.avif";
+  }
+};
 
 // metadata
 export const metadata = {
-  title: "Presentation Design | Aneeverse",
-  description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+  title: "Presentation Design Services | Aneeverse",
+  description: "Presentations that make your best ideas impossible to ignore. Aneeverse transforms your content into compelling visual stories delivered fast and always on-brand.",
   openGraph: {
-    title: "Presentation Design | Aneeverse",
-    description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+    title: "Presentation Design Services | Aneeverse",
+    description: "Presentations that make your best ideas impossible to ignore. Aneeverse transforms your content into compelling visual stories delivered fast and always on-brand.",
     url: `https://aneeverse.com/services/presentation-design`,
     images: [
       {
-        url: "/images/meta/phone.avif", // ✅ Dynamic Image
+        url: "/images/meta/phone.avif",
         width: 1200,
         height: 630,
-        alt: "Presentation Design | Aneeverse",
+        alt: "Presentation Design Services | Aneeverse",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Presentation Design | Aneeverse",
-    description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+    title: "Presentation Design Services | Aneeverse",
+    description: "Presentations that make your best ideas impossible to ignore. Aneeverse transforms your content into compelling visual stories delivered fast and always on-brand.",
     image: "/images/meta/phone.avif",
   },
 }
 
 
 
-const page = () => {
+const page = async () => {
+  // Fetch projects for DynamicOurWorks
+  let projects = [];
+  try {
+    const [works, stories] = await Promise.all([
+      client.fetch(getPortfolioWorksQuery),
+      client.fetch(getCustomerStoriesQuery)
+    ]);
+
+    const mappedWorks = works.map((item) => ({
+      image: getSanityImageUrl(item.thumbnailImage || item.mainImage, 1200),
+      title: item.title,
+      url: `/works/${item.slug.current}`,
+      description: item.servicesProvided?.join(", ") || item.shortDescription || "",
+    }));
+
+    const mappedStories = stories.map((story) => ({
+      image: getSanityImageUrl(story.mainImage, 1200),
+      title: story.projectTitle || story.title,
+      url: `/customer-stories/${story.slug.current}`,
+      description: story.servicesProvided?.join(", ") || story.shortDescription || "",
+    }));
+
+    projects = [...mappedWorks, ...mappedStories];
+  } catch (error) {
+    console.error('Error fetching projects for presentation-design page:', error);
+  }
+
   // Scrolling services for hero section
   const scrollServices = [
     { title: "Custom presentation design", image: "/images/services/email-design/email-design.avif" },
@@ -127,20 +168,19 @@ const page = () => {
     <div>
       <ServiceSchema
         serviceName="Presentation Design Services"
-        serviceType="Service"
-        description="Create visually compelling and engaging presentations that resonate with your audience. From pitch decks to corporate presentations, we bring your ideas to life."
+        serviceType="ProfessionalService"
+        description="Get polished, high-impact presentations designed to win stakeholders and move business forward. From pitch decks to internal comms and sales enablement, Aneeverse transforms your content into compelling visual stories delivered fast and always on-brand."
         slug="presentation-design"
-        priceRange="$300-$1500"
-        category="Design"
+        priceRange="$500-$3000"
+        category="Presentation Design"
         features={[
-          "Pitch Deck Design",
-          "Corporate Presentation Design",
-          "Sales Presentation Creation",
-          "Investor Presentation Design",
-          "Training Material Design",
-          "Conference Presentation Design",
-          "Template Creation",
-          "Brand-Consistent Design"
+          "Custom presentation design",
+          "Presentation templates",
+          "Pitch deck design",
+          "Data visualization",
+          "Infographics for presentations",
+          "Motion design for slides",
+          "AI-powered image libraries"
         ]}
         benefits={[
           "Professional Visual Impact",
@@ -152,9 +192,9 @@ const page = () => {
           "Consistent Brand Identity",
           "Memorable Content Delivery"
         ]}
-        serviceOutput="Professionally designed presentations with compelling visuals, clear messaging, and brand-consistent design that captivates audiences and drives results."
-        audience="Business professionals, entrepreneurs, sales teams, executives, educators, and anyone needing impactful presentations for meetings, pitches, or conferences."
-        additionalType="https://schema.org/ProfessionalService"
+        serviceOutput="Professionally designed presentations with compelling visuals, clear messaging, and brand-consistent design."
+        audience="Business professionals, entrepreneurs, sales teams, executives, and marketing teams needing high-stakes presentations."
+        additionalType="https://schema.org/CreativeWork"
       />
       <CommonServicesHeroSection
         title="Presentations that make your best ideas impossible to ignore"
@@ -253,7 +293,7 @@ const page = () => {
           },
         ]}
       />
-      <DynamicOurWorks />
+      <DynamicOurWorks projects={projects} />
       <TestimonialSlider />
       <PresentationiDesignFAQSection />
     </div>

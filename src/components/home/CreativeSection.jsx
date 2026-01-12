@@ -125,8 +125,8 @@ const data = [
   },
 
   {
-    firstTitle: "Copywriting", secondTitle: "",
-    tags: ["Sales Copy", "Marketing Copy", "Content Writing"],
+    firstTitle: "Copywriting", secondTitle: "& Strategy",
+    tags: ["Brand Storytelling", "Conversion Copy", "UX Writing"],
     url: "/services/copywriting",
     image: "https://ik.imagekit.io/aghmftdmm/creative/COPYWRITING%201.webp?updatedAt=1765350362521"
   },
@@ -139,8 +139,8 @@ const data = [
 
   {
     firstTitle: "SEO & Blog", secondTitle: "Writing",
-    tags: ["Keyword Research", "On-Page SEO", "Technical SEO"],
-    url: "/services/seo-optimization",
+    tags: ["SEO Strategy", "Keyword Research", "Content Authority"],
+    url: "/services/blog-writing",
     image: "https://ik.imagekit.io/aghmftdmm/creative/SEO%20OPTIMIZE%201.webp?updatedAt=1765350362673"
   },
 
@@ -153,7 +153,7 @@ const data = [
 
   {
     firstTitle: "Ebook, Report &", secondTitle: "Print Design",
-    tags: ["Digital Publications", "Interactive Reports", "PDF Design"],
+    tags: ["High-Converting Ebooks", "Annual Reports", "Print Design"],
     url: "/services/ebook-digital-report",
     image: "https://ik.imagekit.io/aghmftdmm/creative/EBOOK%20AND%20DIGITAL%20REPORT%201.webp?updatedAt=1765350362500"
   },

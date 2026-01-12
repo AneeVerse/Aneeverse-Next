@@ -6,206 +6,236 @@ import DynamicSupportSection from '@/components/services/common/DynamicSupportSe
 import ChannelTailoredSection from '@/components/services/common/ChannelTailoredSection'
 import HowItWorksSection from '@/components/services/common/HowItWorksSection'
 import MarketingStrategyFAQSection from '@/components/services/marketing-strategy/MarketingStrategyFAQSection'
-import MarketingStrategyFeatureSection from '@/components/services/marketing-strategy/MarketingStrategyFeatureSection'
-import MarketingStrategyStateSection from '@/components/services/marketing-strategy/MarketingStrategyStateSection'
+import DynamicStateSection from '@/components/services/common/DynamicStateSection'
 import ServiceSchema from '@/components/seo/ServiceSchema'
-import { FaChartLine, FaUsers, FaBullseye, FaRocket, FaSearch, FaLightbulb } from "react-icons/fa"
+import TestimonialSlider from '@/components/about/TestimonialSlider'
+import { FaCompass, FaBullseye, FaRocket, FaCommentDots, FaChartLine, FaThLarge } from "react-icons/fa"
+import { client } from "@/sanity/lib/client"
+import { getPortfolioWorksQuery, getCustomerStoriesQuery } from "@/sanity/lib/queries"
+import { urlForImage } from "@/sanity/lib/image"
 import React from 'react'
 
+const getSanityImageUrl = (source, width = 800) => {
+  if (!source) return "";
+  try {
+    return urlForImage(source).width(width).url();
+  } catch (error) {
+    return "";
+  }
+};
 
 // metadata
 export const metadata = {
-  title: "Marketing Strategy | Aneeverse",
-  description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+  title: "Marketing Strategy Services | Aneeverse",
+  description: "Clear, creative strategy that powerfully guides growth. We deliver data-grounded marketing strategy that aligns your brand story with audience insights.",
   openGraph: {
-    title: "Marketing Strategy | Aneeverse",
-    description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+    title: "Marketing Strategy Services | Aneeverse",
+    description: "Clear, creative strategy that powerfully guides growth. We deliver data-grounded marketing strategy that aligns your brand story with audience insights.",
     url: `https://aneeverse.com/services/marketing-strategy`,
-    images: [
-      {
-        url: "/images/meta/phone.avif", // ✅ Dynamic Image
-        width: 1200,
-        height: 630,
-        alt: "Marketing Strategy | Aneeverse",
-      },
-    ],
+    images: [{ url: "/images/meta/phone.avif", width: 1200, height: 630, alt: "Marketing Strategy Services | Aneeverse" }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Marketing Strategy | Aneeverse",
-    description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+    title: "Marketing Strategy Services | Aneeverse",
+    description: "Clear, creative strategy that powerfully guides growth. We deliver data-grounded marketing strategy that aligns your brand story with audience insights.",
     image: "/images/meta/phone.avif",
   },
 }
 
-const page = () => {
+const page = async () => {
+  // Fetch projects for DynamicOurWorks
+  let projects = [];
+  try {
+    const [works, stories] = await Promise.all([
+      client.fetch(getPortfolioWorksQuery),
+      client.fetch(getCustomerStoriesQuery)
+    ]);
+
+    const mappedWorks = works.map((item) => ({
+      image: getSanityImageUrl(item.thumbnailImage || item.mainImage, 1200),
+      title: item.title,
+      url: `/works/${item.slug.current}`,
+      description: item.servicesProvided?.join(", ") || item.shortDescription || "",
+    }));
+
+    const mappedStories = stories.map((story) => ({
+      image: getSanityImageUrl(story.mainImage, 1200),
+      title: story.projectTitle || story.title,
+      url: `/customer-stories/${story.slug.current}`,
+      description: story.servicesProvided?.join(", ") || story.shortDescription || "",
+    }));
+
+    projects = [...mappedWorks, ...mappedStories];
+  } catch (error) {
+    console.error('Error fetching projects for marketing strategy page:', error);
+  }
+
+  const scrollServices = [
+    { title: "Brand positioning & messaging", image: "/images/services/website/website-strategy.avif" },
+    { title: "Audience insights & segmentation", image: "/images/services/website/ux-ui-audit.avif" },
+    { title: "Content strategy & planning", image: "/images/services/website/content-development.avif" },
+    { title: "Go-to-market (GTM) frameworks", image: "/images/services/website/design-systems.avif" },
+    { title: "Channel & campaign strategy", image: "/images/services/website/webflow-development.avif" },
+    { title: "Performance measurement & analytics", image: "/images/services/website/website-design.avif" },
+    { title: "Brand growth playbooks", image: "/images/services/website/landing-page-design.avif" },
+  ];
 
   const items = [
-    {
-      name: "Marketing insight projects",
-      about: "Unlock deeper insights that drive your marketing strategies forward. Our expert strategists deliver tailored analyses to elevate your brand's performance.",
-      image: "/images/services/marketing-strategy/marketing-insight-projects.avif",
-      bgColor: "bg-secondary-500",
-      textColor: "text-primary-500",
-    },
-    {
-      name: "Marketing foundations insights",
-      about: "Lay the groundwork for brand success with strategies that define your positioning and engage your audience.",
-      image: "/images/services/marketing-strategy/marketing-foundations-insights.avif",
-      bgColor: "bg-[#c0e2ff]",
-      textColor: "text-[#0a211f]",
-    },
-    {
-      name: "Marketing planning projects",
-      about: "Strategically plan impactful marketing initiatives that deliver measurable results and align with your business goals.",
-      image: "/images/services/marketing-strategy/marketing-planning-projects.avif",
-      bgColor: "bg-[#f9f9f9]",
-      textColor: "text-[#3d3d3d]",
-    },
-
-
+    { name: "Brand positioning & messaging", about: "Define how your brand should be seen, heard, and remembered in your market.", image: "/images/services/website/website-design.avif", bgColor: "bg-secondary-500", textColor: "text-primary-500" },
+    { name: "Audience segmentation & insights", about: "Identify and prioritize customer segments with real revenue potential.", image: "/images/services/website/ux-ui-audit.avif", bgColor: "bg-[#c0e2ff]", textColor: "text-[#0a211f]" },
+    { name: "Competitive landscape analysis", about: "Understand your market and differentiate with strategic advantage.", image: "/images/services/website/website-strategy.avif", bgColor: "bg-[#f9f9f9]", textColor: "text-[#3d3d3d]" },
+    { name: "Go-to-Market (GTM) planning", about: "A roadmap for successful product launches and market entry.", image: "/images/services/website/landing-page-design.avif", bgColor: "bg-[#292423]", textColor: "text-[#ffafed]" },
+    { name: "Content strategy & topic planning", about: "Align story, topics, and content output to strategic goals.", image: "/images/services/website/content-development.avif", bgColor: "bg-[#d8ff85]", textColor: "text-[#1c4437]" },
+    { name: "Channel mix & engagement strategy", about: "Optimize where and how you reach prospects and customers.", image: "/images/services/website/webflow-development.avif", bgColor: "bg-[#edf4ea]", textColor: "text-[#1c4437]" },
+    { name: "Performance measurement frameworks", about: "Metrics and dashboards that track what actually matters.", image: "/images/services/website/seo-optimization.png", bgColor: "bg-[#e7f9d1]", textColor: "text-[#365314]" },
+    { name: "Campaign planning & roadmaps", about: "Strategic plans for seasonal, product, and audience growth campaigns.", image: "/images/services/website/website-illustrations.avif", bgColor: "bg-[#f6edf9]", textColor: "text-[#4a124f]" },
+    { name: "Customer journey mapping", about: "Strategic visualization of how prospects become loyal customers.", image: "/images/services/website/ux-ui-audit.avif", bgColor: "bg-[#ffd6cc]", textColor: "text-[#4a1c0f]" },
+    { name: "Marketing playbooks", about: "Practical, repeatable guides tailored to your team and goals.", image: "/images/services/website/website-strategy.avif", bgColor: "bg-[#e6f3ff]", textColor: "text-[#003366]" },
   ];
+
+  const stats = [
+    { value: "500+", description: "Strategic frameworks delivered." },
+    { value: "40%", description: "Average increase in campaign ROI." },
+    { value: "100%", description: "Focus on data-driven growth." },
+    { value: "24/7", description: "Market and audience monitoring." },
+  ];
+
   return (
     <div>
       <ServiceSchema
         serviceName="Marketing Strategy Services"
-        serviceType="Service"
-        description="Empower your business with data-driven marketing initiatives, plans, and exceptional insights from our team of expert consultants. Leverage our marketing strategy services for an on-demand marketing team extension."
+        serviceType="ProfessionalService"
+        description="Aneeverse delivers practical, data-grounded marketing strategy that aligns your brand story, audience insights, and campaign plans for measurable impact."
         slug="marketing-strategy"
-        priceRange="$1000-$5000"
-        category="Digital Marketing"
+        priceRange="$2000-$10000"
+        category="Marketing Services"
         features={[
-          "Marketing Insight Projects",
-          "Marketing Foundations Insights",
-          "Brand Positioning Strategy",
-          "Competitive Analysis",
-          "Target Audience Research",
-          "Marketing Plan Development",
-          "Performance Metrics Setup",
-          "Strategic Consultation"
+          "Brand Positioning & Messaging",
+          "Audience Insights & Segmentation",
+          "Content Strategy & Planning",
+          "Go-to-market (GTM) Frameworks",
+          "Channel & Campaign Strategy",
+          "Performance Measurement & Analytics",
+          "Brand Growth Playbooks"
         ]}
         benefits={[
-          "Data-Driven Decision Making",
-          "Improved Brand Positioning",
-          "Better Target Audience Understanding",
-          "Increased Marketing ROI",
-          "Competitive Advantage",
-          "Clear Marketing Direction",
-          "Measurable Growth",
-          "Strategic Clarity"
+          "Clear Strategic Direction",
+          "Data-Grounded Insights",
+          "Measurable Growth Impact",
+          "Aligned Brand Story",
+          "Optimized Resource Allocation",
+          "Repeatable Playbooks"
         ]}
-        serviceOutput="Comprehensive marketing strategy with actionable plans, strategic direction, and data-driven insights to enhance your brand's online presence and drive measurable results."
-        audience="Businesses looking to improve their marketing effectiveness, startups needing strategic direction, established companies seeking growth, and marketing teams requiring expert guidance."
+        serviceOutput="Actionable marketing strategy, audience frameworks, and performance dashboards."
+        audience="Businesses seeking strategic clarity, better ROI, and data-driven growth plans."
         additionalType="https://schema.org/ProfessionalService"
       />
       <CommonServicesHeroSection
-        title="Marketing Strategy Services"
-        subtitle="Creative Services"
-        description=" Empower your business with data-driven marketing initiatives, plans, and exceptional insights from our team of expert consultants. Leverage Aneeverse's marketing strategy services for an on-demand marketing team extension."
+        title="Clear, creative strategy that powerfully guides growth"
+        subtitle="MARKETING STRATEGY SERVICES"
+        description="Aneeverse delivers practical, data-grounded marketing strategy that aligns your brand story, audience insights, and campaign plans for measurable impact. From foundational positioning to in-flight performance optimization, we help you turn goals into actionable plans that accelerate customer acquisition and strengthen market presence."
         ctaText="Book a Call"
         ctaLink="/contact"
-        backgroundImage="/images/services/marketing-strategy/hero-banner.avif"
-
+        backgroundImage="/images/services/website/hero-banner.avif"
+        scrollServices={scrollServices}
       />
       <SlidingLogos />
       <DynamicSupportSection
-        subtitle="BUILT FOR CREATIVE, PERFORMANCE & MARKETING TEAMS"
-        title="Power-up your brand's  "
-        highlightText=" marketing"
-        imageSrc="/images/services/email-design/about-email.avif"
-        imageAlt="marketing strategy"
-        description=" In the fast-changing digital landscape, staying ahead requires strategic insight and expert guidance."
-        additionalText=" Aneeverse marketing strategists create customized, data-driven strategies to enhance your brand’s online presence and drive measurable results.
-       
-         We focus on delivering actionable plans and strategic direction, empowering your marketing teams to achieve exceptional growth and visibility.
-        "
+        subtitle="Strategy before tactics"
+        title="Better outcomes start with a "
+        highlightText="plan that matters"
+        imageSrc="/images/services/website/about-web.avif"
+        imageAlt="Marketing Strategy"
+        description="Without a clear marketing strategy, execution becomes chaotic. Fragmented messaging, inconsistent campaigns, and wasted budget slow growth and obscure what resonates with your audience."
+        additionalText="Strategy clarifies your brand’s unique value, target customers, and the channels and content that drive results. Aneeverse helps you connect business goals with strategic insights so every campaign and creative touchpoint is intentional, measurable, and aligned with business momentum."
       />
-
-
       <DynamicCreativeSection
-        subtitle="Strategic Excellence"
-        title=" marketing strategy services"
-        heighlightText=" Full scale"
+        subtitle="What we deliver"
+        title="Strategic clarity for every marketing goal"
+        heighlightText=""
+        description="From foundational frameworks to performance audits and campaign playbooks, we build strategies that connect your brand promise with customer behavior, market dynamics, and measurable growth."
         items={items}
       />
       <ChannelTailoredSection
-        subtitle="Strategies for every business need"
-        title="Marketing strategies that work for your business"
-        titleHighlight="your business"
-        description="From brand positioning to campaign planning, we develop strategies tailored to your industry, audience, and goals."
+        subtitle="Strategy that powers execution"
+        title="Marketing plans that are built to perform"
+        titleHighlight="built to perform"
+        description="A good strategy gives direction to every campaign, creative asset, and channel choice-so your marketing efforts aren’t a set of disconnected actions but a coordinated engine for growth."
         channels={[
           {
-            title: "Brand Strategy",
-            subtitle: "Develop compelling brand positioning and messaging that differentiates you in the market.",
+            title: "Brand identity strategy",
+            subtitle: "Where your value meets the minds and hearts of your customers.",
+            icon: <FaCompass className="w-8 h-8" />,
+          },
+          {
+            title: "Audience & segmentation plans",
+            subtitle: "Tactical insights into who to target, how, and why.",
             icon: <FaBullseye className="w-8 h-8" />,
           },
           {
-            title: "Market Research",
-            subtitle: "Deep insights into your audience, competitors, and market opportunities to inform strategy.",
-            icon: <FaSearch className="w-8 h-8" />,
-          },
-          {
-            title: "Campaign Planning",
-            subtitle: "Strategic campaign plans that align with business objectives and drive measurable results.",
+            title: "GTM and launch strategies",
+            subtitle: "Plans that make introductions impactful and measurable.",
             icon: <FaRocket className="w-8 h-8" />,
           },
           {
-            title: "Audience Segmentation",
-            subtitle: "Identify and understand your target audiences to create more effective marketing strategies.",
-            icon: <FaUsers className="w-8 h-8" />,
+            title: "Content & messaging frameworks",
+            subtitle: "Story frameworks that speak to user intent and stage.",
+            icon: <FaCommentDots className="w-8 h-8" />,
           },
           {
-            title: "Performance Analytics",
-            subtitle: "Set up metrics and analytics to track strategy effectiveness and optimize performance.",
+            title: "Channel optimization strategy",
+            subtitle: "Maximize impact across organic, paid, and owned channels.",
             icon: <FaChartLine className="w-8 h-8" />,
           },
           {
-            title: "Strategic Innovation",
-            subtitle: "Creative strategies and innovative approaches that help you stand out and capture attention.",
-            icon: <FaLightbulb className="w-8 h-8" />,
+            title: "Performance dashboards",
+            subtitle: "Reporting to evaluate strategy effectiveness in real time.",
+            icon: <FaThLarge className="w-8 h-8" />,
           },
         ]}
       />
       <HowItWorksSection
-        subtitle="HOW WE WORK"
-        title="From insights to action without the guesswork"
-        titleHighlight="guesswork"
-        description="Our strategic process combines data analysis, market research, and creative thinking to deliver actionable marketing strategies."
+        subtitle="how we work"
+        title="From insight to strategy to "
+        titleHighlight="measurable impact"
+        description="Our structured approach ensures strategy is grounded in your reality, aligned to business outcomes, and ready for execution."
         steps={[
           {
             number: "1",
-            title: "Discovery & Analysis",
-            subtitle: "We analyze your business, market position, competitors, and audience to identify opportunities and challenges.",
+            title: "Discovery & business goals",
+            subtitle: "Understand your brand, audience, and success metrics.",
           },
           {
             number: "2",
-            title: "Strategic Planning",
-            subtitle: "We develop comprehensive marketing strategies with clear objectives, tactics, and success metrics.",
+            title: "Research & insights",
+            subtitle: "Market, competitor, and audience analysis reveal key strategic opportunities.",
           },
           {
             number: "3",
-            title: "Strategy Review",
-            subtitle: "We present strategies for your review and refinement, ensuring alignment with your business goals.",
+            title: "Strategy formulation",
+            subtitle: "Create positioning, messaging, channel, and content strategies that work together.",
           },
           {
             number: "4",
-            title: "Implementation Roadmap",
-            subtitle: "We create detailed implementation plans with timelines, resources, and milestones for execution.",
+            title: "Tactical planning",
+            subtitle: "Translate strategy into actionable campaign and execution plans.",
           },
           {
             number: "5",
-            title: "Ongoing Optimization",
-            subtitle: "We monitor performance, analyze results, and refine strategies to continuously improve outcomes.",
+            title: "Optimize & measure",
+            subtitle: "Track performance, refine hypotheses, and improve strategy over time.",
           },
         ]}
       />
-       <DynamicOurWorks />      <MarketingStrategyFeatureSection />
-      <MarketingStrategyStateSection />
+      <DynamicOurWorks projects={projects} />
+      <DynamicStateSection
+        title="Our Marketing Strategy Impact"
+        subtitle="PROVEN RESULTS"
+        stats={stats}
+      />
+      <TestimonialSlider />
       <MarketingStrategyFAQSection />
-
-
-
     </div>
   )
 }

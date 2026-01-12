@@ -5,13 +5,16 @@ import { ChevronDown } from "lucide-react";
 import Layout from "../../common/Layout";
 
 const faqs = [
-  { question: "What makes aneeverse's design services different?", answer: "We deliver speedy, high-quality graphic design services through a transparent subscription model." },
-  { question: "How does a design subscription work?", answer: "A subscription provides you access to dedicated design resources on a recurring basis." },
-  { question: "What is graphic design?", answer: "Graphic design is the art of creating visual content to communicate messages." },
-  { question: "What do graphic designers do?", answer: "Graphic designers create visuals that inspire, inform, and captivate audiences." },
-  { question: "Who needs graphic design services?", answer: "Anyone looking to enhance their brand's visual identity needs graphic design services." },
-  { question: "Do you do custom plans?", answer: "Yes, we offer tailored solutions to meet unique design needs." },
-  { question: "What billing options do you offer?", answer: "We offer flexible billing options, including monthly and annual subscriptions." },
+  { question: "What exactly is a marketing strategy service?", answer: "A marketing strategy service helps define what your business wants to achieve, who you’re targeting, and how your marketing efforts will work together to drive growth - aligning campaign plans to business goals." },
+  { question: "Why do I need a marketing strategy before creating campaigns?", answer: "A strategy acts as a blueprint that guides marketing decisions. Without it, teams may execute tactics without direction, which leads to inconsistent messaging and wasted budget." },
+  { question: "How does a marketing strategy improve results?", answer: "By clarifying goals, target audiences, value propositions, and key performance indicators, a strategy ensures your marketing delivers measurable and relevant business outcomes, not just activity." },
+  { question: "What’s the difference between a marketing plan and a marketing strategy?", answer: "A strategy defines why and what you’re trying to achieve. A plan outlines how you’ll do it - the specific channels, timelines, tactics, and workflows. The strategy informs the plan." },
+  { question: "How do you develop a marketing strategy for a business?", answer: "We start with discovery to understand your goals and audience, then conduct research on competitors and opportunities. From there, we map strategic positioning, target segments, messaging priorities, and success measures." },
+  { question: "Will you help with target audience definition?", answer: "Yes - part of strategy work involves identifying and segmenting your ideal customers so messaging and campaigns resonate with the right people." },
+  { question: "How long does it take to build a marketing strategy?", answer: "The timeline varies with depth and scope, but most comprehensive strategic plans take a few weeks from initial briefing to final documentation." },
+  { question: "Do you provide ongoing strategic support after the initial plan?", answer: "Yes - beyond initial strategy creation, we can support execution, monitoring, and iterative optimization based on performance insights." },
+  { question: "Can marketing strategy help with branding and messaging?", answer: "Absolutely - a good strategy clarifies your brand’s differentiation, value proposition, and the stories you tell across channels, helping ensure consistent and compelling communication." },
+  { question: "How do you measure the success of a marketing strategy?", answer: "Success is measured against predetermined goals and KPIs - such as brand awareness, lead quality, conversion rates, or revenue growth - with regular tracking and optimization." },
 ];
 
 export default function MarketingStrategyFAQSection() {

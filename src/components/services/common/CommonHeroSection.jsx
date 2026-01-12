@@ -48,37 +48,37 @@ export default function CommonServicesHeroSection({
   return (
     <div className="relative mt-0 text-white overflow-hidden">
       {/* ✅ Hero Section */}
-      <div className="relative w-full h-[90vh] min-h-[600px] sm:min-h-[600px] sm:h-[75vh] flex items-center">
+      <div className="relative w-full min-h-[80vh] lg:min-h-[90vh] py-20 lg:py-32 flex items-center">
         {/* Background Image */}
         <Image
           src={backgroundImage}
           alt={title}
           fill
-          layout="fill"
-          objectFit="cover"
+          priority
+          style={{ objectFit: 'cover' }}
           className="absolute inset-0 opacity-100"
         />
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
 
-        <Layout>
+        <Layout className="relative z-10 pb-12 lg:pb-20">
           {/* Content */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="relative  z-10">
-                 <UiSubheading className="text-primary-500 mb-2">
-                 {subtitle}
-                        </UiSubheading>
-                        <Heading
-                          level="h1"
-                          color="light"
-                          spacing="lg"
-                          className="text-left font-semibold"
-                        >
-                         {title}
-                        </Heading>
-            
-              <p className="  sm:-mt-2 text-lg text-gray-200">{description}</p>
-         
+          <div className="flex flex-col lg:flex-row gap-8">
+            <div className="relative z-10 lg:w-[70%] xl:w-[65%]">
+              <UiSubheading className="text-primary-500 mb-2">
+                {subtitle}
+              </UiSubheading>
+              <Heading
+                level="h1"
+                color="light"
+                spacing="md"
+                className="text-left font-semibold"
+              >
+                {title}
+              </Heading>
+
+              <p className="text-lg text-gray-200">{description}</p>
+
               <AnimatedButton
                 href={ctaLink}
                 className="mt-6 min-w-fit whitespace-nowrap px-6 py-3 rounded-full font-medium text-primary-500 bg-transparent border border-primary-500 hover:bg-primary-500 hover:text-[#073742] transition-colors"
@@ -89,11 +89,10 @@ export default function CommonServicesHeroSection({
                 {ctaText}
               </AnimatedButton>
             </div>
-            <div className=""></div>
           </div>
         </Layout>
         {/* ✅ Scrolling Services */}
-        <div className="absolute bottom-8 overflow-hidden">
+        <div className="absolute bottom-4 lg:bottom-8 w-full overflow-hidden">
           <motion.div
             className="flex gap-4 w-max"
             variants={scrollVariants}

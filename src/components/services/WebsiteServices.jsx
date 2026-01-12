@@ -8,11 +8,11 @@ import { AccentText } from "../common/typography/AccentText";
 export default function WebsiteServices() {
   const services = [
     {
-      title: "Website Design",
+      title: "UI, UX & Web Development",
       description:
-        "Create stunning, responsive websites with a focus on user-friendly UI/UX to represent your brand effectively.",
+        "Exceptional digital experiences. We craft user-centered UI, intuitive UX, and high-performance websites that drive results.",
       imgUrl: "/images/services/website/website-design.png",
-      pageUrl: "/services/website-design",
+      pageUrl: "/services/ui-ux-web-development",
     },
     {
       title: "Landing Page",
@@ -22,11 +22,11 @@ export default function WebsiteServices() {
       pageUrl: "/services/landing-pages",
     },
     {
-      title: "SEO Optimization",
+      title: "SEO & Blog Writing",
       description:
-        "Boost your website's visibility and rankings with expert keyword optimization and technical SEO strategies.",
+        "Content that ranks, engages, and converts. We create SEO-optimized blogs that attract organic traffic and build authority.",
       imgUrl: "/images/services/website/seo-optimization.png",
-      pageUrl: "/services/seo-optimization",
+      pageUrl: "/services/blog-writing",
     },
     // {
     //   title: "GMB Optimization",
@@ -71,13 +71,12 @@ export default function WebsiteServices() {
             <Link
               key={index}
               href={service.pageUrl}
-              className={`group block h-[250px] sm:h-[370px] lg:h-auto  relative rounded-2xl overflow-hidden ${
-                index === 0 || index === services.length - 1
+              className={`group block h-[250px] sm:h-[370px] lg:h-auto  relative rounded-2xl overflow-hidden ${index === 0 || index === services.length - 1
                   ? "lg:col-span-2"
                   : index === 1
-                  ? "lg:row-span-2"
-                  : ""
-              }`}
+                    ? "lg:row-span-2"
+                    : ""
+                }`}
             >
               {/* Image */}
               <div className="overflow-hidden relative h-[250px] sm:h-full w-full">
