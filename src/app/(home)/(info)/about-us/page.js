@@ -2,7 +2,7 @@ import FeaturesSectionAbout from '@/components/about/FeaturesSectionAbout';
 import HeroSectionAbout from '@/components/about/HeroSectionAbout';
 import ParnterSection from '@/components/about/PartnerSection';
 import TeamSectionAbout from '@/components/about/TeamSectionAbout';
-import TestimonialSlider from '@/components/about/TestimonialSlider';
+import TestimonialsSection from '@/components/home/TestimonialsSection';
 import TextWithVideo from '@/components/about/TextWithVideo';
 import ValuesComponent from '@/components/about/ValuesComponent';
 import ResultsHeroSection from '@/components/about/ResultsHeroSection';
@@ -20,7 +20,7 @@ export const metadata = {
   title: "About Us | Aneeverse",
   description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
   openGraph: {
-    title:  "About Us | Aneeverse",
+    title: "About Us | Aneeverse",
     description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
     url: `https://aneeverse.com/about-us`,
     images: [
@@ -28,14 +28,14 @@ export const metadata = {
         url: "/images/meta/phone.avif", // ✅ Dynamic Image
         width: 1200,
         height: 630,
-        alt:  "About Us | Aneeverse",
+        alt: "About Us | Aneeverse",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title:  "About Us | Aneeverse",
+    title: "About Us | Aneeverse",
     description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
     image: "/images/meta/phone.avif",
   },
@@ -44,26 +44,26 @@ export const metadata = {
 
 const AboutUsPage = () => {
   return (
-   
-    <>
-    <div className='bg-secondary-500 space-y-[60px] py-16'>
-      <HeroSectionAbout/>
-    </div>
-    
-    <AIAdvantageSection/>
-    
-    <ParnterSection/>
-      <div className='bg-secondary-500 space-y-[60px] py-16'>
-      <TextWithVideo/>
-      </div>
-    
 
-    <FeaturesSectionAbout/>
-    {/* <TeamSectionAbout/> */}
-    <TestimonialSlider/>
-    <ResultsHeroSection/>
-    <ValuesComponent/>
-    {/* <OurWorkWithVideoOurTeam/> */}
+    <>
+      <div className='bg-secondary-500 space-y-[60px] py-16'>
+        <HeroSectionAbout />
+      </div>
+
+      <AIAdvantageSection />
+
+      <ParnterSection />
+      <div className='bg-secondary-500 space-y-[60px] py-16'>
+        <TextWithVideo />
+      </div>
+
+
+      <FeaturesSectionAbout />
+      {/* <TeamSectionAbout/> */}
+      <TestimonialsSection />
+      <ResultsHeroSection />
+      <ValuesComponent />
+      {/* <OurWorkWithVideoOurTeam/> */}
     </>
   );
 };

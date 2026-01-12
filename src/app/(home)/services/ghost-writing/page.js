@@ -1,4 +1,4 @@
-import TestimonialSlider from '@/components/about/TestimonialSlider'
+import TestimonialsSection from '@/components/home/TestimonialsSection'
 import SlidingLogos from '@/components/home/SlidingLogos'
 import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
 import DynamicOurWorks from '@/components/home/DynamicOurWorks'
@@ -100,7 +100,7 @@ const page = () => {
   ];
   return (
     <div>
-      <ServiceSchema 
+      <ServiceSchema
         serviceName="Ghost Writing Services"
         serviceType="ProfessionalService"
         description="Transform your ideas into compelling narratives. Our ghostwriters craft books, articles, speeches, and more—seamlessly adapting to your unique voice and style."
@@ -162,7 +162,7 @@ const page = () => {
 
       <DynamicOurWorks />
       <GhostWritingStateSection />
-      <TestimonialSlider />
+      <TestimonialsSection />
       <GhostWritingFAQSection />
 
     </div>

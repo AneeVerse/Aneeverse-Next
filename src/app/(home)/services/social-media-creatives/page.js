@@ -1,4 +1,4 @@
-import TestimonialSlider from '@/components/about/TestimonialSlider'
+import TestimonialsSection from '@/components/home/TestimonialsSection'
 import SlidingLogos from '@/components/home/SlidingLogos'
 import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
 import DynamicOurWorks from '@/components/home/DynamicOurWorks'
@@ -125,7 +125,7 @@ const page = () => {
   ];
   return (
     <div>
-      <ServiceSchema 
+      <ServiceSchema
         serviceName="Social Media Creatives"
         serviceType="ProfessionalService"
         description="Professional social media creative design services that create engaging visuals, graphics, and content to boost brand awareness and audience engagement across all platforms."
@@ -254,7 +254,7 @@ const page = () => {
         ]}
       />
       <DynamicOurWorks />
-      <TestimonialSlider />
+      <TestimonialsSection />
       <SocialMediaFAQSection />
 
     </div>

@@ -1,4 +1,4 @@
-import TestimonialSlider from '@/components/about/TestimonialSlider'
+import TestimonialsSection from '@/components/home/TestimonialsSection'
 import SlidingLogos from '@/components/home/SlidingLogos'
 import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
 import DynamicOurWorks from '@/components/home/DynamicOurWorks'
@@ -229,7 +229,7 @@ const page = async () => {
       />
       <DynamicOurWorks projects={projects} />
       <DynamicStateSection title="Our Automation Impact" subtitle="PROVEN RESULTS" stats={stats} />
-      <TestimonialSlider />
+      <TestimonialsSection />
       <SalesMarketingAutomationFAQSection />
     </div>
   )

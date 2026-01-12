@@ -1,4 +1,4 @@
-import TestimonialSlider from '@/components/about/TestimonialSlider'
+import TestimonialsSection from '@/components/home/TestimonialsSection'
 import SlidingLogos from '@/components/home/SlidingLogos'
 import CommonServicesHeroSection from '@/components/services/common/CommonHeroSection'
 import DynamicOurWorks from '@/components/home/DynamicOurWorks'
@@ -44,62 +44,62 @@ export const metadata = {
 const page = () => {
   const items = [
     {
-        name: "Landing Page Strategy",
-        about: "Developing conversion-focused landing page strategies to capture leads and maximize ROI.",
-        image: "/images/services/email-design/email-design.avif", // Keeping same images
-        bgColor: "bg-secondary-500",
-        textColor: "text-primary-500",
+      name: "Landing Page Strategy",
+      about: "Developing conversion-focused landing page strategies to capture leads and maximize ROI.",
+      image: "/images/services/email-design/email-design.avif", // Keeping same images
+      bgColor: "bg-secondary-500",
+      textColor: "text-primary-500",
     },
     {
-        name: "High-Converting Design",
-        about: "Crafting landing pages with stunning UI and seamless UX for better engagement & conversions.",
-        image: "/images/services/email-design/email-strategy.avif",
-        bgColor: "bg-[#c0e2ff]",
-        textColor: "text-[#0a211f]",
+      name: "High-Converting Design",
+      about: "Crafting landing pages with stunning UI and seamless UX for better engagement & conversions.",
+      image: "/images/services/email-design/email-strategy.avif",
+      bgColor: "bg-[#c0e2ff]",
+      textColor: "text-[#0a211f]",
     },
     {
-        name: "Custom Landing Page Templates",
-        about: "Providing ready-to-use custom landing page templates that align with your brand & campaign goals.",
-        image: "/images/services/email-design/email-html5.avif",
-        bgColor: "bg-[#f9f9f9]",
-        textColor: "text-[#3d3d3d]",
+      name: "Custom Landing Page Templates",
+      about: "Providing ready-to-use custom landing page templates that align with your brand & campaign goals.",
+      image: "/images/services/email-design/email-html5.avif",
+      bgColor: "bg-[#f9f9f9]",
+      textColor: "text-[#3d3d3d]",
     },
     {
-        name: "Responsive & Fast Loading",
-        about: "Building mobile-friendly landing pages optimized for speed and user experience.",
-        image: "/images/services/email-design/email-design-templates.avif",
-        bgColor: "bg-[#292423]",
-        textColor: "text-[#ffafed]",
+      name: "Responsive & Fast Loading",
+      about: "Building mobile-friendly landing pages optimized for speed and user experience.",
+      image: "/images/services/email-design/email-design-templates.avif",
+      bgColor: "bg-[#292423]",
+      textColor: "text-[#ffafed]",
     },
     {
-        name: "A/B Testing & Optimization",
-        about: "Improving landing page performance through A/B testing, analytics, and continuous enhancements.",
-        image: "/images/services/email-design/email-newsletter-design.avif",
-        bgColor: "bg-[#d8ff85]",
-        textColor: "text-[#1c4437]",
+      name: "A/B Testing & Optimization",
+      about: "Improving landing page performance through A/B testing, analytics, and continuous enhancements.",
+      image: "/images/services/email-design/email-newsletter-design.avif",
+      bgColor: "bg-[#d8ff85]",
+      textColor: "text-[#1c4437]",
     },
     {
-        name: "Landing Page UI/UX Audits",
-        about: "Conducting audits to identify usability issues and suggest design improvements for higher conversions.",
-        image: "/images/services/email-design/email-ui-ux-audits.avif",
-        bgColor: "bg-[#edf4ea]",
-        textColor: "text-[#1c4437]",
+      name: "Landing Page UI/UX Audits",
+      about: "Conducting audits to identify usability issues and suggest design improvements for higher conversions.",
+      image: "/images/services/email-design/email-ui-ux-audits.avif",
+      bgColor: "bg-[#edf4ea]",
+      textColor: "text-[#1c4437]",
     },
     {
-        name: "Interactive Elements",
-        about: "Enhancing landing pages with animations, interactive UI elements, and engaging visuals.",
-        image: "/images/services/email-design/graphics-and-illustrations.avif",
-        bgColor: "bg-[#e7f9d1]",
-        textColor: "text-[#365314]",
+      name: "Interactive Elements",
+      about: "Enhancing landing pages with animations, interactive UI elements, and engaging visuals.",
+      image: "/images/services/email-design/graphics-and-illustrations.avif",
+      bgColor: "bg-[#e7f9d1]",
+      textColor: "text-[#365314]",
     },
     {
-        name: "Landing Page Design Systems",
-        about: "Creating scalable landing page design systems for consistent branding across campaigns.",
-        image: "/images/services/email-design/email-design-systems.avif",
-        bgColor: "bg-[#f6edf9]",
-        textColor: "text-[#4a124f]",
+      name: "Landing Page Design Systems",
+      about: "Creating scalable landing page design systems for consistent branding across campaigns.",
+      image: "/images/services/email-design/email-design-systems.avif",
+      bgColor: "bg-[#f6edf9]",
+      textColor: "text-[#4a124f]",
     },
-];
+  ];
   return (
     <div>
       <ServiceSchema
@@ -156,15 +156,15 @@ const page = () => {
         additionalText="From lead generation to e-commerce sales, we create tailored landing pages  
           that capture attention, guide users seamlessly, and drive measurable results."
       />
-      
+
       <DynamicCreativeSection
         subtitle="Conversion-Focused Design"
         title=" Design Services"
         heighlightText=" Landing Page"
         items={items}
       />
-       <DynamicOurWorks />      <LandingPagesStateSection />
-      <TestimonialSlider />
+      <DynamicOurWorks />      <LandingPagesStateSection />
+      <TestimonialsSection />
       <LandingPagesFAQSection />
 
     </div>

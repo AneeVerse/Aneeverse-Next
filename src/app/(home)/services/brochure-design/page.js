@@ -1,4 +1,4 @@
-import TestimonialSlider from '@/components/about/TestimonialSlider'
+import TestimonialsSection from '@/components/home/TestimonialsSection'
 import SlidingLogos from '@/components/home/SlidingLogos'
 import BrochureDesignFAQSection from '@/components/services/brochure-design/BrochureDesignFAQSection'
 import BrochureDesignStateSection from '@/components/services/brochure-design/BrochureDesignStateSection'
@@ -13,28 +13,28 @@ import React from 'react'
 
 // metadata
 export const metadata = {
+  title: "Brochure Design | Aneeverse",
+  description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+  openGraph: {
     title: "Brochure Design | Aneeverse",
     description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
-    openGraph: {
-      title:  "Brochure Design | Aneeverse",
-      description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
-      url: `https://aneeverse.com/services/brochure-design`,
-      images: [
-        {
-          url: "/images/meta/phone.avif", // ✅ Dynamic Image
-          width: 1200,
-          height: 630,
-          alt:  "Brochure Design | Aneeverse",
-        },
-      ],
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title:  "Brochure Design | Aneeverse",
-      description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
-      image: "/images/meta/phone.avif",
-    },
+    url: `https://aneeverse.com/services/brochure-design`,
+    images: [
+      {
+        url: "/images/meta/phone.avif", // ✅ Dynamic Image
+        width: 1200,
+        height: 630,
+        alt: "Brochure Design | Aneeverse",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Brochure Design | Aneeverse",
+    description: "Aneeverse is a Digital Marketing Agency that helps businesses grow online.",
+    image: "/images/meta/phone.avif",
+  },
 }
 
 const page = () => {
@@ -99,7 +99,7 @@ const page = () => {
   ];
   return (
     <div>
-      <ServiceSchema 
+      <ServiceSchema
         serviceName="Brochure Design Services"
         serviceType="ProfessionalService"
         description="From concept to completion, we create brochures that effectively communicate your brand story with professional design and compelling visuals."
@@ -129,16 +129,16 @@ const page = () => {
         additionalType="https://schema.org/CreativeWork"
       />
       <CommonServicesHeroSection
-            title="Brochure Design Services"
-            subtitle="Creative Brochure Designs"
-            description="   From concept to completion, we create brochures that effectively communicate your brand story."
-            ctaText="Book a Call"
-            ctaLink="/contact"
-            backgroundImage="/images/services/brochure-design/hero-banner.avif"
-           
-          />
-        <SlidingLogos />
-        <DynamicSupportSection
+        title="Brochure Design Services"
+        subtitle="Creative Brochure Designs"
+        description="   From concept to completion, we create brochures that effectively communicate your brand story."
+        ctaText="Book a Call"
+        ctaLink="/contact"
+        backgroundImage="/images/services/brochure-design/hero-banner.avif"
+
+      />
+      <SlidingLogos />
+      <DynamicSupportSection
         subtitle="Creative Brochure Design"
         title=" Professional Brochure "
         highlightText=" design services"
@@ -149,17 +149,17 @@ const page = () => {
         additionalText="From **corporate brochures** to **product catalogs** and **event materials**,  
             our designs help communicate your brand story and engage your audience with style."
       />
-      
+
       <DynamicCreativeSection
         subtitle="Showcase Your Brand"
         title="Design Services"
         heighlightText="Professional Brochure "
         items={items}
       />
-         <DynamicOurWorks />        <BrochureDesignStateSection />
-        <TestimonialSlider />
-        <BrochureDesignFAQSection />
-      
+      <DynamicOurWorks />        <BrochureDesignStateSection />
+      <TestimonialsSection />
+      <BrochureDesignFAQSection />
+
     </div>
   )
 }

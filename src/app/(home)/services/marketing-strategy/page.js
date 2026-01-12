@@ -8,7 +8,7 @@ import HowItWorksSection from '@/components/services/common/HowItWorksSection'
 import MarketingStrategyFAQSection from '@/components/services/marketing-strategy/MarketingStrategyFAQSection'
 import DynamicStateSection from '@/components/services/common/DynamicStateSection'
 import ServiceSchema from '@/components/seo/ServiceSchema'
-import TestimonialSlider from '@/components/about/TestimonialSlider'
+import TestimonialsSection from '@/components/home/TestimonialsSection'
 import { FaCompass, FaBullseye, FaRocket, FaCommentDots, FaChartLine, FaThLarge } from "react-icons/fa"
 import { client } from "@/sanity/lib/client"
 import { getPortfolioWorksQuery, getCustomerStoriesQuery } from "@/sanity/lib/queries"
@@ -234,7 +234,7 @@ const page = async () => {
         subtitle="PROVEN RESULTS"
         stats={stats}
       />
-      <TestimonialSlider />
+      <TestimonialsSection />
       <MarketingStrategyFAQSection />
     </div>
   )
