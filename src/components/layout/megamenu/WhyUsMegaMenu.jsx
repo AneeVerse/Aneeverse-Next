@@ -57,14 +57,14 @@ const WhyUsMegaMenu = ({ color }) => {
       </button>
       {isOpen && (
         <motion.div
-          className="fixed h-screen inset-0 w-full top-[60px] pt-5 z-40"
+          className="fixed h-screen inset-0 w-full top-[60px] pt-5 z-[90]"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
           exit={{ opacity: 0, y: -10 }}
         >
           <div
-          className=" h-full backdrop-blur-[2px] w-full">
+            className=" h-full backdrop-blur-[2px] w-full">
             <motion.div
               onMouseLeave={() => {
                 setIsOpen(false);

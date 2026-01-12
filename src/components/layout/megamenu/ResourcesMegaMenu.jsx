@@ -26,10 +26,10 @@ let isFetchingStories = false;
 // Prefetch blogs outside component to share across renders
 const prefetchBlogs = async () => {
   if (isFetchingBlogs || isBlogsFetched) return;
-  
+
   try {
     isFetchingBlogs = true;
-    const response = await fetch('/api/sanity-blogs?limit=2', { 
+    const response = await fetch('/api/sanity-blogs?limit=2', {
       cache: 'no-store',
       next: { revalidate: 300 } // Revalidate every 5 minutes
     });
@@ -50,10 +50,10 @@ const prefetchBlogs = async () => {
 // Add prefetch function for customer stories
 const prefetchCustomerStories = async () => {
   if (isFetchingStories || isStoriesFetched) return;
-  
+
   try {
     isFetchingStories = true;
-    const response = await fetch('/api/sanity-customer-stories?limit=2', { 
+    const response = await fetch('/api/sanity-customer-stories?limit=2', {
       cache: 'no-store',
       next: { revalidate: 300 } // Revalidate every 5 minutes
     });
@@ -93,7 +93,7 @@ const ResourcesMegaMenu = ({ color }) => {
         setIsLoading(false);
         return;
       }
-      
+
       // If already fetching, just wait
       if (isFetchingBlogs) {
         const checkCache = setInterval(() => {
@@ -105,12 +105,12 @@ const ResourcesMegaMenu = ({ color }) => {
         }, 100);
         return () => clearInterval(checkCache);
       }
-      
+
       // Otherwise fetch them now
       try {
         setIsLoading(true);
         isFetchingBlogs = true;
-        const response = await fetch('/api/sanity-blogs?limit=2', { 
+        const response = await fetch('/api/sanity-blogs?limit=2', {
           cache: 'no-store',
           next: { revalidate: 300 } // Revalidate every 5 minutes
         });
@@ -143,7 +143,7 @@ const ResourcesMegaMenu = ({ color }) => {
         setIsLoadingStories(false);
         return;
       }
-      
+
       // If already fetching, just wait
       if (isFetchingStories) {
         const checkCache = setInterval(() => {
@@ -155,12 +155,12 @@ const ResourcesMegaMenu = ({ color }) => {
         }, 100);
         return () => clearInterval(checkCache);
       }
-      
+
       // Otherwise fetch them now
       try {
         setIsLoadingStories(true);
         isFetchingStories = true;
-        const response = await fetch('/api/sanity-customer-stories?limit=2', { 
+        const response = await fetch('/api/sanity-customer-stories?limit=2', {
           cache: 'no-store',
           next: { revalidate: 300 } // Revalidate every 5 minutes
         });
@@ -267,121 +267,121 @@ const ResourcesMegaMenu = ({ color }) => {
       </button>
       {isOpen && (
         <motion.div
-          className="fixed h-screen inset-0 w-full top-[60px] pt-5 z-40"
+          className="fixed h-screen inset-0 w-full top-[60px] pt-5 z-[90]"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
           exit={{ opacity: 0, y: -10 }}
         >
           <div className="backdrop-blur-[2px] h-full w-full">
-          <motion.div
+            <motion.div
               onMouseLeave={() => {
                 setIsOpen(false);
               }}
-          
-          className="bg-[#EBFAFE] shadow-lg border border-gray-200">
-            <Layout>
-              <div className="grid grid-cols-3 gap-6 py-8">
-                {/* Learning Center */}
-                <div className="border-r border-gray-200 pr-6">
-                 
-                  <ul className="mt-12 space-y-4">
-                    {resources[0].items.map((item, idx) => (
-                      <li key={idx}>
-                        <Link href={item.link} onClick={()=>{setIsOpen(false)}} 
-                       className="flex cursor-pointer border-b pb-3 items-start group justify-between gap-3">
-                        <div>
-                          <h4 className="text-md flex items-center font-medium text-gray-700">
-                           <span className="h-[5px] bg-secondary-500 w-[5px] inline-block transition-all duration-300 scale-0 group-hover:scale-100 rounded-full"></span> <span className="ml-[-5px] group-hover:ml-[6px] transition-all duration-300">{item.name}</span>
-                          </h4>
-                          <p className="text-sm text-gray-500">
-                            {item.description}
-                          </p>
-                        </div>
-                        <div className="text-gray-700 text-xl">{item.icon}</div>
-                      </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
 
-                {/* Blog */}
-                <div className="border-r border-gray-200 pr-6">
-                  <Link onClick={()=>{setIsOpen(false)}} href={resources[1].link} className="text-lg group font-semibold cursor-pointer hover:underline flex items-center text-secondary-500 gap-2">
-                    Blog <div className="relative"> <FiArrowUpRight className="z-10 group-hover:translate-x-[80%] group-hover:translate-y-[-80%] group-hover:opacity-0 transition-all duration-300" /> <FiArrowUpRight className="absolute inset-0 z-10 opacity-0 translate-x-[-80%] translate-y-[80%] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" /></div>
-                  </Link>
-                  <div className="grid grid-cols-1 gap-4 mt-4">
-                    {isLoading ? (
-                      // Loading placeholders with reduced height for faster rendering
-                      Array(2).fill(0).map((_, idx) => (
-                        <div key={idx} className="animate-pulse">
-                          <div className="bg-gray-200 h-[120px] rounded-md"></div>
-                          <div className="h-4 bg-gray-200 rounded mt-3 w-3/4"></div>
-                        </div>
-                      ))
-                    ) : blogs && blogs.length > 0 ? (
-                      // Render actual blogs
-                      blogs.map((blog, idx) => (
-                        <Link onClick={()=>{setIsOpen(false)}} href={`/blog/${blog.slug}`} key={idx} className="flex flex-col cursor-pointer gap-3">
-                          <div className="overflow-hidden rounded-md">
-                            <img
-                              src={blog.thumbnail}
-                              alt={blog.title}
-                              className="w-full h-[160px] hover:scale-110 transition-all duration-300 object-cover rounded-md"
-                            />
+              className="bg-[#EBFAFE] shadow-lg border border-gray-200">
+              <Layout>
+                <div className="grid grid-cols-3 gap-6 py-8">
+                  {/* Learning Center */}
+                  <div className="border-r border-gray-200 pr-6">
+
+                    <ul className="mt-12 space-y-4">
+                      {resources[0].items.map((item, idx) => (
+                        <li key={idx}>
+                          <Link href={item.link} onClick={() => { setIsOpen(false) }}
+                            className="flex cursor-pointer border-b pb-3 items-start group justify-between gap-3">
+                            <div>
+                              <h4 className="text-md flex items-center font-medium text-gray-700">
+                                <span className="h-[5px] bg-secondary-500 w-[5px] inline-block transition-all duration-300 scale-0 group-hover:scale-100 rounded-full"></span> <span className="ml-[-5px] group-hover:ml-[6px] transition-all duration-300">{item.name}</span>
+                              </h4>
+                              <p className="text-sm text-gray-500">
+                                {item.description}
+                              </p>
+                            </div>
+                            <div className="text-gray-700 text-xl">{item.icon}</div>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Blog */}
+                  <div className="border-r border-gray-200 pr-6">
+                    <Link onClick={() => { setIsOpen(false) }} href={resources[1].link} className="text-lg group font-semibold cursor-pointer hover:underline flex items-center text-secondary-500 gap-2">
+                      Blog <div className="relative"> <FiArrowUpRight className="z-10 group-hover:translate-x-[80%] group-hover:translate-y-[-80%] group-hover:opacity-0 transition-all duration-300" /> <FiArrowUpRight className="absolute inset-0 z-10 opacity-0 translate-x-[-80%] translate-y-[80%] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" /></div>
+                    </Link>
+                    <div className="grid grid-cols-1 gap-4 mt-4">
+                      {isLoading ? (
+                        // Loading placeholders with reduced height for faster rendering
+                        Array(2).fill(0).map((_, idx) => (
+                          <div key={idx} className="animate-pulse">
+                            <div className="bg-gray-200 h-[120px] rounded-md"></div>
+                            <div className="h-4 bg-gray-200 rounded mt-3 w-3/4"></div>
                           </div>
-                          <p className="text-sm line-clamp-1 font-medium text-gray-700">
-                            {blog.title}
-                          </p>
-                        </Link>
-                      ))
-                    ) : (
-                      // No blogs found
-                      <div className="text-center py-4 text-gray-500">
-                        Check out our blog for latest updates
-                      </div>
-                    )}
+                        ))
+                      ) : blogs && blogs.length > 0 ? (
+                        // Render actual blogs
+                        blogs.map((blog, idx) => (
+                          <Link onClick={() => { setIsOpen(false) }} href={`/blog/${blog.slug}`} key={idx} className="flex flex-col cursor-pointer gap-3">
+                            <div className="overflow-hidden rounded-md">
+                              <img
+                                src={blog.thumbnail}
+                                alt={blog.title}
+                                className="w-full h-[160px] hover:scale-110 transition-all duration-300 object-cover rounded-md"
+                              />
+                            </div>
+                            <p className="text-sm line-clamp-1 font-medium text-gray-700">
+                              {blog.title}
+                            </p>
+                          </Link>
+                        ))
+                      ) : (
+                        // No blogs found
+                        <div className="text-center py-4 text-gray-500">
+                          Check out our blog for latest updates
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Customer Stories */}
+                  <div>
+                    <Link onClick={() => { setIsOpen(false) }} href={resources[2].link} className="text-lg group font-semibold cursor-pointer hover:underline flex items-center text-secondary-500 gap-2">
+                      Customer Stories <div className="relative"> <FiArrowUpRight className="z-10 group-hover:translate-x-[80%] group-hover:translate-y-[-80%] group-hover:opacity-0 transition-all duration-300" /> <FiArrowUpRight className="absolute inset-0 z-10 opacity-0 translate-x-[-80%] translate-y-[80%] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" /></div>
+                    </Link>
+                    <div className="grid grid-cols-1 gap-4 mt-4">
+                      {isLoadingStories ? (
+                        // Loading placeholders
+                        Array(2).fill(0).map((_, idx) => (
+                          <div key={idx} className="animate-pulse">
+                            <div className="bg-gray-200 h-[120px] rounded-md"></div>
+                            <div className="h-4 bg-gray-200 rounded mt-3 w-3/4"></div>
+                          </div>
+                        ))
+                      ) : customerStories && customerStories.length > 0 ? (
+                        // Render actual customer stories
+                        customerStories.map((story, idx) => (
+                          <Link onClick={() => { setIsOpen(false) }} href={`/customer-stories/${story.slug}`} key={idx} className="flex flex-col cursor-pointer gap-3">
+                            <div className="overflow-hidden rounded-md">
+                              <img
+                                src={story.thumbnail}
+                                alt={story.title}
+                                className="w-full h-[160px] hover:scale-110 transition-all duration-300 object-cover rounded-md"
+                              />
+                            </div>
+                            <p className="text-sm line-clamp-1 font-medium text-gray-700">
+                              {story.title}
+                            </p>
+                          </Link>
+                        ))
+                      ) : (
+                        <p className="text-sm text-gray-500 italic">No customer stories available</p>
+                      )}
+                    </div>
                   </div>
                 </div>
-
-                {/* Customer Stories */}
-                <div>
-                  <Link onClick={()=>{setIsOpen(false)}} href={resources[2].link} className="text-lg group font-semibold cursor-pointer hover:underline flex items-center text-secondary-500 gap-2">
-                    Customer Stories <div className="relative"> <FiArrowUpRight className="z-10 group-hover:translate-x-[80%] group-hover:translate-y-[-80%] group-hover:opacity-0 transition-all duration-300" /> <FiArrowUpRight className="absolute inset-0 z-10 opacity-0 translate-x-[-80%] translate-y-[80%] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" /></div>
-                  </Link>
-                  <div className="grid grid-cols-1 gap-4 mt-4">
-                    {isLoadingStories ? (
-                      // Loading placeholders
-                      Array(2).fill(0).map((_, idx) => (
-                        <div key={idx} className="animate-pulse">
-                          <div className="bg-gray-200 h-[120px] rounded-md"></div>
-                          <div className="h-4 bg-gray-200 rounded mt-3 w-3/4"></div>
-                        </div>
-                      ))
-                    ) : customerStories && customerStories.length > 0 ? (
-                      // Render actual customer stories
-                      customerStories.map((story, idx) => (
-                        <Link onClick={()=>{setIsOpen(false)}} href={`/customer-stories/${story.slug}`} key={idx} className="flex flex-col cursor-pointer gap-3">
-                          <div className="overflow-hidden rounded-md">
-                            <img
-                              src={story.thumbnail}
-                              alt={story.title}
-                              className="w-full h-[160px] hover:scale-110 transition-all duration-300 object-cover rounded-md"
-                            />
-                          </div>
-                          <p className="text-sm line-clamp-1 font-medium text-gray-700">
-                            {story.title}
-                          </p>
-                        </Link>
-                      ))
-                    ) : (
-                      <p className="text-sm text-gray-500 italic">No customer stories available</p>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </Layout>
-          </motion.div>
+              </Layout>
+            </motion.div>
           </div>
         </motion.div>
       )}
