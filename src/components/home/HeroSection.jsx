@@ -436,7 +436,7 @@ const HeroSection = () => {
                     we got you covered.
                   </AccentText>
                 </Heading>
-                <p className="text-center sm:text-left mb-2 sm:mb-2 mt-0 hero-paragraph">
+                <p className="text-center sm:text-left mb-2 sm:mb-2 -mt-2 sm:-mt-4 hero-paragraph">
                   Get access to high-velocity creative team that works with your
                   brand. Ship campaigns  faster, more reliably, and at scale.
                 </p>
