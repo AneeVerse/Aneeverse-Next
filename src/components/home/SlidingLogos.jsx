@@ -77,7 +77,7 @@ const SlidingLogos = () => {
           </div>
         </div>
       </Layout>
-      
+
       <style jsx>{`
         @keyframes slide {
           0% {
@@ -89,7 +89,7 @@ const SlidingLogos = () => {
         }
         
         .animate-slide {
-          animation: slide 30s linear infinite;
+          animation: slide 80s linear infinite;
           will-change: transform;
         }
       `}</style>
