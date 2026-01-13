@@ -116,8 +116,13 @@ const BlogHeroSection = ({ blogData }) => {
                   <p className="text-md uppercase tracking-wide text-white font-['Inter',sans-serif] mb-[10px]">
                     {featuredBlog.category || "BLOG"} • <span className="normal-case">{featuredBlog.timeToRead ? `${featuredBlog.timeToRead} min read` : '5 min read'}</span>
                   </p>
-                  <h3 className="text-3xl sm:text-4xl md:text-5xl max-w-md sm:max-w-xl font-normal leading-[1.3] pb-2 font-['Inter',sans-serif]" style={{ '--underline-height': '3px', '--underline-speed': '500ms' }}>
-                    <span className="pb-1 bg-[linear-gradient(currentColor,currentColor)] bg-left-bottom bg-no-repeat transition-[background] duration-[var(--underline-speed)] bg-[length:0%_var(--underline-height)] hover:bg-[length:100%_var(--underline-height)] group-hover:bg-[length:100%_var(--underline-height)]" style={{ paddingBottom: '4px' }}>
+                  <h3 className="text-3xl sm:text-4xl md:text-5xl max-w-md sm:max-w-xl font-normal leading-[1.3] pb-2 font-['Inter',sans-serif]" style={{ '--underline-height': '2px', '--underline-speed': '500ms' }}>
+                    <span className="inline bg-no-repeat transition-[background-size] duration-[var(--underline-speed)] bg-[length:0%_100%] group-hover:bg-[length:100%_100%]"
+                      style={{
+                        backgroundImage: 'repeating-linear-gradient(to bottom, transparent 0, transparent 1.15em, currentColor 1.15em, currentColor calc(1.15em + var(--underline-height)), transparent calc(1.15em + var(--underline-height)), transparent 1.3em)',
+                        boxDecorationBreak: 'slice',
+                        WebkitBoxDecorationBreak: 'slice'
+                      }}>
                       {featuredBlog.title}
                     </span>
                   </h3>
