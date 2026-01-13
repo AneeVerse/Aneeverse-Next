@@ -263,12 +263,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           )}
         </AnimatePresence>
 
-        {/* Our Work Section */}
+        {/* Portfolio Section */}
         <Link href="/works" onClick={toggleSidebar} className="py-3 block cursor-pointer">
-          Our Work
+          Portfolio
         </Link>
 
-        {/* Why Us Section */}
+        {/* Why Us Section - Hidden for now */}
+        {/*
         <div className="py-3 flex justify-between items-center cursor-pointer" onClick={() => toggleSection("whyUs")}>
           <span>Why Us</span>
           {openSection === "whyUs" ? <FaChevronUp /> : <FaChevronDown />}
@@ -308,6 +309,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             </motion.div>
           )}
         </AnimatePresence>
+        */}
 
         {/* Resources Section */}
         <div className="py-3 flex justify-between items-center cursor-pointer" onClick={() => toggleSection("resources")}>

@@ -5,8 +5,8 @@ import Sidebar from "./Sidebar";
 import ServicesMegaMenu from "./megamenu/ServicesMegaMenu";
 import Link from "next/link";
 import ResourcesMegaMenu from "./megamenu/ResourcesMegaMenu";
+import PortfolioMegaMenu from "./megamenu/PortfolioMegaMenu";
 import { usePathname } from "next/navigation";
-import WhyUsMegaMenu from "./megamenu/WhyUsMegaMenu";
 import Layout from "../common/Layout";
 import Button from "../common/Button";
 import AnimatedButton from "../common/AnimatedButton";
@@ -88,19 +88,11 @@ const Navbar = () => {
         <div className="hidden lg:flex lg:gap-6 gap-3 items-center">
           <ServicesMegaMenu color={pathName.includes('/customer-stories') ? { text: '#073742', bg: '#EBFAFE' } : color} />
 
-          <Link
-            href="/works"
-            className="flex items-center group"
-            style={{ color: pathName.includes('/customer-stories') ? '#073742' : color.text }}
-          >
-            <span
-              className="h-[5px] w-[5px] inline-block rounded-full transition-all duration-300 scale-0 group-hover:scale-100 mr-0 group-hover:mr-1.5"
-              style={{ backgroundColor: pathName.includes('/customer-stories') ? '#073742' : color.text }}
-            />
-            <span>Our Works</span>
-          </Link>
+          <PortfolioMegaMenu color={pathName.includes('/customer-stories') ? { text: '#073742', bg: '#EBFAFE' } : color} />
 
-          <WhyUsMegaMenu color={pathName.includes('/customer-stories') ? { text: '#073742', bg: '#EBFAFE' } : color} />
+          {/* Why Us - Hidden for now */}
+          {/* <WhyUsMegaMenu color={pathName.includes('/customer-stories') ? { text: '#073742', bg: '#EBFAFE' } : color} /> */}
+
           <ResourcesMegaMenu color={pathName.includes('/customer-stories') ? { text: '#073742', bg: '#EBFAFE' } : color} />
 
           <Link
