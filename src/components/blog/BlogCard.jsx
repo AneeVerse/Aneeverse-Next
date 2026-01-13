@@ -7,10 +7,10 @@ import SanityImage from '../common/SanityImage';
 
 export default function BlogCard({ blog }) {
   const [authorImageError, setAuthorImageError] = useState(false);
-  
+
   // Default placeholder images
   const defaultAuthorImage = "/images/blog/author/abhi.png";
-  
+
   // Safe access to blog data with fallbacks
   const title = blog?.title || 'Untitled Blog Post';
   const category = blog?.category || 'Uncategorized';
@@ -19,11 +19,11 @@ export default function BlogCard({ blog }) {
     : (blog?.timeToRead || '5 min read');
   const shortDescription = blog?.shortDescription || '';
   const author = blog?.author || { name: 'Anonymous', role: 'Author', image: defaultAuthorImage };
-  
+
   // Check for slug first, then fall back to id for compatibility
   // If slug is an object (from Sanity), use slug.current
   const slug = blog?.slug?.current || blog?.slug || blog?.id || '#';
-  
+
   // Ensure author image exists and is a non-empty string
   const authorImageSrc = author?.image && typeof author.image === 'string' && author.image.trim() !== ''
     ? author.image
@@ -33,7 +33,7 @@ export default function BlogCard({ blog }) {
     console.error('Failed to load author image:', authorImageSrc);
     setAuthorImageError(true);
   };
-  
+
   return (
     <div className="flex flex-col h-full">
       {/* Image Section - Superside style */}
@@ -94,15 +94,16 @@ export default function BlogCard({ blog }) {
 
       <style jsx>{`
         .underline-animation {
-          background-image: linear-gradient(#0A2E3D, #0A2E3D);
-          background-size: 0% 2px;
-          background-position: 0 100%;
+          display: inline;
+          background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 1.1em, #0A2E3D 1.1em, #0A2E3D 1.16em, transparent 1.16em, transparent 1.25em);
+          background-size: 0% 100%;
           background-repeat: no-repeat;
           transition: background-size 0.6s;
-          padding-bottom: 2px;
+          -webkit-box-decoration-break: slice;
+          box-decoration-break: slice;
         }
         :global(.group:hover) .underline-animation {
-          background-size: 100% 1.5px;
+          background-size: 100% 100%;
         }
       `}</style>
     </div>
