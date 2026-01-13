@@ -1,11 +1,20 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { FcGoogle } from 'react-icons/fc';
-import { FaApple } from 'react-icons/fa';
+import { FaMicrosoft, FaLinkedin, FaStar } from 'react-icons/fa';
 import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
+import { client } from '@/sanity/lib/client';
+import { urlForImage } from '@/sanity/lib/image';
+
+const logos = [
+  "/images/home/logo/ishaniya foundashion logo 1.png",
+  "/images/home/logo/gilmoreoak logo 2.png",
+  "/images/home/logo/deepak fertilizers logo 3.png",
+  "/images/home/logo/Tiger Terrain logo 4.png",
+  "/images/home/logo/mesmerize india logo 5.png",
+];
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -13,8 +22,28 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [portfolioWorks, setPortfolioWorks] = useState([]);
 
-  // Decorative panel doesn't need carousel state now
+  // Fetch portfolio works for the left panel
+  useEffect(() => {
+    const fetchPortfolio = async () => {
+      try {
+        const data = await client.fetch(`
+          *[_type == "portfolioWork"] | order(featured desc, publishedAt desc)[0...4] {
+            _id,
+            title,
+            mainImage,
+            thumbnailImage,
+            industry
+          }
+        `);
+        setPortfolioWorks(data || []);
+      } catch (err) {
+        console.error('Error fetching portfolio for login page:', err);
+      }
+    };
+    fetchPortfolio();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,99 +69,168 @@ export default function LoginPage() {
     }
   };
 
+  // Helper to get image URL
+  const getImageUrl = (work) => {
+    const image = work.thumbnailImage || work.mainImage;
+    if (image?.asset) {
+      return urlForImage(image).width(400).height(400).url();
+    }
+    return null;
+  };
+
+  // Default display categories if sanity hasn't returned enough data
+  const categories = [
+    { title: "Brand & Identity" },
+    { title: "Marketing & Advertising" },
+    { title: "Digital & Web" },
+    { title: "Motion & Video" }
+  ];
+
   return (
-    <main className="min-h-screen flex">
-      {/* Decorative left section */}
-      <div className="hidden lg:flex lg:w-1/2 flex-col items-center justify-center bg-[#073742] text-white p-16 relative overflow-hidden">
-        {/* Logo & Back */}
-        <div className="absolute top-8 left-8 right-8 flex justify-between items-center z-10">
-          <div className="text-2xl font-bold tracking-wide">ANEEVERSE</div>
-          <Link href="/" className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-sm hover:bg-white/20 transition-colors">
-            Back to website →
-          </Link>
-        </div>
+    <main className="h-screen w-full bg-[#052b33] p-4 lg:p-6 flex items-center justify-center overflow-hidden font-sans">
+      <div className="w-full h-full max-w-[1400px] flex flex-col lg:flex-row gap-4 lg:gap-6">
 
-        <h2 className="text-5xl font-light leading-tight z-10 text-center">
-          Unleashing Creativity,
-          <br />Powering Excellence
-        </h2>
-
-        {/* Decorative SVG blobs */}
-        <svg width="700" height="700" viewBox="0 0 700 700" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute -bottom-40 -right-40 opacity-20">
-          <circle cx="350" cy="350" r="350" fill="url(#grad)" />
-          <defs>
-            <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#0a4c5c" />
-              <stop offset="100%" stopColor="#0f6a7f" />
-            </linearGradient>
-          </defs>
-        </svg>
-        <svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute -top-48 -left-48 opacity-10 rotate-45">
-          <rect x="0" y="0" width="500" height="500" rx="60" fill="#0e586d" />
-        </svg>
-      </div>
-
-      {/* Right section */}
-      <div className="w-full lg:w-1/2 bg-white p-8 lg:p-16 flex flex-col justify-center">
-        <div className="max-w-md w-full mx-auto">
-          <h1 className="text-3xl font-semibold text-[#073742] mb-2">Welcome back</h1>
-          <p className="text-gray-600 mb-8">
-            New here?{' '}
-            <Link href="/register" className="text-white hover:underline">
-              Create an account
+        {/* LEFT CARD - Brand Panel */}
+        <div className="hidden lg:flex flex-1 bg-[#073742] rounded-[40px] p-8 xl:p-12 flex-col justify-between relative overflow-hidden text-white h-full shadow-2xl shadow-black/20">
+          {/* Top: Logo */}
+          <div className="z-10">
+            <Link href="/" className="text-3xl font-black tracking-tighter text-[#88d7f0] uppercase">
+              Aneeverse
             </Link>
-          </p>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-gray-100 text-gray-900 border border-gray-300 focus:outline-none focus:border-[#073742]"
-                required
-              />
-            </div>
-            <div className="relative">
-              <input
-                type={showPassword ? 'text' : 'password'}
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-gray-100 text-gray-900 border border-gray-300 focus:outline-none focus:border-[#073742]"
-                required
-              />
-              <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
-                {showPassword ? <IoEyeOffOutline size={20} /> : <IoEyeOutline size={20} />}
-              </button>
-            </div>
-            {error && <p className="text-red-500 text-sm">{error}</p>}
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full py-3 rounded-lg bg-[#073742] text-white font-medium hover:bg-[#085061] transition-colors disabled:opacity-60"
-            >
-              {isLoading ? 'Signing in…' : 'Sign in'}
-            </button>
-          </form>
-
-          {/* Divider */}
-          {/* <div className="my-8 flex items-center gap-4">
-            <span className="flex-1 h-px bg-gray-300" />
-            <span className="text-gray-500 text-sm">Or continue with</span>
-            <span className="flex-1 h-px bg-gray-300" />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <button className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-white border border-gray-300 text-[#073742] hover:bg-gray-50 transition-colors">
-              <FcGoogle size={20} /> Google
-            </button>
-            <button className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-white border border-gray-300 text-[#073742] hover:bg-gray-50 transition-colors">
-              <FaApple size={20} /> Apple
-            </button>
-          </div> */}
+          {/* Middle: Headline & Cards */}
+          <div className="z-10 flex-grow flex flex-col justify-center max-w-4xl">
+            <div className="mb-6">
+              <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black leading-[0.9] uppercase tracking-tighter">
+                Creative<br />
+                Subscription Partner
+              </h1>
+            </div>
+
+            {/* Service Cards Grid - 4 items */}
+            <div className="grid grid-cols-4 gap-3 mb-6">
+              {[0, 1, 2, 3].map((idx) => {
+                const work = portfolioWorks[idx];
+                const category = categories[idx];
+                const imageUrl = work && getImageUrl(work);
+
+                return (
+                  <div key={idx} className="flex flex-col gap-2">
+                    <div className="bg-black/20 rounded-xl aspect-[4/5] relative overflow-hidden group shadow-2xl">
+                      {imageUrl ? (
+                        <img
+                          src={imageUrl}
+                          alt={work?.title || category.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-white/5 animate-pulse">
+                          <span className="text-white/20 text-[8px] text-center px-2 uppercase font-bold">
+                            {category.title}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    <span className="font-bold text-[9px] uppercase tracking-wider text-white/60">
+                      {category.title}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Bottom: Trusted By Logos */}
+          <div className="z-10 pt-6 border-t border-white/10">
+            <p className="text-[10px] font-bold tracking-widest uppercase opacity-40 mb-4">Trusted by established brands</p>
+            <div className="flex flex-wrap items-center gap-x-8 xl:gap-x-10 gap-y-4 filter brightness-0 invert opacity-60">
+              {logos.map((logo, index) => (
+                <img key={index} src={logo} alt="Partner Logo" className="h-6 w-auto object-contain" />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT CARD - Login Panel */}
+        <div className="w-full lg:w-[450px] xl:w-[500px] h-full bg-white rounded-[40px] flex flex-col justify-center relative p-8 lg:p-10 xl:p-14 shadow-2xl shadow-black/20">
+          <div className="max-w-[380px] w-full mx-auto flex flex-col justify-center">
+
+            <div>
+              <h2 className="text-3xl lg:text-[42px] font-bold text-gray-900 mb-8 tracking-tight text-left">Sign In</h2>
+
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-6 py-4 rounded-full bg-[#F2F2F2] text-gray-900 border-none focus:ring-2 focus:ring-[#073742] transition-all placeholder-gray-500 font-medium text-base h-[54px]"
+                  required
+                />
+                <div className="relative">
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full px-6 py-4 rounded-full bg-[#F2F2F2] text-gray-900 border-none focus:ring-2 focus:ring-[#073742] transition-all placeholder-gray-500 font-medium text-base h-[54px]"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                    tabIndex="-1"
+                  >
+                    {showPassword ? <IoEyeOffOutline size={20} /> : <IoEyeOutline size={20} />}
+                  </button>
+                </div>
+
+                {error && <div className="text-red-500 text-xs font-bold px-2">{error}</div>}
+
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full py-4 rounded-full bg-black text-white font-bold text-lg hover:bg-gray-900 transition-all shadow-lg disabled:opacity-70 mt-2 h-[54px] active:scale-[0.98]"
+                >
+                  {isLoading ? 'Signing in...' : 'Continue'}
+                </button>
+              </form>
+
+              <div className="mt-4 text-left">
+                <Link href="/forgot-password" title="Forgot Password" className="text-[#3F51B5] lg:text-blue-600 font-semibold text-sm hover:underline transition-colors">
+                  Forgot your password?
+                </Link>
+              </div>
+            </div>
+
+            {/* Social Divider */}
+            <div className="relative my-8">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-100"></div>
+              </div>
+              <div className="relative flex justify-center text-xs">
+                <span className="px-4 bg-white text-gray-400 font-bold uppercase tracking-[0.1em]">OR</span>
+              </div>
+            </div>
+
+            {/* Social Stack */}
+            <div className="space-y-4">
+              <button className="w-full h-[54px] flex items-center justify-center gap-3 px-6 rounded-full border-2 border-gray-900 text-gray-900 hover:bg-gray-50 transition-all font-bold text-base bg-white">
+                <FcGoogle size={22} /> <span>Login with Google</span>
+              </button>
+              <button className="w-full h-[54px] flex items-center justify-center gap-3 px-6 rounded-full border-2 border-gray-900 text-gray-900 hover:bg-gray-50 transition-all font-bold text-base bg-white">
+                <FaMicrosoft size={18} className="text-[#00a4ef]" /> <span>Login with Microsoft</span>
+              </button>
+              <button className="w-full h-[54px] flex items-center justify-center gap-3 px-6 rounded-full border-2 border-gray-900 text-gray-900 hover:bg-gray-50 transition-all font-bold text-base bg-white">
+                <FaLinkedin size={22} className="text-[#0077b5]" /> <span>Login with LinkedIn</span>
+              </button>
+            </div>
+
+          </div>
         </div>
       </div>
     </main>
   );
-} 
+}
