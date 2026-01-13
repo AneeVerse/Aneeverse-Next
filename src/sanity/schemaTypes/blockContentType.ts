@@ -1,5 +1,6 @@
-import {defineType, defineArrayMember} from 'sanity'
-import {ImageIcon, PlayIcon, EditIcon} from '@sanity/icons'
+import { defineType, defineArrayMember, defineField } from 'sanity'
+import { ImageIcon, PlayIcon, EditIcon } from '@sanity/icons'
+import { MarkdownTableInput } from '../components/MarkdownTableInput'
 
 /**
  * This is the schema type for block content used in the post document type
@@ -24,24 +25,24 @@ export const blockContentType = defineType({
       // you want, and decide how you want to deal with it where you want to
       // use your content.
       styles: [
-        {title: 'Normal', value: 'normal'},
-        {title: 'H1', value: 'h1'},
-        {title: 'H2', value: 'h2'},
-        {title: 'H3', value: 'h3'},
-        {title: 'H4', value: 'h4'},
-        {title: 'Quote', value: 'blockquote'},
+        { title: 'Normal', value: 'normal' },
+        { title: 'H1', value: 'h1' },
+        { title: 'H2', value: 'h2' },
+        { title: 'H3', value: 'h3' },
+        { title: 'H4', value: 'h4' },
+        { title: 'Quote', value: 'blockquote' },
       ],
       lists: [
-        {title: 'Bullet', value: 'bullet'},
-        {title: 'Numbered', value: 'number'}
+        { title: 'Bullet', value: 'bullet' },
+        { title: 'Numbered', value: 'number' }
       ],
       // Marks let you mark up inline text in the Portable Text Editor
       marks: {
         // Decorators usually describe a single property – e.g. a typographic
         // preference or highlighting
         decorators: [
-          {title: 'Strong', value: 'strong'},
-          {title: 'Emphasis', value: 'em'},
+          { title: 'Strong', value: 'strong' },
+          { title: 'Emphasis', value: 'em' },
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
@@ -157,7 +158,7 @@ export const blockContentType = defineType({
           url: 'url',
           customThumbnail: 'customThumbnail'
         },
-        prepare({url, customThumbnail}) {
+        prepare({ url, customThumbnail }) {
           const id = url
             ? url.split('v=')[1]?.split('&')[0] || url.split('youtu.be/')[1]?.split('?')[0] || ''
             : '';
@@ -225,6 +226,37 @@ export const blockContentType = defineType({
         }
       }
     }),
+    // Markdown Table block - stores as markdown string (Paste Supported)
+    defineArrayMember({
+      type: 'object',
+      name: 'markdownTable',
+      title: 'Table (Paste Supported)',
+      icon: () => '📊',
+      fields: [
+        defineField({
+          name: 'tableContent',
+          title: 'Table Content',
+          type: 'markdown',
+          components: {
+            input: MarkdownTableInput,
+          },
+        }),
+      ],
+      preview: {
+        select: {
+          content: 'tableContent',
+        },
+        prepare({ content }) {
+          // Count rows from markdown
+          const lines = (content || '').split('\n').filter((l: string) => l.trim() && !l.includes('---'));
+          const rowCount = lines.length;
+          return {
+            title: `Table (${rowCount} rows)`,
+            subtitle: lines[0]?.substring(0, 50) || 'Empty table',
+          };
+        },
+      },
+    }),
     defineArrayMember({
       type: 'object',
       name: 'inlineTOC',
@@ -250,3 +282,4 @@ export const blockContentType = defineType({
     }),
   ],
 })
+

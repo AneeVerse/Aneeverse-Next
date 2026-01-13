@@ -1,5 +1,6 @@
 import { defineConfig } from 'sanity'
 import { deskTool } from 'sanity/desk'
+import { markdownSchema } from 'sanity-plugin-markdown'
 import { schemaTypes } from '../sanity/schemaTypes'
 
 export default defineConfig({
@@ -8,7 +9,7 @@ export default defineConfig({
   title: 'Aneeverse Content Studio',
   basePath: '/studio',
   hostname: 'blog.aneeverse.com',
-  plugins: [deskTool()],
+  plugins: [deskTool(), markdownSchema()],
   schema: { types: schemaTypes },
   studio: {
     components: {
@@ -21,10 +22,10 @@ export default defineConfig({
       if (!document || !document.slug) {
         return prev;
       }
-      
+
       const slug = document.slug.current;
       let url;
-      
+
       switch (document._type) {
         case 'post':
           url = `https://aneeverse.com/blog/${slug}`;
@@ -35,7 +36,7 @@ export default defineConfig({
         default:
           url = prev;
       }
-      
+
       return url;
     }
   }

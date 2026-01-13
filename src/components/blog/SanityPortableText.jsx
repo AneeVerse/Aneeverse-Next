@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import SanityImage from '../common/SanityImage';
 import { urlForImage } from '@/sanity/lib/image';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 // Custom components for portable text rendering
 const InlineTOC = ({ headings }) => {
@@ -106,11 +108,11 @@ const components = {
     },
     table: ({ value }) => {
       console.log('Table value:', value);
-      
+
       // Handle different table structures
       let rows = [];
       let hasHeaderRow = false;
-      
+
       if (value.rows && Array.isArray(value.rows)) {
         rows = value.rows;
         hasHeaderRow = value.hasHeaderRow || false;
@@ -155,8 +157,8 @@ const components = {
             )}
             <tbody>
               {rows.slice(hasHeaderRow ? 1 : 0).map((row, rowIndex) => (
-                <tr 
-                  key={rowIndex} 
+                <tr
+                  key={rowIndex}
                   style={{ backgroundColor: 'green' }}
                 >
                   {row.cells.map((cell, cellIndex) => (
@@ -172,6 +174,48 @@ const components = {
               ))}
             </tbody>
           </table>
+        </div>
+      );
+    },
+    markdownTable: ({ value }) => {
+      if (!value || !value.tableContent) return null;
+      return (
+        <div className="overflow-x-auto my-6 shadow-sm rounded-lg -mx-4 sm:mx-0">
+          <div className="inline-block min-w-full align-middle markdown-table-wrapper">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                table: ({ children }) => (
+                  <table className="min-w-full border border-gray-300 text-sm">
+                    {children}
+                  </table>
+                ),
+                thead: ({ children }) => <thead>{children}</thead>,
+                tbody: ({ children }) => <tbody>{children}</tbody>,
+                tr: ({ children, ...props }) => {
+                  // Check if this is in thead or tbody for styling
+                  const isHeader = props.node?.parentNode?.tagName === 'thead';
+                  return (
+                    <tr className={isHeader ? "bg-blue-500" : "even:bg-white odd:bg-gray-50"}>
+                      {children}
+                    </tr>
+                  );
+                },
+                th: ({ children }) => (
+                  <th className="px-2 sm:px-3 py-2 text-white font-semibold border border-blue-500 text-left text-xs sm:text-sm whitespace-nowrap">
+                    {children}
+                  </th>
+                ),
+                td: ({ children }) => (
+                  <td className="border px-2 sm:px-3 py-2 align-top text-xs sm:text-sm text-gray-700 leading-relaxed max-w-xs break-words">
+                    {children}
+                  </td>
+                ),
+              }}
+            >
+              {value.tableContent}
+            </ReactMarkdown>
+          </div>
         </div>
       );
     },
@@ -216,9 +260,9 @@ const components = {
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/(^-|-$)/g, '');
-      
+
       return (
-        <h2 
+        <h2
           id={id}
           className="text-2xl font-bold mt-8 mb-4 text-[#101828] scroll-mt-24"
         >
