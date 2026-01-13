@@ -50,7 +50,7 @@ const BottomAboutSection = () => {
                 href={"/contact"}
                 className="mt-8 lg:mt-12 px-6 py-3 rounded-full font-medium text-[#e6ecd6] bg-secondary-500 border border-secondary-500 hover:bg-[#e6ecd6] hover:text-[#073742] transition-colors"
                 mainTextSlide="-130%"
-                duplicateTextStart="40%"
+                duplicateTextStart="100%"
                 duplicateTextEnd="-100%"
               >
                 Book a Call

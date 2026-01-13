@@ -92,7 +92,7 @@ const SupportSection = () => {
             href="/contact"
             className="px-6 py-3 bg-orange-400 hover:bg-orange-500 text-white font-semibold text-md rounded-full transition-colors"
             mainTextSlide="-130%"
-            duplicateTextStart="40%"
+            duplicateTextStart="100%"
             duplicateTextEnd="-100%"
           >
             Get Started

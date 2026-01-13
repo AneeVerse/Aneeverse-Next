@@ -40,7 +40,7 @@ export default function AIDesignSection() {
               href="/contact"
               className="px-8 py-3 rounded-full font-medium text-black bg-lime-300 hover:bg-lime-400 transition-colors"
               mainTextSlide="-130%"
-              duplicateTextStart="40%"
+              duplicateTextStart="100%"
               duplicateTextEnd="-100%"
             >
               Book a demo

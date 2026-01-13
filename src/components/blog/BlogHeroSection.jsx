@@ -64,7 +64,7 @@ const BlogHeroSection = ({ blogData }) => {
                   href="/contact"
                   className="mt-4 w-full py-3 rounded-full font-bold border-2 bg-[#ebfafe] text-[#073742] border-[#ebfafe]/100 hover:bg-transparent hover:text-[#ebfafe] hover:border-[#ebfafe]/40 transition-colors font-['Inter',sans-serif] text-center"
                   mainTextSlide="-130%"
-                  duplicateTextStart="40%"
+                  duplicateTextStart="100%"
                   duplicateTextEnd="-100%"
                 >
                   Subscribe now
@@ -165,7 +165,7 @@ const BlogHeroSection = ({ blogData }) => {
                 href="/contact"
                 className="mt-4 w-full py-3 rounded-full font-bold border-2 bg-[#ebfafe] text-[#073742] border-[#ebfafe]/100 hover:bg-transparent hover:text-[#ebfafe] hover:border-[#ebfafe]/40 transition-colors font-['Inter',sans-serif] text-center"
                 mainTextSlide="-130%"
-                duplicateTextStart="40%"
+                duplicateTextStart="100%"
                 duplicateTextEnd="-100%"
               >
                 Subscribe now

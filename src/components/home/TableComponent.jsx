@@ -78,7 +78,7 @@ const TableComponent = () => {
               color: "#073742"
             }}
             mainTextSlide="-140%"
-            duplicateTextStart="40%"
+            duplicateTextStart="100%"
             duplicateTextEnd="-100%"
           >
             GET STARTED
@@ -86,25 +86,30 @@ const TableComponent = () => {
         </div>
 
         {/* ✅ Table Container */}
-        <div className="max-w-7xl mx-auto overflow-hidden rounded-[2rem] border border-gray-800 shadow-2xl">
-          <div className="overflow-x-auto scrollbar-hide">
-            <div className="min-w-[900px]">
+        <div className="max-w-7xl mx-auto overflow-hidden rounded-[1rem] sm:rounded-[2rem] border border-gray-800 shadow-2xl">
+          <div className="w-full">
+            <div className="min-w-0">
 
               {/* ✅ Sticky Table Header (Black) */}
-              <div className="bg-black py-6 px-10 flex items-center border-b border-gray-800">
-                <div className="w-[35%] flex items-center">
+              <div className="bg-black py-4 sm:py-6 px-3 sm:px-10 flex items-center border-b border-gray-800">
+                <div className="w-[35%] sm:w-[35%] flex items-center pr-2">
                   <Image
                     src="/images/aneeverse-logo.svg"
                     alt="Aneeverse Logo"
                     width={180}
                     height={40}
-                    className="h-10 w-auto object-contain brightness-200 transform translate-y-1"
+                    className="h-5 sm:h-10 w-auto object-contain brightness-200"
                   />
                 </div>
-                <div className="flex-1 grid grid-cols-5 gap-4 items-center">
+                <div className="flex-1 grid grid-cols-5 gap-0 items-center">
                   {headers.map((header, index) => (
-                    <div key={index} className="text-center text-[10px] md:text-xs uppercase tracking-[0.15em] font-black text-gray-400">
-                      {header}
+                    <div key={index} className="text-center text-[7px] min-[380px]:text-[8px] sm:text-[10px] md:text-xs uppercase tracking-tight sm:tracking-[0.15em] font-black text-gray-400 px-0.5">
+                      <span className="sm:hidden">
+                        {header === "Cost-effectiveness" ? "Cost" :
+                          header === "Scalability" ? "Scale" :
+                            header === "Flexibility" ? "Flex" : header}
+                      </span>
+                      <span className="hidden sm:inline">{header}</span>
                     </div>
                   ))}
                 </div>
@@ -120,15 +125,15 @@ const TableComponent = () => {
                     }`}
                 >
                   {/* Left content (Platform/Icon/Description) */}
-                  <div className={`w-[35%] p-8 flex items-center gap-6 border-r ${item.highlight ? 'border-[#073742]/10' : 'border-gray-800'}`}>
-                    <div className={`${item.highlight ? 'opacity-100' : 'opacity-80'}`}>
+                  <div className={`w-[35%] sm:w-[35%] p-3 sm:p-8 flex items-center gap-2 sm:gap-6 border-r ${item.highlight ? 'border-[#073742]/10' : 'border-gray-800'}`}>
+                    <div className={`hidden sm:block ${item.highlight ? 'opacity-100' : 'opacity-80'}`}>
                       {item.icon}
                     </div>
-                    <div>
-                      <h3 className="text-xl md:text-2xl font-bold leading-tight mb-2">
+                    <div className="min-w-0">
+                      <h3 className="text-[10px] min-[380px]:text-xs sm:text-xl md:text-2xl font-bold leading-tight whitespace-normal">
                         {item.title}
                       </h3>
-                      <p className={`text-xs md:text-sm leading-relaxed ${item.highlight ? 'text-[#073742]/80 font-medium' : 'text-gray-400'}`}>
+                      <p className={`hidden md:block text-xs md:text-sm leading-relaxed ${item.highlight ? 'text-[#073742]/80 font-medium' : 'text-gray-400'}`}>
                         {item.description}
                       </p>
                     </div>
@@ -143,9 +148,9 @@ const TableComponent = () => {
                           }`}
                       >
                         {feature ? (
-                          <IoCheckmarkCircleOutline className={`text-3xl md:text-4xl ${item.highlight ? 'text-[#073742]' : 'text-[#88D7F0]'}`} />
+                          <IoCheckmarkCircleOutline className={`text-base min-[380px]:text-lg sm:text-3xl md:text-4xl ${item.highlight ? 'text-[#073742]' : 'text-[#88D7F0]'}`} />
                         ) : (
-                          <IoCloseCircleOutline className={`text-3xl md:text-4xl ${item.highlight ? 'text-[#073742]/40' : 'text-gray-600'}`} />
+                          <IoCloseCircleOutline className={`text-base min-[380px]:text-lg sm:text-3xl md:text-4xl ${item.highlight ? 'text-[#073742]/40' : 'text-gray-600'}`} />
                         )}
                       </div>
                     ))}

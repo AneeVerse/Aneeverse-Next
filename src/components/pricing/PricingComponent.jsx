@@ -83,7 +83,7 @@ export default function PricingComponent() {
           href="/contact"
           className="mt-6 w-full flex justify-center mx-auto sm:mx-0 text-center px-6 py-3 rounded-full font-medium text-[#0A211F] bg-[#D8FF85] border border-[#D8FF85] hover:bg-[#2A4E45] hover:text-[#D8FF85] transition-colors"
           mainTextSlide="-130%"
-          duplicateTextStart="40%"
+          duplicateTextStart="100%"
           duplicateTextEnd="-100%"
         >
           {pricingData.leftBox.buttonText}

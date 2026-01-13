@@ -36,7 +36,7 @@ export default function AboutDesignServicesSection() {
           href="/contact"
           className="mt-8 w-full md:w-fit max-w-[400px] flex justify-center mx-auto md:mx-0 text-center px-6 py-3 rounded-full font-medium text-secondary-500 bg-[#D8FF85] border border-[#D8FF85] hover:bg-secondary-500 hover:text-[#D8FF85] transition-colors"
           mainTextSlide="-130%"
-          duplicateTextStart="40%"
+          duplicateTextStart="100%"
           duplicateTextEnd="-100%"
         >
           BOOK A CALL

@@ -36,7 +36,7 @@ const Newsletter = ({ wide = false }) => {
             href="/contact"
             className="bg-[#C0FF7C] text-black font-bold w-full px-4 py-2 rounded-full hover:bg-[#C0FF7C] transition text-center text-base shadow-lg"
             mainTextSlide="-130%"
-            duplicateTextStart="40%"
+            duplicateTextStart="100%"
             duplicateTextEnd="-100%"
           >
             Book a call
@@ -72,7 +72,7 @@ const Newsletter = ({ wide = false }) => {
             href="/contact"
             className="bg-[#C0FF7C] text-black font-bold px-6 py-2 rounded-full hover:bg-[#C0FF7C] transition text-center text-base shadow-lg text-left"
             mainTextSlide="-130%"
-            duplicateTextStart="40%"
+            duplicateTextStart="100%"
             duplicateTextEnd="-100%"
           >
             Book a call

@@ -48,7 +48,7 @@ export default function ServicesHero() {
           href="/contact"
           className="mt-4 min-w-fit whitespace-nowrap px-6 py-3 rounded-full font-medium text-black bg-[#D8FF85] border border-[#D8FF85] hover:bg-black/90 hover:text-[#D8FF85] transition-colors"
           mainTextSlide="-130%"
-          duplicateTextStart="40%"
+          duplicateTextStart="100%"
           duplicateTextEnd="-100%"
         >
           BOOK A CALL
