@@ -120,7 +120,7 @@ export default function NewFooter() {
               href="/contact"
               className="mt-2 px-6 py-3 rounded-full font-medium text-secondary-500 bg-primary-500 border border-primary-500 hover:bg-secondary-500 hover:text-[#EBFAFE] transition-colors"
               mainTextSlide="-130%"
-              duplicateTextStart="40%"
+              duplicateTextStart="100%"
               duplicateTextEnd="-100%"
             >
               GET STARTED
@@ -271,7 +271,7 @@ export default function NewFooter() {
                 href="/contact"
                 className="mt-6 px-6 py-3 rounded-full font-medium text-secondary-500 bg-primary-500 border border-primary-500 hover:bg-secondary-500 hover:text-[#EBFAFE] transition-colors"
                 mainTextSlide="-130%"
-                duplicateTextStart="40%"
+                duplicateTextStart="100%"
                 duplicateTextEnd="-100%"
               >
                 GET STARTED

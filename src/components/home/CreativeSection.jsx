@@ -489,7 +489,7 @@ export default function CreativeSection() {
                 color: "#073742"
               }}
               mainTextSlide="-140%"
-              duplicateTextStart="40%"
+              duplicateTextStart="100%"
               duplicateTextEnd="-100%"
             >
               GET STARTED

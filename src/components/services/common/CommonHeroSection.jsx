@@ -83,7 +83,7 @@ export default function CommonServicesHeroSection({
                 href={ctaLink}
                 className="mt-6 min-w-fit whitespace-nowrap px-6 py-3 rounded-full font-medium text-primary-500 bg-transparent border border-primary-500 hover:bg-primary-500 hover:text-[#073742] transition-colors"
                 mainTextSlide="-130%"
-                duplicateTextStart="40%"
+                duplicateTextStart="100%"
                 duplicateTextEnd="-100%"
               >
                 {ctaText}

@@ -2,15 +2,15 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-const AnimatedButton = ({ 
-  href, 
-  children, 
-  className = "", 
+const AnimatedButton = ({
+  href,
+  children,
+  className = "",
   style = {},
   mainTextSlide = "-120%",  // How far main text slides up
-  duplicateTextStart = "10%", // Starting position of duplicate text
+  duplicateTextStart = "100%", // Starting position of duplicate text
   duplicateTextEnd = "-100%", // End position of duplicate text
-  ...props 
+  ...props
 }) => {
   return (
     <motion.div
@@ -32,7 +32,7 @@ const AnimatedButton = ({
         >
           {children}
         </motion.div>
-        
+
         {/* Duplicate text - hidden below, comes up on hover */}
         <motion.div
           className="absolute top-full left-0 w-full"

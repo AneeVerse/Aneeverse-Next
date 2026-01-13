@@ -48,13 +48,15 @@ const testimonials = [
   }
 ];
 
-const ITEM_SIZE = 160;
+const DESKTOP_ITEM_SIZE = 160;
+const MOBILE_ITEM_SIZE = 120;
 
 const TestimonialsSection = () => {
   const scrollY = useMotionValue(0);
   const [centerIndex, setCenterIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const itemSize = isMobile ? MOBILE_ITEM_SIZE : DESKTOP_ITEM_SIZE;
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -63,46 +65,74 @@ const TestimonialsSection = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  const [wheelIndex, setWheelIndex] = useState(0); // Tracks the visual center of the wheel (updated during drag)
+
+  // Synchronize both wheel and text content index during scroll
   useEffect(() => {
     const unsub = scrollY.on("change", (latest) => {
-      const rawIndex = Math.round(-latest / ITEM_SIZE);
-      setCenterIndex(rawIndex);
+      const newIndex = Math.round(-latest / itemSize);
+      setWheelIndex(newIndex);
+      // 🔥 Update text content immediately to feel "attached" 
+      setCenterIndex((prev) => (prev !== newIndex ? newIndex : prev));
     });
     return () => unsub();
-  }, [scrollY]);
+  }, [scrollY, itemSize]);
 
   const onPanStart = () => {
     setIsDragging(true);
+    scrollY.stop();
   };
 
   const onPan = (e, info) => {
     const delta = isMobile ? info.delta.x : info.delta.y;
-    scrollY.set(scrollY.get() + delta * 1.5);
+    scrollY.set(scrollY.get() + delta * 2.5);
   };
 
   const onPanEnd = (e, info) => {
     setIsDragging(false);
     const currentVal = scrollY.get();
     const velocity = isMobile ? info.velocity.x : info.velocity.y;
-    const predictedVal = currentVal + velocity * 0.2;
-    const targetIndex = Math.round(-predictedVal / ITEM_SIZE);
-    const targetVal = -targetIndex * ITEM_SIZE;
+
+    const predictedVal = currentVal + velocity * 0.4;
+    const targetIndex = Math.round(-predictedVal / itemSize);
+    const targetVal = -targetIndex * itemSize;
 
     animate(scrollY, targetVal, {
       type: "spring",
-      stiffness: 200,
-      damping: 30
+      stiffness: 100,  // Faster snap
+      damping: 25,     // More controlled
+      mass: 0.8,
+      velocity: velocity,
+      restDelta: 0.01,
+      onComplete: () => {
+        // Final sync
+        const finalIndex = Math.round(-targetVal / itemSize);
+        setCenterIndex(finalIndex);
+        setWheelIndex(finalIndex);
+      }
     });
   };
 
   const handleNext = () => {
-    const target = (centerIndex + 1) * -ITEM_SIZE;
-    animate(scrollY, target, { type: "spring", stiffness: 200, damping: 30 });
+    const target = (centerIndex + 1) * -itemSize;
+    animate(scrollY, target, {
+      type: "spring",
+      stiffness: 100,
+      damping: 25,
+      restDelta: 0.1,
+      onComplete: () => setCenterIndex(centerIndex + 1)
+    });
   };
 
   const handlePrev = () => {
-    const target = (centerIndex - 1) * -ITEM_SIZE;
-    animate(scrollY, target, { type: "spring", stiffness: 200, damping: 30 });
+    const target = (centerIndex - 1) * -itemSize;
+    animate(scrollY, target, {
+      type: "spring",
+      stiffness: 100,
+      damping: 25,
+      restDelta: 0.1,
+      onComplete: () => setCenterIndex(centerIndex - 1)
+    });
   };
 
   // ✅ Auto-scroll Logic
@@ -111,10 +141,10 @@ const TestimonialsSection = () => {
 
     const timer = setInterval(() => {
       handleNext();
-    }, 3500); // 3.5 seconds for a balanced read time
+    }, 4500);
 
     return () => clearInterval(timer);
-  }, [isDragging, centerIndex]); // Reset timer when index changes or dragging starts
+  }, [isDragging, centerIndex]);
 
   // Safe wrap for data access
   const getData = (i) => {
@@ -130,27 +160,28 @@ const TestimonialsSection = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-16 relative w-full">
 
           {/* ✅ Left Column: Infinite Wheel */}
-          <div className="relative w-[100vw] ml-[calc(-50vw+50%)] md:ml-0 h-48 md:h-[600px] md:w-64 flex-shrink-0 flex md:flex-col items-center justify-center select-none touch-none mt-0 md:mt-10 mb-8 md:mb-0">
+          <div className="relative w-full h-40 md:h-[600px] md:w-64 flex-shrink-0 flex md:flex-col items-center justify-center select-none mt-0 md:mt-10 mb-8 md:mb-0">
 
             {/* Interaction Overlay */}
             <motion.div
-              className="absolute inset-0 z-20 cursor-grab active:cursor-grabbing"
+              className="absolute inset-0 z-20 cursor-grab active:cursor-grabbing touch-none"
               onPanStart={onPanStart}
               onPan={onPan}
               onPanEnd={onPanEnd}
             />
 
-            {/* Render Visible Slots relative to centerIndex */}
-            {[-2, -1, 0, 1, 2].map((offset) => {
-              const i = centerIndex + offset;
+            {/* Render Visible Slots relative to wheelIndex for infinite visual scroll */}
+            {[-4, -3, -2, -1, 0, 1, 2, 3, 4].map((offset) => {
+              const i = wheelIndex + offset; // Use wheelIndex (dynamic) instead of centerIndex (stable)
               const item = getData(i);
               return (
                 <SlotItem
-                  key={i}
+                  key={`slot-${i}`} // Use absolute index key to ensure content is stable during shifts
                   item={item}
                   index={i}
                   scrollY={scrollY}
                   isMobile={isMobile}
+                  itemSize={itemSize}
                 />
               );
             })}
@@ -158,8 +189,8 @@ const TestimonialsSection = () => {
             {/* Gradients */}
             {isMobile ? (
               <>
-                <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-[#073742] via-[#073742]/10 to-transparent z-15 pointer-events-none" />
-                <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#073742] via-[#073742]/10 to-transparent z-15 pointer-events-none" />
+                <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[#073742] to-transparent z-15 pointer-events-none" />
+                <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-[#073742] to-transparent z-15 pointer-events-none" />
               </>
             ) : (
               <>
@@ -174,10 +205,13 @@ const TestimonialsSection = () => {
             {/* We use a transition group here to fade content */}
             <motion.div
               key={centerIndex}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3 }}
+              initial={{ opacity: 0, scale: 0.98, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 1.02, y: -10 }}
+              transition={{
+                duration: 0.2, // Faster transition for "attached" feel
+                ease: "easeOut"
+              }}
               className="w-full"
             >
               <ContentBlock testimonial={activeData} />
@@ -201,14 +235,14 @@ const TestimonialsSection = () => {
   );
 };
 
-const SlotItem = ({ item, index, scrollY, isMobile }) => {
-  const val = useTransform(scrollY, (currentScroll) => index * ITEM_SIZE + currentScroll);
+const SlotItem = ({ item, index, scrollY, isMobile, itemSize }) => {
+  const val = useTransform(scrollY, (currentScroll) => index * itemSize + currentScroll);
 
-  const inputRange = [-320, -160, 0, 160, 320];
-  const scale = useTransform(val, inputRange, [0.5, 0.75, 1.35, 0.75, 0.5]);
-  const opacity = useTransform(val, inputRange, [0, 0.4, 1, 0.4, 0]);
-  const blur = useTransform(val, inputRange, ["5px", "2px", "0px", "2px", "5px"]);
-  const overlayOpacity = useTransform(val, inputRange, [0.8, 0.6, 0, 0.6, 0.8]);
+  const range = isMobile ? [-(itemSize * 2), -itemSize, 0, itemSize, itemSize * 2] : [-320, -160, 0, 160, 320];
+  const scale = useTransform(val, range, [0.5, 0.75, 1.35, 0.75, 0.5]);
+  const opacity = useTransform(val, range, [0, 0.4, 1, 0.4, 0]);
+  const blur = useTransform(val, range, ["5px", "2px", "0px", "2px", "5px"]);
+  const overlayOpacity = useTransform(val, range, [0.8, 0.6, 0, 0.6, 0.8]);
 
   return (
     <motion.div
@@ -221,7 +255,7 @@ const SlotItem = ({ item, index, scrollY, isMobile }) => {
         position: 'absolute',
         zIndex: 10
       }}
-      className="w-32 h-32 rounded-full border-2 border-white/10 overflow-hidden shadow-2xl bg-black"
+      className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-2 border-white/10 overflow-hidden shadow-2xl bg-black"
     >
       <Image
         src={item.avatar}

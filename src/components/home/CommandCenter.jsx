@@ -56,7 +56,7 @@ export default function CommandCenter() {
                             color: "#073742"
                         }}
                         mainTextSlide="-140%"
-                        duplicateTextStart="40%"
+                        duplicateTextStart="100%"
                         duplicateTextEnd="-100%"
                     >
                         GET STARTED

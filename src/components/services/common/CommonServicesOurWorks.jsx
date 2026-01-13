@@ -90,7 +90,7 @@ const CommonServicesOurWorks = () => {
             href={"/works"}
             className="mt-6 whitespace-nowrap px-6 py-3 rounded-full font-medium text-primary-500 bg-secondary-500 border border-primary-500 hover:bg-primary-500 hover:text-[#073742] transition-colors"
             mainTextSlide="-130%"
-            duplicateTextStart="40%"
+            duplicateTextStart="100%"
             duplicateTextEnd="-100%"
           >
             Explore all{" "}
