@@ -40,16 +40,16 @@ const HumanCreativity = React.memo(() => {
                         viewport={{ once: true }}
                         whileHover={{ scale: 1.02, zIndex: 20, transition: { duration: 0.3 } }}
                         transition={{ duration: 0.5, delay: 0.2 }}
-                        className="lg:col-span-4 bg-[#072d36] rounded-xl overflow-hidden relative group min-h-[420px] lg:min-h-[420px] flex flex-col flex-shrink-0 w-[80vw] sm:w-[340px] lg:w-auto snap-center"
+                        className="lg:col-span-4 bg-[#072d36] rounded-xl overflow-hidden relative group min-h-[320px] sm:min-h-[420px] flex flex-col flex-shrink-0 w-[80vw] sm:w-[340px] lg:w-auto snap-center"
                     >
                         <div className="absolute left-0 top-[85%] w-[2px] h-[80px] bg-gradient-to-b from-transparent via-[#88d7f0] to-transparent opacity-0 group-hover:opacity-100 group-hover:top-[10%] transition-all duration-1000 ease-in-out z-10" />
                         {/* Image Section */}
-                        <div className="flex-grow relative h-[200px] lg:h-auto">
+                        <div className="relative h-[240px] lg:h-auto lg:flex-grow w-full">
                             <Image
                                 src="/images/home/human creativity/7dee15b1aae6aab33f6f2c6e02ee72aab8f21a2d.png"
                                 alt="Creative Professional"
                                 fill
-                                className="object-cover object-top"
+                                className="object-contain object-center sm:object-cover sm:object-top"
                                 loading="lazy"
                                 sizes="(max-width: 1024px) 100vw, 33vw"
                             />
