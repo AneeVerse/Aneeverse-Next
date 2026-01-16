@@ -164,7 +164,7 @@ const TestimonialsSection = () => {
 
             {/* Interaction Overlay */}
             <motion.div
-              className="absolute inset-0 z-20 cursor-grab active:cursor-grabbing touch-none"
+              className={`absolute inset-0 z-20 cursor-grab active:cursor-grabbing ${isMobile ? 'touch-pan-y' : 'touch-none'}`}
               onPanStart={onPanStart}
               onPan={onPan}
               onPanEnd={onPanEnd}
