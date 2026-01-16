@@ -145,9 +145,10 @@ export default async function Home() {
 
       {/* <FeaturesSection /> */}
 
-      {/* <LazySection>
+
+      <LazySection sectionId="discovery-call">
         <DiscoveryCall />
-      </LazySection> */}
+      </LazySection>
 
       {/* <LazySection>
         <BottomAboutSection />

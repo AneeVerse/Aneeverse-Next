@@ -156,6 +156,16 @@ export default function LoginPage() {
         <div className="w-full lg:w-[450px] xl:w-[500px] h-full bg-white rounded-[40px] flex flex-col justify-center relative p-8 lg:p-10 xl:p-14 shadow-2xl shadow-black/20">
           <div className="max-w-[380px] w-full mx-auto flex flex-col justify-center">
 
+            {/* NEW: Mobile Back Button - only visible on small screens */}
+            <div className="lg:hidden absolute top-8 left-8">
+              <Link href="/" className="flex items-center gap-2 text-[#073742] font-bold text-sm tracking-tight hover:opacity-70 transition-opacity">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg>
+                Back
+              </Link>
+            </div>
+
             <div>
               <h2 className="text-3xl lg:text-[42px] font-bold text-gray-900 mb-8 tracking-tight text-left">Sign In</h2>
 
