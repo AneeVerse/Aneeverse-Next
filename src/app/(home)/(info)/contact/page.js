@@ -33,6 +33,8 @@ export const metadata = {
 
 
 
+import ContactCalEmbed from '@/components/contact/ContactCalEmbed';
+
 const ContactUsPage = () => {
 
 
@@ -46,7 +48,7 @@ const ContactUsPage = () => {
         <p className="text-xl font-light">We'd love to hear from you! Schedule a meeting or reach out to us.</p>
       </div> */}
 
-      {/* Calendly Embed */}
+      {/* Cal.com Embed */}
       <div className="pt-24 sm:pt-28 sm:pb-16 bg-[#fbfcfd] text-secondary-500">
         <Layout>
           <Heading
@@ -58,7 +60,7 @@ const ContactUsPage = () => {
             Schedule a Discovery Call
 
           </Heading>
-          <p className="text-md sm:text-lg md:text-xl mb-4 text-center font-normal">
+          <p className="text-md sm:text-lg md:text-xl mb-12 text-center font-normal">
             Schedule a call below or email{" "}
             <Link href="mailto:team@aneeverse.com" className='inline-block'>
               <span className="text-blue-600">team@aneeverse.com</span>
@@ -70,16 +72,8 @@ const ContactUsPage = () => {
             </Link>{" "}
             to learn more about our plans, process, and results.
           </p>
-          <div className="rounded-lg overflow-hidden ">
-            <iframe
-              src="https://calendly.com/aneeverse/discovery-call"
-              className="w-full min-h-[1090px] lg:min-h-[760px] border-none"
-              frameBorder="0"
-              scrolling="no"
 
-              title="Calendly Scheduling"
-            ></iframe>
-          </div>
+          <ContactCalEmbed />
         </Layout>
       </div>
 
@@ -89,15 +83,15 @@ const ContactUsPage = () => {
 
           {/* Contact Information */}
           <div className="space-y-8">
-          <Heading
-            level="h4"
-            color="light"
-            spacing="lg"
-            className="text-left font-semibold"
-          >
-            Get in Touch
+            <Heading
+              level="h4"
+              color="light"
+              spacing="lg"
+              className="text-left font-semibold"
+            >
+              Get in Touch
 
-          </Heading>
+            </Heading>
             <div className="space-y-6 text-md sm:text-lg">
               <Link href={"tel:+91 91527 55529"} className="flex items-center  ">
                 <FaPhone className="  mr-4" /> +91 91527 55529
@@ -129,15 +123,15 @@ const ContactUsPage = () => {
 
           {/* Map Section */}
           <div className="space-y-8">
-          <Heading
-            level="h4"
-            color="light"
-            spacing="lg"
-            className="text-left font-semibold "
-          >
-           Our Location
+            <Heading
+              level="h4"
+              color="light"
+              spacing="lg"
+              className="text-left font-semibold "
+            >
+              Our Location
 
-          </Heading>
+            </Heading>
             <div className="rounded-lg overflow-hidden shadow-2xl">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8045.169104825051!2d73.005389!3d19.0155818!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c103ebdfb625%3A0xee9ac3282c16c2!2sAneeverse%20Creative%20Solutions%20%7C%20Digital%20Marketing%2C%20Web%20Development%20Services%20in%20Navi%20Mumbai!5e1!3m2!1sen!2sin!4v1738217506212!5m2!1sen!2sin"
