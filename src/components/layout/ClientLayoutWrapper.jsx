@@ -9,6 +9,7 @@ import OrganizationSchema from '@/components/seo/OrganizationSchema';
 import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema';
 import WebPageSchema from '@/components/seo/WebPageSchema';
 import HomeSchema from '@/components/seo/HomeSchema';
+import Preloader from '@/components/ui/Preloader';
 
 export default function ClientLayoutWrapper({ children }) {
   const pathname = usePathname();
@@ -17,6 +18,9 @@ export default function ClientLayoutWrapper({ children }) {
 
   return (
     <>
+      {/* Preloader - Shows before all content */}
+      {!isStudio && !isAuth && <Preloader />}
+
       {/* Top Loader */}
       <NextTopLoader
         color="#0e2f50"
