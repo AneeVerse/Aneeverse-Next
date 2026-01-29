@@ -9,6 +9,7 @@ import MarketingServices from '@/components/services/MarketingServices'
 import ServicesHero from '@/components/services/ServicesHero'
 import ServicesSupportSection from '@/components/services/ServicesSupportSection'
 import WebsiteServices from '@/components/services/WebsiteServices'
+import EcommerceServices from '@/components/services/EcommerceServices'
 import ServiceSchema from '@/components/seo/ServiceSchema'
 import React from 'react'
 import { client } from "@/sanity/lib/client";
@@ -124,6 +125,7 @@ export default async function Page() {
       <SlidingLogos />
       <ServicesSupportSection />
       <div className='bg-secondary-500 space-y-8 py-16'>
+        <EcommerceServices />
         <WebsiteServices />
 
         <MarketingServices />

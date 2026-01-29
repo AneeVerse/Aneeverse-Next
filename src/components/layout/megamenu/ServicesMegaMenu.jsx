@@ -6,7 +6,8 @@ import {
   FaPaintBrush, FaFacebook, FaSlideshare, FaPalette,
   FaTag, FaFilePdf, FaBox, FaDesktop,
   FaCode, FaLayerGroup, FaCog, FaPenFancy, FaSearch, FaBuilding,
-  FaRobot, FaBlog, FaChartLine, FaEnvelope, FaEnvelopeOpenText, FaChartPie
+  FaRobot, FaBlog, FaChartLine, FaEnvelope, FaEnvelopeOpenText, FaChartPie,
+  FaAmazon, FaEbay, FaShoppingCart, FaRocket
 } from "react-icons/fa";
 import Link from "next/link";
 import { FaChevronDown } from "react-icons/fa6";
@@ -65,6 +66,16 @@ const ServicesMegaMenu = ({ color }) => {
 
       ],
     },
+    {
+      title: "Ecommerce Marketplace",
+      url: "/services",
+      color: "bg-orange-100 hover:bg-orange-200 text-orange-900",
+      items: [
+        { name: "Amazon Marketplace Management", url: "/services/amazon-marketplace-management", description: "Scale more on Amazon without firefighting.", icon: <FaAmazon /> },
+        { name: "eBay Marketplace Management", url: "/services/ebay-marketplace-management", description: "Profitable eBay store management.", icon: <FaEbay /> },
+        { name: "Zepto Management", url: "/services/zepto-marketplace-management", description: "Win in quick commerce.", icon: <FaRocket /> },
+      ],
+    },
   ];
 
   return (
@@ -89,61 +100,66 @@ const ServicesMegaMenu = ({ color }) => {
       </Link>
       {isOpen && (
         <motion.div
-          className="absolute left-0 top-[60px] pt-[20px] w-full z-[90]"
+          className="fixed h-screen inset-0 w-full top-[60px] pt-[20px] z-[90]"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
         >
-          <div className="bg-[#EBFAFE] shadow-lg border py-3 overflow-y-auto h-[calc(100vh-80px)] border-gray-200 ">
-            <Layout>
-              <div className="grid grid-cols-3 gap-6">
-                {menuCategories.map((category, index) => (
-                  <div key={index}>
-                    <Link
-                      onClick={() => { setIsOpen(false) }}
-                      href={category.url}
-                      className={`mt-6 text-lg font-bold group py-2 px-4 rounded-md inline-flex items-center gap-2 ${category.color}`}
-                    >
-                      {category.title}
-                      <div className="relative">
-                        <FiArrowUpRight className="z-10 group-hover:translate-x-[80%] group-hover:translate-y-[-80%] group-hover:opacity-0 transition-all duration-300" />
-                        <FiArrowUpRight className="absolute inset-0 z-10 opacity-0 translate-x-[-80%] translate-y-[80%] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" />
-                      </div>
-                    </Link>
-                    <ul className="mt-4 space-y-2">
-                      {category.items.map((item, idx) => (
-                        item.type === "category" ? (
-                          <div key={idx} className="px-3 pt-2 mt-5 pb-3 mb-2">
-                            <div className={`text-base font-bold py-1.5 px-3 rounded-md inline-flex items-center gap-2 ${item.color}`}>
-                              {item.name}
-                              <FiArrowUpRight className="text-xs" />
-                            </div>
-                          </div>
-                        ) : (
-                          <Link
-                            onClick={() => { setIsOpen(false) }}
-                            href={item.url}
-                            key={idx}
-                            className="flex group px-3 py-2 border-b items-center justify-between gap-3"
-                          >
-                            <div className="flex items-center justify-between gap-3">
-                              <div>
-                                <h4 className="text-sm font-normal text-gray-800 flex items-center">
-                                  <span className="h-[5px] w-[5px] bg-secondary-500 inline-block transition-all duration-300 scale-0 group-hover:scale-100 rounded-full"></span>
-                                  <span className="ml-[-5px] group-hover:ml-[6px] transition-all duration-300">{item.name}</span>
-                                </h4>
-                                <p className="text-sm text-gray-500">{item.description}</p>
+          <div className="backdrop-blur-[2px] h-full w-full">
+            <motion.div
+              onMouseLeave={() => setIsOpen(false)}
+              className="bg-[#EBFAFE] shadow-lg border py-3 overflow-y-auto h-[calc(100vh-80px)] border-gray-200 "
+            >
+              <Layout>
+                <div className="grid grid-cols-4 gap-6">
+                  {menuCategories.map((category, index) => (
+                    <div key={index}>
+                      <Link
+                        onClick={() => { setIsOpen(false) }}
+                        href={category.url}
+                        className={`mt-6 text-lg font-bold group py-2 px-4 rounded-md inline-flex items-center gap-2 ${category.color}`}
+                      >
+                        {category.title}
+                        <div className="relative">
+                          <FiArrowUpRight className="z-10 group-hover:translate-x-[80%] group-hover:translate-y-[-80%] group-hover:opacity-0 transition-all duration-300" />
+                          <FiArrowUpRight className="absolute inset-0 z-10 opacity-0 translate-x-[-80%] translate-y-[80%] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" />
+                        </div>
+                      </Link>
+                      <ul className="mt-4 space-y-2">
+                        {category.items.map((item, idx) => (
+                          item.type === "category" ? (
+                            <div key={idx} className="px-3 pt-2 mt-5 pb-3 mb-2">
+                              <div className={`text-base font-bold py-1.5 px-3 rounded-md inline-flex items-center gap-2 ${item.color}`}>
+                                {item.name}
+                                <FiArrowUpRight className="text-xs" />
                               </div>
                             </div>
-                            <div className="text-gray-400 group-hover:text-gray-600 transition-colors duration-300 text-lg self-center">{item.icon}</div>
-                          </Link>
-                        )
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </Layout>
+                          ) : (
+                            <Link
+                              onClick={() => { setIsOpen(false) }}
+                              href={item.url}
+                              key={idx}
+                              className="flex group px-3 py-2 border-b items-center justify-between gap-3"
+                            >
+                              <div className="flex items-center justify-between gap-3">
+                                <div>
+                                  <h4 className="text-sm font-normal text-gray-800 flex items-center">
+                                    <span className="h-[5px] w-[5px] bg-secondary-500 inline-block transition-all duration-300 scale-0 group-hover:scale-100 rounded-full"></span>
+                                    <span className="ml-[-5px] group-hover:ml-[6px] transition-all duration-300">{item.name}</span>
+                                  </h4>
+                                  <p className="text-sm text-gray-500">{item.description}</p>
+                                </div>
+                              </div>
+                              <div className="text-gray-400 group-hover:text-gray-600 transition-colors duration-300 text-lg self-center">{item.icon}</div>
+                            </Link>
+                          )
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </Layout>
+            </motion.div>
           </div>
         </motion.div>
       )}
