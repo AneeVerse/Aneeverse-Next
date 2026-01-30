@@ -22,7 +22,7 @@ const menuCategories = [
   {
     title: "Creative Design",
     link: "/services",
-    color: "bg-purple-100 text-purple-900",
+    color: "bg-purple-100 hover:bg-purple-200 text-purple-900",
     items: [
       { name: "Ad Creative", description: "Eye-catching ad creatives that convert.", icon: <FaPaintBrush />, link: "/services/ad-creative" },
       { name: "Presentation Design", description: "Pitch-perfect presentations.", icon: <FaSlideshare />, link: "/services/presentation-design" },
@@ -33,7 +33,7 @@ const menuCategories = [
   {
     title: "Specialized Solutions",
     link: "/services",
-    color: "bg-blue-100 text-blue-900",
+    color: "bg-blue-100 hover:bg-blue-200 text-blue-900",
     items: [
       { name: "Platform Development", description: "Scalable web platforms.", icon: <FaCode />, link: "/services/platform-development" },
       { name: "UI, UX & Web Development", description: "Exceptional digital experiences.", icon: <FaDesktop />, link: "/services/ui-ux-web-development" },
@@ -44,12 +44,12 @@ const menuCategories = [
   {
     title: "AI & Automation",
     link: "/services",
-    color: "bg-emerald-100 text-emerald-900",
+    color: "bg-emerald-100 hover:bg-emerald-200 text-emerald-900",
     items: [
       { name: "AI SEO (GEO) (AEO) (AIO)", description: "Next-generation SEO optimization.", icon: <FaChartLine />, link: "/services/ai-seo-geo-aeo-aio" },
       { name: "n8n Workflows", description: "Workflow Automation & Integrations.", icon: <FaRobot />, link: "/services/n8n-workflows" },
       { name: "Sales & Marketing Automation", description: "Streamline your workflows.", icon: <FaChartPie />, link: "/services/sales-marketing-automation" },
-      { type: "category", name: "Marketing", color: "bg-orange-100 text-orange-900" },
+      { type: "category", name: "Marketing", color: "bg-orange-100 hover:bg-orange-200 text-orange-900" },
       { name: "Marketing Strategy", description: "Data-driven marketing plans.", icon: <FaChartPie />, link: "/services/marketing-strategy" },
       { name: "Email Design & Campaign", description: "Automated email campaigns.", icon: <FaEnvelope />, link: "/services/email-campaign" },
     ],
@@ -57,7 +57,7 @@ const menuCategories = [
   {
     title: "Ecommerce Marketplace",
     link: "/services",
-    color: "bg-[#FFF8E1] text-[#F57F17]",
+    color: "bg-[#FFF8E1] hover:bg-[#FFECB3] text-[#F57F17]",
     items: [
       { name: "Amazon Management", description: "Scale more on Amazon without firefighting.", icon: <FaAmazon />, link: "/services/amazon-marketplace-management" },
       { name: "eBay Management", description: "Profitable eBay store management.", icon: <FaEbay />, link: "/services/ebay-marketplace-management" },
@@ -243,7 +243,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                       {category.items.map((item, idx) => (
                         item.type === "category" ? (
                           <div key={idx} className="pl-0 pr-3 pt-2 mt-5 pb-3 mb-2">
-                            <div className={`text-base font-semibold py-2 px-6 rounded-xl inline-flex items-center gap-2 border border-black/5 shadow-sm ${item.color}`}>
+                            <div className={`text-base font-semibold py-2 px-6 rounded-xl inline-flex items-center cursor-pointer gap-2 border border-black/5 shadow-sm transition-all duration-300 ${item.color}`}>
                               {item.name}
                               <FaChevronRight className="text-xs" />
                             </div>

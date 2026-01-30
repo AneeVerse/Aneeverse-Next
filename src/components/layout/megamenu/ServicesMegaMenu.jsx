@@ -59,7 +59,7 @@ const ServicesMegaMenu = ({ color }) => {
         { name: "AI SEO (GEO) (AEO) (AIO)", url: "/services/ai-seo-geo-aeo-aio", description: "Next-generation SEO optimization.", icon: <FaChartLine /> },
         { name: "n8n Workflows", url: "/services/n8n-workflows", description: "Workflow Automation & Integrations.", icon: <FaRobot /> },
         { name: "Sales & Marketing Automation", url: "/services/sales-marketing-automation", description: "Streamline your workflows.", icon: <FaChartPie /> },
-        { type: "category", name: "Marketing", color: "bg-orange-100 text-orange-900" },
+        { type: "category", name: "Marketing", color: "bg-orange-100 hover:bg-orange-200 text-orange-900" },
         { name: "Marketing Strategy", url: "/services/marketing-strategy", description: "Data-driven marketing plans.", icon: <FaChartPie /> },
         { name: "Email Design & Campaign", url: "/services/email-campaign", description: "Automated email campaigns.", icon: <FaEnvelope /> },
         // { name: "Email Design", url: "/services/email-design", description: "Engaging email templates.", icon: <FaEnvelopeOpenText /> },
@@ -69,7 +69,7 @@ const ServicesMegaMenu = ({ color }) => {
     {
       title: "Ecommerce Marketplace",
       url: "/services",
-      color: "bg-[#FFF8E1] hover:opacity-90 text-[#F57F17]",
+      color: "bg-[#FFF8E1] hover:bg-[#FFECB3] text-[#F57F17]",
       items: [
         { name: "Amazon Management", url: "/services/amazon-marketplace-management", description: "Scale more on Amazon without firefighting.", icon: <FaAmazon /> },
         { name: "eBay Management", url: "/services/ebay-marketplace-management", description: "Profitable eBay store management.", icon: <FaEbay /> },
@@ -126,7 +126,7 @@ const ServicesMegaMenu = ({ color }) => {
                         {category.items.map((item, idx) => (
                           item.type === "category" ? (
                             <div key={idx} className="pl-0 pr-3 pt-2 mt-5 pb-3 mb-2">
-                              <div className={`text-base font-semibold py-2 px-6 rounded-xl inline-flex items-center gap-2 border border-black/5 shadow-sm ${item.color}`}>
+                              <div className={`text-base font-semibold py-2 px-6 rounded-xl inline-flex items-center cursor-pointer gap-2 border border-black/5 shadow-sm transition-all duration-300 ${item.color}`}>
                                 {item.name}
                                 <FaChevronRight className="text-xs" />
                               </div>
