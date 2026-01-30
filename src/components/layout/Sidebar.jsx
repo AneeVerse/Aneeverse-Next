@@ -7,7 +7,7 @@ import { HiOutlineBookOpen, HiOutlinePlay, HiOutlineClipboardList, HiOutlinePenc
 import { FaDesktop, FaPager, FaSearch, FaMapMarkerAlt, FaLocationArrow } from "react-icons/fa";
 import { FaPenFancy, FaGhost, FaFileAlt, FaTags } from "react-icons/fa";
 import { FaChartPie, FaEnvelope, FaGoogle, FaFacebook, FaUserFriends } from "react-icons/fa";
-import { FaEnvelopeOpenText, FaSlideshare, FaPaintBrush, FaFilePdf, FaCode, FaTag, FaRobot, FaChartLine } from "react-icons/fa";
+import { FaEnvelopeOpenText, FaSlideshare, FaPaintBrush, FaFilePdf, FaCode, FaTag, FaRobot, FaChartLine, FaAmazon, FaEbay, FaRocket, FaChevronRight } from "react-icons/fa";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa6";
 
@@ -52,6 +52,16 @@ const menuCategories = [
       { type: "category", name: "Marketing", color: "bg-orange-100 text-orange-900" },
       { name: "Marketing Strategy", description: "Data-driven marketing plans.", icon: <FaChartPie />, link: "/services/marketing-strategy" },
       { name: "Email Design & Campaign", description: "Automated email campaigns.", icon: <FaEnvelope />, link: "/services/email-campaign" },
+    ],
+  },
+  {
+    title: "Ecommerce Marketplace",
+    link: "/services",
+    color: "bg-[#FFF8E1] text-[#F57F17]",
+    items: [
+      { name: "Amazon Management", description: "Scale more on Amazon without firefighting.", icon: <FaAmazon />, link: "/services/amazon-marketplace-management" },
+      { name: "eBay Management", description: "Profitable eBay store management.", icon: <FaEbay />, link: "/services/ebay-marketplace-management" },
+      { name: "Zepto Management", description: "Win in quick commerce.", icon: <FaRocket />, link: "/services/zepto-marketplace-management" },
     ],
   },
 ];
@@ -226,16 +236,16 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 {menuCategories.map((category, index) => (
                   <div key={index}>
 
-                    <Link href={`${category.link}`} className={`text-lg font-bold py-2 px-4 min-w-fit rounded-md inline-flex items-center gap-2 ${category.color}`} onClick={toggleSidebar}>
-                      <span>{category.title} </span> <FiArrowUpRight />
+                    <Link href={`${category.link}`} className={`text-base font-semibold py-2 px-6 min-w-fit rounded-xl inline-flex items-center gap-2 border border-black/5 shadow-sm ${category.color}`} onClick={toggleSidebar}>
+                      <span>{category.title} </span> <FaChevronRight className="text-xs" />
                     </Link>
                     <ul className="mt-4 space-y-2">
                       {category.items.map((item, idx) => (
                         item.type === "category" ? (
-                          <div key={idx} className="px-3 pt-2 mt-5 pb-3 mb-2">
-                            <div className={`text-base font-bold py-1.5 px-3 rounded-md inline-flex items-center gap-2 ${item.color}`}>
+                          <div key={idx} className="pl-0 pr-3 pt-2 mt-5 pb-3 mb-2">
+                            <div className={`text-base font-semibold py-2 px-6 rounded-xl inline-flex items-center gap-2 border border-black/5 shadow-sm ${item.color}`}>
                               {item.name}
-                              <FiArrowUpRight className="text-xs" />
+                              <FaChevronRight className="text-xs" />
                             </div>
                           </div>
                         ) : (

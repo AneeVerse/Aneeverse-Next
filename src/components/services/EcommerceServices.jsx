@@ -7,14 +7,14 @@ import { AccentText } from "../common/typography/AccentText";
 export default function EcommerceServices() {
     const services = [
         {
-            title: "Amazon Marketplace Management",
+            title: "Amazon Management",
             description:
                 "Scale more on Amazon without troubleshooting. We handle listings, ads, and account health.",
             imgUrl: "/images/services/website/website-design.png",
             pageUrl: "/services/amazon-marketplace-management",
         },
         {
-            title: "eBay Marketplace Management",
+            title: "eBay Management",
             description:
                 "Profitable eBay store management. From listing optimization to Promoted Listings campaigns.",
             imgUrl: "/images/services/website/landing-page.png",

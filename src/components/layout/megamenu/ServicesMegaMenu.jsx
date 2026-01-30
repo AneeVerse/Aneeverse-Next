@@ -7,7 +7,7 @@ import {
   FaTag, FaFilePdf, FaBox, FaDesktop,
   FaCode, FaLayerGroup, FaCog, FaPenFancy, FaSearch, FaBuilding,
   FaRobot, FaBlog, FaChartLine, FaEnvelope, FaEnvelopeOpenText, FaChartPie,
-  FaAmazon, FaEbay, FaShoppingCart, FaRocket
+  FaAmazon, FaEbay, FaShoppingCart, FaRocket, FaChevronRight
 } from "react-icons/fa";
 import Link from "next/link";
 import { FaChevronDown } from "react-icons/fa6";
@@ -69,10 +69,10 @@ const ServicesMegaMenu = ({ color }) => {
     {
       title: "Ecommerce Marketplace",
       url: "/services",
-      color: "bg-orange-100 hover:bg-orange-200 text-orange-900",
+      color: "bg-[#FFF8E1] hover:opacity-90 text-[#F57F17]",
       items: [
-        { name: "Amazon Marketplace Management", url: "/services/amazon-marketplace-management", description: "Scale more on Amazon without firefighting.", icon: <FaAmazon /> },
-        { name: "eBay Marketplace Management", url: "/services/ebay-marketplace-management", description: "Profitable eBay store management.", icon: <FaEbay /> },
+        { name: "Amazon Management", url: "/services/amazon-marketplace-management", description: "Scale more on Amazon without firefighting.", icon: <FaAmazon /> },
+        { name: "eBay Management", url: "/services/ebay-marketplace-management", description: "Profitable eBay store management.", icon: <FaEbay /> },
         { name: "Zepto Management", url: "/services/zepto-marketplace-management", description: "Win in quick commerce.", icon: <FaRocket /> },
       ],
     },
@@ -117,21 +117,18 @@ const ServicesMegaMenu = ({ color }) => {
                       <Link
                         onClick={() => { setIsOpen(false) }}
                         href={category.url}
-                        className={`mt-6 text-lg font-bold group py-2 px-4 rounded-md inline-flex items-center gap-2 ${category.color}`}
+                        className={`mt-6 text-base font-semibold group py-2 px-6 rounded-xl inline-flex items-center gap-2 border border-black/5 shadow-sm transition-all duration-300 ${category.color}`}
                       >
                         {category.title}
-                        <div className="relative">
-                          <FiArrowUpRight className="z-10 group-hover:translate-x-[80%] group-hover:translate-y-[-80%] group-hover:opacity-0 transition-all duration-300" />
-                          <FiArrowUpRight className="absolute inset-0 z-10 opacity-0 translate-x-[-80%] translate-y-[80%] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" />
-                        </div>
+                        <FaChevronRight className="text-xs group-hover:translate-x-1 transition-transform duration-300" />
                       </Link>
                       <ul className="mt-4 space-y-2">
                         {category.items.map((item, idx) => (
                           item.type === "category" ? (
-                            <div key={idx} className="px-3 pt-2 mt-5 pb-3 mb-2">
-                              <div className={`text-base font-bold py-1.5 px-3 rounded-md inline-flex items-center gap-2 ${item.color}`}>
+                            <div key={idx} className="pl-0 pr-3 pt-2 mt-5 pb-3 mb-2">
+                              <div className={`text-base font-semibold py-2 px-6 rounded-xl inline-flex items-center gap-2 border border-black/5 shadow-sm ${item.color}`}>
                                 {item.name}
-                                <FiArrowUpRight className="text-xs" />
+                                <FaChevronRight className="text-xs" />
                               </div>
                             </div>
                           ) : (

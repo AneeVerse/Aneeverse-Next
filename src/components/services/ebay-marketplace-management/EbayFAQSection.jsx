@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react";
 import Layout from "../../common/Layout";
 
 const faqs = [
-    { question: "What is eBay Marketplace Management?", answer: "We provide end-to-end management of your eBay store, including listing optimization, custom store design, Promoted Listings management, and daily operations handling." },
+    { question: "What is eBay Management?", answer: "We provide end-to-end management of your eBay store, including listing optimization, custom store design, Promoted Listings management, and daily operations handling." },
     { question: "How do you improve eBay search visibility?", answer: "We focus on 'Best Match' SEO by optimizing titles, ensuring 100% item specific completion, mapping to the correct categories, and using high-quality images." },
     { question: "What are eBay Promoted Listings?", answer: "They are advertised listings that help your products stand out. We manage both Standard and Advanced campaigns to scale your traffic profitably while monitoring ad-rate-to-margin ratios." },
     { question: "Do you handle eBay store design?", answer: "Yes, we build branded storefronts and custom HTML listing templates that are mobile-responsive and designed to build buyer trust and drive cross-sells." },
