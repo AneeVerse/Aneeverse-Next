@@ -26,7 +26,7 @@ const getSanityImageUrl = (image, maxWidth = 1200) => {
 };
 
 export const metadata = {
-    title: "eBay Marketplace Management | Aneeverse",
+    title: "eBay Management | Aneeverse",
     description: "Run a profitable eBay store without living in Seller Hub. We manage your listings, ads, and daily operations.",
 }
 
@@ -87,14 +87,14 @@ const page = async () => {
     return (
         <div>
             <ServiceSchema
-                serviceName="eBay Marketplace Management"
+                serviceName="eBay Management"
                 serviceType="ProfessionalService"
                 description="Optimize your eBay store for growth with SEO-rich listings, branded templates, and automated operations."
                 slug="ebay-marketplace-management"
             />
             <CommonServicesHeroSection
                 title="Run a profitable eBay store. Without living in Seller Hub."
-                subtitle="eBay Marketplace Management"
+                subtitle="eBay Management"
                 description="A dedicated team to manage your eBay listings, store design, promotions, ads, and daily operations—so you focus on sourcing and growth, not listing uploads and case replies."
                 ctaText="Book a Call"
                 ctaLink="/contact"

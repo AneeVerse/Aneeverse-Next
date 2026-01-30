@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react";
 import Layout from "../../common/Layout";
 
 const faqs = [
-    { question: "What is Zepto Marketplace Management?", answer: "We help brands navigate the quick commerce landscape by handling everything from vendor onboarding and listing creation to PO management and promotional campaigns on Zepto." },
+    { question: "What is Zepto Management?", answer: "We help brands navigate the quick commerce landscape by handling everything from vendor onboarding and listing creation to PO management and promotional campaigns on Zepto." },
     { question: "How fast can you get a brand live on Zepto?", answer: "Onboarding timelines depend on category manager approvals, but we streamline the process by having all vendor data, images, and SKU mapping ready for submission from day one." },
     { question: "What is app-optimized content?", answer: "Since quick commerce is mobile-first, we design thumbnail-friendly packshots and concise product titles optimized for small screens and 10-minute delivery decisions." },
     { question: "Do you handle PO fulfillment?", answer: "We provide guidance on PO acceptance workflows, fulfillment timelines, and dispatch coordination to ensure you meet Zepto's strict operational SLAs." },

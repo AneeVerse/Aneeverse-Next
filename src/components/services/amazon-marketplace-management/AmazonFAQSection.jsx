@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react";
 import Layout from "../../common/Layout";
 
 const faqs = [
-    { question: "What is Amazon Marketplace Management?", answer: "It's a comprehensive service where we handle everything from listing optimization and PPC ads to inventory planning and account health monitoring so you can focus on growth." },
+    { question: "What is Amazon Management?", answer: "It's a comprehensive service where we handle everything from listing optimization and PPC ads to inventory planning and account health monitoring so you can focus on growth." },
     { question: "How do you improve listing conversion rates?", answer: "We use SEO-optimized titles, high-converting bullet points, A+ content design, and backend keyword strategies to make your products more discoverable and persuasive." },
     { question: "Can you help with FBA shipment planning?", answer: "Yes, we assist with box content plans, FNSKU labels, and navigating the seller central shipping workflow to ensure your inventory reaches Amazon safely." },
     { question: "How do you manage Amazon PPC costs?", answer: "We optimize bids weekly, harvest high-converting search terms into new campaigns, and implement negative keywords to reduce wasted spend and improve ACoS/TACoS." },

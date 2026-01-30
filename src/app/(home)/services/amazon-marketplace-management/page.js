@@ -26,7 +26,7 @@ const getSanityImageUrl = (image, maxWidth = 1200) => {
 };
 
 export const metadata = {
-    title: "Amazon Marketplace Management | Aneeverse",
+    title: "Amazon Management | Aneeverse",
     description: "Sell more on Amazon without the daily firefighting. We manage your listings, ads, and account health.",
 }
 
@@ -87,14 +87,14 @@ const page = async () => {
     return (
         <div>
             <ServiceSchema
-                serviceName="Amazon Marketplace Management"
+                serviceName="Amazon Management"
                 serviceType="ProfessionalService"
                 description="Scale your Amazon business with expert listing optimization, PPC management, and account health monitoring."
                 slug="amazon-marketplace-management"
             />
             <CommonServicesHeroSection
                 title="Sell more on Amazon. Without the daily firefighting."
-                subtitle="Amazon Marketplace Management"
+                subtitle="Amazon Management"
                 description="A dedicated team to handle your listings, ads, operations, and account health—so you stay focused on inventory and growth, not dashboards and case logs."
                 ctaText="Book a Call"
                 ctaLink="/contact"
