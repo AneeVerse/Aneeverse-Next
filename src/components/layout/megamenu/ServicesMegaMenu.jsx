@@ -147,7 +147,7 @@ const ServicesMegaMenu = ({ color }) => {
                                   <p className="text-sm text-gray-500">{item.description}</p>
                                 </div>
                               </div>
-                              <div className="text-gray-400 group-hover:text-gray-600 transition-colors duration-300 text-lg self-center">{item.icon}</div>
+                              <div className={`text-gray-400 group-hover:text-gray-600 transition-colors duration-300 self-center ${item.name === "eBay Management" ? "text-[2.25rem]" : "text-lg"}`}>{item.icon}</div>
                             </Link>
                           )
                         ))}

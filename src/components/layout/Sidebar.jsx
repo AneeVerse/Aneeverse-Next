@@ -261,7 +261,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                                 <p className="text-sm text-gray-500">{item.description}</p>
                               </div>
                             </div>
-                            <div className="text-gray-700 text-lg self-center">{item.icon}</div>
+                            <div className={`text-gray-700 self-center ${item.name === "eBay Management" ? "text-[2.25rem]" : "text-lg"}`}>{item.icon}</div>
                           </Link>
                         )
                       ))}
