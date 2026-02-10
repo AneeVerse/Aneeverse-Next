@@ -16,7 +16,7 @@ module.exports = {
   ],
   additionalPaths: async (config) => {
     const result = [];
-    
+
     // Add static pages
     const staticRoutes = [
       { loc: '/', changefreq: 'daily', priority: 1.0 },
@@ -56,18 +56,18 @@ module.exports = {
         result.push(route);
       }
     });
-    
+
     try {
       // Import Sanity client to fetch dynamic content
       const { client } = require('./src/lib/sanity');
-      
+
       // Fetch all blog posts from Sanity
       const blogs = await client.fetch(`*[_type == "post"] {
         "slug": slug.current,
         publishedAt,
         _updatedAt
       }`);
-      
+
       // Add blog posts to sitemap
       blogs.forEach((blog) => {
         if (blog.slug) {
@@ -79,13 +79,13 @@ module.exports = {
           });
         }
       });
-      
+
       // Fetch all customer stories from Sanity
       const stories = await client.fetch(`*[_type == "customerStory"] {
         "slug": slug.current,
         _updatedAt
       }`);
-      
+
       // Add customer stories to sitemap
       stories.forEach((story) => {
         if (story.slug) {
@@ -97,11 +97,11 @@ module.exports = {
           });
         }
       });
-      
+
     } catch (error) {
       console.error('Error generating additional sitemap paths:', error);
     }
-    
+
     return result;
   },
   robotsTxtOptions: {
@@ -110,6 +110,34 @@ module.exports = {
         userAgent: '*',
         allow: '/',
         disallow: ['/dashboard', '/studio', '/admin', '/api']
+      },
+      {
+        userAgent: 'GPTBot',
+        allow: '/'
+      },
+      {
+        userAgent: 'Google-Extended',
+        allow: '/'
+      },
+      {
+        userAgent: 'Claude-Web',
+        allow: '/'
+      },
+      {
+        userAgent: 'Bytespider',
+        allow: '/'
+      },
+      {
+        userAgent: 'CCBot',
+        allow: '/'
+      },
+      {
+        userAgent: 'PerplexityBot',
+        allow: '/'
+      },
+      {
+        userAgent: 'Applebot-Extended',
+        allow: '/'
       }
     ],
     additionalSitemaps: []
@@ -124,7 +152,7 @@ module.exports = {
         lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
       };
     }
-    
+
     if (path.startsWith('/blog/')) {
       return {
         loc: path,
@@ -133,7 +161,7 @@ module.exports = {
         lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
       };
     }
-    
+
     if (path.startsWith('/services/')) {
       return {
         loc: path,
@@ -142,7 +170,7 @@ module.exports = {
         lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
       };
     }
-    
+
     return {
       loc: path,
       changefreq: config.changefreq,
