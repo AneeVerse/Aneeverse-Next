@@ -22,8 +22,36 @@ const rockSalt = Rock_Salt({
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://aneeverse.com'),
-  title: 'Aneeverse - Your Dedicated Creative & Digital Marketing Team',
+  title: {
+    default: "Aneeverse: Your creative team's growth partner",
+    template: "%s | Aneeverse",
+  },
   description: 'Your dedicated, on-call creative & digital marketing team. Design, optimise and advertise your brand—ship campaigns faster, more reliably and at scale.',
+  robots: {
+    index: true,
+    follow: true,
+    'max-image-preview': 'large',
+    'max-snippet': -1,
+    'max-video-preview': -1,
+  },
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: "Aneeverse: Your creative team's growth partner",
+    description: 'Aneeverse is your dedicated, on-call creative & digital marketing team. Design, optimise and advertise your brand—ship campaigns faster, more reliably and at scale.',
+    url: 'https://aneeverse.com/',
+    siteName: 'Aneeverse',
+    type: 'website',
+    locale: 'en_IN',
+    images: [{ url: '/images/meta/phone.avif', width: 1200, height: 630, alt: "Aneeverse: Your creative team's growth partner" }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Aneeverse: Your creative team's growth partner",
+    description: 'Aneeverse is your dedicated, on-call creative & digital marketing team. Design, optimise and advertise your brand—ship campaigns faster, more reliably and at scale.',
+    images: ['/images/meta/phone.avif'],
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -32,7 +60,7 @@ export default function RootLayout({ children }) {
       <head>
         {/* Google Search Console Verification */}
         <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
-        
+
         {/* GTM script */}
         <Script id="gtm-init" strategy="afterInteractive">
           {`

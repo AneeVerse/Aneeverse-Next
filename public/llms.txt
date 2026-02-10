@@ -1,0 +1,27 @@
+# Aneeverse
+
+> Your dedicated, on-call creative & digital marketing team.
+
+## About
+Aneeverse is a creative-as-a-service agency specializing in digital marketing, web design, and content creation. We help businesses grow their online presence through expert design, development, and marketing services with an on-demand creative team.
+
+## Key Pages
+- Home: https://www.aneeverse.com/
+- Services: https://www.aneeverse.com/services
+- Works: https://www.aneeverse.com/works
+- Pricing: https://www.aneeverse.com/pricing
+- Contact: https://www.aneeverse.com/contact
+- Blog: https://www.aneeverse.com/blog
+
+## Services
+- Website Design & Development: Custom design and development for modern websites.
+- SEO Optimization: Comprehensive Search Engine Optimization and Local SEO.
+- Digital Marketing: Google Ads, Meta Ads, and social media marketing management.
+- Content Creation: Professional blog writing, ghostwriting, and creative design.
+- Branding: Visual identity, logo design, and brand strategy.
+- Automation: n8n workflows and sales/marketing automation.
+
+## Contact
+- Email: team@aneeverse.com
+- Phone: +91 91527 55529
+- Address: Office No. 03, Plot No. 45, Seawoods West, Sector 44, Navi Mumbai, Maharashtra 400706, India
