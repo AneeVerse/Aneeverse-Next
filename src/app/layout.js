@@ -37,6 +37,15 @@ export const metadata = {
   alternates: {
     canonical: '/',
   },
+  manifest: '/site.webmanifest',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Aneeverse',
+  },
+  icons: {
+    apple: '/apple-touch-icon.png',
+  },
   openGraph: {
     title: "Aneeverse: Your creative team's growth partner",
     description: 'Aneeverse is your dedicated, on-call creative & digital marketing team. Design, optimise and advertise your brand—ship campaigns faster, more reliably and at scale.',
@@ -52,6 +61,14 @@ export const metadata = {
     description: 'Aneeverse is your dedicated, on-call creative & digital marketing team. Design, optimise and advertise your brand—ship campaigns faster, more reliably and at scale.',
     images: ['/images/meta/phone.avif'],
   },
+};
+
+export const viewport = {
+  themeColor: '#ffffff',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({ children }) {
