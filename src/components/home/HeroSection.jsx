@@ -423,7 +423,7 @@ const HeroSection = () => {
         <Layout>
           <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center h-full" style={{ minHeight: 'clamp(600px, 100vh, 1200px)' }}>
             {/* Left Content - Vertically Centered */}
-            <div className="flex flex-col justify-start lg:justify-center h-full hero-left-content">
+            <div className="flex flex-col justify-start lg:justify-center h-full hero-left-content relative z-30">
               <div className="flex flex-col sm:flex-col">
                 <Heading
                   level="h1"
