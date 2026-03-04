@@ -1,6 +1,6 @@
-import {DocumentTextIcon} from '@sanity/icons'
+import { DocumentTextIcon } from '@sanity/icons'
 import React from 'react'
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const postType = defineType({
   name: 'post',
@@ -87,12 +87,12 @@ export const postType = defineType({
     defineField({
       name: 'categories',
       type: 'array',
-      of: [defineArrayMember({type: 'reference', to: {type: 'category'}})],
+      of: [defineArrayMember({ type: 'reference', to: { type: 'category' } })],
     }),
     defineField({
       name: 'author',
       type: 'reference',
-      to: {type: 'author'},
+      to: { type: 'author' },
     }),
     defineField({
       name: 'timeToRead',
@@ -108,9 +108,9 @@ export const postType = defineType({
     }),
     defineField({
       name: 'shortDescription',
-      title: 'Short Description',
+      title: 'Short Description (Meta Description)',
       type: 'text',
-      description: 'A brief summary of the post that will appear on blog cards (150-200 characters recommended)',
+      description: 'A brief summary of the post that will appear on blog cards and as the meta description (150-200 characters recommended)',
       validation: Rule => Rule.max(200).warning('Short descriptions work best when kept under 200 characters'),
     }),
     defineField({
@@ -168,7 +168,7 @@ export const postType = defineType({
           ],
         }),
       ],
-      hidden: ({document}) => !document?.includeFaq,
+      hidden: ({ document }) => !document?.includeFaq,
     }),
   ],
   preview: {

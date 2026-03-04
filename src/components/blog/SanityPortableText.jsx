@@ -255,7 +255,10 @@ const components = {
   block: {
     h1: ({ children }) => <h1 className="text-3xl font-bold mt-8 mb-4 text-[#101828]">{children}</h1>,
     h2: ({ children, value }) => {
-      const title = Array.isArray(children) ? children.join('') : children;
+      // Extract plain text from Portable Text block data to match TOC ID generation
+      const title = value?.children
+        ? value.children.map(child => child.text || '').join('')
+        : (typeof children === 'string' ? children : '');
       const id = title
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')

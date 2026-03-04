@@ -726,8 +726,8 @@ export default function BlogDetailClient({ params, initialPost }) {
                         <a
                           href={`#${section.id}`}
                           className={`flex items-center gap-2 text-[12px] leading-snug pl-3 ${activeId === section.id
-                              ? 'text-white font-medium'
-                              : 'text-gray-300 hover:text-white'
+                            ? 'text-white font-medium'
+                            : 'text-gray-300 hover:text-white'
                             }`}
                           onClick={(e) => {
                             e.preventDefault();
@@ -796,8 +796,8 @@ export default function BlogDetailClient({ params, initialPost }) {
                       <a
                         href={`#${section.id}`}
                         className={`flex items-center gap-2 text-xs leading-tight pl-4 ${activeId === section.id
-                            ? 'text-white font-medium'
-                            : 'text-gray-300 hover:text-white'
+                          ? 'text-white font-medium'
+                          : 'text-gray-300 hover:text-white'
                           }`}
                         onClick={(e) => {
                           e.preventDefault();
