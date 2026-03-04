@@ -35,22 +35,27 @@ export default function SanityImage({
       return image.externalImage;
     }
 
-    // If it's a new Sanity image object - use maxWidth to prevent timeout
+    // If it's a new Sanity image object with unresolved ref - use maxWidth to prevent timeout
     if (image.sanityImage?.asset?._ref) {
       return urlForImage(image.sanityImage, width || 1920).url();
     }
 
-    // If it's a legacy Sanity image object (old posts) - use maxWidth
+    // If it's a new Sanity image object with resolved asset (from asset-> in GROQ)
+    if (image.sanityImage?.asset?.url) {
+      return image.sanityImage.asset.url;
+    }
+
+    // If it's a legacy Sanity image object with unresolved ref (old posts) - use maxWidth
     if (image.asset?._ref) {
       return urlForImage(image, width || 1920).url();
     }
 
-    // If it's a legacy Sanity image object with direct URL (API response)
+    // If it's a Sanity image object with resolved asset URL (from asset-> in GROQ)
     if (image.asset?.url) {
       return image.asset.url;
     }
 
-    // If it's a legacy Sanity image object with direct URL (API response)
+    // Direct URL on the image object
     if (image.url) {
       return image.url;
     }
@@ -63,7 +68,7 @@ export default function SanityImage({
 
   if (!imageUrl || error) {
     return (
-      <div 
+      <div
         className={`bg-gray-200 flex items-center justify-center ${className}`}
         style={fill ? { position: 'absolute', inset: 0 } : { width, height }}
       >
@@ -81,7 +86,7 @@ export default function SanityImage({
   // This prevents timeout errors with very large Sanity images
   const isSanityImage = imageUrl?.includes('cdn.sanity.io');
   const shouldOptimize = !isSanityImage; // Let Sanity handle its own optimization
-  
+
   return (
     <Image
       src={imageUrl}
