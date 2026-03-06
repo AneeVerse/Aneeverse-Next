@@ -48,7 +48,7 @@ const Newsletter = ({ wide = false }) => {
 
   // Desktop: Split horizontal, text over image
   return (
-    <div className={`relative mt-10 mb-6 rounded-xl overflow-hidden shadow-md bg-[#f7faef] ${wide ? 'w-full' : 'max-w-6xl mx-auto'}`} style={{height: '360px'}}>
+    <div className={`relative mt-10 mb-6 rounded-xl overflow-hidden shadow-md bg-[#f7faef] ${wide ? 'w-full' : 'max-w-6xl mx-auto'}`} style={{ height: '360px' }}>
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full">
         <Image
@@ -84,4 +84,4 @@ const Newsletter = ({ wide = false }) => {
 };
 
 export default Newsletter;
-  
+

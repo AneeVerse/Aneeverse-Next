@@ -280,6 +280,64 @@ export const blockContentType = defineType({
         }
       }
     }),
+    defineArrayMember({
+      type: 'object',
+      name: 'inlineNewsletter',
+      title: 'Inline Newsletter / CTA',
+      icon: () => '📧',
+      fields: [
+        defineField({
+          name: 'title',
+          type: 'string',
+          title: 'Main Heading',
+          initialValue: 'We create strategic design assets for 200+ B2B & SaaS companies.',
+        }),
+        defineField({
+          name: 'description',
+          type: 'text',
+          title: 'Sub-description',
+          initialValue: 'Sales presentations, Marketing collateral, Website graphics, Ads Creative and more.',
+        }),
+        defineField({
+          name: 'image',
+          type: 'image',
+          title: 'Featured Image',
+          options: { hotspot: true },
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative Text',
+            }
+          ]
+        }),
+        defineField({
+          name: 'buttonText',
+          type: 'string',
+          title: 'Button Text',
+          initialValue: 'View design portfolio',
+        }),
+        defineField({
+          name: 'buttonLink',
+          type: 'string',
+          title: 'Button Link',
+          initialValue: '/portfolio',
+        }),
+      ],
+      preview: {
+        select: {
+          title: 'title',
+          media: 'image',
+        },
+        prepare({ title, media }) {
+          return {
+            title: title || 'Inline Newsletter',
+            subtitle: 'Newsletter / CTA Block',
+            media: media || '📧',
+          }
+        },
+      },
+    }),
   ],
 })
 

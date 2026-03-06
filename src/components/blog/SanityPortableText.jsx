@@ -7,6 +7,7 @@ import SanityImage from '../common/SanityImage';
 import { urlForImage } from '@/sanity/lib/image';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import InlineNewsletter from './InlineNewsletter';
 
 // Custom components for portable text rendering
 const InlineTOC = ({ headings }) => {
@@ -220,6 +221,15 @@ const components = {
       );
     },
     inlineTOC: ({ value, headings }) => <InlineTOC headings={headings} />,
+    inlineNewsletter: ({ value }) => (
+      <InlineNewsletter
+        title={value.title}
+        description={value.description}
+        image={value.image}
+        buttonText={value.buttonText}
+        buttonLink={value.buttonLink}
+      />
+    ),
   },
   marks: {
     link: ({ children, value }) => {
