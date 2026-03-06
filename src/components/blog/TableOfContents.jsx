@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
-// Simple slug generator (lowercase, alphanum & dash)
+import { useScrollSpy } from '@/hooks/useScrollSpy';
+import { FaRegClock } from "react-icons/fa6";
+import { motion, AnimatePresence } from 'framer-motion';
+import { HiOutlinePlusSm, HiOutlineMinusSm } from "react-icons/hi";
+
 const generateSlug = (str) =>
   str
     .toLowerCase()
@@ -7,20 +11,26 @@ const generateSlug = (str) =>
     .replace(/[^a-z0-9\s-]/g, '')
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-');
-import { useScrollSpy } from '@/hooks/useScrollSpy';
-import { FaRegClock } from "react-icons/fa6";
 
-const TableOfContents = ({ timeToRead = "5 min read" }) => {
+const TableOfContents = ({ timeToRead = "5 min read", headings: externalHeadings }) => {
   const [headings, setHeadings] = useState([]);
-  const activeId = useScrollSpy('h2, h3'); // Adjust selectors based on your needs
+  const activeId = useScrollSpy('h2, h3');
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isExpanded, setIsExpanded] = useState(true);
 
   useEffect(() => {
-    // Ensure each heading has an id; if missing generate one
+    if (externalHeadings && externalHeadings.length > 0) {
+      setHeadings(externalHeadings.map(h => ({
+        id: h.id,
+        text: h.title || h.text,
+        level: h.level || 2
+      })));
+      return;
+    }
+
     const elements = Array.from(document.querySelectorAll('h2, h3')).map((element) => {
       if (!element.id) {
-        const generatedId = generateSlug(element.textContent);
-        element.id = generatedId;
+        element.id = generateSlug(element.textContent);
       }
       return {
         id: element.id,
@@ -29,7 +39,7 @@ const TableOfContents = ({ timeToRead = "5 min read" }) => {
       };
     });
     setHeadings(elements);
-  }, []);
+  }, [externalHeadings]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,73 +49,104 @@ const TableOfContents = ({ timeToRead = "5 min read" }) => {
       setScrollProgress(progress);
     };
 
-    // Smooth Scroll Optimization with Throttle Effect
-    let throttleTimeout = null;
-    const throttledScroll = () => {
-      if (!throttleTimeout) {
-        throttleTimeout = setTimeout(() => {
-          handleScroll();
-          throttleTimeout = null;
-        }, 100);
-      }
-    };
-
-    window.addEventListener("scroll", throttledScroll);
-    return () => window.removeEventListener("scroll", throttledScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <nav className="hidden md:block table-of-contents sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto">
-      <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6">
-        {/* Read Time Indicator with Progress Bar */}
-        <div className="mb-6">
-          <div className="text-[#EBFAFE] flex items-center gap-3 font-medium mb-2">
-            <FaRegClock />
-            <div>{timeToRead}</div>
-          </div>
-          <div className="h-1 bg-gray-200/30 rounded-full">
-            <div
-              className="h-full bg-[#88D7F0] transition-all duration-300 rounded-full"
-              style={{ width: `${scrollProgress}%` }}
-            ></div>
+    <nav className="table-of-contents transition-all duration-300">
+      {/* Read Time Progress on Top (Outside Box) */}
+      <div className="mb-6 px-1">
+        <div className="text-[#073742] flex items-center gap-2 font-medium mb-2.5 text-[15px]">
+          <FaRegClock className="text-[#073742] text-base mb-0.5" />
+          <div className="flex items-center gap-1">
+            <span className="text-lg font-bold">{timeToRead.toString().split(' ')[0]}</span>
+            <span className="text-sm font-medium opacity-80">min read</span>
           </div>
         </div>
-
-        <h2 className="text-lg font-semibold mb-4 text-[#EBFAFE]">Table of Contents</h2>
-        <ul className="space-y-3">
-          {headings.map((heading, idx) => {
-            // Add extra margin above h2 if previous was h3, or always for h2
-            const isH2 = heading.level === 2;
-            const prevIsH3 = idx > 0 && headings[idx - 1].level === 3;
-            return (
-              <li
-                key={heading.id}
-                className={`${heading.level === 3 ? 'ml-4' : ''} ${isH2 ? 'mt-8' : ''}`}
-                style={isH2 && idx !== 0 ? { marginTop: '2rem' } : {}}
-              >
-                <a
-                  href={`#${heading.id}`}
-                  className={`block text-sm transition-colors duration-200 font-bold ${
-                    activeId === heading.id
-                      ? 'text-[#88D7F0] font-medium'
-                      : 'text-[#EBFAFE]/80 hover:text-[#88D7F0]'
-                  } ${heading.level === 3 ? 'text-[13px]' : ''}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.querySelector(`#${heading.id}`).scrollIntoView({
-                      behavior: 'smooth'
-                    });
-                  }}
-                >
-                  {heading.text}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+        <div className="h-[3.5px] bg-[#E5F1F4] rounded-full overflow-hidden w-full">
+          <div
+            className="h-full bg-[#073742] transition-all duration-500 rounded-full"
+            style={{ width: `${scrollProgress}%` }}
+          ></div>
+        </div>
       </div>
+
+      <div className={`bg-[#0A2E3D] rounded-xl shadow-xl border border-white/5 transition-all duration-300 ${isExpanded ? 'p-6 md:p-8' : 'p-4 md:p-5'}`}>
+        <div className={`flex justify-between items-center ${isExpanded ? 'mb-5' : 'mb-0'}`}>
+          <h2 className="text-[10px] font-bold text-white tracking-[0.2em] uppercase opacity-60">TABLE OF CONTENTS</h2>
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="text-white opacity-80 hover:opacity-100 transition-opacity outline-none"
+          >
+            {isExpanded ? (
+              <HiOutlineMinusSm className="text-xl" />
+            ) : (
+              <HiOutlinePlusSm className="text-xl" />
+            )}
+          </button>
+        </div>
+
+        <AnimatePresence initial={false}>
+          {isExpanded && (
+            <motion.ul
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
+              className="space-y-4 overflow-y-auto no-scrollbar"
+              style={{ maxHeight: 'calc(100vh - 420px)' }} // Dynamic height based on available screen space
+            >
+              {headings.map((heading) => {
+                const isActive = activeId === heading.id;
+                return (
+                  <li
+                    key={heading.id}
+                    className={`relative ${heading.level === 3 ? 'ml-6' : ''}`}
+                  >
+                    <a
+                      href={`#${heading.id}`}
+                      className={`flex items-center gap-2.5 text-[12px] transition-all duration-300 leading-snug group ${isActive
+                        ? 'text-white font-semibold'
+                        : 'text-gray-400 hover:text-white'
+                        }`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const element = document.getElementById(heading.id);
+                        if (element) {
+                          const offsetTop = element.offsetTop - 100;
+                          window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                          });
+                        }
+                      }}
+                    >
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        {isActive && (
+                          <span className="text-white text-sm flex-shrink-0 animate-pulse">•</span>
+                        )}
+                        <span className="truncate">{heading.text}</span>
+                      </div>
+                    </a>
+                  </li>
+                );
+              })}
+            </motion.ul>
+          )}
+        </AnimatePresence>
+      </div>
+      <style jsx global>{`
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .no-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </nav>
   );
 };
 
-export default TableOfContents; 
+export default TableOfContents;

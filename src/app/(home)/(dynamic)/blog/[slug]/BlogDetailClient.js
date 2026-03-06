@@ -15,7 +15,6 @@ import { motion } from 'framer-motion';
 import BlogFAQ from '@/components/blog/BlogFAQ';
 import '../blogStyles.css';
 import TableOfContents from '@/components/blog/TableOfContents';
-import ReadTimeProgress from '@/components/blog/ReadTimeProgress';
 import AnimatedButton from '@/components/common/AnimatedButton';
 import SanityPortableText from '@/components/blog/SanityPortableText';
 import FAQSchema from '@/components/seo/FAQSchema';
@@ -712,43 +711,11 @@ export default function BlogDetailClient({ params, initialPost }) {
         <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-8 lg:gap-16">
           {/* Left Sidebar - Only shown on desktop */}
           <aside className="lg:sticky top-24 self-start hidden lg:block space-y-8 shrink-0 w-[300px]">
-            {/* Read Time Animation - Added without changing structure */}
-            <ReadTimeProgress timeToRead={post.timeToRead || "5 min read"} />
-
-            {/* Table of Contents */}
-            <div className="bg-[#0A2E3D] p-4 rounded-lg">
-              <h4 className="uppercase text-white text-[13px] font-medium tracking-[0.15em] mb-5">TABLE OF CONTENTS</h4>
-              {h2Headings.length > 0 && (
-                <div className="max-h-[120px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                  <ul className="space-y-4">
-                    {h2Headings.map((section, index) => (
-                      <li key={index} className="relative">
-                        <a
-                          href={`#${section.id}`}
-                          className={`flex items-center gap-2 text-[12px] leading-snug pl-3 ${activeId === section.id
-                            ? 'text-white font-medium'
-                            : 'text-gray-300 hover:text-white'
-                            }`}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            const element = document.getElementById(section.id);
-                            if (element) {
-                              element.scrollIntoView({ behavior: 'smooth' });
-                            }
-                          }}
-                          title={section.title}
-                        >
-                          {activeId === section.id && (
-                            <span className="text-white leading-none animate-toc-pulse" style={{ fontSize: '10px' }}>●</span>
-                          )}
-                          <span className={`truncate transition-all duration-300 ${activeId === section.id ? 'toc-smooth-in' : 'toc-smooth-out'} font-normal`}>{section.title}</span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
+            {/* Table of Contents - Simplified redesigned component */}
+            <TableOfContents
+              timeToRead={post.timeToRead || "5 min read"}
+              headings={h2Headings}
+            />
 
             {/* Promotional Poster */}
             <div className="relative overflow-hidden rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] mt-8 bg-gradient-to-br from-[#073742] via-[#0A2E3D] to-[#073742]">
@@ -786,37 +753,13 @@ export default function BlogDetailClient({ params, initialPost }) {
           </aside>
 
           {/* Mobile TOC - Only visible on mobile - updated to match compact style */}
+          {/* Mobile TOC - Simplified redesigned component */}
           {h2Headings.length > 0 && (
-            <div className="hidden lg:hidden mb-6 bg-[#0A2E3D] p-4 rounded-lg mt-4">
-              <h4 className="uppercase text-white text-xs font-semibold tracking-wide mb-2">TABLE OF CONTENTS</h4>
-              <div className="overflow-y-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                <ul className="space-y-4">
-                  {h2Headings.map((section, index) => (
-                    <li key={index} className="relative">
-                      <a
-                        href={`#${section.id}`}
-                        className={`flex items-center gap-2 text-xs leading-tight pl-4 ${activeId === section.id
-                          ? 'text-white font-medium'
-                          : 'text-gray-300 hover:text-white'
-                          }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          const element = document.getElementById(section.id);
-                          if (element) {
-                            element.scrollIntoView({ behavior: 'smooth' });
-                          }
-                        }}
-                        title={section.title}
-                      >
-                        {activeId === section.id && (
-                          <span className="text-white leading-none animate-toc-pulse" style={{ fontSize: '10px' }}>●</span>
-                        )}
-                        <span className={`truncate transition-all duration-300 ${activeId === section.id ? 'toc-smooth-in' : 'toc-smooth-out'} font-bold`}>{section.title}</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <div className="lg:hidden mb-12">
+              <TableOfContents
+                timeToRead={post.timeToRead || "5 min read"}
+                headings={h2Headings}
+              />
             </div>
           )}
 

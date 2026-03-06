@@ -5,17 +5,30 @@ import { Heading } from "../common/typography/Heading";
 import { AccentText } from "../common/typography/AccentText";
 import FAQSchema from "../seo/FAQSchema";
 
-const FAQItem = ({ question, answer, isOpen, onClick }) => {
+const FAQItem = ({ question, answer, isOpen, onClick, index }) => {
   return (
-    <div className="border-b border-gray-200">
+    <div
+      className={`mb-4 overflow-hidden rounded-2xl border transition-all duration-300 ${isOpen
+        ? 'bg-white border-blue-200 shadow-[0_10px_30px_-10px_rgba(7,55,66,0.1)]'
+        : 'bg-white hover:bg-gray-50 border-gray-100'
+        }`}
+    >
       <button
-        className="w-full py-6 text-left flex justify-between items-center focus:outline-none"
+        className="w-full p-5 md:p-6 text-left flex justify-between items-center focus:outline-none group"
         onClick={onClick}
       >
-        <span className="text-2xl font-medium text-gray-900">{question}</span>
-        <span className="ml-6">
+        <div className="flex items-center gap-4">
+          <span className={`text-xs font-bold tracking-widest ${isOpen ? 'text-blue-500' : 'text-gray-400'}`}>
+            {String(index + 1).padStart(2, '0')}
+          </span>
+          <span className={`text-xl md:text-2xl font-semibold transition-colors ${isOpen ? 'text-[#073742]' : 'text-gray-900 group-hover:text-[#073742]'}`}>
+            {question}
+          </span>
+        </div>
+        <div className={`flex-shrink-0 ml-4 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${isOpen ? 'bg-[#073742] text-white rotate-180 shadow-md' : 'bg-gray-100 text-gray-400 group-hover:bg-gray-200'
+          }`}>
           <svg
-            className={`w-6 h-6 transform ${isOpen ? "rotate-180" : ""}`}
+            className="w-6 h-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -27,13 +40,16 @@ const FAQItem = ({ question, answer, isOpen, onClick }) => {
               d="M19 9l-7 7-7-7"
             />
           </svg>
-        </span>
-      </button>
-      {isOpen && (
-        <div className="pb-6">
-          <p className="text-base text-gray-700">{answer}</p>
         </div>
-      )}
+      </button>
+      <div
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-height-auto opacity-100 pb-6 md:pb-8' : 'max-h-0 opacity-0'
+          }`}
+      >
+        <div className="px-6 md:px-8 ml-0 md:ml-10">
+          <p className="text-lg text-gray-600 leading-relaxed">{answer}</p>
+        </div>
+      </div>
     </div>
   );
 };
@@ -126,6 +142,7 @@ export default function FAQSection() {
               {faqs.map((faq, index) => (
                 <FAQItem
                   key={index}
+                  index={index}
                   question={faq.question}
                   answer={faq.answer}
                   isOpen={index === openIndex}

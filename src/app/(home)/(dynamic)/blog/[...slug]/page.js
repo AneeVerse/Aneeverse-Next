@@ -13,8 +13,8 @@ import React from 'react';
 import BlogSchema from '@/components/seo/BlogSchema';
 import FAQSchema from '@/components/seo/FAQSchema';
 import SanityImage from '@/components/common/SanityImage';
-import ReadTimeProgress from '@/components/blog/ReadTimeProgress';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
+import TableOfContents from '@/components/blog/TableOfContents';
 
 // Add the import for our CSS file:
 import '../blogStyles.css';
@@ -300,43 +300,11 @@ export default function BlogDetail({ params }) {
             <div className="grid grid-cols-1 md:grid-cols-[270px_1fr] gap-8 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" style={{ width: 'calc(100% - 3rem)' }}>
               {/* Left Sidebar - Only shown on desktop */}
               <aside className="lg:sticky top-24 self-start hidden lg:block space-y-8 shrink-0">
-                {/* Read Time Animation - Added without changing structure */}
-                <ReadTimeProgress timeToRead={post.timeToRead || "5 min read"} />
-
-                {/* Table of Contents - More compact with smaller text */}
-                <div className="bg-[#0A2E3D] p-4 rounded-lg mt-6">
-                  <h4 className="uppercase text-white text-xs font-semibold tracking-wide mb-3">TABLE OF CONTENTS</h4>
-                  {h2Headings.length > 0 && (
-                    <div className="max-h-[120px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                      <ul className="space-y-1.5">
-                        {h2Headings.map((section, index) => (
-                          <li key={index} className="relative">
-                            <a
-                              href={`#${section.id}`}
-                              className={`block text-sm leading-tight pl-4 truncate ${activeId === section.id
-                                  ? 'text-white font-medium'
-                                  : 'text-gray-300 hover:text-white'
-                                }`}
-                              onClick={(e) => {
-                                e.preventDefault();
-                                const element = document.getElementById(section.id);
-                                if (element) {
-                                  element.scrollIntoView({ behavior: 'smooth' });
-                                }
-                              }}
-                              title={section.title}
-                            >
-                              {activeId === section.id && (
-                                <div className="absolute left-0 top-[6px] w-1.5 h-1.5 rounded-full bg-white animate-pulse"></div>
-                              )}
-                              {section.title}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
+                {/* Table of Contents - Simplified redesigned component */}
+                <TableOfContents
+                  timeToRead={post.timeToRead || "5 min read"}
+                  headings={h2Headings}
+                />
 
                 {/* Promotional Poster */}
                 <div className="relative overflow-hidden rounded-lg shadow-[0_0_15px_rgba(0,0,0,0.2)] mt-8">
@@ -421,40 +389,13 @@ export default function BlogDetail({ params }) {
               </Link>
             </div>
 
-            {/* Mobile TOC - Only visible on mobile */}
-            {h2Headings.length > 0 && (
-              <div className="lg:hidden mb-6 bg-[#073742] p-4 rounded-lg mt-4">
-                <h4 className="uppercase text-white text-xs font-semibold tracking-wide mb-2">TABLE OF CONTENTS</h4>
-                <div className="overflow-y-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                  <ul className="space-y-1.5">
-                    {h2Headings.map((section, index) => (
-                      <li key={index} className="relative">
-                        <a
-                          href={`#${section.id}`}
-                          className={`block text-sm leading-tight pl-4 truncate ${activeId === section.id
-                              ? 'text-white font-medium'
-                              : 'text-gray-300 hover:text-white'
-                            }`}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            const element = document.getElementById(section.id);
-                            if (element) {
-                              element.scrollIntoView({ behavior: 'smooth' });
-                            }
-                          }}
-                          title={section.title}
-                        >
-                          {activeId === section.id && (
-                            <div className="absolute left-0 top-[6px] w-1.5 h-1.5 rounded-full bg-white animate-pulse"></div>
-                          )}
-                          {section.title}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            )}
+            {/* Mobile TOC - Simplified redesigned component */}
+            <div className="lg:hidden mb-8">
+              <TableOfContents
+                timeToRead={post.timeToRead || "5 min read"}
+                headings={h2Headings}
+              />
+            </div>
 
             {/* Mobile Promotional CTA - Only shown on mobile */}
             <div className="lg:hidden relative overflow-hidden rounded-lg shadow-[0_0_15px_rgba(0,0,0,0.2)] mt-10 mb-6">
