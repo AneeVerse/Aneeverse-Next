@@ -126,9 +126,16 @@ export const getRecommendedPostsQuery = groq`
     slug,
     publishedAt,
     mainImage {
-      sanityImage,
+      sanityImage {
+        asset->{
+          _id,
+          url
+        },
+        alt
+      },
       externalImage,
-      alt
+      alt,
+      asset->{url}
     },
     categories[]->{
       title

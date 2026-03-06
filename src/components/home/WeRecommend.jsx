@@ -39,12 +39,32 @@ export default async function WeRecommend() {
     // Helper to generate image URL safely
     const getImageUrl = (source) => {
         try {
-            if (source?.sanityImage) {
-                return urlForImage(source.sanityImage).url();
+            if (!source) return "/images/home/we recommend/01_2_43dc6e305a.png";
+
+            // 1. Try dereferenced Sanity image URL
+            if (source.sanityImage?.asset?.url) {
+                return source.sanityImage.asset.url;
             }
-            if (source?.externalImage) {
+
+            // 2. Try rebuilding URL with urlForImage if it has a reference
+            if (source.sanityImage) {
+                const imgUrl = urlForImage(source.sanityImage).url();
+                if (imgUrl && !imgUrl.includes('image-404.jpg')) {
+                    return imgUrl;
+                }
+            }
+
+            // 3. Try external image URL
+            if (source.externalImage) {
                 return source.externalImage;
             }
+
+            // 4. Try top-level asset URL (legacy)
+            if (source.asset?.url) {
+                return source.asset.url;
+            }
+
+            // 5. Final fallback
             return "/images/home/we recommend/01_2_43dc6e305a.png";
         } catch (e) {
             console.error("Error generating image URL:", e);
