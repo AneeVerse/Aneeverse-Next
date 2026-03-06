@@ -202,7 +202,7 @@ const ResourcesMegaMenu = ({ color }) => {
 
   const resources = [
     {
-      title: "",
+      title: "Explore",
       link: "#",
       items: [
         {
@@ -217,6 +217,7 @@ const ResourcesMegaMenu = ({ color }) => {
           description: "Success stories from our clients",
           icon: <HiOutlineUserGroup />,
         },
+        /*
         {
           name: "Guides & Quizzes",
           link: "/blog",
@@ -229,6 +230,7 @@ const ResourcesMegaMenu = ({ color }) => {
           description: "Aneeverse's latest videos",
           icon: <HiOutlinePlay />,
         }
+        */
       ],
     },
     {
@@ -284,8 +286,10 @@ const ResourcesMegaMenu = ({ color }) => {
                 <div className="grid grid-cols-3 gap-6 py-8">
                   {/* Learning Center */}
                   <div className="border-r border-gray-200 pr-6">
-
-                    <ul className="mt-12 space-y-4">
+                    <h3 className="text-lg font-semibold text-secondary-500 flex items-center gap-2 h-[28px]">
+                      Explore
+                    </h3>
+                    <ul className="mt-4 space-y-4">
                       {resources[0].items.map((item, idx) => (
                         <li key={idx}>
                           <Link href={item.link} onClick={() => { setIsOpen(false) }}
@@ -307,7 +311,7 @@ const ResourcesMegaMenu = ({ color }) => {
 
                   {/* Blog */}
                   <div className="border-r border-gray-200 pr-6">
-                    <Link onClick={() => { setIsOpen(false) }} href={resources[1].link} className="text-lg group font-semibold cursor-pointer hover:underline flex items-center text-secondary-500 gap-2">
+                    <Link onClick={() => { setIsOpen(false) }} href={resources[1].link} className="text-lg group font-semibold cursor-pointer hover:underline flex items-center text-secondary-500 gap-2 whitespace-nowrap h-[28px]">
                       Blog <div className="relative"> <FiArrowUpRight className="z-10 group-hover:translate-x-[80%] group-hover:translate-y-[-80%] group-hover:opacity-0 transition-all duration-300" /> <FiArrowUpRight className="absolute inset-0 z-10 opacity-0 translate-x-[-80%] translate-y-[80%] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" /></div>
                     </Link>
                     <div className="grid grid-cols-1 gap-4 mt-4">
@@ -315,7 +319,7 @@ const ResourcesMegaMenu = ({ color }) => {
                         // Loading placeholders with reduced height for faster rendering
                         Array(2).fill(0).map((_, idx) => (
                           <div key={idx} className="animate-pulse">
-                            <div className="bg-gray-200 h-[120px] rounded-md"></div>
+                            <div className="bg-gray-200 h-[200px] rounded-md"></div>
                             <div className="h-4 bg-gray-200 rounded mt-3 w-3/4"></div>
                           </div>
                         ))
@@ -327,7 +331,7 @@ const ResourcesMegaMenu = ({ color }) => {
                               <img
                                 src={blog.thumbnail}
                                 alt={blog.title}
-                                className="w-full h-[160px] hover:scale-110 transition-all duration-300 object-cover rounded-md"
+                                className="w-full h-[200px] hover:scale-110 transition-all duration-300 object-cover rounded-md"
                               />
                             </div>
                             <p className="text-sm line-clamp-1 font-medium text-gray-700">
@@ -346,7 +350,7 @@ const ResourcesMegaMenu = ({ color }) => {
 
                   {/* Customer Stories */}
                   <div>
-                    <Link onClick={() => { setIsOpen(false) }} href={resources[2].link} className="text-lg group font-semibold cursor-pointer hover:underline flex items-center text-secondary-500 gap-2">
+                    <Link onClick={() => { setIsOpen(false) }} href={resources[2].link} className="text-lg group font-semibold cursor-pointer hover:underline flex items-center text-secondary-500 gap-2 whitespace-nowrap h-[28px]">
                       Customer Stories <div className="relative"> <FiArrowUpRight className="z-10 group-hover:translate-x-[80%] group-hover:translate-y-[-80%] group-hover:opacity-0 transition-all duration-300" /> <FiArrowUpRight className="absolute inset-0 z-10 opacity-0 translate-x-[-80%] translate-y-[80%] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" /></div>
                     </Link>
                     <div className="grid grid-cols-1 gap-4 mt-4">
@@ -354,7 +358,7 @@ const ResourcesMegaMenu = ({ color }) => {
                         // Loading placeholders
                         Array(2).fill(0).map((_, idx) => (
                           <div key={idx} className="animate-pulse">
-                            <div className="bg-gray-200 h-[120px] rounded-md"></div>
+                            <div className="bg-gray-200 h-[200px] rounded-md"></div>
                             <div className="h-4 bg-gray-200 rounded mt-3 w-3/4"></div>
                           </div>
                         ))
@@ -366,7 +370,7 @@ const ResourcesMegaMenu = ({ color }) => {
                               <img
                                 src={story.thumbnail}
                                 alt={story.title}
-                                className="w-full h-[160px] hover:scale-110 transition-all duration-300 object-cover rounded-md"
+                                className="w-full h-[200px] hover:scale-110 transition-all duration-300 object-cover rounded-md"
                               />
                             </div>
                             <p className="text-sm line-clamp-1 font-medium text-gray-700">
