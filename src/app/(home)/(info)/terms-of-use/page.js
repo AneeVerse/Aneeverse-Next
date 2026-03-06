@@ -6,7 +6,7 @@ const TermsOfUse = () => {
   return (
     <div className="bg-white">
       <Layout>
-        <section className=" py-12">
+        <section className="pt-20 pb-12">
           <div className="max-w-6xl mx-auto px-6">
             <h1 className="text-3xl font-semibold mb-6 text-center">Terms of Use</h1>
 

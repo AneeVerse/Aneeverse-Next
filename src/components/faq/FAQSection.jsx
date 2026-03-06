@@ -110,11 +110,11 @@ export default function FAQSection() {
 
   return (
     <>
-      <FAQSchema 
-        faqData={faqs} 
-        pageTitle="Frequently Asked Questions - Aneeverse" 
+      <FAQSchema
+        faqData={faqs}
+        pageTitle="Frequently Asked Questions - Aneeverse"
       />
-      <section className="py-12 bg-white">
+      <section className="pt-24 pb-12 bg-white">
         <Layout>
           <div className="max-w-4xl mx-auto">
             <Heading level="h1" className="text-center mb-12 mt-12 text-4xl">
