@@ -102,6 +102,9 @@ const ContactUsPage = () => {
               <p className="flex items-center  ">
                 <FaMapMarkerAlt className=" min-w-fit mr-4" /> Office No. 03, Plot No. 45, near HP Petrol Pump, Seawoods West, Sector 44, Seawoods, Navi Mumbai, Maharashtra 400706
               </p>
+              <p className="flex items-center  ">
+                <FaMapMarkerAlt className=" min-w-fit mr-4" /> Wework, Raheja Platinum Road, off Andheri - Kurla Road, Sag Baug, Marol, Andheri East, Mumbai, Maharashtra 400059
+              </p>
             </div>
 
             {/* Social Media Links */}

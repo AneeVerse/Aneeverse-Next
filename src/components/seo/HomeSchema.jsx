@@ -18,14 +18,24 @@ export default function HomeSchema() {
         "description": "Aneeverse is your dedicated, on-call creative & digital marketing team. We provide comprehensive digital marketing services including web design, SEO, social media marketing, content creation, and advertising solutions to help businesses grow online.",
         "telephone": "+91-91527-55529",
         "email": "team@aneeverse.com",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Office No. 03, Plot No. 45, near HP Petrol Pump, Seawoods West, Sector 44",
-          "addressLocality": "Seawoods, Navi Mumbai",
-          "addressRegion": "Maharashtra",
-          "postalCode": "400706",
-          "addressCountry": "IN"
-        },
+        "address": [
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "Office No. 03, Plot No. 45, near HP Petrol Pump, Seawoods West, Sector 44",
+            "addressLocality": "Seawoods, Navi Mumbai",
+            "addressRegion": "Maharashtra",
+            "postalCode": "400706",
+            "addressCountry": "IN"
+          },
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "Wework, Raheja Platinum Road, off Andheri - Kurla Road, Sag Baug, Marol",
+            "addressLocality": "Andheri East, Mumbai",
+            "addressRegion": "Maharashtra",
+            "postalCode": "400059",
+            "addressCountry": "IN"
+          }
+        ],
         "areaServed": [
           {
             "@type": "Country",
@@ -166,14 +176,24 @@ export default function HomeSchema() {
         "name": "Aneeverse",
         "image": "https://aneeverse.com/images/about/aneeverse-office.jpg",
         "priceRange": "₹₹",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Office No. 03, Plot No. 45, near HP Petrol Pump, Seawoods West, Sector 44",
-          "addressLocality": "Seawoods, Navi Mumbai",
-          "addressRegion": "Maharashtra",
-          "postalCode": "400706",
-          "addressCountry": "IN"
-        },
+        "address": [
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "Office No. 03, Plot No. 45, near HP Petrol Pump, Seawoods West, Sector 44",
+            "addressLocality": "Seawoods, Navi Mumbai",
+            "addressRegion": "Maharashtra",
+            "postalCode": "400706",
+            "addressCountry": "IN"
+          },
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "Wework, Raheja Platinum Road, off Andheri - Kurla Road, Sag Baug, Marol",
+            "addressLocality": "Andheri East, Mumbai",
+            "addressRegion": "Maharashtra",
+            "postalCode": "400059",
+            "addressCountry": "IN"
+          }
+        ],
         "geo": {
           "@type": "GeoCoordinates",
           "latitude": "19.0330",

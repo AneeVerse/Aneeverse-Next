@@ -13,14 +13,24 @@ export default function OrganizationSchema() {
       "height": 60
     },
     "image": "https://aneeverse.com/logo.png",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Office No. 03, Plot No. 45, near HP Petrol Pump, Seawoods West, Sector 44",
-      "addressLocality": "Seawoods, Navi Mumbai",
-      "addressRegion": "Maharashtra",
-      "postalCode": "400706",
-      "addressCountry": "IN"
-    },
+    "address": [
+      {
+        "@type": "PostalAddress",
+        "streetAddress": "Office No. 03, Plot No. 45, near HP Petrol Pump, Seawoods West, Sector 44",
+        "addressLocality": "Seawoods, Navi Mumbai",
+        "addressRegion": "Maharashtra",
+        "postalCode": "400706",
+        "addressCountry": "IN"
+      },
+      {
+        "@type": "PostalAddress",
+        "streetAddress": "Wework, Raheja Platinum Road, off Andheri - Kurla Road, Sag Baug, Marol",
+        "addressLocality": "Andheri East, Mumbai",
+        "addressRegion": "Maharashtra",
+        "postalCode": "400059",
+        "addressCountry": "IN"
+      }
+    ],
     "contactPoint": [
       {
         "@type": "ContactPoint",

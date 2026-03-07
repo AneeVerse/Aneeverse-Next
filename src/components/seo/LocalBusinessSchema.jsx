@@ -14,14 +14,24 @@ export default function LocalBusinessSchema() {
       "width": 200,
       "height": 60
     },
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Office No. 03, Plot No. 45, near HP Petrol Pump, Seawoods West, Sector 44",
-      "addressLocality": "Seawoods, Navi Mumbai",
-      "addressRegion": "Maharashtra",
-      "postalCode": "400706",
-      "addressCountry": "IN"
-    },
+    "address": [
+      {
+        "@type": "PostalAddress",
+        "streetAddress": "Office No. 03, Plot No. 45, near HP Petrol Pump, Seawoods West, Sector 44",
+        "addressLocality": "Seawoods, Navi Mumbai",
+        "addressRegion": "Maharashtra",
+        "postalCode": "400706",
+        "addressCountry": "IN"
+      },
+      {
+        "@type": "PostalAddress",
+        "streetAddress": "Wework, Raheja Platinum Road, off Andheri - Kurla Road, Sag Baug, Marol",
+        "addressLocality": "Andheri East, Mumbai",
+        "addressRegion": "Maharashtra",
+        "postalCode": "400059",
+        "addressCountry": "IN"
+      }
+    ],
     "geo": {
       "@type": "GeoCoordinates",
       "latitude": 19.0155818,
@@ -35,7 +45,7 @@ export default function LocalBusinessSchema() {
         "@type": "OpeningHoursSpecification",
         "dayOfWeek": [
           "Monday",
-          "Tuesday", 
+          "Tuesday",
           "Wednesday",
           "Thursday",
           "Friday"

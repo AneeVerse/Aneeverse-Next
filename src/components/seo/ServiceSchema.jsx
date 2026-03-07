@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-const ServiceSchema = ({ 
+const ServiceSchema = ({
   serviceName,
   serviceType = "Service", // Can be "Service", "ProfessionalService", "FinancialService", etc.
   description,
@@ -39,14 +39,24 @@ const ServiceSchema = ({
       "url": serviceUrl || `https://aneeverse.com/services/${slug}`,
       // Add address directly to ProfessionalService
       ...(serviceType === "ProfessionalService" && {
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Office No. 03, Plot No. 45, near HP Petrol Pump, Seawoods West, Sector 44",
-          "addressLocality": "Seawoods, Navi Mumbai",
-          "addressRegion": "Maharashtra",
-          "postalCode": "400706",
-          "addressCountry": "IN"
-        }
+        "address": [
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "Office No. 03, Plot No. 45, near HP Petrol Pump, Seawoods West, Sector 44",
+            "addressLocality": "Seawoods, Navi Mumbai",
+            "addressRegion": "Maharashtra",
+            "postalCode": "400706",
+            "addressCountry": "IN"
+          },
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "Wework, Raheja Platinum Road, off Andheri - Kurla Road, Sag Baug, Marol",
+            "addressLocality": "Andheri East, Mumbai",
+            "addressRegion": "Maharashtra",
+            "postalCode": "400059",
+            "addressCountry": "IN"
+          }
+        ]
       }),
       // Only add provider for non-ProfessionalService types
       ...(serviceType !== "ProfessionalService" && {
@@ -62,14 +72,24 @@ const ServiceSchema = ({
             "width": 200,
             "height": 60
           },
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Office No. 03, Plot No. 45, near HP Petrol Pump, Seawoods West, Sector 44",
-            "addressLocality": "Seawoods, Navi Mumbai",
-            "addressRegion": "Maharashtra",
-            "postalCode": "400706",
-            "addressCountry": "IN"
-          },
+          "address": [
+            {
+              "@type": "PostalAddress",
+              "streetAddress": "Office No. 03, Plot No. 45, near HP Petrol Pump, Seawoods West, Sector 44",
+              "addressLocality": "Seawoods, Navi Mumbai",
+              "addressRegion": "Maharashtra",
+              "postalCode": "400706",
+              "addressCountry": "IN"
+            },
+            {
+              "@type": "PostalAddress",
+              "streetAddress": "Wework, Raheja Platinum Road, off Andheri - Kurla Road, Sag Baug, Marol",
+              "addressLocality": "Andheri East, Mumbai",
+              "addressRegion": "Maharashtra",
+              "postalCode": "400059",
+              "addressCountry": "IN"
+            }
+          ],
           "contactPoint": {
             "@type": "ContactPoint",
             "telephone": "+91-91527-55529",
@@ -143,7 +163,7 @@ const ServiceSchema = ({
       if (price) {
         serviceSchema.offers.price = price;
       }
-      
+
       if (priceRange) {
         serviceSchema.offers.priceRange = priceRange;
       }
