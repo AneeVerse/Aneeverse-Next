@@ -21,24 +21,10 @@ export default function WebsiteServices() {
       imgUrl: "/images/services/website/landing-page.png",
       pageUrl: "/services/email-campaign",
     },
-    // {
-    //   title: "Google Ads",
-    //   description:
-    //     "Targeted ads to maximize ROI. Reach your audience with Google Ads campaigns that drive results.",
-    //   imgUrl: "/images/services/website/gmb-optimization.png",
-    //   pageUrl: "/services/google-ads",
-    // },
-    // {
-    //   title: "Meta Ads",
-    //   description:
-    //     "Creative campaigns that get noticed. Stand out with creative Meta Ads campaigns that drive engagement.",
-    //   imgUrl: "/images/services/website/seo-optimization.png",
-    //   pageUrl: "/services/meta-ads",
-    // },
   ];
 
   return (
-    <section id="marketing-services" className="py-6 text-white">
+    <section id="marketing-services" className="py-6 text-white scroll-mt-24">
       <Layout>
         {/* Heading */}
         <Heading
@@ -47,8 +33,7 @@ export default function WebsiteServices() {
           spacing="lg"
           className="text-center  font-medium"
         >
-          <AccentText size="lg">marketing </AccentText>
-          Services
+          <AccentText size="lg">Marketing </AccentText>
         </Heading>
 
         {/* Grid */}
@@ -57,9 +42,8 @@ export default function WebsiteServices() {
             <Link
               key={index}
               href={service.pageUrl}
-              className={`group relative  h-[250px] sm:h-[370px] lg:h-auto lg:max-h-[420px] rounded-2xl overflow-hidden ${
-                index === 0 ? "lg:col-span-2" : ""
-              }`}
+              className={`group relative  h-[250px] sm:h-[370px] lg:h-auto lg:max-h-[420px] rounded-2xl overflow-hidden ${index === 0 ? "lg:col-span-2" : ""
+                }`}
             >
               {/* Image */}
               <div className="overflow-hidden relative h-[250px] sm:h-full w-full">

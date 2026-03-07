@@ -37,7 +37,7 @@ export default function CreativeDesignServices() {
   ];
 
   return (
-    <section id="creative-design-services" className="py-6 text-white">
+    <section id="creative-design" className="py-6 text-white scroll-mt-24">
       <Layout>
         {/* Heading */}
         <Heading
@@ -46,8 +46,8 @@ export default function CreativeDesignServices() {
           spacing="lg"
           className="text-center  font-medium"
         >
-          <AccentText size="lg">creative </AccentText>
-          Design Services
+          <AccentText size="lg">Creative </AccentText>
+          Design
         </Heading>
 
         {/* Grid */}

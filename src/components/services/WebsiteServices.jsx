@@ -52,7 +52,7 @@ export default function WebsiteServices() {
   ];
 
   return (
-    <section id="website-services" className="py-6 text-white">
+    <section id="specialized-solutions" className="py-6 text-white scroll-mt-24">
       <Layout>
         {/* Heading */}
         <Heading
@@ -61,8 +61,8 @@ export default function WebsiteServices() {
           spacing="lg"
           className="text-center  font-medium"
         >
-          <AccentText size="lg">website </AccentText>
-          Services
+          <AccentText size="lg">Specialized </AccentText>
+          Solutions
         </Heading>
 
         {/* Grid */}
@@ -72,10 +72,10 @@ export default function WebsiteServices() {
               key={index}
               href={service.pageUrl}
               className={`group block h-[250px] sm:h-[370px] lg:h-auto  relative rounded-2xl overflow-hidden ${index === 0 || index === services.length - 1
-                  ? "lg:col-span-2"
-                  : index === 1
-                    ? "lg:row-span-2"
-                    : ""
+                ? "lg:col-span-2"
+                : index === 1
+                  ? "lg:row-span-2"
+                  : ""
                 }`}
             >
               {/* Image */}

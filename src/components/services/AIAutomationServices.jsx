@@ -4,33 +4,30 @@ import Layout from "../common/Layout";
 import { Heading } from "../common/typography/Heading";
 import { AccentText } from "../common/typography/AccentText";
 
-export default function EcommerceServices() {
+export default function AIAutomationServices() {
     const services = [
         {
-            title: "Amazon Management",
-            description:
-                "Scale more on Amazon without troubleshooting. We handle listings, ads, and account health.",
-            imgUrl: "/images/services/website/website-design.png",
-            pageUrl: "/services/amazon-marketplace-management",
-        },
-        {
-            title: "eBay Management",
-            description:
-                "Profitable eBay store management. From listing optimization to Promoted Listings campaigns.",
-            imgUrl: "/images/services/website/landing-page.png",
-            pageUrl: "/services/ebay-marketplace-management",
-        },
-        {
-            title: "Zepto Management",
-            description:
-                "Win in quick commerce. End-to-end execution for Zepto onboarding and operations.",
+            title: "AI SEO (GEO) (AEO) (AIO)",
+            description: "Next-generation SEO optimized for AI discovery and traditional search engines.",
             imgUrl: "/images/services/website/seo-optimization.png",
-            pageUrl: "/services/zepto-marketplace-management",
+            pageUrl: "/services/ai-seo-geo-aeo-aio",
         },
+        {
+            title: "n8n Workflows",
+            description: "Custom workflow automation and integrations to streamline your business operations.",
+            imgUrl: "/images/services/website/webflow-development.avif",
+            pageUrl: "/services/n8n-workflows",
+        },
+        {
+            title: "Sales & Marketing Automation",
+            description: "Automate your sales funnel and marketing campaigns for better efficiency and ROI.",
+            imgUrl: "/images/services/website/landing-page-design.avif",
+            pageUrl: "/services/sales-marketing-automation",
+        }
     ];
 
     return (
-        <section id="ecommerce-marketplace" className="py-6 text-white border-t border-white/10 pt-16 scroll-mt-24">
+        <section id="ai-automation" className="py-6 text-white scroll-mt-24">
             <Layout>
                 {/* Heading */}
                 <Heading
@@ -39,8 +36,8 @@ export default function EcommerceServices() {
                     spacing="lg"
                     className="text-center font-medium"
                 >
-                    <AccentText size="lg">Ecommerce </AccentText>
-                    Marketplace
+                    <AccentText size="lg">AI & </AccentText>
+                    Automation
                 </Heading>
 
                 {/* Grid */}

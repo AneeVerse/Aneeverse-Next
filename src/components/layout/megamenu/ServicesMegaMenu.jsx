@@ -19,7 +19,7 @@ const ServicesMegaMenu = ({ color }) => {
   const menuCategories = [
     {
       title: "Creative Design",
-      url: "/services",
+      url: "/services#creative-design",
       color: "bg-purple-100 hover:bg-purple-200 text-purple-900",
       items: [
         { name: "Ad Creative", url: "/services/ad-creative", description: "Eye-catching ad creatives that convert.", icon: <FaPaintBrush /> },
@@ -35,7 +35,7 @@ const ServicesMegaMenu = ({ color }) => {
     },
     {
       title: "Specialized Solutions",
-      url: "/services",
+      url: "/services#specialized-solutions",
       color: "bg-blue-100 hover:bg-blue-200 text-blue-900",
       items: [
         { name: "Platform Development", url: "/services/platform-development", description: "Scalable web platforms.", icon: <FaCode /> },
@@ -51,7 +51,7 @@ const ServicesMegaMenu = ({ color }) => {
     },
     {
       title: "AI & Automation",
-      url: "/services",
+      url: "/services#ai-automation",
       color: "bg-emerald-100 hover:bg-emerald-200 text-emerald-900",
       items: [
         // { name: "AI Powered Creatives", url: "/services/ai-powered-creatives", description: "AI-enhanced creative solutions.", icon: <FaRobot /> },
@@ -68,7 +68,7 @@ const ServicesMegaMenu = ({ color }) => {
     },
     {
       title: "Ecommerce Marketplace",
-      url: "/services",
+      url: "/services#ecommerce-marketplace",
       color: "bg-[#FFF8E1] hover:bg-[#FFECB3] text-[#F57F17]",
       items: [
         { name: "Amazon Management", url: "/services/amazon-marketplace-management", description: "Scale more on Amazon without firefighting.", icon: <FaAmazon /> },
@@ -125,12 +125,17 @@ const ServicesMegaMenu = ({ color }) => {
                       <ul className="mt-4 space-y-2">
                         {category.items.map((item, idx) => (
                           item.type === "category" ? (
-                            <div key={idx} className="pl-0 pr-3 pt-2 mt-5 pb-3 mb-2">
+                            <Link
+                              key={idx}
+                              href="/services#marketing-services"
+                              onClick={() => { setIsOpen(false) }}
+                              className="pl-0 pr-3 pt-2 mt-5 pb-3 mb-2 block"
+                            >
                               <div className={`text-base font-semibold py-2 px-6 rounded-xl inline-flex items-center cursor-pointer gap-2 border border-black/5 shadow-sm transition-all duration-300 ${item.color}`}>
                                 {item.name}
                                 <FaChevronRight className="text-xs" />
                               </div>
-                            </div>
+                            </Link>
                           ) : (
                             <Link
                               onClick={() => { setIsOpen(false) }}

@@ -30,18 +30,9 @@ export default function ContentWritingServices() {
   ];
 
   return (
-    <section id="content-writing" className="py-6 text-white">
+    <section className="py-6 text-white ">
       <Layout>
-        {/* Heading */}
-        <Heading
-          level="h2"
-          color="light"
-          spacing="lg"
-          className="text-center  font-medium"
-        >
-          <AccentText size="lg">content </AccentText>
-          Writing
-        </Heading>
+
 
         {/* Grid */}
         <div className="grid gap-4 mt-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 auto-rows-fr">
