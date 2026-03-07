@@ -23,7 +23,7 @@ const ContactCalEmbed = () => {
     }, []);
 
     return (
-        <div className="rounded-2xl overflow-hidden shadow-2xl cal-embed-container bg-[#073742]">
+        <div className="rounded-2xl overflow-hidden shadow-2xl cal-embed-container bg-[#111111]">
             <Cal
                 namespace="discovery-call"
                 calLink="aneeverse/15min"
@@ -40,13 +40,33 @@ const ContactCalEmbed = () => {
             />
             <style jsx global>{`
                 .cal-embed-container {
-                    background: linear-gradient(135deg, #072d36 0%, #073742 100%);
-                    border: 1px solid rgba(45, 200, 230, 0.1);
+                    background: #111111;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
                 }
                 :root {
-                    --cal-bg: #073742 !important;
+                    --cal-bg: #111111 !important;
+                    --cal-bg-emphasis: #1a1a1a !important;
+                    --cal-bg-subtle: #0d0d0d !important;
+                    --cal-bg-muted: #080808 !important;
+                    --cal-bg-inverted: #ffffff !important;
+                    
+                    --cal-border: rgba(255, 255, 255, 0.1) !important;
+                    --cal-border-emphasis: rgba(255, 255, 255, 0.2) !important;
+                    --cal-border-subtle: rgba(255, 255, 255, 0.05) !important;
+
                     --cal-text: #ffffff !important;
+                    --cal-text-emphasis: #ffffff !important;
+                    --cal-text-subtle: #9ca3af !important;
+                    --cal-text-muted: #6b7280 !important;
+                    --cal-text-inverted: #111111 !important;
+
                     --cal-brand: #2DC8E6 !important;
+                    --cal-brand-emphasis: #25a8c4 !important;
+                    --cal-brand-text: #111111 !important;
+                }
+
+                [data-cal-namespace="discovery-call"] {
+                    background: #111111 !important;
                 }
             `}</style>
         </div>

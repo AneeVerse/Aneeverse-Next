@@ -51,27 +51,23 @@ const ContactUsPage = () => {
       {/* Cal.com Embed */}
       <div className="pt-24 sm:pt-28 sm:pb-16 bg-[#fbfcfd] text-secondary-500">
         <Layout>
-          <Heading
-            level="h2"
-            color="dark"
-            spacing="lg"
-            className="text-center font-semibold mb-2"
-          >
-            Schedule a Discovery Call
-
-          </Heading>
-          <p className="text-md sm:text-lg md:text-xl mb-12 text-center font-normal">
-            Schedule a call below or email{" "}
-            <Link href="mailto:team@aneeverse.com" className='inline-block'>
-              <span className="text-blue-600">team@aneeverse.com</span>
-            </Link>{" "}
-            or  {" "}
-            {/* send message to whatsapp */}
-            <Link href="https://wa.me/+919152755529" className='inline-block'>
-              <span className="text-blue-600">send us a text </span>
-            </Link>{" "}
-            to learn more about our plans, process, and results.
-          </p>
+          {/* Header */}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-secondary-500 leading-tight mb-4 font-bw-gradual tracking-tight">
+              Schedule a Discovery Call
+            </h2>
+            <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
+              Schedule a call below or email{" "}
+              <Link href="mailto:team@aneeverse.com" className='inline-block'>
+                <span className="text-blue-600">team@aneeverse.com</span>
+              </Link>{" "}
+              or  {" "}
+              <Link href="https://wa.me/+919152755529" className='inline-block'>
+                <span className="text-blue-600">send us a text </span>
+              </Link>{" "}
+              to learn more about our plans, process, and results.
+            </p>
+          </div>
 
           <ContactCalEmbed />
         </Layout>
