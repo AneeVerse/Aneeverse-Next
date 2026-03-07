@@ -14,13 +14,13 @@ const AnimatedButton = ({
 }) => {
   return (
     <motion.div
-      className={`relative overflow-hidden inline-block ${className}`}
-      style={style}
+      className={`relative overflow-hidden inline-block transform-gpu ${className}`}
+      style={{ isolation: 'isolate', ...style }}
       initial="initial"
       whileHover="hover"
       {...props}
     >
-      <Link href={href} className="block w-full h-full relative">
+      <Link href={href} className="block w-full h-full relative no-underline overflow-hidden transition-transform">
         {/* Current text - slides up on hover */}
         <motion.div
           className="block relative z-10"

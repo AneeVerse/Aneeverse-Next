@@ -154,6 +154,10 @@ div[class*="overflow-y-auto"]::-webkit-scrollbar {
   text-underline-offset: 2px;
 }
 
+.blog-content a.no-underline {
+  text-decoration: none !important;
+}
+
 .blog-content a:hover {
   color: #0A2E3D;
 }
