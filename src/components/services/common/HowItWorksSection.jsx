@@ -25,66 +25,78 @@ const HowItWorksSection = ({
   const sectionRef = useRef(null);
   const progressLineRef = useRef(null);
   const [activeStep, setActiveStep] = useState(0);
-  const [gsapLoaded, setGsapLoaded] = useState(false);
+  const gsapInitialized = useRef(false);
 
   useEffect(() => {
     if (typeof window === "undefined" || steps.length === 0) return;
 
-    let gsapInstance = null;
-    let ScrollTriggerInstance = null;
-    let scrollTrigger = null;
+    let scrollTriggerInstance = null;
+    let timelineInstance = null;
     let observer = null;
+    let refreshTimeout = null;
+
+    const initGSAP = async () => {
+      if (gsapInitialized.current) return;
+      gsapInitialized.current = true;
+
+      try {
+        const { gsap, ScrollTrigger } = await loadGSAP();
+
+        const section = sectionRef.current;
+        const progressLine = progressLineRef.current;
+        if (!section || !progressLine) {
+          gsapInitialized.current = false;
+          return;
+        }
+
+        // Use a small delay to ensure DOM is fully laid out
+        await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+
+        // Animate progress line based on scroll
+        timelineInstance = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top center",
+            end: "bottom center",
+            scrub: 1,
+            onUpdate: (self) => {
+              const progress = self.progress;
+              const stepIndex = Math.min(
+                Math.floor(progress * steps.length),
+                steps.length - 1
+              );
+              setActiveStep(stepIndex);
+            },
+          },
+        });
+
+        timelineInstance.fromTo(
+          progressLine,
+          { height: "0%" },
+          { height: "100%", ease: "none" }
+        );
+
+        scrollTriggerInstance = timelineInstance.scrollTrigger;
+
+        // Refresh after a short delay to ensure all layout calculations are correct
+        refreshTimeout = setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 200);
+      } catch (error) {
+        console.error("Error loading GSAP:", error);
+        gsapInitialized.current = false;
+      }
+    };
 
     // Lazy load GSAP when section is about to enter viewport
     observer = new IntersectionObserver(
-      async (entries) => {
-        if (entries[0].isIntersecting && !gsapLoaded) {
-          try {
-            const { gsap: gsapModule, ScrollTrigger: ST } = await loadGSAP();
-            gsapInstance = gsapModule;
-            ScrollTriggerInstance = ST;
-            setGsapLoaded(true);
-
-            const section = sectionRef.current;
-            const progressLine = progressLineRef.current;
-            if (!section || !progressLine) return;
-
-            // Use requestAnimationFrame to ensure DOM is ready
-            requestAnimationFrame(() => {
-              // Animate progress line based on scroll
-              const tl = gsapInstance.timeline({
-                scrollTrigger: {
-                  trigger: section,
-                  start: "top center",
-                  end: "bottom center",
-                  scrub: 1,
-                  onUpdate: (self) => {
-                    // Calculate which step should be active based on progress
-                    const progress = self.progress;
-                    const stepIndex = Math.min(
-                      Math.floor(progress * steps.length),
-                      steps.length - 1
-                    );
-                    setActiveStep(stepIndex);
-                  },
-                },
-              });
-
-              scrollTrigger = tl.fromTo(
-                progressLine,
-                { height: "0%" },
-                { height: "100%", ease: "none" }
-              );
-
-              // Refresh ScrollTrigger after setup to ensure proper initialization
-              ScrollTriggerInstance.refresh();
-            });
-          } catch (error) {
-            console.error("Error loading GSAP:", error);
-          }
+      (entries) => {
+        if (entries[0].isIntersecting && !gsapInitialized.current) {
+          initGSAP();
+          observer.disconnect();
         }
       },
-      { threshold: 0.1, rootMargin: "100px" }
+      { threshold: 0.1, rootMargin: "200px" }
     );
 
     if (sectionRef.current) {
@@ -92,17 +104,13 @@ const HowItWorksSection = ({
     }
 
     return () => {
-      if (observer) {
-        observer.disconnect();
-      }
-      if (ScrollTriggerInstance) {
-        ScrollTriggerInstance.getAll().forEach((trigger) => trigger.kill());
-      }
-      if (scrollTrigger && scrollTrigger.scrollTrigger) {
-        scrollTrigger.scrollTrigger.kill();
-      }
+      if (observer) observer.disconnect();
+      if (refreshTimeout) clearTimeout(refreshTimeout);
+      if (scrollTriggerInstance) scrollTriggerInstance.kill();
+      if (timelineInstance) timelineInstance.kill();
+      gsapInitialized.current = false;
     };
-  }, [steps.length, gsapLoaded]);
+  }, [steps.length]);
 
   return (
     <section ref={sectionRef} className="bg-primary-500 text-secondary-500 py-24">
@@ -151,7 +159,7 @@ const HowItWorksSection = ({
                 >
                   {/* Spacer to maintain flex layout */}
                   <div className="w-14 flex-shrink-0"></div>
-                  
+
                   {/* Number Circle - Positioned absolutely to cover the line */}
                   <div className="absolute left-7 z-30" style={{ transform: 'translateX(-50%)' }}>
                     <div

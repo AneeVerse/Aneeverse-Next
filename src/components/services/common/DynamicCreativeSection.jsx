@@ -80,7 +80,7 @@ const DynamicCreativeSection = ({
           {items.map((item, index) => (
             <div
               key={`${item.name}-${index}`}
-              className={`min-w-[280px] sm:min-w-[350px]  md:min-w-[470px] relative h-[440px] sm:h-[480px]  md:min-h-[580px] pb-[30px] hover:pb-[90px] hover:mt-[-5px] transition-all duration-300 group ${item.bgColor} shadow-md shadow-primary-500 rounded-lg overflow-hidden`}
+              className={`min-w-[280px] sm:min-w-[350px]  md:min-w-[470px] relative h-[440px] sm:h-[480px]  md:min-h-[580px] pb-[30px] hover:pb-[90px] hover:mt-[-5px] transition-all duration-300 group ${item.bgColor} shadow-md hover:shadow-xl shadow-primary-500 rounded-3xl overflow-hidden`}
             >
               <div className="relative w-full h-full">
                 <Image
