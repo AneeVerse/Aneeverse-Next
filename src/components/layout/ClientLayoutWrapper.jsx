@@ -10,6 +10,7 @@ import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema';
 import WebPageSchema from '@/components/seo/WebPageSchema';
 import HomeSchema from '@/components/seo/HomeSchema';
 import Preloader from '@/components/ui/Preloader';
+import { PostHogProvider } from '@/components/providers/PostHogProvider';
 
 export default function ClientLayoutWrapper({ children }) {
   const pathname = usePathname();
@@ -17,7 +18,7 @@ export default function ClientLayoutWrapper({ children }) {
   const isAuth = pathname === '/register' || pathname === '/login';
 
   return (
-    <>
+    <PostHogProvider>
       {/* Preloader - Shows before all content */}
       {!isStudio && !isAuth && <Preloader />}
 
@@ -55,7 +56,7 @@ export default function ClientLayoutWrapper({ children }) {
 
       {/* Footer for all non-studio, non-auth pages */}
       {!isStudio && !isAuth && <NewFooter />}
-    </>
+    </PostHogProvider>
   );
 }
 
