@@ -153,9 +153,9 @@ export default function PlatformCardsSection() {
           <p className="text-[11px] uppercase font-bold tracking-[4px] text-gray-400 mb-3">
             Platform Specific Solutions
           </p>
-          <h2 className="font-bw-gradual text-3xl sm:text-4xl md:text-5xl font-bold uppercase leading-tight text-gray-900 mb-4 flex flex-col items-center">
-            <span className="whitespace-nowrap">Your Store Is Losing Sales on Every</span>
-            <span className="font-Rock_Salt text-[#FF6B00] normal-case text-[0.6em] block -rotate-1 mt-2">
+          <h2 className="font-bw-gradual text-2xl sm:text-4xl md:text-5xl font-bold uppercase leading-[1.1] text-gray-900 mb-4 flex flex-col items-center">
+            <span className="md:whitespace-nowrap text-center">Your Store Is Losing Sales on Every</span>
+            <span className="font-Rock_Salt text-[#FF6B00] normal-case text-[0.55em] block -rotate-1 mt-2 text-center">
               Platform You&apos;re Not Optimising
             </span>
           </h2>

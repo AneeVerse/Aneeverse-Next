@@ -90,9 +90,9 @@ export default function AdsEcommerceHero() {
               Marketplace Management
             </p>
 
-            <h1 className="font-extrabold leading-[1.1] tracking-tight uppercase mb-6 text-[clamp(1.8rem,3.8vw,3rem)]">
+            <h1 className="font-extrabold leading-[1.1] tracking-tight uppercase mb-6 text-[clamp(1.5rem,5vw,3rem)]">
               <span className="text-white">Every Day Your<br />Listing Sits on Page 3,</span>
-              <span className="font-Rock_Salt text-[#FF6B00] normal-case block text-[0.55em] -rotate-1 mt-3 ml-1">
+              <span className="font-Rock_Salt text-[#FF6B00] normal-case block text-[0.6em] sm:text-[0.55em] -rotate-1 mt-4 sm:mt-3 ml-1">
                 Someone Else Gets Your Sale.
               </span>
             </h1>

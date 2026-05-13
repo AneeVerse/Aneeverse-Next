@@ -96,46 +96,51 @@ export default function WhyChooseSection() {
           </motion.h2>
         </div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-          {outcomeCards.map((card, index) => {
-            const isWide = index === 0 || index === 5;
-            return (
-              <motion.div
-                key={index}
-                ref={(el) => (cardRefs.current[index] = el)}
-                data-index={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.02, zIndex: 20, transition: { duration: 0.3 } }}
-                transition={{ duration: 0.5, delay: index * 0.07 }}
-                className={`group relative bg-[#072d36] rounded-xl p-5 md:p-6 hover:bg-[#093540] transition-colors duration-300 cursor-default overflow-hidden ${isWide ? "col-span-2" : "col-span-1"
+        {/* Cards Container - Scrollable on Mobile, Grid on Desktop */}
+        <div className="relative">
+          <div className="flex md:grid md:grid-cols-4 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none gap-3 md:gap-4 pb-6 md:pb-0 scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
+            {outcomeCards.map((card, index) => {
+              const isWide = index === 0 || index === 5;
+              return (
+                <motion.div
+                  key={index}
+                  ref={(el) => (cardRefs.current[index] = el)}
+                  data-index={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.02, zIndex: 20, transition: { duration: 0.3 } }}
+                  transition={{ duration: 0.5, delay: index * 0.07 }}
+                  className={`flex-shrink-0 snap-center group relative bg-[#072d36] rounded-xl p-5 md:p-6 hover:bg-[#093540] transition-colors duration-300 cursor-default overflow-hidden ${
+                    isWide 
+                      ? "w-[280px] sm:w-[350px] md:w-auto md:col-span-2" 
+                      : "w-[220px] sm:w-[250px] md:w-auto md:col-span-1"
                   }`}
-              >
-                {/* Hover accent line */}
-                <div className="absolute left-0 top-[85%] w-[2px] h-[60px] bg-gradient-to-b from-transparent via-[#88d7f0] to-transparent opacity-0 group-hover:opacity-100 group-hover:top-[10%] transition-all duration-1000 ease-in-out z-10" />
+                >
+                  {/* Hover accent line */}
+                  <div className="absolute left-0 top-[85%] w-[2px] h-[60px] bg-gradient-to-b from-transparent via-[#88d7f0] to-transparent opacity-0 group-hover:opacity-100 group-hover:top-[10%] transition-all duration-1000 ease-in-out z-10" />
 
-                {/* Icon + Step */}
-                <div className="flex items-center justify-between mb-5">
-                  <div className="text-white w-8 h-8 flex items-center justify-center">
-                    {card.icon}
+                  {/* Icon + Step */}
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="text-white w-8 h-8 flex items-center justify-center">
+                      {card.icon}
+                    </div>
+                    <span className="text-[10px] font-black text-white/10 uppercase tracking-widest">
+                      0{index + 1}
+                    </span>
                   </div>
-                  <span className="text-[10px] font-black text-white/10 uppercase tracking-widest">
-                    0{index + 1}
-                  </span>
-                </div>
 
-                <h3 className={`font-bold text-white leading-snug mb-2 ${isWide ? "text-base md:text-xl" : "text-sm md:text-base"}`}>
-                  {card.title}
-                </h3>
+                  <h3 className={`font-bold text-white leading-snug mb-2 ${isWide ? "text-base md:text-xl" : "text-sm md:text-base"}`}>
+                    {card.title}
+                  </h3>
 
-                <p className="text-gray-300 text-[12px] md:text-[13px] leading-relaxed">
-                  {card.description}
-                </p>
-              </motion.div>
-            );
-          })}
+                  <p className="text-gray-300 text-[12px] md:text-[13px] leading-relaxed">
+                    {card.description}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </Layout>
     </section>
