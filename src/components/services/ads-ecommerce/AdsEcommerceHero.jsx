@@ -50,7 +50,7 @@ export default function AdsEcommerceHero() {
     storeName: "",
     monthlyRevenue: "",
     biggestChallenge: "",
-    agreeTerms: false,
+    agreeTerms: true,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
