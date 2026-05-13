@@ -35,7 +35,7 @@ const ResultsHeroSection = () => {
             Creative that <span className="font-Rock_Salt">works</span>
           </h2>
           <p className="text-secondary-500 mt-6 text-lg max-w-3xl mx-auto">
-            We help the world's leading brands create standout ads and campaigns at speed— from concept to execution to results.
+            We help the world's leading brands create standout ads and campaigns at speed- from concept to execution to results.
           </p>
         </div>
 
@@ -45,8 +45,8 @@ const ResultsHeroSection = () => {
               <div key={index} className="flex flex-col items-center text-center">
                 <div className="mb-6">
                   <p className="text-secondary-500 text-lg font-medium">{item.description}</p>
-                  <Link 
-                    href={item.link} 
+                  <Link
+                    href={item.link}
                     className="text-secondary-500 flex items-center justify-center gap-1 hover:underline mt-1"
                   >
                     {item.linkText} <FiArrowUpRight />
@@ -57,7 +57,7 @@ const ResultsHeroSection = () => {
             ))}
           </div>
         </div>
-       
+
       </Layout>
     </section>
   );

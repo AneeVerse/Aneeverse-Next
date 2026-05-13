@@ -9,7 +9,7 @@ export default function PortfolioHero() {
             <span className="text-primary-500">Our Work</span> That Delivers Results
           </h1>
           <p className="mt-6 text-xl md:text-2xl text-gray-600 max-w-3xl">
-            We help leading brands create standout digital experiences—from concept to execution to measurable results.
+            We help leading brands create standout digital experiences-from concept to execution to measurable results.
           </p>
         </div>
       </div>

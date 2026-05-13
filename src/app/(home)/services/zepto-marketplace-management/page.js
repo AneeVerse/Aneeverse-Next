@@ -95,7 +95,7 @@ const page = async () => {
             <CommonServicesHeroSection
                 title="Sell on quick commerce. Without the onboarding maze."
                 subtitle="Quick Commerce Management (Zepto)"
-                description="A dedicated team to handle Zepto onboarding, listing creation, PO management, and daily operations—so you unlock hyperlocal sales without adding ops complexity."
+                description="A dedicated team to handle Zepto onboarding, listing creation, PO management, and daily operations-so you unlock hyperlocal sales without adding ops complexity."
                 ctaText="Book a Call"
                 ctaLink="/contact"
                 backgroundImage="/images/services/website/hero-banner.avif"
@@ -104,7 +104,7 @@ const page = async () => {
             <SlidingLogos />
             <DynamicSupportSection
                 subtitle="Quick commerce, simplified"
-                title="Your Zepto operations partner—"
+                title="Your Zepto operations partner-"
                 highlightText="from day one"
                 imageSrc="/images/services/website/about-web.avif"
                 imageAlt="Zepto Management"
@@ -121,7 +121,7 @@ const page = async () => {
                 subtitle="What you get"
                 title="Everything you need to win in quick commerce"
                 titleHighlight="Zepto"
-                description="A complete quick commerce operations team that handles onboarding, daily ops, and growth—without the learning curve."
+                description="A complete quick commerce operations team that handles onboarding, daily ops, and growth-without the learning curve."
                 channels={[
                     { title: "Fast onboarding & setup", subtitle: "Catalog creation and account activation checklists.", icon: <FaRocket className="w-8 h-8" /> },
                     { title: "App-first content & images", subtitle: "Packshots optimized for mobile screens and 10-minute delivery.", icon: <FaMobileAlt className="w-8 h-8" /> },

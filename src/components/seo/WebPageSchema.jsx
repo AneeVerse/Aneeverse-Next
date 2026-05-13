@@ -18,24 +18,24 @@ const WebPageSchema = () => {
       if (typeof document !== 'undefined' && document.title) {
         return document.title;
       }
-      
+
       // Generate title from pathname
       const pathSegments = pathname.split('/').filter(Boolean);
       if (pathSegments.length === 0) return 'Home - Aneeverse';
-      
+
       const lastSegment = pathSegments[pathSegments.length - 1];
       const title = lastSegment
         .split('-')
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
         .join(' ');
-      
+
       return `${title} - Aneeverse`;
     };
 
     // Get page description based on pathname
     const getPageDescription = () => {
       const descriptions = {
-        '/': 'Your dedicated, on-call creative & digital marketing team. Design, optimise and advertise your brand—ship campaigns faster, more reliably and at scale.',
+        '/': 'Your dedicated, on-call creative & digital marketing team. Design, optimise and advertise your brand-ship campaigns faster, more reliably and at scale.',
         '/services': 'Comprehensive digital marketing services including web design, SEO optimization, social media marketing, and creative design solutions.',
         '/services/website-design': 'Professional website design and development services with responsive design and modern UI/UX.',
         '/services/seo-optimization': 'Comprehensive SEO services to improve search engine rankings and organic traffic.',
@@ -63,7 +63,7 @@ const WebPageSchema = () => {
         "@id": "https://aneeverse.com/#website",
         "url": "https://aneeverse.com",
         "name": "Aneeverse",
-        "description": "Your dedicated, on-call creative & digital marketing team. Design, optimise and advertise your brand—ship campaigns faster, more reliably and at scale.",
+        "description": "Your dedicated, on-call creative & digital marketing team. Design, optimise and advertise your brand-ship campaigns faster, more reliably and at scale.",
         "publisher": {
           "@id": "https://aneeverse.com/#organization"
         }
@@ -101,7 +101,7 @@ const WebPageSchema = () => {
       ],
       "speakable": {
         "@type": "SpeakableSpecification",
-        "cssSelector": [ "h2", "h3"]
+        "cssSelector": ["h2", "h3"]
       }
     };
 

@@ -21,7 +21,7 @@ export default function HeroSectionAbout() {
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div className="lg:col-span-4">
                             <p className="text-base md:text-lg leading-relaxed text-[#d9d9d9] font-light">
                                 The only creative service where enterprise teams get the top 1% of
@@ -46,8 +46,8 @@ export default function HeroSectionAbout() {
                 <Layout>
                     <div className="max-w-4xl mx-auto text-center px-4 md:px-0">
                         <p className="text-xl sm:text-2xl lg:text-4xl font-light text-white leading-tight">
-                            Not an agency, not a bunch of freelancers—a 
-                            <span className="font-medium"> world-class creative team </span> 
+                            Not an agency, not a bunch of freelancers-a
+                            <span className="font-medium"> world-class creative team </span>
                             ready to support you whenever, and however, you need.
                         </p>
                     </div>

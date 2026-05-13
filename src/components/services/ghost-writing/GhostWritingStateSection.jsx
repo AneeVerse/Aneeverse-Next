@@ -16,21 +16,21 @@ const statsData = [
   },
   {
     value: "100%",
-    description: "Confidentiality guaranteed—your voice, our words, and complete privacy protection.",
+    description: "Confidentiality guaranteed-your voice, our words, and complete privacy protection.",
   },
 ];
-  
-  export default function GhostWritingStateSection() {
-    return (
-      <div className="bg-secondary-500 text-primary-500 pb-0 pt-5 md:pt-12 md:pb-12 ">
-       <Layout>
-         {/* Heading */}
-         <div className="text-center mb-8">
-            <p className="uppercase text-sm tracking-widest">{"Powerful Words, Lasting Impact".toUpperCase()}</p>
-            <h2 className="text-4xl mt-3 mb-4 md:text-6xl max-w-4xl mx-auto font-semibold">
+
+export default function GhostWritingStateSection() {
+  return (
+    <div className="bg-secondary-500 text-primary-500 pb-0 pt-5 md:pt-12 md:pb-12 ">
+      <Layout>
+        {/* Heading */}
+        <div className="text-center mb-8">
+          <p className="uppercase text-sm tracking-widest">{"Powerful Words, Lasting Impact".toUpperCase()}</p>
+          <h2 className="text-4xl mt-3 mb-4 md:text-6xl max-w-4xl mx-auto font-semibold">
             Ghost writing Success by the Numbers
-            </h2>
-          </div>
+          </h2>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
           {statsData.map((stat, index) => (
             <div
@@ -42,8 +42,8 @@ const statsData = [
             </div>
           ))}
         </div>
-       </Layout>
-      </div>
-    );
-  }
-  
+      </Layout>
+    </div>
+  );
+}
+

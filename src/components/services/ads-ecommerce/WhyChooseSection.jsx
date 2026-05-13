@@ -2,32 +2,45 @@
 
 import { useRef, useState, useEffect } from "react";
 import Layout from "@/components/common/Layout";
-import { FaUsers, FaLayerGroup, FaWhatsapp, FaChartLine } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { FaUsers, FaLayerGroup, FaWhatsapp, FaChartLine, FaShieldAlt, FaTrophy } from "react-icons/fa";
 
 const outcomeCards = [
   {
-    icon: <FaUsers className="w-6 h-6" />,
-    title: "Dedicated Team Per Client",
-    description:
-      "Every client gets one dedicated PM and a specialist team. There is no shared inbox, no rotating account manager, and no handoff mid-project. Your store has one person responsible for it at all times.",
-  },
-  {
     icon: <FaLayerGroup className="w-6 h-6" />,
-    title: "Multi-Platform Operations",
+    title: "The Audit Is Free and Actionable",
     description:
-      "We run full operations across Amazon, eBay, and Etsy – from listings and ads to account health and daily ops. Every week, handled entirely without follow-up required from you.",
-  },
-  {
-    icon: <FaWhatsapp className="w-6 h-6" />,
-    title: "Direct WhatsApp Access",
-    description:
-      "No support tickets. No waiting on portals. You message your PM on WhatsApp and get a clear answer. This direct communication ensures your store stays moving without delays.",
+      "We review your listings, PPC structure, and account health-and tell you exactly what it's costing you. Walk away with a clear picture, no strings attached.",
   },
   {
     icon: <FaChartLine className="w-6 h-6" />,
+    title: "Results Before You Fully Commit",
+    description:
+      "Fixes start in week one. By day 60, you have a scorecard showing exactly what moved-rankings, conversions, ad performance.",
+  },
+  {
+    icon: <FaWhatsapp className="w-6 h-6" />,
+    title: "Direct WhatsApp Access. No Ticket System.",
+    description:
+      "Your PM's number is in your phone from day one. Ask a question, get an answer. No portals, no waiting rooms.",
+  },
+  {
+    icon: <FaShieldAlt className="w-6 h-6" />,
+    title: "Problems Fixed Before They're Your Problem",
+    description:
+      "Daily health monitoring catches policy flags and suppression alerts before they escalate. You get Monday updates, not Friday warnings.",
+  },
+  {
+    icon: <FaUsers className="w-6 h-6" />,
+    title: "Your Store Runs Every Week Without You",
+    description:
+      "Listings updated. Ads adjusted. Health checked. Every week-whether you log in or not. Get your evenings back.",
+  },
+  {
+    icon: <FaTrophy className="w-6 h-6" />,
     title: "Results That Are Measurable",
     description:
-      "Our managed stores see 35%+ organic growth in 90 days, 2.5x conversion lifts through optimization, and 40% reduction in ad waste. We focus on store-level outcomes, not platform averages.",
+      "Stores we manage have seen ranking growth of 35%+ within 90 days, a 2.5x lift in conversion rates with optimised content, and a 40% reduction in ad spend waste.",
   },
 ];
 
@@ -45,7 +58,7 @@ export default function WhyChooseSection() {
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+      { threshold: 0.1, rootMargin: "0px 0px -30px 0px" }
     );
 
     cardRefs.current.forEach((ref) => {
@@ -56,49 +69,73 @@ export default function WhyChooseSection() {
   }, []);
 
   return (
-    <section id="what-we-manage" className="bg-primary-500 py-20 md:py-32 overflow-hidden">
+    <section id="what-we-manage" className="bg-[#03151a] py-12 md:py-16 overflow-hidden text-white">
       <Layout>
-        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
-          <p className="text-sm uppercase font-bold tracking-[3px] text-secondary-500/40 mb-4">
+        {/* Header - matches HumanCreativity style */}
+        <div className="text-center mb-10 sm:mb-12">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-xs sm:text-sm font-medium tracking-tight uppercase text-[#88d7f0] mb-3"
+          >
             The Aneeverse Advantage
-          </p>
-          <h2 className="text-3xl md:text-5xl font-semibold text-secondary-500 leading-[1.1] mb-6">
-            Why Marketplace Sellers{" "}
-            <span className="italic text-secondary-500/60">Work With Us</span>
-          </h2>
-          <p className="text-lg text-secondary-500/70 max-w-2xl mx-auto">
-            Measurable results. Direct communication. A dedicated team that handles the heavy lifting daily.
-          </p>
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="font-bw-gradual text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-tight max-w-4xl mx-auto"
+          >
+            What You Get Before You{" "}
+            <span className="font-Rock_Salt text-[#FF6B00] normal-case text-[0.6em] inline-block -rotate-1 ml-2">
+              Spend a Single Rupee
+            </span>
+          </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 max-w-6xl mx-auto">
-          {outcomeCards.map((card, index) => (
-            <div
-              key={index}
-              ref={(el) => (cardRefs.current[index] = el)}
-              data-index={index}
-              className={`group relative rounded-[2rem] p-8 md:p-10 border border-secondary-500/[0.05] bg-white/70 hover:bg-white hover:shadow-[0_20px_50px_rgba(7,55,66,0.08)] transition-all duration-700 cursor-default ${
-                visibleCards.has(index)
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-12"
-              }`}
-              style={{ transitionDelay: `${index * 150}ms` }}
-            >
-              <div className="flex flex-col h-full">
-                <div className="w-14 h-14 rounded-2xl bg-secondary-500/[0.04] flex items-center justify-center text-secondary-500 mb-8 group-hover:bg-secondary-500 group-hover:text-primary-500 transition-all duration-500">
-                  {card.icon}
+        {/* Bento Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          {outcomeCards.map((card, index) => {
+            const isWide = index === 0 || index === 5;
+            return (
+              <motion.div
+                key={index}
+                ref={(el) => (cardRefs.current[index] = el)}
+                data-index={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.02, zIndex: 20, transition: { duration: 0.3 } }}
+                transition={{ duration: 0.5, delay: index * 0.07 }}
+                className={`group relative bg-[#072d36] rounded-xl p-5 md:p-6 hover:bg-[#093540] transition-colors duration-300 cursor-default overflow-hidden ${isWide ? "col-span-2" : "col-span-1"
+                  }`}
+              >
+                {/* Hover accent line */}
+                <div className="absolute left-0 top-[85%] w-[2px] h-[60px] bg-gradient-to-b from-transparent via-[#88d7f0] to-transparent opacity-0 group-hover:opacity-100 group-hover:top-[10%] transition-all duration-1000 ease-in-out z-10" />
+
+                {/* Icon + Step */}
+                <div className="flex items-center justify-between mb-5">
+                  <div className="text-white w-8 h-8 flex items-center justify-center">
+                    {card.icon}
+                  </div>
+                  <span className="text-[10px] font-black text-white/10 uppercase tracking-widest">
+                    0{index + 1}
+                  </span>
                 </div>
-                
-                <h3 className="text-2xl md:text-3xl font-semibold text-secondary-500 leading-tight mb-5">
+
+                <h3 className={`font-bold text-white leading-snug mb-2 ${isWide ? "text-base md:text-xl" : "text-sm md:text-base"}`}>
                   {card.title}
                 </h3>
-                
-                <p className="text-secondary-500/60 text-[17px] leading-relaxed">
+
+                <p className="text-gray-300 text-[12px] md:text-[13px] leading-relaxed">
                   {card.description}
                 </p>
-              </div>
-            </div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </Layout>
     </section>

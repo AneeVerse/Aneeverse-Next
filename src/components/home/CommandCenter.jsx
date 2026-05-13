@@ -30,7 +30,7 @@ export default function CommandCenter() {
             type: "text-only",
             id: 4,
             title: "Final files delivered, manageable, sharable",
-            desc: "Download layered source files and ready-to-go assets—organized and delivered where and how you need them.",
+            desc: "Download layered source files and ready-to-go assets-organized and delivered where and how you need them.",
         },
         {
             type: "image-only",

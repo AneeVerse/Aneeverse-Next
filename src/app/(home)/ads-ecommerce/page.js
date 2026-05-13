@@ -1,13 +1,12 @@
 import SlidingLogos from '@/components/home/SlidingLogos'
 import DynamicOurWorks from '@/components/home/DynamicOurWorks'
-import DynamicStateSection from '@/components/services/common/DynamicStateSection'
 import ServiceSchema from '@/components/seo/ServiceSchema'
 import AdsEcommerceHero from '@/components/services/ads-ecommerce/AdsEcommerceHero'
 import WhyChooseSection from '@/components/services/ads-ecommerce/WhyChooseSection'
 import PlatformCardsSection from '@/components/services/ads-ecommerce/PlatformCardsSection'
+import AdsEcommerceContactBlock from '@/components/services/ads-ecommerce/AdsEcommerceContactBlock'
 import ReviewsSection from '@/components/services/ads-ecommerce/ReviewsSection'
-import OurStorySection from '@/components/services/ads-ecommerce/OurStorySection'
-import ScrollingTrustSection from '@/components/services/ads-ecommerce/ScrollingTrustSection'
+
 import AdsEcommerceFAQSection from '@/components/services/ads-ecommerce/AdsEcommerceFAQSection'
 import { client } from "@/sanity/lib/client"
 import { getPortfolioWorksQuery, getCustomerStoriesQuery } from "@/sanity/lib/queries"
@@ -53,13 +52,6 @@ const page = async () => {
         console.error('Error fetching projects:', error);
     }
 
-    const stats = [
-        { value: "35%+", description: "Average increase in organic ranking within 90 days." },
-        { value: "2.5x", description: "Increase in conversion rates with optimized listings." },
-        { value: "40%", description: "Reduction in wasted ad spend through keyword harvesting." },
-        { value: "7", description: "Days to go live from onboarding – execution starts immediately." },
-    ];
-
     return (
         <div>
             <ServiceSchema
@@ -71,11 +63,9 @@ const page = async () => {
             <AdsEcommerceHero />
             <WhyChooseSection />
             <PlatformCardsSection />
-            <ScrollingTrustSection />
             <DynamicOurWorks projects={projects} />
-            <DynamicStateSection title="Our Marketplace Impact" subtitle="PROVEN RESULTS" stats={stats} />
             <ReviewsSection />
-            <OurStorySection />
+            <AdsEcommerceContactBlock />
             <AdsEcommerceFAQSection />
         </div>
     )

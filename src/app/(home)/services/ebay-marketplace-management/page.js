@@ -95,7 +95,7 @@ const page = async () => {
             <CommonServicesHeroSection
                 title="Run a profitable eBay store. Without living in Seller Hub."
                 subtitle="eBay Management"
-                description="A dedicated team to manage your eBay listings, store design, promotions, ads, and daily operations—so you focus on sourcing and growth, not listing uploads and case replies."
+                description="A dedicated team to manage your eBay listings, store design, promotions, ads, and daily operations-so you focus on sourcing and growth, not listing uploads and case replies."
                 ctaText="Book a Call"
                 ctaLink="/contact"
                 backgroundImage="/images/services/website/hero-banner.avif"
@@ -104,7 +104,7 @@ const page = async () => {
             <SlidingLogos />
             <DynamicSupportSection
                 subtitle="eBay operations, handled"
-                title="Your eBay growth team—"
+                title="Your eBay growth team-"
                 highlightText="on demand"
                 imageSrc="/images/services/website/about-web.avif"
                 imageAlt="eBay Management"
@@ -121,7 +121,7 @@ const page = async () => {
                 subtitle="What you get"
                 title="Everything you need to scale on eBay"
                 titleHighlight="eBay"
-                description="A complete eBay operations team that keeps your store optimized, ads running, and metrics clean—week after week."
+                description="A complete eBay operations team that keeps your store optimized, ads running, and metrics clean-week after week."
                 channels={[
                     { title: "Listings that rank & convert", subtitle: "SEO titles, item specifics, and high-quality images.", icon: <FaListUl className="w-8 h-8" /> },
                     { title: "Store & template design", subtitle: "Custom storefronts and templates that build trust.", icon: <FaStore className="w-8 h-8" /> },

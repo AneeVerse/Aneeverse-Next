@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Layout from "@/components/common/Layout";
 import Image from "next/image";
-import { FaStar, FaChevronLeft, FaChevronRight, FaGoogle } from "react-icons/fa";
+import { FaStar, FaGoogle } from "react-icons/fa";
 
 const reviews = [
   {
@@ -17,13 +16,40 @@ const reviews = [
     text: "Aneeverse brought fresh ideas that made our creative work simple. They felt like a team that genuinely cared about our vision, and they became a key part of our expansion.",
   },
   {
+    name: "Sanjay Shah",
+    role: "CEO, RetailHub",
+    avatar: "S",
+    rating: 5,
+    featured: true,
+    weeksAgo: "2 weeks ago",
+    text: "Our Amazon sales were stagnant for months. Aneeverse took over our PPC and listing optimization, and we saw a 45% jump in revenue in just 60 days.",
+  },
+  {
     name: "Navin Agarwal",
     role: "Founder, Novino Inks",
     avatar: "/images/testimonals/navino.png",
     rating: 5,
     featured: false,
     weeksAgo: "6 weeks ago",
-    text: "AneeVerse built a stunning eCommerce presence that truly reflects our brand. Abhijeet understood my vision on a personal level – he knew exactly what I wanted and brought it to life with unmatched efficiency.",
+    text: "AneeVerse built a stunning eCommerce presence that truly reflects our brand. Abhijeet understood my vision on a personal level – he knew exactly what I wanted.",
+  },
+  {
+    name: "Rahul Mehta",
+    role: "Director, LuxeDecor",
+    avatar: "R",
+    rating: 5,
+    featured: false,
+    weeksAgo: "3 weeks ago",
+    text: "The best decision we made for our Etsy store. Search visibility tripled in months and our Star Seller status has never been more secure.",
+  },
+  {
+    name: "Priya Das",
+    role: "Owner, GlowOrganic",
+    avatar: "P",
+    rating: 5,
+    featured: true,
+    weeksAgo: "1 week ago",
+    text: "Cassini optimization for eBay is real. Aneeverse knows the algorithm better than anyone. They source the data, we just handle the inventory.",
   },
   {
     name: "Amrita Thakar",
@@ -32,86 +58,124 @@ const reviews = [
     rating: 5,
     featured: false,
     weeksAgo: "8 weeks ago",
-    text: "AneeVerse redesigned our entire digital presence, and the leads started flowing. Their smart strategies got us to number one in Mumbai while cutting our marketing costs. Best move we made for the business.",
+    text: "Their smart strategies got us to number one while cutting our marketing costs. Best move we made for the business.",
   },
 ];
 
 export default function ReviewsSection() {
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const nextReview = () => setActiveIndex((prev) => (prev + 1) % reviews.length);
-  const prevReview = () => setActiveIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
+  // Duplicate reviews for infinite scroll
+  const duplicatedReviews = [...reviews, ...reviews];
 
   return (
-    <section className="bg-secondary-500 text-white py-20 md:py-28 relative overflow-hidden">
-      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] bg-primary-500/[0.04] rounded-full blur-[120px] pointer-events-none"></div>
+    <section className="bg-[#03151a] text-white py-20 md:py-28 relative overflow-hidden">
+      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] bg-[#88d7f0]/[0.02] rounded-full blur-[120px] pointer-events-none"></div>
 
       <Layout>
+        {/* Header — matches HumanCreativity style */}
         <div className="text-center mb-14">
-          <p className="text-sm uppercase font-light tracking-[2px] text-primary-500 mb-3">Reviews</p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight mb-4">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-xs sm:text-sm font-medium tracking-tight uppercase text-[#88d7f0] mb-3"
+          >
+            Real Stories From Real Brands
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="font-bw-gradual text-3xl sm:text-4xl md:text-5xl font-bold uppercase leading-tight max-w-4xl mx-auto"
+          >
             What Do Clients Say About{" "}
-            <span className="font-Rock_Salt text-primary-500 text-[0.7em] relative -top-1">Working With Us?</span>
-          </h2>
-          <div className="flex items-center justify-center gap-2 mt-6">
-            <FaGoogle className="w-5 h-5 text-white/80" />
-            <span className="text-white/70 text-sm font-medium">Excellent</span>
-            <div className="flex gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <FaStar key={i} className="w-4 h-4 text-yellow-400" />
-              ))}
-            </div>
-            <span className="text-white/50 text-sm ml-1">
-              5.0 out of 5 based on Google reviews
+            <span className="font-Rock_Salt text-[#FF6B00] normal-case text-[0.6em] block -rotate-1 mt-2">
+              Working With Us?
             </span>
-          </div>
-        </div>
+          </motion.h2>
 
-        {/* Reviews Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
-          {reviews.map((review, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] rounded-3xl p-6 md:p-8 flex flex-col hover:bg-white/[0.06] transition-all duration-300 group"
-            >
-              <div className="flex items-center justify-between mb-5">
-                {review.featured ? (
-                  <span className="inline-block px-3 py-1 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-500 text-[10px] font-bold tracking-wider uppercase">
-                    Featured
-                  </span>
-                ) : (
-                  <div className="h-6"></div>
-                )}
-                <span className="text-[11px] text-white/30 font-medium">{review.weeksAgo}</span>
-              </div>
-
-              <div className="flex gap-0.5 mb-5">
-                {[...Array(review.rating)].map((_, i) => (
-                  <FaStar key={i} className="w-3.5 h-3.5 text-yellow-400" />
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-wrap items-center justify-center gap-3 mt-8"
+          >
+            <div className="flex items-center gap-2 bg-white/[0.05] border border-white/[0.1] rounded-full px-4 py-2">
+              <FaGoogle className="w-4 h-4 text-white/90" />
+              <span className="text-white/80 text-xs font-bold uppercase tracking-wider">Excellent</span>
+              <div className="flex gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <FaStar key={i} className="w-3 h-3 text-yellow-400" />
                 ))}
               </div>
+            </div>
+            <span className="text-white/40 text-[11px] font-medium uppercase tracking-widest">
+              5.0 BASED ON GOOGLE REVIEWS
+            </span>
+          </motion.div>
+        </div>
+      </Layout>
 
-              <blockquote className="text-[15px] md:text-base text-white/80 leading-relaxed mb-8 font-light italic">
+      {/* Infinite Horizontal Scroll */}
+      <div className="relative mt-4">
+        {/* Fades */}
+        <div className="absolute inset-y-0 left-0 w-20 md:w-40 bg-gradient-to-r from-[#03151a] to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute inset-y-0 right-0 w-20 md:w-40 bg-gradient-to-l from-[#03151a] to-transparent z-10 pointer-events-none"></div>
+
+        <motion.div
+          animate={{
+            x: [0, "-50%"],
+          }}
+          transition={{
+            x: {
+              repeat: Infinity,
+              repeatType: "loop",
+              duration: 40,
+              ease: "linear",
+            },
+          }}
+          className="flex gap-6 w-fit px-6"
+        >
+          {duplicatedReviews.map((review, index) => (
+            <div
+              key={index}
+              className="w-[300px] md:w-[400px] flex-shrink-0 bg-[#072d36] rounded-2xl p-6 md:p-8 flex flex-col hover:bg-[#093540] transition-colors duration-300 group relative overflow-hidden"
+            >
+              {/* Hover accent line */}
+              <div className="absolute left-0 top-[85%] w-[2px] h-[60px] bg-gradient-to-b from-transparent via-[#88d7f0] to-transparent opacity-0 group-hover:opacity-100 group-hover:top-[10%] transition-all duration-1000 ease-in-out z-10" />
+
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex gap-0.5">
+                  {[...Array(review.rating)].map((_, i) => (
+                    <FaStar key={i} className="w-3.5 h-3.5 text-yellow-400" />
+                  ))}
+                </div>
+                <span className="text-[10px] text-white/20 font-bold uppercase tracking-widest">{review.weeksAgo}</span>
+              </div>
+
+              <blockquote className="text-[14px] md:text-[15px] text-gray-300 leading-relaxed mb-8 font-medium italic">
                 &ldquo;{review.text}&rdquo;
               </blockquote>
 
-              <div className="flex items-center gap-3 mt-auto">
-                <div className="w-11 h-11 rounded-full overflow-hidden border border-white/10 relative flex-shrink-0">
-                  <Image src={review.avatar} alt={review.name} fill className="object-cover" />
+              <div className="flex items-center gap-4 mt-auto">
+                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/10 relative flex-shrink-0 flex items-center justify-center bg-white/5">
+                  {review.avatar.length === 1 ? (
+                    <span className="text-white font-bold text-lg">{review.avatar}</span>
+                  ) : (
+                    <Image src={review.avatar} alt={review.name} fill className="object-cover" />
+                  )}
                 </div>
                 <div>
-                  <p className="text-white font-semibold text-[15px] leading-tight mb-0.5">{review.name}</p>
-                  <p className="text-white/40 text-[12px]">{review.role}</p>
+                  <p className="text-white font-bold text-[15px] leading-tight mb-1 uppercase tracking-tight">{review.name}</p>
+                  <p className="text-[#88d7f0] text-[11px] font-bold uppercase tracking-widest">{review.role}</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </div>
-      </Layout>
+        </motion.div>
+      </div>
     </section>
   );
 }

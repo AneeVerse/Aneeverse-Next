@@ -26,7 +26,7 @@ const featureData = [
     icon: <FaBox className="text-2xl" />,
     title: "Organize and share all your brand assets",
     description:
-      "Stop searching—store and organize everything on our platform.",
+      "Stop searching-store and organize everything on our platform.",
     bgColor: "bg-gray-900 text-white",
     image: "/images/pricing/vertical-mobile.png", // Replace with actual image
   },
@@ -73,11 +73,10 @@ export default function FeatureGridPricing() {
           {featureData.map((feature, index) => (
             <div
               key={index}
-              className={`${feature.bgColor} ${
-                index == 2
+              className={`${feature.bgColor} ${index == 2
                   ? ` md:row-span-2 `
                   : ` ${index == 3 ? " md:col-span-2 " : " "} `
-              }  rounded-lg relative flex min-h-[350px] flex-col justify-between shadow-lg`}
+                }  rounded-lg relative flex min-h-[350px] flex-col justify-between shadow-lg`}
             >
               <div className="absolute top-0 left-0 w-full h-full">
                 {feature.image && (

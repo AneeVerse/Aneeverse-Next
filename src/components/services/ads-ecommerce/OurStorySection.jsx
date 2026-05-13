@@ -14,8 +14,8 @@ export default function OurStorySection() {
 
       <Layout>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-          
-          {/* Left Side — Narrative */}
+
+          {/* Left Side - Narrative */}
           <div className="lg:col-span-7">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -69,7 +69,7 @@ export default function OurStorySection() {
             </motion.div>
           </div>
 
-          {/* Right Side — Contact Card */}
+          {/* Right Side - Contact Card */}
           <div className="lg:col-span-5 lg:sticky lg:top-32">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -80,7 +80,7 @@ export default function OurStorySection() {
             >
               {/* Card Glow */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary-500/10 rounded-full blur-3xl group-hover:bg-primary-500/20 transition-all duration-500"></div>
-              
+
               <div className="relative z-10">
                 <div className="flex items-center gap-3 mb-8">
                   <div className="w-10 h-10 rounded-full bg-primary-500/10 flex items-center justify-center text-primary-500">

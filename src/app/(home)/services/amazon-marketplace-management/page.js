@@ -95,7 +95,7 @@ const page = async () => {
             <CommonServicesHeroSection
                 title="Sell more on Amazon. Without the daily firefighting."
                 subtitle="Amazon Management"
-                description="A dedicated team to handle your listings, ads, operations, and account health—so you stay focused on inventory and growth, not dashboards and case logs."
+                description="A dedicated team to handle your listings, ads, operations, and account health-so you stay focused on inventory and growth, not dashboards and case logs."
                 ctaText="Book a Call"
                 ctaLink="/contact"
                 backgroundImage="/images/services/website/hero-banner.avif"
@@ -104,7 +104,7 @@ const page = async () => {
             <SlidingLogos />
             <DynamicSupportSection
                 subtitle="Amazon growth, managed"
-                title="Your marketplace team—"
+                title="Your marketplace team-"
                 highlightText="without the headcount"
                 imageSrc="/images/services/website/about-web.avif"
                 imageAlt="Amazon Management"

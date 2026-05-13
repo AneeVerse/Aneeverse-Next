@@ -229,7 +229,7 @@ export default function HomeSchema() {
         "@id": "https://aneeverse.com/#webpage",
         "url": "https://aneeverse.com",
         "name": "Aneeverse - Your Dedicated Creative & Digital Marketing Team",
-        "description": "Your dedicated, on-call creative & digital marketing team. Design, optimise and advertise your brand—ship campaigns faster, more reliably and at scale.",
+        "description": "Your dedicated, on-call creative & digital marketing team. Design, optimise and advertise your brand-ship campaigns faster, more reliably and at scale.",
         "isPartOf": {
           "@type": "WebSite",
           "@id": "https://aneeverse.com/#website"
@@ -249,7 +249,7 @@ export default function HomeSchema() {
         "@id": "https://aneeverse.com/#website",
         "url": "https://aneeverse.com",
         "name": "Aneeverse",
-        "description": "Your dedicated, on-call creative & digital marketing team. Design, optimise and advertise your brand—ship campaigns faster, more reliably and at scale.",
+        "description": "Your dedicated, on-call creative & digital marketing team. Design, optimise and advertise your brand-ship campaigns faster, more reliably and at scale.",
         "publisher": {
           "@id": "https://aneeverse.com/#organization"
         },

@@ -26,7 +26,7 @@ export const metadata = {
     default: "Aneeverse: Your creative team's growth partner",
     template: "%s | Aneeverse",
   },
-  description: 'Your dedicated, on-call creative & digital marketing team. Design, optimise and advertise your brand—ship campaigns faster, more reliably and at scale.',
+  description: 'Your dedicated, on-call creative & digital marketing team. Design, optimise and advertise your brand-ship campaigns faster, more reliably and at scale.',
   robots: {
     index: true,
     follow: true,
@@ -48,7 +48,7 @@ export const metadata = {
   },
   openGraph: {
     title: "Aneeverse: Your creative team's growth partner",
-    description: 'Aneeverse is your dedicated, on-call creative & digital marketing team. Design, optimise and advertise your brand—ship campaigns faster, more reliably and at scale.',
+    description: 'Aneeverse is your dedicated, on-call creative & digital marketing team. Design, optimise and advertise your brand-ship campaigns faster, more reliably and at scale.',
     url: 'https://aneeverse.com/',
     siteName: 'Aneeverse',
     type: 'website',
@@ -58,7 +58,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "Aneeverse: Your creative team's growth partner",
-    description: 'Aneeverse is your dedicated, on-call creative & digital marketing team. Design, optimise and advertise your brand—ship campaigns faster, more reliably and at scale.',
+    description: 'Aneeverse is your dedicated, on-call creative & digital marketing team. Design, optimise and advertise your brand-ship campaigns faster, more reliably and at scale.',
     images: ['/images/meta/phone.avif'],
   },
 };

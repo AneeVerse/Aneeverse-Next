@@ -103,7 +103,7 @@ const page = () => {
       <ServiceSchema
         serviceName="Ghost Writing Services"
         serviceType="ProfessionalService"
-        description="Transform your ideas into compelling narratives. Our ghostwriters craft books, articles, speeches, and more—seamlessly adapting to your unique voice and style."
+        description="Transform your ideas into compelling narratives. Our ghostwriters craft books, articles, speeches, and more-seamlessly adapting to your unique voice and style."
         slug="services/ghost-writing"
         priceRange="₹10,000 - ₹5,00,000"
         category="Content Writing"
@@ -132,7 +132,7 @@ const page = () => {
       <CommonServicesHeroSection
         title="Ghost writing Services"
         subtitle="Your Words, Our Expertise"
-        description="  Transform your ideas into compelling narratives. Our ghostwriters craft books, articles, speeches, and more—seamlessly adapting to your unique voice and style."
+        description="  Transform your ideas into compelling narratives. Our ghostwriters craft books, articles, speeches, and more-seamlessly adapting to your unique voice and style."
         ctaText="Book a demo"
         ctaLink="/contact"
         backgroundImage="/images/services/ghost-writing/hero-banner.avif"

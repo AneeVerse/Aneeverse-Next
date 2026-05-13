@@ -23,13 +23,13 @@ export default function Preloader() {
         const maxDisplay = 1100;
 
         if (document.readyState === 'complete' || document.readyState === 'interactive') {
-            // Page already loaded — just show for minimum time
+            // Page already loaded - just show for minimum time
             const remaining = Math.max(0, minDisplay - elapsed);
             const timer = setTimeout(startExit, remaining);
             return () => clearTimeout(timer);
         }
 
-        // Page still loading — use a race between load event and max timeout
+        // Page still loading - use a race between load event and max timeout
         let resolved = false;
 
         const resolve = () => {
@@ -45,7 +45,7 @@ export default function Preloader() {
         document.addEventListener('DOMContentLoaded', onReady);
         window.addEventListener('load', onReady);
 
-        // Hard cap — never wait more than maxDisplay ms total
+        // Hard cap - never wait more than maxDisplay ms total
         const maxTimer = setTimeout(resolve, Math.max(0, maxDisplay - elapsed));
 
         return () => {

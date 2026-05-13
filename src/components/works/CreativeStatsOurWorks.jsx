@@ -36,7 +36,7 @@ const CreativeStatsOurWorks = () => {
           {/* Description */}
           <p className="text-base sm:text-lg lg:text-[1.45rem] text-[#4c5c55] max-w-xl mx-auto leading-relaxed mb-32 lg:mb-32">
             We help the world's leading brands create standout ads and campaigns
-            at speed—from concept to execution to results.
+            at speed-from concept to execution to results.
           </p>
 
           {/* Stats Grid */}

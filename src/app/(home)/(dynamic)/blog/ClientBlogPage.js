@@ -27,40 +27,40 @@ export default function ClientBlogPage() {
     try {
       setIsLoading(true);
       setError(null);
-      
+
       console.log('Static blogs count:', staticBlogs.length);
-      
+
       // Create a timeout using a simple Promise race
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
-      
+
       try {
         const apiUrl = `/api/sanity-blogs?limit=100&t=${Date.now()}`;
-        
+
         const response = await fetch(apiUrl, {
           signal: controller.signal,
           cache: 'no-store',
           headers: { 'Content-Type': 'application/json' }
         });
-        
+
         // Clear the timeout since we got a response
         clearTimeout(timeoutId);
-        
+
         if (!response.ok) {
           const errorText = await response.text();
           throw new Error(`Failed to fetch blogs: ${response.status} ${response.statusText} - ${errorText}`);
         }
-        
+
         const data = await response.json();
-        
+
         if (!data.success) {
           throw new Error(data.error || 'Failed to fetch blogs - API reported failure');
         }
-        
+
         // Get API blogs
         const apiBlogs = data.blogs || [];
         console.log('API blogs count:', apiBlogs.length);
-        
+
         // Combine static and API blogs, with API taking precedence for duplicates
         const allBlogs = [...staticBlogs, ...apiBlogs];
         const uniqueBlogs = allBlogs.reduce((acc, current) => {
@@ -77,20 +77,20 @@ export default function ClientBlogPage() {
             return acc;
           }
         }, []);
-        
+
         console.log('Total unique blogs count:', uniqueBlogs.length);
         setBlogs(uniqueBlogs);
       } catch (fetchError) {
         if (fetchError.name === 'AbortError') {
           throw new Error('Request timed out. The server took too long to respond.');
         }
-        
+
         throw fetchError;
       }
     } catch (err) {
       console.error('Error fetching blogs:', err);
       setError(err.message || 'Unknown error occurred while fetching blogs');
-      
+
       // Still use static blogs as fallback if API fails
       console.log('Falling back to static blogs only');
       setBlogs(staticBlogs);
@@ -129,7 +129,7 @@ export default function ClientBlogPage() {
         <div className="text-center max-w-lg mx-auto p-6 bg-red-50 rounded-lg">
           <h2 className="text-2xl font-bold text-red-700 mb-2">Error Loading Blogs</h2>
           <p className="text-red-600 mb-4">{error}</p>
-          
+
           <div className="mt-2 p-4 bg-gray-50 rounded text-left text-sm text-gray-800">
             <p className="font-semibold mb-2">Troubleshooting Tips:</p>
             <ul className="list-disc pl-5 space-y-1">
@@ -138,9 +138,9 @@ export default function ClientBlogPage() {
               <li>Check that the Sanity API is accessible</li>
             </ul>
           </div>
-          
-          <button 
-            onClick={handleRetry} 
+
+          <button
+            onClick={handleRetry}
             className="mt-6 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
           >
             Try Again
@@ -183,15 +183,15 @@ export default function ClientBlogPage() {
             </div>
             <div className="ml-3">
               <p className="text-sm text-yellow-700">
-                {error} — Using backup data.
+                {error} - Using backup data.
               </p>
             </div>
           </div>
         </div>
       )}
-      
+
       <BlogHeroSection blogData={blogData} />
-      
+
       {/* Latest Articles Section (new) */}
       <LatestArticlesSection blogData={blogData} />
 
@@ -202,7 +202,7 @@ export default function ClientBlogPage() {
           // Convert category to URL-friendly format
           const categorySlug = category.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '-');
           const categoryUrl = `/blog/${categorySlug}`;
-          
+
           return (
             <section key={`category-${category}`} className='bg-[#EBFAFE] pb-16'>
               <Layout>
@@ -213,8 +213,8 @@ export default function ClientBlogPage() {
                       <FaChevronRight className="ml-2 text-base md:text-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1" />
                     </h2>
                   </Link>
-                  <Link 
-                    href={categoryUrl} 
+                  <Link
+                    href={categoryUrl}
                     className='text-[#0A2E3D] hover:text-blue-600 flex items-center gap-1 md:gap-2 font-medium text-base md:text-lg font-["Inter",sans-serif]'
                   >
                     <span>See all</span>
@@ -232,7 +232,7 @@ export default function ClientBlogPage() {
             </section>
           );
         };
-        
+
         const renderNewsletter = (key) => (
           <div key={`newsletter-${key}`} className="bg-[#EBFAFE] pb-16">
             <Layout>
@@ -240,47 +240,47 @@ export default function ClientBlogPage() {
             </Layout>
           </div>
         );
-        
+
         // Get all valid categories
         const allCategories = categories.filter(Boolean);
-        
+
         // Array to hold all rendered elements (categories + newsletters)
         const renderedElements = [];
-        
+
         // Process SEO category first if it exists
-        const seoBlogs = blogs.filter(blog => 
-          blog?.category?.toLowerCase() === 'seo' || 
+        const seoBlogs = blogs.filter(blog =>
+          blog?.category?.toLowerCase() === 'seo' ||
           blog?.category?.toLowerCase() === 'search engine optimization'
         );
-        
+
         let categoryCount = 0;
-        
+
         // Add SEO category if it exists
         if (seoBlogs.length > 0) {
           renderedElements.push(renderCategorySection('SEO', seoBlogs, true));
           categoryCount++;
         }
-        
+
         // Process all other categories
         allCategories.forEach(category => {
           // Skip SEO category as we've already processed it
           if (category.toLowerCase() === 'seo' || category.toLowerCase() === 'search engine optimization') {
             return;
           }
-          
+
           const categoryBlogs = blogs.filter(blog => blog.category === category);
           if (categoryBlogs.length === 0) return;
-          
+
           // Add the category section
           renderedElements.push(renderCategorySection(category, categoryBlogs));
           categoryCount++;
-          
+
           // Add Newsletter after every second category (2nd, 4th, 6th, etc.)
           if (categoryCount % 2 === 0) {
             renderedElements.push(renderNewsletter(categoryCount));
           }
         });
-        
+
         return renderedElements;
       })()}
     </div>
