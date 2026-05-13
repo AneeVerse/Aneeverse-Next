@@ -14,7 +14,7 @@ const platforms = [
     name: "Amazon",
     badge: "Amazon Management",
     icon: <FaAmazon className="w-6 h-6 text-black" />,
-    image: "/ads/amazon3.png",
+    image: "/ads/amazon6.png",
     brandColor: "#FF9900",
     stat: "35%+",
     statLabel: "ranking growth within 90 days",
