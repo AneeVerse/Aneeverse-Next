@@ -51,7 +51,7 @@ export default function AdsEcommerceFAQSection() {
             >
               4 Questions. <br />
               Honest Answers. <br />
-              <span className="font-Rock_Salt text-[#FF6B00] normal-case text-[0.6em] block -rotate-1 mt-2">
+              <span className="inline-block bg-[#88d7f0] text-[#03151a] px-4 py-1 rounded-xl text-[0.7em] mt-3 font-bold tracking-tight">
                 No Fluff.
               </span>
             </motion.h2>

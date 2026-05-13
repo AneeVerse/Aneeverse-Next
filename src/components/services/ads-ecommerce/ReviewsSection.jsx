@@ -90,7 +90,7 @@ export default function ReviewsSection() {
             className="font-bw-gradual text-3xl sm:text-4xl md:text-5xl font-bold uppercase leading-tight max-w-4xl mx-auto"
           >
             What Do Clients Say About{" "}
-            <span className="font-Rock_Salt text-[#FF6B00] normal-case text-[0.6em] block -rotate-1 mt-2">
+            <span className="inline-block bg-[#FF6B00] text-[#03151a] px-4 py-1 rounded-xl text-[0.7em] mt-4 font-bold tracking-tight">
               Working With Us?
             </span>
           </motion.h2>

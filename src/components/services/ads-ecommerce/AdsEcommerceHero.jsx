@@ -81,38 +81,36 @@ export default function AdsEcommerceHero() {
       {/* Top fade from nav */}
       <div className="absolute -top-[20px] left-0 w-full h-[200px] bg-gradient-to-b z-20 from-[#021115] via-[#073742]/80 to-transparent pointer-events-none" />
 
-      <Layout className="relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center min-h-[calc(100vh-100px)] pt-28 pb-14 lg:py-32">
+      <Layout className="relative z-30">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center min-h-[calc(100vh-100px)] pt-24 pb-10 lg:py-32">
 
           {/* ── LEFT: Copy ── */}
-          <div className="flex flex-col justify-center">
-            <p className="text-[11px] uppercase font-bold tracking-[4px] text-primary-500/70 mb-5">
+          <div className="flex flex-col justify-center text-left">
+            <p className="text-[10px] md:text-[11px] uppercase font-bold tracking-[3px] md:tracking-[4px] text-primary-500/80 mb-4 md:mb-5">
               Marketplace Management
             </p>
 
-            <h1 className="font-extrabold leading-[1.1] tracking-tight uppercase mb-6 text-[clamp(1.5rem,5vw,3rem)]">
+            <h1 className="font-bw-gradual font-extrabold leading-[1.1] tracking-tighter uppercase mb-6 text-[1.75rem] sm:text-4xl md:text-5xl lg:text-[3rem]">
               <span className="text-white">Every Day Your<br />Listing Sits on Page 3,</span>
-              <span className="font-Rock_Salt text-[#FF6B00] normal-case block text-[0.6em] sm:text-[0.55em] -rotate-1 mt-4 sm:mt-3 ml-1">
+              <span className="inline-block bg-[#FF6B00] text-[#03151a] px-3 sm:px-4 py-1.5 sm:py-1 rounded-lg sm:rounded-xl text-[0.65em] sm:text-[0.65em] mt-4 sm:mt-5 font-black tracking-tight">
                 Someone Else Gets Your Sale.
               </span>
             </h1>
 
-            <p className="text-sm md:text-base text-white/55 leading-relaxed mb-4 max-w-lg">
-              Bad listings, broken PPC, and ignored account health cost you real money every single day.
-              We give you a dedicated team that finds what's leaking, fixes it fast, and keeps your
-              store performing - week after week.
+            <p className="text-[15px] sm:text-lg text-white/90 leading-relaxed max-w-xl mb-6 md:mb-8">
+              One leaking listing. One broken PPC campaign. One ignored warning. That&apos;s all it takes to lose months of rank. We make sure none of that happens.
             </p>
 
-            <p className="text-sm text-primary-500/70 font-medium mb-8 max-w-md">
+            <p className="text-[13px] sm:text-sm text-white font-medium mb-6 md:mb-8 max-w-md opacity-80">
               No long-term contract to start. No upfront risk. Just a free audit.
             </p>
 
             {/* Trust labels */}
-            <div className="flex flex-wrap gap-2 mb-8">
+            <div className="flex flex-wrap gap-2 mb-8 md:mb-10">
               {trustLabels.map((label, i) => (
                 <div
                   key={i}
-                  className="flex items-center gap-1.5 bg-white/[0.05] border border-white/[0.07] rounded-full px-3 py-1.5 text-[11px] text-white/60"
+                  className="flex items-center gap-1.5 bg-white/[0.05] border border-white/[0.07] rounded-full px-3 py-1.5 text-[10px] md:text-[11px] text-white/60"
                 >
                   <span className="text-primary-500">{label.icon}</span>
                   {label.text}
@@ -121,10 +119,10 @@ export default function AdsEcommerceHero() {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center gap-4">
               <AnimatedButton
                 href="#store-audit-form"
-                className="px-7 py-3 rounded-full font-bold text-sm"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-full font-bold text-sm flex items-center justify-center text-center"
                 style={{ backgroundColor: "#88D7F0", color: "#073742" }}
                 mainTextSlide="-130%"
                 duplicateTextStart="100%"
@@ -134,7 +132,7 @@ export default function AdsEcommerceHero() {
               </AnimatedButton>
               <AnimatedButton
                 href="#store-audit-form"
-                className="px-7 py-3 rounded-full font-bold text-sm border border-white/20 bg-white/[0.05]"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-full font-bold text-sm border border-white/20 bg-white/[0.05] flex items-center justify-center text-center"
                 mainTextSlide="-130%"
                 duplicateTextStart="100%"
                 duplicateTextEnd="-100%"
@@ -145,23 +143,23 @@ export default function AdsEcommerceHero() {
           </div>
 
           {/* ── RIGHT: Form ── */}
-          <div id="store-audit-form" className="flex items-center justify-end">
-            <div className="w-full bg-[#05262e] rounded-[2rem] p-6 md:p-10 border border-white/10 shadow-2xl">
+          <div id="store-audit-form" className="flex items-center justify-end w-full scroll-mt-24">
+            <div className="w-full bg-[#05262e] rounded-[1.5rem] md:rounded-[2rem] p-5 sm:p-8 md:p-10 border border-white/10 shadow-2xl">
               {!submitted ? (
                 <>
-                  <h2 className="text-xl font-bold text-white mb-1 leading-tight">
+                  <h2 className="text-lg md:text-xl font-bold text-white mb-2 leading-tight">
                     Get a Free Audit - See Your Store's Numbers
                   </h2>
-                  <p className="text-[12px] text-white/50 mb-5 leading-relaxed">
-                    We'll review your listings, ads, and account health and show you three numbers: what your store does now, what it could do, and what's standing between the two.
+                  <p className="text-[11px] md:text-[12px] text-white/80 mb-6 leading-relaxed">
+                    We&apos;ll review your listings, ads, and account health and show you three numbers: what your store does now, what it could do, and what&apos;s standing between the two. Free. No commitment. We find the gaps and tell you what they&apos;re costing you
                   </p>
 
-                  <form onSubmit={handleSubmit} className="space-y-3">
-                    <div className="grid grid-cols-2 gap-3">
+                  <form onSubmit={handleSubmit} className="space-y-3.5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                       <input type="text" name="fullName" placeholder="Full Name" value={formData.fullName} onChange={handleChange} required className={inputClasses} />
                       <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required className={inputClasses} />
                     </div>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                       <input type="tel" name="phone" placeholder="WhatsApp / Phone" value={formData.phone} onChange={handleChange} required className={inputClasses} />
                       <div className="relative">
                         <select name="platform" value={formData.platform} onChange={handleChange} required className={selectClasses}>
@@ -210,9 +208,9 @@ export default function AdsEcommerceHero() {
                     >
                       {isSubmitting ? "Analyzing Your Store..." : "Send Me My Free Audit →"}
                     </button>
-                    <p className="text-[10px] text-white/35 text-center flex items-center justify-center gap-1.5 pt-1">
-                      <HiLockClosed className="w-3 h-3 text-primary-500/60" />
-                      Free. No commitment. We find the gaps and tell you what they're costing you.
+                    <p className="text-[10px] text-white/60 text-center flex items-center justify-center gap-1.5 pt-1">
+                      <HiLockClosed className="w-3 h-3 text-white/50" />
+                      Free. No commitment. We find the gaps and tell you what they&apos;re costing you.
                     </p>
                   </form>
                 </>

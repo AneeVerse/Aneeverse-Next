@@ -44,6 +44,10 @@ body{
   font-family: var(--font-rock-salt), cursive;
 }
 
+.font-caveat {
+  font-family: var(--font-caveat), cursive;
+}
+
 
   /* Blog description Styling */
 

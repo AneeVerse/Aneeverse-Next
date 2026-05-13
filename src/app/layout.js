@@ -1,6 +1,6 @@
 import "./globals.css";
 import Script from 'next/script';
-import { Poppins, Rock_Salt } from 'next/font/google';
+import { Poppins, Rock_Salt, Caveat } from 'next/font/google';
 import ClientLayoutWrapper from '@/components/layout/ClientLayoutWrapper';
 
 // Configure fonts with next/font/google
@@ -18,6 +18,14 @@ const rockSalt = Rock_Salt({
   display: 'swap',
   preload: true,
   variable: '--font-rock-salt',
+});
+
+const caveat = Caveat({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+  variable: '--font-caveat',
 });
 
 export const metadata = {
@@ -73,7 +81,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${poppins.variable} ${rockSalt.variable}`}>
+    <html lang="en" className={`${poppins.variable} ${rockSalt.variable} ${caveat.variable}`}>
       <head>
         {/* Google Search Console Verification */}
         <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />

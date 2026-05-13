@@ -90,7 +90,7 @@ export default function WhyChooseSection() {
             className="font-bw-gradual text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-tight max-w-4xl mx-auto"
           >
             What You Get Before You{" "}
-            <span className="font-Rock_Salt text-[#FF6B00] normal-case text-[0.6em] inline-block -rotate-1 ml-2">
+            <span className="inline-block bg-[#FF6B00] text-[#03151a] px-4 py-1 rounded-xl text-[0.7em] ml-2 font-bold tracking-tight">
               Spend a Single Rupee
             </span>
           </motion.h2>

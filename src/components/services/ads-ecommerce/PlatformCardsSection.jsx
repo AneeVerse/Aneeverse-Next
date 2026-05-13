@@ -70,70 +70,67 @@ function PlatformCard({ platform, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.12 }}
-      className="flex flex-col bg-white rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.13)] transition-shadow duration-300"
+      className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.1)] border border-gray-200 hover:shadow-[0_0_60px_rgba(0,0,0,0.18)] transition-all duration-300"
     >
-      {/* ── Image Top ── */}
+      {/* ── Image Top with Overlay ── */}
       <div className="relative w-full h-[280px] overflow-hidden">
         <Image
           src={platform.image}
           alt={`${platform.name} Management`}
           fill
-          className="object-cover object-top"
+          className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, 33vw"
           unoptimized
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-5">
+          <div className="flex items-center gap-2 text-white mb-0.5">
+            <span className="p-1.5 bg-white rounded-md shadow-sm">
+              <span style={{ color: platform.brandColor }}>
+                {platform.icon}
+              </span>
+            </span>
+            <span className="text-xl font-bold tracking-tight uppercase">{platform.name}</span>
+          </div>
+          <p className="text-white/70 text-[9px] uppercase tracking-[2px] font-bold">Marketplace Management</p>
+        </div>
       </div>
 
       {/* ── Content Bottom ── */}
-      <div className="flex flex-col flex-1 p-6 bg-white">
+      <div className="flex flex-col flex-1 p-5 bg-white">
+        {/* Service Badges */}
+        <div className="flex flex-wrap gap-1.5 mb-3">
+          {["PPC Strategy", "Listing Audit"].map((tag) => (
+            <span key={tag} className="px-2 py-0.5 rounded-md bg-gray-50 text-gray-400 text-[9px] font-bold uppercase tracking-wider border border-gray-100">
+              {tag}
+            </span>
+          ))}
+        </div>
+
         {/* Headline */}
-        <h3 className="text-[1.25rem] font-extrabold text-gray-900 leading-snug mb-3 whitespace-pre-line">
-          {platform.headline.map((part, i) =>
-            part.accent ? (
-              <span key={i} style={{ color: platform.brandColor }}>
-                {part.text}
-              </span>
-            ) : (
-              <span key={i}>{part.text}</span>
-            )
-          )}
+        <h3 className="text-[1rem] font-bold text-gray-900 leading-tight mb-2">
+          {platform.headline.map((part) => part.text).join(" ")}
         </h3>
 
         {/* Body */}
-        <p className="text-[13px] text-gray-500 leading-relaxed mb-5">
+        <p className="text-[12px] text-gray-400 leading-normal mb-4 line-clamp-3">
           {platform.body}
         </p>
 
-        {/* Stat Box */}
-        <div
-          className="flex items-center gap-4 rounded-2xl px-4 py-3 mb-5"
-          style={{ backgroundColor: `${platform.brandColor}12` }}
-        >
-          <TrendingUp
-            className="w-8 h-8 flex-shrink-0"
-            style={{ color: platform.brandColor }}
-          />
-          <div>
-            <span
-              className="text-3xl font-extrabold leading-none"
-              style={{ color: platform.brandColor }}
-            >
-              {platform.stat}
-            </span>{" "}
-            <span className="text-[12px] text-gray-500 font-medium">
-              {platform.statLabel}
-            </span>
-          </div>
+        {/* Key Result Line (Compact) */}
+        <div className="flex items-center gap-2 mb-4 py-2 border-y border-gray-50">
+          <TrendingUp className="w-3.5 h-3.5 text-gray-400" />
+          <span className="text-[10px] font-bold text-gray-900 uppercase tracking-tight">
+            Avg. Result: <span style={{ color: platform.brandColor }}>{platform.stat} {platform.statLabel}</span>
+          </span>
         </div>
 
         {/* CTA */}
         <div className="mt-auto">
           <Link
             href="#store-audit-form"
-            className="flex items-center justify-center w-full py-3.5 rounded-2xl text-white text-[14px] font-bold transition-all duration-300 hover:opacity-90 hover:scale-[1.02]"
+            className="flex items-center justify-center w-full py-3 rounded-xl text-white text-[13px] font-bold transition-all duration-300 active:scale-95 shadow-lg shadow-black/5"
             style={{
               backgroundColor: platform.brandColor,
-              boxShadow: `0 6px 20px ${platform.brandColor}35`,
             }}
           >
             {platform.cta}
@@ -146,16 +143,16 @@ function PlatformCard({ platform, index }) {
 
 export default function PlatformCardsSection() {
   return (
-    <section className="bg-white py-20 md:py-28 relative overflow-hidden">
+    <section className="bg-gray-100 py-20 md:py-28 relative overflow-hidden">
       <Layout>
         {/* Header */}
         <div className="text-center max-w-4xl mx-auto mb-14">
-          <p className="text-[11px] uppercase font-bold tracking-[4px] text-gray-400 mb-3">
+          <p className="text-[11px] uppercase font-bold tracking-[4px] text-gray-900 mb-3">
             Platform Specific Solutions
           </p>
           <h2 className="font-bw-gradual text-2xl sm:text-4xl md:text-5xl font-bold uppercase leading-[1.1] text-gray-900 mb-4 flex flex-col items-center">
             <span className="md:whitespace-nowrap text-center">Your Store Is Losing Sales on Every</span>
-            <span className="font-Rock_Salt text-[#FF6B00] normal-case text-[0.55em] block -rotate-1 mt-2 text-center">
+            <span className="inline-block bg-[#FF6B00] text-white px-5 py-2 rounded-2xl text-[0.65em] mt-4 text-center font-bold tracking-tight">
               Platform You&apos;re Not Optimising
             </span>
           </h2>
