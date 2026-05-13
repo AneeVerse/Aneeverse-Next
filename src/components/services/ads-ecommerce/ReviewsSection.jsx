@@ -118,31 +118,32 @@ export default function ReviewsSection() {
         </div>
       </Layout>
 
-      {/* Infinite Horizontal Scroll */}
+      {/* Infinite Horizontal Scroll & Touch Scroll for Mobile */}
       <div className="relative mt-4">
         {/* Fades */}
         <div className="absolute inset-y-0 left-0 w-20 md:w-40 bg-gradient-to-r from-[#03151a] to-transparent z-10 pointer-events-none"></div>
         <div className="absolute inset-y-0 right-0 w-20 md:w-40 bg-gradient-to-l from-[#03151a] to-transparent z-10 pointer-events-none"></div>
 
-        <motion.div
-          animate={{
-            x: [0, "-50%"],
-          }}
-          transition={{
-            x: {
-              repeat: Infinity,
-              repeatType: "loop",
-              duration: 40,
-              ease: "linear",
-            },
-          }}
-          className="flex gap-6 w-fit px-6"
-        >
-          {duplicatedReviews.map((review, index) => (
-            <div
-              key={index}
-              className="w-[300px] md:w-[400px] flex-shrink-0 bg-[#072d36] rounded-2xl p-6 md:p-8 flex flex-col hover:bg-[#093540] transition-colors duration-300 group relative overflow-hidden"
-            >
+        <div className="overflow-x-auto md:overflow-x-visible scrollbar-hide snap-x snap-mandatory -mx-4 px-4 md:mx-0 md:px-0">
+          <motion.div
+            animate={{
+              x: [0, "-50%"],
+            }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 40,
+                ease: "linear",
+              },
+            }}
+            className="flex gap-6 w-fit px-6 md:px-0 pointer-events-auto"
+          >
+            {duplicatedReviews.map((review, index) => (
+              <div
+                key={index}
+                className="w-[280px] md:w-[400px] flex-shrink-0 snap-center bg-[#072d36] rounded-2xl p-6 md:p-8 flex flex-col hover:bg-[#093540] transition-colors duration-300 group relative overflow-hidden"
+              >
               {/* Hover accent line */}
               <div className="absolute left-0 top-[85%] w-[2px] h-[60px] bg-gradient-to-b from-transparent via-[#88d7f0] to-transparent opacity-0 group-hover:opacity-100 group-hover:top-[10%] transition-all duration-1000 ease-in-out z-10" />
 
@@ -174,7 +175,8 @@ export default function ReviewsSection() {
               </div>
             </div>
           ))}
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -82,7 +82,7 @@ export default function AdsEcommerceHero() {
       <div className="absolute -top-[20px] left-0 w-full h-[200px] bg-gradient-to-b z-20 from-[#021115] via-[#073742]/80 to-transparent pointer-events-none" />
 
       <Layout className="relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center min-h-screen py-28 lg:py-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center min-h-[calc(100vh-100px)] pt-28 pb-14 lg:py-32">
 
           {/* ── LEFT: Copy ── */}
           <div className="flex flex-col justify-center">
@@ -234,7 +234,7 @@ export default function AdsEcommerceHero() {
       </Layout>
 
       {/* ── Infinite scroll strip (image cards) ── */}
-      <div className="bg-[#073742] py-4 border-t border-white/[0.05] overflow-hidden relative">
+      <div className="bg-[#073742] py-6 md:py-8 border-t border-white/[0.05] overflow-hidden relative">
         <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#073742] to-transparent z-10 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#073742] to-transparent z-10 pointer-events-none" />
         <motion.div

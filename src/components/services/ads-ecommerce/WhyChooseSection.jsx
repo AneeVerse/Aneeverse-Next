@@ -111,10 +111,8 @@ export default function WhyChooseSection() {
                   viewport={{ once: true }}
                   whileHover={{ scale: 1.02, zIndex: 20, transition: { duration: 0.3 } }}
                   transition={{ duration: 0.5, delay: index * 0.07 }}
-                  className={`flex-shrink-0 snap-center group relative bg-[#072d36] rounded-xl p-5 md:p-6 hover:bg-[#093540] transition-colors duration-300 cursor-default overflow-hidden ${
-                    isWide 
-                      ? "w-[280px] sm:w-[350px] md:w-auto md:col-span-2" 
-                      : "w-[220px] sm:w-[250px] md:w-auto md:col-span-1"
+                  className={`flex-shrink-0 snap-center group relative bg-[#072d36] rounded-xl p-5 md:p-6 hover:bg-[#093540] transition-colors duration-300 cursor-default overflow-hidden w-[280px] sm:w-[320px] md:w-auto ${
+                    isWide ? "md:col-span-2" : "md:col-span-1"
                   }`}
                 >
                   {/* Hover accent line */}
