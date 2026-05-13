@@ -72,9 +72,9 @@ export default function AdsEcommerceHero() {
   };
 
   const inputClasses =
-    "w-full bg-white/[0.05] border border-white/[0.08] rounded-lg px-3.5 py-2.5 text-white placeholder-white/35 text-sm focus:outline-none focus:border-primary-500/50 transition-all duration-200";
+    "w-full bg-white/[0.08] border border-white/[0.15] rounded-lg px-3.5 py-2.5 text-white placeholder-white/35 text-sm focus:outline-none focus:border-primary-500/50 transition-all duration-200";
   const selectClasses =
-    "w-full bg-white/[0.05] border border-white/[0.08] rounded-lg px-3.5 py-2.5 text-white text-sm focus:outline-none focus:border-primary-500/50 transition-all duration-200 appearance-none cursor-pointer";
+    "w-full bg-[#05262e] border border-white/[0.15] rounded-lg px-3.5 py-2.5 text-white text-sm focus:outline-none focus:border-primary-500/50 transition-all duration-200 appearance-none cursor-pointer";
 
   return (
     <div className="bg-[#073742] relative text-white overflow-hidden">
@@ -146,7 +146,7 @@ export default function AdsEcommerceHero() {
 
           {/* ── RIGHT: Form ── */}
           <div id="store-audit-form" className="flex items-center justify-end">
-            <div className="w-full bg-white/[0.04] rounded-2xl p-6 md:p-8 border border-white/[0.07] backdrop-blur-sm shadow-2xl shadow-black/30">
+            <div className="w-full bg-[#05262e] rounded-[2rem] p-6 md:p-10 border border-white/10 shadow-2xl">
               {!submitted ? (
                 <>
                   <h2 className="text-xl font-bold text-white mb-1 leading-tight">
@@ -165,11 +165,11 @@ export default function AdsEcommerceHero() {
                       <input type="tel" name="phone" placeholder="WhatsApp / Phone" value={formData.phone} onChange={handleChange} required className={inputClasses} />
                       <div className="relative">
                         <select name="platform" value={formData.platform} onChange={handleChange} required className={selectClasses}>
-                          <option value="" disabled>Platform</option>
-                          <option value="amazon">Amazon</option>
-                          <option value="ebay">eBay</option>
-                          <option value="etsy">Etsy</option>
-                          <option value="all">All Three</option>
+                          <option value="" disabled className="bg-[#05262e]">Platform</option>
+                          <option value="amazon" className="bg-[#05262e]">Amazon</option>
+                          <option value="ebay" className="bg-[#05262e]">eBay</option>
+                          <option value="etsy" className="bg-[#05262e]">Etsy</option>
+                          <option value="all" className="bg-[#05262e]">All Three</option>
                         </select>
                         <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-white/25">▾</div>
                       </div>
@@ -178,21 +178,21 @@ export default function AdsEcommerceHero() {
                     <div className="grid grid-cols-2 gap-3">
                       <div className="relative">
                         <select name="monthlyRevenue" value={formData.monthlyRevenue} onChange={handleChange} required className={selectClasses}>
-                          <option value="" disabled>Monthly Revenue</option>
-                          <option value="under-1l">Under ₹1L</option>
-                          <option value="1l-5l">₹1L – ₹5L</option>
-                          <option value="5l-20l">₹5L – ₹20L</option>
-                          <option value="20l-plus">₹20L+</option>
+                          <option value="" disabled className="bg-[#05262e]">Monthly Revenue</option>
+                          <option value="under-1l" className="bg-[#05262e]">Under ₹1L</option>
+                          <option value="1l-5l" className="bg-[#05262e]">₹1L – ₹5L</option>
+                          <option value="5l-20l" className="bg-[#05262e]">₹5L – ₹20L</option>
+                          <option value="20l-plus" className="bg-[#05262e]">₹20L+</option>
                         </select>
                         <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-white/25">▾</div>
                       </div>
                       <div className="relative">
                         <select name="biggestChallenge" value={formData.biggestChallenge} onChange={handleChange} required className={selectClasses}>
-                          <option value="" disabled>Biggest Challenge</option>
-                          <option value="listings-seo">Listings & SEO</option>
-                          <option value="ad-management">Ad Management</option>
-                          <option value="account-health">Account Health</option>
-                          <option value="all">All of the above</option>
+                          <option value="" disabled className="bg-[#05262e]">Biggest Challenge</option>
+                          <option value="listings-seo" className="bg-[#05262e]">Listings & SEO</option>
+                          <option value="ad-management" className="bg-[#05262e]">Ad Management</option>
+                          <option value="account-health" className="bg-[#05262e]">Account Health</option>
+                          <option value="all" className="bg-[#05262e]">All of the above</option>
                         </select>
                         <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-white/25">▾</div>
                       </div>
