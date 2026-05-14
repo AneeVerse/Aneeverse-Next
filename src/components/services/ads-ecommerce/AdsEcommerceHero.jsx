@@ -54,6 +54,7 @@ export default function AdsEcommerceHero() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -66,9 +67,35 @@ export default function AdsEcommerceHero() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setSubmitted(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/ads-ecommerce-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          platform: formData.platform,
+          storeName: formData.storeName,
+          monthlyRevenue: formData.monthlyRevenue,
+          biggestChallenge: formData.biggestChallenge,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Something went wrong. Please try again.");
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      setError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const inputClasses =
@@ -201,6 +228,11 @@ export default function AdsEcommerceHero() {
                         I agree to the <Link href="/terms" className="text-primary-500 underline">Terms and Conditions</Link>
                       </span>
                     </label>
+                    {error && (
+                      <div className="bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-2.5 text-red-400 text-xs">
+                        {error}
+                      </div>
+                    )}
                     <button
                       type="submit"
                       disabled={isSubmitting || !formData.agreeTerms}
@@ -221,8 +253,10 @@ export default function AdsEcommerceHero() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h3 className="text-lg font-semibold text-white mb-2">We've got your details!</h3>
-                  <p className="text-sm text-white/50">Our team will review your store and get back within 24 hours.</p>
+                  <h3 className="text-lg font-semibold text-white mb-2">We&apos;ve Got Your Details! 🎉</h3>
+                  <p className="text-sm text-white/50 mb-3">A confirmation email has been sent to <span className="text-primary-500 font-medium">{formData.email}</span>.</p>
+                  <p className="text-sm text-white/70 font-medium">We will contact you soon!</p>
+                  <p className="text-xs text-white/40 mt-2">Our team will review your store and get back within 24 hours.</p>
                 </div>
               )}
             </div>
