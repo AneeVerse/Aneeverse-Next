@@ -188,9 +188,9 @@ export default function AdsEcommerceHero() {
               <div className="flex items-center gap-3 w-full sm:w-auto sm:min-w-[220px]">
                 <div className="flex -space-x-2.5">
                   {[
-                    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=128&h=128&fit=crop&crop=faces&auto=format&q=80",
-                    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=128&h=128&fit=crop&crop=faces&auto=format&q=80",
-                    "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=128&h=128&fit=crop&crop=faces&auto=format&q=80",
+                    "/images/testimonals/Vmc.png",
+                    "/images/testimonals/jm-visa.png",
+                    "/images/testimonals/navino.png",
                   ].map((src, i) => (
                     <div key={i} className="w-10 h-10 rounded-full border-2 border-[#073742] relative overflow-hidden bg-white/10">
                       <Image src={src} alt="Seller" fill className="object-cover" sizes="40px" />
@@ -258,7 +258,7 @@ export default function AdsEcommerceHero() {
                           <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-white/25 text-[10px]">▼</div>
                         </div>
                       </div>
-                      <input type="text" name="storeName" placeholder="Store or Brand Name" value={formData.storeName} onChange={handleChange} required className={inputClasses} />
+                      <input type="text" name="storeName" placeholder="Business and Brand Name" value={formData.storeName} onChange={handleChange} required className={inputClasses} />
                       <div className="grid grid-cols-2 gap-3.5">
                         <div className="relative">
                           <select name="monthlyRevenue" value={formData.monthlyRevenue} onChange={handleChange} required className={selectClasses}>
@@ -277,6 +277,7 @@ export default function AdsEcommerceHero() {
                             <option value="ad-management" className="bg-[#05262e]">Ad Management</option>
                             <option value="account-health" className="bg-[#05262e]">Account Health</option>
                             <option value="all" className="bg-[#05262e]">All of the above</option>
+                            <option value="other" className="bg-[#05262e]">Other</option>
                           </select>
                           <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-white/25 text-[10px]">▼</div>
                         </div>
