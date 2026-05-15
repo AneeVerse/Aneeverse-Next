@@ -239,8 +239,8 @@ export default function AdsEcommerceHero() {
                     </div>
                   </div>
 
-                  <div className="p-5 sm:p-6 md:p-7 pt-5 md:pt-6">
-                    <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="p-5 sm:p-6 md:p-7 pt-5 md:pt-6 flex-1 flex flex-col">
+                    <form onSubmit={handleSubmit} className="flex-1 flex flex-col justify-between gap-4">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                         <input type="text" name="fullName" placeholder="Full Name" value={formData.fullName} onChange={handleChange} required className={inputClasses} />
                         <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required className={inputClasses} />

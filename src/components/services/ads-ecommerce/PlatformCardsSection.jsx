@@ -74,11 +74,13 @@ function PlatformCard({ platform, index }) {
           src={platform.image}
           alt={`${platform.name} Management`}
           fill
-          className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+          className="object-cover object-top brightness-[0.9] transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, 33vw"
           unoptimized
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-5">
+        {/* Light overlay to slightly dim the mockup so headline below gets attention */}
+        <div className="absolute inset-0 bg-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent flex flex-col justify-end p-5">
           <div className="flex items-center gap-3 text-white mb-0.5">
             <span className="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center overflow-hidden">
               {platform.icon}
