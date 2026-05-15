@@ -15,6 +15,11 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: '**',
             },
+            {
+                protocol: 'https',
+                hostname: 'ik.imagekit.io',
+                pathname: '/**',
+            },
         ],
     },
     // Increase efficiency with better caching

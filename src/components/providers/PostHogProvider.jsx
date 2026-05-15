@@ -5,14 +5,6 @@ import { PostHogProvider as CSPostHogProvider } from 'posthog-js/react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, Suspense } from 'react';
 
-if (typeof window !== 'undefined') {
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
-    person_profiles: 'identified_only',
-    capture_pageview: false // Disable automatic pageview capture, as we capture manually
-  });
-}
-
 function PostHogPageview() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -33,6 +25,14 @@ function PostHogPageview() {
 }
 
 export function PostHogProvider({ children }) {
+  useEffect(() => {
+    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
+      person_profiles: 'identified_only',
+      capture_pageview: false,
+    });
+  }, []);
+
   return (
     <CSPostHogProvider client={posthog}>
       <Suspense fallback={null}>
