@@ -23,13 +23,16 @@ try {
     git config user.email "aneverse@gmail.com"
     Write-Host "Git user switched to aneeverse"
 
+    # Always update deploy timestamp so there is always something to commit
+    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    Set-Content -Path ".deploy-timestamp" -Value "Last deployed: $timestamp by aneeverse" -Encoding utf8
+
     git add .
     $changes = git status --porcelain
     if ($changes) {
         git commit -m $CommitMsg
         git push
-    } else {
-        Write-Host "Nothing to commit"
+        Write-Host "Committed and pushed as aneeverse"
     }
 
     vercel deploy --prod --token $env:VERCEL_TOKEN
