@@ -6,7 +6,7 @@ import Layout from "@/components/common/Layout";
 import Image from "next/image";
 import Link from "next/link";
 import AnimatedButton from "@/components/common/AnimatedButton";
-import { FaUserTie, FaRocket, FaChartLine, FaStore } from "react-icons/fa";
+import { FaUserTie, FaRocket, FaChartLine, FaStore, FaHeadset } from "react-icons/fa";
 import { HiLockClosed } from "react-icons/hi";
 
 const trustLabels = [
@@ -171,22 +171,38 @@ export default function AdsEcommerceHero() {
 
           {/* ── RIGHT: Form ── */}
           <div id="store-audit-form" className="flex items-center justify-end w-full scroll-mt-24">
-            <div className="w-full bg-[#05262e] rounded-[1.5rem] md:rounded-[2rem] p-5 sm:p-8 md:p-10 border border-white/10 shadow-2xl">
+            <div className="w-full bg-[#05262e] rounded-[1.5rem] md:rounded-[2rem] border border-white/10 shadow-2xl overflow-hidden">
               {!submitted ? (
                 <>
-                  <h2 className="text-lg md:text-xl font-bold text-white mb-2 leading-tight">
-                    Get a Free Audit - See Your Store's Numbers
-                  </h2>
-                  <p className="text-[11px] md:text-[12px] text-white/80 mb-6 leading-relaxed">
-                    We&apos;ll review your listings, ads, and account health and show you three numbers: what your store does now, what it could do, and what&apos;s standing between the two. Free. No commitment. We find the gaps and tell you what they&apos;re costing you
-                  </p>
+                  {/* Premium White Header Section - Condensed "Cut Up" Style */}
+                  <div className="bg-white p-5 sm:p-6 relative overflow-hidden border-b border-[#05262e]/5">
+                    {/* Decorative subtle elements */}
+                    <div className="absolute -right-6 -top-6 w-24 h-24 bg-[#073742]/5 rounded-full" />
+                    
+                    <div className="flex items-center gap-4 relative z-10">
+                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#073742] flex items-center justify-center flex-shrink-0 shadow-lg shadow-[#073742]/20">
+                        <FaHeadset className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                      </div>
+                      <div>
+                        <h2 className="text-lg md:text-xl font-bold text-[#073742] mb-0.5 leading-tight font-bw-gradual">
+                          Get a Free Audit
+                        </h2>
+                        <p className="text-[11px] md:text-[12px] text-[#073742]/70 font-medium leading-relaxed max-w-[420px]">
+                          We&apos;ll review your listings, ads, and account health. No commitment. We find the gaps and tell you what they&apos;re costing you.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
 
-                  <form onSubmit={handleSubmit} className="space-y-3.5">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div className="p-5 sm:p-7 md:p-8 pt-5 md:pt-6">
+
+
+                  <form onSubmit={handleSubmit} className="space-y-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <input type="text" name="fullName" placeholder="Full Name" value={formData.fullName} onChange={handleChange} required className={inputClasses} />
                       <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required className={inputClasses} />
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <input type="tel" name="phone" placeholder="WhatsApp / Phone" value={formData.phone} onChange={handleChange} required className={inputClasses} />
                       <div className="relative">
                         <select name="platform" value={formData.platform} onChange={handleChange} required className={selectClasses}>
@@ -245,18 +261,30 @@ export default function AdsEcommerceHero() {
                       Free. No commitment. We find the gaps and tell you what they&apos;re costing you.
                     </p>
                   </form>
-                </>
+                </div>
+              </>
               ) : (
-                <div className="text-center py-10">
-                  <div className="w-14 h-14 rounded-full bg-primary-500/20 flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-7 h-7 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                <div className="text-center py-16 px-8 min-h-[400px] flex flex-col items-center justify-center">
+                  <motion.div 
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="w-20 h-20 rounded-full bg-primary-500 flex items-center justify-center mb-8 shadow-2xl shadow-primary-500/20"
+                  >
+                    <svg className="w-10 h-10 text-secondary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                     </svg>
-                  </div>
-                  <h3 className="text-lg font-semibold text-white mb-2">We&apos;ve Got Your Details! 🎉</h3>
-                  <p className="text-sm text-white/50 mb-3">A confirmation email has been sent to <span className="text-primary-500 font-medium">{formData.email}</span>.</p>
-                  <p className="text-sm text-white/70 font-medium">We will contact you soon!</p>
-                  <p className="text-xs text-white/40 mt-2">Our team will review your store and get back within 24 hours.</p>
+                  </motion.div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 font-bw-gradual">Audit Requested! 🎉</h3>
+                  <p className="text-lg text-white/80 mb-2 font-medium">We&apos;re analyzing <span className="text-primary-500">{formData.storeName}</span></p>
+                  <p className="text-white/50 max-w-sm mx-auto leading-relaxed">
+                    Check your inbox at <span className="text-white/80">{formData.email}</span>. One of our experts will be in touch within 24 hours.
+                  </p>
+                  <button 
+                    onClick={() => setSubmitted(false)}
+                    className="mt-10 text-primary-500 font-bold text-sm hover:underline"
+                  >
+                    Send another request
+                  </button>
                 </div>
               )}
             </div>
