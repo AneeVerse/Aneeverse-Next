@@ -119,8 +119,8 @@ function PlatformCard({ platform, index }) {
 
         {/* Key Result Line (Compact) */}
         <div className="flex items-center gap-2 mb-4 py-2 border-y border-gray-50">
-          <TrendingUp className="w-3.5 h-3.5 text-gray-400" />
-          <span className="text-[10px] font-bold text-gray-900 uppercase tracking-tight">
+          <TrendingUp className="w-4 h-4 text-gray-400" />
+          <span className="text-[13px] font-bold text-gray-900 uppercase tracking-tight">
             Avg. Result: <span className="text-[#FF9900]">{platform.stat} {platform.statLabel}</span>
           </span>
         </div>
