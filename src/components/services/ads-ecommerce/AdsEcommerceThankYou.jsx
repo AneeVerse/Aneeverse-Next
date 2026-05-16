@@ -94,7 +94,7 @@ export default function AdsEcommerceThankYou() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <AnimatedButton
-                href="/"
+                href="/ads-ecommerce"
                 className="w-full sm:w-auto px-7 py-3.5 rounded-full font-bold text-sm flex items-center justify-center text-center"
                 style={{ backgroundColor: "#88D7F0", color: "#073742" }}
                 mainTextSlide="-130%"
