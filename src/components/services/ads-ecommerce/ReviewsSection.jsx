@@ -124,12 +124,12 @@ export default function ReviewsSection() {
             {duplicatedReviews.map((review, index) => (
               <div
                 key={index}
-                className="w-[280px] md:w-[400px] flex-shrink-0 snap-center bg-[#072d36] rounded-2xl p-6 md:p-8 flex flex-col hover:bg-[#093540] transition-colors duration-300 group relative overflow-hidden"
+                className="w-[280px] md:w-[400px] flex-shrink-0 snap-center bg-[#072d36] rounded-2xl p-5 md:p-6 flex flex-col hover:bg-[#093540] transition-colors duration-300 group relative overflow-hidden"
               >
               {/* Hover accent line */}
               <div className="absolute left-0 top-[85%] w-[2px] h-[60px] bg-gradient-to-b from-transparent via-[#88d7f0] to-transparent opacity-0 group-hover:opacity-100 group-hover:top-[10%] transition-all duration-1000 ease-in-out z-10" />
 
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-3">
                 <div className="flex gap-0.5">
                   {[...Array(review.rating)].map((_, i) => (
                     <FaStar key={i} className="w-3.5 h-3.5 text-yellow-400" />
@@ -138,7 +138,7 @@ export default function ReviewsSection() {
                 <span className="text-[10px] text-white/20 font-bold uppercase tracking-widest">{review.weeksAgo}</span>
               </div>
 
-              <blockquote className="text-[14px] md:text-[15px] text-gray-300 leading-relaxed mb-8 font-medium italic">
+              <blockquote className="text-[13px] md:text-[14px] text-gray-300 leading-relaxed mb-5 font-medium italic line-clamp-5">
                 &ldquo;{review.text}&rdquo;
               </blockquote>
 

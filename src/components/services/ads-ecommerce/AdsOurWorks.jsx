@@ -64,7 +64,7 @@ const AdsOurWorks = React.memo(() => {
                       src={project.image}
                       alt={project.title}
                       fill
-                      className="group-hover:scale-105 transition-transform duration-500 rounded-2xl object-cover"
+                      className="group-hover:scale-105 transition-transform duration-500 rounded-2xl object-contain bg-white"
                       loading="lazy"
                       sizes="50vw"
                       unoptimized={project.image?.includes('cdn.sanity.io')}
@@ -98,7 +98,7 @@ const AdsOurWorks = React.memo(() => {
                       src={project.image}
                       alt={project.title}
                       fill
-                      className="group-hover:scale-105 transition-transform duration-500 rounded-2xl object-cover"
+                      className="group-hover:scale-105 transition-transform duration-500 rounded-2xl object-contain bg-white"
                       loading="lazy"
                       sizes="85vw"
                       unoptimized={project.image?.includes('cdn.sanity.io')}
