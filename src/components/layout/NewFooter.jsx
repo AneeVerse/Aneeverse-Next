@@ -120,7 +120,7 @@ export default function NewFooter() {
             </Heading>
 
             <AnimatedButton
-              href="/contact"
+              href={isAdsEcommerce ? "#platform-solutions" : "/contact"}
               className="mt-2 px-6 py-3 rounded-full font-medium text-secondary-500 bg-primary-500 border border-primary-500 hover:bg-secondary-500 hover:text-[#EBFAFE] transition-colors"
               mainTextSlide="-130%"
               duplicateTextStart="100%"
@@ -332,7 +332,7 @@ export default function NewFooter() {
               </Heading>
 
               <AnimatedButton
-                href="/contact"
+                href={isAdsEcommerce ? "#platform-solutions" : "/contact"}
                 className="mt-6 px-6 py-3 rounded-full font-medium text-secondary-500 bg-primary-500 border border-primary-500 hover:bg-secondary-500 hover:text-[#EBFAFE] transition-colors"
                 mainTextSlide="-130%"
                 duplicateTextStart="100%"

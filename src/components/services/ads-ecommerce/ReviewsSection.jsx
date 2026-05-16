@@ -7,58 +7,40 @@ import { FaStar, FaGoogle } from "react-icons/fa";
 
 const reviews = [
   {
-    name: "Vikram Manghnani",
-    role: "Founder, VMC",
-    avatar: "/images/testimonals/Vmc.png",
-    rating: 5,
-    featured: true,
-    weeksAgo: "4 weeks ago",
-    text: "Aneeverse brought fresh ideas that made our creative work simple. They felt like a team that genuinely cared about our vision, and they became a key part of our expansion.",
-  },
-  {
-    name: "Sanjay Shah",
-    role: "CEO, RetailHub",
-    avatar: "S",
+    name: "Nasher Miles",
+    role: "Travel Luggage Brand, Amazon",
+    avatar: "/images/logos/company/nasher-miles-logo.png",
     rating: 5,
     featured: true,
     weeksAgo: "2 weeks ago",
-    text: "Our Amazon sales were stagnant for months. Aneeverse took over our PPC and listing optimization, and we saw a 45% jump in revenue in just 60 days.",
+    text: "We struggled for months trying to recover suppressed listings and push our rankings past page two. Aneeverse turned that around completely. Within 90 days, we hit top Amazon rankings, every suppressed listing was recovered, and our entire catalog went to 100% data accuracy. What sets them apart is not just the results — it's how they work. Professional, proactive, and genuinely result driven. Best investment we made for our store.",
   },
   {
-    name: "Navin Agarwal",
-    role: "Founder, Novino Inks",
-    avatar: "/images/testimonals/navino.png",
+    name: "Gilmore Oak",
+    role: "Premium Bags & Backpacks, Amazon",
+    avatar: "/images/logos/company/Gilmore-GIF.gif",
     rating: 5,
-    featured: false,
-    weeksAgo: "6 weeks ago",
-    text: "AneeVerse built a stunning eCommerce presence that truly reflects our brand. Abhijeet understood my vision on a personal level – he knew exactly what I wanted.",
-  },
-  {
-    name: "Rahul Mehta",
-    role: "Director, LuxeDecor",
-    avatar: "R",
-    rating: 5,
-    featured: false,
+    featured: true,
     weeksAgo: "3 weeks ago",
-    text: "The best decision we made for our Etsy store. Search visibility tripled in months and our Star Seller status has never been more secure.",
+    text: "Never thought we'd see an Amazon's Choice badge on our listing. Aneeverse made it happen — and got us to page one while they were at it. They knew exactly what needed fixing and just did it.",
   },
   {
-    name: "Priya Das",
-    role: "Owner, GlowOrganic",
-    avatar: "P",
+    name: "GFMJewels",
+    role: "Exclusive Jewellery, eBay",
+    avatar: "/images/logos/company/gfm-exclusive.webp",
     rating: 5,
     featured: true,
     weeksAgo: "1 week ago",
-    text: "Cassini optimization for eBay is real. Aneeverse knows the algorithm better than anyone. They source the data, we just handle the inventory.",
+    text: "Been with Aneeverse for years now and they've become a core part of how we run our eBay store. Our feedback crossed 2000+ which for a jewellery store is no small thing. Listings, ads, orders, returns — all handled without us having to worry about a thing. They've grown with us and that says everything.",
   },
   {
-    name: "Amrita Thakar",
-    role: "Founder, JM Visa Services",
-    avatar: "/images/testimonals/jm-visa.png",
+    name: "Adhira Linen",
+    role: "Handmade Linen, Etsy",
+    avatar: "/images/logos/company/adhira-linen.webp",
     rating: 5,
-    featured: false,
-    weeksAgo: "8 weeks ago",
-    text: "Their smart strategies got us to number one while cutting our marketing costs. Best move we made for the business.",
+    featured: true,
+    weeksAgo: "4 weeks ago",
+    text: "We started with Aneeverse when our Etsy shop was still finding its feet. Two years later, we're sitting at 9,700+ sales and a 4.8 rating with nearly 2,000 reviews. They understood the handmade linen niche from day one — listings, ads, orders, everything. It genuinely feels effortless now.",
   },
 ];
 
@@ -161,12 +143,8 @@ export default function ReviewsSection() {
               </blockquote>
 
               <div className="flex items-center gap-4 mt-auto">
-                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/10 relative flex-shrink-0 flex items-center justify-center bg-white/5">
-                  {review.avatar.length === 1 ? (
-                    <span className="text-white font-bold text-lg">{review.avatar}</span>
-                  ) : (
-                    <Image src={review.avatar} alt={review.name} fill className="object-cover" />
-                  )}
+                <div className="w-12 h-12 rounded-full overflow-hidden relative flex-shrink-0 bg-white">
+                  <Image src={review.avatar} alt={review.name} fill className="object-contain" sizes="48px" unoptimized />
                 </div>
                 <div>
                   <p className="text-white font-bold text-[15px] leading-tight mb-1 uppercase tracking-tight">{review.name}</p>
