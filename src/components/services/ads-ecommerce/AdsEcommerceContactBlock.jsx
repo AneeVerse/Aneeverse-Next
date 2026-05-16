@@ -36,7 +36,7 @@ export default function AdsEcommerceContactBlock() {
             <div className="max-w-2xl text-left">
               <h2 className="font-bw-gradual text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-5 sm:mb-6 leading-tight uppercase drop-shadow-md">
                 Not sure which plan <br className="hidden md:block" />
-                <span className="text-[#C0FF7C]">fits your store?</span>
+                <span className="text-[#88D7F0]">fits your store?</span>
               </h2>
               <p className="text-white/80 text-[15px] sm:text-base md:text-lg mb-8 sm:mb-10 leading-relaxed max-w-lg drop-shadow-md">
                 Our team will review your account and give you a clear picture of what needs to happen first.
@@ -46,7 +46,7 @@ export default function AdsEcommerceContactBlock() {
                 <Link
                   href="https://wa.me/919152755529"
                   target="_blank"
-                  className="bg-[#25D366] text-white font-extrabold px-8 sm:px-10 py-3.5 sm:py-4 rounded-xl hover:bg-[#1eb956] transition-all duration-300 text-sm sm:text-[15px] shadow-lg shadow-[#25D366]/20 flex items-center justify-center gap-3"
+                  className="bg-[#88D7F0] text-[#072d36] font-extrabold px-8 sm:px-10 py-3.5 sm:py-4 rounded-xl hover:bg-[#6dc8e6] transition-all duration-300 text-sm sm:text-[15px] shadow-lg shadow-[#88D7F0]/20 flex items-center justify-center gap-3"
                 >
                   <FaWhatsapp className="w-5 h-5" />
                   Chat on WhatsApp
