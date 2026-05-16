@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Layout from "@/components/common/Layout";
@@ -25,6 +26,16 @@ const steps = [
 ];
 
 export default function AdsEcommerceThankYou() {
+  useEffect(() => {
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      window.gtag("event", "conversion", {
+        send_to: "AW-17978481460/OjkTCKbRhq4cELS25_xC",
+        value: 1.0,
+        currency: "INR",
+      });
+    }
+  }, []);
+
   return (
     <div className="bg-[#073742] relative text-white overflow-hidden h-screen">
       <div className="absolute -top-[20px] left-0 w-full h-[200px] bg-gradient-to-b z-20 from-[#021115] via-[#073742]/80 to-transparent pointer-events-none" />

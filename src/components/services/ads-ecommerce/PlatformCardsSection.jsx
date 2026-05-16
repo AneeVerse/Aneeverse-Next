@@ -1,12 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import Layout from "@/components/common/Layout";
 import { motion } from "framer-motion";
 import { FaAmazon, FaEbay, FaEtsy } from "react-icons/fa";
 import { TrendingUp } from "lucide-react";
-import AnimatedButton from "@/components/common/AnimatedButton";
+import AuditFormModal from "./AuditFormModal";
 
 const platforms = [
   {
@@ -59,7 +59,7 @@ const platforms = [
   },
 ];
 
-function PlatformCard({ platform, index }) {
+function PlatformCard({ platform, index, onCtaClick }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -129,19 +129,13 @@ function PlatformCard({ platform, index }) {
 
         {/* CTA */}
         <div className="mt-auto">
-          <AnimatedButton
-            href="#store-audit-form"
-            className="w-full py-3.5 rounded-full font-bold text-[13px] shadow-lg shadow-black/5 flex items-center justify-center text-center"
-            style={{
-              backgroundColor: "#073742",
-              color: "#EBFAFE",
-            }}
-            mainTextSlide="-130%"
-            duplicateTextStart="100%"
-            duplicateTextEnd="-100%"
+          <button
+            type="button"
+            onClick={() => onCtaClick(platform.id)}
+            className="w-full py-3.5 rounded-full font-bold text-[13px] shadow-lg shadow-black/5 flex items-center justify-center text-center bg-[#073742] text-[#EBFAFE] hover:bg-[#0a4f5e] transition-colors"
           >
             {platform.cta}
-          </AnimatedButton>
+          </button>
         </div>
       </div>
     </motion.div>
@@ -149,6 +143,14 @@ function PlatformCard({ platform, index }) {
 }
 
 export default function PlatformCardsSection() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedPlatform, setSelectedPlatform] = useState("");
+
+  const openModal = (platformId) => {
+    setSelectedPlatform(platformId);
+    setModalOpen(true);
+  };
+
   return (
     <section className="bg-[#073742] py-20 md:py-28 relative overflow-hidden">
       <Layout>
@@ -171,10 +173,21 @@ export default function PlatformCardsSection() {
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 lg:px-0 max-w-[1200px] mx-auto">
           {platforms.map((platform, index) => (
-            <PlatformCard key={platform.id} platform={platform} index={index} />
+            <PlatformCard
+              key={platform.id}
+              platform={platform}
+              index={index}
+              onCtaClick={openModal}
+            />
           ))}
         </div>
       </Layout>
+
+      <AuditFormModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        defaultPlatform={selectedPlatform}
+      />
     </section>
   );
 }
