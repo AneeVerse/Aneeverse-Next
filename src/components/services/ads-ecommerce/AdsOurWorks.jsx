@@ -8,25 +8,25 @@ const hardcodedProjects = [
   {
     image: "/images/works/amazone.jpeg",
     title: "Amazon Sales Growth",
-    description: "₹6.46L+ Revenue, 440 Units Ordered",
+    stats: ["₹6.46L+ Revenue", "440 Units Ordered"],
     url: "/ads-ecommerce",
   },
   {
     image: "/images/works/etsy pow.jpg.jpeg",
     title: "Etsy Store Scaling",
-    description: "10.1K Visits, 300 Orders, $18.5K Revenue",
+    stats: ["10.1K Visits", "300 Orders", "$18.5K Revenue"],
     url: "/ads-ecommerce",
   },
   {
     image: "/images/works/etzy.jpeg",
     title: "Etsy SEO & Traffic Growth",
-    description: "5,450% Search Increase, 6,028% Marketing Growth",
+    stats: ["5,450% Search Increase", "6,028% Marketing Growth"],
     url: "/ads-ecommerce",
   },
   {
     image: "/images/works/amazone.jpeg",
     title: "Amazon PPC Optimization",
-    description: "₹6.46L+ Revenue, Ranking Growth in 90 Days",
+    stats: ["₹6.46L+ Revenue", "Ranking Growth in 90 Days"],
     url: "/ads-ecommerce",
   },
 ];
@@ -73,13 +73,22 @@ const AdsOurWorks = React.memo(() => {
                       }}
                     />
                   </div>
-                  <div className="px-1">
-                    <h3 className="text-xl sm:text-2xl font-normal text-white mb-1 font-serif italic text-left">
+                  <div className="px-1 mt-1">
+                    <h3 className="font-bw-gradual text-xl sm:text-2xl md:text-[1.6rem] font-bold text-white mb-2 leading-tight tracking-tight uppercase text-left">
                       {project.title}
                     </h3>
-                    <p className="text-sm text-gray-400 font-normal font-sans text-left">
-                      {project.description}
-                    </p>
+                    <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-left">
+                      {project.stats.map((stat, i, arr) => (
+                        <React.Fragment key={i}>
+                          <span className="text-[12px] sm:text-[13px] font-bold text-[#88D7F0] tracking-tight">
+                            {stat}
+                          </span>
+                          {i < arr.length - 1 && (
+                            <span className="w-1 h-1 rounded-full bg-white/25" />
+                          )}
+                        </React.Fragment>
+                      ))}
+                    </div>
                   </div>
                 </Link>
               ))}
@@ -107,13 +116,22 @@ const AdsOurWorks = React.memo(() => {
                       }}
                     />
                   </div>
-                  <div className="px-1">
-                    <h3 className="text-xl font-normal text-white mb-1 font-serif italic text-left">
+                  <div className="px-1 mt-1">
+                    <h3 className="font-bw-gradual text-lg sm:text-xl font-bold text-white mb-2 leading-tight tracking-tight uppercase text-left">
                       {project.title}
                     </h3>
-                    <p className="text-sm text-gray-400 font-normal font-sans text-left">
-                      {project.description}
-                    </p>
+                    <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-left">
+                      {project.stats.map((stat, i, arr) => (
+                        <React.Fragment key={i}>
+                          <span className="text-[12px] font-bold text-[#88D7F0] tracking-tight">
+                            {stat}
+                          </span>
+                          {i < arr.length - 1 && (
+                            <span className="w-1 h-1 rounded-full bg-white/25" />
+                          )}
+                        </React.Fragment>
+                      ))}
+                    </div>
                   </div>
                 </Link>
               ))}
