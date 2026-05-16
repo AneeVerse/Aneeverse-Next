@@ -160,7 +160,7 @@ export default function AdsEcommerceHero() {
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <AnimatedButton
-                href="#store-audit-form"
+                href="#platform-cards"
                 className="w-full sm:w-auto px-7 py-3.5 rounded-full font-bold text-sm flex items-center justify-center text-center"
                 style={{ backgroundColor: "#88D7F0", color: "#073742" }}
                 mainTextSlide="-130%"
@@ -170,7 +170,7 @@ export default function AdsEcommerceHero() {
                 Find Out What My Store Is Losing →
               </AnimatedButton>
               <AnimatedButton
-                href="#store-audit-form"
+                href="#platform-cards"
                 className="w-full sm:w-auto px-7 py-3.5 rounded-full font-bold text-sm border border-white/20 bg-white/[0.05] flex items-center justify-center text-center"
                 mainTextSlide="-130%"
                 duplicateTextStart="100%"

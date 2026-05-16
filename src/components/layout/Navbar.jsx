@@ -19,6 +19,9 @@ const Navbar = () => {
   // Check if current path is in the Why Us section
   const isWhyUsSection = pathName === "/about-us" || pathName === "/our-team";
 
+  // Ads e-commerce page swaps "Book a Call" → "Book a Free Audit" and hides Login
+  const isAdsEcommerce = pathName === "/ads-ecommerce";
+
   // State for colors
   const [color, setColor] = useState({
     text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/") || pathName === "/ads-ecommerce" || pathName === "/customer-stories" || pathName.includes("/customer-stories/") || pathName === "/about-us") ? "#EBFAFE" : "#073742",
@@ -111,7 +114,7 @@ const Navbar = () => {
         {/* Buttons */}
         <div className="hidden lg:flex items-center gap-4">
           <AnimatedButton
-            href="/contact"
+            href={isAdsEcommerce ? "/ads-ecommerce#platform-cards" : "/contact"}
             className="px-6 py-2 rounded-full border"
             style={{
               color: pathName === "/about-us" ? "#073742" : (pathName.includes('/customer-stories') ? '#EBFAFE' : callTextColor),
@@ -122,22 +125,24 @@ const Navbar = () => {
             duplicateTextStart="150%"
             duplicateTextEnd="-110%"
           >
-            Book a Call
+            {isAdsEcommerce ? "Book a Free Audit" : "Book a Call"}
           </AnimatedButton>
-          <AnimatedButton
-            href="/login"
-            className="px-6 py-2 rounded-full border"
-            style={{
-              color: pathName.includes('/customer-stories') ? '#073742' : color.text,
-              backgroundColor: pathName.includes('/customer-stories') ? '#EBFAFE' : color.bg,
-              borderColor: pathName.includes('/customer-stories') ? '#073742' : color.text
-            }}
-            mainTextSlide="-150%"
-            duplicateTextStart="150%"
-            duplicateTextEnd="-110%"
-          >
-            Login
-          </AnimatedButton>
+          {!isAdsEcommerce && (
+            <AnimatedButton
+              href="/login"
+              className="px-6 py-2 rounded-full border"
+              style={{
+                color: pathName.includes('/customer-stories') ? '#073742' : color.text,
+                backgroundColor: pathName.includes('/customer-stories') ? '#EBFAFE' : color.bg,
+                borderColor: pathName.includes('/customer-stories') ? '#073742' : color.text
+              }}
+              mainTextSlide="-150%"
+              duplicateTextStart="150%"
+              duplicateTextEnd="-110%"
+            >
+              Login
+            </AnimatedButton>
+          )}
         </div>
 
         {/* Mobile Menu Icon */}

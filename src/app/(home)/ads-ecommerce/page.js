@@ -62,7 +62,9 @@ const page = async () => {
             />
             <AdsEcommerceHero />
             <WhyChooseSection />
-            <PlatformCardsSection />
+            <div id="platform-cards" className="scroll-mt-24">
+              <PlatformCardsSection />
+            </div>
             <div id="our-works" className="scroll-mt-24">
               <DynamicOurWorks projects={projects} />
             </div>

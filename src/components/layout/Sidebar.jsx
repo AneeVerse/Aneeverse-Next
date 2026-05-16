@@ -9,6 +9,7 @@ import { FaPenFancy, FaGhost, FaFileAlt, FaTags } from "react-icons/fa";
 import { FaChartPie, FaEnvelope, FaGoogle, FaFacebook, FaUserFriends } from "react-icons/fa";
 import { FaEnvelopeOpenText, FaSlideshare, FaPaintBrush, FaFilePdf, FaCode, FaTag, FaRobot, FaChartLine, FaAmazon, FaEbay, FaRocket, FaChevronRight } from "react-icons/fa";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FaArrowRight } from "react-icons/fa6";
 
 // Cache for dynamic content to avoid refetching
@@ -67,6 +68,8 @@ const menuCategories = [
 ];
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
+  const pathName = usePathname();
+  const isAdsEcommerce = pathName === "/ads-ecommerce";
   const [openSection, setOpenSection] = useState(null);
   const [blogs, setBlogs] = useState(blogsCache);
   const [customerStories, setCustomerStories] = useState(storiesCache);
@@ -429,19 +432,21 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         {/* Action Buttons */}
         <div className="mt-6">
           <Link
-            href="/contact"
+            href={isAdsEcommerce ? "/ads-ecommerce#platform-cards" : "/contact"}
             onClick={toggleSidebar}
             className="w-full block text-center py-3 rounded-full bg-secondary-500 text-primary-500 font-semibold"
           >
-            Book a Call
+            {isAdsEcommerce ? "Book a Free Audit" : "Book a Call"}
           </Link>
-          <Link
-            href="/register"
-            onClick={toggleSidebar}
-            className="w-full block text-center mt-3 py-3 rounded-full border border-secondary-500 text-secondary-500 font-semibold"
-          >
-            Sign In
-          </Link>
+          {!isAdsEcommerce && (
+            <Link
+              href="/register"
+              onClick={toggleSidebar}
+              className="w-full block text-center mt-3 py-3 rounded-full border border-secondary-500 text-secondary-500 font-semibold"
+            >
+              Sign In
+            </Link>
+          )}
         </div>
       </div>
     </motion.div>
