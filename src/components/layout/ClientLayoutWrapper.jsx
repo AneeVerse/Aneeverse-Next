@@ -16,11 +16,12 @@ export default function ClientLayoutWrapper({ children }) {
   const pathname = usePathname();
   const isStudio = pathname.startsWith('/studio');
   const isAuth = pathname === '/register' || pathname === '/login';
+  const isStandalone = pathname === '/ads-ecommerce-thankyou';
 
   return (
     <PostHogProvider>
       {/* Preloader - Shows before all content */}
-      {!isStudio && !isAuth && <Preloader />}
+      {!isStudio && !isAuth && !isStandalone && <Preloader />}
 
       {/* Top Loader */}
       <NextTopLoader
@@ -34,7 +35,7 @@ export default function ClientLayoutWrapper({ children }) {
       />
 
       {/* Navbar for all non-studio, non-auth pages */}
-      {!isStudio && !isAuth && <Navbar />}
+      {!isStudio && !isAuth && !isStandalone && <Navbar />}
 
       {/* Global Organization Schema */}
       {!isStudio && !isAuth && <OrganizationSchema />}
@@ -55,7 +56,7 @@ export default function ClientLayoutWrapper({ children }) {
       {children}
 
       {/* Footer for all non-studio, non-auth pages */}
-      {!isStudio && !isAuth && <NewFooter />}
+      {!isStudio && !isAuth && !isStandalone && <NewFooter />}
     </PostHogProvider>
   );
 }

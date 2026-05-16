@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Layout from "@/components/common/Layout";
 import Image from "next/image";
@@ -43,6 +44,7 @@ const scrollVariants = {
 };
 
 export default function AdsEcommerceHero() {
+  const router = useRouter();
   const userGeo = useGeoLocation();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -55,7 +57,6 @@ export default function AdsEcommerceHero() {
     agreeTerms: true,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
@@ -97,10 +98,9 @@ export default function AdsEcommerceHero() {
         throw new Error(data.error || "Something went wrong. Please try again.");
       }
 
-      setSubmitted(true);
+      router.push("/ads-ecommerce-thankyou");
     } catch (err) {
       setError(err.message || "Something went wrong. Please try again.");
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -220,9 +220,7 @@ export default function AdsEcommerceHero() {
                 boxShadow: "0 0 20px 4px rgba(255,255,255,0.12), 0 0 60px 8px rgba(136,215,240,0.1), inset 0 0 20px 0 rgba(255,255,255,0.03)"
               }}
             >
-              {!submitted ? (
-                <>
-                  {/* Premium Light Blue Header Section */}
+              {/* Premium Light Blue Header Section */}
                   <div className="bg-[#bde3f9] p-5 sm:p-6 relative overflow-hidden border-b border-[#05262e]/5">
                     {/* Decorative subtle elements - Dots Pattern */}
                     <div className="absolute right-4 top-4 grid grid-cols-4 gap-1.5 opacity-20">
@@ -334,31 +332,6 @@ export default function AdsEcommerceHero() {
                       </div>
                     </form>
                   </div>
-                </>
-              ) : (
-                <div className="text-center py-16 px-8 min-h-[400px] flex flex-col items-center justify-center">
-                  <motion.div 
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="w-20 h-20 rounded-full bg-primary-500 flex items-center justify-center mb-8 shadow-2xl shadow-primary-500/20"
-                  >
-                    <svg className="w-10 h-10 text-secondary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </motion.div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 font-bw-gradual">Audit Requested! 🎉</h3>
-                  <p className="text-lg text-white/80 mb-2 font-medium">We&apos;re analyzing <span className="text-primary-500">{formData.storeName}</span></p>
-                  <p className="text-white/50 max-w-sm mx-auto leading-relaxed">
-                    Check your inbox at <span className="text-white/80">{formData.email}</span>. One of our experts will be in touch within 24 hours.
-                  </p>
-                  <button 
-                    onClick={() => setSubmitted(false)}
-                    className="mt-10 text-primary-500 font-bold text-sm hover:underline"
-                  >
-                    Send another request
-                  </button>
-                </div>
-              )}
             </div>
           </div>
 
