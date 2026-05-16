@@ -104,7 +104,7 @@ export default function AdsEcommerceThankYou() {
                 Back to Home
               </AnimatedButton>
               <Link
-                href="/works"
+                href="/ads-ecommerce#our-works"
                 className="w-full sm:w-auto px-7 py-3.5 rounded-full font-bold text-sm border border-white/20 bg-white/[0.05] text-white text-center hover:bg-white/10 transition-colors"
               >
                 See Our Work
