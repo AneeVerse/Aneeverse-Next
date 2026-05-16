@@ -21,12 +21,24 @@ const challengeLabels = {
   "ad-management": "Ad Management",
   "account-health": "Account Health",
   all: "All of the above",
+  other: "Other",
 };
 
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { fullName, email, phone, platform, storeName, monthlyRevenue, biggestChallenge } = body;
+    const {
+      fullName,
+      email,
+      phone,
+      platform,
+      storeName,
+      monthlyRevenue,
+      biggestChallenge,
+      userLocation,
+      userPincode,
+      userIp,
+    } = body;
 
     // ── Validate required fields ──
     if (!fullName || !email || !phone || !platform || !storeName || !monthlyRevenue || !biggestChallenge) {
@@ -58,6 +70,13 @@ export async function POST(request) {
             <tr><td style="padding:10px 0;color:#64748b;vertical-align:top">Store / Brand</td><td style="padding:10px 0;color:#0f172a;font-weight:600">${storeName}</td></tr>
             <tr style="background:#f1f5f9"><td style="padding:10px;color:#64748b;vertical-align:top;border-radius:6px 0 0 6px">Monthly Revenue</td><td style="padding:10px;color:#0f172a;font-weight:600;border-radius:0 6px 6px 0">${revenueLabels[monthlyRevenue] || monthlyRevenue}</td></tr>
             <tr><td style="padding:10px 0;color:#64748b;vertical-align:top">Biggest Challenge</td><td style="padding:10px 0;color:#0f172a;font-weight:600">${challengeLabels[biggestChallenge] || biggestChallenge}</td></tr>
+          </table>
+
+          <h2 style="color:#073742;margin:24px 0 12px;font-size:15px;font-weight:700;border-top:1px solid #e2e8f0;padding-top:20px">📍 User Location (Auto-Fetched)</h2>
+          <table style="width:100%;border-collapse:collapse;font-size:14px">
+            <tr><td style="padding:10px 0;color:#64748b;width:140px;vertical-align:top">Location</td><td style="padding:10px 0;color:#0f172a;font-weight:600">${userLocation || "Unknown"}</td></tr>
+            <tr style="background:#f1f5f9"><td style="padding:10px;color:#64748b;vertical-align:top;border-radius:6px 0 0 6px">Pincode</td><td style="padding:10px;color:#0f172a;font-weight:600;border-radius:0 6px 6px 0">${userPincode || "Unknown"}</td></tr>
+            <tr><td style="padding:10px 0;color:#64748b;vertical-align:top">IP Address</td><td style="padding:10px 0;color:#0f172a;font-weight:600">${userIp || "Unknown"}</td></tr>
           </table>
         </div>
         <div style="padding:16px 32px;background:#f1f5f9;text-align:center">
@@ -112,6 +131,36 @@ export async function POST(request) {
       subject: `Your Free Store Audit Request Is Confirmed — Aneeverse`,
       html: userHtml,
     });
+
+    // ── 3. Send data to Google Sheets ──
+    try {
+      const GOOGLE_APPS_SCRIPT_URL =
+        process.env.GOOGLE_APPS_SCRIPT_URL ||
+        "https://script.google.com/macros/s/AKfycbxxjaHsbRr8i2wgkwbNKtOkrJZZ9yxMZI_z7zY3um1B2l1-yMPrWQUUD_OQh20af50Q/exec";
+
+      if (GOOGLE_APPS_SCRIPT_URL) {
+        await fetch(GOOGLE_APPS_SCRIPT_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            pageSource: "Ads & E-commerce Page",
+            fullName,
+            email,
+            phone,
+            platform: platformLabels[platform] || platform,
+            storeName,
+            monthlyRevenue: revenueLabels[monthlyRevenue] || monthlyRevenue,
+            biggestChallenge: challengeLabels[biggestChallenge] || biggestChallenge,
+            userLocation: userLocation || "Unknown",
+            userPincode: userPincode || "Unknown",
+            userIp: userIp || "Unknown",
+          }),
+        });
+      }
+    } catch (sheetError) {
+      console.error("Google Sheets sync failed:", sheetError);
+      // Don't fail the request if Sheets fails — emails already sent
+    }
 
     return NextResponse.json({ success: true, message: "Emails sent successfully." });
   } catch (error) {

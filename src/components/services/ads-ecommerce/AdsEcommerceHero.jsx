@@ -8,6 +8,7 @@ import Link from "next/link";
 import AnimatedButton from "@/components/common/AnimatedButton";
 import { FaUserTie, FaRocket, FaChartLine, FaStore, FaHeadset } from "react-icons/fa";
 import { HiLockClosed } from "react-icons/hi";
+import useGeoLocation from "@/hooks/useGeoLocation";
 
 const trustLabels = [
   { icon: <FaUserTie className="w-3 h-3" />, text: "Dedicated PM" },
@@ -42,6 +43,7 @@ const scrollVariants = {
 };
 
 export default function AdsEcommerceHero() {
+  const userGeo = useGeoLocation();
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -81,6 +83,11 @@ export default function AdsEcommerceHero() {
           storeName: formData.storeName,
           monthlyRevenue: formData.monthlyRevenue,
           biggestChallenge: formData.biggestChallenge,
+          userLocation: userGeo
+            ? `${userGeo.city}, ${userGeo.region}, ${userGeo.country}`
+            : "Unknown",
+          userPincode: userGeo ? userGeo.pincode : "Unknown",
+          userIp: userGeo ? userGeo.ip : "Unknown",
         }),
       });
 
