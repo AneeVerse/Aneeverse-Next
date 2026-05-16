@@ -1,5 +1,5 @@
 import SlidingLogos from '@/components/home/SlidingLogos'
-import DynamicOurWorks from '@/components/home/DynamicOurWorks'
+import AdsOurWorks from '@/components/services/ads-ecommerce/AdsOurWorks'
 import ServiceSchema from '@/components/seo/ServiceSchema'
 import AdsEcommerceHero from '@/components/services/ads-ecommerce/AdsEcommerceHero'
 import WhyChooseSection from '@/components/services/ads-ecommerce/WhyChooseSection'
@@ -63,7 +63,7 @@ const page = async () => {
             <AdsEcommerceHero />
             <WhyChooseSection />
             <PlatformCardsSection />
-            <DynamicOurWorks projects={projects} />
+            <AdsOurWorks />
             <ReviewsSection />
             <AdsEcommerceContactBlock />
             <AdsEcommerceFAQSection />

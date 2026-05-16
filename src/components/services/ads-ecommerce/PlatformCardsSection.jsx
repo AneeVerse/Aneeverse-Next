@@ -150,7 +150,7 @@ function PlatformCard({ platform, index }) {
 
 export default function PlatformCardsSection() {
   return (
-    <section className="bg-[#073742] py-20 md:py-28 relative overflow-hidden">
+    <section id="platform-solutions" className="bg-[#073742] py-20 md:py-28 relative overflow-hidden">
       <Layout>
         {/* Header */}
         <div className="text-center max-w-4xl mx-auto mb-16 px-4">
