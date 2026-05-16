@@ -33,17 +33,27 @@ export async function POST(request) {
       phone,
       platform,
       storeName,
+      storeLink,
       monthlyRevenue,
       biggestChallenge,
+      otherChallenge,
       userLocation,
       userPincode,
       userIp,
     } = body;
 
     // ── Validate required fields ──
-    if (!fullName || !email || !phone || !platform || !storeName || !monthlyRevenue || !biggestChallenge) {
+    if (!fullName || !email || !phone || !platform || !storeName || !storeLink || !monthlyRevenue || !biggestChallenge) {
       return NextResponse.json({ error: "All fields are required." }, { status: 400 });
     }
+    if (biggestChallenge === "other" && !otherChallenge) {
+      return NextResponse.json({ error: "Please describe your challenge." }, { status: 400 });
+    }
+
+    const challengeDisplay =
+      biggestChallenge === "other" && otherChallenge
+        ? `Other — ${otherChallenge}`
+        : challengeLabels[biggestChallenge] || biggestChallenge;
 
     // ── Create transporter ──
     const transporter = nodemailer.createTransport({
@@ -68,8 +78,9 @@ export async function POST(request) {
             <tr><td style="padding:10px 0;color:#64748b;vertical-align:top">Phone / WhatsApp</td><td style="padding:10px 0;color:#0f172a;font-weight:600">${phone}</td></tr>
             <tr style="background:#f1f5f9"><td style="padding:10px;color:#64748b;vertical-align:top;border-radius:6px 0 0 6px">Platform</td><td style="padding:10px;color:#0f172a;font-weight:600;border-radius:0 6px 6px 0">${platformLabels[platform] || platform}</td></tr>
             <tr><td style="padding:10px 0;color:#64748b;vertical-align:top">Store / Brand</td><td style="padding:10px 0;color:#0f172a;font-weight:600">${storeName}</td></tr>
-            <tr style="background:#f1f5f9"><td style="padding:10px;color:#64748b;vertical-align:top;border-radius:6px 0 0 6px">Monthly Revenue</td><td style="padding:10px;color:#0f172a;font-weight:600;border-radius:0 6px 6px 0">${revenueLabels[monthlyRevenue] || monthlyRevenue}</td></tr>
-            <tr><td style="padding:10px 0;color:#64748b;vertical-align:top">Biggest Challenge</td><td style="padding:10px 0;color:#0f172a;font-weight:600">${challengeLabels[biggestChallenge] || biggestChallenge}</td></tr>
+            <tr style="background:#f1f5f9"><td style="padding:10px;color:#64748b;vertical-align:top;border-radius:6px 0 0 6px">Store Link</td><td style="padding:10px;color:#0f172a;font-weight:600;border-radius:0 6px 6px 0"><a href="${storeLink}" style="color:#0284c7;text-decoration:none" target="_blank" rel="noopener noreferrer">${storeLink}</a></td></tr>
+            <tr><td style="padding:10px 0;color:#64748b;vertical-align:top">Monthly Revenue</td><td style="padding:10px 0;color:#0f172a;font-weight:600">${revenueLabels[monthlyRevenue] || monthlyRevenue}</td></tr>
+            <tr style="background:#f1f5f9"><td style="padding:10px;color:#64748b;vertical-align:top;border-radius:6px 0 0 6px">Biggest Challenge</td><td style="padding:10px;color:#0f172a;font-weight:600;border-radius:0 6px 6px 0">${challengeDisplay}</td></tr>
           </table>
 
           <h2 style="color:#073742;margin:24px 0 12px;font-size:15px;font-weight:700;border-top:1px solid #e2e8f0;padding-top:20px">📍 User Location (Auto-Fetched)</h2>
@@ -151,8 +162,9 @@ export async function POST(request) {
             phone,
             platform: platformLabels[platform] || platform,
             storeName,
+            storeLink,
             monthlyRevenue: revenueLabels[monthlyRevenue] || monthlyRevenue,
-            biggestChallenge: challengeLabels[biggestChallenge] || biggestChallenge,
+            biggestChallenge: challengeDisplay,
             userLocation: userLocation || "Unknown",
             userPincode: userPincode || "Unknown",
             userIp: userIp || "Unknown",

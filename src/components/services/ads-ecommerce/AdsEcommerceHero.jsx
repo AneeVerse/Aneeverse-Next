@@ -52,8 +52,10 @@ export default function AdsEcommerceHero() {
     phone: "",
     platform: "",
     storeName: "",
+    storeLink: "",
     monthlyRevenue: "",
     biggestChallenge: "",
+    otherChallenge: "",
     agreeTerms: true,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -82,8 +84,11 @@ export default function AdsEcommerceHero() {
           phone: formData.phone,
           platform: formData.platform,
           storeName: formData.storeName,
+          storeLink: formData.storeLink,
           monthlyRevenue: formData.monthlyRevenue,
           biggestChallenge: formData.biggestChallenge,
+          otherChallenge:
+            formData.biggestChallenge === "other" ? formData.otherChallenge : "",
           userLocation: userGeo
             ? `${userGeo.city}, ${userGeo.region}, ${userGeo.country}`
             : "Unknown",
@@ -263,7 +268,10 @@ export default function AdsEcommerceHero() {
                           <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-white/25 text-[10px]">▼</div>
                         </div>
                       </div>
-                      <input type="text" name="storeName" placeholder="Business and Brand Name" value={formData.storeName} onChange={handleChange} required className={inputClasses} />
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                        <input type="text" name="storeName" placeholder="Business and Brand Name" value={formData.storeName} onChange={handleChange} required className={inputClasses} />
+                        <input type="url" name="storeLink" placeholder="Store Link (https://...)" value={formData.storeLink} onChange={handleChange} required className={inputClasses} />
+                      </div>
                       <div className="grid grid-cols-2 gap-3.5">
                         <div className="relative">
                           <select name="monthlyRevenue" value={formData.monthlyRevenue} onChange={handleChange} required className={selectClasses}>
@@ -287,6 +295,17 @@ export default function AdsEcommerceHero() {
                           <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-white/25 text-[10px]">▼</div>
                         </div>
                       </div>
+                      {formData.biggestChallenge === "other" && (
+                        <input
+                          type="text"
+                          name="otherChallenge"
+                          placeholder="Tell us your biggest challenge"
+                          value={formData.otherChallenge}
+                          onChange={handleChange}
+                          required
+                          className={inputClasses}
+                        />
+                      )}
                       <label className="flex items-center gap-2 cursor-pointer group pt-1">
                         <input type="checkbox" name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} required className="w-3.5 h-3.5 rounded border-white/20 bg-white/10 accent-primary-500" />
                         <span className="text-[11px] text-white/40 group-hover:text-white/60 transition-colors">
