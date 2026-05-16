@@ -85,9 +85,11 @@ export async function POST(request) {
       </div>
     `;
 
+    const LEAD_RECEIVER_EMAIL = process.env.LEAD_RECEIVER_EMAIL || "team@aneeverse.com";
+
     await transporter.sendMail({
       from: `"Aneeverse Website" <${process.env.SMTP_EMAIL}>`,
-      to: process.env.SMTP_EMAIL,
+      to: LEAD_RECEIVER_EMAIL,
       subject: `🛒 New Store Audit Request — ${fullName} (${platformLabels[platform] || platform})`,
       html: teamHtml,
     });
