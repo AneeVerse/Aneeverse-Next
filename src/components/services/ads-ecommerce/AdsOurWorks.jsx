@@ -1,8 +1,9 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Layout from "../../common/Layout";
-import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
+import { FaTimes } from "react-icons/fa";
 
 const hardcodedProjects = [
   {
@@ -32,6 +33,21 @@ const hardcodedProjects = [
 ];
 
 const AdsOurWorks = React.memo(() => {
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  React.useEffect(() => {
+    if (!selectedImage) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e) => {
+      if (e.key === "Escape") setSelectedImage(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [selectedImage]);
 
   return (
     <div className="bg-[#03151a] py-16 overflow-hidden">
@@ -54,9 +70,9 @@ const AdsOurWorks = React.memo(() => {
             {/* Desktop: 2x2 Grid */}
             <div className="hidden md:grid md:grid-cols-2 gap-6">
               {hardcodedProjects.map((project, index) => (
-                <Link
-                  href={project.url}
+                <div
                   key={index}
+                  onClick={() => setSelectedImage(project.image)}
                   className="group cursor-pointer relative flex flex-col gap-4"
                 >
                   <div className="relative rounded-2xl overflow-hidden w-full h-[350px]">
@@ -90,16 +106,16 @@ const AdsOurWorks = React.memo(() => {
                       ))}
                     </div>
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
 
             {/* Mobile: Horizontal Slider */}
             <div className="flex md:hidden overflow-x-auto pb-4 gap-4 snap-x snap-mandatory scrollbar-hide pl-4 sm:pl-6 pr-4">
               {hardcodedProjects.map((project, index) => (
-                <Link
-                  href={project.url}
+                <div
                   key={index}
+                  onClick={() => setSelectedImage(project.image)}
                   className="group cursor-pointer relative flex flex-col gap-4 flex-shrink-0 w-[85vw] snap-start"
                 >
                   <div className="relative rounded-2xl overflow-hidden w-full h-[300px]">
@@ -133,7 +149,7 @@ const AdsOurWorks = React.memo(() => {
                       ))}
                     </div>
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           </>
@@ -143,6 +159,44 @@ const AdsOurWorks = React.memo(() => {
           </div>
         )}
       </Layout>
+
+      {/* Premium Image Popup Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6 bg-black/70 backdrop-blur-sm overflow-y-auto"
+            onClick={() => setSelectedImage(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 30, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.97 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="relative max-w-7xl w-full my-auto flex items-center justify-center p-2 sm:p-4"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Standard Floating Close Button in top right of the overlay screen */}
+              <button
+                type="button"
+                onClick={() => setSelectedImage(null)}
+                aria-label="Close"
+                className="fixed top-4 right-4 sm:top-6 sm:right-6 z-[210] text-white/70 hover:text-white hover:scale-110 transition-all duration-200"
+              >
+                <FaTimes className="w-6 h-6 sm:w-8 sm:h-8" />
+              </button>
+              <img
+                src={selectedImage}
+                alt="Project Detail Work"
+                className="w-full h-auto max-h-[88vh] rounded-[1rem] md:rounded-[1.5rem] object-contain bg-white shadow-2xl border border-white/10"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 });
