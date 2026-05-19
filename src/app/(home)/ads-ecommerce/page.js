@@ -8,6 +8,7 @@ import AdsEcommerceContactBlock from '@/components/services/ads-ecommerce/AdsEco
 import ReviewsSection from '@/components/services/ads-ecommerce/ReviewsSection'
 
 import AdsEcommerceFAQSection from '@/components/services/ads-ecommerce/AdsEcommerceFAQSection'
+import VisitorTracker from '@/components/services/ads-ecommerce/VisitorTracker'
 import { client } from "@/sanity/lib/client"
 import { getPortfolioWorksQuery, getCustomerStoriesQuery } from "@/sanity/lib/queries"
 import { urlForImage } from "@/sanity/lib/image"
@@ -54,6 +55,7 @@ const page = async () => {
 
     return (
         <div>
+            <VisitorTracker />
             <ServiceSchema
                 serviceName="Marketplace Management"
                 serviceType="ProfessionalService"
