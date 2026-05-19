@@ -27,6 +27,13 @@ export default function EcommerceServices() {
             imgUrl: "/images/services/website/seo-optimization.png",
             pageUrl: "/services/zepto-marketplace-management",
         },
+        {
+            title: "Etsy Management",
+            description:
+                "Craft a profitable Etsy storefront. We manage listing SEO, tags, shop design, and Etsy Ads.",
+            imgUrl: "/images/services/website/gmb-optimization.png",
+            pageUrl: "/services/etsy-marketplace-management",
+        },
     ];
 
     return (
@@ -44,7 +51,7 @@ export default function EcommerceServices() {
                 </Heading>
 
                 {/* Grid */}
-                <div className="grid gap-4 grid-cols-1 mt-8 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
+                <div className="grid gap-4 grid-cols-1 mt-8 sm:grid-cols-2 lg:grid-cols-4 auto-rows-fr">
                     {services.map((service, index) => (
                         <Link
                             key={index}

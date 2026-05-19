@@ -8,6 +8,7 @@ import { FaDesktop, FaPager, FaSearch, FaMapMarkerAlt, FaLocationArrow } from "r
 import { FaPenFancy, FaGhost, FaFileAlt, FaTags } from "react-icons/fa";
 import { FaChartPie, FaEnvelope, FaGoogle, FaFacebook, FaUserFriends } from "react-icons/fa";
 import { FaEnvelopeOpenText, FaSlideshare, FaPaintBrush, FaFilePdf, FaCode, FaTag, FaRobot, FaChartLine, FaAmazon, FaEbay, FaRocket, FaChevronRight } from "react-icons/fa";
+import { SiEtsy } from "react-icons/si";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaArrowRight } from "react-icons/fa6";
@@ -63,6 +64,7 @@ const menuCategories = [
       { name: "Amazon Management", description: "Scale more on Amazon without firefighting.", icon: <FaAmazon />, link: "/services/amazon-marketplace-management" },
       { name: "eBay Management", description: "Profitable eBay store management.", icon: <FaEbay />, link: "/services/ebay-marketplace-management" },
       { name: "Zepto Management", description: "Win in quick commerce.", icon: <FaRocket />, link: "/services/zepto-marketplace-management" },
+      { name: "Etsy Management", description: "Craft a profitable Etsy storefront.", icon: <SiEtsy />, link: "/services/etsy-marketplace-management" },
     ],
   },
 ];

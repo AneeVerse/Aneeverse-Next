@@ -9,6 +9,7 @@ import {
   FaRobot, FaBlog, FaChartLine, FaEnvelope, FaEnvelopeOpenText, FaChartPie,
   FaAmazon, FaEbay, FaShoppingCart, FaRocket, FaChevronRight
 } from "react-icons/fa";
+import { SiEtsy } from "react-icons/si";
 import Link from "next/link";
 import { FaChevronDown } from "react-icons/fa6";
 import Layout from "@/components/common/Layout";
@@ -74,6 +75,7 @@ const ServicesMegaMenu = ({ color }) => {
         { name: "Amazon Management", url: "/services/amazon-marketplace-management", description: "Scale more on Amazon without firefighting.", icon: <FaAmazon /> },
         { name: "eBay Management", url: "/services/ebay-marketplace-management", description: "Profitable eBay store management.", icon: <FaEbay /> },
         { name: "Zepto Management", url: "/services/zepto-marketplace-management", description: "Win in quick commerce.", icon: <FaRocket /> },
+        { name: "Etsy Management", url: "/services/etsy-marketplace-management", description: "Craft a profitable Etsy storefront.", icon: <SiEtsy /> },
       ],
     },
   ];
