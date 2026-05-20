@@ -81,7 +81,16 @@ const Navbar = () => {
     >
       <Layout className="flex w-full justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="text-3xl ml-2 sm:ml-0 tracking-wide font-bold flex items-center">
+        <Link href="/" className="text-3xl ml-2 sm:ml-0 tracking-wide font-bold flex items-center gap-2">
+          <img
+            src="/images/Artboard 7@2x.png"
+            alt="Aneeverse Logo"
+            className="h-[30px] w-auto object-contain transition-all duration-300"
+            style={{
+              filter: (pathName.includes('/customer-stories') || color.text === "#073742") ? "none" : "brightness(0) invert(1)",
+              transform: "translateY(3px)"
+            }}
+          />
           <span style={{ color: pathName.includes('/customer-stories') ? '#073742' : color.text }}>
             aneeverse
           </span>

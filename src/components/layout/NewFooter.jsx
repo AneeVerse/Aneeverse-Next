@@ -248,8 +248,14 @@ export default function NewFooter() {
             </div>
           </div>
 
-          <div className="text-center md:text-left  tracking-wide text-4xl mt-6 mb-2 font-bold block">
-            aneeverse
+          <div className="flex items-center justify-center md:justify-start gap-2 text-4xl mt-6 mb-2 font-bold">
+            <img
+              src="/images/Artboard 7@2x.png"
+              alt="Aneeverse Logo"
+              className="h-[36px] w-auto object-contain"
+              style={{ filter: "brightness(0) invert(1)", transform: "translateY(3px)" }}
+            />
+            <span className="tracking-wide">aneeverse</span>
           </div>
 
           {/* Bottom Section */}
@@ -492,10 +498,14 @@ export default function NewFooter() {
             )}
 
             {/* Brand name */}
-            <div className="py-8">
-              <div className="text-3xl font-bold text-center">
-                aneeverse
-              </div>
+            <div className="py-8 flex items-center justify-center gap-2">
+              <img
+                src="/images/Artboard 7@2x.png"
+                alt="Aneeverse Logo"
+                className="h-[30px] w-auto object-contain"
+                style={{ filter: "brightness(0) invert(1)", transform: "translateY(3px)" }}
+              />
+              <span className="text-3xl font-bold">aneeverse</span>
             </div>
 
             {/* Copyright */}
