@@ -11,6 +11,7 @@ import WebPageSchema from '@/components/seo/WebPageSchema';
 import HomeSchema from '@/components/seo/HomeSchema';
 import Preloader from '@/components/ui/Preloader';
 import { PostHogProvider } from '@/components/providers/PostHogProvider';
+import ClarityInit from '@/components/analytics/ClarityInit';
 
 export default function ClientLayoutWrapper({ children }) {
   const pathname = usePathname();
@@ -20,6 +21,9 @@ export default function ClientLayoutWrapper({ children }) {
 
   return (
     <PostHogProvider>
+      {/* Microsoft Clarity analytics (skip studio/auth) */}
+      {!isStudio && !isAuth && <ClarityInit />}
+
       {/* Preloader - Shows before all content */}
       {!isStudio && !isAuth && !isStandalone && <Preloader />}
 
