@@ -61,11 +61,11 @@ const Footer = () => {
       <Layout>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-10">
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-0">
               <img
                 src="/images/Artboard 7@2x.png"
                 alt="Aneeverse Logo"
-                className="h-[24px] w-auto object-contain"
+                className="h-[50px] w-auto object-contain"
                 style={{ filter: "brightness(0) invert(1)", transform: "translateY(3px)" }}
               />
               <h2 className="text-2xl font-bold">Aneeverse</h2>

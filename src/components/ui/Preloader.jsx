@@ -71,7 +71,7 @@ export default function Preloader() {
                 <img
                     src="/images/Artboard 7@2x.png"
                     alt="Aneeverse Logo"
-                    className="w-20 h-20 md:w-28 md:h-28 object-contain"
+                    className="w-24 h-24 md:w-32 md:h-32 object-contain"
                     style={{ filter: "brightness(0) invert(1)" }}
                 />
             </div>

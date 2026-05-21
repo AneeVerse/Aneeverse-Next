@@ -210,11 +210,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         exit={{ padding: "0px 0px" }}
         className="flex justify-between items-center h-[70px] sm:h-[80px] px-sm md:px-md"
       >
-        <Link href="/" onClick={toggleSidebar} className="text-secondary-500 text-3xl tracking-wide font-bold flex items-center gap-2">
+        <Link href="/" onClick={toggleSidebar} className="text-secondary-500 text-3xl tracking-wide font-bold flex items-center gap-0">
           <img
             src="/images/Artboard 7@2x.png"
             alt="Aneeverse Logo"
-            className="h-[30px] w-auto object-contain"
+            className="h-[50px] w-auto object-contain"
             style={{ filter: "brightness(0) invert(1)", transform: "translateY(3px)" }}
           />
           <span>aneeverse</span>

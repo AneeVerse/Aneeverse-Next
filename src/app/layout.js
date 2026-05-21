@@ -52,6 +52,7 @@ export const metadata = {
     title: 'Aneeverse',
   },
   icons: {
+    icon: '/favicon-32x32.png',
     apple: '/apple-touch-icon.png',
   },
   openGraph: {
