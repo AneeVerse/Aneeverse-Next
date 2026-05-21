@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const ContactCalEmbed = () => {
     const [step, setStep] = useState("form"); // 'form' | 'calendar'
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -33,10 +34,28 @@ const ContactCalEmbed = () => {
         }
     }, [step]);
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
         if (formData.name && formData.email && formData.service) {
-            setStep("calendar");
+            setIsSubmitting(true);
+            try {
+                const res = await fetch("/api/discovery-lead", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(formData)
+                });
+                if (res.ok) {
+                    setStep("calendar");
+                } else {
+                    console.error("Failed to send discovery lead email, continuing to calendar.");
+                    setStep("calendar");
+                }
+            } catch (err) {
+                console.error("Error submitting discovery lead:", err);
+                setStep("calendar");
+            } finally {
+                setIsSubmitting(false);
+            }
         }
     };
 
@@ -63,10 +82,11 @@ const ContactCalEmbed = () => {
                                 <input
                                     type="text"
                                     required
+                                    disabled={isSubmitting}
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                     placeholder="Enter your name"
-                                    className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-[#2DC8E6] transition-colors"
+                                    className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-[#2DC8E6] transition-colors disabled:opacity-50"
                                 />
                             </div>
 
@@ -75,10 +95,11 @@ const ContactCalEmbed = () => {
                                 <input
                                     type="email"
                                     required
+                                    disabled={isSubmitting}
                                     value={formData.email}
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                     placeholder="Enter your email"
-                                    className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-[#2DC8E6] transition-colors"
+                                    className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-[#2DC8E6] transition-colors disabled:opacity-50"
                                 />
                             </div>
 
@@ -87,9 +108,10 @@ const ContactCalEmbed = () => {
                                 <div className="relative">
                                     <select
                                         required
+                                        disabled={isSubmitting}
                                         value={formData.service}
                                         onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                                        className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-xl text-white focus:outline-none focus:border-[#2DC8E6] transition-colors appearance-none cursor-pointer"
+                                        className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-xl text-white focus:outline-none focus:border-[#2DC8E6] transition-colors appearance-none cursor-pointer disabled:opacity-50"
                                     >
                                         <option value="" disabled>Select a service...</option>
                                         <option value="Creative Design & Branding">Creative Design & Branding</option>
@@ -123,11 +145,12 @@ const ContactCalEmbed = () => {
                                         <label className="block text-gray-300 text-sm font-medium mb-1.5">Please specify your requirements</label>
                                         <textarea
                                             required
+                                            disabled={isSubmitting}
                                             value={formData.otherDetails}
                                             onChange={(e) => setFormData({ ...formData, otherDetails: e.target.value })}
                                             placeholder="Tell us more about what you're looking for..."
                                             rows={3}
-                                            className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-[#2DC8E6] transition-colors resize-none"
+                                            className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-[#2DC8E6] transition-colors resize-none disabled:opacity-50"
                                         />
                                     </motion.div>
                                 )}
@@ -135,9 +158,18 @@ const ContactCalEmbed = () => {
 
                             <button
                                 type="submit"
-                                className="w-full mt-4 py-3 bg-[#2DC8E6] text-black font-semibold rounded-xl hover:bg-[#25a8c4] transition-all duration-300 shadow-md"
+                                disabled={isSubmitting}
+                                className="w-full mt-4 py-3 bg-[#2DC8E6] text-black font-semibold rounded-xl hover:bg-[#25a8c4] transition-all duration-300 shadow-md flex items-center justify-center disabled:opacity-75 disabled:cursor-not-allowed"
                             >
-                                Choose Date & Time
+                                {isSubmitting ? (
+                                    <div className="flex items-center gap-2">
+                                        <svg className="animate-spin h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
+                                        <span>Saving Details...</span>
+                                    </div>
+                                ) : "Choose Date & Time"}
                             </button>
                         </form>
                     </motion.div>
