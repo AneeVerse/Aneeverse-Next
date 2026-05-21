@@ -1,43 +1,176 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Cal, { getCalApi } from "@calcom/embed-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const ContactCalEmbed = () => {
-    useEffect(() => {
-        (async function () {
-            const cal = await getCalApi({ namespace: "discovery-call" });
+    const [step, setStep] = useState("form"); // 'form' | 'calendar'
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        service: "",
+        otherDetails: ""
+    });
 
-            // Apply custom styling
-            cal("ui", {
-                theme: "dark",
-                styles: {
-                    branding: {
-                        brandColor: "#2DC8E6"
-                    }
-                },
-                hideEventTypeDetails: false,
-                layout: "month_view"
-            });
-        })();
-    }, []);
+    useEffect(() => {
+        if (step === "calendar") {
+            (async function () {
+                const cal = await getCalApi({ namespace: "discovery-call" });
+
+                // Apply custom styling
+                cal("ui", {
+                    theme: "dark",
+                    styles: {
+                        branding: {
+                            brandColor: "#2DC8E6"
+                        }
+                    },
+                    hideEventTypeDetails: false,
+                    layout: "month_view"
+                });
+            })();
+        }
+    }, [step]);
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        if (formData.name && formData.email && formData.service) {
+            setStep("calendar");
+        }
+    };
 
     return (
-        <div className="rounded-2xl overflow-hidden shadow-2xl cal-embed-container bg-[#111111]">
-            <Cal
-                namespace="discovery-call"
-                calLink="aneeverse/15min"
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    overflow: "scroll",
-                    minHeight: "700px"
-                }}
-                config={{
-                    layout: "month_view",
-                    theme: "dark"
-                }}
-            />
+        <div className="rounded-2xl overflow-hidden shadow-2xl cal-embed-container bg-[#111111] min-h-[550px] flex flex-col justify-center relative">
+            <AnimatePresence mode="wait">
+                {step === "form" && (
+                    <motion.div
+                        key="form"
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -15 }}
+                        transition={{ duration: 0.3 }}
+                        className="w-full max-w-xl mx-auto py-12 px-6 md:px-12"
+                    >
+                        <div className="text-center mb-8">
+                            <h3 className="text-2xl font-semibold text-white mb-2">Discovery Call Setup</h3>
+                            <p className="text-gray-400 text-sm">Please tell us a bit about your needs first.</p>
+                        </div>
+
+                        <form onSubmit={handleFormSubmit} className="space-y-5">
+                            <div>
+                                <label className="block text-gray-300 text-sm font-medium mb-1.5">Your Name</label>
+                                <input
+                                    type="text"
+                                    required
+                                    value={formData.name}
+                                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                    placeholder="Enter your name"
+                                    className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-[#2DC8E6] transition-colors"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-gray-300 text-sm font-medium mb-1.5">Email Address</label>
+                                <input
+                                    type="email"
+                                    required
+                                    value={formData.email}
+                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                    placeholder="Enter your email"
+                                    className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-[#2DC8E6] transition-colors"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-gray-300 text-sm font-medium mb-1.5">What Service are you interested in?</label>
+                                <div className="relative">
+                                    <select
+                                        required
+                                        value={formData.service}
+                                        onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                                        className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-xl text-white focus:outline-none focus:border-[#2DC8E6] transition-colors appearance-none cursor-pointer"
+                                    >
+                                        <option value="" disabled>Select a service...</option>
+                                        <option value="Creative Design & Branding">Creative Design & Branding</option>
+                                        <option value="UI, UX & Web Development">UI, UX & Web Development</option>
+                                        <option value="Platform Development">Platform Development</option>
+                                        <option value="SEO & Blog Writing">SEO & Blog Writing</option>
+                                        <option value="AI SEO (GEO) (AEO) (AIO)">AI SEO (GEO) (AEO) (AIO)</option>
+                                        <option value="n8n Workflows & Automation">n8n Workflows & Automation</option>
+                                        <option value="Sales & Marketing Automation">Sales & Marketing Automation</option>
+                                        <option value="Marketing Strategy & Campaign">Marketing Strategy & Campaign</option>
+                                        <option value="E-commerce Marketplace Management (Amazon/eBay/Zepto/Etsy)">E-commerce Marketplace Management</option>
+                                        <option value="Other">Other / General Inquiry</option>
+                                    </select>
+                                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
+                                        <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <AnimatePresence>
+                                {formData.service === "Other" && (
+                                    <motion.div
+                                        initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                                        animate={{ opacity: 1, height: "auto", marginTop: 20 }}
+                                        exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                                        transition={{ duration: 0.25 }}
+                                        className="overflow-hidden"
+                                    >
+                                        <label className="block text-gray-300 text-sm font-medium mb-1.5">Please specify your requirements</label>
+                                        <textarea
+                                            required
+                                            value={formData.otherDetails}
+                                            onChange={(e) => setFormData({ ...formData, otherDetails: e.target.value })}
+                                            placeholder="Tell us more about what you're looking for..."
+                                            rows={3}
+                                            className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-[#2DC8E6] transition-colors resize-none"
+                                        />
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+
+                            <button
+                                type="submit"
+                                className="w-full mt-4 py-3 bg-[#2DC8E6] text-black font-semibold rounded-xl hover:bg-[#25a8c4] transition-all duration-300 shadow-md"
+                            >
+                                Choose Date & Time
+                            </button>
+                        </form>
+                    </motion.div>
+                )}
+
+                {step === "calendar" && (
+                    <motion.div
+                        key="calendar"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.4 }}
+                        className="w-full h-full"
+                    >
+                        <Cal
+                            namespace="discovery-call"
+                            calLink="aneeverse/15min"
+                            style={{
+                                width: "100%",
+                                height: "100%",
+                                overflow: "scroll",
+                                minHeight: "700px"
+                            }}
+                            config={{
+                                layout: "month_view",
+                                theme: "dark",
+                                name: formData.name,
+                                email: formData.email,
+                                notes: formData.service === "Other" ? formData.otherDetails : `Service requested: ${formData.service}`
+                            }}
+                        />
+                    </motion.div>
+                )}
+            </AnimatePresence>
             <style jsx global>{`
                 .cal-embed-container {
                     background: #111111;
