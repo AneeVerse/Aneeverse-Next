@@ -7,11 +7,15 @@ import { HiOutlineBookOpen, HiOutlinePlay, HiOutlineClipboardList, HiOutlinePenc
 import { FaDesktop, FaPager, FaSearch, FaMapMarkerAlt, FaLocationArrow } from "react-icons/fa";
 import { FaPenFancy, FaGhost, FaFileAlt, FaTags } from "react-icons/fa";
 import { FaChartPie, FaEnvelope, FaGoogle, FaFacebook, FaUserFriends } from "react-icons/fa";
-import { FaEnvelopeOpenText, FaSlideshare, FaPaintBrush, FaFilePdf, FaCode, FaTag, FaRobot, FaChartLine, FaAmazon, FaEbay, FaRocket, FaChevronRight } from "react-icons/fa";
+import { FaEnvelopeOpenText, FaSlideshare, FaPaintBrush, FaFilePdf, FaCode, FaTag, FaRobot, FaChartLine, FaAmazon, FaEbay, FaRocket } from "react-icons/fa";
 import { SiEtsy } from "react-icons/si";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaArrowRight } from "react-icons/fa6";
+import { 
+  ShoppingCart, SquareCode, Search, Megaphone, PenTool, FileText, 
+  Bot, ChevronRight 
+} from "lucide-react";
 
 // Cache for dynamic content to avoid refetching
 let blogsCache = [];
@@ -20,53 +24,56 @@ let isBlogsFetched = false;
 let isStoriesFetched = false;
 
 // Menu Categories Data
-const menuCategories = [
+const servicesList = [
   {
-    title: "Creative Design",
-    link: "/services",
-    color: "bg-purple-100 hover:bg-purple-200 text-purple-900",
-    items: [
-      { name: "Ad Creative", description: "Eye-catching ad creatives that convert.", icon: <FaPaintBrush />, link: "/services/ad-creative" },
-      { name: "Presentation Design", description: "Pitch-perfect presentations.", icon: <FaSlideshare />, link: "/services/presentation-design" },
-      { name: "Branding System & Merchandise", description: "Complete brand identity solutions.", icon: <FaTag />, link: "/services/branding-services" },
-      { name: "Ebook, Report & Print Design", description: "Professional digital publications.", icon: <FaFilePdf />, link: "/services/ebook-digital-report" },
-    ],
+    name: "E-Commerce Marketplace Management",
+    description: "Manage Amazon, eBay & multi-channel marketplaces for scalable growth.",
+    url: "/services#ecommerce-marketplace",
+    icon: <ShoppingCart className="w-5 h-5 text-[#E07A5F]" strokeWidth={2} />,
+    iconBg: "bg-[#FFF4EB]"
   },
   {
-    title: "Specialized Solutions",
-    link: "/services",
-    color: "bg-blue-100 hover:bg-blue-200 text-blue-900",
-    items: [
-      { name: "Platform Development", description: "Scalable web platforms.", icon: <FaCode />, link: "/services/platform-development" },
-      { name: "UI, UX & Web Development", description: "Exceptional digital experiences.", icon: <FaDesktop />, link: "/services/ui-ux-web-development" },
-      { name: "Copywriting", description: "Copy that converts.", icon: <FaPenFancy />, link: "/services/copywriting" },
-      { name: "SEO & Blog Writing", description: "Boost search rankings.", icon: <FaSearch />, link: "/services/seo-optimization" },
-    ],
+    name: "Platform & Website Development",
+    description: "Scalable, secure and high-performance web platforms built to grow.",
+    url: "/services/platform-development",
+    icon: <SquareCode className="w-5 h-5 text-[#2D9B75]" strokeWidth={2} />,
+    iconBg: "bg-[#EEF8F4]"
   },
   {
-    title: "AI & Automation",
-    link: "/services",
-    color: "bg-emerald-100 hover:bg-emerald-200 text-emerald-900",
-    items: [
-      { name: "AI SEO (GEO) (AEO) (AIO)", description: "Next-generation SEO optimization.", icon: <FaChartLine />, link: "/services/ai-seo-geo-aeo-aio" },
-      { name: "n8n Workflows", description: "Workflow Automation & Integrations.", icon: <FaRobot />, link: "/services/n8n-workflows" },
-      { name: "Sales & Marketing Automation", description: "Streamline your workflows.", icon: <FaChartPie />, link: "/services/sales-marketing-automation" },
-      { type: "category", name: "Marketing", color: "bg-orange-100 hover:bg-orange-200 text-orange-900" },
-      { name: "Marketing Strategy", description: "Data-driven marketing plans.", icon: <FaChartPie />, link: "/services/marketing-strategy" },
-      { name: "Email Design & Campaign", description: "Automated email campaigns.", icon: <FaEnvelope />, link: "/services/email-campaign" },
-    ],
+    name: "AI SEO (GEO) (AEO) (AIO)",
+    description: "AI-first SEO strategies to improve visibility in AI and traditional search.",
+    url: "/services/ai-seo-geo-aeo-aio",
+    icon: <Search className="w-5 h-5 text-[#00A896]" strokeWidth={2} />,
+    iconBg: "bg-[#EAF7FA]"
   },
   {
-    title: "Ecommerce Marketplace",
-    link: "/services",
-    color: "bg-[#FFF8E1] hover:bg-[#FFECB3] text-[#F57F17]",
-    items: [
-      { name: "Amazon Management", description: "Scale more on Amazon without firefighting.", icon: <FaAmazon />, link: "/services/amazon-marketplace-management" },
-      { name: "eBay Management", description: "Profitable eBay store management.", icon: <FaEbay />, link: "/services/ebay-marketplace-management" },
-      { name: "Zepto Management", description: "Win in quick commerce.", icon: <FaRocket />, link: "/services/zepto-marketplace-management" },
-      { name: "Etsy Management", description: "Craft a profitable Etsy storefront.", icon: <SiEtsy />, link: "/services/etsy-marketplace-management" },
-    ],
+    name: "Marketing & Google / Meta Ads Management",
+    description: "ROI-focused ad campaigns that deliver measurable results.",
+    url: "/services/marketing-strategy",
+    icon: <Megaphone className="w-5 h-5 text-[#E76F51]" strokeWidth={2} />,
+    iconBg: "bg-[#FFF6F0]"
   },
+  {
+    name: "Social, Printable & Ads Creative Designs",
+    description: "Eye-catching designs that boost engagement and drive conversions.",
+    url: "/services/ad-creative",
+    icon: <PenTool className="w-5 h-5 text-[#7C3AED]" strokeWidth={2} />,
+    iconBg: "bg-[#F5F3FF]"
+  },
+  {
+    name: "Blogs & SEO Services",
+    description: "High-ranking content and SEO strategies that drive organic traffic.",
+    url: "/services/blog-writing",
+    icon: <FileText className="w-5 h-5 text-[#2563EB]" strokeWidth={2} />,
+    iconBg: "bg-[#EFF6FF]"
+  },
+  {
+    name: "n8n & AI Automation Workflows",
+    description: "Automate tasks, integrate tools and scale your operations.",
+    url: "/services/n8n-workflows",
+    icon: <Bot className="w-5 h-5 text-[#9333EA]" strokeWidth={2} />,
+    iconBg: "bg-[#FAF5FF]"
+  }
 ];
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
@@ -215,9 +222,9 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             src="/images/Artboard 7@2x.png"
             alt="Aneeverse Logo"
             className="h-[50px] w-auto object-contain"
-            style={{ filter: "brightness(0) invert(1)", transform: "translateY(3px)" }}
+            style={{ filter: "brightness(0) invert(1)", transform: "translateY(-1px)", marginRight: "-13px" }}
           />
-          <span>aneeverse</span>
+          <span style={{ transform: "translateY(-3px)" }} className="inline-block">aneeverse</span>
         </Link>
         <button onClick={toggleSidebar} className="text-xl text-secondary-500">
           <FaTimes />
@@ -227,11 +234,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       {/* Menu Sections */}
       <div className="px-5">
         {/* Services Section */}
-        <div className="py-3 flex justify-between items-center cursor-pointer" onClick={() => toggleSection("services")}>
-          <Link href="/services" onClick={toggleSidebar}>
+        <div className="py-3 flex justify-between items-center cursor-pointer text-secondary-500 font-medium" onClick={() => toggleSection("services")}>
+          <span className="cursor-pointer">
             Services
-          </Link>
-          {openSection === "services" ? <FaChevronUp /> : <FaChevronDown />}
+          </span>
+          {openSection === "services" ? <FaChevronUp className="text-xs" /> : <FaChevronDown className="text-xs" />}
         </div>
 
         <AnimatePresence>
@@ -243,41 +250,32 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="max-w-6xl mx-auto py-2 grid grid-cols-1 gap-6">
-                {menuCategories.map((category, index) => (
-                  <div key={index}>
-
-                    <Link href={`${category.link}`} className={`text-base font-semibold py-2 px-6 min-w-fit rounded-xl inline-flex items-center gap-2 border border-black/5 shadow-sm ${category.color}`} onClick={toggleSidebar}>
-                      <span>{category.title} </span> <FaChevronRight className="text-xs" />
-                    </Link>
-                    <ul className="mt-4 space-y-2">
-                      {category.items.map((item, idx) => (
-                        item.type === "category" ? (
-                          <div key={idx} className="pl-0 pr-3 pt-2 mt-5 pb-3 mb-2">
-                            <div className={`text-base font-semibold py-2 px-6 rounded-xl inline-flex items-center cursor-pointer gap-2 border border-black/5 shadow-sm transition-all duration-300 ${item.color}`}>
-                              {item.name}
-                              <FaChevronRight className="text-xs" />
-                            </div>
-                          </div>
-                        ) : (
-                          <Link
-                            href={item.link}
-                            key={idx}
-                            className="flex group px-2 py-2 border-b items-center justify-between gap-3"
-                            onClick={toggleSidebar}
-                          >
-                            <div className="flex items-center gap-3">
-                              <div>
-                                <h4 className="text-md font-medium text-gray-700">{item.name}</h4>
-                                <p className="text-sm text-gray-500">{item.description}</p>
-                              </div>
-                            </div>
-                            <div className={`text-gray-700 self-center ${item.name === "eBay Management" ? "text-[2.25rem]" : "text-lg"}`}>{item.icon}</div>
-                          </Link>
-                        )
-                      ))}
-                    </ul>
-                  </div>
+              <div className="max-w-6xl mx-auto py-2 grid grid-cols-1 gap-1">
+                {servicesList.map((service, index) => (
+                  <Link
+                    key={index}
+                    href={service.url}
+                    onClick={toggleSidebar}
+                    className="flex items-center justify-between py-3.5 px-3 md:hover:bg-black/[0.02] active:bg-black/[0.04] rounded-2xl transition-colors duration-200 group border-b border-gray-150 last:border-b-0"
+                  >
+                    <div className="flex items-center gap-4 flex-1">
+                      {/* Icon Box */}
+                      <div className={`${service.iconBg} w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm transition-transform duration-300 md:group-hover:scale-105`}>
+                        {service.icon}
+                      </div>
+                      {/* Text */}
+                      <div className="flex-1">
+                        <h4 className="text-[14px] font-bold text-gray-900 md:group-hover:text-[#0D9488] transition-colors leading-tight">
+                          {service.name}
+                        </h4>
+                        <p className="text-xs text-gray-500 mt-0.5 leading-relaxed line-clamp-1">
+                          {service.description}
+                        </p>
+                      </div>
+                    </div>
+                    {/* Arrow */}
+                    <ChevronRight className="text-gray-400 md:group-hover:text-[#0D9488] md:group-hover:translate-x-1 transition-all duration-300 w-4 h-4 ml-2 flex-shrink-0" strokeWidth={3} />
+                  </Link>
                 ))}
               </div>
             </motion.div>

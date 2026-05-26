@@ -291,7 +291,7 @@ const ContentBlock = ({ testimonial }) => (
         <p className="text-white font-bold text-xl mb-1">{testimonial.author}</p>
         <p className="text-gray-400 font-normal text-lg">{testimonial.role}</p>
       </div>
-      <div className="flex items-center gap-5 bg-white/5 border border-white/10 p-4 rounded-2xl w-fit cursor-pointer hover:bg-white/10 transition-colors self-end md:self-auto">
+      <div className="flex items-center gap-5 bg-white/5 border border-white/10 p-4 rounded-2xl w-fit hover:bg-white/10 transition-colors self-end md:self-auto">
         <div className="w-20 h-14 relative rounded-xl overflow-hidden shadow-lg">
           <Image src={testimonial.linkCard.image} fill className="object-cover" alt="resource" draggable={false} />
         </div>

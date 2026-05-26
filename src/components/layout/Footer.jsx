@@ -66,9 +66,9 @@ const Footer = () => {
                 src="/images/Artboard 7@2x.png"
                 alt="Aneeverse Logo"
                 className="h-[50px] w-auto object-contain"
-                style={{ filter: "brightness(0) invert(1)", transform: "translateY(3px)" }}
+                style={{ filter: "brightness(0) invert(1)", transform: "translateY(-1px)", marginRight: "-13px" }}
               />
-              <h2 className="text-2xl font-bold">Aneeverse</h2>
+              <h2 className="text-2xl font-bold inline-block" style={{ transform: "translateY(-3px)" }}>Aneeverse</h2>
             </div>
             <p className="text-primary-500/70 text-sm max-w-xs">
               Design, optimize, advertise. Your creative team, on-demand.

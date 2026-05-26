@@ -253,9 +253,9 @@ export default function NewFooter() {
               src="/images/Artboard 7@2x.png"
               alt="Aneeverse Logo"
               className="h-[50px] w-auto object-contain"
-              style={{ filter: "brightness(0) invert(1)", transform: "translateY(3px)" }}
+              style={{ filter: "brightness(0) invert(1)", transform: "translateY(-1px)", marginRight: "-13px" }}
             />
-            <span className="tracking-wide">aneeverse</span>
+            <span className="tracking-wide inline-block" style={{ transform: "translateY(-3px)" }}>aneeverse</span>
           </div>
 
           {/* Bottom Section */}
@@ -503,9 +503,9 @@ export default function NewFooter() {
                 src="/images/Artboard 7@2x.png"
                 alt="Aneeverse Logo"
                 className="h-[36px] w-auto object-contain"
-                style={{ filter: "brightness(0) invert(1)", transform: "translateY(3px)" }}
+                style={{ filter: "brightness(0) invert(1)", transform: "translateY(-1px)", marginRight: "-9.5px" }}
               />
-              <span className="text-3xl font-bold">aneeverse</span>
+              <span className="text-3xl font-bold inline-block" style={{ transform: "translateY(-2px)" }}>aneeverse</span>
             </div>
 
             {/* Copyright */}

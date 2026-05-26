@@ -88,10 +88,11 @@ const Navbar = () => {
             className="h-[50px] w-auto object-contain transition-all duration-300"
             style={{
               filter: (pathName.includes('/customer-stories') || color.text === "#073742") ? "none" : "brightness(0) invert(1)",
-              transform: "translateY(3px)"
+              transform: "translateY(-1.2px)",
+              marginRight: "-11px"
             }}
           />
-          <span style={{ color: pathName.includes('/customer-stories') ? '#073742' : color.text }}>
+          <span style={{ color: pathName.includes('/customer-stories') ? '#073742' : color.text, transform: "translateY(-3px)" }} className="inline-block">
             aneeverse
           </span>
         </Link>

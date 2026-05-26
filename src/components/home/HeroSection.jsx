@@ -48,6 +48,9 @@ const images3 = [
   { src: "https://ik.imagekit.io/aghmftdmm/creative/PACKING%20&%20MERCHANDISE%20DESIGN%201.webp?updatedAt=1765350363321" },
 ];
 
+const column1Images = [...images1, ...images3.slice(0, 4)];
+const column2Images = [...images2, ...images3.slice(4)];
+
 const HeroSection = () => {
   const scrollRef = useRef(null);
   const scrollRefRight = useRef(null);
@@ -482,7 +485,7 @@ const HeroSection = () => {
                     <div className="flex" style={{ width: 'max-content' }}>
                       {[...images1, ...images1, ...images1].map((img, index) => (
                         <div
-                          className="relative flex-shrink-0 select-none overflow-hidden cursor-pointer rounded-xl group"
+                          className="relative flex-shrink-0 select-none overflow-hidden rounded-xl group"
                           key={index}
                         >
                           <div
@@ -533,7 +536,7 @@ const HeroSection = () => {
                         .reverse()
                         .map((img, index) => (
                           <div
-                            className="relative flex-shrink-0 select-none overflow-hidden cursor-pointer rounded-xl group"
+                            className="relative flex-shrink-0 select-none overflow-hidden rounded-xl group"
                             key={index}
                           >
                             <div
@@ -578,13 +581,13 @@ const HeroSection = () => {
           {/* Desktop View - Vertical Scroll */}
           <div className="flex gap-4 h-full overflow-hidden marquee-wrapper" style={{ height: 'clamp(600px, 100vh, 1200px)' }}>
             <div
-              className="w-[31%] marquee-column"
+              className="w-[48%] marquee-column"
             >
               <div className="marquee-vertical marquee-vertical-content space-y-4">
-                {[...images1, ...images1].map((img, index) => (
+                {[...column1Images, ...column1Images].map((img, index) => (
                   <div
                     key={index}
-                    className="relative overflow-hidden cursor-pointer rounded-xl group"
+                    className="relative overflow-hidden rounded-xl group"
                   >
                     <Image
                       src={img.src}
@@ -605,13 +608,13 @@ const HeroSection = () => {
             </div>
 
             <div
-              className="w-[31%] marquee-column"
+              className="w-[48%] marquee-column"
             >
               <div className="marquee-vertical-reverse marquee-vertical-content space-y-4">
-                {[...images2, ...images2].map((img, index) => (
+                {[...column2Images, ...column2Images].map((img, index) => (
                   <div
                     key={index}
-                    className="relative overflow-hidden cursor-pointer rounded-xl group"
+                    className="relative overflow-hidden rounded-xl group"
                   >
                     <Image
                       src={img.src}
@@ -619,33 +622,6 @@ const HeroSection = () => {
                       width={400}
                       height={index % 2 === 0 ? 200 : 280}
                       className={`w-full ${index % 2 === 0 ? 'h-[200px]' : 'h-[280px]'} object-cover rounded-xl transition-all duration-300 shadow-2xl`}
-                      loading="lazy"
-                      sizes="(max-width: 1024px) 0vw, 12vw"
-                      unoptimized={img.src?.includes('ik.imagekit.io')}
-                      onError={(e) => {
-                        console.error('Image failed to load:', img.src);
-                      }}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div
-              className="w-[31%] marquee-column"
-            >
-              <div className="marquee-vertical marquee-vertical-content space-y-4">
-                {[...images3, ...images3].map((img, index) => (
-                  <div
-                    key={index}
-                    className="relative overflow-hidden cursor-pointer rounded-xl group"
-                  >
-                    <Image
-                      src={img.src}
-                      alt="Creative work"
-                      width={400}
-                      height={index % 2 === 0 ? 280 : 200}
-                      className={`w-full ${index % 2 === 0 ? 'h-[280px]' : 'h-[200px]'} object-cover rounded-xl transition-all duration-300 shadow-2xl`}
                       loading="lazy"
                       sizes="(max-width: 1024px) 0vw, 12vw"
                       unoptimized={img.src?.includes('ik.imagekit.io')}
