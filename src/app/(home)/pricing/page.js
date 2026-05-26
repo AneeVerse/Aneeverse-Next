@@ -1,7 +1,7 @@
 import TestimonialsSection from '@/components/home/TestimonialsSection'
 import SlidingLogos from '@/components/home/SlidingLogos'
 import AIDesignSection from '@/components/pricing/AIDesignSection'
-import CreativeSectionPricing from '@/components/pricing/CreativeSectionPricing'
+import CreativeSection from '@/components/home/CreativeSection'
 import FAQSectionPricing from '@/components/pricing/FAQSectionPricing'
 import FeatureGridPricing from '@/components/pricing/FeatureGridPricing'
 import PricingComponent from '@/components/pricing/PricingComponent'
@@ -42,7 +42,7 @@ const page = () => {
       <div className='py-16 bg-primary-500'>
         <SlidingLogos />
       </div>
-      <CreativeSectionPricing />
+      <CreativeSection />
       <FeatureGridPricing />
       {/* <TestimonialSliderPricing /> */}
       <TestimonialsSection />

@@ -7,7 +7,7 @@ const AnimatedButton = ({
   children,
   className = "",
   style = {},
-  mainTextSlide = "-120%",  // How far main text slides up
+  mainTextSlide = "-140%",  // How far main text slides up
   duplicateTextStart = "100%", // Starting position of duplicate text
   duplicateTextEnd = "-100%", // End position of duplicate text
   ...props

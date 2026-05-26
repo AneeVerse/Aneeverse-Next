@@ -3,6 +3,7 @@ import Link from "next/link";
 import { client } from "@/sanity/lib/client";
 import { getRecommendedPostsQuery } from "@/sanity/lib/queries";
 import { urlForImage } from "@/sanity/lib/image";
+import AnimatedButton from "../common/AnimatedButton";
 
 export default async function WeRecommend() {
     let rawPosts = [];
@@ -121,15 +122,26 @@ export default async function WeRecommend() {
                 <div className="flex items-start justify-between">
                     <div>
                         <p className="text-gray-400 text-xs md:text-sm mb-2 tracking-widest uppercase">
-                            GOT TIME?
+                             GOT TIME?
                         </p>
                         <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight">
                             WE RECOMMEND
                         </h2>
                     </div>
-                    <Link href="/blog" className="hidden md:flex items-center gap-2 px-5 py-2.5 bg-[#072d36] hover:bg-teal-700 text-white text-sm rounded-full transition-all duration-300 hover:gap-3 group mt-8">
-                        <span className="font-medium">View all</span>
-                    </Link>
+                    <AnimatedButton
+                        href="/blog"
+                        className="hidden md:block rounded-full font-medium text-sm transition-all duration-300 mt-8"
+                        style={{
+                            backgroundColor: "#072d36",
+                            color: "white",
+                            padding: "0.625rem 1.5rem"
+                        }}
+                        mainTextSlide="-140%"
+                        duplicateTextStart="100%"
+                        duplicateTextEnd="-100%"
+                    >
+                        View all
+                    </AnimatedButton>
                 </div>
             </div>
 
@@ -183,9 +195,20 @@ export default async function WeRecommend() {
 
             {/* Mobile View All Button */}
             <div className="md:hidden mt-8 flex justify-center">
-                <Link href="/blog" className="flex items-center gap-2 px-5 py-2.5 bg-teal-600 hover:bg-teal-700 text-white text-sm rounded-full transition-all duration-300">
-                    <span className="font-medium">View all</span>
-                </Link>
+                <AnimatedButton
+                    href="/blog"
+                    className="rounded-full font-medium text-sm transition-all duration-300"
+                    style={{
+                        backgroundColor: "#0d9488",
+                        color: "white",
+                        padding: "0.625rem 1.5rem"
+                    }}
+                    mainTextSlide="-140%"
+                    duplicateTextStart="100%"
+                    duplicateTextEnd="-100%"
+                >
+                    View all
+                </AnimatedButton>
             </div>
         </section>
     );

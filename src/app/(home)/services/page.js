@@ -2,12 +2,7 @@ import DynamicOurWorks from '@/components/home/DynamicOurWorks'
 import FeaturesSection from '@/components/home/FeaturesSection'
 import SlidingLogos from '@/components/home/SlidingLogos'
 import AboutDesignServicesSection from '@/components/services/AboutDesignServicesSection'
-import CreativeDesignServices from '@/components/services/CreativeDesignServices'
-import WebsiteServices from '@/components/services/WebsiteServices'
-import ContentWritingServices from '@/components/services/ContentWritingServices'
-import AIAutomationServices from '@/components/services/AIAutomationServices'
-import MarketingServices from '@/components/services/MarketingServices'
-import EcommerceServices from '@/components/services/EcommerceServices'
+import ServicesPageGrid from '@/components/services/ServicesPageGrid'
 import FAQSection from '@/components/services/FAQSection'
 import ServicesHero from '@/components/services/ServicesHero'
 import ServicesSupportSection from '@/components/services/ServicesSupportSection'
@@ -125,17 +120,8 @@ export default async function Page() {
       <ServicesHero />
       <SlidingLogos />
       <ServicesSupportSection />
-      <div className='bg-secondary-500 space-y-8 py-16'>
-        <CreativeDesignServices />
-
-        <WebsiteServices />
-        <ContentWritingServices />
-
-        <AIAutomationServices />
-
-        <MarketingServices />
-
-        <EcommerceServices />
+      <div className='bg-secondary-500 py-16 border-t border-white/10'>
+        <ServicesPageGrid />
       </div>
       <DynamicOurWorks projects={projects} />
       <FeaturesSection />

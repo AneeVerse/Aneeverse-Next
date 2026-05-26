@@ -15,37 +15,37 @@ const TOUCH_DIRECTION_THRESHOLD = 5;
 
 // Column 1 - First 8 creative images
 const images1 = [
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/AD%20CREATIVE%202.webp?updatedAt=1765350361052" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/PLATFORM%20DEVLOPMENT%202.webp?updatedAt=1765350362851" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/AI%20POWERED%20CREATIVES%201.webp?updatedAt=1765350360954" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/MARKETING%20STRATEGY%201.webp?updatedAt=1765350363109" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/SOCIAL%20MEDIA%20CREATIVES%201.webp?updatedAt=1765350362918" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/UI,%20UX%20&%20WEB%20DEVLOPMENT%202.webp?updatedAt=1765350363457" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/AI%20BLOG%20WRITING%202.webp?updatedAt=1765350361070" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/EMAIL%20CAMPAIGN%201.webp?updatedAt=1765350362742" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/AD%20CREATIVE%202.webp?updatedAt=1765350361052", url: "/services/ad-creative", label: "Ad Creative" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/PLATFORM%20DEVLOPMENT%202.webp?updatedAt=1765350362851", url: "/services/platform-development", label: "Platform Development" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/AI%20POWERED%20CREATIVES%201.webp?updatedAt=1765350360954", url: "/services/ai-powered-creatives", label: "AI Powered Creatives" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/MARKETING%20STRATEGY%201.webp?updatedAt=1765350363109", url: "/services/marketing-strategy", label: "Marketing Strategy" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/SOCIAL%20MEDIA%20CREATIVES%201.webp?updatedAt=1765350362918", url: "/services/social-media-creatives", label: "Social Media Creatives" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/UI,%20UX%20&%20WEB%20DEVLOPMENT%202.webp?updatedAt=1765350363457", url: "/services/ui-ux-web-development", label: "UI, UX & Web Dev" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/AI%20BLOG%20WRITING%202.webp?updatedAt=1765350361070", url: "/services/blog-writing", label: "AI Blog Writing" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/EMAIL%20CAMPAIGN%201.webp?updatedAt=1765350362742", url: "/services/email-design", label: "Email Campaign" },
 ];
 
 // Column 2 - Next 8 creative images
 const images2 = [
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/PRESENTATION%20DESIGN%201.webp?updatedAt=1765350362921" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/DESIGN%20SYSTEM%201.webp?updatedAt=1765350363997" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/AI%20SEO%20(GEO)%20(AEO)%20(AIO)%201.webp?updatedAt=1765350361413" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/EMAIL%20DESIGN%201.webp?updatedAt=1765350362829" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/ILLUSTRATION%20DESIGN%201.webp?updatedAt=1765350362443" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/PRODUCT%20DESIGN%201.webp?updatedAt=1765350363546" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/SALES%20&%20MARKETING%20AUTOMATION%201.webp?updatedAt=1765350362822" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/BRANDING%20SERVICES%201.webp?updatedAt=1765350361962" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/PRESENTATION%20DESIGN%201.webp?updatedAt=1765350362921", url: "/services/presentation-design", label: "Presentation Design" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/DESIGN%20SYSTEM%201.webp?updatedAt=1765350363997", url: "/services/design-system", label: "Design System" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/AI%20SEO%20(GEO)%20(AEO)%20(AIO)%201.webp?updatedAt=1765350361413", url: "/services/ai-seo-geo-aeo-aio", label: "AI SEO" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/EMAIL%20DESIGN%201.webp?updatedAt=1765350362829", url: "/services/email-design", label: "Email Design" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/ILLUSTRATION%20DESIGN%201.webp?updatedAt=1765350362443", url: "/services/illustration-design", label: "Illustration Design" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/PRODUCT%20DESIGN%201.webp?updatedAt=1765350363546", url: "/services/product-design", label: "Product Design" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/SALES%20&%20MARKETING%20AUTOMATION%201.webp?updatedAt=1765350362822", url: "/services/sales-marketing-automation", label: "Sales Automation" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/BRANDING%20SERVICES%201.webp?updatedAt=1765350361962", url: "/services/branding-services", label: "Branding Services" },
 ];
 
 // Column 3 - Last 7 creative images
 const images3 = [
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/COPYWRITING%201.webp?updatedAt=1765350362521" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/BLOG%20WRITING%20%201.webp?updatedAt=1765350361275" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/SEO%20OPTIMIZE%201.webp?updatedAt=1765350362673" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/COPERATE%20&%20INTERNELS%201.webp?updatedAt=1765350362598" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/EBOOK%20AND%20DIGITAL%20REPORT%201.webp?updatedAt=1765350362500" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/PRINT%20DESIGN%201.webp?updatedAt=1765350362624" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/PACKING%20&%20MERCHANDISE%20DESIGN%201.webp?updatedAt=1765350363321" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/COPYWRITING%201.webp?updatedAt=1765350362521", url: "/services/copywriting", label: "Copywriting" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/BLOG%20WRITING%20%201.webp?updatedAt=1765350361275", url: "/services/blog-writing", label: "Blog Writing" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/SEO%20OPTIMIZE%201.webp?updatedAt=1765350362673", url: "/services/ai-seo-geo-aeo-aio", label: "SEO Optimize" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/COPERATE%20&%20INTERNELS%201.webp?updatedAt=1765350362598", url: "/services/corporate-internals", label: "Corporate & Internals" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/EBOOK%20AND%20DIGITAL%20REPORT%201.webp?updatedAt=1765350362500", url: "/services/ebook-digital-report", label: "Ebook & Report" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/PRINT%20DESIGN%201.webp?updatedAt=1765350362624", url: "/services/ebook-digital-report", label: "Print Design" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/PACKING%20&%20MERCHANDISE%20DESIGN%201.webp?updatedAt=1765350363321", url: "/services/branding-services", label: "Packaging Design" },
 ];
 
 const column1Images = [...images1, ...images3.slice(0, 4)];
@@ -55,7 +55,10 @@ const HeroSection = () => {
   const scrollRef = useRef(null);
   const scrollRefRight = useRef(null);
   const heroSectionRef = useRef(null);
+  const marqueeWrapperRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const [showCursor, setShowCursor] = useState(false);
   const startX = useRef(0);
   const startY = useRef(0);
   const scrollLeft = useRef(0);
@@ -65,6 +68,130 @@ const HeroSection = () => {
   const touchDirection = useRef(null); // 'horizontal' or 'vertical' or null
   const isVisibleRef = useRef(true); // Track visibility without causing re-renders
   const hasInitializedRef = useRef(false); // Track if initially loaded
+
+  const col1Ref = useRef(null);
+  const col2Ref = useRef(null);
+  const col1Y = useRef(0);
+  const col2Y = useRef(0);
+  const col1Hovered = useRef(false);
+  const col2Hovered = useRef(false);
+  const col1Scrolling = useRef(false);
+  const col2Scrolling = useRef(false);
+  const col1ScrollTimeout = useRef(null);
+  const col2ScrollTimeout = useRef(null);
+
+  const isInteracting1 = useRef(false);
+  const isInteracting2 = useRef(false);
+  const timeout1 = useRef(null);
+  const timeout2 = useRef(null);
+  const scrollPos1 = useRef(0);
+  const scrollPos2 = useRef(0);
+
+  // Desktop vertical marquee JS animation and non-passive wheel events
+  useEffect(() => {
+    let animId;
+
+    const tick = () => {
+      if (!isVisibleRef.current) {
+        animId = requestAnimationFrame(tick);
+        return;
+      }
+
+      // Column 1 animation (Upwards)
+      if (col1Ref.current) {
+        const H = col1Ref.current.scrollHeight / 2;
+        if (H > 0) {
+          if (!col1Scrolling.current) {
+            const speed = col1Hovered.current ? 0.15 : 0.6;
+            col1Y.current -= speed;
+          }
+          // Wrap
+          if (col1Y.current < -H) col1Y.current += H;
+          if (col1Y.current > 0) col1Y.current -= H;
+
+          col1Ref.current.style.transform = `translate3d(0, ${col1Y.current}px, 0)`;
+        }
+      }
+
+      // Column 2 animation (Downwards)
+      if (col2Ref.current) {
+        const H = col2Ref.current.scrollHeight / 2;
+        if (H > 0) {
+          // Initialize Column 2 to start at -H so it flows naturally downwards
+          if (col2Y.current === 0) {
+            col2Y.current = -H;
+          }
+
+          if (!col2Scrolling.current) {
+            const speed = col2Hovered.current ? 0.15 : 0.6;
+            col2Y.current += speed;
+          }
+          // Wrap
+          if (col2Y.current < -H) col2Y.current += H;
+          if (col2Y.current > 0) col2Y.current -= H;
+
+          col2Ref.current.style.transform = `translate3d(0, ${col2Y.current}px, 0)`;
+        }
+      }
+
+      animId = requestAnimationFrame(tick);
+    };
+
+    animId = requestAnimationFrame(tick);
+
+    // Non-passive wheel event listeners to prevent main page scroll
+    const col1 = col1Ref.current;
+    const col2 = col2Ref.current;
+
+    const handleWheelCol1 = (e) => {
+      e.preventDefault();
+      const H = col1.scrollHeight / 2;
+      if (H > 0) {
+        col1Scrolling.current = true;
+        clearTimeout(col1ScrollTimeout.current);
+        col1ScrollTimeout.current = setTimeout(() => {
+          col1Scrolling.current = false;
+        }, 1000);
+
+        col1Y.current -= e.deltaY * 0.8;
+        // Wrap instantly
+        if (col1Y.current < -H) col1Y.current += H;
+        if (col1Y.current > 0) col1Y.current -= H;
+
+        col1.style.transform = `translate3d(0, ${col1Y.current}px, 0)`;
+      }
+    };
+
+    const handleWheelCol2 = (e) => {
+      e.preventDefault();
+      const H = col2.scrollHeight / 2;
+      if (H > 0) {
+        col2Scrolling.current = true;
+        clearTimeout(col2ScrollTimeout.current);
+        col2ScrollTimeout.current = setTimeout(() => {
+          col2Scrolling.current = false;
+        }, 1000);
+
+        col2Y.current -= e.deltaY * 0.8;
+        // Wrap instantly
+        if (col2Y.current < -H) col2Y.current += H;
+        if (col2Y.current > 0) col2Y.current -= H;
+
+        col2.style.transform = `translate3d(0, ${col2Y.current}px, 0)`;
+      }
+    };
+
+    if (col1) col1.addEventListener('wheel', handleWheelCol1, { passive: false });
+    if (col2) col2.addEventListener('wheel', handleWheelCol2, { passive: false });
+
+    return () => {
+      cancelAnimationFrame(animId);
+      if (col1) col1.removeEventListener('wheel', handleWheelCol1);
+      if (col2) col2.removeEventListener('wheel', handleWheelCol2);
+      clearTimeout(col1ScrollTimeout.current);
+      clearTimeout(col2ScrollTimeout.current);
+    };
+  }, []);
 
   // Intersection Observer to pause/resume animations when off-screen
   useEffect(() => {
@@ -108,26 +235,28 @@ const HeroSection = () => {
     const scrollContainer = scrollRef.current;
     if (!scrollContainer) return;
 
-    let lastScrollLeft = scrollContainer.scrollLeft;
-
     const scroll = () => {
-      // Use the ref for visibility check (updated by IntersectionObserver)
-      if (!isDragging && scrollContainer && isVisibleRef.current) {
-        scrollContainer.scrollLeft += 0.5;
-        lastScrollLeft = scrollContainer.scrollLeft;
+      // Pause auto-scroll during user interaction
+      if (!isDragging && !isInteracting1.current && scrollContainer && isVisibleRef.current) {
+        // Synchronize starting point if it was reset or initialized
+        if (scrollPos1.current === 0) {
+          scrollPos1.current = scrollContainer.scrollLeft;
+        }
 
-        // Check if we've scrolled past 2/3 point (near the end)
+        scrollPos1.current += 0.5;
+
         const maxScroll = scrollContainer.scrollWidth / 3;
-        if (scrollContainer.scrollLeft >= maxScroll * 2) {
-          scrollContainer.scrollLeft = maxScroll;
+        if (maxScroll > 0) {
+          if (scrollPos1.current >= maxScroll * 2) {
+            scrollPos1.current -= maxScroll;
+          }
+          if (scrollPos1.current <= 0) {
+            scrollPos1.current += maxScroll;
+          }
         }
-        // Check if scrolled to beginning
-        if (scrollContainer.scrollLeft <= 1) {
-          scrollContainer.scrollLeft = maxScroll;
-        }
+        scrollContainer.scrollLeft = Math.round(scrollPos1.current);
       }
 
-      // Continue animation loop if visible
       if (isVisibleRef.current) {
         animationFrameId.current = requestAnimationFrame(scroll);
       } else {
@@ -135,43 +264,50 @@ const HeroSection = () => {
       }
     };
 
-    // Handle manual scroll in both directions
     const handleScroll = () => {
-      if (isDragging) {
-        const currentScroll = scrollContainer.scrollLeft;
-        const maxScroll = scrollContainer.scrollWidth / 3;
+      const maxScroll = scrollContainer.scrollWidth / 3;
+      if (maxScroll <= 0) return;
 
-        // Scrolling forward (right) - near end
-        if (currentScroll >= maxScroll * 2.5) {
-          scrollContainer.scrollLeft = maxScroll + (currentScroll - maxScroll * 2.5);
-        }
-        // Scrolling backward (left) - near start
-        else if (currentScroll <= maxScroll * 0.5) {
-          scrollContainer.scrollLeft = maxScroll * 1.5 + currentScroll;
-        }
+      const currentScroll = scrollContainer.scrollLeft;
+      
+      // Sync our float variable with the actual scrollLeft
+      scrollPos1.current = currentScroll;
 
-        lastScrollLeft = currentScroll;
+      if (currentScroll >= maxScroll * 2) {
+        scrollContainer.scrollLeft = currentScroll - maxScroll;
+        scrollPos1.current = scrollContainer.scrollLeft;
+      } else if (currentScroll <= 0) {
+        scrollContainer.scrollLeft = currentScroll + maxScroll;
+        scrollPos1.current = scrollContainer.scrollLeft;
       }
     };
 
-    // Re-start animation when visible changes (handled by polling)
-    const checkAndRestartAnimation = () => {
-      if (isVisibleRef.current && !animationFrameId.current && !isDragging) {
-        animationFrameId.current = requestAnimationFrame(scroll);
-      }
+    const handleTouchStartLocal = () => {
+      isInteracting1.current = true;
+      clearTimeout(timeout1.current);
+    };
+
+    const handleTouchEndLocal = () => {
+      clearTimeout(timeout1.current);
+      timeout1.current = setTimeout(() => {
+        isInteracting1.current = false;
+      }, 1500);
     };
 
     scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
+    scrollContainer.addEventListener('touchstart', handleTouchStartLocal, { passive: true });
+    scrollContainer.addEventListener('touchend', handleTouchEndLocal, { passive: true });
+    scrollContainer.addEventListener('touchcancel', handleTouchEndLocal, { passive: true });
 
     // Start the animation
     animationFrameId.current = requestAnimationFrame(scroll);
 
-    // Poll for visibility changes to restart animation
-    const visibilityInterval = setInterval(checkAndRestartAnimation, 100);
-
     return () => {
       scrollContainer.removeEventListener('scroll', handleScroll);
-      clearInterval(visibilityInterval);
+      scrollContainer.removeEventListener('touchstart', handleTouchStartLocal);
+      scrollContainer.removeEventListener('touchend', handleTouchEndLocal);
+      scrollContainer.removeEventListener('touchcancel', handleTouchEndLocal);
+      clearTimeout(timeout1.current);
       if (animationFrameId.current) {
         cancelAnimationFrame(animationFrameId.current);
       }
@@ -183,31 +319,39 @@ const HeroSection = () => {
     const scrollContainer = scrollRefRight.current;
     if (!scrollContainer) return;
 
-    // Set initial position to middle third
-    const maxScroll = scrollContainer.scrollWidth / 3;
-    if (scrollContainer.scrollLeft === 0) {
-      scrollContainer.scrollLeft = maxScroll * 1.5;
-    }
-
-    let lastScrollLeft = scrollContainer.scrollLeft;
+    let initializedPosition = false;
 
     const scroll = () => {
-      // Use the ref for visibility check (updated by IntersectionObserver)
-      if (!isDragging && scrollContainer && isVisibleRef.current) {
-        scrollContainer.scrollLeft -= 0.5;
-        lastScrollLeft = scrollContainer.scrollLeft;
+      // Pause auto-scroll during user interaction
+      if (!isDragging && !isInteracting2.current && scrollContainer && isVisibleRef.current) {
+        const maxScrollLocal = scrollContainer.scrollWidth / 3;
+        
+        if (maxScrollLocal > 0) {
+          // Initialize position on load
+          if (!initializedPosition && scrollContainer.scrollLeft === 0) {
+            scrollContainer.scrollLeft = maxScrollLocal * 1.5;
+            scrollPos2.current = maxScrollLocal * 1.5;
+            initializedPosition = true;
+          }
 
-        // Check if scrolled to beginning
-        if (scrollContainer.scrollLeft <= maxScroll * 0.5) {
-          scrollContainer.scrollLeft = maxScroll * 1.5;
-        }
-        // Check if scrolled near end
-        if (scrollContainer.scrollLeft >= maxScroll * 2.5) {
-          scrollContainer.scrollLeft = maxScroll * 1.5;
+          // Synchronize ref if needed
+          if (scrollPos2.current === 0) {
+            scrollPos2.current = scrollContainer.scrollLeft;
+          }
+
+          scrollPos2.current -= 0.5;
+
+          if (scrollPos2.current <= maxScrollLocal * 0.5) {
+            scrollPos2.current += maxScrollLocal;
+          }
+          if (scrollPos2.current >= maxScrollLocal * 2.5) {
+            scrollPos2.current -= maxScrollLocal;
+          }
+          
+          scrollContainer.scrollLeft = Math.round(scrollPos2.current);
         }
       }
 
-      // Continue animation loop if visible
       if (isVisibleRef.current) {
         animationFrameIdRight.current = requestAnimationFrame(scroll);
       } else {
@@ -215,42 +359,50 @@ const HeroSection = () => {
       }
     };
 
-    // Handle manual scroll in both directions
     const handleScroll = () => {
-      if (isDragging) {
-        const currentScroll = scrollContainer.scrollLeft;
+      const maxScrollLocal = scrollContainer.scrollWidth / 3;
+      if (maxScrollLocal <= 0) return;
 
-        // Scrolling forward (right) - near end
-        if (currentScroll >= maxScroll * 2.5) {
-          scrollContainer.scrollLeft = maxScroll + (currentScroll - maxScroll * 2.5);
-        }
-        // Scrolling backward (left) - near start
-        else if (currentScroll <= maxScroll * 0.5) {
-          scrollContainer.scrollLeft = maxScroll * 1.5 + currentScroll;
-        }
+      const currentScroll = scrollContainer.scrollLeft;
+      
+      // Sync float ref
+      scrollPos2.current = currentScroll;
 
-        lastScrollLeft = currentScroll;
+      if (currentScroll <= maxScrollLocal * 0.5) {
+        scrollContainer.scrollLeft = currentScroll + maxScrollLocal;
+        scrollPos2.current = scrollContainer.scrollLeft;
+      } else if (currentScroll >= maxScrollLocal * 2.5) {
+        scrollContainer.scrollLeft = currentScroll - maxScrollLocal;
+        scrollPos2.current = scrollContainer.scrollLeft;
       }
     };
 
-    // Re-start animation when visible changes (handled by polling)
-    const checkAndRestartAnimation = () => {
-      if (isVisibleRef.current && !animationFrameIdRight.current && !isDragging) {
-        animationFrameIdRight.current = requestAnimationFrame(scroll);
-      }
+    const handleTouchStartLocal = () => {
+      isInteracting2.current = true;
+      clearTimeout(timeout2.current);
+    };
+
+    const handleTouchEndLocal = () => {
+      clearTimeout(timeout2.current);
+      timeout2.current = setTimeout(() => {
+        isInteracting2.current = false;
+      }, 1500);
     };
 
     scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
+    scrollContainer.addEventListener('touchstart', handleTouchStartLocal, { passive: true });
+    scrollContainer.addEventListener('touchend', handleTouchEndLocal, { passive: true });
+    scrollContainer.addEventListener('touchcancel', handleTouchEndLocal, { passive: true });
 
     // Start the animation
     animationFrameIdRight.current = requestAnimationFrame(scroll);
 
-    // Poll for visibility changes to restart animation
-    const visibilityInterval = setInterval(checkAndRestartAnimation, 100);
-
     return () => {
       scrollContainer.removeEventListener('scroll', handleScroll);
-      clearInterval(visibilityInterval);
+      scrollContainer.removeEventListener('touchstart', handleTouchStartLocal);
+      scrollContainer.removeEventListener('touchend', handleTouchEndLocal);
+      scrollContainer.removeEventListener('touchcancel', handleTouchEndLocal);
+      clearTimeout(timeout2.current);
       if (animationFrameIdRight.current) {
         cancelAnimationFrame(animationFrameIdRight.current);
       }
@@ -479,7 +631,8 @@ const HeroSection = () => {
                     className="overflow-x-scroll scrollbar-hide mb-2 mobile-scroll-smooth"
                     style={{
                       WebkitOverflowScrolling: 'touch',
-                      scrollSnapType: 'none'
+                      scrollSnapType: 'none',
+                      scrollBehavior: 'auto'
                     }}
                   >
                     <div className="flex" style={{ width: 'max-content' }}>
@@ -528,7 +681,8 @@ const HeroSection = () => {
                     className="overflow-x-scroll scrollbar-hide mobile-scroll-smooth"
                     style={{
                       WebkitOverflowScrolling: 'touch',
-                      scrollSnapType: 'none'
+                      scrollSnapType: 'none',
+                      scrollBehavior: 'auto'
                     }}
                   >
                     <div className="flex" style={{ width: 'max-content' }}>
@@ -577,59 +731,97 @@ const HeroSection = () => {
         </Layout>
 
         {/* Right Image Section - Positioned absolutely to reach screen edge */}
-        <div className="hidden lg:block absolute right-2 top-0 w-[41%] lg:w-[43%] xl:w-[41%] 2xl:w-[38%] h-full pb-8 overflow-hidden" style={{ height: 'clamp(600px, 100vh, 1200px)' }}>
-          {/* Desktop View - Vertical Scroll */}
-          <div className="flex gap-4 h-full overflow-hidden marquee-wrapper" style={{ height: 'clamp(600px, 100vh, 1200px)' }}>
+        <div
+          className="hidden lg:block absolute right-2 top-0 w-[41%] lg:w-[43%] xl:w-[41%] 2xl:w-[38%] h-full pb-8 overflow-hidden"
+          style={{ height: 'clamp(600px, 100vh, 1200px)', cursor: 'none' }}
+          onMouseMove={(e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            setCursorPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+            if (!showCursor) setShowCursor(true);
+          }}
+          onMouseEnter={() => setShowCursor(true)}
+          onMouseLeave={() => setShowCursor(false)}
+        >
+          {/* Custom Cursor - "Expand +" circle */}
+          {showCursor && (
             <div
-              className="w-[48%] marquee-column"
+              className="pointer-events-none absolute z-50 hero-expand-cursor"
+              style={{
+                left: cursorPos.x,
+                top: cursorPos.y,
+                transform: 'translate(-50%, -50%)',
+              }}
             >
-              <div className="marquee-vertical marquee-vertical-content space-y-4">
+              <div className="w-[90px] h-[90px] rounded-full bg-[#2a2a2a]/80 backdrop-blur-md flex items-center justify-center shadow-2xl border border-white/10">
+                <span className="text-white text-sm font-semibold tracking-wide flex items-center gap-1">
+                  Explore
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          )}
+
+          {/* Desktop View - Vertical Scroll with touchpad support */}
+          <div
+            ref={marqueeWrapperRef}
+            className="flex gap-4 h-full overflow-hidden marquee-wrapper"
+            style={{ height: 'clamp(600px, 100vh, 1200px)' }}
+          >
+            <div className="w-[48%] marquee-column">
+              <div 
+                ref={col1Ref}
+                className="marquee-vertical-content flex flex-col gap-4"
+                onMouseEnter={() => { col1Hovered.current = true; }}
+                onMouseLeave={() => { col1Hovered.current = false; }}
+              >
                 {[...column1Images, ...column1Images].map((img, index) => (
-                  <div
+                  <Link
                     key={index}
-                    className="relative overflow-hidden rounded-xl group"
+                    href={img.url || "/services"}
+                    className="relative overflow-hidden rounded-xl flex-shrink-0 block"
+                    style={{ cursor: 'none' }}
                   >
-                    <Image
+                    <img
                       src={img.src}
-                      alt="Creative work"
-                      width={400}
-                      height={index % 2 === 0 ? 280 : 200}
-                      className={`w-full ${index % 2 === 0 ? 'h-[280px]' : 'h-[200px]'} object-cover rounded-xl transition-all duration-300 shadow-xl`}
+                      alt={img.label || "Creative work"}
+                      className="w-full h-auto block rounded-xl transition-transform duration-500 shadow-xl"
                       loading="lazy"
-                      sizes="(max-width: 1024px) 0vw, 12vw"
-                      unoptimized={img.src?.includes('ik.imagekit.io')}
                       onError={(e) => {
                         console.error('Image failed to load:', img.src);
                       }}
                     />
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>
 
-            <div
-              className="w-[48%] marquee-column"
-            >
-              <div className="marquee-vertical-reverse marquee-vertical-content space-y-4">
+            <div className="w-[48%] marquee-column">
+              <div 
+                ref={col2Ref}
+                className="marquee-vertical-content flex flex-col gap-4"
+                onMouseEnter={() => { col2Hovered.current = true; }}
+                onMouseLeave={() => { col2Hovered.current = false; }}
+              >
                 {[...column2Images, ...column2Images].map((img, index) => (
-                  <div
+                  <Link
                     key={index}
-                    className="relative overflow-hidden rounded-xl group"
+                    href={img.url || "/services"}
+                    className="relative overflow-hidden rounded-xl flex-shrink-0 block"
+                    style={{ cursor: 'none' }}
                   >
-                    <Image
+                    <img
                       src={img.src}
-                      alt="Creative work"
-                      width={400}
-                      height={index % 2 === 0 ? 200 : 280}
-                      className={`w-full ${index % 2 === 0 ? 'h-[200px]' : 'h-[280px]'} object-cover rounded-xl transition-all duration-300 shadow-2xl`}
+                      alt={img.label || "Creative work"}
+                      className="w-full h-auto block rounded-xl transition-transform duration-500 shadow-2xl"
                       loading="lazy"
-                      sizes="(max-width: 1024px) 0vw, 12vw"
-                      unoptimized={img.src?.includes('ik.imagekit.io')}
                       onError={(e) => {
                         console.error('Image failed to load:', img.src);
                       }}
                     />
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -711,35 +903,15 @@ const HeroSection = () => {
           }
         }
 
-        /* Vertical Marquee Animation */
-        @keyframes marqueeVertical {
-          0% {
-            transform: translateY(0);
-          }
-          100% {
-            transform: translateY(-50%);
-          }
-        }
-
-        @keyframes marqueeVerticalReverse {
-          0% {
-            transform: translateY(-50%);
-          }
-          100% {
-            transform: translateY(0);
-          }
-        }
-
-        .marquee-vertical {
-          animation: marqueeVertical 80s linear infinite;
+        .marquee-vertical-content {
           transform-style: preserve-3d;
           transition: none;
         }
 
-        .marquee-vertical-reverse {
-          animation: marqueeVerticalReverse 80s linear infinite;
-          transform-style: preserve-3d;
-          transition: none;
+        /* Custom Expand cursor animation */
+        .hero-expand-cursor {
+          transition: opacity 0.2s ease;
+          will-change: left, top;
         }
 
         /* Horizontal Marquee Animation */

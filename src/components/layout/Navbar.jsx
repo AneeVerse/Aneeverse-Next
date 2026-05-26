@@ -131,9 +131,9 @@ const Navbar = () => {
               backgroundColor: pathName === "/about-us" ? "#EBFAFE" : (pathName.includes('/customer-stories') ? '#073742' : color.text),
               borderColor: pathName.includes('/customer-stories') ? '#EBFAFE' : color.bg
             }}
-            mainTextSlide="-150%"
-            duplicateTextStart="150%"
-            duplicateTextEnd="-110%"
+            mainTextSlide="-140%"
+            duplicateTextStart="100%"
+            duplicateTextEnd="-100%"
           >
             {isAdsEcommerce ? "Book a Free Audit" : "Book a Call"}
           </AnimatedButton>
@@ -146,9 +146,9 @@ const Navbar = () => {
                 backgroundColor: pathName.includes('/customer-stories') ? '#EBFAFE' : color.bg,
                 borderColor: pathName.includes('/customer-stories') ? '#073742' : color.text
               }}
-              mainTextSlide="-150%"
-              duplicateTextStart="150%"
-              duplicateTextEnd="-110%"
+              mainTextSlide="-140%"
+              duplicateTextStart="100%"
+              duplicateTextEnd="-100%"
             >
               Login
             </AnimatedButton>

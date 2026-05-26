@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Layout from "@/components/common/Layout";
+import AnimatedButton from "@/components/common/AnimatedButton";
 
 const ServicesMegaMenu = ({ color }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -105,9 +106,9 @@ const ServicesMegaMenu = ({ color }) => {
             {/* Dropdown Container */}
             <motion.div
               onMouseLeave={() => setIsOpen(false)}
-              className="bg-white shadow-2xl border-b border-gray-150/70 py-10 overflow-y-auto max-h-[calc(100vh-100px)] w-full"
+              className="bg-white shadow-2xl pt-10 pb-6 overflow-y-auto h-[calc(100vh-80px)] w-full flex flex-col"
             >
-              <Layout className="w-full flex flex-col gap-10">
+              <Layout className="w-full flex flex-col gap-6">
                 {/* Main Content Area */}
                 <div className="flex flex-col lg:flex-row gap-10 items-stretch">
                   
@@ -220,7 +221,7 @@ const ServicesMegaMenu = ({ color }) => {
                 </div>
 
                 {/* Bottom CTA Banner */}
-                <div className="bg-[#F0FAFD] border border-[#D5EBF2] rounded-2xl p-4 flex flex-col sm:flex-row gap-4 items-center justify-between mt-2">
+                <div className="bg-[#F0FAFD] border border-[#D5EBF2] rounded-2xl p-4 flex flex-col sm:flex-row gap-4 items-center justify-between mt-6">
                   <div className="flex items-center gap-4 text-center sm:text-left">
                     <div className="w-12 h-12 rounded-2xl bg-[#E6F8F6] text-[#0D9488] flex items-center justify-center flex-shrink-0">
                       <Headphones className="w-6 h-6" strokeWidth={2} />
@@ -234,13 +235,23 @@ const ServicesMegaMenu = ({ color }) => {
                       </p>
                     </div>
                   </div>
-                  <Link
+                  <AnimatedButton
                     href="/contact"
                     onClick={() => setIsOpen(false)}
-                    className="bg-[#E6F8F6] hover:bg-[#D4F4F0] text-[#0D9488] border border-[#0D9488]/10 hover:border-[#0D9488]/30 px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 flex items-center gap-2 shadow-sm flex-shrink-0"
+                    className="rounded-full font-bold text-sm shadow-[0_0_20px_rgba(13,148,136,0.05)] flex-shrink-0"
+                    style={{
+                      backgroundColor: "#E6F8F6",
+                      color: "#0D9488",
+                      padding: "0.625rem 1.5rem"
+                    }}
+                    mainTextSlide="-140%"
+                    duplicateTextStart="100%"
+                    duplicateTextEnd="-100%"
                   >
-                    Contact Us <ChevronRight className="w-4 h-4" strokeWidth={2.5} />
-                  </Link>
+                    <span className="flex items-center gap-2">
+                      Contact Us <ChevronRight className="w-4 h-4" strokeWidth={2.5} />
+                    </span>
+                  </AnimatedButton>
                 </div>
 
               </Layout>
