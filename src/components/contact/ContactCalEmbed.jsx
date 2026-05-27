@@ -10,6 +10,7 @@ const ContactCalEmbed = () => {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
+        phone: "",
         service: "",
         otherDetails: ""
     });
@@ -36,7 +37,7 @@ const ContactCalEmbed = () => {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        if (formData.name && formData.email && formData.service) {
+        if (formData.name && formData.email && formData.phone && formData.service) {
             setIsSubmitting(true);
             try {
                 const res = await fetch("/api/discovery-lead", {
@@ -60,7 +61,7 @@ const ContactCalEmbed = () => {
     };
 
     return (
-        <div className="rounded-2xl overflow-hidden shadow-2xl cal-embed-container bg-[#111111] min-h-[550px] flex flex-col justify-center relative">
+        <div className="rounded-2xl overflow-hidden cal-embed-container bg-[#073742] min-h-[550px] flex flex-col justify-center relative">
             <AnimatePresence mode="wait">
                 {step === "form" && (
                     <motion.div
@@ -69,7 +70,7 @@ const ContactCalEmbed = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -15 }}
                         transition={{ duration: 0.3 }}
-                        className="w-full max-w-xl mx-auto py-12 px-6 md:px-12"
+                        className="w-full max-w-2xl mx-auto py-12 px-6 md:px-12"
                     >
                         <div className="text-center mb-8">
                             <h3 className="text-2xl font-semibold text-white mb-2">Discovery Call Setup</h3>
@@ -86,21 +87,35 @@ const ContactCalEmbed = () => {
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                     placeholder="Enter your name"
-                                    className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-[#2DC8E6] transition-colors disabled:opacity-50"
+                                    className="w-full px-4 py-3 bg-[#031d23] border border-[#0c4755] rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#2DC8E6] transition-colors disabled:opacity-50"
                                 />
                             </div>
 
-                            <div>
-                                <label className="block text-gray-300 text-sm font-medium mb-1.5">Email Address</label>
-                                <input
-                                    type="email"
-                                    required
-                                    disabled={isSubmitting}
-                                    value={formData.email}
-                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    placeholder="Enter your email"
-                                    className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-[#2DC8E6] transition-colors disabled:opacity-50"
-                                />
+                            <div className="flex flex-col md:flex-row gap-5">
+                                <div className="flex-1">
+                                    <label className="block text-gray-300 text-sm font-medium mb-1.5">Email Address</label>
+                                    <input
+                                        type="email"
+                                        required
+                                        disabled={isSubmitting}
+                                        value={formData.email}
+                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                        placeholder="Enter your email"
+                                        className="w-full px-4 py-3 bg-[#031d23] border border-[#0c4755] rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#2DC8E6] transition-colors disabled:opacity-50"
+                                    />
+                                </div>
+                                <div className="flex-1">
+                                    <label className="block text-gray-300 text-sm font-medium mb-1.5">Phone Number</label>
+                                    <input
+                                        type="tel"
+                                        required
+                                        disabled={isSubmitting}
+                                        value={formData.phone}
+                                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                        placeholder="Enter your phone number"
+                                        className="w-full px-4 py-3 bg-[#031d23] border border-[#0c4755] rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#2DC8E6] transition-colors disabled:opacity-50"
+                                    />
+                                </div>
                             </div>
 
                             <div>
@@ -111,7 +126,7 @@ const ContactCalEmbed = () => {
                                         disabled={isSubmitting}
                                         value={formData.service}
                                         onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                                        className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-xl text-white focus:outline-none focus:border-[#2DC8E6] transition-colors appearance-none cursor-pointer disabled:opacity-50"
+                                        className="w-full px-4 py-3 bg-[#031d23] border border-[#0c4755] rounded-xl text-white focus:outline-none focus:border-[#2DC8E6] transition-colors appearance-none cursor-pointer disabled:opacity-50"
                                     >
                                         <option value="" disabled>Select a service...</option>
                                         <option value="Creative Design & Branding">Creative Design & Branding</option>
@@ -150,7 +165,7 @@ const ContactCalEmbed = () => {
                                             onChange={(e) => setFormData({ ...formData, otherDetails: e.target.value })}
                                             placeholder="Tell us more about what you're looking for..."
                                             rows={3}
-                                            className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-[#2DC8E6] transition-colors resize-none disabled:opacity-50"
+                                            className="w-full px-4 py-3 bg-[#031d23] border border-[#0c4755] rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#2DC8E6] transition-colors resize-none disabled:opacity-50"
                                         />
                                     </motion.div>
                                 )}
@@ -205,33 +220,33 @@ const ContactCalEmbed = () => {
             </AnimatePresence>
             <style jsx global>{`
                 .cal-embed-container {
-                    background: #111111;
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    background: #073742;
+                    border: none;
                 }
                 :root {
-                    --cal-bg: #111111 !important;
-                    --cal-bg-emphasis: #1a1a1a !important;
-                    --cal-bg-subtle: #0d0d0d !important;
-                    --cal-bg-muted: #080808 !important;
+                    --cal-bg: #073742 !important;
+                    --cal-bg-emphasis: #0c4755 !important;
+                    --cal-bg-subtle: #052c35 !important;
+                    --cal-bg-muted: #031d23 !important;
                     --cal-bg-inverted: #ffffff !important;
                     
-                    --cal-border: rgba(255, 255, 255, 0.1) !important;
-                    --cal-border-emphasis: rgba(255, 255, 255, 0.2) !important;
-                    --cal-border-subtle: rgba(255, 255, 255, 0.05) !important;
+                    --cal-border: transparent !important;
+                    --cal-border-emphasis: transparent !important;
+                    --cal-border-subtle: transparent !important;
 
                     --cal-text: #ffffff !important;
                     --cal-text-emphasis: #ffffff !important;
                     --cal-text-subtle: #9ca3af !important;
                     --cal-text-muted: #6b7280 !important;
-                    --cal-text-inverted: #111111 !important;
+                    --cal-text-inverted: #073742 !important;
 
                     --cal-brand: #2DC8E6 !important;
                     --cal-brand-emphasis: #25a8c4 !important;
-                    --cal-brand-text: #111111 !important;
+                    --cal-brand-text: #073742 !important;
                 }
 
                 [data-cal-namespace="discovery-call"] {
-                    background: #111111 !important;
+                    background: #073742 !important;
                 }
             `}</style>
         </div>

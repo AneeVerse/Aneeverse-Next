@@ -4,7 +4,7 @@ import nodemailer from "nodemailer";
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { name, email, service, otherDetails } = body;
+    const { name, email, phone, service, otherDetails } = body;
 
     // Validate required fields
     if (!name || !email || !service) {
@@ -39,6 +39,12 @@ export async function POST(request) {
               <td style="padding:10px;color:#64748b;vertical-align:top;border-radius:6px 0 0 6px">Email</td>
               <td style="padding:10px;color:#0f172a;font-weight:600;border-radius:0 6px 6px 0">
                 <a href="mailto:${email}" style="color:#0284c7;text-decoration:none">${email}</a>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:10px 0;color:#64748b;vertical-align:top">Phone</td>
+              <td style="padding:10px 0;color:#0f172a;font-weight:600">
+                <a href="tel:${phone || 'N/A'}" style="color:#0284c7;text-decoration:none">${phone || 'N/A'}</a>
               </td>
             </tr>
             <tr>
@@ -125,7 +131,7 @@ export async function POST(request) {
             pageSource: "Discovery Call Form",
             fullName: name,
             email,
-            phone: "N/A",
+            phone: phone || "N/A",
             platform: service,
             storeName: "N/A",
             storeLink: "N/A",

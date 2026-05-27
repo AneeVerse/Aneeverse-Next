@@ -12,14 +12,41 @@ import AnimatedButton from "@/components/common/AnimatedButton";
 const ServicesMegaMenu = ({ color }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const column1Services = [
+  const ecomServices = [
     {
       name: "E-Commerce Marketplace Management",
-      description: "Manage Amazon, eBay & multi-channel marketplaces for scalable growth.",
-      url: "/services#ecommerce-marketplace",
+      description: "Manage Amazon, eBay, Etsy, Zepto & multi-channel marketplaces for scalable growth.",
+      url: "/services/amazon-marketplace-management",
       icon: <ShoppingCart className="w-[22px] h-[22px] text-[#E07A5F]" strokeWidth={2} />,
       iconBg: "bg-[#FFF4EB]"
+    }
+  ];
+
+  const column1Services = [
+    {
+      name: "Social, Printable & Ads Creative Designs",
+      description: "Eye-catching designs that boost engagement and drive conversions.",
+      url: "/services/ad-creative",
+      icon: <PenTool className="w-[22px] h-[22px] text-[#7C3AED]" strokeWidth={2} />,
+      iconBg: "bg-[#F5F3FF]"
     },
+    {
+      name: "Marketing & Google / Meta Ads Management",
+      description: "ROI-focused ad campaigns that deliver measurable results.",
+      url: "/services/marketing-strategy",
+      icon: <Megaphone className="w-[22px] h-[22px] text-[#E76F51]" strokeWidth={2} />,
+      iconBg: "bg-[#FFF6F0]"
+    },
+    {
+      name: "Blogs & SEO Services",
+      description: "High-ranking content and SEO strategies that drive organic traffic.",
+      url: "/services/blog-writing",
+      icon: <FileText className="w-[22px] h-[22px] text-[#2563EB]" strokeWidth={2} />,
+      iconBg: "bg-[#EFF6FF]"
+    }
+  ];
+
+  const column2Services = [
     {
       name: "Platform & Website Development",
       description: "Scalable, secure and high-performance web platforms built to grow.",
@@ -33,30 +60,6 @@ const ServicesMegaMenu = ({ color }) => {
       url: "/services/ai-seo-geo-aeo-aio",
       icon: <Search className="w-[22px] h-[22px] text-[#00A896]" strokeWidth={2} />,
       iconBg: "bg-[#EAF7FA]"
-    },
-    {
-      name: "Marketing & Google / Meta Ads Management",
-      description: "ROI-focused ad campaigns that deliver measurable results.",
-      url: "/services/marketing-strategy",
-      icon: <Megaphone className="w-[22px] h-[22px] text-[#E76F51]" strokeWidth={2} />,
-      iconBg: "bg-[#FFF6F0]"
-    }
-  ];
-
-  const column2Services = [
-    {
-      name: "Social, Printable & Ads Creative Designs",
-      description: "Eye-catching designs that boost engagement and drive conversions.",
-      url: "/services/ad-creative",
-      icon: <PenTool className="w-[22px] h-[22px] text-[#7C3AED]" strokeWidth={2} />,
-      iconBg: "bg-[#F5F3FF]"
-    },
-    {
-      name: "Blogs & SEO Services",
-      description: "High-ranking content and SEO strategies that drive organic traffic.",
-      url: "/services/blog-writing",
-      icon: <FileText className="w-[22px] h-[22px] text-[#2563EB]" strokeWidth={2} />,
-      iconBg: "bg-[#EFF6FF]"
     },
     {
       name: "n8n & AI Automation Workflows",
@@ -149,75 +152,116 @@ const ServicesMegaMenu = ({ color }) => {
                   </div>
 
                   {/* Right Services Columns */}
-                  <div className="w-full lg:w-[72%] flex flex-col justify-center">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12">
+                  <div className="w-full lg:w-[72%] flex flex-col justify-center gap-6">
+                    
+                    {/* Top Row - E-Commerce (Full Width Row) */}
+                    <div className="border-b border-gray-100 pb-5">
+                      <span className="text-[11px] font-bold text-gray-400 tracking-wider mb-2 uppercase block border-b border-gray-100 pb-2">E-Commerce</span>
+                      {ecomServices.map((service, index) => (
+                        <Link
+                          key={index}
+                          href={service.url}
+                          onClick={() => setIsOpen(false)}
+                          className="flex items-center justify-between py-[18px] border-b border-gray-100 last:border-0 group cursor-pointer"
+                        >
+                          <div className="flex items-center gap-4 pr-4 w-full">
+                            {/* Icon Container */}
+                            <div className={`${service.iconBg} w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-105 shadow-sm`}>
+                              {service.icon}
+                            </div>
+                            {/* Text Info */}
+                            <div className="flex-1 md:flex md:items-center md:justify-between md:gap-6">
+                              <div>
+                                <h4 className="text-[15px] font-bold text-gray-900 group-hover:text-[#0D9488] transition-colors leading-tight">
+                                  {service.name}
+                                </h4>
+                                <p className="text-xs text-gray-500 mt-1 leading-relaxed md:line-clamp-1 line-clamp-2">
+                                  {service.description}
+                                </p>
+                              </div>
+                              {/* Chevron Arrow */}
+                              <div className="flex items-center gap-1 text-[#E07A5F] font-bold text-xs group-hover:translate-x-1.5 transition-all duration-300 pr-2">
+                                <span>Explore Marketplace Management</span>
+                                <ChevronRight className="w-4 h-4" strokeWidth={3} />
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+
+                    {/* Bottom Row - 2 Columns (Creative & Marketing | Tech & Automation) */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 lg:gap-x-10 gap-y-6">
                       
-                      {/* Column 1 Services */}
+                      {/* Column 2 - Creative & Marketing */}
                       <div className="flex flex-col">
+                        <span className="text-[11px] font-bold text-gray-400 tracking-wider mb-2 uppercase block border-b border-gray-100 pb-2">Creative & Marketing</span>
                         {column1Services.map((service, index) => (
                           <Link
                             key={index}
                             href={service.url}
                             onClick={() => setIsOpen(false)}
-                            className="flex items-center justify-between py-[18px] border-b border-gray-100 last:border-0 group cursor-pointer"
+                            className="flex items-center justify-between py-[14px] border-b border-gray-100 last:border-0 group cursor-pointer"
                           >
                             <div className="flex items-center gap-4 pr-4">
                               {/* Icon Container */}
-                              <div className={`${service.iconBg} w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-105 shadow-sm`}>
+                              <div className={`${service.iconBg} w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-105 shadow-sm`}>
                                 {service.icon}
                               </div>
                               {/* Text Info */}
                               <div className="flex-1">
-                                <h4 className="text-[15px] font-bold text-gray-900 group-hover:text-[#0D9488] transition-colors leading-tight">
+                                <h4 className="text-[14px] font-bold text-gray-900 group-hover:text-[#0D9488] transition-colors leading-tight">
                                   {service.name}
                                 </h4>
-                                <p className="text-xs text-gray-500 mt-1 leading-relaxed line-clamp-2">
+                                <p className="text-[11px] text-gray-500 mt-1 leading-relaxed line-clamp-1">
                                   {service.description}
                                 </p>
                               </div>
                             </div>
                             {/* Chevron Arrow */}
                             <div className="self-center pr-2">
-                              <ChevronRight className="text-gray-400 group-hover:text-[#0D9488] group-hover:translate-x-1.5 transition-all duration-300 w-[15px] h-[15px]" strokeWidth={3} />
+                              <ChevronRight className="text-gray-400 group-hover:text-[#0D9488] group-hover:translate-x-1.5 transition-all duration-300 w-[14px] h-[14px]" strokeWidth={3} />
                             </div>
                           </Link>
                         ))}
                       </div>
 
-                      {/* Column 2 Services */}
+                      {/* Column 3 - Tech & Automation */}
                       <div className="flex flex-col">
+                        <span className="text-[11px] font-bold text-gray-400 tracking-wider mb-2 uppercase block border-b border-gray-100 pb-2">Tech & Automation</span>
                         {column2Services.map((service, index) => (
                           <Link
                             key={index}
                             href={service.url}
                             onClick={() => setIsOpen(false)}
-                            className="flex items-center justify-between py-[18px] border-b border-gray-100 last:border-0 group cursor-pointer"
+                            className="flex items-center justify-between py-[14px] border-b border-gray-100 last:border-0 group cursor-pointer"
                           >
                             <div className="flex items-center gap-4 pr-4">
                               {/* Icon Container */}
-                              <div className={`${service.iconBg} w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-105 shadow-sm`}>
+                              <div className={`${service.iconBg} w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-105 shadow-sm`}>
                                 {service.icon}
                               </div>
                               {/* Text Info */}
                               <div className="flex-1">
-                                <h4 className="text-[15px] font-bold text-gray-900 group-hover:text-[#0D9488] transition-colors leading-tight">
+                                <h4 className="text-[14px] font-bold text-gray-900 group-hover:text-[#0D9488] transition-colors leading-tight">
                                   {service.name}
                                 </h4>
-                                <p className="text-xs text-gray-500 mt-1 leading-relaxed line-clamp-2">
+                                <p className="text-[11px] text-gray-500 mt-1 leading-relaxed line-clamp-1">
                                   {service.description}
                                 </p>
                               </div>
                             </div>
                             {/* Chevron Arrow */}
                             <div className="self-center pr-2">
-                              <ChevronRight className="text-gray-400 group-hover:text-[#0D9488] group-hover:translate-x-1.5 transition-all duration-300 w-[15px] h-[15px]" strokeWidth={3} />
+                              <ChevronRight className="text-gray-400 group-hover:text-[#0D9488] group-hover:translate-x-1.5 transition-all duration-300 w-[14px] h-[14px]" strokeWidth={3} />
                             </div>
                           </Link>
                         ))}
                       </div>
-                    </div>
-                  </div>
 
+                    </div>
+
+                  </div>
                 </div>
 
                 {/* Bottom CTA Banner */}

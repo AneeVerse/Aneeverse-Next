@@ -13,43 +13,27 @@ import { AccentText } from "../common/typography/AccentText";
 // Touch direction detection threshold
 const TOUCH_DIRECTION_THRESHOLD = 5;
 
-// Column 1 - First 8 creative images
-const images1 = [
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/AD%20CREATIVE%202.webp?updatedAt=1765350361052", url: "/services/ad-creative", label: "Ad Creative" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/PLATFORM%20DEVLOPMENT%202.webp?updatedAt=1765350362851", url: "/services/platform-development", label: "Platform Development" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/AI%20POWERED%20CREATIVES%201.webp?updatedAt=1765350360954", url: "/services/ai-powered-creatives", label: "AI Powered Creatives" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/MARKETING%20STRATEGY%201.webp?updatedAt=1765350363109", url: "/services/marketing-strategy", label: "Marketing Strategy" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/SOCIAL%20MEDIA%20CREATIVES%201.webp?updatedAt=1765350362918", url: "/services/social-media-creatives", label: "Social Media Creatives" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/UI,%20UX%20&%20WEB%20DEVLOPMENT%202.webp?updatedAt=1765350363457", url: "/services/ui-ux-web-development", label: "UI, UX & Web Dev" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/AI%20BLOG%20WRITING%202.webp?updatedAt=1765350361070", url: "/services/blog-writing", label: "AI Blog Writing" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/EMAIL%20CAMPAIGN%201.webp?updatedAt=1765350362742", url: "/services/email-design", label: "Email Campaign" },
+// Column 1 - 7 core service images (scrolls up)
+const column1Images = [
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/AD%20CREATIVE%202.webp?updatedAt=1765350361052", url: "/services/ad-creative", label: "Social & Ads Creative" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/PLATFORM%20DEVLOPMENT%202.webp?updatedAt=1765350362851", url: "/services/platform-development", label: "Platform & Website Dev" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/AI%20POWERED%20CREATIVES%201.webp?updatedAt=1765350360954", url: "/services/n8n-workflows", label: "n8n & AI Automation" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/MARKETING%20STRATEGY%201.webp?updatedAt=1765350363109", url: "/services/marketing-strategy", label: "Marketing & Ads" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/SEO%20OPTIMIZE%201.webp?updatedAt=1765350362673", url: "/services/ai-seo-geo-aeo-aio", label: "AI SEO (GEO) (AEO)" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/EMAIL%20CAMPAIGN%201.webp?updatedAt=1765350362742", url: "/services/amazon-marketplace-management", label: "E-Commerce Marketplace" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/BLOG%20WRITING%20%201.webp?updatedAt=1765350361275", url: "/services/blog-writing", label: "Blogs & SEO" },
 ];
 
-// Column 2 - Next 8 creative images
-const images2 = [
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/PRESENTATION%20DESIGN%201.webp?updatedAt=1765350362921", url: "/services/presentation-design", label: "Presentation Design" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/DESIGN%20SYSTEM%201.webp?updatedAt=1765350363997", url: "/services/design-system", label: "Design System" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/AI%20SEO%20(GEO)%20(AEO)%20(AIO)%201.webp?updatedAt=1765350361413", url: "/services/ai-seo-geo-aeo-aio", label: "AI SEO" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/EMAIL%20DESIGN%201.webp?updatedAt=1765350362829", url: "/services/email-design", label: "Email Design" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/ILLUSTRATION%20DESIGN%201.webp?updatedAt=1765350362443", url: "/services/illustration-design", label: "Illustration Design" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/PRODUCT%20DESIGN%201.webp?updatedAt=1765350363546", url: "/services/product-design", label: "Product Design" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/SALES%20&%20MARKETING%20AUTOMATION%201.webp?updatedAt=1765350362822", url: "/services/sales-marketing-automation", label: "Sales Automation" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/BRANDING%20SERVICES%201.webp?updatedAt=1765350361962", url: "/services/branding-services", label: "Branding Services" },
+// Column 2 - 7 core service images with alternate visuals (scrolls down)
+const column2Images = [
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/AI%20SEO%20(GEO)%20(AEO)%20(AIO)%201.webp?updatedAt=1765350361413", url: "/services/ai-seo-geo-aeo-aio", label: "AI SEO (GEO) (AEO)" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/UI,%20UX%20&%20WEB%20DEVLOPMENT%202.webp?updatedAt=1765350363457", url: "/services/platform-development", label: "Platform & Website Dev" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/SALES%20&%20MARKETING%20AUTOMATION%201.webp?updatedAt=1765350362822", url: "/services/n8n-workflows", label: "n8n & AI Automation" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/COPYWRITING%201.webp?updatedAt=1765350362521", url: "/services/blog-writing", label: "Blogs & SEO" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/EMAIL%20DESIGN%201.webp?updatedAt=1765350362829", url: "/services/amazon-marketplace-management", label: "E-Commerce Marketplace" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/SOCIAL%20MEDIA%20CREATIVES%201.webp?updatedAt=1765350362918", url: "/services/ad-creative", label: "Social & Ads Creative" },
+  { src: "https://ik.imagekit.io/aghmftdmm/creative/BRANDING%20SERVICES%201.webp?updatedAt=1765350361962", url: "/services/marketing-strategy", label: "Marketing & Ads" },
 ];
-
-// Column 3 - Last 7 creative images
-const images3 = [
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/COPYWRITING%201.webp?updatedAt=1765350362521", url: "/services/copywriting", label: "Copywriting" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/BLOG%20WRITING%20%201.webp?updatedAt=1765350361275", url: "/services/blog-writing", label: "Blog Writing" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/SEO%20OPTIMIZE%201.webp?updatedAt=1765350362673", url: "/services/ai-seo-geo-aeo-aio", label: "SEO Optimize" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/COPERATE%20&%20INTERNELS%201.webp?updatedAt=1765350362598", url: "/services/corporate-internals", label: "Corporate & Internals" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/EBOOK%20AND%20DIGITAL%20REPORT%201.webp?updatedAt=1765350362500", url: "/services/ebook-digital-report", label: "Ebook & Report" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/PRINT%20DESIGN%201.webp?updatedAt=1765350362624", url: "/services/ebook-digital-report", label: "Print Design" },
-  { src: "https://ik.imagekit.io/aghmftdmm/creative/PACKING%20&%20MERCHANDISE%20DESIGN%201.webp?updatedAt=1765350363321", url: "/services/branding-services", label: "Packaging Design" },
-];
-
-const column1Images = [...images1, ...images3.slice(0, 4)];
-const column2Images = [...images2, ...images3.slice(4)];
 
 const HeroSection = () => {
   const scrollRef = useRef(null);
@@ -636,7 +620,7 @@ const HeroSection = () => {
                     }}
                   >
                     <div className="flex" style={{ width: 'max-content' }}>
-                      {[...images1, ...images1, ...images1].map((img, index) => (
+                      {[...column1Images, ...column1Images, ...column1Images].map((img, index) => (
                         <div
                           className="relative flex-shrink-0 select-none overflow-hidden rounded-xl group"
                           key={index}
@@ -686,7 +670,7 @@ const HeroSection = () => {
                     }}
                   >
                     <div className="flex" style={{ width: 'max-content' }}>
-                      {[...images2, ...images2, ...images2]
+                      {[...column2Images, ...column2Images, ...column2Images]
                         .reverse()
                         .map((img, index) => (
                           <div

@@ -12,166 +12,47 @@ import AnimatedButton from "../common/AnimatedButton";
 
 const data = [
   {
-    firstTitle: "Ad", secondTitle: "Creative",
-    tags: ["Social Ads", "Display Ads", "Creative Campaigns"],
-    url: "/services/ad-creative",
-    image: "https://ik.imagekit.io/aghmftdmm/creative/AD%20CREATIVE%202.webp?updatedAt=1765350361052"
+    firstTitle: "E-Commerce", secondTitle: "Marketplace Management",
+    tags: ["Amazon", "eBay", "Zepto", "Etsy"],
+    url: "/services/amazon-marketplace-management",
+    image: "/images/services/website/website-design.png"
   },
-
   {
-    firstTitle: "Platform", secondTitle: "Development",
-    tags: ["Web Platforms", "Custom Development", "Full-Stack Solutions"],
+    firstTitle: "Platform & Website", secondTitle: "Development",
+    tags: ["Web Platforms", "Custom SaaS", "Web Apps"],
     url: "/services/platform-development",
-    image: "https://ik.imagekit.io/aghmftdmm/creative/PLATFORM%20DEVLOPMENT%202.webp?updatedAt=1765350362851"
+    image: "/images/services/website/landing-page.png"
   },
-  // {
-  //   firstTitle: "AI Powered", secondTitle: "Creatives",
-  //   tags: ["AI Design", "Automated Creatives", "Smart Graphics"],
-  //   url: "/services/ai-powered-creatives",
-  //   image: "https://ik.imagekit.io/aghmftdmm/creative/AI%20POWERED%20CREATIVES%201.webp?updatedAt=1765350360954"
-  // },
-  {
-    firstTitle: "n8n", secondTitle: "Workflows",
-    tags: ["Workflow Automation", "Process Optimization", "Integrations"],
-    url: "/services/n8n-workflows",
-    image: "https://ik.imagekit.io/aghmftdmm/creative/AI%20POWERED%20CREATIVES%201.webp?updatedAt=1765350360954" // Using placeholder image for now
-  },
-
-  {
-    firstTitle: "Marketing", secondTitle: "Strategy",
-    tags: ["Brand Awareness", "Customer Retention", "Market Research"],
-    url: "/services/marketing-strategy",
-    image: "https://ik.imagekit.io/aghmftdmm/creative/MARKETING%20STRATEGY%201.webp?updatedAt=1765350363109"
-  },
-  // {
-  //   firstTitle: "Social Media", secondTitle: "Creatives",
-  //   tags: ["Social Posts", "Ad Creatives", "Engaging Graphics"],
-  //   url: "/services/social-media-creatives",
-  //   image: "https://ik.imagekit.io/aghmftdmm/creative/SOCIAL%20MEDIA%20CREATIVES%201.webp?updatedAt=1765350362918"
-  // },
-
-  {
-    firstTitle: "UI, UX & Web", secondTitle: "Development",
-    tags: ["User Interface", "User Experience", "Web Development"],
-    url: "/services/ui-ux-web-development",
-    image: "https://ik.imagekit.io/aghmftdmm/creative/UI,%20UX%20&%20WEB%20DEVLOPMENT%202.webp?updatedAt=1765350363457"
-  },
-  // {
-  //   firstTitle: "AI Blog", secondTitle: "Writing",
-  //   tags: ["AI Content", "Automated Writing", "SEO Optimized"],
-  //   url: "/services/ai-blog-writing",
-  //   image: "https://ik.imagekit.io/aghmftdmm/creative/AI%20BLOG%20WRITING%202.webp?updatedAt=1765350361070"
-  // },
-
-  {
-    firstTitle: "Email Design &", secondTitle: "Campaign",
-    tags: ["Personalized Emails", "Automated Sequences", "Lead Nurturing"],
-    url: "/services/email-campaign",
-    image: "https://ik.imagekit.io/aghmftdmm/creative/EMAIL%20CAMPAIGN%201.webp?updatedAt=1765350362742"
-  },
-
-  {
-    firstTitle: "Presentation", secondTitle: "Design",
-    tags: ["Business Pitches", "Infographics", "Slide Decks"],
-    url: "/services/presentation-design",
-    image: "https://ik.imagekit.io/aghmftdmm/creative/PRESENTATION%20DESIGN%201.webp?updatedAt=1765350362921"
-  },
-  // {
-  //   firstTitle: "Design", secondTitle: "System",
-  //   tags: ["Component Library", "Style Guide", "Design Standards"],
-  //   url: "/services/design-system",
-  //   image: "https://ik.imagekit.io/aghmftdmm/creative/DESIGN%20SYSTEM%201.webp?updatedAt=1765350363997"
-  // },
-
   {
     firstTitle: "AI SEO", secondTitle: "(GEO) (AEO) (AIO)",
-    tags: ["AI Optimization", "Geo SEO", "Advanced SEO"],
+    tags: ["AI SEO", "Geo-Targeting", "Search Visibility"],
     url: "/services/ai-seo-geo-aeo-aio",
-    image: "https://ik.imagekit.io/aghmftdmm/creative/AI%20SEO%20(GEO)%20(AEO)%20(AIO)%201.webp?updatedAt=1765350361413"
-  },
-  // {
-  //   firstTitle: "Email", secondTitle: "Design",
-  //   tags: ["Responsive Emails", "Newsletter Templates", "HTML Emails"],
-  //   // url: "/services/email-design", // Merged into Email Campaign
-  //   url: "/services/email-campaign",
-  //   image: "https://ik.imagekit.io/aghmftdmm/creative/EMAIL%20DESIGN%201.webp?updatedAt=1765350362829"
-  // },
-
-  // {
-  //   firstTitle: "Illustration", secondTitle: "Design",
-  //   tags: ["Custom Illustrations", "Digital Art", "Visual Storytelling"],
-  //   url: "/services/illustration-design",
-  //   image: "https://ik.imagekit.io/aghmftdmm/creative/ILLUSTRATION%20DESIGN%201.webp?updatedAt=1765350362443"
-  // },
-
-  // {
-  //   firstTitle: "Product", secondTitle: "Design",
-  //   tags: ["Product Development", "Industrial Design", "Prototyping"],
-  //   url: "/services/product-design",
-  //   image: "https://ik.imagekit.io/aghmftdmm/creative/PRODUCT%20DESIGN%201.webp?updatedAt=1765350363546"
-  // },
-
-  {
-    firstTitle: "Sales & Marketing", secondTitle: "Automation",
-    tags: ["Marketing Automation", "CRM Integration", "Workflow Design"],
-    url: "/services/sales-marketing-automation",
-    image: "https://ik.imagekit.io/aghmftdmm/creative/SALES%20&%20MARKETING%20AUTOMATION%201.webp?updatedAt=1765350362822"
+    image: "/images/services/website/seo-optimization.png"
   },
   {
-    firstTitle: "Branding System &", secondTitle: "Merchandise",
-    tags: ["Logo Design", "Brand Identity", "Visual Identity"],
-    url: "/services/branding-services",
-    image: "https://ik.imagekit.io/aghmftdmm/creative/BRANDING%20SERVICES%201.webp?updatedAt=1765350361962"
+    firstTitle: "Marketing &", secondTitle: "Ads Management",
+    tags: ["Google Ads", "Meta Ads", "ROI Campaigns"],
+    url: "/services/marketing-strategy",
+    image: "/images/services/website/local-seo.png"
   },
-
   {
-    firstTitle: "Copywriting", secondTitle: "& Strategy",
-    tags: ["Brand Storytelling", "Conversion Copy", "UX Writing"],
-    url: "/services/copywriting",
-    image: "https://ik.imagekit.io/aghmftdmm/creative/COPYWRITING%201.webp?updatedAt=1765350362521"
+    firstTitle: "Social, Printable &", secondTitle: "Creative Designs",
+    tags: ["Ad Creative", "Branding", "Social Graphics"],
+    url: "/services/ad-creative",
+    image: "/images/services/creative/social-media-creative.png"
   },
-  // {
-  //   firstTitle: "Blog", secondTitle: "Writing",
-  //   tags: ["SEO Blogs", "Long-Form Content", "Industry Research"],
-  //   url: "/services/blog-writing",
-  //   image: "https://ik.imagekit.io/aghmftdmm/creative/BLOG%20WRITING%20%201.webp?updatedAt=1765350361275"
-  // },
-
   {
-    firstTitle: "SEO & Blog", secondTitle: "Writing",
-    tags: ["SEO Strategy", "Keyword Research", "Content Authority"],
+    firstTitle: "Blogs & SEO", secondTitle: "Services",
+    tags: ["SEO Articles", "Authority Writing", "Content Strategy"],
     url: "/services/blog-writing",
-    image: "https://ik.imagekit.io/aghmftdmm/creative/SEO%20OPTIMIZE%201.webp?updatedAt=1765350362673"
+    image: "/images/services/creative/presentation-design.png"
   },
-
-  // {
-  //   firstTitle: "Corporate &", secondTitle: "Internals",
-  //   tags: ["Brand Guidelines", "Internal Communications", "Corporate Identity"],
-  //   url: "/services/corporate-internals",
-  //   image: "https://ik.imagekit.io/aghmftdmm/creative/COPERATE%20&%20INTERNELS%201.webp?updatedAt=1765350362598"
-  // },
-
   {
-    firstTitle: "Ebook, Report &", secondTitle: "Print Design",
-    tags: ["High-Converting Ebooks", "Annual Reports", "Print Design"],
-    url: "/services/ebook-digital-report",
-    image: "https://ik.imagekit.io/aghmftdmm/creative/EBOOK%20AND%20DIGITAL%20REPORT%201.webp?updatedAt=1765350362500"
-  },
-
-  // {
-  //   firstTitle: "Print", secondTitle: "Design",
-  //   tags: ["Brochures", "Flyers", "Business Cards"],
-  //   url: "/services/print-design",
-  //   image: "https://ik.imagekit.io/aghmftdmm/creative/PRINT%20DESIGN%201.webp?updatedAt=1765350362624"
-  // },
-
-  // {
-  //   firstTitle: "Packing &", secondTitle: "Merchandise Design",
-  //   tags: ["Product Packaging", "Retail Design", "Brand Identity"],
-  //   url: "/services/packing-merchandise-design",
-  //   image: "https://ik.imagekit.io/aghmftdmm/creative/PACKING%20&%20MERCHANDISE%20DESIGN%201.webp?updatedAt=1765350363321"
-  // }
-
+    firstTitle: "n8n & AI", secondTitle: "Automation Workflows",
+    tags: ["Automations", "AI Agents", "n8n Workflows"],
+    url: "/services/n8n-workflows",
+    image: "/images/services/creative/borchore.png"
+  }
 ];
 
 const duplicatedData = [...data, ...data];

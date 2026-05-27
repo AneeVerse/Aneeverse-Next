@@ -28,7 +28,7 @@ const servicesList = [
   {
     name: "E-Commerce Marketplace Management",
     description: "Manage Amazon, eBay & multi-channel marketplaces for scalable growth.",
-    url: "/services#ecommerce-marketplace",
+    url: "/services/amazon-marketplace-management",
     icon: <ShoppingCart className="w-5 h-5 text-[#E07A5F]" strokeWidth={2} />,
     iconBg: "bg-[#FFF4EB]"
   },

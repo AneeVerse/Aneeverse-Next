@@ -24,7 +24,7 @@ const Navbar = () => {
 
   // State for colors
   const [color, setColor] = useState({
-    text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/") || pathName === "/ads-ecommerce" || pathName === "/customer-stories" || pathName.includes("/customer-stories/") || pathName === "/about-us") ? "#EBFAFE" : "#073742",
+    text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/") || pathName === "/ads-ecommerce" || pathName === "/customer-stories" || pathName.includes("/customer-stories/") || pathName === "/about-us" || pathName === "/contact") ? "#EBFAFE" : "#073742",
     bg: "transparent",
   });
 
@@ -41,7 +41,7 @@ const Navbar = () => {
           } else {
             setScrolled(false);
             setColor({
-              text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/") || pathName === "/ads-ecommerce" || pathName === "/customer-stories" || pathName.includes("/customer-stories/") || pathName === "/about-us") ? "#EBFAFE" : "#073742",
+              text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/") || pathName === "/ads-ecommerce" || pathName === "/customer-stories" || pathName.includes("/customer-stories/") || pathName === "/about-us" || pathName === "/contact") ? "#EBFAFE" : "#073742",
               bg: "transparent",
             });
           }
@@ -58,14 +58,14 @@ const Navbar = () => {
   // Ensure color is updated correctly on route change
   useEffect(() => {
     setColor({
-      text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/") || pathName === "/ads-ecommerce" || pathName === "/customer-stories" || pathName.includes("/customer-stories/") || pathName === "/about-us") ? "#EBFAFE" : "#073742",
+      text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/") || pathName === "/ads-ecommerce" || pathName === "/customer-stories" || pathName.includes("/customer-stories/") || pathName === "/about-us" || pathName === "/contact") ? "#EBFAFE" : "#073742",
       bg: "transparent",
     });
   }, [pathName]);
 
   // Determine button text color for "Book a Call"
   const callTextColor = pathName !== "/"
-    ? (pathName === "/services" || pathName.includes("/services/") || pathName === "/ads-ecommerce" || pathName === "/customer-stories" || pathName.includes("/customer-stories/") || pathName === "/about-us")
+    ? (pathName === "/services" || pathName.includes("/services/") || pathName === "/ads-ecommerce" || pathName === "/customer-stories" || pathName.includes("/customer-stories/") || pathName === "/about-us" || pathName === "/contact")
       ? (color.bg !== "#EBFAFE" ? "#073742" : "#EBFAFE")
       : "#EBFAFE"
     : (color.bg !== "#EBFAFE" ? "#073742" : "#EBFAFE");
