@@ -235,7 +235,7 @@ function getStaticUrls() {
       priority: 0.5,
     },
     {
-      url: `${CONFIG.baseUrl}/terms-of-use`,
+      url: `${CONFIG.baseUrl}/terms-of-service`,
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.5,
