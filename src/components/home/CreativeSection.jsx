@@ -15,43 +15,43 @@ const data = [
     firstTitle: "E-Commerce", secondTitle: "Marketplace Management",
     tags: ["Amazon", "eBay", "Zepto", "Etsy"],
     url: "/services/amazon-marketplace-management",
-    image: "/images/services/website/website-design.png"
+    image: "https://ik.imagekit.io/aghmftdmm/creative/EMAIL%20CAMPAIGN%201.webp?updatedAt=1765350362742"
   },
   {
     firstTitle: "Platform & Website", secondTitle: "Development",
     tags: ["Web Platforms", "Custom SaaS", "Web Apps"],
     url: "/services/platform-development",
-    image: "/images/services/website/landing-page.png"
+    image: "https://ik.imagekit.io/aghmftdmm/creative/PLATFORM%20DEVLOPMENT%202.webp?updatedAt=1765350362851"
   },
   {
     firstTitle: "AI SEO", secondTitle: "(GEO) (AEO) (AIO)",
     tags: ["AI SEO", "Geo-Targeting", "Search Visibility"],
     url: "/services/ai-seo-geo-aeo-aio",
-    image: "/images/services/website/seo-optimization.png"
+    image: "https://ik.imagekit.io/aghmftdmm/creative/SEO%20OPTIMIZE%201.webp?updatedAt=1765350362673"
   },
   {
     firstTitle: "Marketing &", secondTitle: "Ads Management",
     tags: ["Google Ads", "Meta Ads", "ROI Campaigns"],
     url: "/services/marketing-strategy",
-    image: "/images/services/website/local-seo.png"
+    image: "https://ik.imagekit.io/aghmftdmm/creative/MARKETING%20STRATEGY%201.webp?updatedAt=1765350363109"
   },
   {
     firstTitle: "Social, Printable &", secondTitle: "Creative Designs",
     tags: ["Ad Creative", "Branding", "Social Graphics"],
     url: "/services/ad-creative",
-    image: "/images/services/creative/social-media-creative.png"
+    image: "https://ik.imagekit.io/aghmftdmm/creative/AD%20CREATIVE%202.webp?updatedAt=1765350361052"
   },
   {
     firstTitle: "Blogs & SEO", secondTitle: "Services",
     tags: ["SEO Articles", "Authority Writing", "Content Strategy"],
     url: "/services/blog-writing",
-    image: "/images/services/creative/presentation-design.png"
+    image: "https://ik.imagekit.io/aghmftdmm/creative/BLOG%20WRITING%20%201.webp?updatedAt=1765350361275"
   },
   {
     firstTitle: "n8n & AI", secondTitle: "Automation Workflows",
     tags: ["Automations", "AI Agents", "n8n Workflows"],
     url: "/services/n8n-workflows",
-    image: "/images/services/creative/borchore.png"
+    image: "https://ik.imagekit.io/aghmftdmm/creative/SALES%20&%20MARKETING%20AUTOMATION%201.webp?updatedAt=1765350362822"
   }
 ];
 
