@@ -14,6 +14,34 @@ import { AccentText } from "../common/typography/AccentText";
 export default function NewFooter() {
   const pathname = usePathname();
   const isAdsEcommerce = pathname === "/ads-ecommerce";
+  const isAdsDigitalMarketing = pathname === "/ads-digital-marketing";
+
+  const getStartedHref = isAdsEcommerce
+    ? "#platform-solutions"
+    : isAdsDigitalMarketing
+      ? "#service-cards"
+      : "/contact";
+
+  const adsDigitalMarketingQuickLinks = [
+    { title: "Home", link: "/" },
+    { title: "Services", link: "/#services" },
+    { title: "Portfolio", link: "/works" },
+    { title: "Blog", link: "/blog" },
+    { title: "About Us", link: "/about" },
+    { title: "Contact", link: "/contact" },
+  ];
+
+  const adsDigitalMarketingServiceLinks = [
+    { title: "Google Ads", link: "/ads-digital-marketing#service-cards" },
+    { title: "Meta Ads", link: "/ads-digital-marketing#service-cards" },
+    { title: "SEO", link: "/ads-digital-marketing#service-cards" },
+    { title: "Website Development", link: "/ads-digital-marketing#service-cards" },
+    { title: "Platform Development", link: "/ads-digital-marketing#service-cards" },
+    { title: "Ad Creative", link: "/services/ad-creative" },
+    { title: "Copywriting", link: "/services/copywriting" },
+    { title: "Branding", link: "/services/branding-services" },
+    { title: "Marketplace Management", link: "/ads-ecommerce" },
+  ];
   const [servicesOpen, setServicesOpen] = useState(false);
   const [navigationOpen, setNavigationOpen] = useState(false);
 
@@ -120,7 +148,7 @@ export default function NewFooter() {
             </Heading>
 
             <AnimatedButton
-              href={isAdsEcommerce ? "#platform-solutions" : "/contact"}
+              href={getStartedHref}
               className="mt-2 px-6 py-3 rounded-full font-medium text-secondary-500 bg-primary-500 border border-primary-500 hover:bg-secondary-500 hover:text-[#EBFAFE] transition-colors"
               mainTextSlide="-130%"
               duplicateTextStart="100%"
@@ -188,9 +216,48 @@ export default function NewFooter() {
                     </div>
                   </div>
                 </>
+              ) : isAdsDigitalMarketing ? (
+                <>
+                  <div className="flex flex-col gap-6 py-4 md:col-span-2 items-center text-center">
+                    <div className="w-full">
+                      <h3 className="text-white/40 text-[11px] uppercase tracking-[0.2em] font-bold mb-4">
+                        Quick Links
+                      </h3>
+                      <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+                        {adsDigitalMarketingQuickLinks.map((val, i, arr) => (
+                          <div key={i} className="flex items-center">
+                            <Link href={val.link} className="text-[14px] text-[#c9c9c9] hover:text-white transition-all duration-300 font-medium">
+                              {val.title}
+                            </Link>
+                            {i !== arr.length - 1 && (
+                              <span className="ml-6 text-white/30 font-bold text-[10px]">/</span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="w-full">
+                      <h3 className="text-white/40 text-[11px] uppercase tracking-[0.2em] font-bold mb-4">
+                        Digital Marketing Services
+                      </h3>
+                      <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+                        {adsDigitalMarketingServiceLinks.map((val, i, arr) => (
+                          <div key={i} className="flex items-center">
+                            <Link href={val.link} className="text-[14px] text-[#c9c9c9] hover:text-white transition-all duration-300 font-medium">
+                              {val.title}
+                            </Link>
+                            {i !== arr.length - 1 && (
+                              <span className="ml-6 text-white/30 font-bold text-[10px]">/</span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </>
               ) : (
                 <>
-                  {/* Standard Services Section */}
                   <div className="">
                     <h3 className="text-lg border-b pb-1 border-gray-200 font-semibold mb-4">
                       {footerData.services.heading}
@@ -338,7 +405,7 @@ export default function NewFooter() {
               </Heading>
 
               <AnimatedButton
-                href={isAdsEcommerce ? "#platform-solutions" : "/contact"}
+                href={getStartedHref}
                 className="mt-6 px-6 py-3 rounded-full font-medium text-secondary-500 bg-primary-500 border border-primary-500 hover:bg-secondary-500 hover:text-[#EBFAFE] transition-colors"
                 mainTextSlide="-130%"
                 duplicateTextStart="100%"
@@ -389,6 +456,39 @@ export default function NewFooter() {
                       { title: "SEO", link: "/services/blog-writing" },
                       { title: "Branding", link: "/services/branding-services" }
                     ].map((val, i, arr) => (
+                      <div key={i} className="flex items-center">
+                        <Link href={val.link} className="text-[15px] text-[#c9c9c9] hover:text-white transition-colors font-medium">
+                          {val.title}
+                        </Link>
+                        {i !== arr.length - 1 && (
+                          <span className="mx-3 text-white/20 font-light text-xs">|</span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : isAdsDigitalMarketing ? (
+              <div className="space-y-10">
+                <div>
+                  <h3 className="text-lg font-bold border-b border-white/10 pb-3 mb-6 text-white">Quick Links</h3>
+                  <div className="flex flex-wrap items-center gap-y-4">
+                    {adsDigitalMarketingQuickLinks.map((val, i, arr) => (
+                      <div key={i} className="flex items-center">
+                        <Link href={val.link} className="text-[15px] text-[#c9c9c9] hover:text-white transition-colors font-medium">
+                          {val.title}
+                        </Link>
+                        {i !== arr.length - 1 && (
+                          <span className="mx-3 text-white/20 font-light text-xs">|</span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold border-b border-white/10 pb-3 mb-6 text-white">Digital Marketing Services</h3>
+                  <div className="flex flex-wrap items-center gap-y-4">
+                    {adsDigitalMarketingServiceLinks.map((val, i, arr) => (
                       <div key={i} className="flex items-center">
                         <Link href={val.link} className="text-[15px] text-[#c9c9c9] hover:text-white transition-colors font-medium">
                           {val.title}

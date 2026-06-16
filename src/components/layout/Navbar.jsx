@@ -19,12 +19,31 @@ const Navbar = () => {
   // Check if current path is in the Why Us section
   const isWhyUsSection = pathName === "/about-us" || pathName === "/our-team";
 
-  // Ads e-commerce page swaps "Book a Call" → "Book a Free Audit" and hides Login
+  // Ads landing pages swap CTA text and hide Login
   const isAdsEcommerce = pathName === "/ads-ecommerce";
+  const isAdsDigitalMarketing = pathName === "/ads-digital-marketing";
+  const isAdsLanding = isAdsEcommerce || isAdsDigitalMarketing;
+
+  const isLightNavPage =
+    pathName === "/" ||
+    pathName === "/services" ||
+    pathName.includes("/services/") ||
+    isAdsLanding ||
+    pathName === "/customer-stories" ||
+    pathName.includes("/customer-stories/") ||
+    pathName === "/about-us" ||
+    pathName === "/contact";
+
+  const ctaHref = isAdsEcommerce
+    ? "/ads-ecommerce#platform-cards"
+    : isAdsDigitalMarketing
+      ? "/ads-digital-marketing#consultation-form"
+      : "/contact";
+  const ctaText = isAdsEcommerce ? "Book a Free Audit" : "Book a Call";
 
   // State for colors
   const [color, setColor] = useState({
-    text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/") || pathName === "/ads-ecommerce" || pathName === "/customer-stories" || pathName.includes("/customer-stories/") || pathName === "/about-us" || pathName === "/contact") ? "#EBFAFE" : "#073742",
+    text: isLightNavPage ? "#EBFAFE" : "#073742",
     bg: "transparent",
   });
 
@@ -41,7 +60,7 @@ const Navbar = () => {
           } else {
             setScrolled(false);
             setColor({
-              text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/") || pathName === "/ads-ecommerce" || pathName === "/customer-stories" || pathName.includes("/customer-stories/") || pathName === "/about-us" || pathName === "/contact") ? "#EBFAFE" : "#073742",
+              text: isLightNavPage ? "#EBFAFE" : "#073742",
               bg: "transparent",
             });
           }
@@ -53,19 +72,19 @@ const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [pathName]);
+  }, [pathName, isLightNavPage]);
 
   // Ensure color is updated correctly on route change
   useEffect(() => {
     setColor({
-      text: (pathName === "/" || pathName === "/services" || pathName.includes("/services/") || pathName === "/ads-ecommerce" || pathName === "/customer-stories" || pathName.includes("/customer-stories/") || pathName === "/about-us" || pathName === "/contact") ? "#EBFAFE" : "#073742",
+      text: isLightNavPage ? "#EBFAFE" : "#073742",
       bg: "transparent",
     });
-  }, [pathName]);
+  }, [pathName, isLightNavPage]);
 
   // Determine button text color for "Book a Call"
   const callTextColor = pathName !== "/"
-    ? (pathName === "/services" || pathName.includes("/services/") || pathName === "/ads-ecommerce" || pathName === "/customer-stories" || pathName.includes("/customer-stories/") || pathName === "/about-us" || pathName === "/contact")
+    ? (pathName === "/services" || pathName.includes("/services/") || isAdsLanding || pathName === "/customer-stories" || pathName.includes("/customer-stories/") || pathName === "/about-us" || pathName === "/contact")
       ? (color.bg !== "#EBFAFE" ? "#073742" : "#EBFAFE")
       : "#EBFAFE"
     : (color.bg !== "#EBFAFE" ? "#073742" : "#EBFAFE");
@@ -124,7 +143,7 @@ const Navbar = () => {
         {/* Buttons */}
         <div className="hidden lg:flex items-center gap-4">
           <AnimatedButton
-            href={isAdsEcommerce ? "/ads-ecommerce#platform-cards" : "/contact"}
+            href={ctaHref}
             className="px-6 py-2 rounded-full border"
             style={{
               color: pathName === "/about-us" ? "#073742" : (pathName.includes('/customer-stories') ? '#EBFAFE' : callTextColor),
@@ -135,9 +154,9 @@ const Navbar = () => {
             duplicateTextStart="100%"
             duplicateTextEnd="-100%"
           >
-            {isAdsEcommerce ? "Book a Free Audit" : "Book a Call"}
+            {ctaText}
           </AnimatedButton>
-          {!isAdsEcommerce && (
+          {!isAdsLanding && (
             <AnimatedButton
               href="/login"
               className="px-6 py-2 rounded-full border"

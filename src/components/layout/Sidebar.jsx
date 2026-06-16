@@ -79,6 +79,15 @@ const servicesList = [
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const pathName = usePathname();
   const isAdsEcommerce = pathName === "/ads-ecommerce";
+  const isAdsDigitalMarketing = pathName === "/ads-digital-marketing";
+  const isAdsLanding = isAdsEcommerce || isAdsDigitalMarketing;
+
+  const ctaHref = isAdsEcommerce
+    ? "/ads-ecommerce#platform-cards"
+    : isAdsDigitalMarketing
+      ? "/ads-digital-marketing#consultation-form"
+      : "/contact";
+  const ctaText = isAdsEcommerce ? "Book a Free Audit" : "Book a Call";
   const [openSection, setOpenSection] = useState(null);
   const [blogs, setBlogs] = useState(blogsCache);
   const [customerStories, setCustomerStories] = useState(storiesCache);
@@ -438,13 +447,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         {/* Action Buttons */}
         <div className="mt-6">
           <Link
-            href={isAdsEcommerce ? "/ads-ecommerce#platform-cards" : "/contact"}
+            href={ctaHref}
             onClick={toggleSidebar}
             className="w-full block text-center py-3 rounded-full bg-secondary-500 text-primary-500 font-semibold"
           >
-            {isAdsEcommerce ? "Book a Free Audit" : "Book a Call"}
+            {ctaText}
           </Link>
-          {!isAdsEcommerce && (
+          {!isAdsLanding && (
             <Link
               href="/register"
               onClick={toggleSidebar}

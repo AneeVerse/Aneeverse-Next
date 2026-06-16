@@ -17,7 +17,9 @@ export default function ClientLayoutWrapper({ children }) {
   const pathname = usePathname();
   const isStudio = pathname.startsWith('/studio');
   const isAuth = pathname === '/register' || pathname === '/login';
-  const isStandalone = pathname === '/ads-ecommerce-thankyou';
+  const isStandalone =
+    pathname === '/ads-ecommerce-thankyou' ||
+    pathname === '/ads-digital-marketing-thankyou';
 
   return (
     <PostHogProvider>
