@@ -41,8 +41,6 @@ const clientLogos = [
   "/images/testimonals/Vmc.png",
   "/images/testimonals/jm-visa.png",
   "/images/testimonals/navino.png",
-  "/images/testimonals/Vmc.png",
-  "/images/testimonals/jm-visa.png",
 ];
 
 const scrollVariants = {
