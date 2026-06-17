@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Layout from "@/components/common/Layout";
 import { motion } from "framer-motion";
-import { FaGoogle, FaFacebookF, FaSearch, FaGlobe, FaCode } from "react-icons/fa";
+import { FaGoogle, FaFacebookF, FaSearch, FaGlobe, FaCode, FaAmazon, FaEbay, FaEtsy } from "react-icons/fa";
 import { Clock } from "lucide-react";
 import ConsultationFormModal from "./ConsultationFormModal";
 
@@ -84,16 +84,58 @@ const services = [
       "60-day post-launch support",
     ],
   },
+  {
+    id: "amazon",
+    name: "Amazon",
+    badge: "Amazon Management",
+    icon: <FaAmazon className="w-5 h-5 text-black" />,
+    image: "/ads/amazon6.png",
+    subtitle: "Ranking on Page 3 Is the Same as Not Existing.",
+    description: "Listings fixed. Keywords ranked. PPC restructured. Margin protected.",
+    deliverables: [
+      "Listings fixed. Keywords ranked.",
+      "PPC restructured. Margin protected.",
+      "35%+ ranking growth within 90 days",
+    ],
+  },
+  {
+    id: "ebay",
+    name: "eBay",
+    badge: "eBay Management",
+    icon: <FaEbay className="w-6 h-4 text-[#6557D2]" />,
+    image: "/ads/ebay1.png",
+    subtitle: "If Your Listing Doesn't Stop Them, Someone Else's Does.",
+    description: "Storefront built. Listings ranked. Promoted campaigns that sell, not just spend.",
+    deliverables: [
+      "Storefront built. Listings ranked.",
+      "Promoted campaigns that sell, not just spend.",
+      "50%+ impression increase in first 60 days",
+    ],
+  },
+  {
+    id: "etsy",
+    name: "Etsy",
+    badge: "Etsy Management",
+    icon: <FaEtsy className="w-5 h-5 text-[#D5641C]" />,
+    image: "/ads/etsy1.png",
+    subtitle: "Title & Tags Decide Everything — Most Sellers Get Both Wrong.",
+    description: "Every listing optimised for how Etsy actually ranks.",
+    deliverables: [
+      "Every listing optimised for how Etsy actually ranks.",
+      "Etsy Ads built to convert — not just run.",
+      "3x search visibility in first 60 days",
+    ],
+  },
 ];
 
-function ServiceCard({ service, index, onCtaClick }) {
+function ServiceCard({ service, index, onCtaClick, isCarousel = false }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, ...(isCarousel ? {} : { y: 30 }) }}
+      whileInView={{ opacity: 1, ...(isCarousel ? {} : { y: 0 }) }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group flex flex-col bg-[#f1f5f9] rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.1)] border border-white/10 hover:shadow-[0_0_60px_rgba(0,0,0,0.18)] transition-all duration-300 h-full"
+      className="group flex flex-col bg-[#f1f5f9] rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.1)] border border-white/10 hover:shadow-[0_0_60px_rgba(0,0,0,0.18)] transition-all duration-300 h-full w-full"
     >
       <div className="relative w-full h-[220px] overflow-hidden">
         <Image
@@ -170,11 +212,19 @@ export default function ServiceCardsSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 px-4 lg:px-0 max-w-[1200px] mx-auto">
+        <div className="flex md:hidden overflow-x-auto overflow-y-hidden overscroll-x-contain snap-x snap-mandatory scrollbar-hide -mx-4 px-4 gap-4 pb-6 items-stretch touch-pan-x">
+          {services.map((service, index) => (
+            <div key={service.id} className="flex-shrink-0 snap-center w-[85vw] sm:w-[320px] flex">
+              <ServiceCard service={service} index={index} onCtaClick={openModal} isCarousel />
+            </div>
+          ))}
+        </div>
+
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-6 gap-8 px-4 lg:px-0 max-w-[1200px] mx-auto">
           {services.map((service, index) => (
             <div
               key={service.id}
-              className={`lg:col-span-2 ${index === 3 ? "lg:col-start-2" : ""}`}
+              className={`lg:col-span-2 ${index === 6 ? "lg:col-start-2" : ""}`}
             >
               <ServiceCard service={service} index={index} onCtaClick={openModal} />
             </div>

@@ -66,13 +66,13 @@ export default function AdsDigitalMarketingHero() {
               Digital Marketing Services
             </p>
 
-            <h1 className="font-bw-gradual font-extrabold leading-[1.1] tracking-tighter uppercase mb-6 text-[1.75rem] sm:text-4xl md:text-5xl lg:text-[2.75rem] xl:text-[3rem] max-w-full">
+            <h1 className="font-bw-gradual font-extrabold leading-[1.1] max-md:leading-[1.15] tracking-tighter uppercase mb-6 text-[1.75rem] max-md:text-[1.35rem] sm:text-4xl md:text-5xl lg:text-[2.75rem] xl:text-[3rem] max-w-full max-md:pr-0 max-md:overflow-hidden">
               <span className="text-white">
                 One Team for All Your
                 <br />
                 Digital Marketing and Development.
               </span>
-              <span className="block w-fit max-w-full bg-[#FF6B00] text-[#03151a] px-3 sm:px-4 py-1.5 sm:py-1 rounded-lg sm:rounded-xl text-[0.65em] sm:text-[0.65em] mt-4 sm:mt-5 font-black tracking-tight">
+              <span className="inline-block max-w-full max-md:mr-0 max-md:pr-2.5 max-md:whitespace-normal bg-[#FF6B00] text-[#03151a] px-3 sm:px-4 py-1.5 sm:py-1 rounded-lg sm:rounded-xl text-[0.65em] max-md:text-[0.55em] max-md:leading-snug sm:text-[0.65em] mt-4 sm:mt-5 font-black tracking-tight">
                 More Leads. Better Rankings. Less Chaos.
               </span>
             </h1>

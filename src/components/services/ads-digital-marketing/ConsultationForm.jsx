@@ -21,6 +21,9 @@ const SERVICE_OPTIONS = [
   { value: "seo", label: "SEO" },
   { value: "website-development", label: "Website Development" },
   { value: "platform-development", label: "Platform Development" },
+  { value: "amazon", label: "Amazon" },
+  { value: "ebay", label: "eBay" },
+  { value: "etsy", label: "Etsy" },
   { value: "not-sure", label: "Not Sure" },
 ];
 

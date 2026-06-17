@@ -63,8 +63,33 @@ export default function HowItWorksSection() {
           </motion.p>
         </div>
 
-        <div className="relative max-w-3xl mx-auto">
-          <div className="absolute left-[19px] md:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-[#88d7f0]/40 via-[#88d7f0]/20 to-transparent hidden sm:block" />
+        <div className="flex md:hidden overflow-x-auto overflow-y-hidden overscroll-x-contain snap-x snap-mandatory scrollbar-hide -mx-4 px-4 gap-4 pb-6 items-stretch touch-pan-x">
+          {steps.map((step, index) => (
+            <motion.div
+              key={step.number}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="flex-shrink-0 snap-center w-[85vw] sm:w-[300px] flex"
+            >
+              <div className="bg-[#072d36] rounded-xl p-5 border border-white/[0.05] hover:border-[#88d7f0]/20 transition-colors group h-full w-full">
+                <div className="flex flex-wrap items-baseline gap-2 mb-2">
+                  <h3 className="font-bw-gradual text-lg font-bold uppercase tracking-tight text-white">
+                    Step {index + 1} – {step.title}
+                  </h3>
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-[#FF6B00] bg-[#FF6B00]/10 px-2 py-0.5 rounded-md">
+                    {step.timeline}
+                  </span>
+                </div>
+                <p className="text-gray-300 text-sm leading-relaxed">{step.description}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="hidden md:block relative max-w-3xl mx-auto">
+          <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-[#88d7f0]/40 via-[#88d7f0]/20 to-transparent" />
 
           <div className="space-y-6 md:space-y-8">
             {steps.map((step, index) => (
@@ -74,7 +99,7 @@ export default function HowItWorksSection() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative flex gap-5 md:gap-8 pl-0 sm:pl-2"
+                className="relative flex gap-5 md:gap-8 pl-2"
               >
                 <div className="flex-shrink-0 relative z-10">
                   <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#072d36] border-2 border-[#88d7f0]/50 flex items-center justify-center">
