@@ -7,31 +7,31 @@ import { FaTimes } from "react-icons/fa";
 
 const hardcodedProjects = [
   {
-    image: "/images/works/amazone.jpeg",
+    image: "/images/ads-digital-marketing/see-our-top-work/google-ads-proof.jpg",
     title: "Google Ads",
     stats: ["CPL ↓ 42%", "Before/After 60 Days"],
     url: "/ads-digital-marketing",
   },
   {
-    image: "/images/works/etsy pow.jpg.jpeg",
+    image: "/images/ads-digital-marketing/see-our-top-work/meta-proof.jpg",
     title: "Meta Ads",
     stats: ["ROAS ↑ 2.8x", "Creative Testing Results"],
     url: "/ads-digital-marketing",
   },
   {
-    image: "/images/works/etzy.jpeg",
+    image: "/images/ads-digital-marketing/see-our-top-work/seo.png",
     title: "SEO",
     stats: ["Page 3 → Page 1", "90-Day Ranking Movement"],
     url: "/ads-digital-marketing",
   },
   {
-    image: "/images/home/works-ban-1.avif",
+    image: "/images/ads-digital-marketing/see-our-top-work/website-dev.png",
     title: "Website",
     stats: ["Homepage Redesign", "Conversion Rate ↑ 35%"],
     url: "/ads-digital-marketing",
   },
   {
-    image: "/images/services/website/webflow-development.avif",
+    image: "/images/ads-digital-marketing/see-our-top-work/platform-dev.png",
     title: "Platform",
     stats: ["Custom Web App", "Delivered On Milestone"],
     url: "/ads-digital-marketing",

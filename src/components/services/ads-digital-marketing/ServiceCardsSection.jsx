@@ -14,7 +14,7 @@ const services = [
     name: "Google Ads",
     badge: "Google Ads",
     icon: <FaGoogle className="w-5 h-5 text-[#4285F4]" />,
-    image: "/ads/amazon6.png",
+    image: "/images/ads-digital-marketing/service-card/google-ads.png",
     subtitle: "Qualified Leads From Google – Not Just Clicks",
     description:
       "One dedicated manager. Weekly optimization. Conversion tracking verified before a single rupee goes live.",
@@ -29,7 +29,7 @@ const services = [
     name: "Meta Ads",
     badge: "Meta Ads",
     icon: <FaFacebookF className="w-5 h-5 text-[#1877F2]" />,
-    image: "/ads/ebay1.png",
+    image: "/images/ads-digital-marketing/service-card/meta-ads.png",
     subtitle: "Paying Customers From Facebook and Instagram – Not Just Reach",
     description:
       "Weekly creative testing. Pixel tracking set up correctly. One manager from build to results.",
@@ -44,7 +44,7 @@ const services = [
     name: "SEO",
     badge: "SEO",
     icon: <FaSearch className="w-5 h-5 text-[#03151a]" />,
-    image: "/ads/etsy1.png",
+    image: "/images/ads-digital-marketing/service-card/seo.png",
     subtitle: "First-Page Rankings So Buyers Find You Without Paid Clicks",
     description:
       "Full audit, on-page fixes, content, and link building – every month, on a clear plan.",
@@ -59,7 +59,7 @@ const services = [
     name: "Website Development",
     badge: "Website Development",
     icon: <FaGlobe className="w-5 h-5 text-[#03151a]" />,
-    image: "/images/services/website/website-design.avif",
+    image: "/images/ads-digital-marketing/service-card/website-dev.png",
     subtitle: "A Website That Converts Visitors – Not One That Just Looks Good",
     description:
       "Strategy before design. Mobile-first. Built to load fast and rank on Google.",
@@ -74,7 +74,7 @@ const services = [
     name: "Platform Development",
     badge: "Platform Development",
     icon: <FaCode className="w-5 h-5 text-[#03151a]" />,
-    image: "/images/services/website/webflow-development.avif",
+    image: "/images/ads-digital-marketing/service-card/platform-dev.png",
     subtitle: "Built to Spec. Delivered on a Fixed Timeline.",
     description:
       "Web apps, marketplaces, automation tools, internal platforms – scoped, built, and handed over clean.",
