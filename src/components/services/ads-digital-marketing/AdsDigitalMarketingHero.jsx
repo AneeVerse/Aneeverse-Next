@@ -59,7 +59,7 @@ export default function AdsDigitalMarketingHero() {
 
       <Layout className="relative z-30">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 xl:gap-20 items-stretch min-h-[calc(100vh-100px)] pt-24 pb-10 lg:py-32">
-          <div className="flex flex-col justify-center text-left min-w-0 lg:pr-6 xl:pr-10">
+          <div className="flex flex-col justify-center text-left min-w-0 lg:pr-12 xl:pr-16">
             <p className="text-[11px] md:text-xs uppercase font-bold tracking-[3px] md:tracking-[4px] text-primary-500/90 mb-5 md:mb-6">
               Digital Marketing Services
             </p>
@@ -70,8 +70,11 @@ export default function AdsDigitalMarketingHero() {
                 <br />
                 Digital Marketing and Development.
               </span>
-              <span className="inline-block max-w-full max-md:mr-0 max-md:pr-2.5 max-md:whitespace-normal sm:whitespace-nowrap bg-[#FF6B00] text-[#03151a] px-3 sm:px-4 py-1.5 sm:py-1 rounded-lg sm:rounded-xl text-[0.55em] sm:text-base md:text-[1.0625rem] max-md:leading-snug mt-4 sm:mt-5 font-black tracking-tighter">
-                More Leads. Better Rankings. Less Chaos.
+              <span className="block mt-4 sm:mt-5">
+                <span className="inline-block max-w-[95%] lg:max-w-[450px] xl:max-w-none bg-[#FF6B00] text-[#03151a] px-4 py-0.5 rounded-lg sm:rounded-xl text-[0.55em] sm:text-[0.52em] xl:text-[0.54em] leading-snug font-black tracking-tighter xl:whitespace-nowrap">
+                  <span className="inline-block whitespace-nowrap">More Leads. Better Rankings.</span>{" "}
+                  <span className="inline-block whitespace-nowrap">Less Chaos.</span>
+                </span>
               </span>
             </h1>
 
