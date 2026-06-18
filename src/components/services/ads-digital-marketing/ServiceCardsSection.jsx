@@ -212,7 +212,7 @@ export default function ServiceCardsSection() {
           </h2>
         </div>
 
-        <div className="flex md:hidden overflow-x-auto overflow-y-hidden overscroll-x-contain snap-x snap-mandatory scrollbar-hide -mx-4 px-4 gap-4 pb-6 items-stretch touch-pan-x">
+        <div className="flex md:hidden overflow-x-auto overflow-y-visible overscroll-x-contain snap-x snap-mandatory scrollbar-hide -mx-4 px-4 gap-4 pb-6 items-stretch">
           {services.map((service, index) => (
             <div key={service.id} className="flex-shrink-0 snap-center w-[85vw] sm:w-[320px] flex">
               <ServiceCard service={service} index={index} onCtaClick={openModal} isCarousel />
