@@ -11,6 +11,7 @@ import ContactBlock from '@/components/services/ads-digital-marketing/ContactBlo
 import FAQSection from '@/components/services/ads-digital-marketing/FAQSection'
 import FinalCTASection from '@/components/services/ads-digital-marketing/FinalCTASection'
 import VisitorTracker from '@/components/services/ads-digital-marketing/VisitorTracker'
+import SignupConversionTracker from '@/components/services/ads-digital-marketing/SignupConversionTracker'
 
 export const metadata = {
     title: "Digital Marketing Services | Aneeverse",
@@ -21,6 +22,7 @@ const page = () => {
     return (
         <div>
             <VisitorTracker />
+            <SignupConversionTracker />
             <ServiceSchema
                 serviceName="Digital Marketing Services"
                 serviceType="ProfessionalService"
