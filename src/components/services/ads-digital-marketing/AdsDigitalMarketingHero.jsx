@@ -70,7 +70,7 @@ export default function AdsDigitalMarketingHero() {
                 <br />
                 Digital Marketing and Development.
               </span>
-              <span className="inline-block max-w-full max-md:mr-0 max-md:pr-2.5 max-md:whitespace-normal bg-[#FF6B00] text-[#03151a] px-3 sm:px-4 py-1.5 sm:py-1 rounded-lg sm:rounded-xl text-[0.65em] max-md:text-[0.55em] max-md:leading-snug sm:text-[0.65em] mt-4 sm:mt-5 font-black tracking-tight">
+              <span className="inline-block max-w-full max-md:mr-0 max-md:pr-2.5 max-md:whitespace-normal sm:whitespace-nowrap bg-[#FF6B00] text-[#03151a] px-3 sm:px-4 py-1.5 sm:py-1 rounded-lg sm:rounded-xl text-[0.55em] sm:text-[0.6em] lg:text-[0.605em] xl:text-[0.62em] max-md:leading-snug mt-4 sm:mt-5 font-black tracking-tighter">
                 More Leads. Better Rankings. Less Chaos.
               </span>
             </h1>

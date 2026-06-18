@@ -63,7 +63,7 @@ export default function HowItWorksSection() {
           </motion.p>
         </div>
 
-        <div className="flex md:hidden overflow-x-auto overflow-y-hidden overscroll-x-contain snap-x snap-mandatory scrollbar-hide -mx-4 px-4 gap-4 pb-6 items-stretch touch-pan-x">
+        <div className="flex md:hidden overflow-x-auto overflow-y-visible overscroll-x-contain snap-x snap-mandatory scrollbar-hide -mx-4 px-4 gap-4 pb-6 items-stretch">
           {steps.map((step, index) => (
             <motion.div
               key={step.number}

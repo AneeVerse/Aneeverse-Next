@@ -33,36 +33,49 @@ const beforeAfterCards = [
 
 const reviews = [
   {
-    name: "[Client Name]",
-    role: "Business Owner",
-    avatar: "/images/testimonals/Vmc.png",
+    name: "Tiger Terrain",
+    role: "Adventure Travel Brand | Website Development",
+    avatar: "/images/ads-digital-marketing/testomonials/tiger-terrain-logo.svg",
+    logoBg: "bg-[#03151a]",
     rating: 5,
-    text: "[Specific outcome]",
-    placeholder: true,
-  },
-  {
-    name: "[Client Name]",
-    role: "Business Owner",
-    avatar: "/images/testimonals/jm-visa.png",
-    rating: 5,
-    text: "[Specific outcome]",
-    placeholder: true,
-  },
-  {
-    name: "Vikram Manghnani",
-    role: "Founder, VMC",
-    avatar: "/images/testimonals/Vmc.png",
-    rating: 5,
-    text: "They felt like a team that genuinely cared about our vision and became a key part of our expansion.",
+    text: "Our old website was losing us customers before they even read a word. Aneeverse rebuilt it. Clean. Fast. No confusion. Visitors actually stay now.",
     placeholder: false,
   },
   {
-    name: "[Client Name]",
-    role: "Business Owner",
-    avatar: "/images/testimonals/navino.png",
+    name: "Eazy Visas",
+    role: "Visa Consultation Services | SEO",
+    avatar: "/images/ads-digital-marketing/testomonials/eazy-visa-logo.png",
+    logoBg: "bg-white",
     rating: 5,
-    text: "[Specific outcome]",
-    placeholder: true,
+    text: "Page 1 on Google in 45 days. 200 qualified leads every single month — organic, no ad spend. I didn't think it was possible that fast. It was.",
+    placeholder: false,
+  },
+  {
+    name: "HoReCa1",
+    role: "B2B Hospitality Platform | Platform Development",
+    avatar: "/images/ads-digital-marketing/testomonials/horeca1_logo.avif",
+    logoBg: "bg-white",
+    rating: 5,
+    text: "Most developers take your brief and disappear. Aneeverse scoped it, built it, and delivered it. Our B2B platform is live. It works. That's all I needed.",
+    placeholder: false,
+  },
+  {
+    name: "Eazyvisas",
+    role: "Visa Consultation | Google Ads",
+    avatar: "/images/ads-digital-marketing/testomonials/eazy-visa-logo.png",
+    logoBg: "bg-white",
+    rating: 5,
+    text: "Same leads. Half the spend. Then double the leads. That's what happened in 60 days. I wish I had done this sooner.",
+    placeholder: false,
+  },
+  {
+    name: "Book My Corporate Party",
+    role: "Corporate Event Booking | Meta Ads",
+    avatar: "/images/ads-digital-marketing/testomonials/bmcp-logo.png",
+    logoBg: "bg-[#03151a]",
+    rating: 5,
+    text: "ROAS went up. Cost per booking went down. Results showed in the first two weeks. Nothing complicated about it.",
+    placeholder: false,
   },
 ];
 
@@ -199,14 +212,17 @@ export default function ResultsSection() {
                   &ldquo;{review.text}&rdquo;
                 </blockquote>
 
-                <div className="flex items-center gap-4 mt-auto">
-                  <div className="w-12 h-12 rounded-full overflow-hidden relative flex-shrink-0 bg-white">
+                <div className="flex items-center gap-3 mt-auto">
+                  <div
+                    className={`h-12 w-[68px] px-2.5 rounded-xl flex items-center justify-center flex-shrink-0 ${review.logoBg || "bg-white"}`}
+                  >
                     <Image
                       src={review.avatar}
                       alt={review.name}
-                      fill
-                      className="object-contain"
-                      sizes="48px"
+                      width={120}
+                      height={48}
+                      className="h-8 w-auto max-w-full object-contain"
+                      sizes="120px"
                       unoptimized
                     />
                   </div>
