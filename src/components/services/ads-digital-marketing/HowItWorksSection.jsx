@@ -89,8 +89,6 @@ export default function HowItWorksSection() {
         </div>
 
         <div className="hidden md:block relative max-w-3xl mx-auto">
-          <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-[#88d7f0]/40 via-[#88d7f0]/20 to-transparent" />
-
           <div className="space-y-6 md:space-y-8">
             {steps.map((step, index) => (
               <motion.div
@@ -105,6 +103,9 @@ export default function HowItWorksSection() {
                   <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#072d36] border-2 border-[#88d7f0]/50 flex items-center justify-center">
                     <span className="text-[10px] md:text-xs font-black text-[#88d7f0]">{step.number}</span>
                   </div>
+                  {index !== steps.length - 1 && (
+                    <div className="absolute left-1/2 -translate-x-1/2 top-12 w-px h-[calc(100%-1rem)] bg-gradient-to-b from-[#88d7f0]/40 to-[#88d7f0]/15" />
+                  )}
                 </div>
 
                 <div className="flex-1 bg-[#072d36] rounded-xl p-5 md:p-6 border border-white/[0.05] hover:border-[#88d7f0]/20 transition-colors group">

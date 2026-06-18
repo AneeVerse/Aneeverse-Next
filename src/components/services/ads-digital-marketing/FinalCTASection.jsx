@@ -6,7 +6,7 @@ import AnimatedButton from "@/components/common/AnimatedButton";
 
 export default function FinalCTASection() {
   return (
-    <section className="bg-[#073742] py-16 md:py-24 relative overflow-hidden">
+    <section className="bg-[#073742] py-16 md:py-12 lg:py-14 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-[#03151a]/30 to-transparent pointer-events-none" />
 
       <Layout>
