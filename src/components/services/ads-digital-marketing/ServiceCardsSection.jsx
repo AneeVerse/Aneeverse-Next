@@ -15,7 +15,10 @@ const services = [
     badge: "Google Ads",
     icon: <FaGoogle className="w-5 h-5 text-[#4285F4]" />,
     image: "/images/ads-digital-marketing/service-card/google-ads.png",
-    subtitle: "Qualified Leads From Google – Not Just Clicks",
+    subtitle: [
+      { text: "Qualified Leads From Google", accent: false },
+      { text: "Not Just Clicks", accent: true },
+    ],
     description:
       "One dedicated manager. Weekly optimization. Conversion tracking verified before a single rupee goes live.",
     deliverables: [
@@ -30,7 +33,10 @@ const services = [
     badge: "Meta Ads",
     icon: <FaFacebookF className="w-5 h-5 text-[#1877F2]" />,
     image: "/images/ads-digital-marketing/service-card/meta-ads.png",
-    subtitle: "Paying Customers From Facebook and Instagram – Not Just Reach",
+    subtitle: [
+      { text: "Facebook & Instagram Leads", accent: false },
+      { text: "Not Just Reach", accent: true },
+    ],
     description:
       "Weekly creative testing. Pixel tracking set up correctly. One manager from build to results.",
     deliverables: [
@@ -45,7 +51,10 @@ const services = [
     badge: "SEO",
     icon: <FaSearch className="w-5 h-5 text-[#03151a]" />,
     image: "/images/ads-digital-marketing/service-card/seo.png",
-    subtitle: "First-Page Rankings So Buyers Find You Without Paid Clicks",
+    subtitle: [
+      { text: "First-Page Google Rankings", accent: false },
+      { text: "Without Paid Clicks", accent: true },
+    ],
     description:
       "Full audit, on-page fixes, content, and link building – every month, on a clear plan.",
     deliverables: [
@@ -60,7 +69,10 @@ const services = [
     badge: "Website Development",
     icon: <FaGlobe className="w-5 h-5 text-[#03151a]" />,
     image: "/images/ads-digital-marketing/service-card/website-dev.png",
-    subtitle: "A Website That Converts Visitors – Not One That Just Looks Good",
+    subtitle: [
+      { text: "Websites Built to Convert", accent: false },
+      { text: "Not Just Look Good", accent: true },
+    ],
     description:
       "Strategy before design. Mobile-first. Built to load fast and rank on Google.",
     deliverables: [
@@ -75,7 +87,10 @@ const services = [
     badge: "Platform Development",
     icon: <FaCode className="w-5 h-5 text-[#03151a]" />,
     image: "/images/ads-digital-marketing/service-card/platform-dev.png",
-    subtitle: "Built to Spec. Delivered on a Fixed Timeline.",
+    subtitle: [
+      { text: "Built to Spec. Delivered on a", accent: false },
+      { text: "Fixed Timeline.", accent: true },
+    ],
     description:
       "Web apps, marketplaces, automation tools, internal platforms – scoped, built, and handed over clean.",
     deliverables: [
@@ -90,7 +105,10 @@ const services = [
     badge: "Amazon Management",
     icon: <FaAmazon className="w-5 h-5 text-black" />,
     image: "/ads/amazon6.png",
-    subtitle: "Ranking on Page 3 Is the Same as Not Existing.",
+    subtitle: [
+      { text: "Ranking on Page 3 Is the Same as", accent: false },
+      { text: "Not Existing.", accent: true },
+    ],
     description: "Listings fixed. Keywords ranked. PPC restructured. Margin protected.",
     deliverables: [
       "Listings fixed. Keywords ranked.",
@@ -104,7 +122,10 @@ const services = [
     badge: "eBay Management",
     icon: <FaEbay className="w-6 h-4 text-[#6557D2]" />,
     image: "/ads/ebay1.png",
-    subtitle: "If Your Listing Doesn't Stop Them, Someone Else's Does.",
+    subtitle: [
+      { text: "If Your Listing Doesn't Stop Them,", accent: false },
+      { text: "Someone Else's Does.", accent: true },
+    ],
     description: "Storefront built. Listings ranked. Promoted campaigns that sell, not just spend.",
     deliverables: [
       "Storefront built. Listings ranked.",
@@ -118,7 +139,10 @@ const services = [
     badge: "Etsy Management",
     icon: <FaEtsy className="w-5 h-5 text-[#D5641C]" />,
     image: "/ads/etsy1.png",
-    subtitle: "Title & Tags Decide Everything — Most Sellers Get Both Wrong.",
+    subtitle: [
+      { text: "Title & Tags Decide Everything —", accent: false },
+      { text: "Most Sellers Get Both Wrong.", accent: true },
+    ],
     description: "Every listing optimised for how Etsy actually ranks.",
     deliverables: [
       "Every listing optimised for how Etsy actually ranks.",
@@ -160,7 +184,18 @@ function ServiceCard({ service, index, onCtaClick, isCarousel = false }) {
 
       <div className="flex flex-col flex-1 p-5 bg-white">
         <h3 className="font-bw-gradual text-[1rem] md:text-[1.05rem] font-bold text-gray-900 leading-tight mb-3 uppercase tracking-tight">
-          {service.subtitle}
+          {Array.isArray(service.subtitle) ? (
+            service.subtitle.map((part, i) => (
+              <span
+                key={i}
+                className={part.accent ? "block w-fit bg-[#ff9900] text-[#03151a] px-1.5 py-0.5 rounded-sm font-black mt-1" : ""}
+              >
+                {part.text}
+              </span>
+            ))
+          ) : (
+            service.subtitle
+          )}
         </h3>
 
         <p className="text-[12px] text-gray-600 leading-relaxed mb-4">{service.description}</p>
@@ -180,7 +215,7 @@ function ServiceCard({ service, index, onCtaClick, isCarousel = false }) {
             onClick={() => onCtaClick(service.id)}
             className="w-full py-3.5 rounded-full font-bold text-[13px] shadow-lg shadow-black/5 flex items-center justify-center text-center bg-[#073742] text-[#EBFAFE] hover:bg-[#0a4f5e] transition-colors"
           >
-            Learn More →
+            Get a free audit →
           </button>
         </div>
       </div>
