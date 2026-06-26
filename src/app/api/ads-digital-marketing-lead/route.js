@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { verifyTurnstile } from "@/lib/turnstile";
 
 const serviceLabels = {
   "google-ads": "Google Ads",
@@ -22,10 +23,17 @@ export async function POST(request) {
       userLocation,
       userPincode,
       userIp,
+      turnstileToken,
     } = body;
 
     if (!fullName || !companyName || !email || !phone || !serviceNeeded) {
       return NextResponse.json({ error: "All fields are required." }, { status: 400 });
+    }
+
+    // Verify Cloudflare Turnstile
+    const isHuman = await verifyTurnstile(turnstileToken);
+    if (!isHuman) {
+      return NextResponse.json({ error: "Verification failed. Please try again." }, { status: 400 });
     }
 
     const serviceDisplay = serviceLabels[serviceNeeded] || serviceNeeded;

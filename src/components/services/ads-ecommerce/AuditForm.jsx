@@ -1,17 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { FaHeadset } from "react-icons/fa";
 import { HiLockClosed } from "react-icons/hi";
 import useGeoLocation from "@/hooks/useGeoLocation";
+import Turnstile from "@/components/common/Turnstile";
+import dynamic from "next/dynamic";
+import "react-phone-input-2/lib/style.css";
+
+const PhoneInput = dynamic(() => import("react-phone-input-2"), { ssr: false });
 
 const inputClasses =
   "w-full bg-white/[0.06] border border-white/50 rounded-lg px-3.5 py-2.5 text-white placeholder-white/80 text-sm focus:outline-none focus:border-white/80 transition-all duration-200";
 const selectClasses =
   "w-full bg-[#05262e] border border-white/50 rounded-lg px-3.5 py-2.5 text-white text-sm focus:outline-none focus:border-white/80 transition-all duration-200 appearance-none cursor-pointer";
+
+
 
 export default function AuditForm({ defaultPlatform = "", showHeader = true, className = "" }) {
   const router = useRouter();
@@ -29,6 +36,7 @@ export default function AuditForm({ defaultPlatform = "", showHeader = true, cla
     agreeTerms: true,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState(null);
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
@@ -59,6 +67,7 @@ export default function AuditForm({ defaultPlatform = "", showHeader = true, cla
           biggestChallenge: formData.biggestChallenge,
           otherChallenge:
             formData.biggestChallenge === "other" ? formData.otherChallenge : "",
+          turnstileToken,
           userLocation: userGeo
             ? `${userGeo.city}, ${userGeo.region}, ${userGeo.country}`
             : "Unknown",
@@ -120,7 +129,19 @@ export default function AuditForm({ defaultPlatform = "", showHeader = true, cla
             <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required className={inputClasses} />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-            <input type="tel" name="phone" placeholder="WhatsApp / Phone" value={formData.phone} onChange={handleChange} required className={inputClasses} />
+            <PhoneInput
+              country={userGeo?.countryCode?.toLowerCase() || "in"}
+              value={formData.phone}
+              onChange={(phone) => setFormData({ ...formData, phone: phone.startsWith('+') ? phone : `+${phone}` })}
+              disabled={isSubmitting}
+              enableSearch={true}
+              inputProps={{
+                required: true,
+                name: 'phone',
+                id: 'phone',
+              }}
+              containerClass="phone-input-container"
+            />
             <div className="relative">
               <select name="platform" value={formData.platform} onChange={handleChange} required className={selectClasses}>
                 <option value="" disabled className="bg-[#05262e]">Platform</option>
@@ -182,13 +203,17 @@ export default function AuditForm({ defaultPlatform = "", showHeader = true, cla
             </div>
           )}
 
+          {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && (
+            <Turnstile onVerify={setTurnstileToken} />
+          )}
+
           <div className="space-y-4 pt-1">
             <motion.button
               type="submit"
-              disabled={isSubmitting || !formData.agreeTerms}
+              disabled={isSubmitting || !formData.agreeTerms || (!!process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && !turnstileToken)}
               className="w-full py-3.5 rounded-xl font-bold text-sm bg-[#88D7F0] text-[#073742] disabled:opacity-40 disabled:cursor-not-allowed shadow-lg shadow-[#88D7F0]/10"
               initial="initial"
-              whileHover={!isSubmitting && formData.agreeTerms ? "hover" : "initial"}
+              whileHover={!isSubmitting && formData.agreeTerms && (!process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || !!turnstileToken) ? "hover" : "initial"}
             >
               <span className="block overflow-hidden relative h-[1.25em]">
                 <motion.span
@@ -215,6 +240,98 @@ export default function AuditForm({ defaultPlatform = "", showHeader = true, cla
           </div>
         </form>
       </div>
+      <style jsx global>{`
+          /* Overwrite react-phone-input-2 default classes to match our style */
+          .phone-input-container .form-control {
+              width: 100% !important;
+              height: 40px !important;
+              background: rgba(255, 255, 255, 0.06) !important;
+              border: 1px solid rgba(255, 255, 255, 0.5) !important;
+              border-radius: 8px !important;
+              color: #ffffff !important;
+              font-size: 14px !important;
+              padding-left: 48px !important;
+              transition: all 0.2s ease-in-out;
+          }
+          .phone-input-container .form-control:focus {
+              border-color: rgba(255, 255, 255, 0.8) !important;
+              box-shadow: none !important;
+          }
+          .phone-input-container .flag-dropdown {
+              background: rgba(255, 255, 255, 0.06) !important;
+              border: 1px solid rgba(255, 255, 255, 0.5) !important;
+              border-right: none !important;
+              border-radius: 8px 0 0 8px !important;
+          }
+          .phone-input-container .flag-dropdown:hover,
+          .phone-input-container .flag-dropdown:focus,
+          .phone-input-container .flag-dropdown.open {
+              background: rgba(255, 255, 255, 0.15) !important;
+          }
+          .phone-input-container .selected-flag:hover,
+          .phone-input-container .selected-flag:focus,
+          .phone-input-container .flag-dropdown.open .selected-flag,
+          .phone-input-container .flag-dropdown.open .selected-flag:hover {
+              background: rgba(255, 255, 255, 0.15) !important;
+          }
+          .phone-input-container .selected-flag .arrow {
+              border-top-color: rgba(255, 255, 255, 0.6) !important;
+          }
+          .phone-input-container .selected-flag .arrow.up {
+              border-bottom-color: rgba(255, 255, 255, 0.6) !important;
+          }
+          .phone-input-container .country-list {
+              background-color: #05262e !important;
+              border: 1px solid rgba(255, 255, 255, 0.3) !important;
+              border-radius: 8px !important;
+              color: #ffffff !important;
+              scrollbar-width: thin;
+              scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+          }
+          .phone-input-container .country-list::-webkit-scrollbar {
+              width: 6px;
+          }
+          .phone-input-container .country-list::-webkit-scrollbar-track {
+              background: transparent;
+          }
+          .phone-input-container .country-list::-webkit-scrollbar-thumb {
+              background-color: rgba(255, 255, 255, 0.25) !important;
+              border-radius: 3px;
+          }
+          .phone-input-container .country-list::-webkit-scrollbar-thumb:hover {
+              background-color: rgba(255, 255, 255, 0.45) !important;
+          }
+          .phone-input-container .country-list .country:hover {
+              background-color: #0c4755 !important;
+          }
+          .phone-input-container .country-list .country.highlight {
+              background-color: #0a4f5e !important;
+              color: #ffffff !important;
+          }
+          .phone-input-container .country-list .search {
+              background-color: #05262e !important;
+              padding: 8px !important;
+              border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+          }
+          .phone-input-container .country-list .search-box {
+              background: #031d23 !important;
+              border: 1px solid #0c4755 !important;
+              color: #ffffff !important;
+              border-radius: 6px !important;
+          }
+          .phone-input-container .country-list .search-emoji {
+              font-size: 0 !important;
+              display: inline-block !important;
+              width: 16px !important;
+              height: 16px !important;
+              vertical-align: middle !important;
+              background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") !important;
+              background-repeat: no-repeat !important;
+              background-position: center !important;
+              background-size: contain !important;
+              opacity: 0.7 !important;
+          }
+      `}</style>
     </div>
   );
 }

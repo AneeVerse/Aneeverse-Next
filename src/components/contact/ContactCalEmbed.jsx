@@ -3,10 +3,18 @@
 import React, { useState, useEffect } from "react";
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Turnstile from "@/components/common/Turnstile";
+import useGeoLocation from "@/hooks/useGeoLocation";
+import dynamic from "next/dynamic";
+import "react-phone-input-2/lib/style.css";
+
+const PhoneInput = dynamic(() => import("react-phone-input-2"), { ssr: false });
 
 const ContactCalEmbed = () => {
+    const userGeo = useGeoLocation();
     const [step, setStep] = useState("form"); // 'form' | 'calendar'
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [turnstileToken, setTurnstileToken] = useState(null);
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -43,7 +51,10 @@ const ContactCalEmbed = () => {
                 const res = await fetch("/api/discovery-lead", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(formData)
+                    body: JSON.stringify({
+                        ...formData,
+                        turnstileToken
+                    })
                 });
                 if (res.ok) {
                     setStep("calendar");
@@ -106,14 +117,17 @@ const ContactCalEmbed = () => {
                                 </div>
                                 <div className="flex-1">
                                     <label className="block text-gray-300 text-sm font-medium mb-1.5">Phone Number</label>
-                                    <input
-                                        type="tel"
-                                        required
-                                        disabled={isSubmitting}
+                                    <PhoneInput
+                                        country={userGeo?.countryCode?.toLowerCase() || "in"}
                                         value={formData.phone}
-                                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                        placeholder="Enter your phone number"
-                                        className="w-full px-4 py-3 bg-[#031d23] border border-[#0c4755] rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#2DC8E6] transition-colors disabled:opacity-50"
+                                        onChange={(phone) => setFormData({ ...formData, phone: phone.startsWith('+') ? phone : `+${phone}` })}
+                                        disabled={isSubmitting}
+                                        enableSearch={true}
+                                        inputProps={{
+                                            required: true,
+                                            name: 'phone',
+                                        }}
+                                        containerClass="phone-input-container"
                                     />
                                 </div>
                             </div>
@@ -171,9 +185,13 @@ const ContactCalEmbed = () => {
                                 )}
                             </AnimatePresence>
 
+                            {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && (
+                                <Turnstile onVerify={setTurnstileToken} />
+                            )}
+
                             <button
                                 type="submit"
-                                disabled={isSubmitting}
+                                disabled={isSubmitting || (!!process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && !turnstileToken)}
                                 className="w-full mt-4 py-3 bg-[#2DC8E6] text-black font-semibold rounded-xl hover:bg-[#25a8c4] transition-all duration-300 shadow-md flex items-center justify-center disabled:opacity-75 disabled:cursor-not-allowed"
                             >
                                 {isSubmitting ? (
@@ -233,20 +251,109 @@ const ContactCalEmbed = () => {
                     --cal-border: transparent !important;
                     --cal-border-emphasis: transparent !important;
                     --cal-border-subtle: transparent !important;
-
+ 
                     --cal-text: #ffffff !important;
                     --cal-text-emphasis: #ffffff !important;
                     --cal-text-subtle: #9ca3af !important;
                     --cal-text-muted: #6b7280 !important;
                     --cal-text-inverted: #073742 !important;
-
+ 
                     --cal-brand: #2DC8E6 !important;
                     --cal-brand-emphasis: #25a8c4 !important;
                     --cal-brand-text: #073742 !important;
                 }
-
+ 
                 [data-cal-namespace="discovery-call"] {
                     background: #073742 !important;
+                }
+
+                /* Overwrite react-phone-input-2 default classes to match our style */
+                .phone-input-container .form-control {
+                    width: 100% !important;
+                    height: 48px !important;
+                    background: #031d23 !important;
+                    border: 1px solid #0c4755 !important;
+                    border-radius: 12px !important;
+                    color: #ffffff !important;
+                    font-size: 14px !important;
+                    padding-left: 48px !important;
+                    transition: border-color 0.2s ease-in-out;
+                }
+                .phone-input-container .form-control:focus {
+                    border-color: #2DC8E6 !important;
+                    box-shadow: none !important;
+                }
+                .phone-input-container .flag-dropdown {
+                    background: #031d23 !important;
+                    border: 1px solid #0c4755 !important;
+                    border-right: none !important;
+                    border-radius: 12px 0 0 12px !important;
+                }
+                .phone-input-container .flag-dropdown:hover,
+                .phone-input-container .flag-dropdown:focus,
+                .phone-input-container .flag-dropdown.open {
+                    background: #0c4755 !important;
+                }
+                .phone-input-container .selected-flag:hover,
+                .phone-input-container .selected-flag:focus,
+                .phone-input-container .flag-dropdown.open .selected-flag,
+                .phone-input-container .flag-dropdown.open .selected-flag:hover {
+                    background: #0c4755 !important;
+                }
+                .phone-input-container .selected-flag .arrow {
+                    border-top-color: #9ca3af !important;
+                }
+                .phone-input-container .selected-flag .arrow.up {
+                    border-bottom-color: #9ca3af !important;
+                }
+                .phone-input-container .country-list {
+                    background-color: #05262e !important;
+                    border: 1px solid #0c4755 !important;
+                    border-radius: 8px !important;
+                    color: #ffffff !important;
+                    scrollbar-width: thin;
+                    scrollbar-color: #0c4755 transparent;
+                }
+                .phone-input-container .country-list::-webkit-scrollbar {
+                    width: 6px;
+                }
+                .phone-input-container .country-list::-webkit-scrollbar-track {
+                    background: transparent;
+                }
+                .phone-input-container .country-list::-webkit-scrollbar-thumb {
+                    background-color: #0c4755 !important;
+                    border-radius: 3px;
+                }
+                .phone-input-container .country-list::-webkit-scrollbar-thumb:hover {
+                    background-color: #2DC8E6 !important;
+                }
+                .phone-input-container .country-list .country:hover {
+                    background-color: #0c4755 !important;
+                }
+                .phone-input-container .country-list .country.highlight {
+                    background-color: #0a4f5e !important;
+                }
+                .phone-input-container .country-list .search {
+                    background-color: #05262e !important;
+                    padding: 8px !important;
+                    border-bottom: 1px solid #0c4755 !important;
+                }
+                .phone-input-container .country-list .search-box {
+                    background: #031d23 !important;
+                    border: 1px solid #0c4755 !important;
+                    color: #ffffff !important;
+                    border-radius: 6px !important;
+                }
+                .phone-input-container .country-list .search-emoji {
+                    font-size: 0 !important;
+                    display: inline-block !important;
+                    width: 16px !important;
+                    height: 16px !important;
+                    vertical-align: middle !important;
+                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") !important;
+                    background-repeat: no-repeat !important;
+                    background-position: center !important;
+                    background-size: contain !important;
                 }
             `}</style>
         </div>

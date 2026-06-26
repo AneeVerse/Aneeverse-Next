@@ -1,14 +1,21 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { verifyTurnstile } from "@/lib/turnstile";
 
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { name, email, phone, service, otherDetails } = body;
+    const { name, email, phone, service, otherDetails, turnstileToken } = body;
 
     // Validate required fields
     if (!name || !email || !service) {
       return NextResponse.json({ error: "All required fields must be filled." }, { status: 400 });
+    }
+
+    // Verify Cloudflare Turnstile
+    const isHuman = await verifyTurnstile(turnstileToken);
+    if (!isHuman) {
+      return NextResponse.json({ error: "Verification failed. Please try again." }, { status: 400 });
     }
 
     // Create transporter
