@@ -12,11 +12,11 @@ import AnimatedButton from "@/components/common/AnimatedButton";
 // ✅ Infinite Scroll Animation
 const scrollVariants = {
   animate: {
-    x: ["0%", "-100%"],
+    x: ["0%", "-25%"],
     transition: {
       repeat: Infinity,
       repeatType: "loop",
-      duration: 225,
+      duration: 50,
       ease: "linear",
     },
   },
