@@ -15,6 +15,8 @@ const useGeoLocation = () => {
           region: data.region || "",
           pincode: data.postal || "",
           country: data.country_name || "",
+          countryCode: data.country || "",
+          callingCode: data.country_calling_code || "",
           ip: data.ip || "",
         });
       } catch (err) {

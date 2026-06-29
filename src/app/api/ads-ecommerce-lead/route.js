@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { verifyTurnstile } from "@/lib/turnstile";
 
 // Readable label maps
 const platformLabels = {
@@ -40,11 +41,18 @@ export async function POST(request) {
       userLocation,
       userPincode,
       userIp,
+      turnstileToken,
     } = body;
 
     // ── Validate required fields ──
     if (!fullName || !email || !phone || !platform || !storeName || !storeLink || !monthlyRevenue || !biggestChallenge) {
       return NextResponse.json({ error: "All fields are required." }, { status: 400 });
+    }
+
+    // Verify Cloudflare Turnstile
+    const isHuman = await verifyTurnstile(turnstileToken);
+    if (!isHuman) {
+      return NextResponse.json({ error: "Verification failed. Please try again." }, { status: 400 });
     }
     if (biggestChallenge === "other" && !otherChallenge) {
       return NextResponse.json({ error: "Please describe your challenge." }, { status: 400 });
