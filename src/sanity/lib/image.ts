@@ -7,6 +7,27 @@ const imageBuilder = createImageUrlBuilder({
 })
 
 export const urlForImage = (source: any, maxWidth: number = 1920) => {
+  if (source && source._ref === 'custom-jm-visa-image') {
+    const url = 'https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/portfolio/JM%20Visa.png?updatedAt=1782714093330';
+    return {
+      url: () => url,
+      width: () => 1200,
+      height: () => 630,
+      format: () => 'png',
+      toString: () => url,
+    } as any;
+  }
+  if (source && source._ref === 'custom-eazy-visa-image') {
+    const url = 'https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/portfolio/V1_Eazy%20Visa.png?updatedAt=1782714093667';
+    return {
+      url: () => url,
+      width: () => 1200,
+      height: () => 630,
+      format: () => 'png',
+      toString: () => url,
+    } as any;
+  }
+
   // Check if the source exists and has a valid way to build a URL
   // Either direct asset reference, asset object with _id, or just the reference string
   const hasAsset = source && (

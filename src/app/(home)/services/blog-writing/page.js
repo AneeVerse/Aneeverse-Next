@@ -81,7 +81,7 @@ const page = async () => {
     { title: "SEO blog writing", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/SEO%20&%20Blog/SEO%20blogs%20Resized.png?updatedAt=1782714075439" },
     { title: "Long-form content creation", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/SEO%20&%20Blog/Long%20form%20pillar%20content.png?updatedAt=1782714047094" },
     { title: "Keyword research & strategy", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/SEO%20&%20Blog/Keyword%20reaserach%20and%20statergy%20Resized.png?updatedAt=1782714065012" },
-    { title: "Industry / niche authority blogs", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/SEO%20&%20Blog/Industry%20_%20niche%20authority%20blogs%20Resized.png?updatedAt=1782714080008" },
+    { title: "Brand authority blogs", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/SEO%20&%20Blog/Industry%20_%20niche%20authority%20blogs%20Resized.png?updatedAt=1782714080008" },
     { title: "Content calendars & planning", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/SEO%20&%20Blog/CONTENT%20CALENDAR%20%20PLANNING%20resized.png?updatedAt=1782714085071" },
     { title: "SEO optimization & on-page editing", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/SEO%20&%20Blog/SEO%20optimization%20and%20on%20page%20editing%20Resize.png?updatedAt=1782714069115" },
     { title: "Performance tracking & analytics", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/SEO%20&%20Blog/PERFORMANCE%20Analytics%20&%20TRACKING%20%20Resized.png?updatedAt=1782714075766" },
@@ -130,7 +130,7 @@ const page = async () => {
       textColor: "text-[#365314]",
     },
     {
-      name: "Industry / niche authority blogs",
+      name: "Brand authority blogs",
       about: "Specialized content for unique sectors like B2B SaaS, Finance, and Enterprise Health.",
       image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/SEO%20&%20Blog/Industry%20_%20niche%20authority%20blogs%20Resized.png?updatedAt=1782714080008",
       bgColor: "bg-[#f6edf9]",
@@ -173,7 +173,7 @@ const page = async () => {
           "SEO blog writing",
           "Long-form content creation",
           "Keyword research & strategy",
-          "Industry / niche authority blogs",
+          "Brand authority blogs",
           "Content calendars & planning",
           "SEO optimization & on-page editing",
           "Performance tracking & analytics"

@@ -144,7 +144,7 @@ const ServicesMegaMenu = ({ color }) => {
                     */}
                     <div className="relative w-full flex items-end justify-center mt-auto pt-6 select-none overflow-visible">
                       <img 
-                        src="/images/service-mega-menu-left.png" 
+                        src="https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/Image%201_V2.png?updatedAt=1782714053898" 
                         alt="Services Illustration" 
                         className="w-full max-w-[360px] h-auto object-contain object-bottom scale-[1.35] -ml-16"
                       />
