@@ -74,26 +74,26 @@ const page = async () => {
 
   // Scrolling services for hero section
   const scrollServices = [
-    { title: "AI SEO strategy & audit", image: "/images/services/website/website-strategy.avif" },
-    { title: "Generative Engine Optimization (GEO)", image: "/images/services/website/ux-ui-audit.avif" },
-    { title: "Answer Engine Optimization (AEO)", image: "/images/services/website/content-development.avif" },
-    { title: "Large Language Model Optimization (LLMO)", image: "/images/services/website/website-illustrations.avif" },
+    { title: "AI SEO strategy & audit", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/AI%20SEO/SEO%20Strategy.png?updatedAt=1782714094381" },
+    { title: "Generative Engine Optimization (GEO)", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/AI%20SEO/GEO%20Resized.png?updatedAt=1782714090018" },
+    { title: "Answer Engine Optimization (AEO)", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/AI%20SEO/AEO%20Resized.png?updatedAt=1782714087880" },
+    { title: "Large Language Model Optimization (LLMO)", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/AI%20SEO/AIO.png?updatedAt=1782714091826" },
     { title: "Voice & conversational search optimization", image: "/images/services/website/webflow-development.avif" },
-    { title: "Structured data & schema implementation", image: "/images/services/website/website-design.avif" },
+    { title: "Structured data & schema implementation", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/AI%20SEO/Schema%20marckup.png?updatedAt=1782714089655" },
     { title: "Zero-click and featured snippet optimization", image: "/images/services/website/landing-page-design.avif" },
   ];
 
   const items = [
-    { name: "AI SEO strategy & audit", about: "Evaluate your website’s presence across search engines and AI systems with a tailored roadmap.", image: "/images/services/website/website-strategy.avif", bgColor: "bg-secondary-500", textColor: "text-primary-500" },
-    { name: "Generative Engine Optimization (GEO)", about: "Structure and contextualize content so AI engines like ChatGPT, Gemini, or Perplexity can interpret and cite it.", image: "/images/services/website/ux-ui-audit.avif", bgColor: "bg-[#c0e2ff]", textColor: "text-[#0a211f]" },
-    { name: "Answer Engine Optimization (AEO)", about: "Optimize content to appear in featured snippets, direct answer boxes, and AI answer responses.", image: "/images/services/website/content-development.avif", bgColor: "bg-[#f9f9f9]", textColor: "text-[#3d3d3d]" },
-    { name: "AI & LLM optimization (AIO)", about: "Enhance entity signals, semantics, and data structures so AI understands and includes your content.", image: "/images/services/website/design-systems.avif", bgColor: "bg-[#292423]", textColor: "text-[#ffafed]" },
+    { name: "AI SEO strategy & audit", about: "Evaluate your website’s presence across search engines and AI systems with a tailored roadmap.", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/AI%20SEO/SEO%20Strategy.png?updatedAt=1782714094381", bgColor: "bg-secondary-500", textColor: "text-primary-500" },
+    { name: "Generative Engine Optimization (GEO)", about: "Structure and contextualize content so AI engines like ChatGPT, Gemini, or Perplexity can interpret and cite it.", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/AI%20SEO/GEO%20Resized.png?updatedAt=1782714090018", bgColor: "bg-[#c0e2ff]", textColor: "text-[#0a211f]" },
+    { name: "Answer Engine Optimization (AEO)", about: "Optimize content to appear in featured snippets, direct answer boxes, and AI answer responses.", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/AI%20SEO/AEO%20Resized.png?updatedAt=1782714087880", bgColor: "bg-[#f9f9f9]", textColor: "text-[#3d3d3d]" },
+    { name: "AI & LLM optimization (AIO)", about: "Enhance entity signals, semantics, and data structures so AI understands and includes your content.", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/AI%20SEO/AIO.png?updatedAt=1782714091826", bgColor: "bg-[#292423]", textColor: "text-[#ffafed]" },
     { name: "Voice search optimization", about: "Tune content for conversational queries and voice assistants like Siri, Alexa, and Google Assistant.", image: "/images/services/website/webflow-development.avif", bgColor: "bg-[#d8ff85]", textColor: "text-[#1c4437]" },
-    { name: "Structured data & schema", about: "Implement schema markup to boost AI extraction, featured snippets, and contextual understanding.", image: "/images/services/website/website-design.avif", bgColor: "bg-[#edf4ea]", textColor: "text-[#1c4437]" },
+    { name: "Structured data & schema", about: "Implement schema markup to boost AI extraction, featured snippets, and contextual understanding.", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/AI%20SEO/Schema%20marckup.png?updatedAt=1782714089655", bgColor: "bg-[#edf4ea]", textColor: "text-[#1c4437]" },
     { name: "Zero-click optimization", about: "Improve chances your brand is seen in AI overviews and answer placements without a click.", image: "/images/services/website/landing-page-design.avif", bgColor: "bg-[#ffd6cc]", textColor: "text-[#4a1c0f]" },
-    { name: "Content relevance & authority building", about: "Identify topics AI values and build trust signals to increase visibility over time.", image: "/images/services/website/website-illustrations.avif", bgColor: "bg-[#e6f3ff]", textColor: "text-[#003366]" },
-    { name: "Local & geo-targeted AI SEO", about: "Combine traditional SEO with AI signals tailored to geographic and local search intent.", image: "/images/services/website/local-seo.png", bgColor: "bg-[#fff4e6]", textColor: "text-[#663300]" },
-    { name: "Performance tracking & AI search insights", about: "Monitor both traditional search rankings and AI-driven visibility metrics for ongoing improvement.", image: "/images/services/website/seo-optimization.png", bgColor: "bg-[#f0e6ff]", textColor: "text-[#330066]" },
+    { name: "Content relevance & authority building", about: "Identify topics AI values and build trust signals to increase visibility over time.", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/AI%20SEO/Content%20relevent%20and%20authority%20buliding%20Resized.png?updatedAt=1782714093928", bgColor: "bg-[#e6f3ff]", textColor: "text-[#003366]" },
+    { name: "Local & geo-targeted AI SEO", about: "Combine traditional SEO with AI signals tailored to geographic and local search intent.", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/AI%20SEO/Local%20&%20GEO%20SEO.png?updatedAt=1782714081084", bgColor: "bg-[#fff4e6]", textColor: "text-[#663300]" },
+    { name: "Performance tracking & AI search insights", about: "Monitor both traditional search rankings and AI-driven visibility metrics for ongoing improvement.", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/AI%20SEO/Performace%20tracking%20Resize.png?updatedAt=1782714092488", bgColor: "bg-[#f0e6ff]", textColor: "text-[#330066]" },
   ];
 
   const stats = [

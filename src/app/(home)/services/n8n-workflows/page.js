@@ -72,26 +72,26 @@ const page = async () => {
 
   // Scrolling services for hero section
   const scrollServices = [
-    { title: "Workflow automation consulting", image: "/images/services/website/website-strategy.avif" },
-    { title: "Custom n8n workflow creation", image: "/images/services/website/ux-ui-audit.avif" },
-    { title: "App integrations & connectors", image: "/images/services/website/content-development.avif" },
+    { title: "Workflow automation consulting", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/N8N/Workflow%20Automation%20Resized.png?updatedAt=1782714077706" },
+    { title: "Custom n8n workflow creation", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/N8N/Custom%20n8n%20workflow%20creation%20Resized.png?updatedAt=1782714069311" },
+    { title: "App integrations & connectors", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/N8N/APP%20INTEGRATIONS%20&%20connection%20Resized.png?updatedAt=1782714060205" },
     { title: "AI-augmented automations", image: "/images/services/website/website-illustrations.avif" },
-    { title: "Data syncing & systems integration", image: "/images/services/website/webflow-development.avif" },
-    { title: "Monitoring & maintenance", image: "/images/services/website/website-design.avif" },
-    { title: "Training & support", image: "/images/services/website/landing-page-design.avif" },
+    { title: "Data syncing & systems integration", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/N8N/data%20sycn%20automation%20Resized.png?updatedAt=1782714068050" },
+    { title: "Monitoring & maintenance", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/N8N/Monitor%20proformace%20and%20report%20Resized.png?updatedAt=1782714078644" },
+    { title: "Training & support", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/N8N/Training%20&%20support%20Resized.png?updatedAt=1782714084080" },
   ];
 
   const items = [
-    { name: "Workflow automation consulting", about: "Strategic analysis and planning to define where automation adds the most impact.", image: "/images/services/website/website-strategy.avif", bgColor: "bg-secondary-500", textColor: "text-primary-500" },
-    { name: "Custom workflow builds", about: "End-to-end automation sequences designed to your business logic.", image: "/images/services/website/ux-ui-audit.avif", bgColor: "bg-[#c0e2ff]", textColor: "text-[#0a211f]" },
-    { name: "App integrations & connectors", about: "Seamlessly connect your CRM, calendar, tickets, and productivity tools.", image: "/images/services/website/content-development.avif", bgColor: "bg-[#f9f9f9]", textColor: "text-[#3d3d3d]" },
+    { name: "Workflow automation consulting", about: "Strategic analysis and planning to define where automation adds the most impact.", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/N8N/Workflow%20Automation%20Resized.png?updatedAt=1782714077706", bgColor: "bg-secondary-500", textColor: "text-primary-500" },
+    { name: "Custom workflow builds", about: "End-to-end automation sequences designed to your business logic.", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/N8N/Custom%20n8n%20workflow%20creation%20Resized.png?updatedAt=1782714069311", bgColor: "bg-[#c0e2ff]", textColor: "text-[#0a211f]" },
+    { name: "App integrations & connectors", about: "Seamlessly connect your CRM, calendar, tickets, and productivity tools.", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/N8N/APP%20INTEGRATIONS%20&%20connection%20Resized.png?updatedAt=1782714060205", bgColor: "bg-[#f9f9f9]", textColor: "text-[#3d3d3d]" },
     { name: "AI-augmented automations", about: "Embed AI logic into workflows for smarter triggers and decisions.", image: "/images/services/website/design-systems.avif", bgColor: "bg-[#292423]", textColor: "text-[#ffafed]" },
-    { name: "Data sync automations", about: "Keep customer, sales, and operations data aligned in real time.", image: "/images/services/website/webflow-development.avif", bgColor: "bg-[#d8ff85]", textColor: "text-[#1c4437]" },
-    { name: "Trigger-based task workflows", about: "Automate actions based on user behavior, time schedules, or external events.", image: "/images/services/website/website-design.avif", bgColor: "bg-[#edf4ea]", textColor: "text-[#1c4437]" },
+    { name: "Data sync automations", about: "Keep customer, sales, and operations data aligned in real time.", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/N8N/data%20sycn%20automation%20Resized.png?updatedAt=1782714068050", bgColor: "bg-[#d8ff85]", textColor: "text-[#1c4437]" },
+    { name: "Trigger-based task workflows", about: "Automate actions based on user behavior, time schedules, or external events.", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/N8N/Trigger%20based%20task%20workflow%20Resized.png?updatedAt=1782714070438", bgColor: "bg-[#edf4ea]", textColor: "text-[#1c4437]" },
     { name: "Error handling & alerts", about: "Robust workflows that notify, retry, or branch on failure.", image: "/images/services/website/landing-page-design.avif", bgColor: "bg-[#e7f9d1]", textColor: "text-[#365314]" },
     { name: "System modernization automations", about: "Replace legacy manual processes with scalable automated pipelines.", image: "/images/services/website/website-illustrations.avif", bgColor: "bg-[#f6edf9]", textColor: "text-[#4a124f]" },
-    { name: "Monitoring & performance reporting", about: "Real-time oversight of workflow execution and performance.", image: "/images/services/website/local-seo.png", bgColor: "bg-[#ffd6cc]", textColor: "text-[#4a1c0f]" },
-    { name: "Training & support packages", about: "Enable your team to own, manage, and extend workflows confidently.", image: "/images/services/website/seo-optimization.png", bgColor: "bg-[#e6f3ff]", textColor: "text-[#003366]" },
+    { name: "Monitoring & performance reporting", about: "Real-time oversight of workflow execution and performance.", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/N8N/Monitor%20proformace%20and%20report%20Resized.png?updatedAt=1782714078644", bgColor: "bg-[#ffd6cc]", textColor: "text-[#4a1c0f]" },
+    { name: "Training & support packages", about: "Enable your team to own, manage, and extend workflows confidently.", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/N8N/Training%20&%20support%20Resized.png?updatedAt=1782714084080", bgColor: "bg-[#e6f3ff]", textColor: "text-[#003366]" },
   ];
 
   const stats = [
