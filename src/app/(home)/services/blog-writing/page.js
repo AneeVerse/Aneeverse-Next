@@ -196,7 +196,7 @@ const page = async () => {
         description="Aneeverse creates SEO-optimized blogs and content that attract organic traffic, build authority, and turn readers into customers. From keyword strategy to compelling storytelling, we help you dominate search results and strengthen your brand voice-consistently, strategically, and with real measurable impact."
         ctaText="Book a Call"
         ctaLink="/contact"
-        backgroundImage="/images/services/google-ads/hero-banner.avif"
+        backgroundImage="https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/SEO%20&%20Blog%20Writing%20Services.png?updatedAt=1782714066693"
         scrollServices={scrollServices}
       />
 

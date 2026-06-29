@@ -132,7 +132,7 @@ const page = async () => {
         description="Aneeverse builds intelligent n8n workflow automation tailored to your business operations, connecting apps and data while eliminating repetitive tasks. Whether you need automation strategy, custom workflow builds, or end-to-end deployment, we help you streamline processes, boost productivity, and accelerate growth."
         ctaText="Book a Call"
         ctaLink="/contact"
-        backgroundImage="/images/services/website/hero-banner.avif"
+        backgroundImage="https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/N8n%20.png?updatedAt=1782714067242"
         scrollServices={scrollServices}
       />
       <SlidingLogos />

@@ -190,7 +190,7 @@ const page = async () => {
         description="Whether it's digital, social, display, print, or out-of-home, Aneeverse delivers the ad creative you need fast, flexible, and always on brand. From concept to final delivery, we are your creative partner for campaigns that perform."
         ctaText="Book a Call"
         ctaLink="/contact"
-        backgroundImage="/images/services/email-design/hero-banner.avif"
+        backgroundImage="https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/Social,%20Prints%20and%20%20Ad%20Creative%20Services.png?updatedAt=1782714067528"
         scrollServices={scrollServices}
       />
       <SlidingLogos />

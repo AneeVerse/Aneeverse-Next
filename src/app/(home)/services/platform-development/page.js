@@ -198,7 +198,7 @@ const page = async () => {
         description="Aneeverse designs and develops high-performance digital platforms for B2B SaaS companies. From rapid MVPs to enterprise-grade systems, we turn complex product ideas into secure, scalable, and market-ready platforms-built fast, engineered for growth, and designed to evolve."
         ctaText="Book a Call"
         ctaLink="/contact"
-        backgroundImage="/images/services/email-design/hero-banner.avif"
+        backgroundImage="https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/Plateform%20and%20web%20develpoment.png?updatedAt=1782714066188"
         scrollServices={scrollServices}
       />
       <SlidingLogos />

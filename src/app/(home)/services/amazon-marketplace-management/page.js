@@ -97,7 +97,7 @@ const page = async () => {
                 description="A dedicated team to handle your listings, ads, operations, and account health-so you stay focused on inventory and growth, not dashboards and case logs."
                 ctaText="Book a Call"
                 ctaLink="/contact"
-                backgroundImage="/images/services/website/hero-banner.avif"
+                backgroundImage="https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/E-Commerce%20and%20marketing%20management.png?updatedAt=1782714065120"
                 scrollServices={scrollServices}
             />
             <SlidingLogos />

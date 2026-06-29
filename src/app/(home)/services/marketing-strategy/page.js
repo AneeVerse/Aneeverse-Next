@@ -137,7 +137,7 @@ const page = async () => {
         description="Aneeverse delivers practical, data-grounded marketing strategy that aligns your brand story, audience insights, and campaign plans for measurable impact. From foundational positioning to in-flight performance optimization, we help you turn goals into actionable plans that accelerate customer acquisition and strengthen market presence."
         ctaText="Book a Call"
         ctaLink="/contact"
-        backgroundImage="/images/services/website/hero-banner.avif"
+        backgroundImage="https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/MARKETING%20STRATEGY%20SERVICES.png?updatedAt=1782714066887"
         scrollServices={scrollServices}
       />
       <SlidingLogos />

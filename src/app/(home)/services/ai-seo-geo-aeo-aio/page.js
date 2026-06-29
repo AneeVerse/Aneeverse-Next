@@ -125,7 +125,7 @@ const page = async () => {
         description="Aneeverse combines advanced SEO with generative and answer engine optimization to ensure your brand is discoverable wherever prospects search - from classic Google results to AI assistants, voice search, chatbots, and answer engines. Our AI-powered optimization strategies increase organic traffic, enhance credibility, and position your content to be cited, answered, and surfaced across the next generation of search experiences."
         ctaText="Book a Call"
         ctaLink="/contact"
-        backgroundImage="/images/services/website/hero-banner.avif"
+        backgroundImage="https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/AI%20SEO.png?updatedAt=1782714069759"
         scrollServices={scrollServices}
       />
 
