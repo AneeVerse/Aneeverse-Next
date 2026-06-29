@@ -10,21 +10,21 @@ export default function CommandCenter() {
             id: 1,
             title: "Submit your idea",
             desc: "Use our simple request form to submit a project from ad banners to brand refreshes. Upload assets, set context, and hit go.",
-            image: "/images/home/command center/1card.png"
+            image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/Home_YOUR%20Creative%20COMMAND%20CENTER/1.%20Submit%20your%20idea.png?updatedAt=1782714090111"
         },
         {
             type: "standard",
             id: 2,
             title: "Track in real-time",
             desc: "Monitor progress and adjust priorities so your creative team is always working on what's important.",
-            image: "/images/home/command center/2card.png"
+            image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/Home_YOUR%20Creative%20COMMAND%20CENTER/2.%20Track%20in%20real-time.png?updatedAt=1782714090440"
         },
         {
             type: "standard",
             id: 3,
             title: "Collaborate & review",
             desc: "Comment directly in the platform or connect via Slack. Revisions are tracked, versioned, and easy to manage.",
-            image: "/images/home/command center/3card.png"
+            image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/Home_YOUR%20Creative%20COMMAND%20CENTER/3.%20Collaborate%20&%20review.png?updatedAt=1782714089946"
         },
         {
             type: "text-only",
@@ -35,7 +35,7 @@ export default function CommandCenter() {
         {
             type: "image-only",
             id: 5,
-            image: "/images/home/command center/5card.png"
+            image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/Home_YOUR%20Creative%20COMMAND%20CENTER/4.%20Final%20files%20delivered,%20manageable,%20sharable.png?updatedAt=1782714089777"
         }
     ];
 

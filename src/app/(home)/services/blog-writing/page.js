@@ -116,13 +116,6 @@ const page = async () => {
       textColor: "text-[#ffafed]",
     },
     {
-      name: "Evergreen content creation",
-      about: "Timeless posts that continue to attract traffic over time.",
-      image: "/images/services/website/webflow-development.avif",
-      bgColor: "bg-[#d8ff85]",
-      textColor: "text-[#1c4437]",
-    },
-    {
       name: "Content calendar planning",
       about: "Strategic schedules aligned with SEO goals and seasonal trends.",
       image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/SEO%20&%20Blog/CONTENT%20CALENDAR%20%20PLANNING%20resized.png?updatedAt=1782714085071",
@@ -137,7 +130,7 @@ const page = async () => {
       textColor: "text-[#365314]",
     },
     {
-      name: "Niche / industry blogs",
+      name: "Industry / niche authority blogs",
       about: "Specialized content for unique sectors like B2B SaaS, Finance, and Enterprise Health.",
       image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/SEO%20&%20Blog/Industry%20_%20niche%20authority%20blogs%20Resized.png?updatedAt=1782714080008",
       bgColor: "bg-[#f6edf9]",

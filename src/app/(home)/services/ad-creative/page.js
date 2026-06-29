@@ -84,7 +84,6 @@ const page = async () => {
     { title: "Static ad design", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/Social,%20printable%20and%20ads%20creative%20service/Static%20ads%20creatives.png?updatedAt=1782714061622" },
     { title: "Motion graphics and animated ads", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/Social,%20printable%20and%20ads%20creative%20service/Motion%20Graphics%20resize_.png?updatedAt=1782714076141" },
     { title: "Display advertising", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/Social,%20printable%20and%20ads%20creative%20service/Static%20ads%20creatives.png?updatedAt=1782714061622" },
-    { title: "Video ad production and editing", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/Social,%20printable%20and%20ads%20creative%20service/Video%20production%20ads.png?updatedAt=1782714069278" },
     { title: "Ad campaign concepting", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/Social,%20printable%20and%20ads%20creative%20service/Ads%20creatives%20resized.png?updatedAt=1782714050151" },
     { title: "Multi-format adaptation", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/Social,%20printable%20and%20ads%20creative%20service/Multi%20format%20resize_.png?updatedAt=1782714044385" },
     { title: "Performance-driven A/B testing variants", image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/Social,%20printable%20and%20ads%20creative%20service/A_B%20testing.png?updatedAt=1782714053197" },
@@ -104,13 +103,6 @@ const page = async () => {
       image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/Social,%20printable%20and%20ads%20creative%20service/Motion%20Graphics%20resize_.png?updatedAt=1782714076141",
       bgColor: "bg-[#c0e2ff]",
       textColor: "text-[#0a211f]",
-    },
-    {
-      name: "Video ad production",
-      about: "Full-service video editing, animation, and production for ads, product launches, and hero campaign moments.",
-      image: "https://ik.imagekit.io/Aneeverse/AV_creatives_new/AV_Image/SERVICES%20&%20INTERNAL/Social,%20printable%20and%20ads%20creative%20service/Video%20production%20ads.png?updatedAt=1782714069278",
-      bgColor: "bg-[#f9f9f9]",
-      textColor: "text-[#3d3d3d]",
     },
     {
       name: "Campaign concepting",
@@ -176,7 +168,6 @@ const page = async () => {
           "Static ad design",
           "Motion graphics and animated ads",
           "Display advertising",
-          "Video ad production and editing",
           "Ad campaign concepting",
           "Multi-format adaptation",
           "Performance-driven A/B testing variants"
